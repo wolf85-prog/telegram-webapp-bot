@@ -40,7 +40,7 @@ bot.on('message', async (msg) => {
           const chatId = msg.chat.id;
 
           // send a message to the chat acknowledging receipt of their message
-          bot.sendMessage(chatId, 'Received your message');
+          bot.sendMessage(chatId, 'Получил ваше сообщение');
     });
 
   }
