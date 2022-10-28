@@ -1,5 +1,11 @@
 require("dotenv").config();
 
+//notion api
+const { Client } = require("@notionhq/client");
+const notion = new Client({ auth: process.env.NOTION_API_KEY });
+const databaseId = process.env.NOTION_DATABASE_ID
+
+//telegram api
 const TelegramBot = require('node-telegram-bot-api');
 const express = require('express');
 const cors = require('cors');
@@ -12,6 +18,30 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
+
+//send data to notion
+async function addItem(text) {
+    try {
+        const response = await notion.pages.create({
+            parent: { database_id: databaseId },
+            properties: {
+                title: {
+                    title:[
+                        {
+                            "text": {
+                                "content": text
+                            }
+                        }
+                    ]
+                }
+            },
+        })
+        console.log(response)
+        console.log("Success! Entry added.")
+    } catch (error) {
+        console.error(error.body)
+    }
+}
 
 
 bot.on('message', async (msg) => {
@@ -52,6 +82,8 @@ bot.on('message', async (msg) => {
         await bot.sendMessage(chatId, 'Спасибо за обратную связь!')
         await bot.sendMessage(chatId, 'Название проекта: ' + data?.country);
         await bot.sendMessage(chatId, 'Город: ' + data?.street);
+
+        addItem("Тестовый проект 2");
 
         setTimeout(async () => {
             await bot.sendMessage(chatId, 'Всю информацию вы получите в этом чате');
