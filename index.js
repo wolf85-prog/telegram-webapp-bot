@@ -74,10 +74,6 @@ bot.on('message', async (msg) => {
     });*/
   }
 
-  if (text === '/notion') {
-      addItem("Тестовый проект 2");
-  }
-
   if(msg?.web_app_data?.data) {
     try {
         const data = JSON.parse(msg?.web_app_data?.data)
@@ -87,7 +83,7 @@ bot.on('message', async (msg) => {
         await bot.sendMessage(chatId, 'Город: ' + data?.street);
 
         //добавление проекта с названием проекта в базу
-        //addItem("Тестовый проект 2");
+        addItem("Тестовый проект 3");
 
         setTimeout(async () => {
             await bot.sendMessage(chatId, 'Всю информацию вы получите в этом чате');
