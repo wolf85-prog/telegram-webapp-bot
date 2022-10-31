@@ -83,7 +83,8 @@ bot.on('message', async (msg) => {
         await bot.sendMessage(chatId, 'Название проекта: ' + data?.country);
         await bot.sendMessage(chatId, 'Город: ' + data?.street);
 
-        addItem("Тестовый проект 2");
+        //добавление проекта с названием проекта в базу
+        addItem(data?.country);
 
         setTimeout(async () => {
             await bot.sendMessage(chatId, 'Всю информацию вы получите в этом чате');
