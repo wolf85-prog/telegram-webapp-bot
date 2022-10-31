@@ -25,11 +25,20 @@ async function addItem(text) {
         const response = await notion.pages.create({
             parent: { database_id: databaseId },
             properties: {
-                title: {
+                Name: {
                     title:[
                         {
                             "text": {
                                 "content": text
+                            }
+                        }
+                    ]
+                },
+                TG_chat_ID: {
+                    rich_text:[
+                        {
+                            "text": {
+                                "content": "47453454"
                             }
                         }
                     ]
@@ -44,12 +53,20 @@ async function addItem(text) {
 }
 
 //get items from DB
-async function getItems() {
+async function getDatabase() {
     try {
-        const response = await notion.databases.retrieve({
+        const response = await notion.databases.query({
             database_id: databaseId
         });
-        console.log(response);
+
+        const responseResults = response.results.map((page) => {
+            return {
+                Manager: page.properties.Manager.id,
+            };
+        });
+
+        console.log(responseResults);
+        return responseResults;
     } catch (error) {
         console.error(error.body)
     }
@@ -97,7 +114,10 @@ bot.on('message', async (msg) => {
         //добавление проекта с названием проекта в базу
         addItem(data?.country);
 
-        getItems();
+        //getDatabase();
+
+        const projects = await getDatabase();
+        res.json(projects);
 
 
         setTimeout(async () => {
