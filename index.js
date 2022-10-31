@@ -43,6 +43,18 @@ async function addItem(text) {
     }
 }
 
+//get items from DB
+async function getItems() {
+    try {
+        const response = await notion.databases.retrieve({
+            database_id: databaseId
+        });
+        console.log(response);
+    } catch (error) {
+        console.error(error.body)
+    }
+}
+
 
 bot.on('message', async (msg) => {
   const chatId = msg.chat.id;
@@ -84,6 +96,9 @@ bot.on('message', async (msg) => {
 
         //добавление проекта с названием проекта в базу
         addItem(data?.country);
+
+        getItems();
+
 
         setTimeout(async () => {
             await bot.sendMessage(chatId, 'Всю информацию вы получите в этом чате');
