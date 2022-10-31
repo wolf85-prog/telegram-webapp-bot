@@ -10,10 +10,8 @@ const TelegramBot = require('node-telegram-bot-api');
 const express = require('express');
 const cors = require('cors');
 
-//const token = '5360466924:AAHNPVR7bV9269oe-pzxtzTuj58HIR4Jf5c';
 const token = process.env.TELEGRAM_API_TOKEN;
-
-const webAppUrl = 'https://inspiring-manatee-7e59f8.netlify.app';
+const webAppUrl = process.env.WEB_APP_URL;
 
 const bot = new TelegramBot(token, {polling: true});
 const app = express();
@@ -68,13 +66,16 @@ bot.on('message', async (msg) => {
         }
     })
 
-    await bot.on('message', (msg) => {
+    /*await bot.on('message', (msg) => {
           const chatId = msg.chat.id;
 
           // send a message to the chat acknowledging receipt of their message
           bot.sendMessage(chatId, 'Получил ваше сообщение');
-    });
+    });*/
+  }
 
+  if (text === '/notion') {
+      addItem("Тестовый проект 2");
   }
 
   if(msg?.web_app_data?.data) {
@@ -86,7 +87,7 @@ bot.on('message', async (msg) => {
         await bot.sendMessage(chatId, 'Город: ' + data?.street);
 
         //добавление проекта с названием проекта в базу
-        addItem(data?.country);
+        //addItem("Тестовый проект 2");
 
         setTimeout(async () => {
             await bot.sendMessage(chatId, 'Всю информацию вы получите в этом чате');
