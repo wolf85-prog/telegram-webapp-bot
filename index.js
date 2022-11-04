@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(cors());
 
 const menuOptions = {
-    reply_markup: JSON.stringify({
+    reply_markup: ({
         inline_keyboard:[
             [{text: 'Информация', callback_data:'1'}, {text: 'Настройки', callback_data:'2'}],
             [{text: 'Открыть Notion', callback_data:'3'}],
@@ -94,11 +94,25 @@ bot.on('message', async (msg) => {
 
   if (text === '/start') {
     await bot.sendMessage(chatId, 'Добро пожаловать в чат-бот Notion. Смотрите и создавайте Notion-проекты в ' +
-        'web-приложении прямо из телеграм.', {menuOptions})
+        'web-приложении прямо из телеграм.', {
+        reply_markup: ({
+            inline_keyboard:[
+                [{text: 'Информация', callback_data:'1'}, {text: 'Настройки', callback_data:'2'}],
+                [{text: 'Открыть Notion', web_app: {url: webAppUrl}}],
+            ]
+        })
+    })
   }
 
   if (text === '/menu') {
-      await bot.sendMessage(chatId, 'Смотрите и создавайте Notion-проекты в web-приложении прямо из телеграм.', {menuOptions})
+      await bot.sendMessage(chatId, 'Смотрите и создавайте Notion-проекты в web-приложении прямо из телеграм.', {
+          reply_markup: ({
+              inline_keyboard:[
+                  [{text: 'Информация', callback_data:'1'}, {text: 'Настройки', callback_data:'2'}],
+                  [{text: 'Открыть Notion', web_app: {url: webAppUrl}}],
+              ]
+          })
+      })
   }
 
   if (text === '/info') {
