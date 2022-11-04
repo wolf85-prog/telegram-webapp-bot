@@ -19,6 +19,21 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+const menuOptions = {
+    reply_markup: JSON.stringify({
+        inline_keyboard:[
+            [{text: 'Информация', callback_data:'sdfsdf'}, {text: 'Настройки', callback_data:'sdfsdf'}],
+            [{text: 'Открыть Notion', callback_data:'sdfsdf'}],
+        ]
+    })
+}
+
+bot.setMyCommands([
+    {command: '/menu', description: 'Главное меню'},
+    {command: '/info', description: 'Получить информацию о боте'},
+    {command: '/settings', description: 'Настройки'},
+])
+
 //send data to notion
 async function addItem(text) {
     try {
@@ -78,29 +93,20 @@ bot.on('message', async (msg) => {
   const text = msg.text;
 
   if (text === '/start') {
-    
-    await bot.sendMessage(chatId, 'Ниже появится форма, заполни ее', {
-      reply_markup: {
-        inline_keyboard:[
-          [{text: 'Создать проект', web_app: {url: webAppUrl + '/form'}}]
-        ]
-      }
-    })
+    await bot.sendMessage(chatId, 'Добро пожаловать в чат-бот Notion. Смотрите и создавайте Notion-проекты в ' +
+        'web-приложении прямо из телеграм.', {menuOptions})
+  }
 
-      await  bot.sendMessage(chatId, 'Ниже появится кнопка, заполни форму', {
-        reply_markup: {
-            keyboard:[
-                [{text: 'Заполнить форму', web_app:{url: webAppUrl + '/form'}}]
-            ]
-        }
-    })
+  if (text === '/menu') {
+      await bot.sendMessage(chatId, 'Смотрите и создавайте Notion-проекты в web-приложении прямо из телеграм.', {menuOptions})
+  }
 
-    /*await bot.on('message', (msg) => {
-          const chatId = msg.chat.id;
+  if (text === '/info') {
 
-          // send a message to the chat acknowledging receipt of their message
-          bot.sendMessage(chatId, 'Получил ваше сообщение');
-    });*/
+  }
+
+  if (text === '/settings') {
+
   }
 
   if(msg?.web_app_data?.data) {
