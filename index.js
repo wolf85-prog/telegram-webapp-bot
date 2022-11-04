@@ -22,8 +22,8 @@ app.use(cors());
 const menuOptions = {
     reply_markup: JSON.stringify({
         inline_keyboard:[
-            [{text: 'Информация', callback_data:'sdfsdf'}, {text: 'Настройки', callback_data:'sdfsdf'}],
-            [{text: 'Открыть Notion', callback_data:'sdfsdf'}],
+            [{text: 'Информация', callback_data:'1'}, {text: 'Настройки', callback_data:'2'}],
+            [{text: 'Открыть Notion', callback_data:'3'}],
         ]
     })
 }
