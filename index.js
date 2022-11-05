@@ -28,6 +28,15 @@ const menuOptions = {
     })
 }
 
+const backOptions = {
+    reply_markup: JSON.stringify({
+        inline_keyboard:[
+            [{text: 'Открыть Notion', callback_data:'1'}],
+            [{text: 'Назад', callback_data:'/menu'}],
+        ]
+    })
+}
+
 bot.setMyCommands([
     {command: '/menu', description: 'Главное меню'},
     {command: '/info', description: 'Получить информацию о боте'},
@@ -156,7 +165,7 @@ bot.on('callback_query', async msg => {
     const chatId = msg.message.chat.id;
 
     //console.log(msg)
-    await bot.sendMessage(chatId, `Вы нажали кнопку ${data}`)
+    await bot.sendMessage(chatId, `Вы нажали кнопку ${data}`, againOptions)
 })
 
 app.post('/web-data', async (req, res) => {
