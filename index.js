@@ -20,10 +20,10 @@ app.use(express.json());
 app.use(cors());
 
 const menuOptions = {
-    reply_markup: ({
+    reply_markup: JSON.stringify({
         inline_keyboard:[
             [{text: 'Информация', callback_data:'Информация'}, {text: 'Настройки', callback_data:'Настройки'}],
-            [{text: 'Открыть Notion', callback_data:'3'}],
+            [{text: 'Открыть Notion', web_app: {url: webAppUrl}}],
         ]
     })
 }
@@ -31,7 +31,7 @@ const menuOptions = {
 const backOptions = {
     reply_markup: JSON.stringify({
         inline_keyboard:[
-            [{text: 'Открыть Notion', callback_data:'1'}],
+            [{text: 'Открыть Notion', web_app: {url: webAppUrl}}],
             [{text: 'Назад', callback_data:'/menu'}],
         ]
     })
@@ -106,19 +106,18 @@ bot.on('message', async (msg) => {
         'web-приложении прямо из телеграм.', {
         reply_markup: ({
             inline_keyboard:[
-                [{text: 'Информация', callback_data:'1'}, {text: 'Настройки', callback_data:'2'}],
+                [{text: 'Информация', callback_data:'Информация'}, {text: 'Настройки', callback_data:'Настройки'}],
                 [{text: 'Открыть Notion', web_app: {url: webAppUrl}}],
             ]
         })
     })
-
   }
 
   if (text === '/menu') {
       await bot.sendMessage(chatId, 'Смотрите и создавайте Notion-проекты в web-приложении прямо из телеграм.', {
           reply_markup: ({
               inline_keyboard:[
-                  [{text: 'Информация', callback_data:'1'}, {text: 'Настройки', callback_data:'2'}],
+                  [{text: 'Информация', callback_data:'Информация'}, {text: 'Настройки', callback_data:'Настройки'}],
                   [{text: 'Открыть Notion', web_app: {url: webAppUrl}}],
               ]
           })
@@ -160,12 +159,21 @@ bot.on('message', async (msg) => {
   
 });
 
-bot.on('callback_query', async msg => {
+bot.on('callback_query', msg => {
     const data = msg.data;
     const chatId = msg.message.chat.id;
 
-    //console.log(msg)
-    await bot.sendMessage(chatId, `Вы нажали кнопку ${data}`, againOptions)
+    if (data === '/menu') {
+        return bot.sendMessage(chatId, 'Смотрите и создавайте Notion-проекты в web-приложении прямо из телеграм.', {
+            reply_markup: ({
+                inline_keyboard:[
+                    [{text: 'Информация', callback_data:'Информация'}, {text: 'Настройки', callback_data:'Настройки'}],
+                    [{text: 'Открыть Notion', web_app: {url: webAppUrl}}],
+                ]
+            })
+        })
+    }
+    bot.sendMessage(chatId, `Вы нажали кнопку ${data}`, backOptions)
 })
 
 app.post('/web-data', async (req, res) => {
