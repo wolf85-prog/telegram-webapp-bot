@@ -22,7 +22,7 @@ app.use(cors());
 const menuOptions = {
     reply_markup: ({
         inline_keyboard:[
-            [{text: 'Информация', callback_data:'1'}, {text: 'Настройки', callback_data:'2'}],
+            [{text: 'Информация', callback_data:'Информация'}, {text: 'Настройки', callback_data:'Настройки'}],
             [{text: 'Открыть Notion', callback_data:'3'}],
         ]
     })
@@ -102,6 +102,7 @@ bot.on('message', async (msg) => {
             ]
         })
     })
+
   }
 
   if (text === '/menu') {
@@ -149,6 +150,14 @@ bot.on('message', async (msg) => {
   }
   
 });
+
+bot.on('callback_query', async msg => {
+    const data = msg.data;
+    const chatId = msg.message.chat.id;
+
+    //console.log(msg)
+    await bot.sendMessage(chatId, `Вы нажали кнопку ${data}`)
+})
 
 app.post('/web-data', async (req, res) => {
   const {queryId, products = [], totalPrice} = req.body;
