@@ -43,8 +43,34 @@ bot.setMyCommands([
     {command: '/settings', description: 'Настройки'},
 ])
 
+// properties: {
+//     Manager: { id: '%3ACda', type: 'relation', relation: [], has_more: false },
+//     Company: { id: '%3AgN%3A', type: 'relation', relation: [], has_more: false },
+//     City: { id: '%3B%3Eb%5B', type: 'select', select: null },
+//     'Date (1) 2': { id: 'HOPL', type: 'date', date: null },
+//     Property: { id: 'MI%5BK', type: 'people', people: [] },
+//     'Date (1) 3': { id: 'Nj%3DX', type: 'date', date: null },
+//     'Ссылка на карту': { id: 'PZXb', type: 'url', url: null },
+//     TG_chat_ID: { id: 'QctD', type: 'rich_text', rich_text: [] },
+//     'Date (1)': { id: '%5CTdz', type: 'date', date: null },
+//     Text: { id: '%5CXsm', type: 'rich_text', rich_text: [] },
+//     Payload: { id: '%5DJj%60', type: 'number', number: null },
+//     Notice24: { id: 'eT%5BN', type: 'checkbox', checkbox: false },
+//     'Тех. Задание': { id: 'hP%3C%3A', type: 'rich_text', rich_text: [] },
+//     'Смета №1': { id: 'jIHc', type: 'relation', relation: [], has_more: false },
+//     Date: { id: 'llLo', type: 'date', date: null },
+//     'Адрес': { id: 'nRHW', type: 'rich_text', rich_text: [] },
+//     Status: { id: 'qC%3Ac', type: 'select', select: null },
+//     Notice2: { id: 'qdtL', type: 'checkbox', checkbox: false },
+//     Phone: { id: 'tF%3Fl', type: 'rollup', rollup: [Object] },
+//     Responsible: { id: 'tVkR', type: 'relation', relation: [], has_more: false },
+//     Crm_ID: { id: 'zwOj', type: 'rich_text', rich_text: [] },
+//     'Date (2)': { id: '%7CHuq', type: 'date', date: null },
+//     Name: { id: 'title', type: 'title', title: [Array] }
+// },
+
 //send data to notion
-async function addItem(text) {
+async function addItem(title, geo) {
     try {
         const response = await notion.pages.create({
             parent: { database_id: databaseId },
@@ -53,7 +79,16 @@ async function addItem(text) {
                     title:[
                         {
                             "text": {
-                                "content": text
+                                "content": title
+                            }
+                        }
+                    ]
+                },
+                TG_chat_ID: {
+                    rich_text:[
+                        {
+                            "text": {
+                                "content": "47453454"
                             }
                         }
                     ]
@@ -107,22 +142,31 @@ bot.on('message', async (msg) => {
         reply_markup: ({
             inline_keyboard:[
                 [{text: 'Информация', callback_data:'Информация'}, {text: 'Настройки', callback_data:'Настройки'}],
-                [{text: 'Открыть Notion', web_app: {url: webAppUrl}}],
             ]
         })
     })
   }
 
-  if (text === '/menu') {
+  /*if (text === '/menu') {
       await bot.sendMessage(chatId, 'Смотрите и создавайте Notion-проекты в web-приложении прямо из телеграм.', {
           reply_markup: ({
               inline_keyboard:[
                   [{text: 'Информация', callback_data:'Информация'}, {text: 'Настройки', callback_data:'Настройки'}],
-                  [{text: 'Открыть Notion-проекты', web_app: {url: webAppUrl}}],
+                  [{text: 'Открыть Notion-форму', web_app: {url: webAppUrl + '/form'}}],
               ]
           })
       })
-  }
+  }*/
+
+    if (text === '/menu') {
+        await bot.sendMessage(chatId, 'Смотрите и создавайте Notion-проекты в web-приложении прямо из телеграм.', {
+            reply_markup: ({
+                keyboard:[
+                    [{text: 'Создать проект', web_app: {url: webAppUrl}}],
+                ]
+            })
+        })
+    }
 
   if (text === '/info') {
 
@@ -138,18 +182,18 @@ bot.on('message', async (msg) => {
         console.log(data)
         await bot.sendMessage(chatId, 'Проект успешно создан!')
 
-        await bot.sendMessage(chatId, 'Название проекта: ' + data?.project_name);
-        await bot.sendMessage(chatId, 'Дата начала: ' + data?.project_date);
-        await bot.sendMessage(chatId, 'Геопозиция: ' + data?.project_geo);
-        await bot.sendMessage(chatId, 'Тех. задание: ' + data?.project_teh);
+        await bot.sendMessage(chatId, 'Название проекта: ' + data?.project);
+        await bot.sendMessage(chatId, 'Дата начала: ' + data?.datestart);
+        await bot.sendMessage(chatId, 'Геопозиция: ' + data?.geo);
+        await bot.sendMessage(chatId, 'Тех. задание: ' + data?.teh);
 
         //добавление проекта с названием проекта в базу
-        addItem(data?.project_name);
+        addItem(data?.project, data?.geo);
 
         //getDatabase();
 
-        const projects = await getDatabase();
-        res.json(projects);
+       // const projects = await getDatabase();
+        //res.json(projects);
 
 
         setTimeout(async () => {
@@ -171,7 +215,6 @@ bot.on('callback_query', msg => {
             reply_markup: ({
                 inline_keyboard:[
                     [{text: 'Информация', callback_data:'Информация'}, {text: 'Настройки', callback_data:'Настройки'}],
-                    [{text: 'Открыть Notion', web_app: {url: webAppUrl}}],
                 ]
             })
         })
