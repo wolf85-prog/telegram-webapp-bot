@@ -31,7 +31,7 @@ const menuOptions = {
 const backOptions = {
     reply_markup: JSON.stringify({
         inline_keyboard:[
-            [{text: 'Открыть Notion', web_app: {url: webAppUrl}}],
+            [{text: 'Открыть Notion-проекты', web_app: {url: webAppUrl}}],
             [{text: 'Назад', callback_data:'/menu'}],
         ]
     })
@@ -118,7 +118,7 @@ bot.on('message', async (msg) => {
           reply_markup: ({
               inline_keyboard:[
                   [{text: 'Информация', callback_data:'Информация'}, {text: 'Настройки', callback_data:'Настройки'}],
-                  [{text: 'Открыть Notion', web_app: {url: webAppUrl}}],
+                  [{text: 'Открыть Notion-проекты', web_app: {url: webAppUrl}}],
               ]
           })
       })
@@ -136,12 +136,15 @@ bot.on('message', async (msg) => {
     try {
         const data = JSON.parse(msg?.web_app_data?.data)
         console.log(data)
-        await bot.sendMessage(chatId, 'Спасибо за обратную связь!')
-        await bot.sendMessage(chatId, 'Название проекта: ' + data?.country);
-        await bot.sendMessage(chatId, 'Город: ' + data?.street);
+        await bot.sendMessage(chatId, 'Проект успешно создан!')
+
+        await bot.sendMessage(chatId, 'Название проекта: ' + data?.project_name);
+        await bot.sendMessage(chatId, 'Дата начала: ' + data?.project_date);
+        await bot.sendMessage(chatId, 'Геопозиция: ' + data?.project_geo);
+        await bot.sendMessage(chatId, 'Тех. задание: ' + data?.project_teh);
 
         //добавление проекта с названием проекта в базу
-        addItem(data?.country);
+        addItem(data?.project_name);
 
         //getDatabase();
 
