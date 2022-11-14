@@ -107,9 +107,11 @@ bot.on('message', async (msg) => {
     try {
         const data = JSON.parse(msg?.web_app_data?.data)
         console.log(data)
-        await bot.sendMessage(chatId, 'Спасибо за обратную связь!')
+        await bot.sendMessage(chatId, 'Проект успешно создан!')
         await bot.sendMessage(chatId, 'Название проекта: ' + data?.country);
-        await bot.sendMessage(chatId, 'Город: ' + data?.street);
+        await bot.sendMessage(chatId, 'Дата начала: ' + data?.street);
+        await bot.sendMessage(chatId, 'Геопозиция: ' + data?.street);
+        await bot.sendMessage(chatId, 'Тех. задание: ' + data?.street);
 
         //добавление проекта с названием проекта в базу
         addItem(data?.country);
