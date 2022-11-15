@@ -225,14 +225,14 @@ bot.on('callback_query', msg => {
 })
 
 app.post('/web-data', async (req, res) => {
-  const {queryId, project = []} = req.body;
+  const {queryId, projectname} = req.body;
   try {
       await bot.answerWebAppQuery(queryId, {
           type: 'article',
           id: queryId,
           title: 'Проект успешно создан',
           input_message_content: {
-              message_text: ` Название проекты:  ${project.title}`
+              message_text: ` Название проекта:  ${projectname}`
           }
       })
       return res.status(200).json({});
