@@ -142,31 +142,32 @@ bot.on('message', async (msg) => {
         reply_markup: ({
             inline_keyboard:[
                 [{text: 'Информация', callback_data:'Информация'}, {text: 'Настройки', callback_data:'Настройки'}],
+                [{text: 'Открыть Notion-проекты', web_app: {url: webAppUrl}}],
             ]
         })
     })
   }
 
-  /*if (text === '/menu') {
+  if (text === '/menu') {
       await bot.sendMessage(chatId, 'Смотрите и создавайте Notion-проекты в web-приложении прямо из телеграм.', {
           reply_markup: ({
               inline_keyboard:[
                   [{text: 'Информация', callback_data:'Информация'}, {text: 'Настройки', callback_data:'Настройки'}],
-                  [{text: 'Открыть Notion-форму', web_app: {url: webAppUrl + '/form'}}],
+                  [{text: 'Открыть Notion-проекты', web_app: {url: webAppUrl}}],
               ]
           })
       })
-  }*/
+  }
 
-    if (text === '/menu') {
-        await bot.sendMessage(chatId, 'Смотрите и создавайте Notion-проекты в web-приложении прямо из телеграм.', {
-            reply_markup: ({
-                keyboard:[
-                    [{text: 'Создать проект', web_app: {url: webAppUrl}}],
-                ]
-            })
-        })
-    }
+    // if (text === '/menu') {
+    //     await bot.sendMessage(chatId, 'Смотрите и создавайте Notion-проекты в web-приложении прямо из телеграм.', {
+    //         reply_markup: ({
+    //             keyboard:[
+    //                 [{text: 'Создать проект', web_app: {url: webAppUrl}}],
+    //             ]
+    //         })
+    //     })
+    // }
 
   if (text === '/info') {
 
@@ -215,6 +216,7 @@ bot.on('callback_query', msg => {
             reply_markup: ({
                 inline_keyboard:[
                     [{text: 'Информация', callback_data:'Информация'}, {text: 'Настройки', callback_data:'Настройки'}],
+                    [{text: 'Открыть Notion-проекты', web_app: {url: webAppUrl}}],
                 ]
             })
         })
