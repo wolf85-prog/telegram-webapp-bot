@@ -207,6 +207,7 @@ bot.on('message', async (msg) => {
   
 });
 
+//Ответ на нажатие кнопок настройки и информаци
 bot.on('callback_query', msg => {
     const data = msg.data;
     const chatId = msg.message.chat.id;
@@ -222,17 +223,17 @@ bot.on('callback_query', msg => {
         })
     }
     bot.sendMessage(chatId, `Вы нажали кнопку ${data}`, backOptions)
-})
+});
 
 app.post('/web-data', async (req, res) => {
-    const {queryId, products = []} = req.body;
+    const {queryId, products = [], totalPrice} = req.body;
     try {
         await bot.answerWebAppQuery(queryId, {
             type: 'article',
             id: queryId,
             title: 'Успешная покупка',
             input_message_content: {
-                message_text: ` Поздравляю с покупкой, вы приобрели товар на сумму ${products.map(item => item.title).join(', ')}`
+                message_text: ` Поздравляю с покупкой, вы приобрели товар на сумму ${totalPrice}, ${products.map(item => item.title).join(', ')}`
             }
         })
         return res.status(200).json({});
