@@ -2,8 +2,8 @@ require("dotenv").config();
 
 //notion api
 const { Client } = require("@notionhq/client");
-const notion = new Client({ auth: process.env.NOTION_API_KEY });
-const databaseId = process.env.NOTION_DATABASE_ID
+const notion = new Client({ auth: 'secret_QoVUx95AXfIlCgSkMpMx5WgRu1H4SvuZflCH4xMA42f' });
+const databaseId = '0e317603bca24676ac25616243e10ab4'
 
 //telegram api
 const TelegramBot = require('node-telegram-bot-api');
@@ -11,7 +11,7 @@ const express = require('express');
 const cors = require('cors');
 
 const token = '5360466924:AAHNPVR7bV9269oe-pzxtzTuj58HIR4Jf5c';
-const webAppUrl = process.env.WEB_APP_URL;
+const webAppUrl = 'https://inspiring-manatee-7e59f8.netlify.app';
 
 const bot = new TelegramBot(token, {polling: true});
 const app = express();
