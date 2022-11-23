@@ -86,7 +86,7 @@ bot.setMyCommands([
 // },
 
 //send data to notion
-async function addItem(title, geo) {
+async function addItem(title) {
     try {
         const response = await notion.pages.create({
             parent: { database_id: databaseId },
@@ -96,15 +96,6 @@ async function addItem(title, geo) {
                         {
                             "text": {
                                 "content": title
-                            }
-                        }
-                    ]
-                },
-                TG_chat_ID: {
-                    rich_text:[
-                        {
-                            "text": {
-                                "content": "47453454"
                             }
                         }
                     ]
@@ -271,9 +262,13 @@ app.post('/web-data', async (req, res) => {
           id: queryId,
           title: 'Проект успешно создан',
           input_message_content: {
-              message_text: ` Название проекта:  ${projectname}`
+              message_text: `Проект успешно создан. Название проекта:  ${projectname}`
           }
       })
+
+      //добавление проекта с названием проекта в базу
+      addItem(projectname);
+
       return res.status(200).json({});
   } catch (e) {
       return res.status(500).json({})
