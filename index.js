@@ -9,6 +9,7 @@ const databaseId = process.env.NOTION_DATABASE_ID
 const TelegramBot = require('node-telegram-bot-api');
 const express = require('express');
 const cors = require('cors');
+const https = require('https');
 
 const token = process.env.TELEGRAM_API_TOKEN;
 const webAppUrl = process.env.WEB_APP_URL;
@@ -18,6 +19,20 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
+app.use(express.static('telegram-webapp-bot'));
+
+// Certificate
+const privateKey = fs.readFileSync('/etc/letsencrypt/live/telegram.uley.moscow/privkey.pem', 'utf8');
+const certificate = fs.readFileSync('/etc/letsencrypt/live/telegram.uley.moscow/cert.pem', 'utf8');
+const ca = fs.readFileSync('/etc/letsencrypt/live/telegram.uley.moscow/chain.pem', 'utf8');
+
+const credentials = {
+    key: privateKey,
+    cert: certificate,
+    ca: ca
+};
+
+const httpsServer = https.createServer(credentials, app);
 
 const menuOptions = {
     reply_markup: JSON.stringify({
@@ -266,4 +281,7 @@ app.post('/web-data', async (req, res) => {
 
 const PORT = 8000;
 
-app.listen(PORT, () => console.log('server started on PORT ' + PORT))
+//app.listen(PORT, () => console.log('server started on PORT ' + PORT))
+httpsServer.listen(PORT, () => {
+    console.log('HTTPS Server running on port' + PORT);
+});
