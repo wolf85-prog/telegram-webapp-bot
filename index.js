@@ -86,7 +86,7 @@ bot.setMyCommands([
 // },
 
 //send data to notion
-async function addItem(title) {
+async function addItem(title, datetime) {
     try {
         const response = await notion.pages.create({
             parent: { database_id: databaseId },
@@ -105,6 +105,15 @@ async function addItem(title) {
                         {
                             "text": {
                                 "content": ""
+                            }
+                        }
+                    ]
+                },
+                Date: {
+                    date:[
+                        {
+                            "text": {
+                                "content": datestart
                             }
                         }
                     ]
@@ -130,7 +139,7 @@ async function getDatabase() {
                // Manager: page.properties.Manager.id,
                id: page.id,
                title: page.properties.Name.title[0]?.plain_text,
-               time: '',
+               time: page.properties.Name.title[0]?.plain_text,
                geo: '',
                teh: '',
                status: '',
@@ -203,12 +212,6 @@ bot.on('message', async (msg) => {
 
         //добавление проекта с названием проекта в базу
         addItem(data?.project, data?.geo);
-
-        //getDatabase();
-
-       // const projects = await getDatabase();
-        //res.json(projects);
-
 
         setTimeout(async () => {
             await bot.sendMessage(chatId, 'Всю информацию вы получите в этом чате');
@@ -284,7 +287,7 @@ app.post('/web-data', async (req, res) => {
       })
 
       //добавление проекта с названием проекта в базу
-      addItem(projectname);
+      addItem(projectname, datestart);
 
       return res.status(200).json({});
   } catch (e) {
