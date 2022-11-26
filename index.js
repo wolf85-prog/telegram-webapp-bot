@@ -129,7 +129,11 @@ async function getDatabase() {
             return {
                // Manager: page.properties.Manager.id,
                id: page.id,
-               name: page.properties.Name.title[0]?.plain_text,
+               title: page.properties.Name.title[0]?.plain_text,
+               time: '',
+               geo: '',
+               teh: '',
+               status: '',
             };
         });
 
