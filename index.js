@@ -255,7 +255,7 @@ app.get('/secret',(req, res) => {
 });
 
 app.post('/web-data', async (req, res) => {
-  const {queryId, projectname, datestart, geo, teh} = req.body;
+  const {queryId, projectname, datestart, geo, teh, worklist = []} = req.body;
   try {
       await bot.answerWebAppQuery(queryId, {
           type: 'article',
@@ -263,7 +263,8 @@ app.post('/web-data', async (req, res) => {
           title: 'Проект успешно создан',
           input_message_content: {
               message_text: `Проект успешно создан. Название проекта:  ${projectname}, 
-              Дата начала: ${datestart}, Геопозиция: ${geo}, Тех. задание: ${teh}`
+              Дата начала: ${datestart}, Геопозиция: ${geo}, Тех. задание: ${teh}, 
+              Список специалистов: ${worklist.map(item => item.spec).join(', ')}`
           }
       })
 
