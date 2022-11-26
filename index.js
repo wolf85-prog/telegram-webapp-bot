@@ -262,9 +262,11 @@ app.post('/web-data', async (req, res) => {
           id: queryId,
           title: 'Проект успешно создан',
           input_message_content: {
-              message_text: `Проект успешно создан. Название проекта:  ${projectname}, 
-              Дата начала: ${datestart}, Геопозиция: ${geo}, Тех. задание: ${teh}, 
-              Список специалистов: ${worklist.map(item => item.spec + '-' + item.count + ' чел.').join(', ')}`
+              parse_mode: 'HTML',
+              message_text: `Проект успешно создан. 
+              <b>Название проекта:</b>  ${projectname}, 
+              <b>Дата начала:</b> ${datestart}, Геопозиция: ${geo}, Тех. задание: ${teh}, 
+              <b>Список специалистов:</b> ${worklist.map(item => item.spec + ' - ' + item.count + ' чел.').join(', ')}`
           }
       })
 
