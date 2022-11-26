@@ -265,7 +265,9 @@ app.post('/web-data', async (req, res) => {
               parse_mode: 'HTML',
               message_text: `Проект успешно создан. 
               <b>Название проекта:</b>  ${projectname}, 
-              <b>Дата начала:</b> ${datestart}, Геопозиция: ${geo}, Тех. задание: ${teh}, 
+              <b>Дата начала:</b> ${datestart}, 
+              <b>Геопозиция:</b> ${geo}, 
+              <b>Тех. задание:</b> ${teh}, 
               <b>Список специалистов:</b> ${worklist.map(item => item.spec + ' - ' + item.count + ' чел.').join(', ')}`
           }
       })
