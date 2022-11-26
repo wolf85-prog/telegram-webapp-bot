@@ -255,7 +255,7 @@ app.get('/secret',(req, res) => {
 });
 
 app.get('/projects',(req, res) => {
-    const projects = await getDatabase();
+    const projects = getDatabase();
     res.json(projects);
 });
 
