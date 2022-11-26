@@ -254,6 +254,11 @@ app.get('/secret',(req, res) => {
     res.json({secret})
 });
 
+app.get('/projects',(req, res) => {
+    const projects = await getDatabase();
+    res.json(projects);
+});
+
 app.post('/web-data', async (req, res) => {
   const {queryId, projectname, datestart, geo, teh, worklist = []} = req.body;
   try {
