@@ -104,7 +104,7 @@ async function addItem(title) {
                     rich_text:[
                         {
                             "text": {
-                                "content": "47453454"
+                                "content": ""
                             }
                         }
                     ]
@@ -127,7 +127,9 @@ async function getDatabase() {
 
         const responseResults = response.results.map((page) => {
             return {
-                Manager: page.properties.Manager.id,
+               // Manager: page.properties.Manager.id,
+               id: page.id,
+               name: page.properties.Name.title[0]?.plain_text,
             };
         });
 
