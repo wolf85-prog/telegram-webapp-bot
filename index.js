@@ -86,7 +86,7 @@ bot.setMyCommands([
 // },
 
 //send data to notion
-async function addItem(title, datetime) {
+async function addItem(title, datestart) {
     try {
         const response = await notion.pages.create({
             parent: { database_id: databaseId },
