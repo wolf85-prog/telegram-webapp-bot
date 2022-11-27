@@ -133,7 +133,7 @@ async function getDatabase() {
                time: '',
                geo: '',
                teh: '',
-               status: page.properties.Status.id,
+               status: Math.floor(Math.random()*9),//page.properties.Status.id,
             };
         });
 
