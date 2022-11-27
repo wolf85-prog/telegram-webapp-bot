@@ -130,7 +130,7 @@ async function getDatabase() {
                // Manager: page.properties.Manager.id,
                id: page.id,
                title: page.properties.Name.title[0]?.plain_text,
-               time: page.properties.Date.date[0]?.plain_text,
+               time: '',
                geo: '',
                teh: '',
                status: page.properties.Status.id[0]?.plain_text,
