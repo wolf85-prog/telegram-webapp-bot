@@ -86,7 +86,7 @@ bot.setMyCommands([
 // },
 
 //send data to notion
-async function addItem(title, datestart) {
+async function addItem(title, teh) {
     try {
         const response = await notion.pages.create({
             parent: { database_id: databaseId },
@@ -104,16 +104,7 @@ async function addItem(title, datestart) {
                     rich_text:[
                         {
                             "text": {
-                                "content": ""
-                            }
-                        }
-                    ]
-                },
-                Date: {
-                    date:[
-                        {
-                            "text": {
-                                "content": datestart
+                                "content": teh
                             }
                         }
                     ]
@@ -287,7 +278,7 @@ app.post('/web-data', async (req, res) => {
       })
 
       //добавление проекта с названием проекта в базу
-      addItem(projectname, datestart);
+      addItem(projectname, teh);
 
       return res.status(200).json({});
   } catch (e) {
