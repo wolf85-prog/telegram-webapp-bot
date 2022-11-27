@@ -133,7 +133,7 @@ async function getDatabase() {
                time: '',
                geo: '',
                teh: '',
-               status: page.properties.Status.id[0]?.plain_text,
+               status: page.properties.Status.id,
             };
         });
 
