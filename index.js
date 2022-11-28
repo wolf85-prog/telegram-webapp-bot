@@ -146,7 +146,7 @@ async function getDatabase() {
                time: page.properties.Date.date,
                geo: '',
                teh: '',
-               status: '',
+               status_id: '',
             };
         });
 
