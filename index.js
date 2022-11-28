@@ -85,6 +85,19 @@ bot.setMyCommands([
 //     Name: { id: 'title', type: 'title', title: [Array] }
 // },
 
+// {
+//     "id": "a345d4e3-1b11-48d3-a120-6dda986be3b4",
+//     "title": "Тест Сара 2.0",
+//     "time": {
+//         "start": "2022-11-01T21:00:00.000+03:00",
+//         "end": "2022-11-03T23:59:00.000+03:00",
+//         "time_zone": null
+//     },
+//     "geo": "",
+//     "teh": "",
+//     "status": ""
+// },
+
 //send data to notion
 async function addItem(title, teh) {
     try {
