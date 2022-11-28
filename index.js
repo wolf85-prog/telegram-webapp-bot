@@ -146,7 +146,7 @@ async function getDatabase() {
                time: page.properties.Date.date,
                geo: '',//page.properties.Адрес.rich_text,
                teh: '',//page.properties.Тех. Задание.rich_text,
-               status_id: page.properties.Status.select[0],
+               status_id: page.properties.Status.select,
             };
         });
 
