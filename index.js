@@ -133,12 +133,12 @@ async function getDatabase() {
                geo: '',//page.properties.Адрес.rich_text,
                teh: '',//page.properties.Тех. Задание.rich_text,
                status_id: page.properties.Status.select,
-               Manager: page.properties.Manager.relation?.plain_text,
+               Manager: page.properties.Manager.relation,
             };
         });
 
         console.log(responseResults);
-        return responseResults;
+        return response;
     } catch (error) {
         console.error(error.body)
     }
