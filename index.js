@@ -104,15 +104,12 @@ async function addProject(title, time, teh, worklist) {
                     }
                 },
                 Workers: {
-                    type: 'rich_text',
-                    rich_text: [
-                        {
-                            type: 'text',
-                            text: {
-                                content: worklist,
-                            },
-                        }
-                        ],
+                    type: "rollup",
+                    rollup: {
+                        type: "array",
+                        array: worklist,
+                        function: "show_original"
+                    }
                 },
             },
         })
@@ -135,10 +132,10 @@ async function addAddress(geo) {
                         {
                             type: "text",
                             text: {
-                                content: "Тест",
+                                content: geo,
                                 "link": null
                             },
-                            plain_text: "Тест",
+                            plain_text: geo,
                             "href": null
                         }
                     ]
