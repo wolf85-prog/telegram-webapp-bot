@@ -162,6 +162,18 @@ async function getDatabase() {
             database_id: databaseId
         });
 
+        return response;
+    } catch (error) {
+        console.error(error.body)
+    }
+}
+
+async function getProjects() {
+    try {
+        const response = await notion.databases.query({
+            database_id: databaseId
+        });
+
         const responseResults = response.results.map((page) => {
             return {
                id: page.id,
@@ -317,8 +329,13 @@ app.get('/secret',(req, res) => {
     res.json({secret})
 });
 
-app.get("/projects", async (req, res) => {
+app.get("/database1", async (req, res) => {
     const projects = await getDatabase();
+    res.json(projects);
+  });
+
+app.get("/projects", async (req, res) => {
+    const projects = await getProjects();
     res.json(projects);
   });
 
