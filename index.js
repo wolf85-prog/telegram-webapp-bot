@@ -151,7 +151,7 @@ async function getDatabase() {
         });
 
         console.log(responseResults);
-        return responseResults;
+        return response;
     } catch (error) {
         console.error(error.body)
     }
