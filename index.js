@@ -62,7 +62,7 @@ bot.setMyCommands([
 ])
 
 //send data to notion
-async function addItem(title, time, geo, teh) {
+async function addItem(title, time, teh) {
     try {
         const response = await notion.pages.create({
             parent: { database_id: databaseId },
@@ -103,16 +103,21 @@ async function addItem(title, time, geo, teh) {
                         "color": "blue"
                     }
                 },
-                // Address: {
-                //     type: "rollup",
-                //     rollup: {
-                //         "type": "array",
-                //         "array": [
-                            
-                //         ],
-                //         "function": "show_original"
-                //     }
-                // },
+            },
+        })
+        console.log(response)
+        console.log("Success! Entry added.")
+    } catch (error) {
+        console.error(error.body)
+    }
+}
+
+//send data to notion
+async function addAddress(geo) {
+    try {
+        const response = await notion.pages.create({
+            parent: { database_id: databaseAddressId },
+            properties: {
                 Address: {
                     type: "rollup",
                     rollup: {
@@ -124,19 +129,19 @@ async function addItem(title, time, geo, teh) {
                                     {
                                         type: "text",
                                         text: {
-                                            "content": geo,
+                                            content: geo,
                                         },
                                     }
                                 ]
                             }
                         ],
-                        "function": "show_original"
+                        function: "show_original"
                     }
                 },
             },
         })
         console.log(response)
-        console.log("Success! Entry added.")
+        console.log("Success! Entry address added.")
     } catch (error) {
         console.error(error.body)
     }
@@ -338,7 +343,10 @@ app.post('/web-data', async (req, res) => {
       })
 
       //добавление проекта с названием проекта в базу
-      addItem(projectname, datestart, geo, teh);
+      addItem(projectname, datestart, teh);
+
+      //добавление геопозиции в БД Площадки (Адрес)
+      addAddress(geo);
 
       return res.status(200).json({});
   } catch (e) {
