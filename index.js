@@ -86,7 +86,7 @@ bot.setMyCommands([
 // },
 
 //send data to notion
-async function addItem(title, time) {
+async function addItem(title, time, geo) {
     try {
         const response = await notion.pages.create({
             parent: { database_id: databaseId },
@@ -108,14 +108,22 @@ async function addItem(title, time) {
                         "time_zone": null
                     }
                 },
-                // Status: {
-                //     type: 'select',
-                //     select: {
-                //         "id": "4f52b59e-2d7f-4a13-976f-f9773274825d",
-                //         "name": "New",
-                //         "color": "blue"
+                // Address: {
+                //     type: "rollup",
+                //     "rollup": {
+                //         "type": "array",
+                //         "array": [],
+                //         "function": "show_original"
                 //     }
                 // },
+                Status: {
+                    type: 'select',
+                    select: {
+                        "id": "4f52b59e-2d7f-4a13-976f-f9773274825d",
+                        "name": "New",
+                        "color": "blue"
+                    }
+                },
             },
         })
         console.log(response)
@@ -285,7 +293,7 @@ app.post('/web-data', async (req, res) => {
       })
 
       //добавление проекта с названием проекта в базу
-      addItem(projectname, datestart);
+      addItem(projectname, datestart, geo);
 
       return res.status(200).json({});
   } catch (e) {
