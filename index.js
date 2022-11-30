@@ -62,7 +62,7 @@ bot.setMyCommands([
 ])
 
 //send data to notion
-async function addItem(title, time, teh) {
+async function addProject(title, time, teh, worklist) {
     try {
         const response = await notion.pages.create({
             parent: { database_id: databaseId },
@@ -102,6 +102,17 @@ async function addItem(title, time, teh) {
                         "name": "New",
                         "color": "blue"
                     }
+                },
+                Workers: {
+                    type: 'rich_text',
+                    rich_text: [
+                        {
+                            type: 'text',
+                            text: {
+                                content: worklist,
+                            },
+                        }
+                        ],
                 },
             },
         })
@@ -368,7 +379,7 @@ app.post('/web-data', async (req, res) => {
       })
 
       //добавление проекта с названием проекта в базу
-      addItem(projectname, datestart, teh);
+      addProject(projectname, datestart, teh, worklist);
 
       //добавление геопозиции в БД Площадки (Адрес)
       addAddress(geo);
