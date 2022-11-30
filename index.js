@@ -86,7 +86,7 @@ bot.setMyCommands([
 // },
 
 //send data to notion
-async function addItem(title, teh) {
+async function addItem(title, time, teh, status) {
     try {
         const response = await notion.pages.create({
             parent: { database_id: databaseId },
@@ -100,15 +100,22 @@ async function addItem(title, teh) {
                         }
                     ]
                 },
-                TG_chat_ID: {
-                    rich_text:[
-                        {
-                            "text": {
-                                "content": teh
-                            }
-                        }
-                    ]
-                }
+                Date: {
+                    type: 'date',
+                    date: {
+                        "start": time,
+                        "end": null,
+                        "time_zone": null
+                    }
+                },
+                Status: {
+                    type: 'select',
+                    select: {
+                        "id": "4f52b59e-2d7f-4a13-976f-f9773274825d",
+                        "name": "New",
+                        "color": "blue"
+                    }
+                },
             },
         })
         console.log(response)
@@ -138,7 +145,7 @@ async function getDatabase() {
         });
 
         console.log(responseResults);
-        return response;
+        return responseResults;
     } catch (error) {
         console.error(error.body)
     }
