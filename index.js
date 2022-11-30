@@ -149,7 +149,7 @@ async function getDatabase() {
                title: page.properties.Name.title[0]?.plain_text,
                time: page.properties.Date.date,
                geo: '',//page.properties.Адрес.rich_text,
-               teh: '',//page.properties.Тех. Задание.rich_text,
+               teh: page.properties.'Tech Zadanie'.rich_text,
                status_id: page.properties.Status.select,
                //Manager: page.properties.Manager.relation,
             };
