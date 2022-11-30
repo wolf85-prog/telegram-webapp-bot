@@ -108,14 +108,14 @@ async function addItem(title, time, teh, status) {
                         "time_zone": null
                     }
                 },
-                Status: {
-                    type: 'select',
-                    select: {
-                        "id": "4f52b59e-2d7f-4a13-976f-f9773274825d",
-                        "name": "New",
-                        "color": "blue"
-                    }
-                },
+                // Status: {
+                //     type: 'select',
+                //     select: {
+                //         "id": "4f52b59e-2d7f-4a13-976f-f9773274825d",
+                //         "name": "New",
+                //         "color": "blue"
+                //     }
+                // },
             },
         })
         console.log(response)
