@@ -108,7 +108,7 @@ async function addItem(title, time, geo, teh) {
                         "time_zone": null
                     }
                 },
-                Tech Zadanie: {
+                'Tech Zadanie': {
                     type: 'rich_text',
                     rich_text: [
                         {
