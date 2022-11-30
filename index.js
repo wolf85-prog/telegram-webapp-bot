@@ -127,6 +127,18 @@ async function addItem(title, time, geo, teh) {
                         "color": "blue"
                     }
                 },
+                Address: {
+                    type: "rollup",
+                    rollup: {
+                        "type": "array",
+                        "array": [
+                            {
+                                "title": geo
+                            }
+                        ],
+                        "function": "show_original"
+                    }
+                },
             },
         })
         console.log(response)
