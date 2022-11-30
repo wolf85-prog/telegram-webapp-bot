@@ -4,6 +4,8 @@ require("dotenv").config();
 const { Client } = require("@notionhq/client");
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
 const databaseId = process.env.NOTION_DATABASE_ID
+const databaseManagerId = process.env.NOTION_DATABASE_MANAGER_ID
+const databaseAddressId = process.env.NOTION_DATABASE_ADDRESS_ID
 
 //telegram api
 const TelegramBot = require('node-telegram-bot-api');
@@ -59,32 +61,6 @@ bot.setMyCommands([
     {command: '/settings', description: 'Настройки'},
 ])
 
-// properties: {
-//     Manager: { id: '%3ACda', type: 'relation', relation: [], has_more: false },
-//     Company: { id: '%3AgN%3A', type: 'relation', relation: [], has_more: false },
-//     City: { id: '%3B%3Eb%5B', type: 'select', select: null },
-//     'Date (1) 2': { id: 'HOPL', type: 'date', date: null },
-//     Property: { id: 'MI%5BK', type: 'people', people: [] },
-//     'Date (1) 3': { id: 'Nj%3DX', type: 'date', date: null },
-//     'Ссылка на карту': { id: 'PZXb', type: 'url', url: null },
-//     TG_chat_ID: { id: 'QctD', type: 'rich_text', rich_text: [] },
-//     'Date (1)': { id: '%5CTdz', type: 'date', date: null },
-//     Text: { id: '%5CXsm', type: 'rich_text', rich_text: [] },
-//     Payload: { id: '%5DJj%60', type: 'number', number: null },
-//     Notice24: { id: 'eT%5BN', type: 'checkbox', checkbox: false },
-//     'Тех. Задание': { id: 'hP%3C%3A', type: 'rich_text', rich_text: [] },
-//     'Смета №1': { id: 'jIHc', type: 'relation', relation: [], has_more: false },
-//     Date: { id: 'llLo', type: 'date', date: null },
-//     'Адрес': { id: 'nRHW', type: 'rich_text', rich_text: [] },
-//     Status: { id: 'qC%3Ac', type: 'select', select: null },
-//     Notice2: { id: 'qdtL', type: 'checkbox', checkbox: false },
-//     Phone: { id: 'tF%3Fl', type: 'rollup', rollup: [Object] },
-//     Responsible: { id: 'tVkR', type: 'relation', relation: [], has_more: false },
-//     Crm_ID: { id: 'zwOj', type: 'rich_text', rich_text: [] },
-//     'Date (2)': { id: '%7CHuq', type: 'date', date: null },
-//     Name: { id: 'title', type: 'title', title: [Array] }
-// },
-
 //send data to notion
 async function addItem(title, time, geo, teh) {
     try {
@@ -127,18 +103,16 @@ async function addItem(title, time, geo, teh) {
                         "color": "blue"
                     }
                 },
-                Address: {
-                    type: "rollup",
-                    rollup: {
-                        "type": "array",
-                        "array": [
-                            {
-                                "title": geo
-                            }
-                        ],
-                        "function": "show_original"
-                    }
-                },
+                // Address: {
+                //     type: "rollup",
+                //     rollup: {
+                //         "type": "array",
+                //         "array": [
+                            
+                //         ],
+                //         "function": "show_original"
+                //     }
+                // },
             },
         })
         console.log(response)
@@ -169,6 +143,48 @@ async function getDatabase() {
 
         console.log(responseResults);
         return responseResults;
+    } catch (error) {
+        console.error(error.body)
+    }
+}
+
+async function getAddress() {
+    try {
+        const response = await notion.databases.query({
+            database_id: databaseAddressId
+        });
+
+        const responseResults = response.results.map((page) => {
+            return {
+               id: page.id,
+               title: '',
+
+            };
+        });
+
+        console.log(responseResults);
+        return response;
+    } catch (error) {
+        console.error(error.body)
+    }
+}
+
+async function getManagers() {
+    try {
+        const response = await notion.databases.query({
+            database_id: databaseManagerId
+        });
+
+        const responseResults = response.results.map((page) => {
+            return {
+               id: page.id,
+               title: '',
+
+            };
+        });
+
+        console.log(responseResults);
+        return response;
     } catch (error) {
         console.error(error.body)
     }
@@ -262,22 +278,6 @@ bot.on('callback_query', msg => {
     bot.sendMessage(chatId, `Вы нажали кнопку ${data}`, backOptions)
 });
 
-// app.post('/web-data', async (req, res) => {
-//     const {queryId, products = [], totalPrice} = req.body;
-//     try {
-//         await bot.answerWebAppQuery(queryId, {
-//             type: 'article',
-//             id: queryId,
-//             title: 'Успешная покупка',
-//             input_message_content: {
-//                 message_text: ` Поздравляю с покупкой, вы приобрели товар на сумму ${totalPrice}, ${products.map(item => item.title).join(', ')}`
-//             }
-//         })
-//         return res.status(200).json({});
-//     } catch (e) {
-//         return res.status(500).json({})
-//     }
-// })
 
 app.get('/secret',(req, res) => {
     const secret =  Math.floor(Math.random()*100)
@@ -287,6 +287,16 @@ app.get('/secret',(req, res) => {
 app.get("/projects", async (req, res) => {
     const projects = await getDatabase();
     res.json(projects);
+  });
+
+app.get("/managers", async (req, res) => {
+    const managers = await getManagers();
+    res.json(managers);
+  });
+
+app.get("/address", async (req, res) => {
+    const address = await getAddress();
+    res.json(address);
   });
 
 app.post('/web-data', async (req, res) => {
