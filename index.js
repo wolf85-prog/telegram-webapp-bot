@@ -376,6 +376,7 @@ app.post('/web-data', async (req, res) => {
       })
 
       //добавление проекта с названием проекта в базу
+      console.log(worklist);
       addProject(projectname, datestart, teh, worklist);
 
       //добавление геопозиции в БД Площадки (Адрес)
