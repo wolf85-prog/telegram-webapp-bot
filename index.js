@@ -162,19 +162,20 @@ async function getDatabase() {
             database_id: databaseId
         });
 
-        // const responseResults = response.results.map((page) => {
-        //     return {
-        //        id: page.id,
-        //        title: page.properties.Name.title[0]?.plain_text,
-        //        time: page.properties.Date.date,
-        //        geo: page.properties.Address.rollup.array,
-        //        teh: page.properties.TechZadanie.rich_text,
-        //        status_id: page.properties.Status.select,
-        //        //Manager: page.properties.Manager.relation,
-        //     };
-        // });
+        const responseResults = response.results.map((page) => {
+            return {
+               id: page.id,
+               title: page.properties.Name.title[0]?.plain_text,
+               time: page.properties.Date.date,
+               geo: '',//page.properties.Address.rollup.array,
+               teh: page.properties.TechZadanie.rich_text,
+               status_id: page.properties.Status.select,
+               workers: '',
+               //Manager: page.properties.Manager.relation,
+            };
+        });
 
-        return response;
+        return responseResults;
     } catch (error) {
         console.error(error.body)
     }
