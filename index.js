@@ -118,25 +118,27 @@ async function addAddress(geo) {
         const response = await notion.pages.create({
             parent: { database_id: databaseAddressId },
             properties: {
-                Address: {
-                    type: "rollup",
-                    rollup: {
-                        type: "array",
-                        array: [
-                            {
-                                type: "title",
-                                title: [
-                                    {
-                                        type: "text",
-                                        text: {
-                                            content: geo,
-                                        },
-                                    }
-                                ]
-                            }
-                        ],
-                        function: "show_original"
-                    }
+                "Адрес": {
+                    "type": "rich_text",
+                    "rich_text": [
+                        {
+                            "type": "text",
+                            "text": {
+                                "content": geo,
+                                "link": null
+                            },
+                            "annotations": {
+                                "bold": false,
+                                "italic": false,
+                                "strikethrough": false,
+                                "underline": false,
+                                "code": false,
+                                "color": "default"
+                            },
+                            "plain_text": geo,
+                            "href": null
+                        }
+                    ]
                 },
             },
         })
