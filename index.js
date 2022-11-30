@@ -377,10 +377,10 @@ app.post('/web-data', async (req, res) => {
 
       //добавление проекта с названием проекта в базу
       console.log(worklist);
-      addProject(projectname, datestart, teh, worklist);
+      //addProject(projectname, datestart, teh, worklist);
 
       //добавление геопозиции в БД Площадки (Адрес)
-      addAddress(geo);
+      //addAddress(geo);
 
       return res.status(200).json({});
   } catch (e) {
