@@ -113,6 +113,26 @@ async function addItem(title, time, geo, teh) {
                 //         "function": "show_original"
                 //     }
                 // },
+                Address: {
+                    type: "rollup",
+                    rollup: {
+                        type: "array",
+                        array: [
+                            {
+                                type: "title",
+                                title: [
+                                    {
+                                        type: "text",
+                                        text: {
+                                            "content": geo,
+                                        },
+                                    }
+                                ]
+                            }
+                        ],
+                        "function": "show_original"
+                    }
+                },
             },
         })
         console.log(response)
