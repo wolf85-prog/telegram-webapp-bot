@@ -109,11 +109,18 @@ async function addItem(title, time, geo) {
                     }
                 },
                 Address: {
-                    "title":'',
-                    "number": '1',
-                    "rich_text": geo,
-                    "url":'',
-                    
+                    type: "rollup",
+                    "rollup": {
+                        "type": "array",
+                        array: [
+                                {
+                                    "title": {
+                                        "content": geo
+                                    }
+                                }
+                            ],
+                        "function": "show_original"
+                    }
                 },
                 Status: {
                     type: 'select',
