@@ -108,14 +108,14 @@ async function addItem(title, time, geo) {
                         "time_zone": null
                     }
                 },
-                // Address: {
-                //     type: "rollup",
-                //     "rollup": {
-                //         "type": "array",
-                //         "array": [],
-                //         "function": "show_original"
-                //     }
-                // },
+                Address: {
+                    type: "rollup",
+                    "rollup": {
+                        "type": "array",
+                        "array": [geo],
+                        "function": "show_original"
+                    }
+                },
                 Status: {
                     type: 'select',
                     select: {
