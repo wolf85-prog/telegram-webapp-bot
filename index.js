@@ -108,7 +108,7 @@ async function addItem(title, time, geo, teh) {
                         "time_zone": null
                     }
                 },
-                'Tech Zadanie': {
+                TechZadanie: {
                     type: 'rich_text',
                     rich_text: [
                         {
@@ -149,7 +149,7 @@ async function getDatabase() {
                title: page.properties.Name.title[0]?.plain_text,
                time: page.properties.Date.date,
                geo: '',//page.properties.Адрес.rich_text,
-               teh: page.properties.Tech Zadanie.rich_text,
+               teh: page.properties.TechZadanie.rich_text,
                status_id: page.properties.Status.select,
                //Manager: page.properties.Manager.relation,
             };
