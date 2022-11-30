@@ -170,12 +170,13 @@ async function getDatabase() {
                geo: page.properties.Address.rollup.array,
                teh: page.properties.TechZadanie.rich_text,
                status_id: page.properties.Status.select,
+               workers: '',
                //Manager: page.properties.Manager.relation,
             };
         });
 
         console.log(responseResults);
-        return response;
+        return responseResults;
     } catch (error) {
         console.error(error.body)
     }
