@@ -124,14 +124,28 @@ async function addAddress(geo) {
                         {
                             type: "text",
                             text: {
-                                content: "Тестовая площадь",
+                                content: "Тест",
                                 "link": null
                             },
-                            plain_text: "Тестовая площадь",
+                            plain_text: "Тест",
                             "href": null
                         }
                     ]
-                }
+                },
+                "Адрес": {
+                    type: "rich_text",
+                    rich_text: [
+                        {
+                            type: "text",
+                            text: {
+                                content: geo,
+                                "link": null
+                            },
+                            plain_text: geo,
+                            "href": null
+                        }
+                    ]
+                },
             },
         })
         console.log(response)
