@@ -86,7 +86,7 @@ bot.setMyCommands([
 // },
 
 //send data to notion
-async function addItem(title, time, geo) {
+async function addItem(title, time, geo, teh) {
     try {
         const response = await notion.pages.create({
             parent: { database_id: databaseId },
@@ -108,19 +108,16 @@ async function addItem(title, time, geo) {
                         "time_zone": null
                     }
                 },
-                Address: {
-                    type: "rollup",
-                    "rollup": {
-                        "type": "array",
-                        array: [
-                                {
-                                    "title": {
-                                        "content": geo
-                                    }
-                                }
-                            ],
-                        "function": "show_original"
-                    }
+                Tech Zadanie: {
+                    type: 'rich_text',
+                    rich_text: [
+                        {
+                            type: 'text',
+                            text: {
+                                content: teh,
+                            },
+                        }
+                        ],
                 },
                 Status: {
                     type: 'select',
@@ -299,7 +296,7 @@ app.post('/web-data', async (req, res) => {
       })
 
       //добавление проекта с названием проекта в базу
-      addItem(projectname, datestart, geo);
+      addItem(projectname, datestart, geo, teh);
 
       return res.status(200).json({});
   } catch (e) {
