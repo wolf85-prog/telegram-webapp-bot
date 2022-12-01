@@ -201,7 +201,7 @@ async function getProjects() {
                geo: '',//page.properties.Address.rollup.array,
                teh: page.properties.TechZadanie.rich_text,
                status_id: page.properties.Status.select,
-               workers: page.properties.Workers.rich_text,
+               workers: page.properties.Workers.array[0]?.plain_text,
                //Manager: page.properties.Manager.relation,
             };
         });
@@ -387,6 +387,7 @@ app.post('/web-data', async (req, res) => {
       })
 
       const workers_str = JSON.stringify(worklist);
+      //const workers_str=str.replace('\\','');
 
       //добавление проекта с названием проекта в базу
       addProject(projectname, datestart, teh, workers_str);
