@@ -217,7 +217,7 @@ async function getManagerId(id) {
         const response = await notion.databases.query({
             database_id: databaseManagerId, 
             "filter": {
-                "property": "ID",
+                "property": "TelegramID",
                 "rich_text": {
                     "contains": id
                 }
