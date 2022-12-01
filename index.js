@@ -224,21 +224,6 @@ async function getManagerId(id) {
             }
         });
 
-        // const responseResults = response.results.map((page) => {
-        //     return {
-        //        id: page.id,
-        //        post_manager: page.properties.Select.name,
-        //        telegram_id: page.properties.TelegramID.rich_text[0]?.plain_text,
-        //        fio: '',//page.properties.ФИО.rollup.array,
-        //     };
-        // });
-
-        // const response = await notion.search({
-        //     database_id: databaseManagerId, 
-        //     query: id,
-
-        //   });
-
         return response.results[0].id;
     } catch (error) {
         console.error(error.body)
