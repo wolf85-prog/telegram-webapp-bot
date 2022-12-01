@@ -114,15 +114,16 @@ async function addProject(title, time, teh, workers_str) {
                         }
                         ],
                 },
-                // Workers: {
-                //     type: "rollup",
-                //     rollup: {
-                //         type: "array",
-                //         array: worklist,
-                //         function: "show_original"
-                //     }
-                // },
             },
+            children: [
+                {
+                  object: "block",
+                  type: "child_database",
+                    "child_database": {
+                        "title": "My database"
+                    }
+                }
+              ]
         })
         console.log(response)
         console.log("Success! Entry added.")
