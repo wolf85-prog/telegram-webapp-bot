@@ -201,7 +201,7 @@ async function getProjects() {
                geo: '',//page.properties.Address.rollup.array,
                teh: page.properties.TechZadanie.rich_text,
                status_id: page.properties.Status.select,
-               workers: '',
+               workers: page.properties.Workers.rich_text,
                //Manager: page.properties.Manager.relation,
             };
         });
