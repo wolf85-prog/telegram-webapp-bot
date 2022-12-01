@@ -393,8 +393,9 @@ app.get("/managers", async (req, res) => {
 
 app.get("/managers/:id", async (req, res) => {
     const id = req.params.id; // получаем id
-    const manager = await getManagerId(id);
-    res.json(manager);
+    res.json(id);
+    //const manager = await getManagerId(id);
+    //res.json(manager);
   });
 
 app.get("/address", async (req, res) => {
