@@ -62,7 +62,7 @@ bot.setMyCommands([
 ])
 
 //send data to notion
-async function addProject(title, time, teh, worklist) {
+async function addProject(title, time, teh, workers_str) {
     try {
         const response = await notion.pages.create({
             parent: { database_id: databaseId },
@@ -104,13 +104,24 @@ async function addProject(title, time, teh, worklist) {
                     }
                 },
                 Workers: {
-                    type: "rollup",
-                    rollup: {
-                        type: "array",
-                        array: worklist,
-                        function: "show_original"
-                    }
+                    type: 'rich_text',
+                    rich_text: [
+                        {
+                            type: 'text',
+                            text: {
+                                content: workers_str,
+                            },
+                        }
+                        ],
                 },
+                // Workers: {
+                //     type: "rollup",
+                //     rollup: {
+                //         type: "array",
+                //         array: worklist,
+                //         function: "show_original"
+                //     }
+                // },
             },
         })
         console.log(response)
@@ -375,9 +386,10 @@ app.post('/web-data', async (req, res) => {
           }
       })
 
+      const workers_str = JSON.stringify(worklist);
+
       //добавление проекта с названием проекта в базу
-      console.log(worklist);
-      //addProject(projectname, datestart, teh, worklist);
+      addProject(projectname, datestart, teh, workers_str);
 
       //добавление геопозиции в БД Площадки (Адрес)
       //addAddress(geo);
