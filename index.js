@@ -202,7 +202,7 @@ async function getProjects() {
                teh: page.properties.TechZadanie.rich_text,
                status_id: page.properties.Status.select,
                workers: page.properties.Workers.rich_text[0]?.plain_text,
-               //Manager: page.properties.Manager.relation,
+               manager: page.properties.Manager.relation.id,
             };
         });
 
