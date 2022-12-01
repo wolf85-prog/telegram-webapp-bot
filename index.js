@@ -213,37 +213,6 @@ async function getProjects() {
 }
 
 
-// async function getProjectsByManager(manager_id) {
-//     try {
-//         const response = await notion.databases.query({
-//             database_id: databaseId,
-//             "filter": {
-//                 "property": "Manager",
-//                 "relation": {
-//                     "id": manager_id
-//                 }
-//             }
-//         });
-
-//         const responseResults = response.results.map((page) => {
-//             return {
-//                id: page.id,
-//                title: page.properties.Name.title[0]?.plain_text,
-//                time: page.properties.Date.date,
-//                geo: '',//page.properties.Address.rollup.array,
-//                teh: page.properties.TechZadanie.rich_text,
-//                status_id: page.properties.Status.select,
-//                workers: page.properties.Workers.rich_text[0]?.plain_text,
-//                manager: page.properties.Manager.relation[0]?.id,
-//             };
-//         });
-
-//         return responseResults;
-//     } catch (error) {
-//         console.error(error.body)
-//     }
-// }
-
 async function getManagerId(id) {
     try {
         const response = await notion.databases.query({
