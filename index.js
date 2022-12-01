@@ -212,6 +212,34 @@ async function getProjects() {
     }
 }
 
+async function getManagerId(id) {
+    try {
+        const response = await notion.databases.query({
+            database_id: databaseManagerId, 
+            // "filter": {
+            //     "property": "TelegramID",
+            //     page.id
+            // }
+            "filter": {
+                "id": id,
+            }
+        });
+
+        // const responseResults = response.results.map((page) => {
+        //     return {
+        //        id: page.id,
+        //        post_manager: page.properties.Select.name,
+        //        telegram_id: page.properties.TelegramID.rich_text[0]?.plain_text,
+        //        fio: '',//page.properties.ФИО.rollup.array,
+        //     };
+        // });
+
+        return response;
+    } catch (error) {
+        console.error(error.body)
+    }
+}
+
 async function getAddress() {
     try {
         const response = await notion.databases.query({
@@ -361,6 +389,12 @@ app.get("/projects", async (req, res) => {
 app.get("/managers", async (req, res) => {
     const managers = await getManagers();
     res.json(managers);
+  });
+
+app.get("/managers/:id", async (req, res) => {
+    const id = req.params.id; // получаем id
+    const manager = await getManagerId(id);
+    res.json(manager);
   });
 
 app.get("/address", async (req, res) => {
