@@ -214,16 +214,12 @@ async function getProjects() {
 
 async function getManagerId(id) {
     try {
-        const response = await notion.databases.query({
-            database_id: databaseManagerId, 
-            // "filter": {
-            //     "property": "TelegramID",
-            //     page.id
-            // }
-            "filter": {
-                "property": id,
-            }
-        });
+        // const response = await notion.databases.query({
+        //     database_id: databaseManagerId, 
+        //     "filter": {
+        //         "property": id,
+        //     }
+        // });
 
         // const responseResults = response.results.map((page) => {
         //     return {
@@ -233,6 +229,12 @@ async function getManagerId(id) {
         //        fio: '',//page.properties.ФИО.rollup.array,
         //     };
         // });
+
+        const response = await notion.search({
+            database_id: databaseManagerId, 
+            query: id,
+
+          });
 
         return response;
     } catch (error) {
