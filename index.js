@@ -221,7 +221,7 @@ async function getManagerId(id) {
             //     page.id
             // }
             "filter": {
-                "id": id,
+                "property": id,
             }
         });
 
@@ -393,9 +393,8 @@ app.get("/managers", async (req, res) => {
 
 app.get("/managers/:id", async (req, res) => {
     const id = req.params.id; // получаем id
-    res.json(id);
-    //const manager = await getManagerId(id);
-    //res.json(manager);
+    const manager = await getManagerId(id);
+    res.json(manager);
   });
 
 app.get("/address", async (req, res) => {
