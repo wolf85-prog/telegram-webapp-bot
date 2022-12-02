@@ -231,10 +231,8 @@ async function getBlocks(blockId) {
         const response = await notion.blocks.children.list({
             block_id: blockId,
             "filter": {
-                "property": "",
-                "child_database": {
-                    "title": "Основной состав"
-                }
+                "property": "child_database",
+                "title": "Основной состав"
             }
         });
 
