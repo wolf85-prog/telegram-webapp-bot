@@ -209,7 +209,7 @@ async function getProjects() {
 async function getBlocks(blockId) {
     try {
         //const blockId = '57688b06-e277-4ff2-b83a-65de211dc50b';
-        const response = await notion.blocks.retrieve({
+        const response = await notion.blocks.children.list({
             block_id: blockId,
         });
 
