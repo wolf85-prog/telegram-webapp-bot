@@ -220,7 +220,7 @@ async function getBlocks(blockId) {
 
 async function getBlockId(blockId) {
     try {
-        const response = await notion.blocks.retrieve({
+        const response = await notion.blocks.query({
             block_id: blockId,
         });
 
