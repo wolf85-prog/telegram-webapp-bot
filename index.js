@@ -180,6 +180,18 @@ async function getDatabase() {
     }
 }
 
+async function getDatabaseId(baseId) {
+    try {
+        const response = await notion.databases.query({
+            database_id: baseId
+        });
+
+        return response;
+    } catch (error) {
+        console.error(error.body)
+    }
+}
+
 async function getProjects() {
     try {
         const response = await notion.databases.query({
@@ -220,7 +232,7 @@ async function getBlocks(blockId) {
 
 async function getBlockId(blockId) {
     try {
-        const response = await notion.blocks.query({
+        const response = await notion.blocks.retrieve({
             block_id: blockId,
         });
 
@@ -415,6 +427,13 @@ app.get('/page/:id', async (req, res) => {
     const id = req.params.id; // получаем id
     const page = await getPage(id);
     res.json(page);
+  });
+
+//get DATABASE by ID
+app.get('/database/:id', async (req, res) => {
+    const id = req.params.id; // получаем id
+    const base = await getDatabaseId(id);
+    res.json(base);
   });
 
 app.get("/database1", async (req, res) => {
