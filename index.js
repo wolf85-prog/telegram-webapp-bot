@@ -180,24 +180,6 @@ async function getDatabase() {
     }
 }
 
-async function getDatabaseId(baseId) {
-    try {
-        const response = await notion.databases.query({
-            database_id: baseId
-        });
-
-        const responseResults = response.results.map((page) => {
-            return {
-               id: page.id,
-               title: page.properties.Специалиация.multi_select,
-            };
-        });
-
-        return responseResults;
-    } catch (error) {
-        console.error(error.body)
-    }
-}
 
 async function getProjects() {
     try {
@@ -224,22 +206,16 @@ async function getProjects() {
     }
 }
 
-async function getMainCast(blockId) {
+async function getDatabaseId(baseId) {
     try {
         const response = await notion.databases.query({
-            database_id: blockId
+            database_id: baseId
         });
 
         const responseResults = response.results.map((page) => {
             return {
                id: page.id,
-               title: page.properties.Name.title[0]?.plain_text,
-               time: page.properties.Date.date,
-               geo: '',//page.properties.Address.rollup.array,
-               teh: page.properties.TechZadanie.rich_text,
-               status_id: page.properties.Status.select,
-               workers: page.properties.Workers.rich_text[0]?.plain_text,
-               manager: page.properties.Manager.relation[0]?.id,
+               title: page.properties.Специалиация.multi_select,
             };
         });
 
@@ -254,9 +230,13 @@ async function getBlocks(blockId) {
     try {
         const response = await notion.blocks.children.list({
             block_id: blockId,
+            "filter": {
+                "property": "child_database",
+                "title": 'Основной состав'
+            }
         });
 
-        return response;
+        return response.results[0].id;
     } catch (error) {
         console.error(error.body)
     }
