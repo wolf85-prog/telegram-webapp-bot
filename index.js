@@ -13,6 +13,7 @@ const fs = require('fs');
 const express = require('express');
 const cors = require('cors');
 const https = require('https');
+const { getBlock } = require("@notionhq/client/build/src/api-endpoints");
 
 const token = process.env.TELEGRAM_API_TOKEN;
 const webAppUrl = process.env.WEB_APP_URL;
@@ -115,15 +116,6 @@ async function addProject(title, time, teh, workers_str) {
                         ],
                 },
             },
-            children: [
-                {
-                  object: "block",
-                  type: "child_database",
-                    "child_database": {
-                        "title": "My database"
-                    }
-                }
-              ]
         })
         console.log(response)
         console.log("Success! Entry added.")
@@ -208,6 +200,20 @@ async function getProjects() {
         });
 
         return responseResults;
+    } catch (error) {
+        console.error(error.body)
+    }
+}
+
+
+async function getBlocks() {
+    try {
+        const pageId = '57688b06-e277-4ff2-b83a-65de211dc50b';
+        const response = await notion.pages.retrieve({
+            page_id: pageId
+        });
+
+        return response;
     } catch (error) {
         console.error(error.body)
     }
@@ -367,6 +373,11 @@ app.get('/secret',(req, res) => {
     const secret =  Math.floor(Math.random()*100)
     res.json({secret})
 });
+
+app.get('/block', async (req, res) => {
+    const blocks = await getBlocks();
+    res.json(blocks);
+  });
 
 app.get("/database1", async (req, res) => {
     const projects = await getDatabase();
