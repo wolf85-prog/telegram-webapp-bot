@@ -231,6 +231,19 @@ async function getBlockId(blockId) {
 }
 
 
+async function getPage(pageId) {
+    try {
+        const response = await notion.pages.retrieve({
+            page_id: pageId,
+        });
+
+        return response;
+    } catch (error) {
+        console.error(error.body)
+    }
+}
+
+
 async function getManagerId(id) {
     try {
         const response = await notion.databases.query({
@@ -395,6 +408,13 @@ app.get('/block/:id', async (req, res) => {
     const id = req.params.id; // получаем id
     const blocks = await getBlockId(id);
     res.json(blocks);
+  });
+
+//get PAGE
+app.get('/page/:id', async (req, res) => {
+    const id = req.params.id; // получаем id
+    const page = await getPage(id);
+    res.json(page);
   });
 
 app.get("/database1", async (req, res) => {
