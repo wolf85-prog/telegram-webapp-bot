@@ -231,12 +231,14 @@ async function getBlocks(blockId) {
         const response = await notion.blocks.children.list({
             block_id: blockId,
             "filter": {
-                "property": "child_database",
-                "title": 'Основной состав'
+                "property": "",
+                "child_database": {
+                    "title": "Основной состав"
+                }
             }
         });
 
-        return response;
+        return response.results[0].id;
     } catch (error) {
         console.error(error.body)
     }
