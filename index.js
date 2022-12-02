@@ -238,7 +238,7 @@ async function getBlocks(blockId) {
             }
         });
 
-        return response.results[0].id;
+        return response;
     } catch (error) {
         console.error(error.body)
     }
