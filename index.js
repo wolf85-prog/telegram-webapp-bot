@@ -208,8 +208,19 @@ async function getProjects() {
 
 async function getBlocks(blockId) {
     try {
-        //const blockId = '57688b06-e277-4ff2-b83a-65de211dc50b';
         const response = await notion.blocks.children.list({
+            block_id: blockId,
+        });
+
+        return response;
+    } catch (error) {
+        console.error(error.body)
+    }
+}
+
+async function getBlockId(blockId) {
+    try {
+        const response = await notion.blocks.retrieve({
             block_id: blockId,
         });
 
@@ -374,9 +385,15 @@ app.get('/secret',(req, res) => {
     res.json({secret})
 });
 
-app.get('/block/:id', async (req, res) => {
+app.get('/blocks/:id', async (req, res) => {
     const id = req.params.id; // получаем id
     const blocks = await getBlocks(id);
+    res.json(blocks);
+  });
+
+app.get('/block/:id', async (req, res) => {
+    const id = req.params.id; // получаем id
+    const blocks = await getBlockId(id);
     res.json(blocks);
   });
 
