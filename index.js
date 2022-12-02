@@ -208,9 +208,9 @@ async function getProjects() {
 
 async function getBlocks() {
     try {
-        const pageId = '57688b06-e277-4ff2-b83a-65de211dc50b';
-        const response = await notion.pages.retrieve({
-            page_id: pageId
+        const blockId = '57688b06-e277-4ff2-b83a-65de211dc50b';
+        const response = await notion.blocks.retrieve({
+            block_id: blockId,
         });
 
         return response;
