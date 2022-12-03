@@ -216,7 +216,7 @@ async function getDatabaseId(baseId) {
         const responseResults = response.results.map((page) => {
             return {
                id: page.id,
-               title: page.properties.Специалиация.multi_select.name,
+               title: page.properties.Специалиация.multi_select[0]?.name,
             };
         });
 
