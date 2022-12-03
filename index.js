@@ -226,7 +226,7 @@ async function getDatabaseId(baseId) {
     }
 }
 
-async function getDatabaseId() {
+async function getDatabase2() {
     return {};
 }
 
@@ -447,7 +447,7 @@ app.get('/database/:id', async (req, res) => {
   });
 
   app.get('/database/', async (req, res) => {
-    const base = await getDatabaseId();
+    const base = await getDatabase2();
     res.json(base);
   });
 
