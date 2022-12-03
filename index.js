@@ -225,6 +225,10 @@ async function getDatabaseId(baseId) {
     }
 }
 
+async function getDatabaseId() {
+    return {};
+}
+
 
 async function getBlocks(blockId) {
     try {
@@ -448,6 +452,11 @@ app.get('/database/:id', async (req, res) => {
     else{
         res.json({});
     }
+  });
+
+  app.get('/database/', async (req, res) => {
+    const base = await getDatabaseId();
+    res.json(base);
   });
 
 app.get("/database1", async (req, res) => {
