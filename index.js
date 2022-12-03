@@ -441,7 +441,13 @@ app.get('/page/:id', async (req, res) => {
 app.get('/database/:id', async (req, res) => {
     const id = req.params.id; // получаем id
     const base = await getDatabaseId(id);
-    res.json(base);
+
+    if(base){
+        res.json(base);
+    }
+    else{
+        res.json({});
+    }
   });
 
 app.get("/database1", async (req, res) => {
