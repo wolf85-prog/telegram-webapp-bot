@@ -220,7 +220,7 @@ async function getDatabaseId(baseId) {
             };
         });
 
-        return responseResults;
+        return response;
     } catch (error) {
         console.error(error.body)
     }
