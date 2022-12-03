@@ -195,8 +195,9 @@ async function getProjects() {
                geo: '',//page.properties.Address.rollup.array,
                teh: page.properties.TechZadanie.rich_text,
                status_id: page.properties.Status.select,
-               workers: page.properties.Workers.rich_text[0]?.plain_text,
+               //workers: page.properties.Workers.rich_text[0]?.plain_text,
                manager: page.properties.Manager.relation[0]?.id,
+               worklist:'',
             };
         });
 
