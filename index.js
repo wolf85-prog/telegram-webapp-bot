@@ -226,10 +226,6 @@ async function getDatabaseId(baseId) {
     }
 }
 
-async function getDatabaseId() {
-    return {};
-}
-
 
 async function getBlocks(blockId) {
     try {
@@ -357,16 +353,6 @@ bot.on('message', async (msg) => {
       })
   }
 
-    // if (text === '/menu') {
-    //     await bot.sendMessage(chatId, 'Смотрите и создавайте Notion-проекты в web-приложении прямо из телеграм.', {
-    //         reply_markup: ({
-    //             keyboard:[
-    //                 [{text: 'Создать проект', web_app: {url: webAppUrl}}],
-    //             ]
-    //         })
-    //     })
-    // }
-
   if (text === '/info') {
 
   }
@@ -455,10 +441,6 @@ app.get('/database/:id', async (req, res) => {
     }
   });
 
-  app.get('/database/', async (req, res) => {
-    const base = await getDatabaseId();
-    res.json(base);
-  });
 
 app.get("/database1", async (req, res) => {
     const projects = await getDatabase();
