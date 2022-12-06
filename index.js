@@ -26,9 +26,9 @@ app.use(cors());
 app.use(express.static('telegram-webapp-bot'));
 
 // Certificate
-const privateKey = fs.readFileSync('/etc/letsencrypt/live/telegram.uley.moscow/privkey.pem', 'utf8');
-const certificate = fs.readFileSync('/etc/letsencrypt/live/telegram.uley.moscow/cert.pem', 'utf8');
-const ca = fs.readFileSync('/etc/letsencrypt/live/telegram.uley.moscow/chain.pem', 'utf8');
+const privateKey = fs.readFileSync('/etc/letsencrypt/live/proj.uley.team/privkey.pem', 'utf8');
+const certificate = fs.readFileSync('/etc/letsencrypt/live/proj.uley.team/cert.pem', 'utf8');
+const ca = fs.readFileSync('/etc/letsencrypt/live/proj.uley.team/chain.pem', 'utf8');
 
 const credentials = {
     key: privateKey,
@@ -42,7 +42,7 @@ const menuOptions = {
     reply_markup: JSON.stringify({
         inline_keyboard:[
             [{text: 'Информация', callback_data:'Информация'}, {text: 'Настройки', callback_data:'Настройки'}],
-            [{text: 'Открыть Notion', web_app: {url: webAppUrl}}],
+            [{text: 'Открыть проекты U.L.E.Y', web_app: {url: webAppUrl}}],
         ]
     })
 }
@@ -50,7 +50,7 @@ const menuOptions = {
 const backOptions = {
     reply_markup: JSON.stringify({
         inline_keyboard:[
-            [{text: 'Открыть Notion-проекты', web_app: {url: webAppUrl}}],
+            [{text: 'Открыть проекты U.L.E.Y', web_app: {url: webAppUrl}}],
             [{text: 'Назад', callback_data:'/menu'}],
         ]
     })
@@ -195,7 +195,6 @@ async function getProjects() {
                geo: '',//page.properties.Address.rollup.array,
                teh: page.properties.TechZadanie.rich_text,
                status_id: page.properties.Status.select,
-               //workers: page.properties.Workers.rich_text[0]?.plain_text,
                manager: page.properties.Manager.relation[0]?.id,
                worklist:'',
             };
@@ -335,23 +334,23 @@ bot.on('message', async (msg) => {
   const text = msg.text;
 
   if (text === '/start') {
-    await bot.sendMessage(chatId, 'Добро пожаловать в чат-бот Notion. Смотрите и создавайте Notion-проекты в ' +
+    await bot.sendMessage(chatId, 'Добро пожаловать в чат-бот U.L.E.Y_Projects. Смотрите и создавайте проекты U.L.E.Y в ' +
         'web-приложении прямо из телеграм.', {
         reply_markup: ({
             inline_keyboard:[
                 [{text: 'Информация', callback_data:'Информация'}, {text: 'Настройки', callback_data:'Настройки'}],
-                [{text: 'Открыть Notion-проекты', web_app: {url: webAppUrl}}],
+                [{text: 'Открыть проекты U.L.E.Y', web_app: {url: webAppUrl}}],
             ]
         })
     })
   }
 
   if (text === '/menu') {
-      await bot.sendMessage(chatId, 'Смотрите и создавайте Notion-проекты в web-приложении прямо из телеграм.', {
+      await bot.sendMessage(chatId, 'Смотрите и создавайте проекты U.L.E.Y в web-приложении прямо из телеграм.', {
           reply_markup: ({
               inline_keyboard:[
                   [{text: 'Информация', callback_data:'Информация'}, {text: 'Настройки', callback_data:'Настройки'}],
-                  [{text: 'Открыть Notion-проекты', web_app: {url: webAppUrl}}],
+                  [{text: 'Открыть проекты U.L.E.Y', web_app: {url: webAppUrl}}],
               ]
           })
       })
