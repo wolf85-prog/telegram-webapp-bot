@@ -26,9 +26,9 @@ app.use(cors());
 app.use(express.static('telegram-webapp-bot'));
 
 // Certificate
-const privateKey = fs.readFileSync('/etc/letsencrypt/live/proj.uley.team/privkey.pem', 'utf8');
-const certificate = fs.readFileSync('/etc/letsencrypt/live/proj.uley.team/cert.pem', 'utf8');
-const ca = fs.readFileSync('/etc/letsencrypt/live/proj.uley.team/chain.pem', 'utf8');
+const privateKey = fs.readFileSync('privkey.pem', 'utf8'); //fs.readFileSync('/etc/letsencrypt/live/proj.uley.team/privkey.pem', 'utf8');
+const certificate = fs.readFileSync('cert.pem', 'utf8'); //fs.readFileSync('/etc/letsencrypt/live/proj.uley.team/cert.pem', 'utf8');
+const ca = fs.readFileSync('chain.pem', 'utf8'); //fs.readFileSync('/etc/letsencrypt/live/proj.uley.team/chain.pem', 'utf8');
 
 const credentials = {
     key: privateKey,
