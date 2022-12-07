@@ -13,7 +13,6 @@ const fs = require('fs');
 const express = require('express');
 const cors = require('cors');
 const https = require('https');
-const { getBlock } = require("@notionhq/client/build/src/api-endpoints");
 
 const token = process.env.TELEGRAM_API_TOKEN;
 const webAppUrl = process.env.WEB_APP_URL;
@@ -103,17 +102,6 @@ async function addProject(title, time, teh, workers_str) {
                         "name": "New",
                         "color": "blue"
                     }
-                },
-                Workers: {
-                    type: 'rich_text',
-                    rich_text: [
-                        {
-                            type: 'text',
-                            text: {
-                                content: workers_str,
-                            },
-                        }
-                        ],
                 },
             },
         })
@@ -500,11 +488,10 @@ app.post('/web-data', async (req, res) => {
           }
       })
 
-      const workers_str = JSON.stringify(worklist);
-      //const workers_str=str.replace('\\','');
+      //const workers_str = JSON.stringify(worklist);
 
       //добавление проекта с названием проекта в базу
-      //addProject(projectname, datestart, teh, workers_str);
+      addProject(projectname, datestart, teh);
 
       //добавление геопозиции в БД Площадки (Адрес)
       //addAddress(geo);
