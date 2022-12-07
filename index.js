@@ -504,7 +504,7 @@ app.post('/web-data', async (req, res) => {
       //const workers_str=str.replace('\\','');
 
       //добавление проекта с названием проекта в базу
-      addProject(projectname, datestart, teh, workers_str);
+      //addProject(projectname, datestart, teh, workers_str);
 
       //добавление геопозиции в БД Площадки (Адрес)
       //addAddress(geo);
