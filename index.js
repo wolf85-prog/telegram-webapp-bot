@@ -62,7 +62,7 @@ bot.setMyCommands([
 ])
 
 //send data to notion
-async function addProject(title, time, teh, workers_str) {
+async function addProject(title, time, teh) {
     try {
         const response = await notion.pages.create({
             parent: { database_id: databaseId },
@@ -322,8 +322,8 @@ bot.on('message', async (msg) => {
   const text = msg.text;
 
   if (text === '/start') {
-    await bot.sendMessage(chatId, 'Добро пожаловать в чат-бот U.L.E.Y_Projects. Смотрите и создавайте проекты U.L.E.Y в ' +
-        'web-приложении прямо из телеграм.', {
+    await bot.sendMessage(chatId, 'Добро пожаловать в телеграм-бот U.L.E.Y_Projects. Смотрите и создавайте проекты U.L.E.Y в ' +
+        'web-приложении прямо из мессенджера Telegram.', {
         reply_markup: ({
             inline_keyboard:[
                 [{text: 'Информация', callback_data:'Информация'}, {text: 'Настройки', callback_data:'Настройки'}],
@@ -334,7 +334,7 @@ bot.on('message', async (msg) => {
   }
 
   if (text === '/menu') {
-      await bot.sendMessage(chatId, 'Смотрите и создавайте проекты U.L.E.Y в web-приложении прямо из телеграм.', {
+      await bot.sendMessage(chatId, 'Смотрите и создавайте проекты U.L.E.Y в web-приложении прямо из мессенджера Telegram.', {
           reply_markup: ({
               inline_keyboard:[
                   [{text: 'Информация', callback_data:'Информация'}, {text: 'Настройки', callback_data:'Настройки'}],
@@ -383,7 +383,7 @@ bot.on('callback_query', msg => {
     const chatId = msg.message.chat.id;
 
     if (data === '/menu') {
-        return bot.sendMessage(chatId, 'Смотрите и создавайте Notion-проекты в web-приложении прямо из телеграм.', {
+        return bot.sendMessage(chatId, 'Смотрите и создавайте Notion-проекты в web-приложении прямо из мессенджера Telegram.', {
             reply_markup: ({
                 inline_keyboard:[
                     [{text: 'Информация', callback_data:'Информация'}, {text: 'Настройки', callback_data:'Настройки'}],
@@ -494,7 +494,7 @@ app.post('/web-data', async (req, res) => {
       addProject(projectname, datestart, teh);
 
       //добавление геопозиции в БД Площадки (Адрес)
-      //addAddress(geo);
+      addAddress(geo);
 
       return res.status(200).json({});
   } catch (e) {
