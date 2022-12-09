@@ -238,7 +238,7 @@ async function getProjectsId(managerId) {
         //     };
         // });
 
-        return response.results;
+        return response.results[0].id;
     } catch (error) {
         console.error(error.body)
     }
