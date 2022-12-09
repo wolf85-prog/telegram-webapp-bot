@@ -457,7 +457,12 @@ app.get('/secret',(req, res) => {
 app.get('/blocks/:id', async (req, res) => {
     const id = req.params.id; // получаем id
     const blocks = await getBlocks(id);
-    res.json(blocks);
+    if(blocks){
+        res.json(blocks);
+    }
+    else{
+        res.json({});
+    }
   });
 
 app.get('/block/:id', async (req, res) => {
