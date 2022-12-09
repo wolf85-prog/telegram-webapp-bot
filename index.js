@@ -168,7 +168,7 @@ async function getDatabase() {
     }
 }
 
-
+//получить все проекты
 async function getProjects() {
     try {
         const response = await notion.databases.query({
@@ -194,6 +194,53 @@ async function getProjects() {
     }
 }
 
+async function getProjects2() {
+    try {
+        const response = await notion.databases.query({
+            database_id: databaseId
+        });
+
+        return response;
+    } catch (error) {
+        console.error(error.body)
+    }
+}
+
+//получить все проекты менеджера по id
+async function getProjectsId(managerId) {
+    try {
+        const response = await notion.databases.query({
+            database_id: databaseId,
+            "filter": {
+                "property": "manager",
+                "rich_text": {
+                    "contains": managerId
+                }
+            }
+        });
+
+        //return response.results[0].id;
+
+        const responseResults = response.results.map((page) => {
+            return {
+               id: page.id,
+               title: page.properties.Name.title[0]?.plain_text,
+               time: page.properties.Date.date,
+               geo: '',//page.properties.Address.rollup.array,
+               teh: page.properties.TechZadanie.rich_text,
+               status_id: page.properties.Status.select,
+               manager: page.properties.Manager.relation[0]?.id,
+               worklist:'',
+            };
+        });
+
+        return responseResults;
+    } catch (error) {
+        console.error(error.body)
+    }
+}
+
+//получить данные блока по заданному ID
 async function getDatabaseId(baseId) {
     try {
         const response = await notion.databases.query({
@@ -213,11 +260,12 @@ async function getDatabaseId(baseId) {
     }
 }
 
+//получить пустые данные блока
 async function getDatabase2() {
     return {};
 }
 
-
+//получить все блоки заданной страницы по id
 async function getBlocks(blockId) {
     try {
         const response = await notion.blocks.children.list({
@@ -230,6 +278,7 @@ async function getBlocks(blockId) {
     }
 }
 
+//получить данные блока по заданному ID
 async function getBlockId(blockId) {
     try {
         const response = await notion.blocks.retrieve({
@@ -242,7 +291,7 @@ async function getBlockId(blockId) {
     }
 }
 
-
+//получить данные страницы по заданному ID
 async function getPage(pageId) {
     try {
         const response = await notion.pages.retrieve({
@@ -255,7 +304,7 @@ async function getPage(pageId) {
     }
 }
 
-
+//получить id менеджера по его TelegramID
 async function getManagerId(id) {
     try {
         const response = await notion.databases.query({
@@ -274,6 +323,7 @@ async function getManagerId(id) {
     }
 }
 
+//получить данные таблицы Площадки
 async function getAddress() {
     try {
         const response = await notion.databases.query({
