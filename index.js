@@ -493,17 +493,25 @@ app.get("/database1", async (req, res) => {
     res.json(projects);
   });
 
+
+// get PROJECTS  
 app.get("/projects", async (req, res) => {
     const projects = await getProjects();
     res.json(projects);
   });
 
-// app.get("/projects/:id", async (req, res) => {
-//     const id = req.params.id; // получаем id
-//     const projects = await getProjectsByManager(id);
-//     res.json(projects);
-//   });
+app.get("/projects2", async (req, res) => {
+    const projects = await getProjects2();
+    res.json(projects);
+  });
 
+app.get("/projects/:id", async (req, res) => {
+    const id = req.params.id; // получаем id
+    const projects = await getProjectsId(id);
+    res.json(projects);
+  });
+
+//get MANAGERS
 app.get("/managers", async (req, res) => {
     const managers = await getManagers();
     res.json(managers);
@@ -515,6 +523,7 @@ app.get("/managers/:id", async (req, res) => {
     res.json(manager);
   });
 
+//get ADDRESS
 app.get("/address", async (req, res) => {
     const address = await getAddress();
     res.json(address);
