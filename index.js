@@ -217,7 +217,7 @@ async function getProjectsId(managerId) {
                 //     "contains": managerId
                 // },
                 "relation": {
-                    "id": managerId
+                    "contains": managerId
                 },
             }
         });
