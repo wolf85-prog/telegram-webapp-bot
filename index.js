@@ -211,7 +211,16 @@ async function getProjectsId(managerId) {
     try {
         const response = await notion.databases.query({
             database_id: databaseId,
-            
+            "filter": {
+                // "property": "Manager",
+                // "relation": [{
+                //     "id": managerId
+                // }]
+                "property": "City",
+                "select": {
+                    "name": "Казань"
+                }
+            }
         });
 
         //return response.results[0].id;
@@ -229,7 +238,7 @@ async function getProjectsId(managerId) {
         //     };
         // });
 
-        return response;
+        return response.results;
     } catch (error) {
         console.error(error.body)
     }
