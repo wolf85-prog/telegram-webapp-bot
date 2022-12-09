@@ -216,9 +216,12 @@ async function getProjectsId(managerId) {
                 // "relation": [{
                 //     "id": managerId
                 // }]
-                "property": "City",
-                "select": {
-                    "name": "Казань"
+                "property": "TG_chat_ID",
+                // "select": {
+                //     "name": "Казань"
+                // }
+                "rich_text": {
+                    "contains": "817802083"
                 }
             }
         });
@@ -238,7 +241,7 @@ async function getProjectsId(managerId) {
         //     };
         // });
 
-        return response.results[0].id;
+        return response;
     } catch (error) {
         console.error(error.body)
     }
