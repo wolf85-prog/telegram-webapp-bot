@@ -213,8 +213,8 @@ async function getProjectsId(managerId) {
             database_id: databaseId,
             "filter": {
                 "property": "manager",
-                "rich_text": {
-                    "contains": managerId
+                "relation": {
+                    "id": managerId
                 }
             }
         });
