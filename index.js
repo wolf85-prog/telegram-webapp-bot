@@ -213,9 +213,9 @@ async function getProjectsId(managerId) {
             database_id: databaseId,
             "filter": {
                 "property": "Manager",
-                "relation": {
+                "relation": [{
                     "id": managerId
-                }
+                }]
             }
         });
 
