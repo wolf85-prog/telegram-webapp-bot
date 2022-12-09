@@ -228,20 +228,20 @@ async function getProjectsId(managerId) {
 
         //return response.results[0].id;
 
-        // const responseResults = response.results.map((page) => {
-        //     return {
-        //        id: page.id,
-        //        title: page.properties.Name.title[0]?.plain_text,
-        //        time: page.properties.Date.date,
-        //        geo: '',//page.properties.Address.rollup.array,
-        //        teh: page.properties.TechZadanie.rich_text,
-        //        status_id: page.properties.Status.select,
-        //        manager: page.properties.Manager.relation[0]?.id,
-        //        worklist:'',
-        //     };
-        // });
+        const responseResults = response.results.map((page) => {
+            return {
+               id: page.id,
+               title: page.properties.Name.title[0]?.plain_text,
+               time: page.properties.Date.date,
+               geo: '',//page.properties.Address.rollup.array,
+               teh: page.properties.TechZadanie.rich_text,
+               status_id: page.properties.Status.select,
+               manager: page.properties.Manager.relation[0]?.id,
+               worklist:'',
+            };
+        });
 
-        return response;
+        return responseResults;
     } catch (error) {
         console.error(error.body)
     }
