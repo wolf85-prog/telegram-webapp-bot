@@ -218,7 +218,7 @@ async function getProjectsId(managerId) {
                 // }]
                 "property": "City",
                 "select": {
-                    "name": "Москва"
+                    "name": managerId
                 }
             }
         });
