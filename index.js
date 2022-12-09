@@ -212,7 +212,7 @@ async function getProjectsId(managerId) {
         const response = await notion.databases.query({
             database_id: databaseId,
             "filter": {
-                "property": "manager",
+                "property": "Manager",
                 "relation": {
                     "id": managerId
                 }
