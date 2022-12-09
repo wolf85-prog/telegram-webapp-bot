@@ -212,29 +212,33 @@ async function getProjectsId(managerId) {
         const response = await notion.databases.query({
             database_id: databaseId,
             "filter": {
-                "property": "Manager",
-                "relation": [{
-                    "id": managerId
-                }]
+                // "property": "Manager",
+                // "relation": [{
+                //     "id": managerId
+                // }]
+                "property": "City",
+                "select": {
+                    "name": "Казань"
+                }
             }
         });
 
         //return response.results[0].id;
 
-        const responseResults = response.results.map((page) => {
-            return {
-               id: page.id,
-               title: page.properties.Name.title[0]?.plain_text,
-               time: page.properties.Date.date,
-               geo: '',//page.properties.Address.rollup.array,
-               teh: page.properties.TechZadanie.rich_text,
-               status_id: page.properties.Status.select,
-               manager: page.properties.Manager.relation[0]?.id,
-               worklist:'',
-            };
-        });
+        // const responseResults = response.results.map((page) => {
+        //     return {
+        //        id: page.id,
+        //        title: page.properties.Name.title[0]?.plain_text,
+        //        time: page.properties.Date.date,
+        //        geo: '',//page.properties.Address.rollup.array,
+        //        teh: page.properties.TechZadanie.rich_text,
+        //        status_id: page.properties.Status.select,
+        //        manager: page.properties.Manager.relation[0]?.id,
+        //        worklist:'',
+        //     };
+        // });
 
-        return responseResults;
+        return response.results;
     } catch (error) {
         console.error(error.body)
     }
