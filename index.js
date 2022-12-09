@@ -520,7 +520,7 @@ app.get("/projects/:id", async (req, res) => {
         res.json(projects);
     }
     else{
-        res.json({});
+        res.json([]);
     }
   });
 
