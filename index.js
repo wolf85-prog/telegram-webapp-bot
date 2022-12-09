@@ -216,12 +216,9 @@ async function getProjectsId(managerId) {
                 // "relation": [{
                 //     "id": managerId
                 // }]
-                "property": "TG_chat_ID",
-                // "select": {
-                //     "name": "Казань"
-                // }
-                "rich_text": {
-                    "contains": "817802083"
+                "property": "City",
+                "select": {
+                    "name": "Москва"
                 }
             }
         });
