@@ -516,7 +516,12 @@ app.get("/projects2", async (req, res) => {
 app.get("/projects/:id", async (req, res) => {
     const id = req.params.id; // получаем id
     const projects = await getProjectsId(id);
-    res.json(projects);
+    if(projects){
+        res.json(projects);
+    }
+    else{
+        res.json({});
+    }
   });
 
 //get MANAGERS
