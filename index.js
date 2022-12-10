@@ -114,100 +114,40 @@ async function addProject(title, time, teh, managerId) {
             },
             children: [
                 {
-                    "type": "table",
-                    "table": {
-                        "table_width": 3,
-                        "has_column_header": true,
-                        "has_row_header": true,
-                        "children": [
-                        {
-                            "type": "table_row",
-                            "table_row": {
-                            "cells": [
-                                [{
-                                        "type": "text",
-                                        "text": {
-                                        "content": "Name"
-                                        },
-                                        "plain_text": "Name"
-                                }],
-                                [{
-                                    "type": "text",
-                                    "text": {
-                                    "content": "Date"
-                                    },
-                                    "plain_text": "Date"
-                                }],
-                                [{
-                                    "type": "text",
-                                    "text": {
-                                    "content": "Комментарий"
-                                    },
-                                    "plain_text": "Комментарий"
-                                }]
-                            ]
-                            }
-                        },
-                        {
-                            "type": "table_row",
-                            "table_row": {
-                            "cells": [
-                                [
+                    type: "child_database",
+                    child_database: {
+                        "title": "График проекта"
+                    },
+                    properties: {
+                        Name: {
+                            title:[
                                 {
-                                    "type": "text",
                                     "text": {
-                                    "content": "День №2"
-                                    },
-                                    "plain_text": "День №2"
-                                }],
-                                [{
-                                    "type": "text",
-                                    "text": {
-                                    "content": "01/01/2022"
-                                    },
-                                    "plain_text": "01/01/2022"
-                                }],
-                                [{
-                                    "type": "text",
-                                    "text": {
-                                    "content": ""
-                                    },
-                                    "plain_text": ""
-                                }]
+                                        "content": title
+                                    }
+                                }
                             ]
+                        },
+                        Date: {
+                            type: 'date',
+                            date: {
+                                "start": time,
+                                "end": null,
+                                "time_zone": null
                             }
                         },
-                        {
-                            "type": "table_row",
-                            "table_row": {
-                            "cells": [
-                                [
+                        Комментарий: {
+                            type: 'rich_text',
+                            rich_text: [
                                 {
-                                    "type": "text",
-                                    "text": {
-                                    "content": "День №3"
+                                    type: 'text',
+                                    text: {
+                                        content: teh,
                                     },
-                                    "plain_text": "День №3"
-                                }],
-                                [{
-                                    "type": "text",
-                                    "text": {
-                                    "content": "01/01/2022"
-                                    },
-                                    "plain_text": "01/01/2022"
-                                }],
-                                [{
-                                    "type": "text",
-                                    "text": {
-                                    "content": ""
-                                    },
-                                    "plain_text": ""
-                                }]
-                            ]
-                            }
+                                }
+                                ],
                         },
-                        ]
-                    }
+                    },
                 },
             ]
         })
