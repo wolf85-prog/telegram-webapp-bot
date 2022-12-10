@@ -114,28 +114,128 @@ async function addProject(title, time, teh, managerId) {
             },
             children: [
                 {
-                    object: "block",
-                    table: {
-                        "table_width": 1,
+                    "type": "table",
+                    "table": {
+                        "table_width": 3,
                         "has_column_header": false,
                         "has_row_header": false,
                         "children": [
-                          {
+                        {
                             "type": "table_row",
                             "table_row": {
-                              "cells": [
+                            "cells": [
                                 [
-                                  {
+                                {
                                     "type": "text",
                                     "text": {
-                                      "content": "column 1 content"
+                                    "content": "Name"
                                     },
-                                    "plain_text": "column 1 content"
-                                  }
+                                    "plain_text": "Name"
+                                },{
+                                    "type": "text",
+                                    "text": {
+                                    "content": "Date"
+                                    },
+                                    "plain_text": "Date"
+                                },
+                                {
+                                    "type": "text",
+                                    "text": {
+                                    "content": "Комментарий"
+                                    },
+                                    "plain_text": "Комментарий"
+                                }
                                 ]
-                              ]
+                            ]
                             }
-                          }
+                        },
+                        {
+                            "type": "table_row",
+                            "table_row": {
+                            "cells": [
+                                [
+                                {
+                                    "type": "text",
+                                    "text": {
+                                    "content": "День №2"
+                                    },
+                                    "plain_text": "День №2"
+                                },{
+                                    "type": "text",
+                                    "text": {
+                                    "content": "01/01/2022"
+                                    },
+                                    "plain_text": "01/01/2022"
+                                },
+                                {
+                                    "type": "text",
+                                    "text": {
+                                    "content": ""
+                                    },
+                                    "plain_text": ""
+                                }
+                                ]
+                            ]
+                            }
+                        },
+                        {
+                            "type": "table_row",
+                            "table_row": {
+                            "cells": [
+                                [
+                                {
+                                    "type": "text",
+                                    "text": {
+                                    "content": "День №3"
+                                    },
+                                    "plain_text": "День №3"
+                                },{
+                                    "type": "text",
+                                    "text": {
+                                    "content": "01/01/2022"
+                                    },
+                                    "plain_text": "01/01/2022"
+                                },
+                                {
+                                    "type": "text",
+                                    "text": {
+                                    "content": ""
+                                    },
+                                    "plain_text": ""
+                                }
+                                ]
+                            ]
+                            }
+                        },
+                        {
+                            "type": "table_row",
+                            "table_row": {
+                            "cells": [
+                                [
+                                {
+                                    "type": "text",
+                                    "text": {
+                                    "content": "День №4"
+                                    },
+                                    "plain_text": "День №4"
+                                },{
+                                    "type": "text",
+                                    "text": {
+                                    "content": "01/01/2022"
+                                    },
+                                    "plain_text": "01/01/2022"
+                                },
+                                {
+                                    "type": "text",
+                                    "text": {
+                                    "content": ""
+                                    },
+                                    "plain_text": ""
+                                }
+                                ]
+                            ]
+                            }
+                        }
                         ]
                     }
                 },
