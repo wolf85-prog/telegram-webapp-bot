@@ -115,14 +115,9 @@ async function addProject(title, time, teh, managerId) {
             children: [
                 {
                     object: "block",
-                    heading_2: {
-                        "rich_text": [
-                            {
-                                "text": {
-                                    "content": "Lacinato kale"
-                                }
-                            }
-                        ]
+                    type: "child_database",
+                    child_database: {
+                        title: "Основной состав"
                     }
                 }
             ]
