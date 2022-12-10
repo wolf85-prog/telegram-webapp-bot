@@ -297,6 +297,18 @@ async function getBlocks(blockId) {
     }
 }
 
+async function getBlocks2(blockId) {
+    try {
+        const response = await notion.blocks.children.list({
+            block_id: blockId,
+        });
+
+        return response;
+    } catch (error) {
+        console.error(error.body)
+    }
+}
+
 //получить данные блока по заданному ID
 async function getBlockId(blockId) {
     try {
@@ -473,6 +485,17 @@ app.get('/secret',(req, res) => {
 app.get('/blocks/:id', async (req, res) => {
     const id = req.params.id; // получаем id
     const blocks = await getBlocks(id);
+    if(blocks){
+        res.json(blocks);
+    }
+    else{
+        res.json({});
+    }
+  });
+
+app.get('/blocks2/:id', async (req, res) => {
+    const id = req.params.id; // получаем id
+    const blocks = await getBlocks2(id);
     if(blocks){
         res.json(blocks);
     }
