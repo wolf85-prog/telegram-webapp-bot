@@ -114,11 +114,17 @@ async function addProject(title, time, teh, managerId) {
             },
             children: [
                 {
-                    type: "child_database",
-                    child_database: {
-                        "title": "График проекта"
-                    },
-                },
+                    object: "block",
+                    heading_2: {
+                        "rich_text": [
+                            {
+                                "text": {
+                                    "content": "Lacinato kale"
+                                }
+                            }
+                        ]
+                    }
+                }
             ]
         })
         console.log(response)
