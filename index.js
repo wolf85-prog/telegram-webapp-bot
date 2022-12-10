@@ -115,13 +115,27 @@ async function addProject(title, time, teh, managerId) {
             children: [
                 {
                     object: "block",
-                    heading_1: {
-                        "rich_text": [
-                            {
-                                "text": {
-                                    "content": "Lacinato kale"
-                                }
+                    table: {
+                        "table_width": 1,
+                        "has_column_header": false,
+                        "has_row_header": false,
+                        "children": [
+                          {
+                            "type": "table_row",
+                            "table_row": {
+                              "cells": [
+                                [
+                                  {
+                                    "type": "text",
+                                    "text": {
+                                      "content": "column 1 content"
+                                    },
+                                    "plain_text": "column 1 content"
+                                  }
+                                ]
+                              ]
                             }
+                          }
                         ]
                     }
                 },
