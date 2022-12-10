@@ -118,36 +118,6 @@ async function addProject(title, time, teh, managerId) {
                     child_database: {
                         "title": "График проекта"
                     },
-                    properties: {
-                        Name: {
-                            title:[
-                                {
-                                    "text": {
-                                        "content": title
-                                    }
-                                }
-                            ]
-                        },
-                        Date: {
-                            type: 'date',
-                            date: {
-                                "start": time,
-                                "end": null,
-                                "time_zone": null
-                            }
-                        },
-                        Комментарий: {
-                            type: 'rich_text',
-                            rich_text: [
-                                {
-                                    type: 'text',
-                                    text: {
-                                        content: teh,
-                                    },
-                                }
-                                ],
-                        },
-                    },
                 },
             ]
         })
