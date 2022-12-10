@@ -548,7 +548,7 @@ app.get("/address", async (req, res) => {
   });
 
 app.post('/web-data', async (req, res) => {
-  const {queryId, projectname, datestart, geo, teh, worklist = []} = req.body;
+  const {queryId, projectname, datestart, geo, teh, managerId, worklist = []} = req.body;
   try {
       await bot.answerWebAppQuery(queryId, {
           type: 'article',
@@ -561,6 +561,7 @@ app.post('/web-data', async (req, res) => {
               <b>Дата начала:</b> ${datestart}, 
               <b>Геопозиция:</b> ${geo}, 
               <b>Тех. задание:</b> ${teh}, 
+              <b>Менеджер ID:</b> ${managerId}, 
               <b>Список специалистов:</b> ${worklist.map(item => item.spec + ' - ' + item.count + ' чел.').join(', ')}`
           }
       })
