@@ -279,6 +279,18 @@ async function getDatabaseId(baseId) {
     }
 }
 
+async function getDatabaseId2(baseId) {
+    try {
+        const response = await notion.databases.query({
+            database_id: baseId
+        });
+
+        return response;
+    } catch (error) {
+        console.error(error.body)
+    }
+}
+
 //получить пустые данные блока
 async function getDatabase2() {
     return {};
@@ -521,6 +533,18 @@ app.get('/page/:id', async (req, res) => {
 app.get('/database/:id', async (req, res) => {
     const id = req.params.id; // получаем id
     const base = await getDatabaseId(id);
+
+    if(base){
+        res.json(base);
+    }
+    else{
+        res.json({});
+    }
+  });
+
+  app.get('/database2/:id', async (req, res) => {
+    const id = req.params.id; // получаем id
+    const base = await getDatabaseId2(id);
 
     if(base){
         res.json(base);
