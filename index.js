@@ -110,8 +110,22 @@ async function addProject(title, time, teh, managerId) {
                             "id": managerId
                         }
                     ]
-                }
+                },
             },
+            children: [
+                {
+                    object: "block",
+                    heading_1: {
+                        "rich_text": [
+                            {
+                                "text": {
+                                    "content": "Lacinato kale"
+                                }
+                            }
+                        ]
+                    }
+                },
+            ]
         })
         console.log(response)
         console.log("Success! Entry added.")
