@@ -117,7 +117,23 @@ async function addProject(title, time, teh, managerId) {
                     object: "block",
                     child_database: {
                         title: "Основной состав"
-                    }
+                    },
+                    children: [
+                        {
+                            type: "heading_2",
+                            heading_2: {
+                              "rich_text": [{
+                                "type": "text",
+                                "text": {
+                                  "content": "Lacinato kale",
+                                  "link": null
+                                }
+                              }],
+                              "color": "default",
+                              "is_toggleable": false
+                            }
+                          }
+                    ]
                 }
             ]
         })
