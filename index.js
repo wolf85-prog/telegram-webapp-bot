@@ -115,7 +115,6 @@ async function addProject(title, time, teh, managerId) {
             children: [
                 {
                     object: "block",
-                    type: "child_database",
                     child_database: {
                         title: "Основной состав"
                     }
