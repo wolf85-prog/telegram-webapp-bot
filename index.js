@@ -66,9 +66,9 @@ bot.setMyCommands([
 ])
 
 //send create db notion
-async function newDatabase() {
+async function newDatabase(parent_page_id) {
     try {
-        parent_page_id = "97884d7c-2c21-4dd0-adcb-689e6dd7da89" //Проект А
+        //parent_page_id = "97884d7c-2c21-4dd0-adcb-689e6dd7da89" //Проект А
 
         const body = {
             "parent": {
@@ -243,9 +243,9 @@ async function addProject(title, time, teh, managerId) {
             // ]
         })
         console.log(response)
-        console.log("Success! Project added.")
+        console.log("Success! Project added." + response.parent.page_id)
 
-        newDatabase()
+        //newDatabase()
     } catch (error) {
         console.error(error.body)
     }
@@ -801,8 +801,8 @@ app.post('/web-data', async (req, res) => {
       //const workers_str = JSON.stringify(worklist);
 
       //добавление проекта с названием проекта в базу
-      //addProject(projectname, datestart, teh, managerId);
-      newDatabase();
+      addProject(projectname, datestart, teh, managerId);
+      //newDatabase();
 
       //addChildBlock("97884d7c-2c21-4dd0-adcb-689e6dd7da89");
 
