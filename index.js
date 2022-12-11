@@ -75,6 +75,14 @@ async function newDatabase() {
                 "type": "page_id",
                 "page_id": parent_page_id
             },
+            "title": [
+                {
+                    "type": "text",
+                    "text": {
+                        "content": "Основной состав"
+                    }
+                }
+            ],
             "is_inline": true,
             "properties": {                
                 "Date": {
