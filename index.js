@@ -625,7 +625,6 @@ app.post('/web-data', async (req, res) => {
               <b>Дата начала:</b> ${datestart}, 
               <b>Геопозиция:</b> ${geo}, 
               <b>Тех. задание:</b> ${teh}, 
-              <b>Менеджер ID:</b> ${managerId}, 
               <b>Список специалистов:</b> ${worklist.map(item => item.spec + ' - ' + item.count + ' чел.').join(', ')}`
           }
       })
@@ -636,7 +635,7 @@ app.post('/web-data', async (req, res) => {
       addProject(projectname, datestart, teh, managerId);
 
       //добавление геопозиции в БД Площадки (Адрес)
-      addAddress(geo);
+      //addAddress(geo);
 
       return res.status(200).json({});
   } catch (e) {
