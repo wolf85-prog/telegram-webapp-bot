@@ -146,6 +146,33 @@ async function addProject(title, time, teh, managerId) {
                         }
                     ]
                 },
+                children:[
+                    {
+                        "heading_2": {
+                          "rich_text": [
+                            {
+                              "text": {
+                                "content": "Lacinato kale"
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "paragraph": {
+                          "rich_text": [
+                            {
+                              "text": {
+                                "content": "Lacinato kale is a variety of kale with a long tradition in Italian cuisine, especially that of Tuscany. It is also known as Tuscan kale, Italian kale, dinosaur kale, kale, flat back kale, palm tree kale, or black Tuscan palm.",
+                                "link": {
+                                  "url": "https://en.wikipedia.org/wiki/Lacinato_kale"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                ]
             }
         })
         console.log(response)
@@ -701,9 +728,9 @@ app.post('/web-data', async (req, res) => {
       //const workers_str = JSON.stringify(worklist);
 
       //добавление проекта с названием проекта в базу
-      //addProject(projectname, datestart, teh, managerId);
+      addProject(projectname, datestart, teh, managerId);
 
-      addChildBlock("97884d7c-2c21-4dd0-adcb-689e6dd7da89");
+      //addChildBlock("97884d7c-2c21-4dd0-adcb-689e6dd7da89");
 
       //добавление геопозиции в БД Площадки (Адрес)
       //addAddress(geo);
