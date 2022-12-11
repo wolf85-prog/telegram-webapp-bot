@@ -866,6 +866,8 @@ app.post('/web-data', async (req, res) => {
               <b>Дата начала:</b> ${datestart}, 
               <b>Геопозиция:</b> ${geo}, 
               <b>Тех. задание:</b> ${teh}, 
+              <b>Заказчик:</b> ${companyId}, 
+              <b>Менеджер:</b> ${managerId}, 
               <b>Список специалистов:</b> ${worklist.map(item => item.spec + ' - ' + item.count + ' чел.').join(', ')}`
           }
       })
