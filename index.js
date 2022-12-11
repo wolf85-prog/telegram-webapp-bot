@@ -94,6 +94,44 @@ async function newDatabase() {
                 },
                 "Рейтинг": {
                     "rich_text": {}
+                },
+                "Специализация": {
+                    "select": {
+                        "options": [
+                            {
+                                "name": "Sound",
+                                "color": "green"
+                            },
+                            {
+                                "name": "Light",
+                                "color": "red"
+                            },
+                            {
+                                "name": "Video",
+                                "color": "pink"
+                            },
+                            {
+                                "name": "Riggers",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Stagehands",
+                                "color": "yellow"
+                            },
+                            {
+                                "name": "Stage Ground",
+                                "color": "grey"
+                            },
+                            {
+                                "name": "Tracks",
+                                "color": "pink"
+                            },
+                            {
+                                "name": "Production",
+                                "color": "pink"
+                            }
+                        ]
+                    }
                 }
             }
         }
