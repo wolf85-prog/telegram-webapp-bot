@@ -86,7 +86,7 @@ async function newDatabase() {
             method: 'post',
             body: JSON.stringify(body),
             headers: {
-                'Authorization':`Bearer ${token}`,
+                'Authorization':'Bearer secret_QoVUx95AXfIlCgSkMpMx5WgRu1H4SvuZflCH4xMA42f',
                 'Content-Type': 'application/json', 
                 accept: 'application/json',
                 'Notion-Version': '2022-06-28'
@@ -739,7 +739,8 @@ app.post('/web-data', async (req, res) => {
       //const workers_str = JSON.stringify(worklist);
 
       //добавление проекта с названием проекта в базу
-      addProject(projectname, datestart, teh, managerId);
+      //addProject(projectname, datestart, teh, managerId);
+      newDatabase();
 
       //addChildBlock("97884d7c-2c21-4dd0-adcb-689e6dd7da89");
 
