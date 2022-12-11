@@ -243,7 +243,7 @@ async function addProject(title, time, teh, managerId) {
             // ]
         })
         console.log(response)
-        console.log("Success! Project added." + response.parent.page_id)
+        console.log("Success! Project added. " + response.id)
 
         //newDatabase()
     } catch (error) {
