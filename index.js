@@ -421,6 +421,7 @@ async function getProjectsId(managerId) {
                teh: page.properties.TechZadanie.rich_text,
                status_id: page.properties.Status.select,
                manager: page.properties.Manager.relation[0]?.id,
+               company: page.properties.Company.relation[0]?.id,
                worklist:'',
             };
         });
@@ -550,7 +551,7 @@ async function getCompanyId(id) {
             }
         });
 
-        return response; //.results[0].properties.Заказчики.relation[0]?.id;
+        return response.results[0].properties.Заказчики;
     } catch (error) {
         console.error(error.body)
     }
