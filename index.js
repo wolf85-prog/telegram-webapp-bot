@@ -165,7 +165,7 @@ async function newDatabase(parent_page_id) {
 }
 
 //send data to notion
-async function addProject(title, time, teh, managerId) {
+async function addProject(title, time, teh, managerId, companyId) {
     try {
         const response = await notion.pages.create({
             parent: { database_id: databaseId },
@@ -222,7 +222,15 @@ async function addProject(title, time, teh, managerId) {
                         }
                     ]
                 },
-            },
+                Company: {
+                    type: "relation",
+                    relation: [
+                        {
+                            "id": companyId
+                        }
+                    ]
+                }
+            }
             // children:[
             //     {
             //         "heading_2": {
@@ -818,7 +826,7 @@ app.get("/address", async (req, res) => {
 
 //создание страницы (проекта) базыданных проектов
 app.post('/web-data', async (req, res) => {
-  const {queryId, projectname, datestart, geo, teh, managerId, worklist = []} = req.body;
+  const {queryId, projectname, datestart, geo, teh, managerId, companyId, worklist = []} = req.body;
   try {
       await bot.answerWebAppQuery(queryId, {
           type: 'article',
@@ -838,7 +846,7 @@ app.post('/web-data', async (req, res) => {
       //const workers_str = JSON.stringify(worklist);
 
       //добавление проекта с названием проекта в базу
-      addProject(projectname, datestart, teh, managerId);
+      addProject(projectname, datestart, teh, managerId, companyId);
       //newDatabase();
 
       //addChildBlock("97884d7c-2c21-4dd0-adcb-689e6dd7da89");
