@@ -18,6 +18,7 @@ const cors = require('cors');
 const https = require('https');
 
 const token = process.env.TELEGRAM_API_TOKEN;
+const token_fetch = 'Bearer ' + token;
 const webAppUrl = process.env.WEB_APP_URL;
 
 const bot = new TelegramBot(token, {polling: true});
@@ -86,7 +87,7 @@ async function newDatabase() {
             method: 'post',
             body: JSON.stringify(body),
             headers: {
-                'Authorization':'Bearer secret_QoVUx95AXfIlCgSkMpMx5WgRu1H4SvuZflCH4xMA42f',
+                'Authorization': token_fetch,
                 'Content-Type': 'application/json', 
                 accept: 'application/json',
                 'Notion-Version': '2022-06-28'
