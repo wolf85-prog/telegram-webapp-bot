@@ -76,12 +76,24 @@ async function newDatabase() {
                 "page_id": parent_page_id
             },
             "is_inline": true,
-            "properties": {
-                "Name": {
-                    "title": {}
-                },
+            "properties": {                
                 "Date": {
                     "date": {}
+                },
+                "ФИО": {
+                    "title": {}
+                },
+                "Специализация": {
+                    "title": {}
+                },
+                "Мерч": {
+                    "title": {}
+                },
+                "Комментарий": {
+                    "title": {}
+                },
+                "Рейтинг": {
+                    "title": {}
                 }
             }
         }
