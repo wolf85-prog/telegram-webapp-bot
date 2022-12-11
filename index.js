@@ -205,6 +205,14 @@ async function addProject(title, time, teh, managerId) {
                         "color": "blue"
                     }
                 },
+                City: {
+                    type: 'select',
+                    select: {
+                        "id": "4e370773-fb5d-4ef7-bd2a-eaa91e5919e0",
+                        "name": "Test",
+                        "color": "brown"
+                    }
+                },
                 Manager: {
                     type: "relation",
                     relation: [
@@ -245,7 +253,7 @@ async function addProject(title, time, teh, managerId) {
         console.log(response)
         console.log("Success! Project added. " + response.id)
 
-        //newDatabase()
+        newDatabase(response.id)
     } catch (error) {
         console.error(error.body)
     }
