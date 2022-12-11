@@ -372,6 +372,7 @@ async function getProjects() {
                teh: page.properties.TechZadanie.rich_text,
                status_id: page.properties.Status.select,
                manager: page.properties.Manager.relation[0]?.id,
+               company: page.properties.Company.relation[0]?.id,
                worklist:'',
             };
         });
@@ -401,9 +402,6 @@ async function getProjectsId(managerId) {
             database_id: databaseId,
             "filter": {
                 "property": "Manager",
-                // "rich_text": {
-                //     "contains": managerId
-                // },
                 "relation": {
                     "contains": managerId
                 },
