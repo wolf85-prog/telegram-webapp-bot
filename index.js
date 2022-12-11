@@ -61,6 +61,41 @@ bot.setMyCommands([
     {command: '/settings', description: 'Настройки'},
 ])
 
+//send create db notion
+async function newDatabase() {
+    try {
+        parent_page_id = "97884d7c-2c21-4dd0-adcb-689e6dd7da89" //Проект А
+
+        const options = {
+            method: 'POST',
+            headers: {
+              accept: 'application/json',
+              'Notion-Version': '2022-06-28',
+              'content-type': 'application/json'
+            },
+            body: {
+                "parent": {
+                    "type": "page_id",
+                    "page_id": parent_page_id
+                },
+                "properties": {
+                    "Name": {
+                        "title": "Основной состав"
+                    }
+                }
+            }
+          };
+          
+          fetch('https://api.notion.com/v1/databases', options)
+            .then(response => response.json())
+            .then(response => console.log(response))
+            .catch(err => console.error(err));
+        
+    } catch (error) {
+        
+    }
+}
+
 //send data to notion
 async function addProject(title, time, teh, managerId) {
     try {
@@ -111,34 +146,53 @@ async function addProject(title, time, teh, managerId) {
                         }
                     ]
                 },
-            },
-            children: [
-                {
-                    "type": "heading_2",
-                    //...other keys excluded
-                    "heading_2": {
-                      "rich_text": [{
-                        "type": "text",
-                        "text": {
-                          "content": "Lacinato kale",
-                          "link": null
-                        }
-                      }],
-                      "color": "default",
-                      "is_toggleable": false
-                    }
-                },
-                {
-                    "type": "divider",
-                    //...other keys excluded
-                    "divider": {}
-                  }
-            ]
+            }
         })
         console.log(response)
         console.log("Success! Entry added.")
     } catch (error) {
         console.error(error.body)
+    }
+}
+
+//97884d7c-2c21-4dd0-adcb-689e6dd7da89 //Проект А
+
+//send data to page notion
+async function addChildBlock(blockId) {
+    try {
+        const response = await notion.blocks.children.append({
+            block_id: blockId,
+            children: [
+              {
+                "heading_2": {
+                  "rich_text": [
+                    {
+                      "text": {
+                        "content": "Lacinato kale"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "paragraph": {
+                  "rich_text": [
+                    {
+                      "text": {
+                        "content": "Lacinato kale is a variety of kale with a long tradition in Italian cuisine, especially that of Tuscany. It is also known as Tuscan kale, Italian kale, dinosaur kale, kale, flat back kale, palm tree kale, or black Tuscan palm.",
+                        "link": {
+                          "url": "https://en.wikipedia.org/wiki/Lacinato_kale"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ],
+        });
+
+    } catch (error) {
+        
     }
 }
 
@@ -624,6 +678,8 @@ app.get("/address", async (req, res) => {
     res.json(address);
   });
 
+
+//создание страницы (проекта) базыданных проектов
 app.post('/web-data', async (req, res) => {
   const {queryId, projectname, datestart, geo, teh, managerId, worklist = []} = req.body;
   try {
@@ -645,7 +701,9 @@ app.post('/web-data', async (req, res) => {
       //const workers_str = JSON.stringify(worklist);
 
       //добавление проекта с названием проекта в базу
-      addProject(projectname, datestart, teh, managerId);
+      //addProject(projectname, datestart, teh, managerId);
+
+      addChildBlock("97884d7c-2c21-4dd0-adcb-689e6dd7da89");
 
       //добавление геопозиции в БД Площадки (Адрес)
       //addAddress(geo);
