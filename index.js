@@ -538,6 +538,24 @@ async function getManagerId(id) {
     }
 }
 
+async function getCompanyId(id) {
+    try {
+        const response = await notion.databases.query({
+            database_id: databaseManagerId, 
+            "filter": {
+                "property": "TelegramID",
+                "rich_text": {
+                    "contains": id
+                }
+            }
+        });
+
+        return response.results[0].Company.id;
+    } catch (error) {
+        console.error(error.body)
+    }
+}
+
 //получить данные таблицы Площадки
 async function getAddress() {
     try {
@@ -768,6 +786,17 @@ app.get("/managers", async (req, res) => {
 app.get("/managers/:id", async (req, res) => {
     const id = req.params.id; // получаем id
     const manager = await getManagerId(id);
+    if(manager){
+        res.json(manager);
+    }
+    else{
+        res.json({});
+    }
+  });
+
+app.get("/manager/:id", async (req, res) => {
+    const id = req.params.id; // получаем id
+    const manager = await getCompanyId(id);
     if(manager){
         res.json(manager);
     }
