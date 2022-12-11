@@ -865,9 +865,7 @@ app.post('/web-data', async (req, res) => {
               <b>Название проекта:</b>  ${projectname}, 
               <b>Дата начала:</b> ${datestart}, 
               <b>Геопозиция:</b> ${geo}, 
-              <b>Тех. задание:</b> ${teh}, 
-              <b>Заказчик:</b> ${companyId}, 
-              <b>Менеджер:</b> ${managerId}, 
+              <b>Тех. задание:</b> ${teh},  
               <b>Список специалистов:</b> ${worklist.map(item => item.spec + ' - ' + item.count + ' чел.').join(', ')}`
           }
       })
@@ -876,7 +874,6 @@ app.post('/web-data', async (req, res) => {
 
       //добавление проекта с названием проекта в базу
       addProject(projectname, datestart, teh, managerId, companyId);
-      //newDatabase();
 
       //addChildBlock("97884d7c-2c21-4dd0-adcb-689e6dd7da89");
 
