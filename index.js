@@ -120,15 +120,15 @@ async function newDatabase() {
                             },
                             {
                                 "name": "Stage Ground",
-                                "color": "grey"
+                                "color": "gray"
                             },
                             {
                                 "name": "Tracks",
-                                "color": "pink"
+                                "color": "purple"
                             },
                             {
                                 "name": "Production",
-                                "color": "pink"
+                                "color": "brown"
                             }
                         ]
                     }
