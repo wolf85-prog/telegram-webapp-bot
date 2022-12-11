@@ -129,13 +129,6 @@ async function addProject(title, time, teh, managerId) {
                     }
                 },
                 {
-                    'type': "child_database",
-                    'child_database': {
-                        'title': "Основной состав"
-                    },
-                    
-                },
-                {
                     "type": "divider",
                     //...other keys excluded
                     "divider": {}
