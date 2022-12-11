@@ -550,7 +550,7 @@ async function getCompanyId(id) {
             }
         });
 
-        return response.results[0];
+        return response.results[0].properties.Заказчики.relation[0]?.id;
     } catch (error) {
         console.error(error.body)
     }
