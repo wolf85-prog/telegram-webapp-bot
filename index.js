@@ -607,6 +607,27 @@ async function getManagers() {
     }
 }
 
+async function getCompanys() {
+    try {
+        const response = await notion.databases.query({
+            database_id: databaseCompanyId
+        });
+
+        const responseResults = response.results.map((page) => {
+            return {
+               id: page.id,
+               title: '',
+
+            };
+        });
+
+        console.log(responseResults);
+        return response;
+    } catch (error) {
+        console.error(error.body)
+    }
+}
+
 
 bot.on('message', async (msg) => {
   const chatId = msg.chat.id;
@@ -811,6 +832,12 @@ app.get("/manager/:id", async (req, res) => {
     else{
         res.json({});
     }
+  });
+
+//get COMPANYS
+app.get("/companys", async (req, res) => {
+    const companys = await getCompanys();
+    res.json(companys);
   });
 
 //get ADDRESS
