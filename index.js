@@ -163,31 +163,13 @@ async function addChildBlock(blockId) {
         const response = await notion.blocks.children.append({
             block_id: blockId,
             children: [
-              {
-                "heading_2": {
-                  "rich_text": [
-                    {
-                      "text": {
-                        "content": "Lacinato kale"
-                      }
+                {
+                    "type": "child_database",
+                    //...other keys excluded
+                    "child_database": {
+                      "title": "My database"
                     }
-                  ]
                 }
-              },
-              {
-                "paragraph": {
-                  "rich_text": [
-                    {
-                      "text": {
-                        "content": "Lacinato kale is a variety of kale with a long tradition in Italian cuisine, especially that of Tuscany. It is also known as Tuscan kale, Italian kale, dinosaur kale, kale, flat back kale, palm tree kale, or black Tuscan palm.",
-                        "link": {
-                          "url": "https://en.wikipedia.org/wiki/Lacinato_kale"
-                        }
-                      }
-                    }
-                  ]
-                }
-              }
             ],
         });
 
