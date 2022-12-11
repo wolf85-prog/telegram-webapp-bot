@@ -9,6 +9,7 @@ const notion = new Client({ auth: process.env.NOTION_API_KEY });
 const databaseId = process.env.NOTION_DATABASE_ID
 const databaseManagerId = process.env.NOTION_DATABASE_MANAGER_ID
 const databaseAddressId = process.env.NOTION_DATABASE_ADDRESS_ID
+const databaseCompanyId = process.env.NOTION_DATABASE_COMPANY_ID
 
 //telegram api
 const TelegramBot = require('node-telegram-bot-api');
@@ -549,7 +550,7 @@ async function getCompanyId(id) {
             }
         });
 
-        return response.results[0].properties.Заказчики;
+        return response.results[0].properties.Заказчики.relation[0].id;
     } catch (error) {
         console.error(error.body)
     }
