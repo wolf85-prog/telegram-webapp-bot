@@ -1,5 +1,8 @@
 require("dotenv").config();
 
+//fetch api
+const fetch = require('node-fetch');
+
 //notion api
 const { Client } = require("@notionhq/client");
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
@@ -66,31 +69,32 @@ async function newDatabase() {
     try {
         parent_page_id = "97884d7c-2c21-4dd0-adcb-689e6dd7da89" //Проект А
 
-        const options = {
-            method: 'POST',
-            headers: {
-              accept: 'application/json',
-              'Notion-Version': '2022-06-28',
-              'content-type': 'application/json'
+        const body = {
+            "parent": {
+                "type": "page_id",
+                "page_id": parent_page_id
             },
-            body: {
-                "parent": {
-                    "type": "page_id",
-                    "page_id": parent_page_id
-                },
-                "properties": {
-                    "Name": {
-                        "title": "Основной состав"
-                    }
+            "is_inline": true,
+            "properties": {
+                "Name": {
+                    "title": {}
                 }
             }
-          };
-          
-          fetch('https://api.notion.com/v1/databases', options)
-            .then(response => response.json())
-            .then(response => console.log(response))
-            .catch(err => console.error(err));
-        
+        }
+
+        const response = await fetch('https://api.notion.com/v1/databases', {
+            method: 'post',
+            body: JSON.stringify(body),
+            headers: {
+                'Content-Type': 'application/json', 
+                accept: 'application/json',
+                'Notion-Version': '2022-06-28'
+            }
+        });
+        const data = await response.json();
+
+        console.log(data);
+        console.log("Success! Maincast added.")
     } catch (error) {
         
     }
@@ -176,7 +180,9 @@ async function addProject(title, time, teh, managerId) {
             // ]
         })
         console.log(response)
-        console.log("Success! Entry added.")
+        console.log("Success! Project added.")
+
+        newDatabase()
     } catch (error) {
         console.error(error.body)
     }
@@ -705,6 +711,10 @@ app.get("/address", async (req, res) => {
     res.json(address);
   });
 
+
+  app.post('https://api.notion.com/v1/databases', async (req, res) => {
+    
+  })
 
 //создание страницы (проекта) базыданных проектов
 app.post('/web-data', async (req, res) => {
