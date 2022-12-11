@@ -87,7 +87,7 @@ async function newDatabase() {
             method: 'post',
             body: JSON.stringify(body),
             headers: {
-                'Authorization': 'Bearer ' + token,
+                'Authorization': 'Bearer secret_QoVUx95AXfIlCgSkMpMx5WgRu1H4SvuZflCH4xMA42f',
                 'Content-Type': 'application/json', 
                 accept: 'application/json',
                 'Notion-Version': '2022-06-28'
