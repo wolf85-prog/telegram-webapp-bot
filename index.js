@@ -550,7 +550,7 @@ async function getCompanyId(id) {
             }
         });
 
-        return response.results[0].Company.id;
+        return response.results[0].Должность.id;
     } catch (error) {
         console.error(error.body)
     }
