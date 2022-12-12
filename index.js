@@ -261,7 +261,8 @@ async function newDatabase(parent_page_id, worklist) {
             ],
             "is_inline": true,
             "properties": {                
-                "Date": {
+                "Дата": {
+                    "name": "Дата", 
                     "date": {}
                 },
                 "👷 ФИО": {    
