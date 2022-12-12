@@ -373,7 +373,7 @@ async function addWorker(blockId, worker) {
                     type: "multi_select",
                     multi_select: [
                         {
-                            "name": worker.icon
+                            "name": worker
                         }
                     ]
                 },
