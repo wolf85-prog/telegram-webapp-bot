@@ -304,7 +304,7 @@ async function newDatabase(parent_page_id, worklist) {
                             },
                             {
                                 "name": "Stagehands",
-                                "color": "yellow"
+                                "color": "blue"
                             },
                             {
                                 "name": "Stage Ground",
@@ -367,7 +367,6 @@ async function addWorker(blockId, worker) {
                     type: "multi_select",
                     multi_select: [
                         {
-                            "id": "77b62d03-73f2-46cd-b152-da47401462d3",
                             "name": "Stagehands",
                             "color": "blue"
                         }
