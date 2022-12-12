@@ -67,6 +67,180 @@ bot.setMyCommands([
     {command: '/settings', description: 'Настройки'},
 ])
 
+
+//send data to notion
+async function addProject(title, time, teh, managerId, companyId, worklist, geoId) {
+    try {
+        const response = await notion.pages.create({
+            parent: { database_id: databaseId },
+            icon: {
+                type: "emoji",
+                emoji: "🟦"
+            },
+            properties: {
+                Name: {
+                    title:[
+                        {
+                            "text": {
+                                "content": title
+                            }
+                        }
+                    ]
+                },
+                Date: {
+                    type: 'date',
+                    date: {
+                        "start": time,
+                        "end": null,
+                        "time_zone": null
+                    }
+                },
+                TechZadanie: {
+                    type: 'rich_text',
+                    rich_text: [
+                        {
+                            type: 'text',
+                            text: {
+                                content: teh,
+                            },
+                        }
+                        ],
+                },
+                Status: {
+                    type: 'select',
+                    select: {
+                        "id": "4f52b59e-2d7f-4a13-976f-f9773274825d",
+                        "name": "New",
+                        "color": "blue"
+                    }
+                },
+                City: {
+                    type: 'select',
+                    select: {
+                        "id": "4e370773-fb5d-4ef7-bd2a-eaa91e5919e0",
+                        "name": "Test",
+                        "color": "brown"
+                    }
+                },
+                Manager: {
+                    type: "relation",
+                    relation: [
+                        {
+                            "id": managerId
+                        }
+                    ]
+                },
+                Company: {
+                    type: "relation",
+                    relation: [
+                        {
+                            "id": companyId
+                        }
+                    ]
+                },
+                "Площадка": {
+                    "type": "relation",
+                    "relation": [
+                        {
+                            "id": geoId
+                        }
+                    ],
+                    "has_more": false
+                },
+            }
+        })
+        //console.log(response)
+        console.log("1 Success! Project added. " + response.id)
+
+        newDatabase(response.id, worklist)
+
+    } catch (error) {
+        console.error(error.body)
+    }
+}
+
+async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist) {
+    try {
+        const response = await notion.pages.create({
+            parent: { database_id: databaseId },
+            icon: {
+                type: "emoji",
+                emoji: "🟦"
+            },
+            properties: {
+                Name: {
+                    title:[
+                        {
+                            "text": {
+                                "content": title
+                            }
+                        }
+                    ]
+                },
+                Date: {
+                    type: 'date',
+                    date: {
+                        "start": time,
+                        "end": null,
+                        "time_zone": null
+                    }
+                },
+                TechZadanie: {
+                    type: 'rich_text',
+                    rich_text: [
+                        {
+                            type: 'text',
+                            text: {
+                                content: teh,
+                            },
+                        }
+                        ],
+                },
+                Status: {
+                    type: 'select',
+                    select: {
+                        "id": "4f52b59e-2d7f-4a13-976f-f9773274825d",
+                        "name": "New",
+                        "color": "blue"
+                    }
+                },
+                City: {
+                    type: 'select',
+                    select: {
+                        "id": "4e370773-fb5d-4ef7-bd2a-eaa91e5919e0",
+                        "name": "Test",
+                        "color": "brown"
+                    }
+                },
+                Manager: {
+                    type: "relation",
+                    relation: [
+                        {
+                            "id": managerId
+                        }
+                    ]
+                },
+                Company: {
+                    type: "relation",
+                    relation: [
+                        {
+                            "id": companyId
+                        }
+                    ]
+                },
+            }
+        })
+        //console.log(response)
+        console.log("1 Success! Project added. " + response.id)
+
+        newDatabase(response.id, worklist)
+
+    } catch (error) {
+        console.error(error.body)
+    }
+}
+
+
 //send create db notion
 async function newDatabase(parent_page_id, worklist) {
     try {
@@ -162,7 +336,7 @@ async function newDatabase(parent_page_id, worklist) {
             }
         });
         const data = await response.json();
-        console.log("Success! Maincast added. Database_id: " + data.id + " data: " + JSON.stringify(data))
+        console.log("2 Success! Maincast added. Database_id: " + data.id)// + " data: " + JSON.stringify(data))
 
         //добавить список работников
         worklist.forEach((worker, index) =>
@@ -171,178 +345,6 @@ async function newDatabase(parent_page_id, worklist) {
         
     } catch (error) {
         
-    }
-}
-
-//send data to notion
-async function addProject(title, time, teh, managerId, companyId, worklist, geoId) {
-    try {
-        const response = await notion.pages.create({
-            parent: { database_id: databaseId },
-            icon: {
-                type: "emoji",
-                emoji: "🟦"
-            },
-            properties: {
-                Name: {
-                    title:[
-                        {
-                            "text": {
-                                "content": title
-                            }
-                        }
-                    ]
-                },
-                Date: {
-                    type: 'date',
-                    date: {
-                        "start": time,
-                        "end": null,
-                        "time_zone": null
-                    }
-                },
-                TechZadanie: {
-                    type: 'rich_text',
-                    rich_text: [
-                        {
-                            type: 'text',
-                            text: {
-                                content: teh,
-                            },
-                        }
-                        ],
-                },
-                Status: {
-                    type: 'select',
-                    select: {
-                        "id": "4f52b59e-2d7f-4a13-976f-f9773274825d",
-                        "name": "New",
-                        "color": "blue"
-                    }
-                },
-                City: {
-                    type: 'select',
-                    select: {
-                        "id": "4e370773-fb5d-4ef7-bd2a-eaa91e5919e0",
-                        "name": "Test",
-                        "color": "brown"
-                    }
-                },
-                Manager: {
-                    type: "relation",
-                    relation: [
-                        {
-                            "id": managerId
-                        }
-                    ]
-                },
-                Company: {
-                    type: "relation",
-                    relation: [
-                        {
-                            "id": companyId
-                        }
-                    ]
-                },
-                "Площадка": {
-                    "type": "relation",
-                    "relation": [
-                        {
-                            "id": geoId
-                        }
-                    ],
-                    "has_more": false
-                },
-            }
-        })
-        console.log(response)
-        console.log("Success! Project added. " + response.id)
-
-        newDatabase(response.id, worklist)
-
-    } catch (error) {
-        console.error(error.body)
-    }
-}
-
-async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist) {
-    try {
-        const response = await notion.pages.create({
-            parent: { database_id: databaseId },
-            icon: {
-                type: "emoji",
-                emoji: "🟦"
-            },
-            properties: {
-                Name: {
-                    title:[
-                        {
-                            "text": {
-                                "content": title
-                            }
-                        }
-                    ]
-                },
-                Date: {
-                    type: 'date',
-                    date: {
-                        "start": time,
-                        "end": null,
-                        "time_zone": null
-                    }
-                },
-                TechZadanie: {
-                    type: 'rich_text',
-                    rich_text: [
-                        {
-                            type: 'text',
-                            text: {
-                                content: teh,
-                            },
-                        }
-                        ],
-                },
-                Status: {
-                    type: 'select',
-                    select: {
-                        "id": "4f52b59e-2d7f-4a13-976f-f9773274825d",
-                        "name": "New",
-                        "color": "blue"
-                    }
-                },
-                City: {
-                    type: 'select',
-                    select: {
-                        "id": "4e370773-fb5d-4ef7-bd2a-eaa91e5919e0",
-                        "name": "Test",
-                        "color": "brown"
-                    }
-                },
-                Manager: {
-                    type: "relation",
-                    relation: [
-                        {
-                            "id": managerId
-                        }
-                    ]
-                },
-                Company: {
-                    type: "relation",
-                    relation: [
-                        {
-                            "id": companyId
-                        }
-                    ]
-                },
-            }
-        })
-        console.log(response)
-        console.log("Success! Project added. " + response.id)
-
-        newDatabase(response.id, worklist)
-
-    } catch (error) {
-        console.error(error.body)
     }
 }
 
@@ -361,15 +363,6 @@ async function addWorker(blockId, worker) {
                         "time_zone": null
                     }
                 },
-                // Специалиация: {
-                //     type: "multi_select",
-                //     multi_select: [
-                //         {
-                //             "name": "Stagehands",
-                //             "color": "blue"
-                //         }
-                //     ]
-                // },
                 Комментарий : {
                     type: 'rich_text',
                     rich_text: [
@@ -384,7 +377,7 @@ async function addWorker(blockId, worker) {
             }
         })
         console.log(response)
-        console.log("Success! Worker added. Data: " + JSON.stringify(response))
+        console.log("3 Success! Worker added. Data: " + JSON.stringify(response))
     } catch (error) {
         console.error(error.body)
     }
