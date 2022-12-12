@@ -159,8 +159,14 @@ async function newDatabase(parent_page_id) {
 
         console.log(data);
         console.log("Success! Maincast added. Database_id: " + data.id + " data: " + JSON.stringify(data))
+
+        var a = ["a", "b", "c"];
+        a.forEach(function(entry) {
+            //console.log(entry);
+            addWorker(data.id)
+        });
         
-        addWorker(data.id)
+        //addWorker(data.id)
     } catch (error) {
         
     }
@@ -261,7 +267,7 @@ async function addWorker(blockId) {
             }
         })
         console.log(response)
-        console.log("Success! Worker added. ")
+        console.log("Success! Worker added. Data: " + JSON.stringify(response))
     } catch (error) {
         console.error(error.body)
     }
