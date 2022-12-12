@@ -160,7 +160,7 @@ async function newDatabase(parent_page_id) {
         console.log(data);
         console.log("Success! Maincast added. Database_id: " + JSON.stringify(data))
         
-        //addWorker()
+        addWorker(data.id)
     } catch (error) {
         
     }
@@ -245,28 +245,19 @@ async function addProject(title, time, teh, managerId, companyId) {
 
 
 //send data to notion
-async function addWorker(blockId, title) {
+async function addWorker(blockId) {
     try {
         const response = await notion.pages.create({
             parent: { database_id: blockId },
             properties: {
-                Name: {
-                    title:[
-                        {
-                            "text": {
-                                "content": title
-                            }
-                        }
-                    ]
-                },
                 Date: {
                     type: 'date',
                     date: {
-                        "start": time,
+                        "start": '30/10/2022T0:00',
                         "end": null,
                         "time_zone": null
                     }
-                }            
+                }           
             }
         })
         console.log(response)
