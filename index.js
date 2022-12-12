@@ -339,9 +339,15 @@ async function newDatabase(parent_page_id, worklist) {
         console.log("2 Success! Maincast added. Database_id: " + data.id)// + " data: " + JSON.stringify(data))
 
         //добавить список работников
-        worklist.forEach((worker, index) =>
-            addWorker(data.id, worker.icon)
-        );
+        worklist.forEach((worker, index) => {
+            if (worker.count > 1) {
+                for (let i = 0; i < worker.count; i++) {
+                    addWorker(data.id, worker.icon)
+                }
+            } else {
+                addWorker(data.id, worker.icon)
+            }          
+        });
         
     } catch (error) {
         console.error(error.body)
