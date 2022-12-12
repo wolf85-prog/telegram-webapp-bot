@@ -363,6 +363,16 @@ async function addWorker(blockId, worker) {
                         "time_zone": null
                     }
                 },
+                Специалиация: {
+                    type: "multi_select",
+                    multi_select: [
+                        {
+                            "id": "77b62d03-73f2-46cd-b152-da47401462d3",
+                            "name": "Stagehands",
+                            "color": "blue"
+                        }
+                    ]
+                },
                 Комментарий : {
                     type: 'rich_text',
                     rich_text: [
