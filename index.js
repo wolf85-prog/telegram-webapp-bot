@@ -158,7 +158,7 @@ async function newDatabase(parent_page_id) {
         const data = await response.json();
 
         console.log(data);
-        console.log("Success! Maincast added. Database_id: " + JSON.stringify(data))
+        console.log("Success! Maincast added. Database_id: " + data.id + " data: " + JSON.stringify(data))
         
         addWorker(data.id)
     } catch (error) {
@@ -253,7 +253,7 @@ async function addWorker(blockId) {
                 Date: {
                     type: 'date',
                     date: {
-                        "start": '30/10/2022T0:00',
+                        "start": '2022-10-30T00:00:00.000Z',
                         "end": null,
                         "time_zone": null
                     }
