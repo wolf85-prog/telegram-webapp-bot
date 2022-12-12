@@ -373,8 +373,7 @@ async function addWorker(blockId, worker) {
                     type: "multi_select",
                     multi_select: [
                         {
-                            "name": "Stagehands",
-                            "color": "blue"
+                            "name": worker.icon
                         }
                     ]
                 },
