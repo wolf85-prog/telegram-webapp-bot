@@ -67,7 +67,7 @@ bot.setMyCommands([
 ])
 
 //send create db notion
-async function newDatabase(parent_page_id) {
+async function newDatabase(parent_page_id, worklist) {
     try {
         //parent_page_id = "97884d7c-2c21-4dd0-adcb-689e6dd7da89" //Проект А
 
@@ -145,6 +145,7 @@ async function newDatabase(parent_page_id) {
             }
         }
 
+        // создание базы данных "Основной состав"
         const response = await fetch('https://api.notion.com/v1/databases', {
             method: 'post',
             body: JSON.stringify(body),
@@ -160,20 +161,19 @@ async function newDatabase(parent_page_id) {
         console.log(data);
         console.log("Success! Maincast added. Database_id: " + data.id + " data: " + JSON.stringify(data))
 
-        var a = ["a", "b", "c"];
-        a.forEach(function(entry) {
-            //console.log(entry);
+        //добавить список работников
+        //var a = ["a", "b", "c"];
+        worklist.forEach(function(entry) {
             addWorker(data.id)
         });
         
-        //addWorker(data.id)
     } catch (error) {
         
     }
 }
 
 //send data to notion
-async function addProject(title, time, teh, managerId, companyId) {
+async function addProject(title, time, teh, managerId, companyId, worklist) {
     try {
         const response = await notion.pages.create({
             parent: { database_id: databaseId },
@@ -243,7 +243,8 @@ async function addProject(title, time, teh, managerId, companyId) {
         console.log(response)
         console.log("Success! Project added. " + response.id)
 
-        newDatabase(response.id)
+        newDatabase(response.id, worklist)
+
     } catch (error) {
         console.error(error.body)
     }
@@ -837,12 +838,8 @@ app.post('/web-data', async (req, res) => {
           }
       })
 
-      //const workers_str = JSON.stringify(worklist);
-
       //добавление проекта с названием проекта в базу
-      addProject(projectname, datestart, teh, managerId, companyId);
-
-      //addChildBlock("97884d7c-2c21-4dd0-adcb-689e6dd7da89");
+      addProject(projectname, datestart, teh, managerId, companyId, worklist);
 
       //добавление геопозиции в БД Площадки (Адрес)
       //addAddress(geo);
