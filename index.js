@@ -90,15 +90,18 @@ async function newDatabase(parent_page_id, worklist) {
                     "date": {}
                 },
                 "👷 ФИО": {                   
-                    "type": "relation",
-                    "relation": [],
-                    "has_more": true
+                    "rich_text": {}
                 },
                 "Специализация": {
                     "rich_text": {}
                 },
                 "Мерч": {
                     "rich_text": {}
+                },
+                "In stock": {
+                    "name": "In stock",
+                    "type": "checkbox",
+                    "checkbox": {}
                 },
                 "Комментарий": {
                     "rich_text": {}
@@ -872,7 +875,12 @@ app.post('/web-data', async (req, res) => {
       //addProject(projectname, datestart, teh, managerId, companyId, worklist);
 
       //добавление геопозиции в БД Площадки (Адрес)
-      addAddress(geo, projectname, datestart, teh, managerId, companyId, worklist);
+      if (geo != '') {
+        addAddress(geo, projectname, datestart, teh, managerId, companyId, worklist);
+      } else {
+        addProject(projectname, datestart, teh, managerId, companyId, worklist, geo);
+      }
+      
 
       return res.status(200).json({});
   } catch (e) {
