@@ -173,7 +173,7 @@ async function newDatabase(parent_page_id, worklist) {
 }
 
 //send data to notion
-async function addProject(title, time, teh, managerId, companyId, worklist) {
+async function addProject(title, time, teh, managerId, companyId, worklist, geoId) {
     try {
         const response = await notion.pages.create({
             parent: { database_id: databaseId },
@@ -241,7 +241,16 @@ async function addProject(title, time, teh, managerId, companyId, worklist) {
                             "id": companyId
                         }
                     ]
-                }
+                },
+                "Площадка": {
+                    "type": "relation",
+                    "relation": [
+                        {
+                            "id": geoId
+                        }
+                    ],
+                    "has_more": false
+                },
             }
         })
         console.log(response)
@@ -292,7 +301,7 @@ async function addWorker(blockId, worker) {
 //97884d7c-2c21-4dd0-adcb-689e6dd7da89 //Проект А
 
 //send data to notion
-async function addAddress(geo) {
+async function addAddress(geo, projectname, datestart, teh, managerId, companyId, worklist) {
     try {
         const response = await notion.pages.create({
             parent: { database_id: databaseAddressId },
@@ -328,7 +337,11 @@ async function addAddress(geo) {
             },
         })
         console.log(response)
-        console.log("Success! Entry address added.")
+        console.log("Success! Entry address added. " + response.id)
+
+        //добавление проекта с названием проекта в базу
+        addProject(projectname, datestart, teh, managerId, companyId, worklist, response.id);
+
     } catch (error) {
         console.error(error.body)
     }
@@ -854,10 +867,10 @@ app.post('/web-data', async (req, res) => {
       })
 
       //добавление проекта с названием проекта в базу
-      addProject(projectname, datestart, teh, managerId, companyId, worklist);
+      //addProject(projectname, datestart, teh, managerId, companyId, worklist);
 
       //добавление геопозиции в БД Площадки (Адрес)
-      //addAddress(geo);
+      addAddress(geo, projectname, datestart, teh, managerId, companyId, worklist);
 
       return res.status(200).json({});
   } catch (e) {
