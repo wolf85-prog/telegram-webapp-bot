@@ -92,14 +92,8 @@ async function newDatabase(parent_page_id, worklist) {
                 "👷 ФИО": {                   
                     "rich_text": {}
                 },
-                "Специализация": {
-                    "rich_text": {}
-                },
                 "Мерч": {
-                    "rich_text": {}
-                },
-                "In stock": {
-                    "name": "In stock",
+                    "name": "Мерч",
                     "type": "checkbox",
                     "checkbox": {}
                 },
@@ -110,7 +104,7 @@ async function newDatabase(parent_page_id, worklist) {
                     "title": {}
                 },
                 "Специализация": {
-                    "select": {
+                    "multi_select": {
                         "options": [
                             {
                                 "name": "Sound",
