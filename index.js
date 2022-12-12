@@ -164,7 +164,7 @@ async function newDatabase(parent_page_id, worklist) {
         const data = await response.json();
 
         console.log(data);
-        console.log("Success! Maincast added. Database_id: " + data.id + " data: " + JSON.stringify(data))
+        //console.log("Success! Maincast added. Database_id: " + data.id + " data: " + JSON.stringify(data))
 
         //добавить список работников
         //worklist = [{id: '', cat: '', spec: '', count: 1, icon: ''}];
@@ -368,7 +368,6 @@ async function addWorker(blockId, worker) {
                     type: "multi_select",
                     multi_select: [
                         {
-                            "id": "77b62d03-73f2-46cd-b152-da47401462d3",
                             "name": "Stagehands",
                             "color": "blue"
                         }
