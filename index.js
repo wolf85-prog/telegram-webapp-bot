@@ -163,7 +163,7 @@ async function newDatabase(parent_page_id, worklist) {
         });
         const data = await response.json();
 
-        console.log(data);
+        //console.log(data);
         //console.log("Success! Maincast added. Database_id: " + data.id + " data: " + JSON.stringify(data))
 
         //добавить список работников
@@ -364,15 +364,15 @@ async function addWorker(blockId, worker) {
                         "time_zone": null
                     }
                 },
-                Специалиация: {
-                    type: "multi_select",
-                    multi_select: [
-                        {
-                            "name": "Stagehands",
-                            "color": "blue"
-                        }
-                    ]
-                },
+                // Специалиация: {
+                //     type: "multi_select",
+                //     multi_select: [
+                //         {
+                //             "name": "Stagehands",
+                //             "color": "blue"
+                //         }
+                //     ]
+                // },
                 Комментарий : {
                     type: 'rich_text',
                     rich_text: [
