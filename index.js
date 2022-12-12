@@ -362,7 +362,7 @@ async function addWorker(blockId, worker) {
         const response = await notion.pages.create({
             parent: { database_id: blockId },
             properties: {
-                Date: {
+                Дата: {
                     type: 'date',
                     date: {
                         "start": '2022-10-30T00:00',
