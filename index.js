@@ -162,10 +162,10 @@ async function newDatabase(parent_page_id, worklist) {
         console.log("Success! Maincast added. Database_id: " + data.id + " data: " + JSON.stringify(data))
 
         //добавить список работников
-        //var a = ["a", "b", "c"];
-        worklist.forEach(function(entry) {
-            addWorker(data.id)
-        });
+        //worklist = [{id: '', cat: '', spec: '', count: 1, icon: ''}];
+        worklist.forEach((worker, index) =>
+            addWorker(data.id, worker.icon)
+        );
         
     } catch (error) {
         
@@ -252,7 +252,7 @@ async function addProject(title, time, teh, managerId, companyId, worklist) {
 
 
 //send data to notion
-async function addWorker(blockId) {
+async function addWorker(blockId, worker) {
     try {
         const response = await notion.pages.create({
             parent: { database_id: blockId },
@@ -264,7 +264,18 @@ async function addWorker(blockId) {
                         "end": null,
                         "time_zone": null
                     }
-                }           
+                },
+                Комментарий : {
+                    type: 'rich_text',
+                    rich_text: [
+                    {
+                        type: 'text',
+                        text: {
+                            content: worker,
+                        },
+                    }
+                    ]
+                }
             }
         })
         console.log(response)
