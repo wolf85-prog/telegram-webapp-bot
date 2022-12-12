@@ -162,12 +162,9 @@ async function newDatabase(parent_page_id, worklist) {
             }
         });
         const data = await response.json();
-
-        //console.log(data);
-        //console.log("Success! Maincast added. Database_id: " + data.id + " data: " + JSON.stringify(data))
+        console.log("Success! Maincast added. Database_id: " + data.id + " data: " + JSON.stringify(data))
 
         //добавить список работников
-        //worklist = [{id: '', cat: '', spec: '', count: 1, icon: ''}];
         worklist.forEach((worker, index) =>
             addWorker(data.id, worker.icon)
         );
