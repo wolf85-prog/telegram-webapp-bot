@@ -177,6 +177,10 @@ async function addProject(title, time, teh, managerId, companyId, worklist) {
     try {
         const response = await notion.pages.create({
             parent: { database_id: databaseId },
+            icon: {
+                type: "emoji",
+                emoji: "🟦"
+            },
             properties: {
                 Name: {
                     title:[
