@@ -363,7 +363,7 @@ async function addWorker(blockId, worker) {
                         "time_zone": null
                     }
                 },
-                Специалиация: {
+                Специализация: {
                     type: "multi_select",
                     multi_select: [
                         {
