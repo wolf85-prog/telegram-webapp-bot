@@ -288,19 +288,19 @@ async function newDatabase(parent_page_id, worklist) {
                         "options": [
                             {
                                 "name": "Sound",
-                                "color": "green"
+                                "color": "blue"
                             },
                             {
                                 "name": "Light",
-                                "color": "red"
+                                "color": "yellow"
                             },
                             {
                                 "name": "Video",
-                                "color": "pink"
+                                "color": "green"
                             },
                             {
                                 "name": "Riggers",
-                                "color": "blue"
+                                "color": "orange"
                             },
                             {
                                 "name": "Stagehands",
@@ -308,15 +308,15 @@ async function newDatabase(parent_page_id, worklist) {
                             },
                             {
                                 "name": "Stage Ground",
-                                "color": "gray"
+                                "color": "green"
                             },
                             {
                                 "name": "Tracks",
-                                "color": "purple"
+                                "color": "yellow"
                             },
                             {
                                 "name": "Production",
-                                "color": "brown"
+                                "color": "orange"
                             }
                         ]
                     }
