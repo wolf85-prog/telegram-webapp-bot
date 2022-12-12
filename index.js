@@ -344,7 +344,7 @@ async function newDatabase(parent_page_id, worklist) {
         );
         
     } catch (error) {
-        
+        console.error(error.body)
     }
 }
 
@@ -376,7 +376,7 @@ async function addWorker(blockId, worker) {
                 }
             }
         })
-        console.log(response)
+        //console.log(response)
         console.log("3 Success! Worker added. Data: " + JSON.stringify(response))
     } catch (error) {
         console.error(error.body)
