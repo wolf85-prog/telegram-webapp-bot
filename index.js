@@ -89,8 +89,10 @@ async function newDatabase(parent_page_id, worklist) {
                 "Date": {
                     "date": {}
                 },
-                "👷 ФИО": {
-                    "title": {}
+                "👷 ФИО": {                   
+                    "type": "relation",
+                    "relation": [],
+                    "has_more": true
                 },
                 "Специализация": {
                     "rich_text": {}
@@ -102,7 +104,7 @@ async function newDatabase(parent_page_id, worklist) {
                     "rich_text": {}
                 },
                 "Рейтинг": {
-                    "rich_text": {}
+                    "title": {}
                 },
                 "Специализация": {
                     "select": {
@@ -273,7 +275,7 @@ async function addWorker(blockId, worker) {
                 Date: {
                     type: 'date',
                     date: {
-                        "start": '2022-10-30T00:00:00.000Z',
+                        "start": '2022-10-30T00:00',
                         "end": null,
                         "time_zone": null
                     }
