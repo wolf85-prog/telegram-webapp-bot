@@ -10,6 +10,7 @@ const databaseId = process.env.NOTION_DATABASE_ID
 const databaseManagerId = process.env.NOTION_DATABASE_MANAGER_ID
 const databaseAddressId = process.env.NOTION_DATABASE_ADDRESS_ID
 const databaseCompanyId = process.env.NOTION_DATABASE_COMPANY_ID
+const databaseWorkersId = process.env.NOTION_DATABASE_WORKERS_ID
 
 //telegram api
 const TelegramBot = require('node-telegram-bot-api');
@@ -89,8 +90,13 @@ async function newDatabase(parent_page_id, worklist) {
                 "Date": {
                     "date": {}
                 },
-                "👷 ФИО": {                   
-                    "rich_text": {}
+                "👷 ФИО": {    
+                    "name": "👷 ФИО",               
+                    "type": "relation",
+                    "relation": {
+                        "database_id": databaseWorkersId,
+                        "single_property": {}
+                    }
                 },
                 "Мерч": {
                     "name": "Мерч",
