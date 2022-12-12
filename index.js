@@ -158,7 +158,9 @@ async function newDatabase(parent_page_id) {
         const data = await response.json();
 
         console.log(data);
-        console.log("Success! Maincast added.")
+        console.log("Success! Maincast added. Database_id: " + JSON.stringify(data))
+        
+        //addWorker()
     } catch (error) {
         
     }
@@ -231,33 +233,6 @@ async function addProject(title, time, teh, managerId, companyId) {
                     ]
                 }
             }
-            // children:[
-            //     {
-            //         "heading_2": {
-            //           "rich_text": [
-            //             {
-            //               "text": {
-            //                 "content": "Lacinato kale"
-            //               }
-            //             }
-            //           ]
-            //         }
-            //       },
-            //       {
-            //         "paragraph": {
-            //           "rich_text": [
-            //             {
-            //               "text": {
-            //                 "content": "Lacinato kale is a variety of kale with a long tradition in Italian cuisine, especially that of Tuscany. It is also known as Tuscan kale, Italian kale, dinosaur kale, kale, flat back kale, palm tree kale, or black Tuscan palm.",
-            //                 "link": {
-            //                   "url": "https://en.wikipedia.org/wiki/Lacinato_kale"
-            //                 }
-            //               }
-            //             }
-            //           ]
-            //         }
-            //       }
-            // ]
         })
         console.log(response)
         console.log("Success! Project added. " + response.id)
@@ -268,46 +243,40 @@ async function addProject(title, time, teh, managerId, companyId) {
     }
 }
 
-//97884d7c-2c21-4dd0-adcb-689e6dd7da89 //Проект А
 
-//send data to page notion
-async function addChildBlock(blockId) {
+//send data to notion
+async function addWorker(blockId, title) {
     try {
-        const response = await notion.blocks.children.append({
-            block_id: blockId,
-            children: [
-                {
-                    "heading_2": {
-                      "rich_text": [
+        const response = await notion.pages.create({
+            parent: { database_id: blockId },
+            properties: {
+                Name: {
+                    title:[
                         {
-                          "text": {
-                            "content": "Lacinato kale"
-                          }
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "paragraph": {
-                      "rich_text": [
-                        {
-                          "text": {
-                            "content": "Lacinato kale is a variety of kale with a long tradition in Italian cuisine, especially that of Tuscany. It is also known as Tuscan kale, Italian kale, dinosaur kale, kale, flat back kale, palm tree kale, or black Tuscan palm.",
-                            "link": {
-                              "url": "https://en.wikipedia.org/wiki/Lacinato_kale"
+                            "text": {
+                                "content": title
                             }
-                          }
                         }
-                      ]
+                    ]
+                },
+                Date: {
+                    type: 'date',
+                    date: {
+                        "start": time,
+                        "end": null,
+                        "time_zone": null
                     }
-                  }                
-            ]
-        });
-
+                }            
+            }
+        })
+        console.log(response)
+        console.log("Success! Worker added. ")
     } catch (error) {
-        
+        console.error(error.body)
     }
 }
+
+//97884d7c-2c21-4dd0-adcb-689e6dd7da89 //Проект А
 
 //send data to notion
 async function addAddress(geo) {
@@ -546,6 +515,7 @@ async function getManagerId(id) {
     }
 }
 
+//получить id компании заказчика
 async function getCompanyId(id) {
     try {
         const response = await notion.databases.query({
