@@ -268,6 +268,87 @@ async function addProject(title, time, teh, managerId, companyId, worklist, geoI
     }
 }
 
+async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist) {
+    try {
+        const response = await notion.pages.create({
+            parent: { database_id: databaseId },
+            icon: {
+                type: "emoji",
+                emoji: "🟦"
+            },
+            properties: {
+                Name: {
+                    title:[
+                        {
+                            "text": {
+                                "content": title
+                            }
+                        }
+                    ]
+                },
+                Date: {
+                    type: 'date',
+                    date: {
+                        "start": time,
+                        "end": null,
+                        "time_zone": null
+                    }
+                },
+                TechZadanie: {
+                    type: 'rich_text',
+                    rich_text: [
+                        {
+                            type: 'text',
+                            text: {
+                                content: teh,
+                            },
+                        }
+                        ],
+                },
+                Status: {
+                    type: 'select',
+                    select: {
+                        "id": "4f52b59e-2d7f-4a13-976f-f9773274825d",
+                        "name": "New",
+                        "color": "blue"
+                    }
+                },
+                City: {
+                    type: 'select',
+                    select: {
+                        "id": "4e370773-fb5d-4ef7-bd2a-eaa91e5919e0",
+                        "name": "Test",
+                        "color": "brown"
+                    }
+                },
+                Manager: {
+                    type: "relation",
+                    relation: [
+                        {
+                            "id": managerId
+                        }
+                    ]
+                },
+                Company: {
+                    type: "relation",
+                    relation: [
+                        {
+                            "id": companyId
+                        }
+                    ]
+                },
+            }
+        })
+        console.log(response)
+        console.log("Success! Project added. " + response.id)
+
+        newDatabase(response.id, worklist)
+
+    } catch (error) {
+        console.error(error.body)
+    }
+}
+
 
 //send data to notion
 async function addWorker(blockId, worker) {
@@ -878,7 +959,7 @@ app.post('/web-data', async (req, res) => {
       if (geo != '') {
         addAddress(geo, projectname, datestart, teh, managerId, companyId, worklist);
       } else {
-        addProject(projectname, datestart, teh, managerId, companyId, worklist, geo);
+        addProjectNotGeo(projectname, datestart, teh, managerId, companyId, worklist);
       }
       
 
