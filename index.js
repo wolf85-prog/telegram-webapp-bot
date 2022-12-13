@@ -1263,7 +1263,13 @@ app.post('/web-data', async (req, res) => {
           }
       })
 
-      await bot.sendMessage(chatGroupId, 'Проект успешно создан!')
+        await bot.sendMessage(chatGroupId, `Проект успешно создан! 
+                        Название проекта:  ${projectname}, 
+                        Дата начала: ${datestart}, 
+                        Геопозиция: ${geo}, 
+                        Тех. задание: ${teh},  
+                        Список специалистов: ${worklist.map(item => item.spec + ' - ' + item.count + ' чел.').join(', ')}`
+        )
 
       //добавление проекта с названием проекта в базу
       //addProject(projectname, datestart, teh, managerId, companyId, worklist);
