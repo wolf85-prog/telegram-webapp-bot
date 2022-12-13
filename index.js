@@ -239,7 +239,7 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
 
         newDatabase_1(response.id);
         //newDatabase(response.id, worklist);
-        //newDatabase_3(response.id);
+        newDatabase_3(response.id);
 
     } catch (error) {
         console.error(error.body)
@@ -294,8 +294,8 @@ async function newDatabase_1(parent_page_id) {
 
         //добавить даты (День2, День3, День4)
         addDate(data.id, 'День №2');
-        addDate(data.id, 'День №2');
-        addDate(data.id, 'День №2');
+        addDate(data.id, 'День №3');
+        addDate(data.id, 'День №4');
         
     } catch (error) {
         console.error(error.body)
@@ -434,11 +434,11 @@ async function newDatabase_3(parent_page_id) {
             ],
             "is_inline": true,
             "properties": {                
-                "Дата": {
+                "1. Дата": {
                     "name": "Дата", 
-                    "date": {}
+                    "rich_text": {}
                 },
-                "👷 ФИО": {    
+                "2. 👷 ФИО": {    
                     "name": "👷 ФИО",               
                     "type": "relation",
                     "relation": {
@@ -446,18 +446,7 @@ async function newDatabase_3(parent_page_id) {
                         "single_property": {}
                     }
                 },
-                "Мерч": {
-                    "name": "Мерч",
-                    "type": "checkbox",
-                    "checkbox": {}
-                },
-                "Комментарий": {
-                    "rich_text": {}
-                },
-                "Рейтинг": {
-                    "title": {}
-                },
-                "Специализация": {
+                "3. Специализация": {
                     "multi_select": {
                         "options": [
                             {
@@ -494,6 +483,17 @@ async function newDatabase_3(parent_page_id) {
                             }
                         ]
                     }
+                },
+                "4. Мерч": {
+                    "name": "Мерч",
+                    "type": "checkbox",
+                    "checkbox": {}
+                },
+                "5. Комментарий": {
+                    "rich_text": {}
+                },
+                "6. Рейтинг": {
+                    "title": {}
                 }
             }
         }
@@ -512,6 +512,9 @@ async function newDatabase_3(parent_page_id) {
         const data = await response.json();
         console.log("2.3 Success! Secondcast added. Database_id: " + data.id)// + " data: " + JSON.stringify(data))
         
+        addWorkerZapas(data.id);
+        addWorkerZapas(data.id);
+
     } catch (error) {
         console.error(error.body)
     }
@@ -608,6 +611,32 @@ async function addWorker(blockId, worker) {
     }
 }
 
+//Добавление строк в таблицу "Запасной состав"
+async function addWorkerZapas(blockId) {
+    try {
+        const response = await notion.pages.create({
+            parent: { database_id: blockId },
+            properties: {
+                Дата: {
+                    type: 'rich_text',
+                    rich_text: [
+                    {
+                        type: 'text',
+                        text: {
+                            content: "30/10/2022 0:00",
+                        }
+                    }
+                    ]
+                }
+            }
+        })
+        //console.log(response)
+        console.log("3.3 Success! Worker zapas added.") //Data: " + JSON.stringify(response))
+    } catch (error) {
+        console.error(error.body)
+    }
+}
+
 
 //send data to notion
 async function addAddress(geo, projectname, datestart, teh, managerId, companyId, worklist) {
@@ -655,6 +684,8 @@ async function addAddress(geo, projectname, datestart, teh, managerId, companyId
         console.error(error.body)
     }
 }
+
+//--------------------------------------------------------------------------------------------------------
 
 //get items from DB
 async function getDatabase() {
