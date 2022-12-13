@@ -1245,7 +1245,7 @@ app.get("/address", async (req, res) => {
 
 //создание страницы (проекта) базыданных проектов
 app.post('/web-data', async (req, res) => {
-  const chatGroupId = msg.chat.id;
+  const chatGroupId = "-800573397";
   const {queryId, projectname, datestart, geo, teh, managerId, companyId, worklist = []} = req.body;
   try {
       await bot.answerWebAppQuery(queryId, {
@@ -1263,12 +1263,7 @@ app.post('/web-data', async (req, res) => {
           }
       })
 
-      bot.sendMessage(chatGroupId, `Проект успешно создан!
-              <b>Название проекта:</b>  ${projectname}, 
-              <b>Дата начала:</b> ${datestart}, 
-              <b>Геопозиция:</b> ${geo}, 
-              <b>Тех. задание:</b> ${teh},  
-              <b>Список специалистов:</b> ${worklist.map(item => item.spec + ' - ' + item.count + ' чел.').join(', ')}`)
+      await bot.sendMessage(chatGroupId, 'Проект успешно создан!')
 
       //добавление проекта с названием проекта в базу
       //addProject(projectname, datestart, teh, managerId, companyId, worklist);
