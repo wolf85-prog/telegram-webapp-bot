@@ -514,8 +514,8 @@ async function newDatabase_3(parent_page_id) {
         const data = await response.json();
         console.log("2.3 Success! Secondcast added. Database_id: " + data.id)// + " data: " + JSON.stringify(data))
         
-        //addWorkerZapas(data.id);
-        //addWorkerZapas(data.id);
+        addWorkerZapas(data.id);
+        addWorkerZapas(data.id);
 
     } catch (error) {
         console.error(error.body)
@@ -620,14 +620,25 @@ async function addWorkerZapas(blockId) {
             parent: { database_id: blockId },
             properties: {
                 "1. Дата": {
-                    type: 'rich_text',
-                    rich_text: [
-                    {
-                        type: 'text',
-                        text: {
-                            content: "30/10/2022 0:00",
+                    "type": "title",
+                    "title": [
+                        {
+                            "type": "text",
+                            "text": {
+                                "content": "30/10/2022 0:00",
+                                "link": null
+                            },
+                            "annotations": {
+                                "bold": false,
+                                "italic": false,
+                                "strikethrough": false,
+                                "underline": false,
+                                "code": false,
+                                "color": "default"
+                            },
+                            "plain_text": "30/10/2022 0:00",
+                            "href": null
                         }
-                    }
                     ]
                 }
             }
