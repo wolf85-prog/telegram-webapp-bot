@@ -617,7 +617,7 @@ async function addWorkerZapas(blockId) {
         const response = await notion.pages.create({
             parent: { database_id: blockId },
             properties: {
-                Дата: {
+                "1. Дата": {
                     type: 'rich_text',
                     rich_text: [
                     {
