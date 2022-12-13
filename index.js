@@ -1245,6 +1245,7 @@ app.get("/address", async (req, res) => {
 
 //создание страницы (проекта) базыданных проектов
 app.post('/web-data', async (req, res) => {
+  const chatGroupId = msg.chat.id;
   const {queryId, projectname, datestart, geo, teh, managerId, companyId, worklist = []} = req.body;
   try {
       await bot.answerWebAppQuery(queryId, {
@@ -1253,7 +1254,7 @@ app.post('/web-data', async (req, res) => {
           title: 'Проект успешно создан',
           input_message_content: {
               parse_mode: 'HTML',
-              message_text: `Проект успешно создан. 
+              message_text: `Проект успешно создан! 
               <b>Название проекта:</b>  ${projectname}, 
               <b>Дата начала:</b> ${datestart}, 
               <b>Геопозиция:</b> ${geo}, 
@@ -1261,6 +1262,13 @@ app.post('/web-data', async (req, res) => {
               <b>Список специалистов:</b> ${worklist.map(item => item.spec + ' - ' + item.count + ' чел.').join(', ')}`
           }
       })
+
+      bot.sendMessage(chatGroupId, `Проект успешно создан!
+              <b>Название проекта:</b>  ${projectname}, 
+              <b>Дата начала:</b> ${datestart}, 
+              <b>Геопозиция:</b> ${geo}, 
+              <b>Тех. задание:</b> ${teh},  
+              <b>Список специалистов:</b> ${worklist.map(item => item.spec + ' - ' + item.count + ' чел.').join(', ')}`)
 
       //добавление проекта с названием проекта в базу
       //addProject(projectname, datestart, teh, managerId, companyId, worklist);
