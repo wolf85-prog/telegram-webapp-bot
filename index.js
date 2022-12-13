@@ -240,8 +240,8 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
 
         //setTimeout(()=> {
             newDatabase_1(res_id);
-            newDatabase(res_id, worklist);
-            newDatabase_3(res_id);
+            //newDatabase(res_id, worklist);
+            //newDatabase_3(res_id);
         //}, 3000) 
 
     } catch (error) {
@@ -251,7 +251,7 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
 
 //создание базы данных "График работы"
 async function newDatabase_1(parent_page_id) {
-    console.log("parent_page_id: ", parent_page_id)
+    //console.log("parent_page_id: ", parent_page_id)
     try {
         const body = {
             "parent": {
@@ -272,8 +272,6 @@ async function newDatabase_1(parent_page_id) {
                     "title": {}
                 },              
                 "Date": {
-                    // "name": "Date", 
-                    // "date": {}
                     "rich_text": {}
                 },
                 "Комментарий": {
