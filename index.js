@@ -582,8 +582,6 @@ async function getBlocks(blockId) {
             //if (block.child_database.title == "Основной состав" || block.child_database.title == "Назначенные")
             if (block.child_database) {
                 return block.id;
-            } else {
-                return 'null'
             }
         });
 
