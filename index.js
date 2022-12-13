@@ -11,6 +11,7 @@ const databaseManagerId = process.env.NOTION_DATABASE_MANAGER_ID
 const databaseAddressId = process.env.NOTION_DATABASE_ADDRESS_ID
 const databaseCompanyId = process.env.NOTION_DATABASE_COMPANY_ID
 const databaseWorkersId = process.env.NOTION_DATABASE_WORKERS_ID
+const chatGroupId = process.env.CHAT_GROUP_ID
 
 //telegram api
 const TelegramBot = require('node-telegram-bot-api');
@@ -1245,7 +1246,6 @@ app.get("/address", async (req, res) => {
 
 //создание страницы (проекта) базыданных проектов
 app.post('/web-data', async (req, res) => {
-  const chatGroupId = "-800573397";
   const {queryId, projectname, datestart, geo, teh, managerId, companyId, worklist = []} = req.body;
   try {
       await bot.answerWebAppQuery(queryId, {
