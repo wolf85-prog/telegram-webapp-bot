@@ -241,7 +241,7 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
             newDatabase_1(response.id);
             newDatabase(response.id, worklist);
             newDatabase_3(response.id);
-        }, 3000) 
+        }, 4000) 
 
     } catch (error) {
         console.error(error.body)
