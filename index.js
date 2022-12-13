@@ -240,7 +240,7 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
 
         setTimeout(()=> {
             newDatabase_1(res_id);
-        }, 1000) 
+        }, 2000) 
 
         setTimeout(()=> {
             newDatabase(res_id, worklist);
