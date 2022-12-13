@@ -580,9 +580,11 @@ async function getBlocks(blockId) {
 
         const responseResults = response.results.map((block) => {
             //if (block.child_database.title == "Основной состав" || block.child_database.title == "Назначенные")
-            //if (block.child_database !== null) {
-                return block.child_database.title;
-            //}
+            if (block.child_database) {
+                return block.id;
+            } else {
+                return 'null'
+            }
         });
 
         return responseResults; //response.results[1].id;
