@@ -571,19 +571,25 @@ async function getDatabase2() {
     return {};
 }
 
-//получить все блоки заданной страницы по id
+//получить id блока заданной страницы по id
 async function getBlocks(blockId) {
     try {
         const response = await notion.blocks.children.list({
             block_id: blockId,
         });
 
-        return response.results[1].id;
+        const responseResults = response.results.map((block) => {
+            if (block.child_database.title == "Основной состав" || block.child_database.title == "Назначенные")
+            return block.id;
+        });
+
+        return responseResults; //response.results[1].id;
     } catch (error) {
         console.error(error.body)
     }
 }
 
+//получить все блоки заданной страницы по id
 async function getBlocks2(blockId) {
     try {
         const response = await notion.blocks.children.list({
