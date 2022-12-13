@@ -238,8 +238,8 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
         console.log("1 Success! Project not geo added. " + response.id)        
 
         setTimeout(()=> {
-            //newDatabase_1(response.id);
-            //newDatabase(response.id, worklist);
+            newDatabase_1(response.id);
+            newDatabase(response.id, worklist);
             newDatabase_3(response.id);
         }, 3000) 
 
@@ -322,12 +322,12 @@ async function newDatabase(parent_page_id, worklist) {
                 }
             ],
             "is_inline": true,
-            "properties": {                
-                "Дата": {
+            "properties": { 
+                "1. Дата": {
                     "name": "Дата", 
-                    "date": {}
+                    "title": {}
                 },
-                "👷 ФИО": {    
+                "2. 👷 ФИО": {    
                     "name": "👷 ФИО",               
                     "type": "relation",
                     "relation": {
@@ -335,18 +335,7 @@ async function newDatabase(parent_page_id, worklist) {
                         "single_property": {}
                     }
                 },
-                "Мерч": {
-                    "name": "Мерч",
-                    "type": "checkbox",
-                    "checkbox": {}
-                },
-                "Комментарий": {
-                    "rich_text": {}
-                },
-                "Рейтинг": {
-                    "title": {}
-                },
-                "Специализация": {
+                "3. Специализация": {
                     "multi_select": {
                         "options": [
                             {
@@ -383,6 +372,17 @@ async function newDatabase(parent_page_id, worklist) {
                             }
                         ]
                     }
+                },
+                "4. Мерч": {
+                    "name": "Мерч",
+                    "type": "checkbox",
+                    "checkbox": {}
+                },
+                "5. Комментарий": {
+                    "rich_text": {}
+                },
+                "6. Рейтинг": {
+                    "rich_text": {}
                 }
             }
         }
@@ -577,13 +577,27 @@ async function addWorker(blockId, worker) {
         const response = await notion.pages.create({
             parent: { database_id: blockId },
             properties: {
-                Дата: {
-                    type: 'date',
-                    date: {
-                        "start": '2022-10-30T00:00',
-                        "end": null,
-                        "time_zone": null
-                    }
+                "1. Дата": {
+                    "type": "title",
+                    "title": [
+                        {
+                            "type": "text",
+                            "text": {
+                                "content": "30/10/2022 0:00",
+                                "link": null
+                            },
+                            "annotations": {
+                                "bold": false,
+                                "italic": false,
+                                "strikethrough": false,
+                                "underline": false,
+                                "code": false,
+                                "color": "default"
+                            },
+                            "plain_text": "30/10/2022 0:00",
+                            "href": null
+                        }
+                    ]
                 },
                 Специализация: {
                     type: "multi_select",
@@ -592,18 +606,18 @@ async function addWorker(blockId, worker) {
                             "name": worker
                         }
                     ]
-                },
-                Комментарий : {
-                    type: 'rich_text',
-                    rich_text: [
-                    {
-                        type: 'text',
-                        text: {
-                            content: worker,
-                        },
-                    }
-                    ]
                 }
+                // Комментарий : {
+                //     type: 'rich_text',
+                //     rich_text: [
+                //     {
+                //         type: 'text',
+                //         text: {
+                //             content: worker,
+                //         },
+                //     }
+                //     ]
+                // }
             }
         })
         //console.log(response)
