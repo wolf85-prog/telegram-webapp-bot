@@ -438,7 +438,7 @@ async function newDatabase_3(parent_page_id) {
             "properties": {                
                 "1. Дата": {
                     "name": "Дата", 
-                    "rich_text": {}
+                    "title": {}
                 },
                 "2. 👷 ФИО": {    
                     "name": "👷 ФИО",               
