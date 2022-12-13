@@ -153,7 +153,8 @@ async function addProject(title, time, teh, managerId, companyId, worklist, geoI
         console.log("1 Success! Project added. " + response.id)
 
         newDatabase_1(response.id);
-        newDatabase(response.id, worklist)
+        newDatabase(response.id, worklist);
+        newDatabase_3(response.id);
 
     } catch (error) {
         console.error(error.body)
@@ -235,7 +236,8 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
         console.log("1 Success! Project added. " + response.id)
 
         newDatabase_1(response.id);
-        newDatabase(response.id, worklist)
+        newDatabase(response.id, worklist);
+        newDatabase_3(response.id);
 
     } catch (error) {
         console.error(error.body)
@@ -408,6 +410,107 @@ async function newDatabase(parent_page_id, worklist) {
     }
 }
 
+
+// создание БД "Запасной состав"
+async function newDatabase_3(parent_page_id) {
+    try {
+        const body = {
+            "parent": {
+                "type": "page_id",
+                "page_id": parent_page_id
+            },
+            "title": [
+                {
+                    "type": "text",
+                    "text": {
+                        "content": "Запасной состав"
+                    }
+                }
+            ],
+            "is_inline": true,
+            "properties": {                
+                "Дата": {
+                    "name": "Дата", 
+                    "date": {}
+                },
+                "👷 ФИО": {    
+                    "name": "👷 ФИО",               
+                    "type": "relation",
+                    "relation": {
+                        "database_id": databaseWorkersId,
+                        "single_property": {}
+                    }
+                },
+                "Мерч": {
+                    "name": "Мерч",
+                    "type": "checkbox",
+                    "checkbox": {}
+                },
+                "Комментарий": {
+                    "rich_text": {}
+                },
+                "Рейтинг": {
+                    "title": {}
+                },
+                "Специализация": {
+                    "multi_select": {
+                        "options": [
+                            {
+                                "name": "Sound",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Light",
+                                "color": "yellow"
+                            },
+                            {
+                                "name": "Video",
+                                "color": "green"
+                            },
+                            {
+                                "name": "Riggers",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "Stagehands",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Stage Ground",
+                                "color": "green"
+                            },
+                            {
+                                "name": "Tracks",
+                                "color": "yellow"
+                            },
+                            {
+                                "name": "Production",
+                                "color": "orange"
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+
+        // создание базы данных "Запасной состав"
+        const response = await fetch('https://api.notion.com/v1/databases', {
+            method: 'post',
+            body: JSON.stringify(body),
+            headers: {
+                'Authorization': 'Bearer secret_QoVUx95AXfIlCgSkMpMx5WgRu1H4SvuZflCH4xMA42f', //`Bearer ${token}`
+                'Content-Type': 'application/json', 
+                accept: 'application/json',
+                'Notion-Version': '2022-06-28'
+            }
+        });
+        const data = await response.json();
+        console.log("2.3 Success! Secondcast added. Database_id: " + data.id)// + " data: " + JSON.stringify(data))
+        
+    } catch (error) {
+        console.error(error.body)
+    }
+}
 
 //send data to notion
 async function addWorker(blockId, worker) {
