@@ -241,7 +241,7 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
             newDatabase_1(response.id);
             //newDatabase(response.id, worklist);
             newDatabase_3(response.id);
-        }, 2000) 
+        }, 3000) 
 
     } catch (error) {
         console.error(error.body)
@@ -564,7 +564,7 @@ async function addDate(blockId, day) {
             }
         })
         //console.log(response)
-        console.log("3.1 Success! Date added. Data: " )//+ JSON.stringify(response))
+        console.log("3.1 Success! Date added. Data: "  + response.id)//+ JSON.stringify(response))
     } catch (error) {
         console.error(error.body)
     }
@@ -607,7 +607,7 @@ async function addWorker(blockId, worker) {
             }
         })
         //console.log(response)
-        console.log("3 Success! Worker added. Data: " + JSON.stringify(response))
+        console.log("3 Success! Worker added. Data: " + response.id) //+ JSON.stringify(response))
     } catch (error) {
         console.error(error.body)
     }
@@ -633,7 +633,7 @@ async function addWorkerZapas(blockId) {
             }
         })
         //console.log(response)
-        console.log("3.3 Success! Worker zapas added.") //Data: " + JSON.stringify(response))
+        console.log("3.3 Success! Worker zapas added. Data: " + response.id) //JSON.stringify(response))
     } catch (error) {
         console.error(error.body)
     }
