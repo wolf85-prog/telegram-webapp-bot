@@ -246,11 +246,11 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
 
         setTimeout(()=> {
             newDatabase(res_id, worklist);
-        }, 1000) 
+        }, 3000) 
 
         setTimeout(()=> {
             newDatabase_3(res_id);
-        }, 1000) 
+        }, 5000) 
 
     } catch (error) {
         console.error(error.body)
