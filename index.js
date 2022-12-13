@@ -251,6 +251,7 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
 
 //создание базы данных "График работы"
 async function newDatabase_1(parent_page_id) {
+    console.log("parent_page_id: ", parent_page_id)
     try {
         const body = {
             "parent": {
