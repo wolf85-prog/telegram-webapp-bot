@@ -238,8 +238,8 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
         console.log("1 Success! Project not geo added. " + response.id)        
 
         setTimeout(()=> {
-            newDatabase_1(response.id);
-            newDatabase(response.id, worklist);
+            //newDatabase_1(response.id);
+            //newDatabase(response.id, worklist);
             newDatabase_3(response.id);
         }, 3000) 
 
@@ -514,8 +514,8 @@ async function newDatabase_3(parent_page_id) {
         const data = await response.json();
         console.log("2.3 Success! Secondcast added. Database_id: " + data.id)// + " data: " + JSON.stringify(data))
         
-        addWorkerZapas(data.id);
-        addWorkerZapas(data.id);
+        //addWorkerZapas(data.id);
+        //addWorkerZapas(data.id);
 
     } catch (error) {
         console.error(error.body)
