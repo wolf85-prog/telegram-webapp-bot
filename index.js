@@ -237,9 +237,9 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
         //console.log(response)
         console.log("1 Success! Project not geo added. " + response.id)        
 
-        setTimeout(async ()=> {
+        setTimeout(()=> {
             newDatabase_1(response.id);
-            //newDatabase(response.id, worklist);
+            newDatabase(response.id, worklist);
             newDatabase_3(response.id);
         }, 3000) 
 
