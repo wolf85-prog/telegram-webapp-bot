@@ -152,6 +152,7 @@ async function addProject(title, time, teh, managerId, companyId, worklist, geoI
         //console.log(response)
         console.log("1 Success! Project added. " + response.id)
 
+        newDatabase_1(response.id);
         newDatabase(response.id, worklist)
 
     } catch (error) {
@@ -233,8 +234,62 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
         //console.log(response)
         console.log("1 Success! Project added. " + response.id)
 
+        newDatabase_1(response.id);
         newDatabase(response.id, worklist)
 
+    } catch (error) {
+        console.error(error.body)
+    }
+}
+
+//создание базы данных "График работы"
+async function newDatabase_1(parent_page_id) {
+    try {
+        const body = {
+            "parent": {
+                "type": "page_id",
+                "page_id": parent_page_id
+            },
+            "title": [
+                {
+                    "type": "text",
+                    "text": {
+                        "content": "График проекта"
+                    }
+                }
+            ],
+            "is_inline": true,
+            "properties": {  
+                "Name": {
+                    "title": {}
+                },              
+                "Date": {
+                    "name": "Date", 
+                    "date": {}
+                },
+                "Комментарий": {
+                    "rich_text": {}
+                }               
+            }
+        }
+
+        // создание базы данных "График проекта"
+        const response = await fetch('https://api.notion.com/v1/databases', {
+            method: 'post',
+            body: JSON.stringify(body),
+            headers: {
+                'Authorization': 'Bearer secret_QoVUx95AXfIlCgSkMpMx5WgRu1H4SvuZflCH4xMA42f', //`Bearer ${token}`
+                'Content-Type': 'application/json', 
+                accept: 'application/json',
+                'Notion-Version': '2022-06-28'
+            }
+        });
+        const data = await response.json();
+        console.log("2.1 Success! Grafik project added. Database_id: " + data.id) // + " data: " + JSON.stringify(data))
+
+        //добавить даты (День2, День3, День4)
+        //addDate(data.id)
+        
     } catch (error) {
         console.error(error.body)
     }
@@ -244,8 +299,6 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
 //send create db notion
 async function newDatabase(parent_page_id, worklist) {
     try {
-        //parent_page_id = "97884d7c-2c21-4dd0-adcb-689e6dd7da89" //Проект А
-
         const body = {
             "parent": {
                 "type": "page_id",
