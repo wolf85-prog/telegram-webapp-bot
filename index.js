@@ -266,8 +266,9 @@ async function newDatabase_1(parent_page_id) {
                     "title": {}
                 },              
                 "Date": {
-                    "name": "Date", 
-                    "date": {}
+                    // "name": "Date", 
+                    // "date": {}
+                    "rich_text": {}
                 },
                 "Комментарий": {
                     "rich_text": {}
@@ -290,7 +291,9 @@ async function newDatabase_1(parent_page_id) {
         console.log("2.1 Success! Grafik project added. Database_id: " + data.id) // + " data: " + JSON.stringify(data))
 
         //добавить даты (День2, День3, День4)
-        //addDate(data.id)
+        addDate(data.id, 'День №2');
+        addDate(data.id, 'День №2');
+        addDate(data.id, 'День №2');
         
     } catch (error) {
         console.error(error.body)
@@ -513,6 +516,63 @@ async function newDatabase_3(parent_page_id) {
 }
 
 //send data to notion
+async function addDate(blockId, day) {
+    try {
+        const response = await notion.pages.create({
+            parent: { database_id: blockId },
+            properties: {
+                Name: {
+                    type: "title",
+                    title: [
+                        {
+                            "type": "text",
+                            "text": {
+                                "content": day,
+                                "link": null
+                            },
+                            "annotations": {
+                                "bold": false,
+                                "italic": false,
+                                "strikethrough": false,
+                                "underline": false,
+                                "code": false,
+                                "color": "default"
+                            },
+                            "plain_text": "День №3",
+                            "href": null
+                        }
+                    ]
+                },
+                Date : {
+                    type: 'rich_text',
+                    rich_text: [
+                    {
+                        type: 'text',
+                        text: {
+                            content: "01/01/2022 0:00",
+                        },
+                    }
+                    ]
+                },
+                Специализация: {
+                    type: "multi_select",
+                    multi_select: [
+                        {
+                            "name": worker
+                        }
+                    ]
+                }
+            }
+        })
+        //console.log(response)
+        console.log("3 Success! Worker added. Data: " + JSON.stringify(response))
+    } catch (error) {
+        console.error(error.body)
+    }
+}
+
+
+//send data to notion
 async function addWorker(blockId, worker) {
     try {
         const response = await notion.pages.create({
@@ -554,7 +614,6 @@ async function addWorker(blockId, worker) {
     }
 }
 
-//97884d7c-2c21-4dd0-adcb-689e6dd7da89 //Проект А
 
 //send data to notion
 async function addAddress(geo, projectname, datestart, teh, managerId, companyId, worklist) {
