@@ -68,7 +68,7 @@ bot.setMyCommands([
 ])
 
 
-//send data to notion
+//addProject send data to notion
 async function addProject(title, time, teh, managerId, companyId, worklist, geoId) {
     try {
         const response = await notion.pages.create({
@@ -161,6 +161,8 @@ async function addProject(title, time, teh, managerId, companyId, worklist, geoI
     }
 }
 
+
+//addProjectNotGeo
 async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist) {
     try {
         const response = await notion.pages.create({
@@ -236,8 +238,8 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
         console.log("1 Success! Project not geo added. " + response.id)
 
         newDatabase_1(response.id);
-        newDatabase(response.id, worklist);
-        newDatabase_3(response.id);
+        //newDatabase(response.id, worklist);
+        //newDatabase_3(response.id);
 
     } catch (error) {
         console.error(error.body)
@@ -552,14 +554,6 @@ async function addDate(blockId, day) {
                             content: "01/01/2022 0:00",
                         },
                     }
-                    ]
-                },
-                Специализация: {
-                    type: "multi_select",
-                    multi_select: [
-                        {
-                            "name": worker
-                        }
                     ]
                 }
             }
