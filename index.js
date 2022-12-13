@@ -150,11 +150,20 @@ async function addProject(title, time, teh, managerId, companyId, worklist, geoI
             }
         })
         //console.log(response)
-        console.log("1 Success! Project with geo added. " + response.id)
+        const res_id = response.id;
+        console.log("1 Success! Project with geo added. " + res_id)
 
-        newDatabase_1(response.id);
-        newDatabase(response.id, worklist);
-        newDatabase_3(response.id);
+        setTimeout(()=> {
+            newDatabase_1(res_id);
+        }, 2000) 
+
+        setTimeout(()=> {
+            newDatabase(res_id, worklist);
+        }, 4000) 
+
+        setTimeout(()=> {
+            newDatabase_3(res_id);
+        }, 9000)
 
     } catch (error) {
         console.error(error.body)
