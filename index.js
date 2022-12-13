@@ -565,7 +565,7 @@ async function addDate(blockId, day) {
             }
         })
         //console.log(response)
-        console.log("3 Success! Worker added. Data: " + JSON.stringify(response))
+        console.log("3.1 Success! Date added. Data: " + JSON.stringify(response))
     } catch (error) {
         console.error(error.body)
     }
