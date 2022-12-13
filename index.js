@@ -150,7 +150,7 @@ async function addProject(title, time, teh, managerId, companyId, worklist, geoI
             }
         })
         //console.log(response)
-        console.log("1 Success! Project added. " + response.id)
+        console.log("1 Success! Project with geo added. " + response.id)
 
         newDatabase_1(response.id);
         newDatabase(response.id, worklist);
@@ -233,7 +233,7 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
             }
         })
         //console.log(response)
-        console.log("1 Success! Project added. " + response.id)
+        console.log("1 Success! Project not geo added. " + response.id)
 
         newDatabase_1(response.id);
         newDatabase(response.id, worklist);
@@ -538,7 +538,7 @@ async function addDate(blockId, day) {
                                 "code": false,
                                 "color": "default"
                             },
-                            "plain_text": "День №3",
+                            "plain_text": day,
                             "href": null
                         }
                     ]
