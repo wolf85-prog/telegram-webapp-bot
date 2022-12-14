@@ -68,6 +68,12 @@ bot.setMyCommands([
     {command: '/settings', description: 'Настройки'},
 ])
 
+bot.on('message', msg => {
+    const text = msg.text;
+    const chat_id = msg.chat.id;
+    bot.sendMessage(chat_id, `Ваше сообщение ${text} отправлено администратору!`)
+})
+
 
 //addProject send data to notion
 async function addProject(title, time, teh, managerId, companyId, worklist, geoId) {
@@ -1265,22 +1271,26 @@ app.post('/web-data', async (req, res) => {
       })
 
         await bot.sendMessage(chatGroupId, `Проект успешно создан! 
-                        Название проекта:  ${projectname}, 
-                        Дата начала: ${datestart}, 
-                        Геопозиция: ${geo}, 
-                        Тех. задание: ${teh},  
-                        Список специалистов: ${worklist.map(item => item.spec + ' - ' + item.count + ' чел.').join(', ')}`
+            Название проекта:  ${projectname}, 
+            Дата начала: ${datestart}, 
+            Геопозиция: ${geo}, 
+            Тех. задание: ${teh},  
+            Список специалистов: ${worklist.map(item => item.spec + ' - ' + item.count + ' чел.').join(', ')}`
         )
 
-      //добавление проекта с названием проекта в базу
-      //addProject(projectname, datestart, teh, managerId, companyId, worklist);
+    //добавление проекта с названием проекта в базу
+    //addProject(projectname, datestart, teh, managerId, companyId, worklist);
 
-      //добавление геопозиции в БД Площадки (Адрес)
-      if (geo != '') {
+    //добавление геопозиции в БД Площадки (Адрес)
+    if (geo != '') {
         addAddress(geo, projectname, datestart, teh, managerId, companyId, worklist);
-      } else {
+    } else {
         addProjectNotGeo(projectname, datestart, teh, managerId, companyId, worklist);
-      }
+    }
+
+    setTimeout(async () => {
+        await bot.sendMessage(chatId, 'Всю информацию вы получите в этом чате');
+    }, 3000)
       
 
       return res.status(200).json({});
