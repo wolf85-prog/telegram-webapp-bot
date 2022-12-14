@@ -73,8 +73,8 @@ bot.on('message', msg => {
     const chat_id = msg.chat.id;
     const chat_admin_id = '1698411118';
     if (!text.includes('/')) {       
-        if (text.includes("Ответ:")) {
-            bot.sendMessage(chat_id, `Ваше сообщение получено администратором!`)
+        if (text.includes("Ответ")) {           
+            bot.sendMessage(text.substring(7), `Ваше сообщение получено администратором!`)
         } else {
             bot.sendMessage(chat_id, `Ваше сообщение "${text}" отправлено администратору!`)
             bot.sendMessage(chat_admin_id, `Новое сообщение "${text}" от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)           
