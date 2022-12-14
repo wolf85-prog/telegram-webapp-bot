@@ -76,6 +76,10 @@ bot.on('message', msg => {
         bot.sendMessage(chat_id, `Ваше сообщение "${text}" отправлено администратору!`)
         bot.sendMessage(chat_admin_id, `Новое сообщение "${text}" от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)
     }  
+
+    if (text.includes("Ответ:")) {
+        bot.sendMessage(chat_id, `Ваше сообщение получено администратором!`)
+    }
 })
 
 
