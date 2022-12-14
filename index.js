@@ -1065,6 +1065,12 @@ bot.on('message', async (msg) => {
 
   }
 
+  if (text === '/getmyid') {
+    const userId = msg.from.id;
+    const chatId = msg.chat.id;
+    bot.sendMessage(chatId, "Это твой айди - " + userId);
+  }
+
   if(msg?.web_app_data?.data) {
     try {
         const data = JSON.parse(msg?.web_app_data?.data)
@@ -1246,10 +1252,6 @@ app.get("/address", async (req, res) => {
     res.json(address);
   });
 
-
-  app.post('https://api.notion.com/v1/databases', async (req, res) => {
-    
-  })
 
 //создание страницы (проекта) базыданных проектов
 app.post('/web-data', async (req, res) => {
