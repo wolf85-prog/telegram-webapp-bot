@@ -71,9 +71,11 @@ bot.setMyCommands([
 bot.on('message', msg => {
     const text = msg.text;
     const chat_id = msg.chat.id;
+    const chat_admin_id = '1698411118';
     if (!text.includes('/')) {
         bot.sendMessage(chat_id, `Ваше сообщение "${text}" отправлено администратору!`)
-    }       
+        bot.sendMessage(chat_admin_id, `Новое сообщение "${text}" от ${msg.from.last_name}  ${msg.from.first_name}` )
+    }  
 })
 
 
