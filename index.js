@@ -71,7 +71,7 @@ bot.setMyCommands([
 bot.on('message', msg => {
     const text = msg.text;
     const chat_id = msg.chat.id;
-    bot.sendMessage(chat_id, `Ваше сообщение ${text} отправлено администратору!`)
+    bot.sendMessage(chat_id, `Ваше сообщение "${text}" отправлено администратору!`)
 })
 
 
