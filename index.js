@@ -72,13 +72,13 @@ bot.on('message', msg => {
     const text = msg.text;
     const chat_id = msg.chat.id;
     const chat_admin_id = '1698411118';
-    if (!text.includes('/')) {
-        bot.sendMessage(chat_id, `Ваше сообщение "${text}" отправлено администратору!`)
-        bot.sendMessage(chat_admin_id, `Новое сообщение "${text}" от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)
-    }  
-
-    else if (text.includes("Ответ:")) {
-        bot.sendMessage(chat_id, `Ваше сообщение получено администратором!`)
+    if (!text.includes('/')) {       
+        if (text.includes("Ответ:")) {
+            bot.sendMessage(chat_id, `Ваше сообщение получено администратором!`)
+        } else {
+            bot.sendMessage(chat_id, `Ваше сообщение "${text}" отправлено администратору!`)
+            bot.sendMessage(chat_admin_id, `Новое сообщение "${text}" от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)           
+        }
     }
 })
 
