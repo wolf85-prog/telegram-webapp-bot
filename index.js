@@ -1032,6 +1032,7 @@ async function getCompanys() {
 bot.on('message', async (msg) => {
   const chatId = msg.chat.id;
   const text = msg.text;
+  const userId = msg.from.id;
 
   if (text === '/start') {
     await bot.sendMessage(chatId, 'Добро пожаловать в телеграм-бот U.L.E.Y_Projects. Смотрите и создавайте проекты U.L.E.Y в ' +
@@ -1066,8 +1067,6 @@ bot.on('message', async (msg) => {
   }
 
   if (text === '/getmyid') {
-    const userId = msg.from.id;
-    const chatId = msg.chat.id;
     bot.sendMessage(chatId, "Это твой айди - " + userId);
   }
 
