@@ -326,8 +326,15 @@ async function newDatabase_1(parent_page_id) {
 
         //добавить даты (День2, День3, День4)
         addDate(data.id, 'День №2');
-        addDate(data.id, 'День №3');
-        addDate(data.id, 'День №4');
+        setTimeout(()=> {
+            addDate(data.id, 'День №3');
+        }, 2000)  
+        setTimeout(()=> {
+            addDate(data.id, 'День №4');
+        }, 4000) 
+        // addDate(data.id, 'День №2');
+        // addDate(data.id, 'День №3');
+        // addDate(data.id, 'День №4');
         
     } catch (error) {
         console.error(error.body)
