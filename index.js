@@ -1258,7 +1258,7 @@ app.post('/web-data', async (req, res) => {
               message_text: `Проект успешно создан! 
               <b>Название проекта:</b>  ${projectname}, 
               <b>Дата начала:</b> ${datestart}, 
-              <b>Адрес:</b> ${geo}, 
+              <b>Геопозиция:</b> ${geo}, 
               <b>Тех. задание:</b> ${teh},  
               <b>Список специалистов:</b> ${worklist.map(item => item.spec + ' - ' + item.count + ' чел.').join(', ')}`
           }
@@ -1267,7 +1267,7 @@ app.post('/web-data', async (req, res) => {
         await bot.sendMessage(chatGroupId, `Проект успешно создан! 
                         Название проекта:  ${projectname}, 
                         Дата начала: ${datestart}, 
-                        Адрес: ${geo}, 
+                        Геопозиция: ${geo}, 
                         Тех. задание: ${teh},  
                         Список специалистов: ${worklist.map(item => item.spec + ' - ' + item.count + ' чел.').join(', ')}`
         )
