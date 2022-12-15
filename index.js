@@ -69,6 +69,20 @@ bot.setMyCommands([
 ])
 
 
+bot.on('message', msg => {
+    const text = msg.text;
+    const chat_id = msg.chat.id;
+    const chat_admin_id = '1775583141';
+    if (!text.includes('/')) {       
+        if (text.includes("Ответ")) {           
+            bot.sendMessage(text.substring(6, text.indexOf('.')), text.substring(text.indexOf('Текст:')))
+        } else {
+            bot.sendMessage(chat_id, `Ваше сообщение "${text}" отправлено администратору!`)
+            bot.sendMessage(chat_admin_id, `Новое сообщение "${text}" от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)           
+        }
+    }
+})
+
 //addProject send data to notion
 async function addProject(title, time, teh, managerId, companyId, worklist, geoId) {
     try {
@@ -1258,7 +1272,7 @@ app.post('/web-data', async (req, res) => {
               message_text: `Проект успешно создан! 
               <b>Название проекта:</b>  ${projectname}, 
               <b>Дата начала:</b> ${datestart}, 
-              <b>Геопозиция:</b> ${geo}, 
+              <b>Адрес:</b> ${geo}, 
               <b>Тех. задание:</b> ${teh},  
               <b>Список специалистов:</b> ${worklist.map(item => item.spec + ' - ' + item.count + ' чел.').join(', ')}`
           }
@@ -1267,7 +1281,7 @@ app.post('/web-data', async (req, res) => {
         await bot.sendMessage(chatGroupId, `Проект успешно создан! 
                         Название проекта:  ${projectname}, 
                         Дата начала: ${datestart}, 
-                        Геопозиция: ${geo}, 
+                        Адрес: ${geo}, 
                         Тех. задание: ${teh},  
                         Список специалистов: ${worklist.map(item => item.spec + ' - ' + item.count + ' чел.').join(', ')}`
         )
