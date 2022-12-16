@@ -1240,7 +1240,7 @@ app.get("/address", async (req, res) => {
 app.post('/web-data', async (req, res) => {
   const {queryId, projectname, datestart, geo, teh, managerId, companyId, worklist = []} = req.body;
   const d = new Date(datestart);
-  console.log(d);
+  //console.log(d);
   const year = d.getFullYear();
   const month = d.getMonth()+1;
   const day = String(d.getDate()).padStart(2, "0");
@@ -1253,29 +1253,27 @@ app.post('/web-data', async (req, res) => {
           title: 'Проект успешно создан',
           input_message_content: {
               parse_mode: 'HTML',
-              message_text: `Проект успешно создан! 
-
-<b>Проект:</b> ${projectname} 
-<b>Дата:</b> ${day}.${month}.${year}
-<b>Время:</b> ${chas}:${minut} 
-<b>Адрес:</b> ${geo} 
-<b>Тех. задание:</b> ${teh}  
-<b>Специалисты:</b>  
-${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}`
+              message_text: `Проект успешно создан!` 
+//<b>Проект:</b> ${projectname} 
+//<b>Дата:</b> ${day}.${month}.${year}
+//<b>Время:</b> ${chas}:${minut} 
+//<b>Адрес:</b> ${geo} 
+//<b>Тех. задание:</b> ${teh}  
+//<b>Специалисты:</b>  
+//${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}`
             }
       })
 
-        await bot.sendMessage(chatGroupId, 
-`Проект успешно создан! 
-
-Название проекта:  ${projectname} 
-Дата: ${day}.${month}.${year}
-Время: ${chas}:${minut} 
-Адрес: ${geo} 
-Тех. задание: ${teh}  
-Специалисты: 
-${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}`
-        )
+//         await bot.sendMessage(chatGroupId, 
+// `Проект успешно создан! 
+// Название проекта:  ${projectname} 
+// Дата: ${day}.${month}.${year}
+// Время: ${chas}:${minut} 
+// Адрес: ${geo} 
+// Тех. задание: ${teh}  
+// Специалисты: 
+// ${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}`
+//         )
 
       //добавление проекта с названием проекта в базу
       //addProject(projectname, datestart, teh, managerId, companyId, worklist);
