@@ -1270,6 +1270,10 @@ app.get("/address", async (req, res) => {
 app.post('/web-data', async (req, res) => {
   const {queryId, projectname, datestart, geo, teh, managerId, companyId, worklist = []} = req.body;
   const d = new Date(datestart);
+  const year = d.getFullYear();
+  const date = d.getDate();
+  const chas = d.getHours();
+  const minut = String(d.getMinutes()).padStart(2, "0");
   try {
       await bot.answerWebAppQuery(queryId, {
           type: 'article',
@@ -1279,7 +1283,7 @@ app.post('/web-data', async (req, res) => {
               parse_mode: 'HTML',
               message_text: `Проект успешно создан! 
               <b>Название проекта:</b>  ${projectname} 
-              <b>Дата:</b> ${d.getFullYear} 
+              <b>Дата:</b> ${year}.${d.getMonth()}.${d.getDay()}
               <b>Время:</b> ${datestart}  
               <b>Адрес:</b> ${geo} 
               <b>Тех. задание:</b> ${teh}  
