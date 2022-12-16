@@ -168,16 +168,16 @@ async function addProject(title, time, teh, managerId, companyId, worklist, geoI
                         }
                     ],
                     "has_more": false
-                },
+                }
             }
         })
         //console.log(response)
         const res_id = response.id;
         console.log("1 Success! Project with geo added. " + res_id)
 
-        setTimeout(()=> {
+        //setTimeout(()=> {
             newDatabase_1(res_id);
-        }, 2000) 
+        //}, 2000) 
 
         setTimeout(()=> {
             newDatabase(res_id, worklist);
