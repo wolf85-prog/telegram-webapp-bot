@@ -717,7 +717,7 @@ async function addAddress(geo, projectname, datestart, teh, managerId, companyId
                 },
             },
         })
-        console.log(response)
+        //console.log(response)
         console.log("Success! Entry address added. " + response.id)
 
         //добавление проекта с названием проекта в базу
