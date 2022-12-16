@@ -365,7 +365,7 @@ async function newDatabase(parent_page_id, worklist) {
             "properties": { 
                 "1. Дата": {
                     "name": "Дата", 
-                    "date": {}
+                    "title": {}
                 },
                 "2. 👷 ФИО": {    
                     "name": "👷 ФИО",               
@@ -616,12 +616,15 @@ async function addWorker(blockId, worker) {
             parent: { database_id: blockId },
             properties: {
                 "1. Дата": {
-                    type: "date",
-                    date: {
-                        "start": "2022-10-30T00:00:00+03:00",
-                        "end": null,
-                        "time_zone": null
-                    }
+                    type: 'title',
+                    title: [
+                    {
+                        type: 'text',
+                        text: {
+                            content: "30/10/2022 0:00",
+                        },
+                    },
+                    ]
                 },
                 "3. Специализация": {
                     type: "multi_select",
