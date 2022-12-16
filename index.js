@@ -1271,7 +1271,8 @@ app.post('/web-data', async (req, res) => {
   const {queryId, projectname, datestart, geo, teh, managerId, companyId, worklist = []} = req.body;
   const d = new Date(datestart);
   const year = d.getFullYear();
-  const date = d.getDate();
+  const month = d.getMonth();
+  const day = d.getDay();
   const chas = d.getHours();
   const minut = String(d.getMinutes()).padStart(2, "0");
   try {
@@ -1283,8 +1284,8 @@ app.post('/web-data', async (req, res) => {
               parse_mode: 'HTML',
               message_text: `Проект успешно создан! 
               <b>Название проекта:</b>  ${projectname} 
-              <b>Дата:</b> ${year}.${d.getMonth()}.${d.getDay()}
-              <b>Время:</b> ${datestart}  
+              <b>Дата:</b> ${day}.${month}.${year}
+              <b>Время:</b> ${chas}:${minut} 
               <b>Адрес:</b> ${geo} 
               <b>Тех. задание:</b> ${teh}  
               <b>Специалисты:</b> ${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join('<br>')}`
@@ -1293,8 +1294,8 @@ app.post('/web-data', async (req, res) => {
 
         await bot.sendMessage(chatGroupId, `Проект успешно создан! 
                         Название проекта:  ${projectname}, 
-                        Дата: 
-                        Время: 
+                        Дата: ${day}.${month}.${year}
+                        Время: ${chas}:${minut} 
                         Адрес: ${geo} 
                         Тех. задание: ${teh}  
                         Специалисты: ${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join(', ')}`
