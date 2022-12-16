@@ -1273,7 +1273,7 @@ app.post('/web-data', async (req, res) => {
   console.log(d);
   const year = d.getFullYear();
   const month = d.getMonth()+1;
-  const day = d.getDate();
+  const day = String(d.getDate()).padStart(2, "0");
   const chas = d.getHours();
   const minut = String(d.getMinutes()).padStart(2, "0");
   try {
