@@ -1283,7 +1283,7 @@ app.post('/web-data', async (req, res) => {
               <b>Время:</b> ${d.getHours} : ${String(d.getMinutes()).padStart(2, "0")} 
               <b>Адрес:</b> ${geo} 
               <b>Тех. задание:</b> ${teh}  
-              <b>Специалисты:</b> ${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join(', ')}
+              <b>Специалисты:</b> ${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join('<br>')}
             
               Отпаравлено администратору!`
             }
@@ -1291,10 +1291,13 @@ app.post('/web-data', async (req, res) => {
 
         await bot.sendMessage(chatGroupId, `Проект успешно создан! 
                         Название проекта:  ${projectname}, 
-                        Дата начала: ${datestart}, 
-                        Адрес: ${geo}, 
-                        Тех. задание: ${teh},  
-                        Список специалистов: ${worklist.map(item => item.spec + ' - ' + item.count + ' чел.').join(', ')}`
+                        Дата: ${d.getFullYear}.${d.getMonth}.${d.getDay} 
+                        Время: ${d.getHours} : ${String(d.getMinutes()).padStart(2, "0")} 
+                        Адрес: ${geo} 
+                        Тех. задание: ${teh}  
+                        Специалисты: ${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join('<br>')}
+            
+              Отпаравлено администратору!`, {parse_mode: 'HTML'}
         )
 
       //добавление проекта с названием проекта в базу
