@@ -79,6 +79,8 @@ bot.on('message', msg => {
             bot.sendMessage(text.substring(6, text.indexOf('.')), text.substring(text.indexOf('Текст:')))
         } else if (text.includes('Проект успешно создан')) {
             bot.sendMessage(chat_id, 'Ваша заявка отправлена администратору!')
+        } else if (text.includes('Всю информацию вы получите в этом чате')) {
+
         } else {
             bot.sendMessage(chat_id, `Ваше сообщение "${text}" отправлено администратору!`)
             bot.sendMessage(chat_admin_id, `${text} \n \n от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)           
