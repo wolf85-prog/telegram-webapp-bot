@@ -81,7 +81,7 @@ bot.on('message', msg => {
             bot.sendMessage(chat_id, 'Ваша заявка отправлена администратору!')
         } else {
             bot.sendMessage(chat_id, `Ваше сообщение "${text}" отправлено администратору!`)
-            bot.sendMessage(chat_admin_id, `${text} \n от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)           
+            bot.sendMessage(chat_admin_id, `${text} \n \n от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)           
         }
     }
 })
@@ -1262,7 +1262,7 @@ app.post('/web-data', async (req, res) => {
 <b>Адрес:</b> ${geo} 
 <b>Тех. задание:</b> ${teh}  
 <b>Специалисты:</b>  
-${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}`
+${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join(' ')}`
             }
       })
 
@@ -1274,7 +1274,7 @@ ${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join(
 Адрес: ${geo} 
 Тех. задание: ${teh}  
 Специалисты: 
-${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}`
+${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join(' ')}`
         )
 
       //добавление проекта с названием проекта в базу
