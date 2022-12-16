@@ -12,6 +12,7 @@ const databaseAddressId = process.env.NOTION_DATABASE_ADDRESS_ID
 const databaseCompanyId = process.env.NOTION_DATABASE_COMPANY_ID
 const databaseWorkersId = process.env.NOTION_DATABASE_WORKERS_ID
 const chatGroupId = process.env.CHAT_GROUP_ID
+const chatTelegramId = process.env.CHAT_ID
 
 //telegram api
 const TelegramBot = require('node-telegram-bot-api');
@@ -72,7 +73,7 @@ bot.setMyCommands([
 bot.on('message', msg => {
     const text = msg.text;
     const chat_id = msg.chat.id;
-    const chat_admin_id = '1775583141';
+    const chat_admin_id = chatTelegramId;
     if (!text.includes('/')) {       
         if (text.includes("Ответ")) {           
             bot.sendMessage(text.substring(6, text.indexOf('.')), text.substring(text.indexOf('Текст:')))
@@ -304,7 +305,7 @@ async function newDatabase_1(parent_page_id) {
                     "title": {}
                 },              
                 "Date": {
-                    "rich_text": {}
+                    "date": {}
                 },
                 "Комментарий": {
                     "rich_text": {}
@@ -364,7 +365,7 @@ async function newDatabase(parent_page_id, worklist) {
             "properties": { 
                 "1. Дата": {
                     "name": "Дата", 
-                    "title": {}
+                    "date": {}
                 },
                 "2. 👷 ФИО": {    
                     "name": "👷 ФИО",               
@@ -590,15 +591,13 @@ async function addDate(blockId, day) {
                     ]
                 },
                 Date : {
-                    type: 'rich_text',
-                    rich_text: [
-                    {
-                        type: 'text',
-                        text: {
-                            content: "01/01/2022 0:00",
-                        },
+                    type: 'date',                   
+                    date: {
+                        "start": "01/01/2022 0:00",
+                        "end": null,
+                        "time_zone": null
                     }
-                    ]
+
                 }
             }
         })
@@ -617,26 +616,12 @@ async function addWorker(blockId, worker) {
             parent: { database_id: blockId },
             properties: {
                 "1. Дата": {
-                    "type": "title",
-                    "title": [
-                        {
-                            "type": "text",
-                            "text": {
-                                "content": "30/10/2022 0:00",
-                                "link": null
-                            },
-                            "annotations": {
-                                "bold": false,
-                                "italic": false,
-                                "strikethrough": false,
-                                "underline": false,
-                                "code": false,
-                                "color": "default"
-                            },
-                            "plain_text": "30/10/2022 0:00",
-                            "href": null
-                        }
-                    ]
+                    type: "date",
+                    date: {
+                        "start": "30/10/2022 0:00",
+                        "end": null,
+                        "time_zone": null
+                    }
                 },
                 "3. Специализация": {
                     type: "multi_select",
@@ -673,26 +658,12 @@ async function addWorkerZapas(blockId) {
             parent: { database_id: blockId },
             properties: {
                 "1. Дата": {
-                    "type": "title",
-                    "title": [
-                        {
-                            "type": "text",
-                            "text": {
-                                "content": "30/10/2022 0:00",
-                                "link": null
-                            },
-                            "annotations": {
-                                "bold": false,
-                                "italic": false,
-                                "strikethrough": false,
-                                "underline": false,
-                                "code": false,
-                                "color": "default"
-                            },
-                            "plain_text": "30/10/2022 0:00",
-                            "href": null
-                        }
-                    ]
+                    "type": "date",
+                    date: {
+                        "start": "30/10/2022 0:00",
+                        "end": null,
+                        "time_zone": null
+                    }
                 }
             }
         })
