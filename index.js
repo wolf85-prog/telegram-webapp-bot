@@ -593,7 +593,7 @@ async function addDate(blockId, day) {
                 Date : {
                     type: 'date',                   
                     date: {
-                        "start": "01/01/2022 0:00",
+                        "start": "2022-01-01 0:00",
                         "end": null,
                         "time_zone": null
                     }
@@ -618,7 +618,7 @@ async function addWorker(blockId, worker) {
                 "1. Дата": {
                     type: "date",
                     date: {
-                        "start": "30/10/2022 0:00",
+                        "start": "2022-10-30 0:00",
                         "end": null,
                         "time_zone": null
                     }
@@ -660,7 +660,7 @@ async function addWorkerZapas(blockId) {
                 "1. Дата": {
                     "type": "date",
                     date: {
-                        "start": "30/10/2022 0:00",
+                        "start": "2022-10-30 0:00",
                         "end": null,
                         "time_zone": null
                     }
