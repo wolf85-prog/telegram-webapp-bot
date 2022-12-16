@@ -179,13 +179,13 @@ async function addProject(title, time, teh, managerId, companyId, worklist, geoI
             newDatabase_1(res_id);
         }, 2000) 
 
-        // setTimeout(()=> {
-        //     newDatabase(res_id, worklist);
-        // }, 4000) 
+        setTimeout(()=> {
+            newDatabase(res_id, worklist);
+        }, 4000) 
 
-        // setTimeout(()=> {
-        //     newDatabase_3(res_id);
-        // }, 9000)
+        setTimeout(()=> {
+            newDatabase_3(res_id);
+        }, 9000)
 
     } catch (error) {
         console.error(error.body)
