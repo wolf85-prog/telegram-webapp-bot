@@ -277,9 +277,9 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
             newDatabase(res_id, worklist);
         }, 4000) 
 
-        // setTimeout(()=> {
-        //     newDatabase_3(res_id);
-        // }, 9000) 
+        setTimeout(()=> {
+            newDatabase_3(res_id);
+        }, 9000) 
 
     } catch (error) {
         console.error(error.body)
@@ -478,7 +478,7 @@ async function newDatabase_3(parent_page_id) {
             "properties": {                
                 "1. Дата": {
                     "name": "Дата", 
-                    "date": {}
+                    "title": {}
                 },
                 "2. 👷 ФИО": {    
                     "name": "👷 ФИО",               
@@ -661,12 +661,15 @@ async function addWorkerZapas(blockId) {
             parent: { database_id: blockId },
             properties: {
                 "1. Дата": {
-                    "type": "date",
-                    date: {
-                        "start": "2022-10-30T00:00:00+03:00",
-                        "end": null,
-                        "time_zone": null
-                    }
+                    type: 'title',
+                    title: [
+                    {
+                        type: 'text',
+                        text: {
+                            content: "30/10/2022 0:00",
+                        },
+                    },
+                    ]
                 }
             }
         })
