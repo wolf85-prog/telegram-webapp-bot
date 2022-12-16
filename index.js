@@ -81,7 +81,7 @@ bot.on('message', msg => {
             bot.sendMessage(chat_id, 'Ваша заявка отправлена администратору!')
         } else {
             bot.sendMessage(chat_id, `Ваше сообщение "${text}" отправлено администратору!`)
-            bot.sendMessage(chat_admin_id, `${text} \n \n от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)           
+            bot.sendMessage(chat_admin_id, `${text} \n от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)           
         }
     }
 })
@@ -1268,7 +1268,7 @@ ${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join(
 
         await bot.sendMessage(chatGroupId, 
 `Проект успешно создан! 
-Название проекта:  ${projectname}, 
+Название проекта:  ${projectname} 
 Дата: ${day}.${month}.${year}
 Время: ${chas}:${minut} 
 Адрес: ${geo} 
