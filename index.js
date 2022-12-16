@@ -1284,12 +1284,15 @@ app.post('/web-data', async (req, res) => {
           input_message_content: {
               parse_mode: 'HTML',
               message_text: `Проект успешно создан! 
+
               <b>Проект:</b> ${projectname} 
               <b>Дата:</b> ${day}.${month}.${year}
               <b>Время:</b> ${chas}:${minut} 
               <b>Адрес:</b> ${geo} 
               <b>Тех. задание:</b> ${teh}  
-              <b>Специалисты:</b><br> ${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join(' ')}`
+              <b>Специалисты:</b><br> ${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join(' ')}
+              
+              `
             }
       })
 
