@@ -74,16 +74,16 @@ bot.on('message', msg => {
     const text = msg.text;
     const chat_id = msg.chat.id;
     const chat_admin_id = chatTelegramId;
-    // if (!text.includes('/')) {       
-    //     if (text.includes("Ответ")) {           
-    //         bot.sendMessage(text.substring(6, text.indexOf('.')), text.substring(text.indexOf('Текст:')))
-    //     } else if (text.includes('Проект успешно создан')) {
-    //         bot.sendMessage(chat_id, 'Ваша заявка отправлена администратору!')
-    //     } else {
-    //         bot.sendMessage(chat_id, `Ваше сообщение "${text}" отправлено администратору!`)
-    //         bot.sendMessage(chat_admin_id, `${text} \n \n от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)           
-    //     }
-    // }
+    if (!text.includes('/')) {       
+        if (text.includes("Ответ")) {           
+            bot.sendMessage(text.substring(6, text.indexOf('.')), text.substring(text.indexOf('Текст:')))
+        } else if (text.includes('Проект успешно создан')) {
+            bot.sendMessage(chat_id, 'Ваша заявка отправлена администратору!')
+        } else {
+            bot.sendMessage(chat_id, `Ваше сообщение "${text}" отправлено администратору!`)
+            bot.sendMessage(chat_admin_id, `${text} \n \n от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)           
+        }
+    }
 })
 
 //addProject send data to notion
@@ -175,13 +175,13 @@ async function addProject(title, time, teh, managerId, companyId, worklist, geoI
             newDatabase_1(res_id);
         }, 2000) 
 
-        setTimeout(()=> {
-            newDatabase(res_id, worklist);
-        }, 4000) 
+        // setTimeout(()=> {
+        //     newDatabase(res_id, worklist);
+        // }, 4000) 
 
-        setTimeout(()=> {
-            newDatabase_3(res_id);
-        }, 9000)
+        // setTimeout(()=> {
+        //     newDatabase_3(res_id);
+        // }, 9000)
 
     } catch (error) {
         console.error(error.body)
@@ -269,13 +269,13 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
             newDatabase_1(res_id);
         }, 2000) 
 
-        setTimeout(()=> {
-            newDatabase(res_id, worklist);
-        }, 4000) 
+        // setTimeout(()=> {
+        //     newDatabase(res_id, worklist);
+        // }, 4000) 
 
-        setTimeout(()=> {
-            newDatabase_3(res_id);
-        }, 9000) 
+        // setTimeout(()=> {
+        //     newDatabase_3(res_id);
+        // }, 9000) 
 
     } catch (error) {
         console.error(error.body)
