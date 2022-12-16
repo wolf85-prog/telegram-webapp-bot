@@ -78,7 +78,7 @@ bot.on('message', msg => {
             bot.sendMessage(text.substring(6, text.indexOf('.')), text.substring(text.indexOf('Текст:')))
         } else {
             bot.sendMessage(chat_id, `Ваше сообщение "${text}" отправлено администратору!`)
-            bot.sendMessage(chat_admin_id, `"${text}" от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)           
+            bot.sendMessage(chat_admin_id, `${text} от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)           
         }
     }
 })
