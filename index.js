@@ -1283,7 +1283,8 @@ app.post('/web-data', async (req, res) => {
           title: 'Проект успешно создан',
           input_message_content: {
               parse_mode: 'HTML',
-              message_text: `Проект успешно создан! 
+              message_text: 
+              `Проект успешно создан! 
 
               <b>Проект:</b> ${projectname} 
               <b>Дата:</b> ${day}.${month}.${year}
