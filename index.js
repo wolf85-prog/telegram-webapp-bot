@@ -335,9 +335,6 @@ async function newDatabase_1(parent_page_id) {
         setTimeout(()=> {
             addDate(data.id, 'День №2');
         }, 4000) 
-        // addDate(data.id, 'День №2');
-        // addDate(data.id, 'День №3');
-        // addDate(data.id, 'День №4');
         
     } catch (error) {
         console.error(error.body)
@@ -478,7 +475,7 @@ async function newDatabase_3(parent_page_id) {
             "properties": {                
                 "1. Дата": {
                     "name": "Дата", 
-                    "title": {}
+                    "Date": {}
                 },
                 "2. 👷 ФИО": {    
                     "name": "👷 ФИО",               
@@ -1269,14 +1266,16 @@ app.post('/web-data', async (req, res) => {
             }
       })
 
-        // await bot.sendMessage(chatGroupId, `Проект успешно создан! 
-        //                 Название проекта:  ${projectname}, 
-        //                 Дата: ${day}.${month}.${year}
-        //                 Время: ${chas}:${minut} 
-        //                 Адрес: ${geo} 
-        //                 Тех. задание: ${teh}  
-        //                 Специалисты: ${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join(', ')}`
-        // )
+        await bot.sendMessage(chatGroupId, 
+            `Проект успешно создан! 
+            Название проекта:  ${projectname}, 
+            Дата: ${day}.${month}.${year}
+            Время: ${chas}:${minut} 
+            Адрес: ${geo} 
+            Тех. задание: ${teh}  
+            Специалисты: 
+            ${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}`
+        )
 
       //добавление проекта с названием проекта в базу
       //addProject(projectname, datestart, teh, managerId, companyId, worklist);
