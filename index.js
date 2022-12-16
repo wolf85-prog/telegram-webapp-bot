@@ -1290,7 +1290,8 @@ app.post('/web-data', async (req, res) => {
               <b>Время:</b> ${chas}:${minut} 
               <b>Адрес:</b> ${geo} 
               <b>Тех. задание:</b> ${teh}  
-              <b>Специалисты:</b><br> ${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join(' ')}
+              <b>Специалисты:</b>  
+              ${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}
               
               `
             }
