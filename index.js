@@ -1270,6 +1270,7 @@ app.get("/address", async (req, res) => {
 app.post('/web-data', async (req, res) => {
   const {queryId, projectname, datestart, geo, teh, managerId, companyId, worklist = []} = req.body;
   const d = new Date(datestart);
+  console.log(d);
   const year = d.getFullYear();
   const month = d.getMonth();
   const day = d.getDay();
@@ -1283,23 +1284,23 @@ app.post('/web-data', async (req, res) => {
           input_message_content: {
               parse_mode: 'HTML',
               message_text: `Проект успешно создан! 
-              <b>Название проекта:</b>  ${projectname} 
+              <b>Название проекта:</b> ${projectname} 
               <b>Дата:</b> ${day}.${month}.${year}
               <b>Время:</b> ${chas}:${minut} 
               <b>Адрес:</b> ${geo} 
               <b>Тех. задание:</b> ${teh}  
-              <b>Специалисты:</b> ${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join('<br>')}`
+              <b>Специалисты:</b> ${worklist.map(item =>item.spec + ' - ' + item.count + ' чел.').join(', ')}`
             }
       })
 
-        await bot.sendMessage(chatGroupId, `Проект успешно создан! 
-                        Название проекта:  ${projectname}, 
-                        Дата: ${day}.${month}.${year}
-                        Время: ${chas}:${minut} 
-                        Адрес: ${geo} 
-                        Тех. задание: ${teh}  
-                        Специалисты: ${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join(', ')}`
-        )
+        // await bot.sendMessage(chatGroupId, `Проект успешно создан! 
+        //                 Название проекта:  ${projectname}, 
+        //                 Дата: ${day}.${month}.${year}
+        //                 Время: ${chas}:${minut} 
+        //                 Адрес: ${geo} 
+        //                 Тех. задание: ${teh}  
+        //                 Специалисты: ${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join(', ')}`
+        // )
 
       //добавление проекта с названием проекта в базу
       //addProject(projectname, datestart, teh, managerId, companyId, worklist);
