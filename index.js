@@ -213,7 +213,7 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
                     date: {
                         "start": time,
                         "end": null,
-                        "time_zone": "GMT+03:00"
+                        "time_zone": "Europe/Moscow"
                     }
                 },
                 TechZadanie: {
