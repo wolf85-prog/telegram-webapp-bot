@@ -1254,27 +1254,27 @@ app.post('/web-data', async (req, res) => {
           input_message_content: {
               parse_mode: 'HTML',
               message_text: 
-              `Проект успешно создан! 
+`Проект успешно создан! 
 
-              <b>Проект:</b> ${projectname} 
-              <b>Дата:</b> ${day}.${month}.${year}
-              <b>Время:</b> ${chas}:${minut} 
-              <b>Адрес:</b> ${geo} 
-              <b>Тех. задание:</b> ${teh}  
-              <b>Специалисты:</b>  
-              ${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}`
+<b>Проект:</b> ${projectname} 
+<b>Дата:</b> ${day}.${month}.${year}
+<b>Время:</b> ${chas}:${minut} 
+<b>Адрес:</b> ${geo} 
+<b>Тех. задание:</b> ${teh}  
+<b>Специалисты:</b>  
+${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}`
             }
       })
 
         await bot.sendMessage(chatGroupId, 
-            `Проект успешно создан! 
-            Название проекта:  ${projectname}, 
-            Дата: ${day}.${month}.${year}
-            Время: ${chas}:${minut} 
-            Адрес: ${geo} 
-            Тех. задание: ${teh}  
-            Специалисты: 
-            ${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}`
+`Проект успешно создан! 
+Название проекта:  ${projectname}, 
+Дата: ${day}.${month}.${year}
+Время: ${chas}:${minut} 
+Адрес: ${geo} 
+Тех. задание: ${teh}  
+Специалисты: 
+${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}`
         )
 
       //добавление проекта с названием проекта в базу
