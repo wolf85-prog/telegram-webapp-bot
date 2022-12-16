@@ -78,7 +78,7 @@ bot.on('message', msg => {
             bot.sendMessage(text.substring(6, text.indexOf('.')), text.substring(text.indexOf('Текст:')))
         } else {
             bot.sendMessage(chat_id, `Ваше сообщение "${text}" отправлено администратору!`)
-            bot.sendMessage(chat_admin_id, `Новое сообщение "${text}" от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)           
+            bot.sendMessage(chat_admin_id, `"${text}" от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)           
         }
     }
 })
@@ -1284,7 +1284,7 @@ app.post('/web-data', async (req, res) => {
           input_message_content: {
               parse_mode: 'HTML',
               message_text: `Проект успешно создан! 
-              <b>Название проекта:</b> ${projectname} 
+              <b>Проект:</b> ${projectname} 
               <b>Дата:</b> ${day}.${month}.${year}
               <b>Время:</b> ${chas}:${minut} 
               <b>Адрес:</b> ${geo} 
