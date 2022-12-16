@@ -84,6 +84,10 @@ bot.on('message', msg => {
             bot.sendMessage(chat_admin_id, `${text} \n \n от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)           
         }
     }
+
+    setTimeout(async () => {
+        await bot.sendMessage(chat_id, 'Всю информацию вы получите в этом чате');
+    }, 3000)
 })
 
 //addProject send data to notion
@@ -269,9 +273,9 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
             newDatabase_1(res_id);
         }, 2000) 
 
-        // setTimeout(()=> {
-        //     newDatabase(res_id, worklist);
-        // }, 4000) 
+        setTimeout(()=> {
+            newDatabase(res_id, worklist);
+        }, 4000) 
 
         // setTimeout(()=> {
         //     newDatabase_3(res_id);
@@ -284,7 +288,6 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
 
 //создание базы данных "График работы"
 async function newDatabase_1(parent_page_id) {
-    //console.log("parent_page_id: ", parent_page_id)
     try {
         const body = {
             "parent": {
@@ -475,7 +478,7 @@ async function newDatabase_3(parent_page_id) {
             "properties": {                
                 "1. Дата": {
                     "name": "Дата", 
-                    "Date": {}
+                    "date": {}
                 },
                 "2. 👷 ФИО": {    
                     "name": "👷 ФИО",               
@@ -1049,28 +1052,6 @@ bot.on('message', async (msg) => {
   if (text === '/settings') {
 
   }
-
-  if(msg?.web_app_data?.data) {
-    try {
-        const data = JSON.parse(msg?.web_app_data?.data)
-        console.log(data)
-        await bot.sendMessage(chatId, 'Проект успешно создан!')
-
-        await bot.sendMessage(chatId, 'Название проекта: ' + data?.project);
-        await bot.sendMessage(chatId, 'Дата начала: ' + data?.datestart);
-        await bot.sendMessage(chatId, 'Геопозиция: ' + data?.geo);
-        await bot.sendMessage(chatId, 'Тех. задание: ' + data?.teh);
-
-        //добавление проекта с названием проекта в базу
-        addItem(data?.project, data?.geo);
-
-        setTimeout(async () => {
-            await bot.sendMessage(chatId, 'Всю информацию вы получите в этом чате');
-        }, 3000)
-    } catch (e) {
-        console.log(e);
-    }
-  }
   
 });
 
@@ -1146,7 +1127,7 @@ app.get('/database/:id', async (req, res) => {
     }
   });
 
-  app.get('/database2/:id', async (req, res) => {
+app.get('/database2/:id', async (req, res) => {
     const id = req.params.id; // получаем id
     const base = await getDatabaseId2(id);
 
@@ -1158,7 +1139,7 @@ app.get('/database/:id', async (req, res) => {
     }
   });
 
-  app.get('/database/', async (req, res) => {
+app.get('/database/', async (req, res) => {
     const base = await getDatabase2();
     res.json(base);
   });
@@ -1231,10 +1212,8 @@ app.get("/address", async (req, res) => {
     res.json(address);
   });
 
+//-------------------------------------------------------------------------------------------------------
 
-  app.post('https://api.notion.com/v1/databases', async (req, res) => {
-    
-  })
 
 //создание страницы (проекта) базыданных проектов
 app.post('/web-data', async (req, res) => {
@@ -1268,6 +1247,7 @@ ${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join(
 
         await bot.sendMessage(chatGroupId, 
 `Проект успешно создан! 
+
 Название проекта:  ${projectname} 
 Дата: ${day}.${month}.${year}
 Время: ${chas}:${minut} 
@@ -1277,13 +1257,11 @@ ${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join(
 ${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}`
         )
 
-      //добавление проекта с названием проекта в базу
-      //addProject(projectname, datestart, teh, managerId, companyId, worklist);
-
-      //добавление геопозиции в БД Площадки (Адрес)
+      //добавление геопозиции в БД Площадки (Адрес) и добавление проекта
       if (geo != '') {
         addAddress(geo, projectname, datestart, teh, managerId, companyId, worklist);
       } else {
+        //добавление проекта с названием проекта в базу
         addProjectNotGeo(projectname, datestart, teh, managerId, companyId, worklist);
       }
       
