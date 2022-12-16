@@ -1269,7 +1269,7 @@ app.get("/address", async (req, res) => {
 //создание страницы (проекта) базыданных проектов
 app.post('/web-data', async (req, res) => {
   const {queryId, projectname, datestart, geo, teh, managerId, companyId, worklist = []} = req.body;
-  const d = new Date(datestart);
+  //const d = new Date(datestart);
   try {
       await bot.answerWebAppQuery(queryId, {
           type: 'article',
@@ -1280,7 +1280,7 @@ app.post('/web-data', async (req, res) => {
               message_text: `Проект успешно создан! 
               <b>Название проекта:</b>  ${projectname} 
               <b>Дата:</b> ${d.getFullYear}.${d.getMonth}.${d.getDay} 
-              <b>Время:</b> ${d.getHours} : ${String(d.getMinutes()).padStart(2, "0")} 
+              <b>Время:</b> ${d.getHours} :  
               <b>Адрес:</b> ${geo} 
               <b>Тех. задание:</b> ${teh}  
               <b>Специалисты:</b> ${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join('<br>')}
@@ -1295,9 +1295,9 @@ app.post('/web-data', async (req, res) => {
                         Время: ${d.getHours} : ${String(d.getMinutes()).padStart(2, "0")} 
                         Адрес: ${geo} 
                         Тех. задание: ${teh}  
-                        Специалисты: ${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join('<br>')}
+                        Специалисты: ${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join(', ')}
             
-              Отпаравлено администратору!`, {parse_mode: 'HTML'}
+              Отпаравлено администратору!`
         )
 
       //добавление проекта с названием проекта в базу
