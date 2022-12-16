@@ -1269,6 +1269,7 @@ app.get("/address", async (req, res) => {
 //создание страницы (проекта) базыданных проектов
 app.post('/web-data', async (req, res) => {
   const {queryId, projectname, datestart, geo, teh, managerId, companyId, worklist = []} = req.body;
+  const d = new Date(datestart);
   try {
       await bot.answerWebAppQuery(queryId, {
           type: 'article',
@@ -1277,12 +1278,15 @@ app.post('/web-data', async (req, res) => {
           input_message_content: {
               parse_mode: 'HTML',
               message_text: `Проект успешно создан! 
-              <b>Название проекта:</b>  ${projectname}, 
-              <b>Дата начала:</b> ${datestart}, 
-              <b>Адрес:</b> ${geo}, 
-              <b>Тех. задание:</b> ${teh},  
-              <b>Список специалистов:</b> ${worklist.map(item => item.spec + ' - ' + item.count + ' чел.').join(', ')}`
-          }
+              <b>Название проекта:</b>  ${projectname} 
+              <b>Дата:</b> ${d.getFullYear}.${d.getMonth}.${d.getDay} 
+              <b>Время:</b> ${d.getHours} : ${String(d.getMinutes()).padStart(2, "0")} 
+              <b>Адрес:</b> ${geo} 
+              <b>Тех. задание:</b> ${teh}  
+              <b>Специалисты:</b> ${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join(', ')}
+            
+              Отпаравлено администратору!`
+            }
       })
 
         await bot.sendMessage(chatGroupId, `Проект успешно создан! 
