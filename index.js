@@ -1279,8 +1279,8 @@ app.post('/web-data', async (req, res) => {
               parse_mode: 'HTML',
               message_text: `Проект успешно создан! 
               <b>Название проекта:</b>  ${projectname} 
-              <b>Дата:</b> ${d.getFullYear}.${d.getMonth}.${d.getDay} 
-              <b>Время:</b> ${d.getHours} :  
+              <b>Дата:</b> ${datestart} 
+              <b>Время:</b> ${datestart}  
               <b>Адрес:</b> ${geo} 
               <b>Тех. задание:</b> ${teh}  
               <b>Специалисты:</b> ${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join('<br>')}
@@ -1291,8 +1291,8 @@ app.post('/web-data', async (req, res) => {
 
         await bot.sendMessage(chatGroupId, `Проект успешно создан! 
                         Название проекта:  ${projectname}, 
-                        Дата: ${d.getFullYear}.${d.getMonth}.${d.getDay} 
-                        Время: ${d.getHours} : ${String(d.getMinutes()).padStart(2, "0")} 
+                        Дата: 
+                        Время: 
                         Адрес: ${geo} 
                         Тех. задание: ${teh}  
                         Специалисты: ${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join(', ')}
