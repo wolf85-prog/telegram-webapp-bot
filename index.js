@@ -87,10 +87,6 @@ bot.on('message', msg => {
             bot.sendMessage(chat_admin_id, `${text} \n \n от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)           
         }
     }
-
-    setTimeout(async () => {
-        await bot.sendMessage(chat_id, 'Всю информацию вы получите в этом чате');
-    }, 3000)
 })
 
 //addProject send data to notion
