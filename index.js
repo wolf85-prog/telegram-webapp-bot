@@ -592,9 +592,9 @@ async function addDate(blockId, day) {
                 Date : {
                     type: 'date',                   
                     date: {
-                        "start": "2022-01-01T00:00:00+03:00",
+                        "start": "2022-01-01T00:00:00",
                         "end": null,
-                        "time_zone": null
+                        "time_zone": "Europe/Moscow"
                     }
 
                 }
