@@ -80,8 +80,6 @@ bot.on('message', msg => {
         } else if (text.includes('Проект успешно создан')) {
             bot.sendMessage(chat_id, 'Ваша заявка отправлена администратору!')
             bot.sendMessage(chat_admin_id, `${text} \n \n от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)
-        } else if (text.includes('Всю информацию вы получите в этом чате')) {
-
         } else {
             bot.sendMessage(chat_id, `Ваше сообщение "${text}" отправлено администратору!`)
             bot.sendMessage(chat_admin_id, `${text} \n \n от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)           
