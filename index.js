@@ -73,7 +73,7 @@ bot.setMyCommands([
 bot.on('message', msg => {
     const text = msg.text;
     const chat_id = msg.chat.id;
-    const chat_admin_id = chatTelegramId;
+    const chat_admin_id = '1698411118';
     if (!text.includes('/')) {       
         if (text.includes("Ответ")) {           
             bot.sendMessage(text.substring(6, text.indexOf('.')), text.substring(text.indexOf('Текст:')))
