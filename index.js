@@ -73,16 +73,15 @@ bot.setMyCommands([
 bot.on('message', msg => {
     const text = msg.text;
     const chat_id = msg.chat.id;
-    const chat_admin_id = '1775583141';
     if (!text.includes('/')) {       
         if (text.includes("Ответ")) {           
-            bot.sendMessage(text.substring(6, text.indexOf('.')), text.substring(text.indexOf('Текст:')))
+            bot.sendMessage(text.substring(6, text.indexOf('.')), text.slice(text.indexOf('.') + 2))
         } else if (text.includes('Проект успешно создан')) {
             bot.sendMessage(chat_id, 'Ваша заявка отправлена администратору!')
-            bot.sendMessage(chat_admin_id, `${text} \n \n от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)
+            bot.sendMessage(chatTelegramId, `${text} \n \n от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)
         } else {
             bot.sendMessage(chat_id, `Ваше сообщение "${text}" отправлено администратору!`)
-            bot.sendMessage(chat_admin_id, `${text} \n \n от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)           
+            bot.sendMessage(chatTelegramId, `${text} \n \n от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)           
         }
     }
 })
