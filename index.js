@@ -1048,7 +1048,7 @@ bot.on('message', async (msg) => {
 
 
   if (text === '/info') {
-
+    await bot.sendMessage(chatId, 'Чат-бот предназначен для создания проектов в U.L.E.Y и общения заказчика с администратором проектов.');
   }
 
   if (text === '/settings') {
