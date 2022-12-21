@@ -870,13 +870,10 @@ async function getBlocks(blockId) {
         });
 
         let res;
-        //if (response != 'undefined') {
-            (count >1) ? res = response.results[1].id : res = response.results[0].id
-        //} else {
-        //    res = '' 
-        //}      
         
-        console.log("Blocks Data: "  + response)//JSON.stringify(res))
+        (count >1) ? res = response.results[1].id : res = response.results[0].id     
+        
+        console.log("Blocks Data: "  + JSON.stringify(res))
 
         return res;
     } catch (error) {
