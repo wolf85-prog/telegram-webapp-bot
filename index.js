@@ -780,6 +780,7 @@ async function getProjects2() {
 
 //получить все проекты менеджера по id
 async function getProjectsId(managerId) {
+    console.log("managerId: ", managerId)
     try {
         const response = await notion.databases.query({
             database_id: databaseId,
