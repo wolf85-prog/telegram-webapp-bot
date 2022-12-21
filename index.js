@@ -870,7 +870,7 @@ async function getBlocks(blockId) {
         });
 
         let res;
-        if (response) {
+        if (response != 'undefined') {
             (count >1) ? res = response.results[1].id : res = response.results[0].id
         } else {
             res = '' 
