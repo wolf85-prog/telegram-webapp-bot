@@ -808,6 +808,7 @@ async function getProjectsId(managerId) {
             };
         });
 
+        console.log("Projects Data: "  + JSON.stringify(responseResults))
         return responseResults;
     } catch (error) {
         console.error(error.body)
