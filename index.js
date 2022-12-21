@@ -886,6 +886,7 @@ async function getBlocks2(blockId) {
             block_id: blockId,
         });
 
+        console.log("Blocks Data: "  + JSON.stringify(response))
         return response;
     } catch (error) {
         console.error(error.body)
@@ -971,7 +972,7 @@ async function getAddress() {
             };
         });
 
-        console.log(responseResults);
+        //console.log(responseResults);
         return response;
     } catch (error) {
         console.error(error.body)
