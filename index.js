@@ -739,6 +739,49 @@ async function getDatabase() {
     }
 }
 
+//получить id менеджера по его TelegramID
+async function getManagerId(id) {
+    try {
+        const response = await notion.databases.query({
+            database_id: databaseManagerId, 
+            "filter": {
+                "property": "TelegramID",
+                "rich_text": {
+                    "contains": id
+                }
+            }
+        });
+
+        console.log("TelegramID: ", id)
+        console.log("ManagerId: ", response.results[0].id)
+
+        return response.results[0].id;
+    } catch (error) {
+        console.error(error.body)
+    }
+}
+
+//получить id компании заказчика
+async function getCompanyId(id) {
+    try {
+        const response = await notion.databases.query({
+            database_id: databaseManagerId, 
+            "filter": {
+                "property": "TelegramID",
+                "rich_text": {
+                    "contains": id
+                }
+            }
+        });
+
+        console.log("CompanyId: ", response.results[0].properties.Заказчики.relation[0].id)
+
+        return response.results[0].properties.Заказчики.relation[0].id;
+    } catch (error) {
+        console.error(error.body)
+    }
+}
+
 //получить все проекты
 async function getProjects() {
     try {
@@ -780,7 +823,8 @@ async function getProjects2() {
 
 //получить все проекты менеджера по id
 async function getProjectsId(managerId) {
-    console.log("managerId: ", managerId)
+    //console.log("managerId: ", managerId)
+    
     try {
         const response = await notion.databases.query({
             database_id: databaseId,
@@ -915,44 +959,6 @@ async function getPage(pageId) {
         });
 
         return response;
-    } catch (error) {
-        console.error(error.body)
-    }
-}
-
-//получить id менеджера по его TelegramID
-async function getManagerId(id) {
-    try {
-        const response = await notion.databases.query({
-            database_id: databaseManagerId, 
-            "filter": {
-                "property": "TelegramID",
-                "rich_text": {
-                    "contains": id
-                }
-            }
-        });
-
-        return response.results[0].id;
-    } catch (error) {
-        console.error(error.body)
-    }
-}
-
-//получить id компании заказчика
-async function getCompanyId(id) {
-    try {
-        const response = await notion.databases.query({
-            database_id: databaseManagerId, 
-            "filter": {
-                "property": "TelegramID",
-                "rich_text": {
-                    "contains": id
-                }
-            }
-        });
-
-        return response.results[0].properties.Заказчики.relation[0].id;
     } catch (error) {
         console.error(error.body)
     }
