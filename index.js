@@ -359,13 +359,9 @@ async function newDatabase(parent_page_id, worklist) {
             ],
             "is_inline": true,
             "properties": { 
-                "№": {
-                    "name": "№", 
-                    "title": {}
-                },               
                 "1. Дата": {
                     "name": "Дата", 
-                    "Date": {}
+                    "title": {}
                 },
                 "2. 👷 ФИО": {    
                     "name": "👷 ФИО",               
@@ -475,14 +471,10 @@ async function newDatabase_3(parent_page_id) {
                 }
             ],
             "is_inline": true,
-            "properties": { 
-                "№": {
-                    "name": "№", 
-                    "title": {}
-                },               
+            "properties": {                
                 "1. Дата": {
                     "name": "Дата", 
-                    "Date": {}
+                    "title": {}
                 },
                 "2. 👷 ФИО": {    
                     "name": "👷 ФИО",               
@@ -619,35 +611,16 @@ async function addWorker(blockId, worker) {
         const response = await notion.pages.create({
             parent: { database_id: blockId },
             properties: {
-                "№": {
-                    type: "title",
-                    title: [
-                        {
-                            "type": "text",
-                            "text": {
-                                "content": null,
-                                "link": null
-                            },
-                            "annotations": {
-                                "bold": false,
-                                "italic": false,
-                                "strikethrough": false,
-                                "underline": false,
-                                "code": false,
-                                "color": "default"
-                            },
-                            "plain_text": null,
-                            "href": null
-                        }
-                    ]
-                },
                 "1. Дата": {
-                    type: 'date',                   
-                    date: {
-                        "start": "2022-10-30T00:00:00.000",
-                        "end": null,
-                        "time_zone": "Europe/Moscow"
-                    }
+                    type: 'title',
+                    title: [
+                    {
+                        type: 'text',
+                        text: {
+                            content: "30/10/2022 0:00",
+                        },
+                    },
+                    ]
                 },
                 "3. Специализация": {
                     type: "multi_select",
@@ -657,6 +630,17 @@ async function addWorker(blockId, worker) {
                         }
                     ]
                 }
+                // Комментарий : {
+                //     type: 'rich_text',
+                //     rich_text: [
+                //     {
+                //         type: 'text',
+                //         text: {
+                //             content: worker,
+                //         },
+                //     }
+                //     ]
+                // }
             }
         })
         //console.log(response)
@@ -672,35 +656,16 @@ async function addWorkerZapas(blockId) {
         const response = await notion.pages.create({
             parent: { database_id: blockId },
             properties: {
-                "№": {
-                    type: "title",
-                    title: [
-                        {
-                            "type": "text",
-                            "text": {
-                                "content": null,
-                                "link": null
-                            },
-                            "annotations": {
-                                "bold": false,
-                                "italic": false,
-                                "strikethrough": false,
-                                "underline": false,
-                                "code": false,
-                                "color": "default"
-                            },
-                            "plain_text": null,
-                            "href": null
-                        }
-                    ]
-                },
                 "1. Дата": {
-                    type: 'date',                   
-                    date: {
-                        "start": "2022-10-30T00:00:00.000",
-                        "end": null,
-                        "time_zone": "Europe/Moscow"
-                    }
+                    type: 'title',
+                    title: [
+                    {
+                        type: 'text',
+                        text: {
+                            content: "30/10/2022 0:00",
+                        },
+                    },
+                    ]
                 }
             }
         })
