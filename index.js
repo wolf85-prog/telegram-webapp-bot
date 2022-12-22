@@ -359,9 +359,13 @@ async function newDatabase(parent_page_id, worklist) {
             ],
             "is_inline": true,
             "properties": { 
+                "№": {
+                    "name": "№", 
+                    "title": {}
+                },               
                 "1. Дата": {
                     "name": "Дата", 
-                    "title": {}
+                    "Date": {}
                 },
                 "2. 👷 ФИО": {    
                     "name": "👷 ФИО",               
@@ -471,10 +475,14 @@ async function newDatabase_3(parent_page_id) {
                 }
             ],
             "is_inline": true,
-            "properties": {                
+            "properties": { 
+                "№": {
+                    "name": "№", 
+                    "title": {}
+                },               
                 "1. Дата": {
                     "name": "Дата", 
-                    "title": {}
+                    "Date": {}
                 },
                 "2. 👷 ФИО": {    
                     "name": "👷 ФИО",               
@@ -612,15 +620,12 @@ async function addWorker(blockId, worker) {
             parent: { database_id: blockId },
             properties: {
                 "1. Дата": {
-                    type: 'title',
-                    title: [
-                    {
-                        type: 'text',
-                        text: {
-                            content: "30/10/2022 0:00",
-                        },
-                    },
-                    ]
+                    type: 'date',                   
+                    date: {
+                        "start": "2022-10-30T00:00:00.000",
+                        "end": null,
+                        "time_zone": "Europe/Moscow"
+                    }
                 },
                 "3. Специализация": {
                     type: "multi_select",
@@ -630,17 +635,6 @@ async function addWorker(blockId, worker) {
                         }
                     ]
                 }
-                // Комментарий : {
-                //     type: 'rich_text',
-                //     rich_text: [
-                //     {
-                //         type: 'text',
-                //         text: {
-                //             content: worker,
-                //         },
-                //     }
-                //     ]
-                // }
             }
         })
         //console.log(response)
@@ -657,15 +651,12 @@ async function addWorkerZapas(blockId) {
             parent: { database_id: blockId },
             properties: {
                 "1. Дата": {
-                    type: 'title',
-                    title: [
-                    {
-                        type: 'text',
-                        text: {
-                            content: "30/10/2022 0:00",
-                        },
-                    },
-                    ]
+                    type: 'date',                   
+                    date: {
+                        "start": "2022-10-30T00:00:00.000",
+                        "end": null,
+                        "time_zone": "Europe/Moscow"
+                    }
                 }
             }
         })
