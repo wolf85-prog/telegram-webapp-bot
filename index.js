@@ -751,7 +751,9 @@ async function getManagerId(id) {
                 }
             }
         });
+        console.log("-------------------------------------------------------")
         console.log("----------------Открытие приложения--------------------")
+        console.log("-------------------------------------------------------")
         console.log("TelegramID: ", id)
         console.log("ManagerId: ", response.results[0].id)
 
