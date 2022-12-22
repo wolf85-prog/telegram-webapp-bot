@@ -619,6 +619,28 @@ async function addWorker(blockId, worker) {
         const response = await notion.pages.create({
             parent: { database_id: blockId },
             properties: {
+                "№": {
+                    type: "title",
+                    title: [
+                        {
+                            "type": "text",
+                            "text": {
+                                "content": null,
+                                "link": null
+                            },
+                            "annotations": {
+                                "bold": false,
+                                "italic": false,
+                                "strikethrough": false,
+                                "underline": false,
+                                "code": false,
+                                "color": "default"
+                            },
+                            "plain_text": null,
+                            "href": null
+                        }
+                    ]
+                },
                 "1. Дата": {
                     type: 'date',                   
                     date: {
@@ -650,6 +672,28 @@ async function addWorkerZapas(blockId) {
         const response = await notion.pages.create({
             parent: { database_id: blockId },
             properties: {
+                "№": {
+                    type: "title",
+                    title: [
+                        {
+                            "type": "text",
+                            "text": {
+                                "content": null,
+                                "link": null
+                            },
+                            "annotations": {
+                                "bold": false,
+                                "italic": false,
+                                "strikethrough": false,
+                                "underline": false,
+                                "code": false,
+                                "color": "default"
+                            },
+                            "plain_text": null,
+                            "href": null
+                        }
+                    ]
+                },
                 "1. Дата": {
                     type: 'date',                   
                     date: {
