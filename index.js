@@ -731,6 +731,8 @@ async function addAddress(geo, projectname, datestart, teh, managerId, companyId
 }
 
 //--------------------------------------------------------------------------------------------------------
+//              GET REQUEST
+//--------------------------------------------------------------------------------------------------------
 
 //get items from DB
 async function getDatabase() {
@@ -757,6 +759,7 @@ async function getManagerId(id) {
                 }
             }
         });
+
         console.log("-------------------------------------------------------")
         console.log("----------------Открытие приложения--------------------")
         console.log("-------------------------------------------------------")
@@ -781,9 +784,7 @@ async function getCompanyId(id) {
                 }
             }
         });
-
-        console.log("CompanyId: ", response.results[0].properties.Заказчики.relation[0].id)
-
+        console.log("CompanyId: ", response.results[0].id)
         return response.results[0].properties.Заказчики.relation[0].id;
     } catch (error) {
         console.error(error.body)
@@ -832,7 +833,6 @@ async function getProjects2() {
 //получить все проекты менеджера по id
 async function getProjectsId(managerId) {
     //console.log("managerId: ", managerId)
-    
     try {
         const response = await notion.databases.query({
             database_id: databaseId,
@@ -922,7 +922,6 @@ async function getBlocks(blockId) {
         });
 
         let res;
-
         (count >1) ? res = response.results[1].id : res = response.results[0].id     
         
         console.log("Blocks Data: "  + JSON.stringify(res))
@@ -1035,63 +1034,6 @@ async function getCompanys() {
         console.error(error.body)
     }
 }
-
-
-bot.on('message', async (msg) => {
-  const chatId = msg.chat.id;
-  const text = msg.text;
-
-  if (text === '/start') {
-    await bot.sendMessage(chatId, 'Добро пожаловать в телеграм-бот U.L.E.Y_Projects. Смотрите и создавайте проекты U.L.E.Y в ' +
-        'web-приложении прямо из мессенджера Telegram.', {
-        reply_markup: ({
-            inline_keyboard:[
-                [{text: 'Информация', callback_data:'Информация'}, {text: 'Настройки', callback_data:'Настройки'}],
-                [{text: 'Открыть проекты U.L.E.Y', web_app: {url: webAppUrl}}],
-            ]
-        })
-    })
-  }
-
-  if (text === '/menu') {
-      await bot.sendMessage(chatId, 'Смотрите и создавайте проекты U.L.E.Y в web-приложении прямо из мессенджера Telegram.', {
-          reply_markup: ({
-              inline_keyboard:[
-                  [{text: 'Информация', callback_data:'Информация'}, {text: 'Настройки', callback_data:'Настройки'}],
-                  [{text: 'Открыть проекты U.L.E.Y', web_app: {url: webAppUrl}}],
-              ]
-          })
-      })
-  }
-
-
-  if (text === '/info') {
-    await bot.sendMessage(chatId, 'Чат-бот предназначен для создания проектов в U.L.E.Y и общения заказчика с администратором проектов.');
-  }
-
-  if (text === '/settings') {
-
-  }
-  
-});
-
-//Ответ на нажатие кнопок настройки и информаци
-bot.on('callback_query', msg => {
-    const data = msg.data;
-    const chatId = msg.message.chat.id;
-
-    if (data === '/menu') {
-        return bot.sendMessage(chatId, 'Смотрите и создавайте Notion-проекты в web-приложении прямо из мессенджера Telegram.', {
-            reply_markup: ({
-                inline_keyboard:[
-                    [{text: 'Информация', callback_data:'Информация'}, {text: 'Настройки', callback_data:'Настройки'}],
-                    [{text: 'Открыть Notion-проекты', web_app: {url: webAppUrl}}],
-                ]
-            })
-        })
-    }
-    bot.sendMessage(chatId, `Вы нажали кнопку ${data}`, backOptions)
-});
 
 
 app.get('/secret',(req, res) => {
@@ -1233,6 +1175,63 @@ app.get("/address", async (req, res) => {
   });
 
 //-------------------------------------------------------------------------------------------------------
+
+
+bot.on('message', async (msg) => {
+    const chatId = msg.chat.id;
+    const text = msg.text;
+  
+    if (text === '/start') {
+      await bot.sendMessage(chatId, 'Добро пожаловать в телеграм-бот U.L.E.Y_Projects. Смотрите и создавайте проекты U.L.E.Y в ' +
+          'web-приложении прямо из мессенджера Telegram.', {
+          reply_markup: ({
+              inline_keyboard:[
+                  [{text: 'Информация', callback_data:'Информация'}, {text: 'Настройки', callback_data:'Настройки'}],
+                  [{text: 'Открыть проекты U.L.E.Y', web_app: {url: webAppUrl}}],
+              ]
+          })
+      })
+    }
+  
+    if (text === '/menu') {
+        await bot.sendMessage(chatId, 'Смотрите и создавайте проекты U.L.E.Y в web-приложении прямо из мессенджера Telegram.', {
+            reply_markup: ({
+                inline_keyboard:[
+                    [{text: 'Информация', callback_data:'Информация'}, {text: 'Настройки', callback_data:'Настройки'}],
+                    [{text: 'Открыть проекты U.L.E.Y', web_app: {url: webAppUrl}}],
+                ]
+            })
+        })
+    }
+  
+  
+    if (text === '/info') {
+      await bot.sendMessage(chatId, 'Чат-бот предназначен для создания проектов в U.L.E.Y и общения заказчика с администратором проектов.');
+    }
+  
+    if (text === '/settings') {
+  
+    }
+    
+  });
+  
+  //Ответ на нажатие кнопок настройки и информаци
+  bot.on('callback_query', msg => {
+      const data = msg.data;
+      const chatId = msg.message.chat.id;
+  
+      if (data === '/menu') {
+          return bot.sendMessage(chatId, 'Смотрите и создавайте Notion-проекты в web-приложении прямо из мессенджера Telegram.', {
+              reply_markup: ({
+                  inline_keyboard:[
+                      [{text: 'Информация', callback_data:'Информация'}, {text: 'Настройки', callback_data:'Настройки'}],
+                      [{text: 'Открыть Notion-проекты', web_app: {url: webAppUrl}}],
+                  ]
+              })
+          })
+      }
+      bot.sendMessage(chatId, `Вы нажали кнопку ${data}`, backOptions)
+  });
 
 
 //создание страницы (проекта) базыданных проектов
