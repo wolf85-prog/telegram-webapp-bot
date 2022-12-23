@@ -359,10 +359,9 @@ async function newDatabase(parent_page_id, worklist) {
             ],
             "is_inline": true,
             "properties": { 
-                // "1. Дата": {
-                //     "name": "Дата", 
-                //     "title": {}
-                // },
+                "Num.": {
+                    "title": {}
+                },
                 "1. Дата": {
                     "date": {}
                 },
@@ -475,10 +474,9 @@ async function newDatabase_3(parent_page_id) {
             ],
             "is_inline": true,
             "properties": {                
-                // "1. Дата": {
-                //     "name": "Дата", 
-                //     "title": {}
-                // },
+                "Num.": {
+                    "title": {}
+                },
                 "1. Дата": {
                     "date": {}
                 },
