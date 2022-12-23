@@ -628,6 +628,15 @@ async function addWorker(blockId, worker) {
                     },
                     ]
                 },
+                Date : {
+                    type: 'date',                   
+                    date: {
+                        "start": "2022-10-30T00:00:00.000",
+                        "end": null,
+                        "time_zone": "Europe/Moscow"
+                    }
+
+                },
                 "3. Специализация": {
                     type: "multi_select",
                     multi_select: [
@@ -672,6 +681,15 @@ async function addWorkerZapas(blockId) {
                         },
                     },
                     ]
+                },
+                Date : {
+                    type: 'date',                   
+                    date: {
+                        "start": "2022-10-30T00:00:00.000",
+                        "end": null,
+                        "time_zone": "Europe/Moscow"
+                    }
+
                 }
             }
         })
