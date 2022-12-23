@@ -1261,36 +1261,36 @@ app.post('/web-data', async (req, res) => {
   const chas = d.getHours();
   const minut = String(d.getMinutes()).padStart(2, "0");
   try {
-//       await bot.answerWebAppQuery(queryId, {
-//           type: 'article',
-//           id: queryId,
-//           title: 'Проект успешно создан',
-//           input_message_content: {
-//               parse_mode: 'HTML',
-//               message_text: 
-// `Проект успешно создан!
+      await bot.answerWebAppQuery(queryId, {
+          type: 'article',
+          id: queryId,
+          title: 'Проект успешно создан',
+          input_message_content: {
+              parse_mode: 'HTML',
+              message_text: 
+`Проект успешно создан!
 
-// <b>Проект:</b> ${projectname} 
-// <b>Дата:</b> ${day}.${month}.${year}
-// <b>Время:</b> ${chas}:${minut} 
-// <b>Адрес:</b> ${geo} 
-// <b>Тех. задание:</b> ${teh}  
-// <b>Специалисты:</b>  
-// ${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}`
-//             }
-//       })
+<b>Проект:</b> ${projectname} 
+<b>Дата:</b> ${day}.${month}.${year}
+<b>Время:</b> ${chas}:${minut} 
+<b>Адрес:</b> ${geo} 
+<b>Тех. задание:</b> ${teh}  
+<b>Специалисты:</b>  
+${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}`
+            }
+      })
 
-//         await bot.sendMessage(chatGroupId, 
-// `Проект успешно создан! 
+        await bot.sendMessage(chatGroupId, 
+`Проект успешно создан! 
 
-// Название проекта:  ${projectname} 
-// Дата: ${day}.${month}.${year}
-// Время: ${chas}:${minut} 
-// Адрес: ${geo} 
-// Тех. задание: ${teh}  
-// Специалисты: 
-// ${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}`
-//         )
+Название проекта:  ${projectname} 
+Дата: ${day}.${month}.${year}
+Время: ${chas}:${minut} 
+Адрес: ${geo} 
+Тех. задание: ${teh}  
+Специалисты: 
+${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}`
+        )
 
       //добавление геопозиции в БД Площадки (Адрес) и добавление проекта
       if (geo != '') {
