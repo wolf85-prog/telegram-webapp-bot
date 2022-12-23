@@ -359,11 +359,11 @@ async function newDatabase(parent_page_id, worklist) {
             ],
             "is_inline": true,
             "properties": { 
+                // "1. Дата": {
+                //     "name": "Дата", 
+                //     "title": {}
+                // },
                 "1. Дата": {
-                    "name": "Дата", 
-                    "title": {}
-                },
-                "Date": {
                     "date": {}
                 },
                 "2. 👷 ФИО": {    
@@ -475,11 +475,11 @@ async function newDatabase_3(parent_page_id) {
             ],
             "is_inline": true,
             "properties": {                
+                // "1. Дата": {
+                //     "name": "Дата", 
+                //     "title": {}
+                // },
                 "1. Дата": {
-                    "name": "Дата", 
-                    "title": {}
-                },
-                "Date": {
                     "date": {}
                 },
                 "2. 👷 ФИО": {    
@@ -617,18 +617,18 @@ async function addWorker(blockId, worker) {
         const response = await notion.pages.create({
             parent: { database_id: blockId },
             properties: {
+                // "1. Дата": {
+                //     type: 'title',
+                //     title: [
+                //     {
+                //         type: 'text',
+                //         text: {
+                //             content: "30/10/2022 0:00",
+                //         },
+                //     },
+                //     ]
+                // },
                 "1. Дата": {
-                    type: 'title',
-                    title: [
-                    {
-                        type: 'text',
-                        text: {
-                            content: "30/10/2022 0:00",
-                        },
-                    },
-                    ]
-                },
-                Date : {
                     type: 'date',                   
                     date: {
                         "start": "2022-10-30T00:00:00.000",
@@ -671,18 +671,18 @@ async function addWorkerZapas(blockId) {
         const response = await notion.pages.create({
             parent: { database_id: blockId },
             properties: {
+                // "1. Дата": {
+                //     type: 'title',
+                //     title: [
+                //     {
+                //         type: 'text',
+                //         text: {
+                //             content: "30/10/2022 0:00",
+                //         },
+                //     },
+                //     ]
+                // },
                 "1. Дата": {
-                    type: 'title',
-                    title: [
-                    {
-                        type: 'text',
-                        text: {
-                            content: "30/10/2022 0:00",
-                        },
-                    },
-                    ]
-                },
-                Date : {
                     type: 'date',                   
                     date: {
                         "start": "2022-10-30T00:00:00.000",
