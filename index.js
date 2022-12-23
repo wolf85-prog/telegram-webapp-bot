@@ -869,6 +869,8 @@ async function getProjectsId(managerId) {
                id: page.id,
                title: page.properties.Name.title[0]?.plain_text,
                time: page.properties.Date.date,
+               time_start: page.properties.Date.date.start,
+               time_created: page.created_time,
                geo: '',//page.properties.Address.rollup.array,
                teh: page.properties.TechZadanie.rich_text,
                status_id: page.properties.Status.select,
