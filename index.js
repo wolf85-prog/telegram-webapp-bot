@@ -169,7 +169,7 @@ async function addProject(title, time, teh, managerId, companyId, worklist, geoI
         })
         //console.log(response)
         const res_id = response.id;
-        console.log("1 Success! Project " + response.Name.title[0]?.plain_text + " with geo added. " + res_id)
+        console.log("1 Success! Project with geo added. " + res_id)
 
         //setTimeout(()=> {
             newDatabase_1(res_id);
@@ -263,7 +263,7 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
         })
         //console.log(response)
         const res_id = response.id;
-        console.log("Success! Project " + response.Name.title[0]?.plain_text + " not geo added. " + res_id)        
+        console.log("Success! Project not geo added. " + res_id)        
 
         setTimeout(()=> {
             newDatabase_1(res_id);
@@ -745,6 +745,51 @@ async function getDatabase() {
     }
 }
 
+//получить id менеджера по его TelegramID
+async function getManagerId(id) {
+    try {
+        const response = await notion.databases.query({
+            database_id: databaseManagerId, 
+            "filter": {
+                "property": "TelegramID",
+                "rich_text": {
+                    "contains": id
+                }
+            }
+        });
+        console.log("-------------------------------------------------------")
+        console.log("----------------Открытие приложения--------------------")
+        console.log("-------------------------------------------------------")
+        console.log("TelegramID: ", id)
+        console.log("ManagerId: ", response.results[0].id)
+
+        return response.results[0].id;
+    } catch (error) {
+        console.error(error.body)
+    }
+}
+
+//получить id компании заказчика
+async function getCompanyId(id) {
+    try {
+        const response = await notion.databases.query({
+            database_id: databaseManagerId, 
+            "filter": {
+                "property": "TelegramID",
+                "rich_text": {
+                    "contains": id
+                }
+            }
+        });
+
+        console.log("CompanyId: ", response.results[0].properties.Заказчики.relation[0].id)
+
+        return response.results[0].properties.Заказчики.relation[0].id;
+    } catch (error) {
+        console.error(error.body)
+    }
+}
+
 //получить все проекты
 async function getProjects() {
     try {
@@ -786,7 +831,8 @@ async function getProjects2() {
 
 //получить все проекты менеджера по id
 async function getProjectsId(managerId) {
-    console.log("managerId: ", managerId)
+    //console.log("managerId: ", managerId)
+    
     try {
         const response = await notion.databases.query({
             database_id: databaseId,
@@ -921,44 +967,6 @@ async function getPage(pageId) {
         });
 
         return response;
-    } catch (error) {
-        console.error(error.body)
-    }
-}
-
-//получить id менеджера по его TelegramID
-async function getManagerId(id) {
-    try {
-        const response = await notion.databases.query({
-            database_id: databaseManagerId, 
-            "filter": {
-                "property": "TelegramID",
-                "rich_text": {
-                    "contains": id
-                }
-            }
-        });
-
-        return response.results[0].id;
-    } catch (error) {
-        console.error(error.body)
-    }
-}
-
-//получить id компании заказчика
-async function getCompanyId(id) {
-    try {
-        const response = await notion.databases.query({
-            database_id: databaseManagerId, 
-            "filter": {
-                "property": "TelegramID",
-                "rich_text": {
-                    "contains": id
-                }
-            }
-        });
-
-        return response.results[0].properties.Заказчики.relation[0].id;
     } catch (error) {
         console.error(error.body)
     }
