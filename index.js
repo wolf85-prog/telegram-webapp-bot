@@ -1345,11 +1345,14 @@ bot.on('message', async (msg) => {
                 }
             })
 
-            const obj = {
-                title2: arritem,
-                count_fio: count_fio,
+            if (count_fio != 0) {
+                const obj = {
+                    title2: arritem,
+                    count_fio: count_fio,
+                }
+                arr_count.push(obj)
             }
-            arr_count.push(obj)
+            
         })
 
         //отправка сообщения в чат ГИА
