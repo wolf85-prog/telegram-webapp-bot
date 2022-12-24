@@ -1320,6 +1320,14 @@ bot.on('message', async (msg) => {
     if (text === '/settings') {
   
     }
+
+    if (text === '/getmyblockdb') {
+        //const projectId = addProjectTest(projectname, datestart, teh, worklist);
+        const projectId = '34954a42-006e-440d-b435-3cb1d5ae8900';
+        const blockId = getBlocks(projectId);
+        const databaseBlock = getDatabaseId(blockId); //JSON.stringify(responseResults)
+        await bot.sendMessage(chatId, JSON.stringify(databaseBlock));
+    }
     
   });
   
