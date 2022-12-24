@@ -1328,13 +1328,38 @@ bot.on('message', async (msg) => {
         const databaseBlock = await getDatabaseId(blockId); //JSON.stringify(responseResults)
         //await bot.sendMessage(chatId, JSON.stringify(databaseBlock));
 
+        let count_fio;
+        const arr_count = []  
+        const arr_cat = ['Sound', 'Light', 'Video', 'Riggers', 'Stagehands', 'StageGround', 'Trucks', 'Production']
+        arr_cat.map((arritem) => {
+            count_fio = 0;
+            databaseBlock.map((value) => {
+                if (arritem === value.title) {
+                    if (value.fio) {
+                        count_fio++
+                        //console.log("title: " + value.title + " count: " + count_fio)                  
+                    }else {
+                        count_fio;
+                        //console.log("title: " + value.title + " count: " + count_fio)
+                    }               
+                }
+            })
+
+            const obj = {
+                title2: arritem,
+                count_fio: count_fio,
+            }
+            arr_count.push(obj)
+        })
+
         //отправка сообщения в чат ГИА
         await bot.sendMessage(chatId, 
-            `Тестпро 
+`Тестпро 
              
-            Специалисты: 
-            ${databaseBlock.map(item => ' - ' + item.fio + ' = ' + item.title + ' чел.').join('\n')}`
-        )
+Специалисты: 
+${arr_count.map(item => ' - ' + item.title2 + ' = ' + item.count_fio + ' чел.').join('\n')}`
+        
+    )
     }
     
   });
