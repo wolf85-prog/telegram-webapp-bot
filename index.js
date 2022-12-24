@@ -13,6 +13,7 @@ const databaseCompanyId = process.env.NOTION_DATABASE_COMPANY_ID
 const databaseWorkersId = process.env.NOTION_DATABASE_WORKERS_ID
 const chatGroupId = process.env.CHAT_GROUP_ID
 const chatTelegramId = process.env.CHAT_ID
+const chatGiaId = process.env.GIA_CHAT_ID
 
 //telegram api
 const TelegramBot = require('node-telegram-bot-api');
@@ -281,6 +282,88 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
         console.error(error.body)
     }
 }
+
+//------------------------------- Тест -----------------------------------------------------
+//Добавление проекта в Notion (addProject send data to notion)
+async function addProjectTest(title, time, teh, worklist) {
+    try {
+        const response = await notion.pages.create({
+            parent: { database_id: databaseId },
+            icon: {
+                type: "emoji",
+                emoji: "🟦"
+            },
+            properties: {
+                Name: {
+                    title:[
+                        {
+                            "text": {
+                                "content": title
+                            }
+                        }
+                    ]
+                },
+                Date: {
+                    type: 'date',
+                    date: {
+                        "start": time,
+                        "end": null,
+                        "time_zone": "Europe/Moscow"
+                    }
+                },
+                TechZadanie: {
+                    type: 'rich_text',
+                    rich_text: [
+                        {
+                            type: 'text',
+                            text: {
+                                content: teh,
+                            },
+                        }
+                        ],
+                },
+                Status: {
+                    type: 'select',
+                    select: {
+                        "id": "08338ef4-9a4a-4f52-8e86-cc3f4115a9f2",
+                        "name": "Test",
+                        "color": "default"
+                    }
+                },
+                City: {
+                    type: 'select',
+                    select: {
+                        "id": "4e370773-fb5d-4ef7-bd2a-eaa91e5919e0",
+                        "name": "Test",
+                        "color": "brown"
+                    }
+                }                
+            }
+        })
+        //console.log(response)
+        const res_id = response.id;
+        console.log("1 Success! Project with geo added. " + res_id)
+
+        //setTimeout(()=> {
+            newDatabase_1(res_id);
+        //}, 2000) 
+
+        setTimeout(()=> {
+            newDatabase(res_id, worklist);
+        }, 4000) 
+
+        setTimeout(()=> {
+            newDatabase_3(res_id);
+        }, 9000)
+
+        return res_id;
+
+    } catch (error) {
+        console.error(error.body)
+    }
+}
+
+//-----------------------------------------------------------------------------------
 
 //создание базы данных "График работы"
 async function newDatabase_1(parent_page_id) {
@@ -1310,6 +1393,54 @@ ${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join
       return res.status(500).json({})
   }
 })
+
+
+//создание тестовой страницы (проекта) базыданных проектов
+app.post('/web-test-data', async (req, res) => {
+    const {queryId, projectname, datestart, geo, teh, managerId, companyId, worklist = []} = req.body;
+    const d = new Date(datestart);
+    //console.log(d);
+    const year = d.getFullYear();
+    const month = d.getMonth()+1;
+    const day = String(d.getDate()).padStart(2, "0");
+    const chas = d.getHours();
+    const minut = String(d.getMinutes()).padStart(2, "0");
+    try {
+        await bot.answerWebAppQuery(queryId, {
+            type: 'article',
+            id: queryId,
+            title: 'Тестпро',
+            input_message_content: {
+                parse_mode: 'HTML',
+                message_text: 
+  `Тестпро!
+  
+  <b>Проект:</b> ${projectname} 
+  <b>Дата:</b> ${day}.${month}.${year}
+  <b>Время:</b> ${chas}:${minut} 
+  <b>Тех. задание:</b> ${teh}  
+  <b>Специалисты:</b>  
+  ${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}`
+              }
+        })
+  
+        const projectId = addProjectTest(projectname, datestart, teh, worklist);
+        const blockId = getBlocks(projectId);
+        const databaseBlock = getDatabaseId(blockId); //JSON.stringify(responseResults)
+
+        //отправка сообщения в чат ГИА
+        await bot.sendMessage(chatGiaId, 
+            `Основной состав 
+             
+            Специалисты: 
+            ${databaseBlock.map(item => ' - ' + item.fio + ' = ' + item.title + ' чел.').join('\n')}`
+)
+  
+        return res.status(200).json({});
+    } catch (e) {
+        return res.status(500).json({})
+    }
+  })
 
 const PORT = 8000;
 
