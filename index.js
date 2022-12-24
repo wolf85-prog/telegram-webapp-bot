@@ -1360,20 +1360,15 @@ bot.on('message', async (msg) => {
             
         })
 
-        while (true) {
-            // do something here
-            setTimeout(()=> {
-                console.log("такт")
-            }, 2000)
-        }
+        
 //отправка сообщения в чат ГИА
-// await bot.sendMessage(chatId, 
-//     `Тестпро 
+await bot.sendMessage(chatId, 
+`Тестпро 
                              
-//     Специалисты: 
-//     ${arr_count.map(item =>'31.12' +'|' + '10:00' + '|' +  ' U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
+Специалисты: 
+${arr_count.map(item =>'31.12' +'|' + '10:00' + '|' +  ' U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
                         
-//                 )
+)
         
     }
     
