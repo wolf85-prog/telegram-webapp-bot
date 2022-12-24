@@ -77,9 +77,14 @@ bot.on('message', msg => {
     if (!text.includes('/')) {       
         if (text.includes("Ответ")) {           
             bot.sendMessage(text.substring(6, text.indexOf('.')), text.slice(text.indexOf('.') + 2))
+        
         } else if (text.includes('Проект успешно создан')) {
             bot.sendMessage(chat_id, 'Ваша заявка отправлена администратору!')
             bot.sendMessage(chatTelegramId, `${text} \n \n от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)
+        
+        } else if (text.includes('Тестпро')) {
+            bot.sendMessage(chat_id, 'Ваша заявка обрабатывается!')
+           
         } else {
             bot.sendMessage(chat_id, `Ваше сообщение "${text}" отправлено администратору!`)
             bot.sendMessage(chatTelegramId, `${text} \n \n от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)           
