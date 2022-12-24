@@ -1326,7 +1326,15 @@ bot.on('message', async (msg) => {
         const projectId = '34954a42-006e-440d-b435-3cb1d5ae8900';
         const blockId = await getBlocks(projectId);
         const databaseBlock = await getDatabaseId(blockId); //JSON.stringify(responseResults)
-        await bot.sendMessage(chatId, JSON.stringify(databaseBlock));
+        //await bot.sendMessage(chatId, JSON.stringify(databaseBlock));
+
+        //отправка сообщения в чат ГИА
+        await bot.sendMessage(chatId, 
+            `Основной состав 
+             
+            Специалисты: 
+            ${databaseBlock.map(item => ' - ' + item.fio + ' = ' + item.title + ' чел.').join('\n')}`
+        )
     }
     
   });
