@@ -1329,10 +1329,12 @@ bot.on('message', async (msg) => {
         //await bot.sendMessage(chatId, JSON.stringify(databaseBlock));
 
         let count_fio;
+        let count_title;
         const arr_count = []  
         const arr_cat = ['Sound', 'Light', 'Video', 'Riggers', 'Stagehands', 'StageGround', 'Trucks', 'Production']
         arr_cat.map((arritem) => {
             count_fio = 0;
+            count_title = 0;
             databaseBlock.map((value) => {
                 if (arritem === value.title) {
                     if (value.fio) {
@@ -1341,7 +1343,9 @@ bot.on('message', async (msg) => {
                     }else {
                         count_fio;
                         //console.log("title: " + value.title + " count: " + count_fio)
-                    }               
+                    }  
+
+                    count_title++;
                 }
             })
 
@@ -1349,6 +1353,7 @@ bot.on('message', async (msg) => {
                 const obj = {
                     title2: arritem,
                     count_fio: count_fio,
+                    count_title: count_title,
                 }
                 arr_count.push(obj)
             }
@@ -1360,7 +1365,7 @@ bot.on('message', async (msg) => {
 `Тестпро 
              
 Специалисты: 
-${arr_count.map(item => ' - ' + item.title2 + ' = ' + item.count_fio + ' чел.').join('\n')}`
+${arr_count.map(item => ' - ' + item.title2 + ' = ' + item.count_fio + '|' + item.count_title + ' чел.').join('\n')}`
         
     )
     }
