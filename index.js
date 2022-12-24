@@ -1416,19 +1416,21 @@ app.post('/web-test-data', async (req, res) => {
         const blockId = getBlocks(projectId);
         const databaseBlock = getDatabaseId(blockId); //JSON.stringify(responseResults)
 
+        console.log("databaseBlock: ", JSON.stringify(databaseBlock))
+
         //отправка сообщения в чат ГИА
-        await bot.sendMessage(chatGiaId, 
-            `Основной состав 
+        // await bot.sendMessage(chatGiaId, 
+        //     `Основной состав 
              
-            Специалисты: 
-            ${databaseBlock.map(item => ' - ' + item.fio + ' = ' + item.title + ' чел.').join('\n')}`
-)
+        //     Специалисты: 
+        //     ${databaseBlock.map(item => ' - ' + item.fio + ' = ' + item.title + ' чел.').join('\n')}`
+        // )
   
         return res.status(200).json({});
     } catch (e) {
         return res.status(500).json({})
     }
-  })
+})
 
 const PORT = 8000;
 
