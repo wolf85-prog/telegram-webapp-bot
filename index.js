@@ -1365,7 +1365,7 @@ bot.on('message', async (msg) => {
 `Тестпро 
              
 Специалисты: 
-${arr_count.map(item => ' - ' + item.title2 + ' = ' + item.count_fio + s.match(/[/]/g) + item.count_title + ' чел.').join('\n')}`
+${arr_count.map(item => ' - ' + item.title2 + ' = ' + item.count_fio + '\/' + item.count_title + ' чел.').join('\n')}`
         
     )
     }
