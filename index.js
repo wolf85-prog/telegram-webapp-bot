@@ -83,7 +83,7 @@ bot.on('message', msg => {
             bot.sendMessage(chatTelegramId, `${text} \n \n от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)
         
         } else if (text.includes('Тестпро')) {
-            bot.sendMessage(chat_id, 'Ваша заявка обрабатывается!')
+            //bot.sendMessage(chat_id, 'Ваша заявка обрабатывается!')
            
         } else {
             bot.sendMessage(chat_id, `Ваше сообщение "${text}" отправлено администратору!`)
@@ -1330,7 +1330,7 @@ bot.on('message', async (msg) => {
 
         //отправка сообщения в чат ГИА
         await bot.sendMessage(chatId, 
-            `Основной состав 
+            `Тестпро 
              
             Специалисты: 
             ${databaseBlock.map(item => ' - ' + item.fio + ' = ' + item.title + ' чел.').join('\n')}`
