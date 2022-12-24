@@ -1406,23 +1406,6 @@ app.post('/web-test-data', async (req, res) => {
     const chas = d.getHours();
     const minut = String(d.getMinutes()).padStart(2, "0");
     try {
-        await bot.answerWebAppQuery(queryId, {
-            type: 'article',
-            id: queryId,
-            title: 'Тестпро',
-            input_message_content: {
-                parse_mode: 'HTML',
-                message_text: 
-  `Тестпро!
-  
-  <b>Проект:</b> ${projectname} 
-  <b>Дата:</b> ${day}.${month}.${year}
-  <b>Время:</b> ${chas}:${minut} 
-  <b>Тех. задание:</b> ${teh}  
-  <b>Специалисты:</b>  
-  ${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}`
-              }
-        })
   
         const projectId = addProjectTest(projectname, datestart, teh, worklist);
         const blockId = getBlocks(projectId);
