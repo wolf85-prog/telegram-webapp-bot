@@ -1375,7 +1375,9 @@ ${arr_count.map(item =>'31.12' +'|' + '10:00' + '|' +  ' U.L.E.Y' + ' = ' + item
         // повторить с интервалом 2 секунды
         let timerId = setInterval(() => {
             i++
-            sendReport(i)
+            if (i % 2 == 0) {
+                sendReport(i)
+            }
         }, 2000);
 
         // остановить вывод через 5 секунд
