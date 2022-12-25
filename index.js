@@ -1351,34 +1351,34 @@ ${arr_count.map(item =>'31.12' +'|' + '10:00' + '|' +  ' U.L.E.Y' + ' = ' + item
 
             console.log("databaseBlock: ", JSON.stringify(databaseBlock))
             
-            // arr_cat.map((arritem) => {
-            //     count_fio = 0;
-            //     count_title = 0;
-            //     databaseBlock.map((value) => {
-            //         if (arritem === value.title) {
-            //             if (value.fio) {
-            //                 count_fio++               
-            //             }else {
-            //                 count_fio;
-            //             }  
-            //             count_title++;
-            //         }
-            //     })
+            arr_cat.map((arritem) => {
+                count_fio = 0;
+                count_title = 0;
+                databaseBlock.map((value) => {
+                    if (arritem === value.title) {
+                        if (value.fio) {
+                            count_fio++               
+                        }else {
+                            count_fio;
+                        }  
+                        count_title++;
+                    }
+                })
 
-            //     if (count_fio != 0) {
-            //         const obj = {
-            //             title2: arritem,
-            //             count_fio: count_fio,
-            //             count_title: count_title,
-            //         }
-            //         arr_count.push(obj)
-            //     }
+                if (count_fio != 0) {
+                    const obj = {
+                        title2: arritem,
+                        count_fio: count_fio,
+                        count_title: count_title,
+                    }
+                    arr_count.push(obj)
+                }
                 
-            // })
+            })
 
-            // if (i % 2 == 0) {
-            //     sendReport(i)
-            // }
+            if (i % 2 == 0) {
+                sendReport(i)
+            }
         }, 2000);
 
         // остановить вывод через 5 секунд
