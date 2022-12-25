@@ -1346,7 +1346,6 @@ ${arr_count.map(item =>date +'|' + '10:00' + '|' + name + '|' + ' U.L.E.Y' + ' =
             i++
 
             //const projectRes = addProjectTest(projectname, datestart, teh, worklist);
-
             const projectId = '34954a42-006e-440d-b435-3cb1d5ae8900'; //projectRes.id
             const projectName = 'Тест name'; //projectRes.properties.Name
             const projectDate = '23.12'; //projectRes.properties.Date
@@ -1368,7 +1367,6 @@ ${arr_count.map(item =>date +'|' + '10:00' + '|' + name + '|' + ' U.L.E.Y' + ' =
                         count_title++;
                     }
                 })
-
                 if (count_fio != 0) {
                     const obj = {
                         title2: arritem,
@@ -1376,8 +1374,7 @@ ${arr_count.map(item =>date +'|' + '10:00' + '|' + name + '|' + ' U.L.E.Y' + ' =
                         count_title: count_title,
                     }
                     arr_count.push(obj)
-                }
-                
+                }               
             })
 
             //сохранение массива в 2-х элементный массив
