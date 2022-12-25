@@ -1360,20 +1360,24 @@ bot.on('message', async (msg) => {
             
         })
 
-        function sayReport() {
+        function sendReport() {
             //отправка сообщения в чат ГИА
             bot.sendMessage(chatId, 
                 `Тестпро 
-                                            
-Специалисты: 
-${arr_count.map(item =>'31.12' +'|' + '10:00' + '|' +  ' U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
-                                        
+                                                            
+                Специалисты: 
+                ${arr_count.map(item =>'31.12' +'|' + '10:00' + '|' +  ' U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
+                                                        
             )
         }
 
-        for (let i = 0; i < 6; i += 1) {           
-            setTimeout(sayReport, 2000);
-        }
+
+        // повторить с интервалом 2 секунды
+        let timerId = setInterval(() => sendReport(), 2000);
+
+        // остановить вывод через 5 секунд
+        setTimeout(() => { clearInterval(timerId); }, 5000);
+
         
     }
     
