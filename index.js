@@ -1338,7 +1338,7 @@ ${arr_count.map(item =>'31.12' +'|' + '10:00' + '|' +  ' U.L.E.Y' + ' = ' + item
         let count_title;
         const arr_cat = ['Sound', 'Light', 'Video', 'Riggers', 'Stagehands', 'StageGround', 'Trucks', 'Production']
         let i = 0;
-        const arr_count = [] 
+        let arr_count = [] 
 
         // повторить с интервалом 2 секунды
         let timerId = setInterval(async() => {
