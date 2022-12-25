@@ -1369,7 +1369,7 @@ await bot.sendMessage(chatId,
 // ${arr_count.map(item =>'31.12' +'|' + '10:00' + '|' +  ' U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
 `Тестпро  
 
-sdfdfd / . sdfd* / dfdfdf`.replace(/\\/g, "\\$&")                        
+sdfdfd / . sdfd* / dfdfdf`//.replace(/\\/g, "\\$&")                        
 )
         
     }
