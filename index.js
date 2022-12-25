@@ -347,7 +347,7 @@ async function addProjectTest(title, time, teh, worklist) {
         })
         //console.log(response)
         const res_id = response.id;
-        console.log("1 Success! Project with geo added. " + res_id)
+        console.log("1 Success! Project test added. " + res_id)
 
         //setTimeout(()=> {
             newDatabase_1(res_id);
@@ -361,7 +361,7 @@ async function addProjectTest(title, time, teh, worklist) {
             newDatabase_3(res_id);
         }, 9000)
 
-        return res_id;
+        return response;
 
     } catch (error) {
         console.error(error.body)
@@ -1323,14 +1323,14 @@ bot.on('message', async (msg) => {
 
     if (text === '/getmyblockdb') {
 
-        function sendReport(count) {
+        function sendReport(name, date) {
 
             //отправка сообщения в чат ГИА
             bot.sendMessage(chatId, 
                 `Тестпро 
                                                             
-Специалисты: ${count} 
-${arr_count.map(item =>'31.12' +'|' + '10:00' + '|' +  ' U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
+Специалисты: 
+${arr_count.map(item =>date +'|' + '10:00' + '|' + name + '|' + ' U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
                                                         
             )
         }
@@ -1339,13 +1339,18 @@ ${arr_count.map(item =>'31.12' +'|' + '10:00' + '|' +  ' U.L.E.Y' + ' = ' + item
         const arr_cat = ['Sound', 'Light', 'Video', 'Riggers', 'Stagehands', 'StageGround', 'Trucks', 'Production']
         let i = 0;
         let arr_count = [] 
+        let arr_all = [] 
 
         // повторить с интервалом 2 секунды
         let timerId = setInterval(async() => {
             i++
 
-            //const projectId = addProjectTest(projectname, datestart, teh, worklist);
-            const projectId = '34954a42-006e-440d-b435-3cb1d5ae8900';
+            //const projectRes = addProjectTest(projectname, datestart, teh, worklist);
+
+            const projectId = '34954a42-006e-440d-b435-3cb1d5ae8900'; //projectRes.id
+            const projectName = 'Тест name'; //projectRes.properties.Name
+            const projectDate = '23.12'; //projectRes.properties.Date
+            
             const blockId = await getBlocks(projectId);
             const databaseBlock = await getDatabaseId(blockId); 
             arr_count = [] 
@@ -1375,13 +1380,26 @@ ${arr_count.map(item =>'31.12' +'|' + '10:00' + '|' +  ' U.L.E.Y' + ' = ' + item
                 
             })
 
-            if (i % 2 == 0) {
-                sendReport(i)
-            }
-        }, 2000);
+            //сохранение массива в 2-х элементный массив
+            // if (i % 2 == 0) {
+            //     arr_all[0] = arr_count
+            // } else {
+            //     arr_all[1] = arr_count 
+            // }
+
+            // // Цикл по всем эле­мен­там
+            // for(var i = 0; i < arr_count.length; i++) {
+            //     if (arr_all[0] === arr_all[0]) {
+            //         sendReport()
+            //     };
+            // }     
+            
+            sendReport(projectName, projectDate)
+
+        }, 2000); //1800000
 
         // остановить вывод через 5 секунд
-        setTimeout(() => { clearInterval(timerId); }, 10000);
+        setTimeout(() => { clearInterval(timerId); }, 5000); //3650000
 
         
     }
