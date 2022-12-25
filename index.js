@@ -1322,45 +1322,9 @@ bot.on('message', async (msg) => {
     }
 
     if (text === '/getmyblockdb') {
-        //const projectId = addProjectTest(projectname, datestart, teh, worklist);
-        const projectId = '34954a42-006e-440d-b435-3cb1d5ae8900';
-        const blockId = await getBlocks(projectId);
-        const databaseBlock = await getDatabaseId(blockId); //JSON.stringify(responseResults)
-        //await bot.sendMessage(chatId, JSON.stringify(databaseBlock));
-
-        let count_fio;
-        let count_title;
-        const arr_count = []  
-        const arr_cat = ['Sound', 'Light', 'Video', 'Riggers', 'Stagehands', 'StageGround', 'Trucks', 'Production']
-        arr_cat.map((arritem) => {
-            count_fio = 0;
-            count_title = 0;
-            databaseBlock.map((value) => {
-                if (arritem === value.title) {
-                    if (value.fio) {
-                        count_fio++
-                        //console.log("title: " + value.title + " count: " + count_fio)                  
-                    }else {
-                        count_fio;
-                        //console.log("title: " + value.title + " count: " + count_fio)
-                    }  
-
-                    count_title++;
-                }
-            })
-
-            if (count_fio != 0) {
-                const obj = {
-                    title2: arritem,
-                    count_fio: count_fio,
-                    count_title: count_title,
-                }
-                arr_count.push(obj)
-            }
-            
-        })
 
         function sendReport(count) {
+
             //отправка сообщения в чат ГИА
             bot.sendMessage(chatId, 
                 `Тестпро 
@@ -1370,11 +1334,46 @@ ${arr_count.map(item =>'31.12' +'|' + '10:00' + '|' +  ' U.L.E.Y' + ' = ' + item
                                                         
             )
         }
-
+        let count_fio;
+        let count_title;
+        const arr_count = []  
+        const arr_cat = ['Sound', 'Light', 'Video', 'Riggers', 'Stagehands', 'StageGround', 'Trucks', 'Production']
         let i = 0;
+
         // повторить с интервалом 2 секунды
         let timerId = setInterval(() => {
             i++
+
+            //const projectId = addProjectTest(projectname, datestart, teh, worklist);
+            const projectId = '34954a42-006e-440d-b435-3cb1d5ae8900';
+            const blockId = getBlocks(projectId);
+            const databaseBlock = getDatabaseId(blockId);
+            
+            arr_cat.map((arritem) => {
+                count_fio = 0;
+                count_title = 0;
+                databaseBlock.map((value) => {
+                    if (arritem === value.title) {
+                        if (value.fio) {
+                            count_fio++               
+                        }else {
+                            count_fio;
+                        }  
+                        count_title++;
+                    }
+                })
+
+                if (count_fio != 0) {
+                    const obj = {
+                        title2: arritem,
+                        count_fio: count_fio,
+                        count_title: count_title,
+                    }
+                    arr_count.push(obj)
+                }
+                
+            })
+
             if (i % 2 == 0) {
                 sendReport(i)
             }
