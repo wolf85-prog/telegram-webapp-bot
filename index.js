@@ -1346,12 +1346,12 @@ ${arr_count.map(item =>'31.12' +'|' + '10:00' + '|' +  ' U.L.E.Y' + ' = ' + item
             //const projectId = addProjectTest(projectname, datestart, teh, worklist);
             const projectId = '34954a42-006e-440d-b435-3cb1d5ae8900';
             const blockId = await getBlocks(projectId);
-            const databaseBlock = await getDatabaseId(blockId);
-            const arr_count = []  
+            const databaseBlock = await getDatabaseId(blockId); 
             
             arr_cat.map((arritem) => {
                 count_fio = 0;
                 count_title = 0;
+                const arr_count = [] 
                 databaseBlock.map((value) => {
                     if (arritem === value.title) {
                         if (value.fio) {
