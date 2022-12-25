@@ -1373,11 +1373,17 @@ ${arr_count.map(item =>'31.12' +'|' + '10:00' + '|' +  ' U.L.E.Y' + ' = ' + item
 
 
         // повторить с интервалом 2 секунды
-        let timerId = setInterval(() => sendReport(), 2000);
+        //let timerId = setInterval(() => sendReport(), 2000);
 
         // остановить вывод через 5 секунд
-        setTimeout(() => { clearInterval(timerId); }, 10000);
+        //setTimeout(() => { clearInterval(timerId); }, 10000);
 
+        let i = 0;
+
+        while(i < 8) {
+            i++;
+            setTimeout(sendReport(), 2000);
+        }
         
     }
     
