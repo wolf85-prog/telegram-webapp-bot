@@ -1360,13 +1360,14 @@ bot.on('message', async (msg) => {
             
         })
 
+        //strRegexp = strRegexp.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
         
 //отправка сообщения в чат ГИА
 await bot.sendMessage(chatId, 
 `Тестпро 
                              
 Специалисты: 
-${arr_count.map(item =>'31.12' +'|' + '10:00' + '|' +  ' U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
+${arr_count.map(item =>('31.12' +'|' + '10:00' + '|' +  ' U.L.E.Y' + ' = ' + item.count_fio + '/' + item.count_title + ' [' + item.title2 + ']').replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&")).join('\n')}`
                         
 )
         
