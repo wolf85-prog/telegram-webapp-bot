@@ -15,6 +15,8 @@ const chatGroupId = process.env.CHAT_GROUP_ID
 const chatTelegramId = process.env.CHAT_ID
 const chatGiaId = process.env.GIA_CHAT_ID
 
+var projectName, projectDate, projectTime
+
 //telegram api
 const TelegramBot = require('node-telegram-bot-api');
 const fs = require('fs');
@@ -88,13 +90,13 @@ bot.on('message', async (msg) => {
             //bot.sendMessage(chatTelegramId, `${text} \n \n от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)
             //setTimeout(bot.sendMessage(chat_id, 'Ваша заявка на обработке...'), 5000)
 
-            //const projectId = addProjectTest(projectname, datestart, teh, worklist);
+            //const projectId = await addProjectTest(projectname, datestart, teh, worklist);
             const projectId = '34954a42-006e-440d-b435-3cb1d5ae8900';
             const blockId = await getBlocks(projectId);
 
-            const projectName = 'Name' //projectRes.properties.Name
-            const projectDate = '12.12' //`${day}.${month}`; //projectRes.properties.Date
-            const projectTime = '12:00' //`${chas}:${minut}`;
+            //const projectName = 'Name' //projectRes.properties.Name
+            //const projectDate = '12.12' //`${day}.${month}`; //projectRes.properties.Date
+            //const projectTime = '12:00' //`${chas}:${minut}`;
 
             let count_fio;
             let count_title;
@@ -147,8 +149,8 @@ bot.on('message', async (msg) => {
                     await bot.sendMessage(chat_id, 
                         `Тестуведомление 
                                                                     
-    Специалисты: 
-    ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
+Специалисты: 
+${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
                                                                 
                     )
                 };
@@ -1593,6 +1595,10 @@ app.post('/web-test-data', async (req, res) => {
   ${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}`
               }
         })
+
+        projectName = projectname
+        projectDate = `${day}.${month}`
+        projectTime = `${chas}:${minut}`
   
         return res.status(200).json({});
     } catch (e) {
