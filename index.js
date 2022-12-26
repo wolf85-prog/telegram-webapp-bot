@@ -88,7 +88,7 @@ bot.on('message', async (msg) => {
         }else if (text.includes('Тестовый')) {
             await bot.sendMessage(chat_id, 'Ваша заявка отправлена администратору!')
             //bot.sendMessage(chatTelegramId, `${text} \n \n от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)
-            await bot.sendMessage(chat_id, 'Ваша заявка на обработке...')
+            setTimeout(() => {bot.sendMessage(chat_id, 'Ваша заявка на обработке...')}, 2000)
 
             //const projectId = await addProjectTest(projectName, dateStart, Teh, Worklist);
             const projectId = '34954a42-006e-440d-b435-3cb1d5ae8900';
