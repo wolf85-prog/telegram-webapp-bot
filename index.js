@@ -1381,11 +1381,13 @@ ${arr_count.map(item =>date +' | ' + '10:00' + ' | ' + name + ' | ' + 'U.L.E.Y' 
             })
 
             //сохранение массива в 2-х элементный массив
-            // if (i % 2 == 0) {
-            //     arr_all[0] = arr_count
-            // } else {
-            //     arr_all[1] = arr_count 
-            // }
+            if (i % 2 == 0) {
+                arr_all[0] = arr_count
+            } else {
+                arr_all[1] = arr_count 
+            }
+
+            console.log('arr_all: ', arr_all)
 
             // // Цикл по всем эле­мен­там
             // for(var i = 0; i < arr_count.length; i++) {
