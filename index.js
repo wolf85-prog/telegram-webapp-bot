@@ -96,7 +96,7 @@ bot.on('message', async (msg) => {
             const projectId2 = 'eb9c59bd-436c-46cd-a9b9-f3c97afd9adf'; 
             console.log("projectId2", projectId2)
 
-            const blockId = setTimeout(() => getBlocks(projectId2), 3000);
+            const blockId = await getBlocks(projectId2);
 
             let count_fio;
             let count_title;
@@ -110,7 +110,7 @@ bot.on('message', async (msg) => {
             let timerId = setInterval(async() => {
                 i++
                 
-                let databaseBlock = setTimeout(() => getDatabaseId(blockId), 5000); 
+                let databaseBlock = await getDatabaseId(blockId); 
                 console.log("databaseBlock: ", JSON.stringify(databaseBlock))
                 arr_count = [] 
                 
