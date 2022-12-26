@@ -144,7 +144,7 @@ bot.on('message', async (msg) => {
 
                 if (!isEqual) {
                     //отправка сообщения в чат ГИА
-                    await bot.sendMessage(chatId, 
+                    await bot.sendMessage(chat_id, 
                         `Тестуведомление 
                                                                     
     Специалисты: 
@@ -154,7 +154,7 @@ bot.on('message', async (msg) => {
                 };
 
 
-            }, 8000); //1800000
+            }, 5000); //1800000
 
             // остановить вывод через 5 секунд
             setTimeout(() => { clearInterval(timerId); }, 20000); //3650000 
