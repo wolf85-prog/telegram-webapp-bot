@@ -1391,10 +1391,11 @@ ${arr_count.map(item =>date +' | ' + '10:00' + ' | ' + name + ' | ' + 'U.L.E.Y' 
 
             // // Цикл по всем эле­мен­там
             for(var j = 0; j < arr_count.length; j++) {
-                //if (arr_all[0] === arr_all[1]) {
-                    //sendReport()
-                    console.log('Равны!')
-               // };
+                var isEqual = JSON.stringify(arr_all[0]) === JSON.stringify(arr_all[1]);
+                // if (arr_all[0] === arr_all[1]) {
+                //     //sendReport()
+                     console.log(isEqual)
+                // };
             }     
             
             //sendReport(projectName, projectDate)
