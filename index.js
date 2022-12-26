@@ -117,24 +117,26 @@ bot.on('message', async (msg) => {
                 arr_cat.map((arritem) => {
                     count_fio = 0;
                     count_title = 0;
-                    databaseBlock.map((value) => {
-                        if (arritem === value.title) {
-                            if (value.fio) {
-                                count_fio++               
-                            }else {
-                                count_fio;
-                            }  
-                            count_title++;
-                        }
-                    })
-                    if (count_fio != 0) {
-                        const obj = {
-                            title2: arritem,
-                            count_fio: count_fio,
-                            count_title: count_title,
-                        }
-                        arr_count.push(obj)
-                    }               
+                    if (databaseBlock) {
+                        databaseBlock.map((value) => {
+                            if (arritem === value.title) {
+                                if (value.fio) {
+                                    count_fio++               
+                                }else {
+                                    count_fio;
+                                }  
+                                count_title++;
+                            }
+                        })
+                        if (count_fio != 0) {
+                            const obj = {
+                                title2: arritem,
+                                count_fio: count_fio,
+                                count_title: count_title,
+                            }
+                            arr_count.push(obj)
+                        } 
+                    }              
                 })
 
                 //сохранение массива в 2-х элементный массив
