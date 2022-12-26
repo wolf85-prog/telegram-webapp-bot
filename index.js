@@ -1387,14 +1387,14 @@ ${arr_count.map(item =>date +' | ' + '10:00' + ' | ' + name + ' | ' + 'U.L.E.Y' 
                 arr_all[1] = arr_count 
             }
 
-            console.log('arr_all: ', arr_all)
+            //console.log('arr_all: ', arr_all)
 
             // // Цикл по всем эле­мен­там
             for(var j = 0; j < arr_count.length; j++) {
-                if (arr_all[0] === arr_all[1]) {
+                //if (arr_all[0] === arr_all[1]) {
                     //sendReport()
                     console.log('Равны!')
-                };
+               // };
             }     
             
             //sendReport(projectName, projectDate)
