@@ -86,7 +86,7 @@ bot.on('message', msg => {
         }else if (text.includes('Тестовый проект успешно создан')) {
             bot.sendMessage(chat_id, 'Ваша заявка отправлена администратору!')
             //bot.sendMessage(chatTelegramId, `${text} \n \n от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)
-            setTimeout(bot.sendMessage(chat_id, 'Ваша заявка на обработке...'), 5000)
+            //setTimeout(bot.sendMessage(chat_id, 'Ваша заявка на обработке...'), 5000)
         
         } else if (text.includes('Тестуведомление')) {
             //bot.sendMessage(chat_id, 'Ваша заявка обрабатывается!')
@@ -1434,7 +1434,7 @@ app.post('/web-data', async (req, res) => {
   const d = new Date(datestart);
   //console.log(d);
   const year = d.getFullYear();
-  const month = d.getMonth()+1;
+  const month = String(d.getMonth()+1).padStart(2, "0");
   const day = String(d.getDate()).padStart(2, "0");
   const chas = d.getHours();
   const minut = String(d.getMinutes()).padStart(2, "0");
@@ -1525,8 +1525,8 @@ app.post('/web-test-data', async (req, res) => {
   
         //const projectId = addProjectTest(projectname, datestart, teh, worklist);
         const projectId = '34954a42-006e-440d-b435-3cb1d5ae8900';
-        const blockId = getBlocks(projectId);
-        const databaseBlock = getDatabaseId(blockId); //JSON.stringify(responseResults)
+        const blockId = await getBlocks(projectId);
+        const databaseBlock = await getDatabaseId(blockId); //JSON.stringify(responseResults)
 
         const projectName = projectname; //projectRes.properties.Name
         const projectDate = `${day}.${month}`; //projectRes.properties.Date
@@ -1542,61 +1542,61 @@ app.post('/web-test-data', async (req, res) => {
         let arr_all = [] 
 
         // повторить с интервалом 2 секунды
-        let timerId = setInterval(async() => {
-            i++
+//         let timerId = setInterval(async() => {
+//             i++
             
-            const blockId = await getBlocks(projectId);
-            const databaseBlock = await getDatabaseId(blockId); 
-            arr_count = [] 
+//             const blockId = await getBlocks(projectId);
+//             const databaseBlock = await getDatabaseId(blockId); 
+//             arr_count = [] 
             
-            arr_cat.map((arritem) => {
-                count_fio = 0;
-                count_title = 0;
-                databaseBlock.map((value) => {
-                    if (arritem === value.title) {
-                        if (value.fio) {
-                            count_fio++               
-                        }else {
-                            count_fio;
-                        }  
-                        count_title++;
-                    }
-                })
-                if (count_fio != 0) {
-                    const obj = {
-                        title2: arritem,
-                        count_fio: count_fio,
-                        count_title: count_title,
-                    }
-                    arr_count.push(obj)
-                }               
-            })
+//             arr_cat.map((arritem) => {
+//                 count_fio = 0;
+//                 count_title = 0;
+//                 databaseBlock.map((value) => {
+//                     if (arritem === value.title) {
+//                         if (value.fio) {
+//                             count_fio++               
+//                         }else {
+//                             count_fio;
+//                         }  
+//                         count_title++;
+//                     }
+//                 })
+//                 if (count_fio != 0) {
+//                     const obj = {
+//                         title2: arritem,
+//                         count_fio: count_fio,
+//                         count_title: count_title,
+//                     }
+//                     arr_count.push(obj)
+//                 }               
+//             })
 
-            //сохранение массива в 2-х элементный массив
-            if (i % 2 == 0) {
-                arr_all[0] = arr_count
-            } else {
-                arr_all[1] = arr_count 
-            }
+//             //сохранение массива в 2-х элементный массив
+//             if (i % 2 == 0) {
+//                 arr_all[0] = arr_count
+//             } else {
+//                 arr_all[1] = arr_count 
+//             }
 
-            var isEqual = JSON.stringify(arr_all[0]) === JSON.stringify(arr_all[1]);
+//             var isEqual = JSON.stringify(arr_all[0]) === JSON.stringify(arr_all[1]);
 
-            if (!isEqual) {
-                //отправка сообщения в чат ГИА
-                bot.sendMessage(chatId, 
-                    `Тестуведомление 
+//             if (!isEqual) {
+//                 //отправка сообщения в чат ГИА
+//                 bot.sendMessage(chatId, 
+//                     `Тестуведомление 
                                                                 
-Специалисты: 
-${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
+// Специалисты: 
+// ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
                                                             
-                )
-            };
+//                 )
+//             };
 
 
-        }, 8000); //1800000
+//         }, 8000); //1800000
 
-        // остановить вывод через 5 секунд
-        setTimeout(() => { clearInterval(timerId); }, 20000); //3650000 
+//         // остановить вывод через 5 секунд
+//         setTimeout(() => { clearInterval(timerId); }, 20000); //3650000 
   
         return res.status(200).json({});
     } catch (e) {
