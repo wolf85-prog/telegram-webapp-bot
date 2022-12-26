@@ -92,10 +92,11 @@ bot.on('message', async (msg) => {
             //bot.sendMessage(chatTelegramId, `${text} \n \n от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)
            // setTimeout(() => {bot.sendMessage(chat_id, 'Ваша заявка на обработке...')}, 5000)
 
-            const projectId2 = await addProjectTest(projectName, dateStart, Teh, Worklist);
+            //const projectId2 = await addProjectTest(projectName, dateStart, Teh, Worklist);
+            const projectId2 = 'eb9c59bd-436c-46cd-a9b9-f3c97afd9adf'; 
             console.log("projectId2", projectId2)
 
-            const blockId = setTimeout(getBlocks(projectId2), 5000);
+            const blockId = setTimeout(() => getBlocks(projectId2), 5000);
 
             let count_fio;
             let count_title;
@@ -449,18 +450,6 @@ async function addProjectTest(title, time, teh, worklist) {
         //console.log(response)
         const res_id = response.id;
         console.log("1 Success! Project test added. " + res_id)
-
-        //setTimeout(()=> {
-            newDatabase_1(res_id);
-        //}, 2000) 
-
-        setTimeout(()=> {
-            newDatabase(res_id, worklist);
-        }, 4000) 
-
-        setTimeout(()=> {
-            newDatabase_3(res_id);
-        }, 9000)
 
         return res_id;
 
