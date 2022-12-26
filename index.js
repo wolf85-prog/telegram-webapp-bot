@@ -15,7 +15,7 @@ const chatGroupId = process.env.CHAT_GROUP_ID
 const chatTelegramId = process.env.CHAT_ID
 const chatGiaId = process.env.GIA_CHAT_ID
 
-var projectName, projectDate, projectTime, dateStart, Teh, Worklist
+var projectId, projectName, projectDate, projectTime, dateStart, Teh, Worklist
 
 //telegram api
 const TelegramBot = require('node-telegram-bot-api');
@@ -79,20 +79,22 @@ bot.on('message', async (msg) => {
     const chat_id = msg.chat.id;
     if (!text.includes('/')) {       
         if (text.includes("Ответ")) {           
-            await bot.sendMessage(text.substring(6, text.indexOf('.')), text.slice(text.indexOf('.') + 2))
+            await bot.sendMessage(text.substring(6, text.indexOf('.')), text.slice(text.indexOf('.') + 2))       
         
-        } else if (text.includes('Проект успешно создан')) {
+        } else if (text.includes('Проект успешно создан')) {           
             await bot.sendMessage(chat_id, 'Ваша заявка отправлена администратору!')
             await bot.sendMessage(chatTelegramId, `${text} \n \n от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)
         
-        }else if (text.includes('Тестовый')) {
+        } else if (text.includes('Уведомление')) {
+               
+        } else if (text.includes('Тестовый')) {
             await bot.sendMessage(chat_id, 'Ваша заявка отправлена администратору!')
             //bot.sendMessage(chatTelegramId, `${text} \n \n от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)
-            setTimeout(() => {bot.sendMessage(chat_id, 'Ваша заявка на обработке...')}, 2000)
+            setTimeout(() => {bot.sendMessage(chat_id, 'Ваша заявка на обработке...')}, 5000)
 
-            //const projectId = await addProjectTest(projectName, dateStart, Teh, Worklist);
-            const projectId = '34954a42-006e-440d-b435-3cb1d5ae8900';
-            const blockId = await getBlocks(projectId);
+            const projectId2 = await addProjectTest(projectName, dateStart, Teh, Worklist);
+            //const projectId = '34954a42-006e-440d-b435-3cb1d5ae8900';
+            const blockId = await getBlocks(projectId2);
 
             let count_fio;
             let count_title;
@@ -139,11 +141,11 @@ bot.on('message', async (msg) => {
                 }
 
                 var isEqual = JSON.stringify(arr_all[0]) === JSON.stringify(arr_all[1]);
-
+                // если есть изменения в составе работников    
                 if (!isEqual) {
-                    //отправка сообщения в чат ГИА
+                    //отправка сообщения в чат бота
                     await bot.sendMessage(chat_id, 
-                        `Тестуведомление 
+                        `Уведомление 
                                                                     
 Специалисты: 
 ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
@@ -152,23 +154,23 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
                 };
 
 
-            }, 6000); //каждые 5 минут 300000
+            }, 300000); //каждые 5 минут 300000
 
             //1. отправка через 30 минут 1800000
             setTimeout(() => {
                 bot.sendMessage(chat_id, 
-                    `Тестуведомление 
+                    `Уведомление 
                                                                 
 Специалисты: 
 ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
                                                             
                 )
-             }, 10000);  //1800000
+             }, 1800000);  //1800000
              
              //2. отправка через 60 минут 3650000
              setTimeout(() => {
                 bot.sendMessage(chat_id, 
-                    `Тестуведомление 
+                    `Уведомление 
                                                                 
 Специалисты: 
 ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
@@ -177,7 +179,7 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
              }, 20000); //3650000
 
             //3. остановить вывод через 20 секунд
-            setTimeout(() => { clearInterval(timerId); }, 25000); //3670000
+            setTimeout(() => { clearInterval(timerId); }, 3670000); //3670000
         
         } else {
             await bot.sendMessage(chat_id, `Ваше сообщение "${text}" отправлено администратору!`)
@@ -1611,7 +1613,7 @@ app.post('/web-test-data', async (req, res) => {
               }
         })
 
-        //addProjectTest(projectname, datestart, teh, worklist);
+        //projectId = addProjectTest(projectname, datestart, teh, worklist);
 
         projectName = projectname
         projectDate = `${day}.${month}`
