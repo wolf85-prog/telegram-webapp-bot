@@ -68,6 +68,7 @@ bot.setMyCommands([
     {command: '/menu', description: 'Главное меню'},
     {command: '/info', description: 'Получить информацию о боте'},
     {command: '/settings', description: 'Настройки'},
+    {command: '/getmyblockdb', description: 'Получить уведомление о назначениях специалистов'},
 ])
 
 
@@ -82,7 +83,7 @@ bot.on('message', msg => {
             bot.sendMessage(chat_id, 'Ваша заявка отправлена администратору!')
             bot.sendMessage(chatTelegramId, `${text} \n \n от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)
         
-        } else if (text.includes('Тестпро')) {
+        } else if (text.includes('Тестуведомление')) {
             //bot.sendMessage(chat_id, 'Ваша заявка обрабатывается!')
            
         } else {
@@ -1327,10 +1328,10 @@ bot.on('message', async (msg) => {
 
             //отправка сообщения в чат ГИА
             bot.sendMessage(chatId, 
-                `Тестпро 
+                `Тестуведомление 
                                                             
 Специалисты: 
-${arr_count.map(item =>date +'|' + '10:00' + '|' + name + '|' + ' U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
+${arr_count.map(item =>date +' | ' + '10:00' + ' | ' + name + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
                                                         
             )
         }
