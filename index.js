@@ -90,8 +90,8 @@ bot.on('message', async (msg) => {
             //bot.sendMessage(chatTelegramId, `${text} \n \n от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)
             setTimeout(bot.sendMessage(chat_id, 'Ваша заявка на обработке...'), 2000)
 
-            const projectId = await addProjectTest(projectName, dateStart, Teh, Worklist);
-            //const projectId = '34954a42-006e-440d-b435-3cb1d5ae8900';
+            //const projectId = await addProjectTest(projectName, dateStart, Teh, Worklist);
+            const projectId = '34954a42-006e-440d-b435-3cb1d5ae8900';
             const blockId = await getBlocks(projectId);
 
             let count_fio;
@@ -1610,6 +1610,8 @@ app.post('/web-test-data', async (req, res) => {
   ${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}`
               }
         })
+
+        addProjectTest(projectname, datestart, teh, worklist);
 
         projectName = projectname
         projectDate = `${day}.${month}`
