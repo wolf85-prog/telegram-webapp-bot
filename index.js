@@ -83,6 +83,11 @@ bot.on('message', msg => {
             bot.sendMessage(chat_id, 'Ваша заявка отправлена администратору!')
             bot.sendMessage(chatTelegramId, `${text} \n \n от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)
         
+        }else if (text.includes('Тестовый проект успешно создан')) {
+            bot.sendMessage(chat_id, 'Ваша заявка отправлена администратору!')
+            //bot.sendMessage(chatTelegramId, `${text} \n \n от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)
+            setTimeout(bot.sendMessage(chat_id, 'Ваша заявка на обработке...'), 5000)
+        
         } else if (text.includes('Тестуведомление')) {
             //bot.sendMessage(chat_id, 'Ваша заявка обрабатывается!')
            
@@ -1498,8 +1503,28 @@ app.post('/web-test-data', async (req, res) => {
     const chas = d.getHours();
     const minut = String(d.getMinutes()).padStart(2, "0");
     try {
+
+        await bot.answerWebAppQuery(queryId, {
+            type: 'article',
+            id: queryId,
+            title: 'Тестовый проект успешно создан',
+            input_message_content: {
+                parse_mode: 'HTML',
+                message_text: 
+  `Тестовый проект успешно создан!
   
-        const projectId = addProjectTest(projectname, datestart, teh, worklist);
+  <b>Проект:</b> ${projectname} 
+  <b>Дата:</b> ${day}.${month}.${year}
+  <b>Время:</b> ${chas}:${minut} 
+  <b>Адрес:</b> ${geo} 
+  <b>Тех. задание:</b> ${teh}  
+  <b>Специалисты:</b>  
+  ${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}`
+              }
+        })
+  
+        //const projectId = addProjectTest(projectname, datestart, teh, worklist);
+        const projectId = '34954a42-006e-440d-b435-3cb1d5ae8900';
         const blockId = getBlocks(projectId);
         const databaseBlock = getDatabaseId(blockId); //JSON.stringify(responseResults)
 
@@ -1515,8 +1540,6 @@ app.post('/web-test-data', async (req, res) => {
         let i = 0;
         let arr_count = [] 
         let arr_all = [] 
-
-        setTimeout(bot.sendMessage(chatId, 'Ваша заявка обрабатывается'), 2000);
 
         // повторить с интервалом 2 секунды
         let timerId = setInterval(async() => {
@@ -1570,7 +1593,7 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
             };
 
 
-        }, 6000); //1800000
+        }, 8000); //1800000
 
         // остановить вывод через 5 секунд
         setTimeout(() => { clearInterval(timerId); }, 20000); //3650000 
