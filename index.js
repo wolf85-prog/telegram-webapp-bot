@@ -176,6 +176,7 @@ async function addProject(title, time, teh, managerId, companyId, worklist, geoI
         })
         //console.log(response)
         const res_id = response.id;
+        console.log(new Date())
         console.log("1 Success! Project with geo added. " + res_id)
 
         //setTimeout(()=> {
@@ -270,6 +271,7 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
         })
         //console.log(response)
         const res_id = response.id;
+        console.log(new Date())
         console.log("Success! Project not geo added. " + res_id)        
 
         setTimeout(()=> {
