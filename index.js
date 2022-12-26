@@ -1526,13 +1526,13 @@ app.post('/web-test-data', async (req, res) => {
         //const projectId = addProjectTest(projectname, datestart, teh, worklist);
         const projectId = '34954a42-006e-440d-b435-3cb1d5ae8900';
         const blockId = await getBlocks(projectId);
-        const databaseBlock = await getDatabaseId(blockId); //JSON.stringify(responseResults)
+        //const databaseBlock = await getDatabaseId(blockId); //JSON.stringify(responseResults)
 
         const projectName = projectname; //projectRes.properties.Name
         const projectDate = `${day}.${month}`; //projectRes.properties.Date
         const projectTime = `${chas}:${minut}`;
 
-        console.log("databaseBlock: ", JSON.stringify(databaseBlock))
+        //console.log("databaseBlock: ", JSON.stringify(databaseBlock))
 
         let count_fio;
         let count_title;
@@ -1542,61 +1542,60 @@ app.post('/web-test-data', async (req, res) => {
         let arr_all = [] 
 
         // повторить с интервалом 2 секунды
-//         let timerId = setInterval(async() => {
-//             i++
+        let timerId = setInterval(async() => {
+            i++
             
-//             const blockId = await getBlocks(projectId);
-//             const databaseBlock = await getDatabaseId(blockId); 
-//             arr_count = [] 
+            let databaseBlock = await getDatabaseId(blockId); 
+            arr_count = [] 
             
-//             arr_cat.map((arritem) => {
-//                 count_fio = 0;
-//                 count_title = 0;
-//                 databaseBlock.map((value) => {
-//                     if (arritem === value.title) {
-//                         if (value.fio) {
-//                             count_fio++               
-//                         }else {
-//                             count_fio;
-//                         }  
-//                         count_title++;
-//                     }
-//                 })
-//                 if (count_fio != 0) {
-//                     const obj = {
-//                         title2: arritem,
-//                         count_fio: count_fio,
-//                         count_title: count_title,
-//                     }
-//                     arr_count.push(obj)
-//                 }               
-//             })
+            arr_cat.map((arritem) => {
+                count_fio = 0;
+                count_title = 0;
+                databaseBlock.map((value) => {
+                    if (arritem === value.title) {
+                        if (value.fio) {
+                            count_fio++               
+                        }else {
+                            count_fio;
+                        }  
+                        count_title++;
+                    }
+                })
+                if (count_fio != 0) {
+                    const obj = {
+                        title2: arritem,
+                        count_fio: count_fio,
+                        count_title: count_title,
+                    }
+                    arr_count.push(obj)
+                }               
+            })
 
-//             //сохранение массива в 2-х элементный массив
-//             if (i % 2 == 0) {
-//                 arr_all[0] = arr_count
-//             } else {
-//                 arr_all[1] = arr_count 
-//             }
+            //сохранение массива в 2-х элементный массив
+            if (i % 2 == 0) {
+                arr_all[0] = arr_count
+            } else {
+                arr_all[1] = arr_count 
+            }
 
-//             var isEqual = JSON.stringify(arr_all[0]) === JSON.stringify(arr_all[1]);
+            var isEqual = JSON.stringify(arr_all[0]) === JSON.stringify(arr_all[1]);
 
-//             if (!isEqual) {
-//                 //отправка сообщения в чат ГИА
-//                 bot.sendMessage(chatId, 
-//                     `Тестуведомление 
+            if (!isEqual) {
+                //отправка сообщения в чат ГИА
+                bot.sendMessage(chatId, 
+                    `Тестуведомление 
                                                                 
-// Специалисты: 
-// ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
+Специалисты: 
+${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
                                                             
-//                 )
-//             };
+                )
+            };
 
 
-//         }, 8000); //1800000
+        }, 8000); //1800000
 
-//         // остановить вывод через 5 секунд
-//         setTimeout(() => { clearInterval(timerId); }, 20000); //3650000 
+        // остановить вывод через 5 секунд
+        setTimeout(() => { clearInterval(timerId); }, 20000); //3650000 
   
         return res.status(200).json({});
     } catch (e) {
