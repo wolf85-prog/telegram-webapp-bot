@@ -103,11 +103,13 @@ bot.on('message', async (msg) => {
             let arr_count = [] 
             let arr_all = [] 
 
+            
             // повторить с интервалом 2 секунды
             let timerId = setInterval(async() => {
                 i++
                 
                 let databaseBlock = await getDatabaseId(blockId); 
+                console.log("databaseBlock: ", JSON.stringify(databaseBlock))
                 arr_count = [] 
                 
                 arr_cat.map((arritem) => {
@@ -154,7 +156,7 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
                 };
 
 
-            }, 300000); //каждые 5 минут 300000
+            }, 10000); //каждые 5 минут 300000
 
             //1. отправка через 30 минут 1800000
             setTimeout(() => {
@@ -165,7 +167,7 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
 ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
                                                             
                 )
-             }, 1800000);  //1800000
+             }, 20000);  //1800000
              
              //2. отправка через 60 минут 3650000
              setTimeout(() => {
@@ -176,10 +178,10 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
 ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
                                                             
                 )
-             }, 20000); //3650000
+             }, 30000); //3650000
 
             //3. остановить вывод через 20 секунд
-            setTimeout(() => { clearInterval(timerId); }, 3670000); //3670000
+            setTimeout(() => { clearInterval(timerId); }, 50000); //3670000
         
         } else {
             await bot.sendMessage(chat_id, `Ваше сообщение "${text}" отправлено администратору!`)
