@@ -1611,7 +1611,7 @@ app.post('/web-test-data', async (req, res) => {
               }
         })
 
-        addProjectTest(projectname, datestart, teh, worklist);
+        //addProjectTest(projectname, datestart, teh, worklist);
 
         projectName = projectname
         projectDate = `${day}.${month}`
