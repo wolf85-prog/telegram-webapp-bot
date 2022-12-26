@@ -1390,18 +1390,19 @@ ${arr_count.map(item =>date +' | ' + '10:00' + ' | ' + name + ' | ' + 'U.L.E.Y' 
             console.log('arr_all: ', arr_all)
 
             // // Цикл по всем эле­мен­там
-            // for(var i = 0; i < arr_count.length; i++) {
-            //     if (arr_all[0] === arr_all[0]) {
-            //         sendReport()
-            //     };
-            // }     
+            for(var j = 0; j < arr_count.length; j++) {
+                if (arr_all[0] === arr_all[1]) {
+                    //sendReport()
+                    console.log('Равны!')
+                };
+            }     
             
-            sendReport(projectName, projectDate)
+            //sendReport(projectName, projectDate)
 
         }, 2000); //1800000
 
         // остановить вывод через 5 секунд
-        setTimeout(() => { clearInterval(timerId); }, 5000); //3650000
+        setTimeout(() => { clearInterval(timerId); }, 8000); //3650000
 
         
     }
