@@ -102,16 +102,9 @@ bot.on('message', async (msg) => {
                 blockId = await getBlocks(projectId2);
                 console.log("blockId: ", blockId)
 
-                let databaseBlock = await getDatabaseId(blockId);
-                console.log("databaseBlock: ", JSON.stringify(databaseBlock))
+                //let databaseBlock = await getDatabaseId(blockId);
+                //console.log("databaseBlock: ", JSON.stringify(databaseBlock))
             }, 5000)
-
-            // setTimeout(() => {
-            //     console.log("blockId: ", blockId)
-
-            //     let databaseBlock = getDatabaseId.then(blockId); 
-            //     //console.log("databaseBlock: ", JSON.stringify(databaseBlock))
-            // }, 7000)
 
 
             let count_fio;
@@ -123,62 +116,63 @@ bot.on('message', async (msg) => {
 
             
             // повторить с интервалом 2 секунды
-//             let timerId = setInterval(async() => {
-//                 i++
+            let timerId = setInterval(async() => {
+                i++
                 
-//                 let databaseBlock = await getDatabaseId(blockId); 
-//                 console.log("databaseBlock: ", JSON.stringify(databaseBlock))
-//                 arr_count = [] 
+                let databaseBlock = await getDatabaseId(blockId); 
+                console.log("databaseBlock: ", JSON.stringify(databaseBlock))
+
+                arr_count = [] 
                 
-//                 arr_cat.map((arritem) => {
-//                     count_fio = 0;
-//                     count_title = 0;
-//                     if (databaseBlock) {
-//                         databaseBlock.map((value) => {
-//                             if (arritem === value.title) {
-//                                 if (value.fio) {
-//                                     count_fio++               
-//                                 }else {
-//                                     count_fio;
-//                                 }  
-//                                 count_title++;
-//                             }
-//                         })
-//                         if (count_fio != 0) {
-//                             const obj = {
-//                                 title2: arritem,
-//                                 count_fio: count_fio,
-//                                 count_title: count_title,
-//                             }
-//                             arr_count.push(obj)
-//                         } 
-//                     }              
-//                 })
+                arr_cat.map((arritem) => {
+                    count_fio = 0;
+                    count_title = 0;
+                    if (databaseBlock) {
+                        databaseBlock.map((value) => {
+                            if (arritem === value.title) {
+                                if (value.fio) {
+                                    count_fio++               
+                                }else {
+                                    count_fio;
+                                }  
+                                count_title++;
+                            }
+                        })
+                        if (count_fio != 0) {
+                            const obj = {
+                                title2: arritem,
+                                count_fio: count_fio,
+                                count_title: count_title,
+                            }
+                            arr_count.push(obj)
+                        } 
+                    }              
+                })
 
-//                 //сохранение массива в 2-х элементный массив
-//                 if (i % 2 == 0) {
-//                     arr_all[0] = arr_count
-//                 } else {
-//                     arr_all[1] = arr_count 
-//                 }
+                //сохранение массива в 2-х элементный массив
+                if (i % 2 == 0) {
+                    arr_all[0] = arr_count
+                } else {
+                    arr_all[1] = arr_count 
+                }
 
-//                 var isEqual = JSON.stringify(arr_all[0]) === JSON.stringify(arr_all[1]);
-//                 // если есть изменения в составе работников    
-//                 if (!isEqual) {
-//                     //отправка сообщения в чат бота
-//                     await bot.sendMessage(chat_id, 
-//                         `Уведомление 
+                var isEqual = JSON.stringify(arr_all[0]) === JSON.stringify(arr_all[1]);
+                // если есть изменения в составе работников    
+                if (!isEqual) {
+                    //отправка сообщения в чат бота
+                    await bot.sendMessage(chat_id, 
+                        `Уведомление 
                                                                     
-// Специалисты: 
-// ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
+Специалисты: 
+${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
                                                                 
-//                     )
-//                 };
+                    )
+                };
 
 
-//             }, 10000); //каждые 5 минут 300000
+            }, 10000); //каждые 5 минут 300000
 
-//             //1. отправка через 30 минут 1800000
+            //1. отправка через 30 минут 1800000
 //             setTimeout(() => {
 //                 bot.sendMessage(chat_id, 
 //                     `Уведомление 
@@ -200,8 +194,8 @@ bot.on('message', async (msg) => {
 //                 )
 //              }, 30000); //3650000
 
-//             //3. остановить вывод через 20 секунд
-//             setTimeout(() => { clearInterval(timerId); }, 50000); //3670000
+            //3. остановить вывод через 20 секунд
+            setTimeout(() => { clearInterval(timerId); }, 50000); //3670000
         
         } else {
             await bot.sendMessage(chat_id, `Ваше сообщение "${text}" отправлено администратору!`)
