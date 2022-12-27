@@ -96,19 +96,20 @@ bot.on('message', async (msg) => {
             //const projectId2 = await addProjectTest(projectName, dateStart, Teh, Worklist);
             const projectId2 = 'eb9c59bd-436c-46cd-a9b9-f3c97afd9adf'; 
 
-            setTimeout(() => {
+            setTimeout(async () => {
                 console.log("projectId2: ", projectId2)
 
                 blockId = getBlocks(projectId2);
-                
+                let databaseBlock = await getDatabaseId.then(blockId);
+                console.log("databaseBlock: ", JSON.stringify(databaseBlock))
             }, 5000)
 
-            setTimeout(() => {
-                console.log("blockId: ", blockId)
+            // setTimeout(() => {
+            //     console.log("blockId: ", blockId)
 
-                let databaseBlock = getDatabaseId(blockId); 
-                //console.log("databaseBlock: ", JSON.stringify(databaseBlock))
-            }, 7000)
+            //     let databaseBlock = getDatabaseId.then(blockId); 
+            //     //console.log("databaseBlock: ", JSON.stringify(databaseBlock))
+            // }, 7000)
 
 
             let count_fio;
