@@ -145,7 +145,7 @@ bot.on('message', async (msg) => {
                                 count_title: count_title,
                             }
                             arr_count.push(obj)
-                        } else {
+                        } else if (count_title !=0) {
                             const obj = {
                                 title2: arritem,
                                 count_fio: count_fio,
