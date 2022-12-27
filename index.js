@@ -93,18 +93,19 @@ bot.on('message', async (msg) => {
             //bot.sendMessage(chatTelegramId, `${text} \n \n от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)
            // setTimeout(() => {bot.sendMessage(chat_id, 'Ваша заявка на обработке...')}, 5000)
 
-            const projectId2 = await addProjectTest(projectName, dateStart, Teh, Worklist);
-            //const projectId2 = 'eb9c59bd-436c-46cd-a9b9-f3c97afd9adf'; 
+            //const projectId2 = await addProjectTest(projectName, dateStart, Teh, Worklist);
+            const projectId2 = 'eb9c59bd-436c-46cd-a9b9-f3c97afd9adf'; 
 
             setTimeout(() => {
                 console.log("projectId2: ", projectId2)
 
-                blockId = getBlocks(projectId2);
+                const blockId2 = getBlocks(projectId2);
+                console.log("blockId: ", blockId2)
+
+                let databaseBlock = getDatabaseId(blockId); 
+                console.log("databaseBlock: ", JSON.stringify(databaseBlock))
             }, 5000)
 
-            setTimeout(() => {
-                console.log("blockId: ", blockId)
-            }, 6000)
 
             let count_fio;
             let count_title;
