@@ -100,7 +100,7 @@ bot.on('message', async (msg) => {
                 console.log("projectId2: ", projectId2)
 
                 blockId = getBlocks(projectId2);
-            }, 2000)
+            }, 1000)
 
             setTimeout(() => {
                 console.log("blockId: ", blockId)
@@ -460,6 +460,18 @@ async function addProjectTest(title, time, teh, worklist) {
         //console.log(response)
         const res_id = response.id;
         console.log("1 Success! Project test added. " + res_id)
+
+        setTimeout(()=> {
+            newDatabase_1(res_id);
+        }, 2000) 
+
+        setTimeout(()=> {
+            newDatabase(res_id, worklist);
+        }, 4000) 
+
+        setTimeout(()=> {
+            newDatabase_3(res_id);
+        }, 9000)
 
         return res_id;
 
