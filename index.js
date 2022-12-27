@@ -99,7 +99,7 @@ bot.on('message', async (msg) => {
             setTimeout(async () => {
                 console.log("projectId2: ", projectId2)
 
-                blockId = getBlocks(projectId2);
+                blockId = await getBlocks(projectId2);
                 let databaseBlock = await getDatabaseId.then(blockId);
                 console.log("databaseBlock: ", JSON.stringify(databaseBlock))
             }, 5000)
