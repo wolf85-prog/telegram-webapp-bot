@@ -104,7 +104,7 @@ bot.on('message', async (msg) => {
 
                 //let databaseBlock = await getDatabaseId(blockId);
                 //console.log("databaseBlock: ", JSON.stringify(databaseBlock))
-            }, 5000)
+            }, 7000)
 
 
             let count_fio;
