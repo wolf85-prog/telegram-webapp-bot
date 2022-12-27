@@ -93,8 +93,8 @@ bot.on('message', async (msg) => {
             //bot.sendMessage(chatTelegramId, `${text} \n \n от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)
            // setTimeout(() => {bot.sendMessage(chat_id, 'Ваша заявка на обработке...')}, 5000)
 
-            //const projectId2 = await addProjectTest(projectName, dateStart, Teh, Worklist);
-            const projectId2 = '34954a42-006e-440d-b435-3cb1d5ae8900'; 
+            const projectId2 = await addProjectTest(projectName, dateStart, Teh, Worklist);
+            //const projectId2 = '34954a42-006e-440d-b435-3cb1d5ae8900'; 
 
             setTimeout(async () => {
                 console.log("projectId2: ", projectId2)
