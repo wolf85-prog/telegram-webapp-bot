@@ -1066,7 +1066,11 @@ async function getProjectsId(managerId) {
                 "relation": {
                     "contains": managerId
                 },
-            }
+            },
+            "sorts": [{ 
+                "timestamp": "created_time", 
+                "direction": "descending" 
+            }]
         });
 
         //return response.results[0].id;
