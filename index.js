@@ -83,11 +83,9 @@ bot.on('message', async (msg) => {
             await bot.sendMessage(text.substring(6, text.indexOf('.')), text.slice(text.indexOf('.') + 2))       
         
         } else if (text.includes('Проект успешно создан')) {           
-            await bot.sendMessage(chat_id, 'Ваша заявка отправлена администратору!')
+            //await bot.sendMessage(chat_id, 'Ваша заявка отправлена администратору!')
             await bot.sendMessage(chatTelegramId, `${text} \n \n от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)
             await bot.sendMessage(chatGiaId, `${text} \n \n от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)
-
-            setTimeout(() => {bot.sendMessage(chat_id, 'Ваша заявка на обработке...')}, 5000)
 
             //добавление геопозиции в БД Площадки (Адрес) и добавление проекта
             if (Geo != '') {
@@ -107,6 +105,9 @@ bot.on('message', async (msg) => {
                 console.log("blockId: ", blockId)
 
             }, 8000)
+
+
+            setTimeout(() => {bot.sendMessage(chat_id, 'Ваша заявка принята!')}, 30000) // 30 секунд
 
 
             let count_fio;
@@ -170,43 +171,44 @@ bot.on('message', async (msg) => {
                 if (!isEqual) {
                     //отправка сообщения в чат бота
                     await bot.sendMessage(chat_id, 
-                        `Уведомление 
-                                                                    
-Специалисты: 
+                        `Запрос на специалистов: 
+
 ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
                                                                 
                     )
                 };
 
 
-            }, 10000); //каждые 5 минут 300000
+            }, 240000); //каждые 5 минут 300000
 
             //1. отправка через 30 минут 1800000
             setTimeout(() => {
                 bot.sendMessage(chat_id, 
-                    `Уведомление 
-                                                                
-Специалисты: 
-${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
+`${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
                                                             
                 )
-             }, 20000);  //1800000
+             }, 1800000);  //1800000 30 минут
              
-             //2. отправка через 60 минут 3650000
+             //2. отправка через 90 минут 5400000
              setTimeout(() => {
                 bot.sendMessage(chat_id, 
-                    `Уведомление 
-                                                                
-Специалисты: 
-${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
+`${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
                                                             
                 )
-             }, 30000); //3650000
+             }, 5400000); //90 минут
+
+             //3. отправка через 90 минут 5400000
+             setTimeout(() => {
+                bot.sendMessage(chat_id, 
+`${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
+                                                            
+                )
+             }, 5400000); //90 минут
 
             //3. остановить вывод через 20 секунд
             setTimeout(() => { clearInterval(timerId); }, 50000); //3670000
         
-        } else if (text.includes('Уведомление')) {
+        } else if (text.includes('Запрос на специалистов')) {
                
         } else if (text.includes('Тестовый')) {
             await bot.sendMessage(chat_id, 'Ваша заявка отправлена администратору!')
@@ -1510,7 +1512,8 @@ app.post('/web-data', async (req, res) => {
 <b>Дата:</b> ${day}.${month}.${year}
 <b>Время:</b> ${chas}:${minut} 
 <b>Адрес:</b> ${geo} 
-<b>Тех. задание:</b> ${teh}  
+<b>Тех. задание:</b> ${teh}
+
 <b>Специалисты:</b>  
 ${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}`
             }
@@ -1523,7 +1526,8 @@ ${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join(
 Дата: ${day}.${month}.${year}
 Время: ${chas}:${minut} 
 Адрес: ${geo} 
-Тех. задание: ${teh}  
+Тех. задание: ${teh} 
+
 Специалисты: 
 ${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}`
         )
@@ -1578,7 +1582,8 @@ app.post('/web-test-data', async (req, res) => {
   <b>Дата:</b> ${day}.${month}.${year}
   <b>Время:</b> ${chas}:${minut} 
   <b>Адрес:</b> ${geo} 
-  <b>Тех. задание:</b> ${teh}  
+  <b>Тех. задание:</b> ${teh} 
+
   <b>Специалисты:</b>  
   ${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}`
               }
