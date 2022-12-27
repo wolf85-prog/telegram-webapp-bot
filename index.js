@@ -99,12 +99,16 @@ bot.on('message', async (msg) => {
             setTimeout(() => {
                 console.log("projectId2: ", projectId2)
 
-                const blockId2 = getBlocks(projectId2);
-                console.log("blockId: ", blockId2)
+                blockId = getBlocks(projectId2);
+                
+            }, 5000)
+
+            setTimeout(() => {
+                console.log("blockId: ", blockId)
 
                 let databaseBlock = getDatabaseId(blockId); 
-                console.log("databaseBlock: ", JSON.stringify(databaseBlock))
-            }, 5000)
+                //console.log("databaseBlock: ", JSON.stringify(databaseBlock))
+            }, 7000)
 
 
             let count_fio;
