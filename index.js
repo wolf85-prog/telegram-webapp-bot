@@ -100,11 +100,11 @@ bot.on('message', async (msg) => {
                 console.log("projectId2: ", projectId2)
 
                 blockId = getBlocks(projectId2);
-            }, 1000)
+            }, 5000)
 
             setTimeout(() => {
                 console.log("blockId: ", blockId)
-            }, 4000)
+            }, 6000)
 
             let count_fio;
             let count_title;
