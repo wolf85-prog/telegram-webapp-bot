@@ -100,7 +100,9 @@ bot.on('message', async (msg) => {
                 console.log("projectId2: ", projectId2)
 
                 blockId = await getBlocks(projectId2);
-                let databaseBlock = await getDatabaseId.then(blockId);
+                console.log("blockId: ", blockId)
+
+                let databaseBlock = await getDatabaseId(blockId);
                 console.log("databaseBlock: ", JSON.stringify(databaseBlock))
             }, 5000)
 
