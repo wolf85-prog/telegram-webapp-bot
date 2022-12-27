@@ -228,7 +228,7 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
                 )
             }, 15600000); //260 минут
 
-            // остановить вывод через 20 секунд
+            // остановить вывод через 260 минут
             setTimeout(() => { clearInterval(timerId); }, 15700000); //
         
         } else if (text.includes('Запрос на специалистов')) {
