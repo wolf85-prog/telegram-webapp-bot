@@ -1523,22 +1523,22 @@ ${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join
         )
 
         //добавление геопозиции в БД Площадки (Адрес) и добавление проекта
-        if (Geo != '') {
-            projectId = await addAddress(Geo, projectName, dateStart, Teh, manager_id, company_id, Worklist);
+        if (geo != '') {
+            await addAddress(geo, projectname, datestart, teh, managerId, companyId, worklist);
         } else {
             //добавление проекта с названием проекта в базу
-            projectId = await addProjectNotGeo(projectName, dateStart, Teh, manager_id, company_id, Worklist);
+            await addProjectNotGeo(projectname, datestart, teh, managerId, companyId, worklist);
         }
 
-        projectName = projectname
-        projectDate = `${day}.${month}`
-        projectTime = `${chas}:${minut}`
-        dateStart = datestart
-        Teh = teh
-        Worklist = worklist
-        manager_id = managerId
-        company_id = companyId
-        Geo = geo
+        // projectName = projectname
+        // projectDate = `${day}.${month}`
+        // projectTime = `${chas}:${minut}`
+        // dateStart = datestart
+        // Teh = teh
+        // Worklist = worklist
+        // manager_id = managerId
+        // company_id = companyId
+        // Geo = geo
       
 
       return res.status(200).json({});
