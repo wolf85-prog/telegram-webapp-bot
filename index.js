@@ -178,8 +178,7 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
                     )
                 };
 
-
-            }, 240000); //каждые 5 минут 300000
+            }, 240000); //каждые 4 минут 300000
 
             //1. отправка через 30 минут 1800000
             setTimeout(() => {
@@ -187,26 +186,50 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
 `${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
                                                             
                 )
-             }, 1800000);  //1800000 30 минут
+            }, 1800000);  //1800000 30 минут
              
-             //2. отправка через 90 минут 5400000
-             setTimeout(() => {
+            //2. отправка через 90 минут 5400000
+            setTimeout(() => {
                 bot.sendMessage(chat_id, 
 `${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
                                                             
                 )
-             }, 5400000); //90 минут
+            }, 5400000); //90 минут
 
-             //3. отправка через 90 минут 5400000
-             setTimeout(() => {
+            //3. отправка через 150 минут 9000000
+            setTimeout(() => {
+                bot.sendMessage(chat_id, 
+`${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`,
+               {
+                reply_markup: ({
+                    inline_keyboard:[
+                        [{text: 'Остановить поиск', callback_data:'Остановить поиск'}],
+                    ]
+                })
+               } 
+                                                            
+                )  
+
+            }, 9000000); //150 минут
+
+            //4. отправка через 210 минут 9000000
+            setTimeout(() => {
                 bot.sendMessage(chat_id, 
 `${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
                                                             
                 )
-             }, 5400000); //90 минут
+            }, 12600000); //210 минут
 
-            //3. остановить вывод через 20 секунд
-            setTimeout(() => { clearInterval(timerId); }, 50000); //3670000
+            //5. отправка через 260 минут 9000000
+            setTimeout(() => {
+                bot.sendMessage(chat_id, 
+`${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
+                                                            
+                )
+            }, 15600000); //260 минут
+
+            // остановить вывод через 20 секунд
+            setTimeout(() => { clearInterval(timerId); }, 15700000); //
         
         } else if (text.includes('Запрос на специалистов')) {
                
