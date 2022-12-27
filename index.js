@@ -85,6 +85,7 @@ bot.on('message', async (msg) => {
         } else if (text.includes('Проект успешно создан')) {           
             await bot.sendMessage(chat_id, 'Ваша заявка отправлена администратору!')
             await bot.sendMessage(chatTelegramId, `${text} \n \n от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)
+            await bot.sendMessage(chatGiaId, `${text} \n \n от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)
             
             //setTimeout(() => {bot.sendMessage(chat_id, 'Ваша заявка на обработке...')}, 5000)
 
