@@ -15,7 +15,7 @@ const chatGroupId = process.env.CHAT_GROUP_ID
 const chatTelegramId = process.env.CHAT_ID
 const chatGiaId = process.env.GIA_CHAT_ID
 
-var projectId, projectName, projectDate, projectTime, dateStart, Teh, Worklist
+var projectId, projectName, projectDate, projectTime, dateStart, manager_id, company_id, Geo, Teh, Worklist
 var blockId
 
 //telegram api
@@ -1596,13 +1596,6 @@ ${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join
   }
 })
 
-
-function sendReport(name, date) {
-
-    //отправка сообщения в чат ГИА
-    
-}
-
 //создание тестовой страницы (проекта) базыданных проектов
 app.post('/web-test-data', async (req, res) => {
     const {queryId, projectname, datestart, geo, teh, managerId, companyId, worklist = []} = req.body;
@@ -1634,14 +1627,14 @@ app.post('/web-test-data', async (req, res) => {
               }
         })
 
-        //projectId = addProjectTest(projectname, datestart, teh, worklist);
-
         projectName = projectname
         projectDate = `${day}.${month}`
         projectTime = `${chas}:${minut}`
         dateStart = datestart
         Teh = teh
         Worklist = worklist
+        manager_id = managerId
+        company_id = companyId
   
         return res.status(200).json({});
     } catch (e) {
