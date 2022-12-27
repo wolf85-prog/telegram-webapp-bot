@@ -94,10 +94,14 @@ bot.on('message', async (msg) => {
 
             //const projectId2 = await addProjectTest(projectName, dateStart, Teh, Worklist);
             //const projectId2 = 'eb9c59bd-436c-46cd-a9b9-f3c97afd9adf'; 
-            console.log("projectId: ", projectId)
 
-            const blockId = await getBlocks(projectId);
-            console.log("blockId: ", blockId)
+            setTimeout(() => {
+                console.log("projectId: ", projectId)
+
+                const blockId = getBlocks(projectId);
+
+                console.log("blockId: ", blockId)
+            }, 4000)
 
             let count_fio;
             let count_title;
