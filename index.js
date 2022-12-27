@@ -16,6 +16,7 @@ const chatTelegramId = process.env.CHAT_ID
 const chatGiaId = process.env.GIA_CHAT_ID
 
 var projectId, projectName, projectDate, projectTime, dateStart, Teh, Worklist
+var blockId
 
 //telegram api
 const TelegramBot = require('node-telegram-bot-api');
@@ -98,8 +99,10 @@ bot.on('message', async (msg) => {
             setTimeout(() => {
                 console.log("projectId2: ", projectId2)
 
-                const blockId = getBlocks(projectId2);
+                blockId = getBlocks(projectId2);
+            }, 2000)
 
+            setTimeout(() => {
                 console.log("blockId: ", blockId)
             }, 4000)
 
