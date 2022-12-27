@@ -145,7 +145,14 @@ bot.on('message', async (msg) => {
                                 count_title: count_title,
                             }
                             arr_count.push(obj)
-                        } 
+                        } else {
+                            const obj = {
+                                title2: arritem,
+                                count_fio: count_fio,
+                                count_title: count_title,
+                            }
+                            arr_count.push(obj) 
+                        }
                     }              
                 })
 
