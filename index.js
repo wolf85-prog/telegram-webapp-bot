@@ -92,13 +92,13 @@ bot.on('message', async (msg) => {
             //bot.sendMessage(chatTelegramId, `${text} \n \n от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)
            // setTimeout(() => {bot.sendMessage(chat_id, 'Ваша заявка на обработке...')}, 5000)
 
-            //const projectId2 = await addProjectTest(projectName, dateStart, Teh, Worklist);
+            const projectId2 = await addProjectTest(projectName, dateStart, Teh, Worklist);
             //const projectId2 = 'eb9c59bd-436c-46cd-a9b9-f3c97afd9adf'; 
 
             setTimeout(() => {
-                console.log("projectId: ", projectId)
+                console.log("projectId2: ", projectId2)
 
-                const blockId = getBlocks(projectId);
+                const blockId = getBlocks(projectId2);
 
                 console.log("blockId: ", blockId)
             }, 4000)
@@ -1129,7 +1129,7 @@ async function getBlocks(blockId) {
         let res;
         (count >1) ? res = response.results[1].id : res = response.results[0].id     
         
-        console.log("Blocks Data: "  + JSON.stringify(res))
+        console.log("Blocks Data: "  + res)
 
         return res;
     } catch (error) {
@@ -1612,14 +1612,14 @@ app.post('/web-test-data', async (req, res) => {
               }
         })
 
-        projectId = addProjectTest(projectname, datestart, teh, worklist);
+        //projectId = addProjectTest(projectname, datestart, teh, worklist);
 
-        // projectName = projectname
-        // projectDate = `${day}.${month}`
-        // projectTime = `${chas}:${minut}`
-        // dateStart = datestart
-        // Teh = teh
-        // Worklist = worklist
+        projectName = projectname
+        projectDate = `${day}.${month}`
+        projectTime = `${chas}:${minut}`
+        dateStart = datestart
+        Teh = teh
+        Worklist = worklist
   
         return res.status(200).json({});
     } catch (e) {
