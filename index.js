@@ -563,7 +563,7 @@ async function newDatabase_1(parent_page_id) {
             method: 'post',
             body: JSON.stringify(body),
             headers: {
-                'Authorization': {token_fetch}, //'Bearer secret_QoVUx95AXfIlCgSkMpMx5WgRu1H4SvuZflCH4xMA42f', //`Bearer ${token}`
+                'Authorization': token_fetch, //'Bearer secret_QoVUx95AXfIlCgSkMpMx5WgRu1H4SvuZflCH4xMA42f', //`Bearer ${token}`
                 'Content-Type': 'application/json', 
                 accept: 'application/json',
                 'Notion-Version': '2022-06-28'
