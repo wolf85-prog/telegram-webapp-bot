@@ -26,7 +26,7 @@ const cors = require('cors');
 const https = require('https');
 
 const token = process.env.TELEGRAM_API_TOKEN;
-const token_fetch = 'Bearer ' + token;
+const token_fetch = 'Bearer ' + process.env.NOTION_API_KEY;
 const webAppUrl = process.env.WEB_APP_URL;
 
 const bot = new TelegramBot(token, {polling: true});
@@ -563,7 +563,7 @@ async function newDatabase_1(parent_page_id) {
             method: 'post',
             body: JSON.stringify(body),
             headers: {
-                'Authorization': token_fetch, //'Bearer secret_QoVUx95AXfIlCgSkMpMx5WgRu1H4SvuZflCH4xMA42f', //`Bearer ${token}`
+                'Authorization': token_fetch, //`Bearer ${token}`
                 'Content-Type': 'application/json', 
                 accept: 'application/json',
                 'Notion-Version': '2022-06-28'
@@ -676,7 +676,7 @@ async function newDatabase(parent_page_id, worklist) {
             method: 'post',
             body: JSON.stringify(body),
             headers: {
-                'Authorization': 'Bearer secret_QoVUx95AXfIlCgSkMpMx5WgRu1H4SvuZflCH4xMA42f', //`Bearer ${token}`
+                'Authorization': token_fetch, //`Bearer ${token}`
                 'Content-Type': 'application/json', 
                 accept: 'application/json',
                 'Notion-Version': '2022-06-28'
@@ -791,7 +791,7 @@ async function newDatabase_3(parent_page_id) {
             method: 'post',
             body: JSON.stringify(body),
             headers: {
-                'Authorization': 'Bearer secret_QoVUx95AXfIlCgSkMpMx5WgRu1H4SvuZflCH4xMA42f', //`Bearer ${token}`
+                'Authorization': token_fetch, //`Bearer ${token}`
                 'Content-Type': 'application/json', 
                 accept: 'application/json',
                 'Notion-Version': '2022-06-28'
