@@ -19,15 +19,15 @@ var projectId, projectName, projectDate, projectTime, dateStart, manager_id, com
 var blockId
 
 //telegram api
+const token = process.env.TELEGRAM_API_TOKEN;
+const token_fetch = 'Bearer ' + process.env.NOTION_API_KEY;
+const webAppUrl = process.env.WEB_APP_URL;
+
 const TelegramBot = require('node-telegram-bot-api');
 const fs = require('fs');
 const express = require('express');
 const cors = require('cors');
 const https = require('https');
-
-const token = process.env.TELEGRAM_API_TOKEN;
-const token_fetch = 'Bearer ' + process.env.NOTION_API_KEY;
-const webAppUrl = process.env.WEB_APP_URL;
 
 const bot = new TelegramBot(token, {polling: true});
 const app = express();
