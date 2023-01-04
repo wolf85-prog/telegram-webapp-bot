@@ -212,7 +212,7 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
                 )           
             });
 
-            task3.destroy();
+            task3.stop();
 
 
             // остановить вывод через 260 минут
