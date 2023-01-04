@@ -1484,11 +1484,12 @@ bot.on('message', async (msg) => {
     }
 
     if (text === '/cron') {
-       // cron.schedule('1-3/1 * * * *', function(){
+        const task = cron.schedule('1 * * * *', function(){
             bot.sendMessage(chatId, 
                 'текст сообщения'                                                
             )           
-      //  });
+        });
+        task.start()
     }
     
   });
