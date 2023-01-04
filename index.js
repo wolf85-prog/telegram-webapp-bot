@@ -183,11 +183,17 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
             }, 60000); //каждую минуту 
 
             // 1. отправка через 30 минут 
-            cron.schedule('30 * * * *', function(){
+            // cron.schedule('30 * * * *', function(){
+            //     bot.sendMessage(chat_id, 
+            //         `${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`                                                    
+            //     )           
+            // });
+
+            setTimeout(() => {
                 bot.sendMessage(chat_id, 
                     `${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`                                                    
-                )           
-            });
+                )
+            }, 1800000)
 
             //task.stop();
              
