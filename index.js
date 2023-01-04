@@ -81,7 +81,7 @@ bot.setMyCommands([
 bot.on('message', async (msg) => {
     const text = msg.text;
     const chat_id = msg.chat.id;
-    if (text[0] !== '/') {       
+    if ((text || '')[0] !== '/') {       
         if (text.includes("Ответ")) {           
             await bot.sendMessage(text.substring(6, text.indexOf('.')), text.slice(text.indexOf('.') + 2))       
         
