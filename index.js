@@ -3,6 +3,9 @@ require("dotenv").config();
 //fetch api
 const fetch = require('node-fetch');
 
+//планировщик
+var cron = require('node-cron');
+
 //notion api
 const { Client } = require("@notionhq/client");
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
@@ -95,9 +98,7 @@ bot.on('message', async (msg) => {
                 projectId = await addProjectNotGeo(projectName, dateStart, Teh, manager_id, company_id, Worklist);
             }
 
-            //const projectId2 = await addProjectTest(projectName, dateStart, Teh, Worklist);
-            //const projectId2 = '34954a42-006e-440d-b435-3cb1d5ae8900'; 
-
+            //8 сеукнд
             setTimeout(async () => {
                 console.log("projectId: ", projectId)
 
@@ -107,6 +108,7 @@ bot.on('message', async (msg) => {
             }, 8000)
 
 
+            // 30 секунд
             setTimeout(() => {bot.sendMessage(chat_id, 'Ваша заявка принята!')}, 30000) // 30 секунд
 
 
@@ -118,7 +120,7 @@ bot.on('message', async (msg) => {
             let arr_all = [] 
 
             
-            // повторить с интервалом 2 секунды
+            // повторить с интервалом 1 минуту
             let timerId = setInterval(async() => {
                 i++
                 
@@ -178,39 +180,51 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
                     )
                 };
 
-            }, 240000); //каждые 4 минут 300000
+            }, 60000); //каждую минуту 
 
             //1. отправка через 10/30 минут 1800000
-            setTimeout(() => {
+            cron.schedule('* 5 * * *', function(){
                 bot.sendMessage(chat_id, 
-`${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
+                    `${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`                                                    
+                )           
+            });
+
+//             setTimeout(() => {
+//                 bot.sendMessage(chat_id, 
+// `${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
                                                             
-                )
-            }, 600000); //10 минут //1800000 30 минут
+//                 )
+//             }, 600000); //10 минут //1800000 30 минут
              
             //2. отправка через 20/90 минут 5400000
-            setTimeout(() => {
-                bot.sendMessage(chat_id, 
-`${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
+            // cron.schedule('* * 1-4/1 * *', function(){
+            //     bot.sendMessage(chat_id, 
+            //         `${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`                                                    
+            //     )           
+            // });
+
+//             setTimeout(() => {
+//                 bot.sendMessage(chat_id, 
+// `${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
                                                             
-                )
-            }, 1200000); //20 минут
+//                 )
+//             }, 1200000); //20 минут
 
             //3. отправка через 30/150 минут 9000000
-            setTimeout(() => {
-                bot.sendMessage(chat_id, 
-`${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`,
-               {
-                reply_markup: ({
-                    inline_keyboard:[
-                        [{text: 'Остановить поиск', callback_data:'Остановить поиск'}],
-                    ]
-                })
-               } 
+//             setTimeout(() => {
+//                 bot.sendMessage(chat_id, 
+// `${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`,
+//                {
+//                 reply_markup: ({
+//                     inline_keyboard:[
+//                         [{text: 'Остановить поиск', callback_data:'Остановить поиск'}],
+//                     ]
+//                 })
+//                } 
                                                             
-                )  
+//                 )  
 
-            }, 1800000); //150 минут
+//             }, 1800000); //150 минут
 
 
             // остановить вывод через 260 минут
