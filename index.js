@@ -183,13 +183,13 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
             }, 60000); //каждую минуту 
 
             // 1. отправка через 30 минут 
-            var task = cron.schedule('30 * * * *', function(){
+            cron.schedule('30 * * * *', function(){
                 bot.sendMessage(chat_id, 
                     `${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`                                                    
                 )           
             });
 
-            task.stop();
+            //task.stop();
              
             // 2. отправка через 1 час
             cron.schedule('* 1-3/1 * * *', function(){
