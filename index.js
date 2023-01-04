@@ -125,7 +125,7 @@ bot.on('message', async (msg) => {
                 i++
                 
                 let databaseBlock = await getDatabaseId(blockId); 
-                console.log("databaseBlock: ", JSON.stringify(databaseBlock))
+                //console.log("databaseBlock: ", JSON.stringify(databaseBlock))
 
                 arr_count = [] 
                 
