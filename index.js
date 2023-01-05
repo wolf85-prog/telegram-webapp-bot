@@ -1499,7 +1499,7 @@ bot.on('message', async (msg) => {
                'текст сообщения'                                            
             )
 
-            console.log('id: ', res.id)
+            console.log('id: ', JSON.stringify(res))
                       
         });
         task.start()
