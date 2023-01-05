@@ -1487,7 +1487,7 @@ bot.on('message', async (msg) => {
     }
 
     if (text === '/cron') {
-        cron.schedule('1-3 * * * *', () => {
+        cron.schedule('1 * * * *', () => {
             bot.sendMessage(chatId, 
                 'текст сообщения'                                                
             )
