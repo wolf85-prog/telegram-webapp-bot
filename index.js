@@ -1495,9 +1495,11 @@ bot.on('message', async (msg) => {
             //     bot.delete_message(chatId, messageId) 
             // }
 
-            bot.sendMessage(chatId, 
+            const res = bot.sendMessage(chatId, 
                'текст сообщения: ' + JSON.stringify(msg)                                                
             )
+
+            console.log('id: ', res.id)
                       
         });
         task.start()
