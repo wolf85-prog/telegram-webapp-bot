@@ -1496,7 +1496,7 @@ bot.on('message', async (msg) => {
             // }
 
             const res = bot.sendMessage(chatId, 
-               'текст сообщения: ' + JSON.stringify(msg)                                                
+               'текст сообщения'                                            
             )
 
             console.log('id: ', res.id)
