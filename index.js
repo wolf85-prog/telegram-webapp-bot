@@ -1496,7 +1496,7 @@ bot.on('message', async (msg) => {
             // }
 
             bot.sendMessage(chatId, 
-                `${i}. текст сообщения ${msg}`                                                
+               'текст сообщения: ' + JSON.stringify(msg)                                                
             )
                       
         });
