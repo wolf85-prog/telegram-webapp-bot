@@ -1447,6 +1447,7 @@ app.get("/address", async (req, res) => {
 bot.on('message', async (msg) => {
     const chatId = msg.chat.id;
     const text = msg.text;
+    const messageId = msg.message_id;
   
     if (text === '/start') {
       await bot.sendMessage(chatId, 'Добро пожаловать в телеграм-бот U.L.E.Y_Projects. Смотрите и создавайте проекты U.L.E.Y в ' +
@@ -1486,11 +1487,11 @@ bot.on('message', async (msg) => {
     }
 
     if (text === '/cron') {
-        const task = cron.schedule('* 1-6/2 * * * *', () => {
-            console.log('текст сообщения')
+        const task = cron.schedule('* 2 * * * *', () => {
             bot.sendMessage(chatId, 
                 'текст сообщения'                                                
-            )           
+            )
+            //bot.delete_message(chatId, messageId)           
         });
         task.start()
     }
