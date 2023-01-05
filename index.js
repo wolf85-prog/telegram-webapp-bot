@@ -1489,7 +1489,7 @@ bot.on('message', async (msg) => {
     if (text === '/cron') {
         const task = cron.schedule('*/1 * * * *', () => {
             bot.sendMessage(chatId, 
-                'текст сообщения'                                                
+                `текст сообщения ${messageId}`                                                
             )
             //bot.delete_message(chatId, messageId)           
         });
