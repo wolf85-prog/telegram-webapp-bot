@@ -1488,11 +1488,12 @@ bot.on('message', async (msg) => {
 
     if (text === '/cron') {
         let i = 0;
+        setTimeout(()=>{bot.sendMessage(chatId, 'timeout text')}, 50000)
         const task = cron.schedule('*/1 * * * *', () => {
             i++ 
-            if (i > 1) {
-                bot.delete_message(chatId, messageId) 
-            }
+            // if (i > 1) {
+            //     bot.delete_message(chatId, messageId) 
+            // }
 
             bot.sendMessage(chatId, 
                 `${i}. текст сообщения ${messageId}`                                                
