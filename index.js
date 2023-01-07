@@ -198,27 +198,27 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
             //task.stop();
              
             // 2. отправка через 1 час
-            const task1 = cron.schedule('* * 1 * * *', function(){
-                bot.sendMessage(chat_id, 
-                    `${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`                                                    
-                )           
-            });
+            // const task1 = cron.schedule('* * 1 * * *', function(){
+            //     bot.sendMessage(chat_id, 
+            //         `${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`                                                    
+            //     )           
+            // });
 
-            task1.start();
+            // task1.start();
 
             // 3. отправка через 4 часа (260 минут) 
-            var task3 = cron.schedule('* 1 * * *', function(){
-                bot.sendMessage(chat_id, 
-                    `${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`,
-                        {
-                            reply_markup: ({
-                                inline_keyboard:[
-                                    [{text: 'Остановить поиск', callback_data:'Остановить поиск'}],
-                                ]
-                            })
-                       }                                                    
-                )           
-            });
+            // var task3 = cron.schedule('* 1 * * *', function(){
+            //     bot.sendMessage(chat_id, 
+            //         `${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`,
+            //             {
+            //                 reply_markup: ({
+            //                     inline_keyboard:[
+            //                         [{text: 'Остановить поиск', callback_data:'Остановить поиск'}],
+            //                     ]
+            //                 })
+            //            }                                                    
+            //     )           
+            // });
 
             //task3.start();
 
@@ -1492,14 +1492,10 @@ bot.on('message', async (msg) => {
         const task = cron.schedule('*/1 * * * *', () => {
             i++ 
             // if (i > 1) {
-            //     bot.delete_message(chatId, messageId) 
+            //     bot.deleteMessage(chatId, messageId) 
             // }
 
-            const res = bot.sendMessage(chatId, 
-               'текст сообщения'                                            
-            )
-
-            console.log('id: ', JSON.stringify(res))
+            bot.sendMessage(chatId, 'текст сообщения')
                       
         });
         task.start()
