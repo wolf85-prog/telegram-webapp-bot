@@ -70,13 +70,6 @@ const backOptions = {
     })
 }
 
-bot.setMyCommands([
-    {command: '/menu', description: 'Главное меню'},
-    {command: '/info', description: 'Получить информацию о боте'},
-    {command: '/settings', description: 'Настройки'},
-    {command: '/getmyblockdb', description: 'Получить уведомление о назначениях специалистов'},
-])
-
 
 bot.on('message', async (msg) => {
     const text = msg.text;
@@ -1443,6 +1436,13 @@ app.get("/address", async (req, res) => {
 
 //-------------------------------------------------------------------------------------------------------
 
+bot.setMyCommands([
+    {command: '/start', description: 'Начальное приветствие'},
+    {command: '/menu', description: 'Главное меню'},
+    {command: '/info', description: 'Получить информацию о боте'},
+    {command: '/settings', description: 'Настройки'},
+    {command: '/getmyblockdb', description: 'Получить уведомление о назначениях специалистов'},
+])
 
 bot.on('message', async (msg) => {
     const chatId = msg.chat.id;
