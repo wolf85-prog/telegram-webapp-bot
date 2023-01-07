@@ -32,6 +32,8 @@ const express = require('express');
 const cors = require('cors');
 const https = require('https');
 
+const sequelize = require('./bot/connections/db')
+
 const bot = new TelegramBot(token, {polling: true});
 const app = express();
 
@@ -1640,7 +1642,16 @@ app.post('/web-test-data', async (req, res) => {
 
 const PORT = process.env.PORT || 8000;
 
-//app.listen(PORT, () => console.log('server started on PORT ' + PORT))
-httpsServer.listen(PORT, () => {
-    console.log('HTTPS Server running on port' + PORT);
-});
+const start = async () => {
+    try {
+        await sequelize.authenticate()
+        await sequelize.sync()
+        httpsServer.listen(PORT, () => {
+            console.log('HTTPS Server running on port' + PORT);
+        });
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+start()
