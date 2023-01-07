@@ -1646,6 +1646,7 @@ const start = async () => {
     try {
         await sequelize.authenticate()
         await sequelize.sync()
+        
         httpsServer.listen(PORT, () => {
             console.log('HTTPS Server running on port' + PORT);
         });
