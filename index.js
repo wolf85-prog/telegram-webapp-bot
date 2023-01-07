@@ -1438,7 +1438,7 @@ app.get("/address", async (req, res) => {
   });
 
 //-------------------------------------------------------------------------------------------------------
-require('./bot/middleawre/command/help.command')
+//require('./bot/middleawre/command/help.command')
 
 bot.setMyCommands([
     {command: '/start', description: 'Начальное приветствие'},
