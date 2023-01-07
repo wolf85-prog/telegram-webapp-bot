@@ -31,7 +31,7 @@ const cors = require('cors');
 const https = require('https');
 
 const sequelize = require('./bot/connections/db')
-//const models = require('./bot/models/models')
+const models = require('./bot/models/models')
 
 const TelegramBot = require('node-telegram-bot-api');
 const bot = new TelegramBot(process.env.TELEGRAM_API_TOKEN, {polling: true});
