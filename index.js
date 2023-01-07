@@ -22,19 +22,20 @@ var projectId, projectName, projectDate, projectTime, dateStart, manager_id, com
 var blockId
 
 //telegram api
-const token = process.env.TELEGRAM_API_TOKEN;
 const token_fetch = 'Bearer ' + process.env.NOTION_API_KEY;
 const webAppUrl = process.env.WEB_APP_URL;
 
-const TelegramBot = require('node-telegram-bot-api');
 const fs = require('fs');
 const express = require('express');
 const cors = require('cors');
 const https = require('https');
 
 const sequelize = require('./bot/connections/db')
+const models = require('./bot/models/models')
 
-const bot = new TelegramBot(token, {polling: true});
+const TelegramBot = require('node-telegram-bot-api');
+const bot = new TelegramBot(process.env.TELEGRAM_API_TOKEN, {polling: true});
+
 const app = express();
 
 app.use(express.json());
@@ -1437,6 +1438,7 @@ app.get("/address", async (req, res) => {
   });
 
 //-------------------------------------------------------------------------------------------------------
+require('./bot/middleawre/command/help.command')
 
 bot.setMyCommands([
     {command: '/start', description: 'Начальное приветствие'},
@@ -1650,6 +1652,7 @@ const start = async () => {
         httpsServer.listen(PORT, () => {
             console.log('HTTPS Server running on port' + PORT);
         });
+
     } catch (error) {
         console.log(error)
     }
