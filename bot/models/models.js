@@ -9,4 +9,17 @@ const User = sequelize.define('user', {
     role: {type: DataTypes.STRING, defaultValue: "USER"},
 })
 
-module.exports = {User}
+const Message = sequelize.define('message', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    text: {type: DataTypes.STRING},
+    from_id: {type: DataTypes.STRING},
+    firstname: {type: DataTypes.STRING},
+    lastname: {type: DataTypes.STRING},
+    is_bot: {type: DataTypes.BOOLEAN},
+    img: {type: DataTypes.STRING},
+})
+
+User.hasMany(Message)
+Message.belongsTo(User)
+
+module.exports = {User, Message}
