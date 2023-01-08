@@ -29,6 +29,7 @@ const fs = require('fs');
 const express = require('express');
 const cors = require('cors');
 const https = require('https');
+const router = require('./bot/routes/index')
 
 const sequelize = require('./bot/connections/db')
 const models = require('./bot/models/models')
