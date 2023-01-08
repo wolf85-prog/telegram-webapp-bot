@@ -30,6 +30,7 @@ const express = require('express');
 const cors = require('cors');
 const https = require('https');
 const router = require('./bot/routes/index')
+const errorHandler = require('./middleware/ErrorHandling')
 
 const sequelize = require('./bot/connections/db')
 const models = require('./bot/models/models')
@@ -1642,6 +1643,9 @@ app.post('/web-test-data', async (req, res) => {
         return res.status(500).json({})
     }
 })
+
+// Обработка ошибок, последний middleware
+app.use(errorHandler)
 
 const PORT = process.env.PORT || 8000;
 
