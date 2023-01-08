@@ -43,6 +43,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(express.static('telegram-webapp-bot'));
+app.use('/api', router)
 
 // Certificate
 const privateKey = fs.readFileSync('privkey.pem', 'utf8'); //fs.readFileSync('/etc/letsencrypt/live/proj.uley.team/privkey.pem', 'utf8');
