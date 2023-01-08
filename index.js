@@ -31,6 +31,7 @@ const cors = require('cors');
 const https = require('https');
 const router = require('./bot/routes/index')
 const errorHandler = require('./bot/middleware/ErrorHandling')
+const path = require('path')
 
 const sequelize = require('./bot/connections/db')
 const models = require('./bot/models/models')
@@ -43,6 +44,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(express.static('telegram-webapp-bot'));
+app.use(express.static(path.resolve(__dirname, 'admin-panel')))
 app.use('/api', router)
 
 // Certificate
@@ -641,7 +643,7 @@ async function newDatabase(parent_page_id, worklist) {
                                 "color": "green"
                             },
                             {
-                                "name": "Tracks",
+                                "name": "Trucks",
                                 "color": "yellow"
                             },
                             {
@@ -756,7 +758,7 @@ async function newDatabase_3(parent_page_id) {
                                 "color": "green"
                             },
                             {
-                                "name": "Tracks",
+                                "name": "Trucks",
                                 "color": "yellow"
                             },
                             {
