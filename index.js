@@ -30,7 +30,7 @@ const express = require('express');
 const cors = require('cors');
 const https = require('https');
 const router = require('./bot/routes/index')
-const errorHandler = require('./middleware/ErrorHandling')
+const errorHandler = require('./bot/middleware/ErrorHandling')
 
 const sequelize = require('./bot/connections/db')
 const models = require('./bot/models/models')
