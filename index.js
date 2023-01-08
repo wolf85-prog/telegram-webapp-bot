@@ -179,7 +179,9 @@ bot.on('message', async (msg) => {
 ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
                                                                 
                     )
-                };
+                } else {
+                    
+                }
 
             }, 60000); //каждую минуту 
 
@@ -190,11 +192,19 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
             //     )           
             // });
 
+
             setTimeout(() => {
                 bot.sendMessage(chat_id, 
                     `${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`                                                    
                 )
             }, 1800000)
+
+            setTimeout(() => {
+                bot.sendMessage(chat_id, 
+                    `${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`                                                    
+                )
+            }, 3600000)
+
 
             //task.stop();
              
