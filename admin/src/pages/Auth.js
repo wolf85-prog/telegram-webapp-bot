@@ -12,7 +12,7 @@ import {Context} from "../index";
 const Auth = observer(() => {
     const {user} = useContext(Context)
     const location = useLocation()
-    const history = useNavigate()
+    const navigate = useNavigate()
     const isLogin = location.pathname === LOGIN_ROUTE
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -27,7 +27,7 @@ const Auth = observer(() => {
             }
             user.setUser(user)
             user.setIsAuth(true)
-            history(ADMIN_ROUTE)
+            navigate(ADMIN_ROUTE)
         } catch (e) {
             alert(e.response.data.message)
         }
