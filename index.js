@@ -1204,7 +1204,7 @@ async function getBlocks(blockId) {
         
         console.log("Blocks Data: "  + res)
 
-        return response.results[1].id;
+        return res;
     } catch (error) {
         console.error(error.body)
     }
