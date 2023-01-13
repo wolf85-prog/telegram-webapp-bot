@@ -39,8 +39,9 @@ const router = require('./bot/routes/index')
 const errorHandler = require('./bot/middleware/ErrorHandling')
 const path = require('path')
 
+//подключение к БД PostreSQL
 const sequelize = require('./bot/connections/db')
-const models = require('./bot/models/models')
+const UserModel = require('./bot/models/models')
 
 const app = express();
 
@@ -62,8 +63,6 @@ const credentials = {
 };
 
 const httpsServer = https.createServer(credentials, app);
-
-
 
 
 bot.on('message', async (msg) => {
@@ -1440,7 +1439,6 @@ app.get("/address", async (req, res) => {
   });
 
 //-------------------------------------------------------------------------------------------------------
-//require('./bot/middleawre/command/help.command')
 
 bot.setMyCommands([
     {command: '/start', description: 'Начальное приветствие'},
@@ -1493,18 +1491,7 @@ bot.on('message', async (msg) => {
     }
 
     if (text === '/cron') {
-        let i = 0;
-        //setTimeout(()=>{bot.sendMessage(chatId, 'timeout text')}, 50000)
-        //const task = cron.schedule('*/1 * * * *', () => {
-            i++ 
-            // if (i > 1) {
-            //     bot.deleteMessage(chatId, messageId) 
-            // }
 
-            bot.sendMessage(chatId, 'текст сообщения: ' + msg.message_id)
-                      
-        //});
-        //task.start()
     }
     
   });
@@ -1659,7 +1646,7 @@ const start = async () => {
         });
 
     } catch (error) {
-        console.log(error)
+        console.log('Подключение к БД сломалось!', error)
     }
 }
 
