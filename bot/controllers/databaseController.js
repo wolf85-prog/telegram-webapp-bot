@@ -61,9 +61,9 @@ class DatabaseController {
     async databaseId(req, res) {
         const {id} = req.params.id; // получаем id
 
-        // if (!id) {
-        //     return console.log('Не задан ID блока')
-        // }
+        if (id === 'undefined') {
+            return console.log('Не задан ID блока')
+        }
 
         const base = await getDatabaseId(id);
     
