@@ -1,7 +1,6 @@
 require("dotenv").config();
 const { Client } = require("@notionhq/client");
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
-const ApiError = require('../error/ApiError')
 
 //получить id блока заданной страницы по id
 async function getBlocks(blockId) {
