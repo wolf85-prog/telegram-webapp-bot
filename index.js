@@ -1494,6 +1494,7 @@ bot.on('message', async (msg) => {
         }
     } catch (error) {
         await bot.sendMessage(chatId, 'Произошла непредвиденная ошибка!');
+        console.log('Произошла непредвиденная ошибка! ', error)
     }
     
   });
