@@ -2,6 +2,7 @@ require("dotenv").config();
 
 //telegram api
 const TelegramBot = require('node-telegram-bot-api');
+const {menuOptions, backOptions} = require('./options')
 const token = process.env.TELEGRAM_API_TOKEN
 const bot = new TelegramBot(token, {polling: true});
 
@@ -62,23 +63,7 @@ const credentials = {
 
 const httpsServer = https.createServer(credentials, app);
 
-const menuOptions = {
-    reply_markup: JSON.stringify({
-        inline_keyboard:[
-            [{text: 'Информация', callback_data:'Информация'}, {text: 'Настройки', callback_data:'Настройки'}],
-            [{text: 'Открыть проекты U.L.E.Y', web_app: {url: webAppUrl}}],
-        ]
-    })
-}
 
-const backOptions = {
-    reply_markup: JSON.stringify({
-        inline_keyboard:[
-            [{text: 'Открыть проекты U.L.E.Y', web_app: {url: webAppUrl}}],
-            [{text: 'Назад', callback_data:'/menu'}],
-        ]
-    })
-}
 
 
 bot.on('message', async (msg) => {
@@ -1670,7 +1655,7 @@ const start = async () => {
         await sequelize.sync()
         
         httpsServer.listen(PORT, () => {
-            console.log('HTTPS Server running on port' + PORT);
+            console.log('HTTPS Server Bot running on port ' + PORT);
         });
 
     } catch (error) {
