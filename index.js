@@ -1455,7 +1455,7 @@ bot.on('message', async (msg) => {
 
     try {
         if (text === '/start') {
-            await UserModel.create({chatId})
+            //await UserModel.create({chatId})
             await bot.sendMessage(chatId, 'Добро пожаловать в телеграм-бот U.L.E.Y_Projects. Смотрите и создавайте проекты U.L.E.Y в ' +
                 'web-приложении прямо из мессенджера Telegram.', {
                 reply_markup: ({
@@ -1480,7 +1480,7 @@ bot.on('message', async (msg) => {
       
       
         if (text === '/info') {
-            const user = await UserModel.findOne({chatId})
+            //const user = await UserModel.findOne({chatId})
             await bot.sendMessage(chatId, `Приветствуем тебя, ${msg,from,first_name} ${msg.from.last_name} (${user.role})! Чат-бот предназначен для создания проектов в U.L.E.Y и общения заказчика с администратором проектов.`);
         }
       
