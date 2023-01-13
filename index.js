@@ -1452,46 +1452,48 @@ bot.on('message', async (msg) => {
     const chatId = msg.chat.id;
     const text = msg.text;
     const messageId = msg.message_id;
-  
-    if (text === '/start') {
-      await bot.sendMessage(chatId, 'Добро пожаловать в телеграм-бот U.L.E.Y_Projects. Смотрите и создавайте проекты U.L.E.Y в ' +
-          'web-приложении прямо из мессенджера Telegram.', {
-          reply_markup: ({
-              inline_keyboard:[
-                  [{text: 'Информация', callback_data:'Информация'}, {text: 'Настройки', callback_data:'Настройки'}],
-                  [{text: 'Открыть проекты U.L.E.Y', web_app: {url: webAppUrl}}],
-              ]
-          })
-      })
-    }
-  
-    if (text === '/menu') {
-        await bot.sendMessage(chatId, 'Смотрите и создавайте проекты U.L.E.Y в web-приложении прямо из мессенджера Telegram.', {
-            reply_markup: ({
-                inline_keyboard:[
-                    [{text: 'Информация', callback_data:'Информация'}, {text: 'Настройки', callback_data:'Настройки'}],
-                    [{text: 'Открыть проекты U.L.E.Y', web_app: {url: webAppUrl}}],
-                ]
+
+    try {
+        if (text === '/start') {
+            await UserModel.create({chatId})
+            await bot.sendMessage(chatId, 'Добро пожаловать в телеграм-бот U.L.E.Y_Projects. Смотрите и создавайте проекты U.L.E.Y в ' +
+                'web-приложении прямо из мессенджера Telegram.', {
+                reply_markup: ({
+                    inline_keyboard:[
+                        [{text: 'Информация', callback_data:'Информация'}, {text: 'Настройки', callback_data:'Настройки'}],
+                        [{text: 'Открыть проекты U.L.E.Y', web_app: {url: webAppUrl}}],
+                    ]
+                })
             })
-        })
-    }
-  
-  
-    if (text === '/info') {
-      await bot.sendMessage(chatId, 'Чат-бот предназначен для создания проектов в U.L.E.Y и общения заказчика с администратором проектов.');
-    }
-  
-    if (text === '/settings') {
-  
-    }
-
-    if (text === '/getmyblockdb') {
-
-
-    }
-
-    if (text === '/cron') {
-
+        }
+      
+        if (text === '/menu') {
+            await bot.sendMessage(chatId, 'Смотрите и создавайте проекты U.L.E.Y в web-приложении прямо из мессенджера Telegram.', {
+                reply_markup: ({
+                    inline_keyboard:[
+                        [{text: 'Информация', callback_data:'Информация'}, {text: 'Настройки', callback_data:'Настройки'}],
+                        [{text: 'Открыть проекты U.L.E.Y', web_app: {url: webAppUrl}}],
+                    ]
+                })
+            })
+        }
+      
+      
+        if (text === '/info') {
+            const user = await UserModel.findOne({chatId})
+            await bot.sendMessage(chatId, `Приветствуем тебя, ${msg,from,first_name} ${msg.from.last_name} (${user.role})! Чат-бот предназначен для создания проектов в U.L.E.Y и общения заказчика с администратором проектов.`);
+        }
+      
+        if (text === '/settings') {
+      
+        }
+    
+    
+        if (text === '/cron') {
+    
+        }
+    } catch (error) {
+        await bot.sendMessage(chatId, 'Произошла непредвиденная ошибка!');
     }
     
   });
