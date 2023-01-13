@@ -63,17 +63,15 @@ class DatabaseController {
 
         if (id) {
             //return console.log('Не задан ID блока')
-            const base = await getDatabaseId(id);
-    
-            if(base){
-                res.json(base);
-            }
-            else{
-                res.json({});
-            }
+            const base = await getDatabaseId(id);         
         }
 
-        
+        if(base){
+            res.json(base);
+        }
+        else{
+            res.json({});
+        }
     }
 
     async databaseId2(req, res) {
