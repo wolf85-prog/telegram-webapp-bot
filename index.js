@@ -1587,52 +1587,6 @@ ${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join
   }
 })
 
-//создание тестовой страницы (проекта) базыданных проектов
-app.post('/web-test-data', async (req, res) => {
-    const {queryId, projectname, datestart, geo, teh, managerId, companyId, worklist = []} = req.body;
-    const d = new Date(datestart);
-    //console.log(d);
-    const year = d.getFullYear();
-    const month = d.getMonth()+1;
-    const day = String(d.getDate()).padStart(2, "0");
-    const chas = d.getHours();
-    const minut = String(d.getMinutes()).padStart(2, "0");
-    try {
-
-        await bot.answerWebAppQuery(queryId, {
-            type: 'article',
-            id: queryId,
-            title: 'Тестовый проект успешно создан',
-            input_message_content: {
-                parse_mode: 'HTML',
-                message_text: 
-  `Тестовый проект успешно создан!
-  
-  <b>Проект:</b> ${projectname} 
-  <b>Дата:</b> ${day}.${month}.${year}
-  <b>Время:</b> ${chas}:${minut} 
-  <b>Адрес:</b> ${geo} 
-  <b>Тех. задание:</b> ${teh} 
-
-  <b>Специалисты:</b>  
-  ${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}`
-              }
-        })
-
-        projectName = projectname
-        projectDate = `${day}.${month}`
-        projectTime = `${chas}:${minut}`
-        dateStart = datestart
-        Teh = teh
-        Worklist = worklist
-        manager_id = managerId
-        company_id = companyId
-  
-        return res.status(200).json({});
-    } catch (e) {
-        return res.status(500).json({})
-    }
-})
 
 // Обработка ошибок, последний middleware
 app.use(errorHandler)
