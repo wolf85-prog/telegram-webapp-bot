@@ -1,5 +1,13 @@
 require("dotenv").config();
 
+//telegram api
+const TelegramBot = require('node-telegram-bot-api');
+const token = process.env.TELEGRAM_API_TOKEN
+const bot = new TelegramBot(token, {polling: true});
+
+// web-приложение
+const webAppUrl = process.env.WEB_APP_URL;
+
 //fetch api
 const fetch = require('node-fetch');
 
@@ -9,6 +17,7 @@ var cron = require('node-cron');
 //notion api
 const { Client } = require("@notionhq/client");
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
+const token_fetch = 'Bearer ' + process.env.NOTION_API_KEY;
 const databaseId = process.env.NOTION_DATABASE_ID
 const databaseManagerId = process.env.NOTION_DATABASE_MANAGER_ID
 const databaseAddressId = process.env.NOTION_DATABASE_ADDRESS_ID
@@ -21,10 +30,6 @@ const chatGiaId = process.env.GIA_CHAT_ID
 var projectId, projectName, projectDate, projectTime, dateStart, manager_id, company_id, Geo, Teh, Worklist
 var blockId
 
-//telegram api
-const token_fetch = 'Bearer ' + process.env.NOTION_API_KEY;
-const webAppUrl = process.env.WEB_APP_URL;
-
 const fs = require('fs');
 const express = require('express');
 const cors = require('cors');
@@ -35,9 +40,6 @@ const path = require('path')
 
 const sequelize = require('./bot/connections/db')
 const models = require('./bot/models/models')
-
-const TelegramBot = require('node-telegram-bot-api');
-const bot = new TelegramBot(process.env.TELEGRAM_API_TOKEN, {polling: true});
 
 const app = express();
 
