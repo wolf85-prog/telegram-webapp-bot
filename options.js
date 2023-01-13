@@ -1,4 +1,8 @@
-module.exports = {
+require("dotenv").config();
+const webAppUrl = process.env.WEB_APP_URL;
+
+module.exports = {   
+
     menuOptions: {
         reply_markup: JSON.stringify({
             inline_keyboard:[
