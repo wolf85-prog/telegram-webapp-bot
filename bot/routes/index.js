@@ -8,9 +8,9 @@ const projectController = require('../controllers/projectController')
 router.get('/secret', secretController.secretInfo)
 
 // get PROJECTS  
-router.get("/projects3", projectController.projects);
-
-router.get("/projects4", projectController.getProjects2);
+router.get("/projects", projectController.projects);
+router.get("/projects2", projectController.projects2);
+router.get("/projects/:id", projectController.projectsId);
 
 
 router.use('/user', userRouter)
