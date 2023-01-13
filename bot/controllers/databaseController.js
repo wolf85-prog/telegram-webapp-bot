@@ -2,6 +2,7 @@ require("dotenv").config();
 const { Client } = require("@notionhq/client");
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
 const databaseId = process.env.NOTION_DATABASE_ID
+const ApiError = require('../error/ApiError')
 
 //get items from DB
 async function getDatabase() {
@@ -58,8 +59,13 @@ async function getDatabaseId2(baseId) {
 
 class DatabaseController {
 
-    async databaseId(req, res) {
-        const id = req.params.id; // получаем id
+    async databaseId(req, res, next) {
+        const {id} = req.params.id; // получаем id
+
+        if (!id) {
+            return next(ApiError.badRequest('Не задан ID блока'))
+        }
+
         const base = await getDatabaseId(id);
     
         if(base){
