@@ -49,7 +49,7 @@ app.use(express.json());
 app.use(cors());
 app.use(express.static('telegram-webapp-bot'));
 app.use(express.static(path.resolve(__dirname, 'static')))
-app.use('/api', router)
+app.use('/', router)
 
 // Certificate
 const privateKey = fs.readFileSync('privkey.pem', 'utf8'); //fs.readFileSync('/etc/letsencrypt/live/proj.uley.team/privkey.pem', 'utf8');
@@ -1300,10 +1300,10 @@ async function getCompanys() {
 }
 
 
-app.get('/secret',(req, res) => {
-    const secret =  Math.floor(Math.random()*100)
-    res.json({secret})
-});
+// app.get('/secret',(req, res) => {
+//     const secret =  Math.floor(Math.random()*100)
+//     res.json({secret})
+// });
 
 app.get('/blocks/:id', async (req, res) => {
     const id = req.params.id; // получаем id
