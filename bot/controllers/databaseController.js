@@ -59,11 +59,11 @@ async function getDatabaseId2(baseId) {
 
 class DatabaseController {
 
-    async databaseId(req, res, next) {
+    async databaseId(req, res) {
         const {id} = req.params.id; // получаем id
 
         if (!id) {
-            return next(ApiError.badRequest('Не задан ID блока'))
+            return console.log('Не задан ID блока')
         }
 
         const base = await getDatabaseId(id);
