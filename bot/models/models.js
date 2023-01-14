@@ -18,13 +18,14 @@ const UserBot = sequelize.define('userbot', {
 
 const Message = sequelize.define('message', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    text: {type: DataTypes.STRING},
-    from_id: {type: DataTypes.STRING},
+    messageType: {type: DataTypes.STRING},      //тип сообщения;
+    textOrPathToFile: {type: DataTypes.STRING}, //текст сообщения или путь к файлу;
+    to: {type: DataTypes.STRING},
+    from: {type: DataTypes.STRING},
     is_bot: {type: DataTypes.BOOLEAN},
-    img: {type: DataTypes.STRING},
 })
 
 UserBot.hasMany(Message)
 Message.belongsTo(UserBot)
 
-module.exports = {User, Message}
+module.exports = {User, UserBot, Message}
