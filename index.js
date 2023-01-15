@@ -478,6 +478,11 @@ async function newDatabase_1(parent_page_id) {
                 "Date": {
                     "date": {}
                 },
+                "Taxi": {
+                    "name": "Taxi",
+                    "type": "checkbox",
+                    "checkbox": {}
+                },
                 "Комментарий": {
                     "rich_text": {}
                 }               
