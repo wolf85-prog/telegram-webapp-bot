@@ -1039,8 +1039,8 @@ const PORT = process.env.PORT || 8000;
 
 const start = async () => {
     try {
-        await sequelize.authenticate()
-        await sequelize.sync()
+        //await sequelize.authenticate()
+        //await sequelize.sync()
         
         httpsServer.listen(PORT, () => {
             console.log('HTTPS Server Bot running on port ' + PORT);
