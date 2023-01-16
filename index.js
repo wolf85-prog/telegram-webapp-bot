@@ -960,11 +960,10 @@ app.post('/web-data', async (req, res) => {
 //-------------------------------------------------------------------------------------------------------
 
 bot.setMyCommands([
-    {command: '/start', description: 'Начальное приветствие'},
-    {command: '/menu', description: 'Главное меню'},
-    {command: '/info', description: 'Получить информацию о боте'},
-    {command: '/settings', description: 'Настройки'},
-    {command: '/getmyblockdb', description: 'Получить уведомление о назначениях специалистов'},
+    // {command: '/start', description: 'Начальное приветствие'},
+    // {command: '/menu', description: 'Главное меню'},
+    // {command: '/info', description: 'Получить информацию о боте'},
+    // {command: '/settings', description: 'Настройки'},
 ])
 
 bot.on('message', async (msg) => {
@@ -998,7 +997,7 @@ bot.on('message', async (msg) => {
         }
       
       
-        if (text === '/info') {
+        if (text === '/information') {
             //const user = await UserModel.findOne({chatId})
             await bot.sendMessage(chatId, `Приветствуем тебя, ${msg.from.first_name} ${msg.from.last_name}! Чат-бот предназначен для создания проектов в U.L.E.Y и общения заказчика с администратором проектов.`);
         }
