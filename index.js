@@ -435,17 +435,17 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
         console.log(new Date())
         console.log("Success! Project not geo added. " + res_id)        
 
+        await newDatabase_1(res_id);
+
         //setTimeout(()=> {
-        newDatabase_1(res_id);
-        //}, 2000) 
+            await newDatabase(res_id, worklist);
+        //}, 4000) 
 
-        setTimeout(()=> {
-            newDatabase(res_id, worklist);
-        }, 4000) 
+        //setTimeout(()=> {
+            await newDatabase_3(res_id);
+        //}, 9000) 
 
-        setTimeout(()=> {
-            newDatabase_3(res_id);
-        }, 9000) 
+        await newDatabase4(res_id)
 
         return res_id;
 
@@ -1010,7 +1010,7 @@ bot.on('message', async (msg) => {
     
     
         if (text === '/cron') {
-            newDatabase4('324234')
+
         }
     } catch (error) {
         await bot.sendMessage(chatId, 'Произошла непредвиденная ошибка!');
