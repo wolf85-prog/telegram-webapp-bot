@@ -1,7 +1,9 @@
+const addEquipment = require("./addEquipment");
+
 require("dotenv").config();
 const token_fetch = 'Bearer ' + process.env.NOTION_API_KEY;
 
-module.exports = async function newDatabase4(parent_page_id) {
+module.exports = async function newDatabase4(parent_page_id, equipmentlist) {
     //создание базы данных "Оборудование"
     try {
         const body = {
@@ -75,6 +77,17 @@ module.exports = async function newDatabase4(parent_page_id) {
         });
         const data = await response.json();
         console.log("4. Success! Equipments added. Database_id: " + data.id) // + " data: " + JSON.stringify(data))
+
+        //добавить список работников
+        equipmentlist.forEach((equipment, index) => {
+            if (worker.count > 1) {
+                for (let i = 0; i < equipment.count; i++) {
+                    addEquipment(data.id, equipment.icon)
+                }
+            } else {
+                addEquipment(data.id, equipment.icon)
+            }          
+        });
         
     } catch (error) {
         console.error(error.body)

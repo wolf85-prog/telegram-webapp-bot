@@ -20,6 +20,7 @@ const { Client } = require("@notionhq/client");
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
 const token_fetch = 'Bearer ' + process.env.NOTION_API_KEY;
 const databaseId = process.env.NOTION_DATABASE_ID
+const databaseAddressId = process.env.NOTION_DATABASE_ADDRESS_ID
 const databaseWorkersId = process.env.NOTION_DATABASE_WORKERS_ID
 const chatGroupId = process.env.CHAT_GROUP_ID
 const chatTelegramId = process.env.CHAT_ID
@@ -885,7 +886,7 @@ async function addAddress(geo, projectname, datestart, teh, managerId, companyId
         console.log("Success! Entry address added. " + response.id)
 
         //добавление проекта с названием проекта в базу
-        const project_id = addProject(projectname, datestart, teh, managerId, companyId, worklist, response.id);
+        const project_id = await addProject(projectname, datestart, teh, managerId, companyId, worklist, response.id);
 
         return project_id
 
