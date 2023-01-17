@@ -1,7 +1,7 @@
 require("dotenv").config();
 const token_fetch = 'Bearer ' + process.env.NOTION_API_KEY;
 
-module.exports = async function newDatabase_4(parent_page_id) {
+module.exports = async function newDatabase4(parent_page_id) {
     //создание базы данных "Оборудование"
     try {
         const body = {
@@ -62,7 +62,7 @@ module.exports = async function newDatabase_4(parent_page_id) {
             }
         }
 
-        // создание базы данных "График проекта"
+        // создание базы данных "Оборудование"
         const response = await fetch('https://api.notion.com/v1/databases', {
             method: 'post',
             body: JSON.stringify(body),
