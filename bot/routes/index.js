@@ -26,16 +26,16 @@ router.get("/companys", managerController.companys);
 
 
 //get DATABASE
-router.get('/database/:id', databaseController.databaseId);
+router.get('/database/:id', databaseController.databaseId); //получить список работников
 router.get('/database2/:id', databaseController.databaseId2);
 router.get('/database/', databaseController.database);
 router.get("/database1", databaseController.database1);
 
 
 //get BLOCK
-router.get('/blocks/:id', blockController.blocksId);
-router.get('/blocks2/:id', blockController.blocksId2);
-router.get('/block/:id', blockController.blockId);
+router.get('/blocks/:id', blockController.blocksId); //получить id таблицы/блока "Основной состав" ("4a74b62a-2f46-4fae-9e4b-9c700cb1b2f1")
+router.get('/blocks2/:id', blockController.blocksId2); //подробная инфа
+router.get('/block/:id', blockController.blockId); // получить данные доп. таблиц
 
 //get PAGE
 router.get('/page/:id', blockController.pageId);
