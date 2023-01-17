@@ -59,7 +59,7 @@ async function getDatabaseId2(baseId) {
 class DatabaseController {
 
     async databaseId(req, res) {
-        const {id} = req.params.id; // получаем id
+        const id = req.params.id; // получаем id
 
         if (id) {
            const base = await getDatabaseId(id);    
