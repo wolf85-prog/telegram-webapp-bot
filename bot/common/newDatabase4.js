@@ -1,3 +1,6 @@
+require("dotenv").config();
+const token_fetch = 'Bearer ' + process.env.NOTION_API_KEY;
+
 module.exports = async function newDatabase_4(parent_page_id) {
     //создание базы данных "Оборудование"
     try {
@@ -15,10 +18,7 @@ module.exports = async function newDatabase_4(parent_page_id) {
                 }
             ],
             "is_inline": true,
-            "properties": {  
-                "Name": {
-                    "title": {}
-                },              
+            "properties": {              
                 "Date": {
                     "date": {}
                 },
@@ -57,8 +57,8 @@ module.exports = async function newDatabase_4(parent_page_id) {
                     }
                 },
                 "Комментарий": {
-                    "rich_text": {}
-                }               
+                    "title": {}
+                },                 
             }
         }
 
@@ -74,16 +74,7 @@ module.exports = async function newDatabase_4(parent_page_id) {
             }
         });
         const data = await response.json();
-        console.log("2.1 Success! Grafik project added. Database_id: " + data.id) // + " data: " + JSON.stringify(data))
-
-        //добавить даты (День2, День3, День4)
-        addDate(data.id, 'День №4');
-        setTimeout(()=> {
-            addDate(data.id, 'День №3');
-        }, 2000)  
-        setTimeout(()=> {
-            addDate(data.id, 'День №2');
-        }, 4000) 
+        console.log("4. Success! Equipments added. Database_id: " + data.id) // + " data: " + JSON.stringify(data))
         
     } catch (error) {
         console.error(error.body)
