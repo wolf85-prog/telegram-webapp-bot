@@ -1,3 +1,4 @@
+require("dotenv").config();
 const databaseAddressId = process.env.NOTION_DATABASE_ADDRESS_ID
 
 module.exports = async function addAddress(geo, projectname, datestart, teh, managerId, companyId, worklist) {

@@ -61,7 +61,12 @@ class DatabaseController {
     async databaseId(req, res) {
         const {id} = req.params.id; // получаем id
 
-        const base = await getDatabaseId(id);         
+        if (id) {
+           const base = await getDatabaseId(id);    
+        } else {
+            console.log('Не валидный id')
+        }
+              
 
         if(base){
             res.json(base);
