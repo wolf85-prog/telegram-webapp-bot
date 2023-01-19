@@ -897,7 +897,7 @@ async function newDatabase4(parent_page_id, equipmentlist) {
             ],
             "is_inline": true,
             "properties": {              
-                "Date": {
+                "Дата": {
                     "date": {}
                 },
                 "Наименование": {
