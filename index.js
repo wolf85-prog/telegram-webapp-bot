@@ -78,10 +78,10 @@ bot.on('message', async (msg) => {
 
             //добавление геопозиции в БД Площадки (Адрес) и добавление проекта
             if (Geo != '') {
-                projectId = await addAddress(Geo, projectName, dateStart, Teh, manager_id, company_id, Worklist);
+                projectId = await addAddress(Geo, projectName, dateStart, Teh, manager_id, company_id, Worklist, Equipmentlist);
             } else {
                 //добавление проекта с названием проекта в базу
-                projectId = await addProjectNotGeo(projectName, dateStart, Teh, manager_id, company_id, Worklist);
+                projectId = await addProjectNotGeo(projectName, dateStart, Teh, manager_id, company_id, Worklist, Equipmentlist);
             }
 
             //8 секунд
@@ -1007,7 +1007,7 @@ async function addEquipment(blockId, equipment) {
 
 
 //send data to notion
-async function addAddress(geo, projectname, datestart, teh, managerId, companyId, worklist) {
+async function addAddress(geo, projectname, datestart, teh, managerId, companyId, worklist, equipmentlist) {
     try {
         const response = await notion.pages.create({
             parent: { database_id: databaseAddressId },
@@ -1046,7 +1046,7 @@ async function addAddress(geo, projectname, datestart, teh, managerId, companyId
         console.log("Success! Entry address added. " + response.id)
 
         //добавление проекта с названием проекта в базу
-        const project_id = await addProject(projectname, datestart, teh, managerId, companyId, worklist, response.id);
+        const project_id = await addProject(projectname, datestart, teh, managerId, companyId, worklist, equipmentlist, response.id);
 
         return project_id
 
