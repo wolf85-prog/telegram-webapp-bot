@@ -554,6 +554,52 @@ async function newDatabase_1(parent_page_id) {
     }
 }
 
+//send data to notion
+async function addDate(blockId, day) {
+    try {
+        const response = await notion.pages.create({
+            parent: { database_id: blockId },
+            properties: {
+                Name: {
+                    type: "title",
+                    title: [
+                        {
+                            "type": "text",
+                            "text": {
+                                "content": day,
+                                "link": null
+                            },
+                            "annotations": {
+                                "bold": false,
+                                "italic": false,
+                                "strikethrough": false,
+                                "underline": false,
+                                "code": false,
+                                "color": "default"
+                            },
+                            "plain_text": day,
+                            "href": null
+                        }
+                    ]
+                },
+                Date : {
+                    type: 'date',                   
+                    date: {
+                        "start": "2023-01-01T00:00:00.000",
+                        "end": null,
+                        "time_zone": "Europe/Moscow"
+                    }
+
+                }
+            }
+        })
+        //console.log(response)
+        console.log("3.1 Success! Date added. Data: "  + response.id)//+ JSON.stringify(response))
+    } catch (error) {
+        console.error(error.body)
+    }
+}
+
 
 //send create db notion
 async function newDatabase(parent_page_id, worklist) {
@@ -669,6 +715,39 @@ async function newDatabase(parent_page_id, worklist) {
     }
 }
 
+//send data to notion
+async function addWorker(blockId, worker) {
+    try {
+        const response = await notion.pages.create({
+            parent: { database_id: blockId },
+            properties: {
+                "1. Дата": {
+                    type: 'date',                   
+                    date: {
+                        "start": "2023-01-01T00:00:00.000",
+                        "end": null,
+                        "time_zone": "Europe/Moscow"
+                    }
+
+                },
+                "3. Специализация": {
+                    type: "multi_select",
+                    multi_select: [
+                        {
+                            "name": worker
+                        }
+                    ]
+                }
+            }
+        })
+        //console.log(response)
+        console.log("3 Success! Worker added. Data: " + response.id) //+ JSON.stringify(response))
+    } catch (error) {
+        console.error(error.body)
+    }
+}
+
+
 
 // создание БД "Запасной состав"
 async function newDatabase_3(parent_page_id) {
@@ -776,6 +855,30 @@ async function newDatabase_3(parent_page_id) {
     }
 }
 
+//Добавление строк в таблицу "Запасной состав"
+async function addWorkerZapas(blockId) {
+    try {
+        const response = await notion.pages.create({
+            parent: { database_id: blockId },
+            properties: {
+                "1. Дата": {
+                    type: 'date',                   
+                    date: {
+                        "start": "2023-01-01T00:00:00.000",
+                        "end": null,
+                        "time_zone": "Europe/Moscow"
+                    }
+
+                }
+            }
+        })
+        //console.log(response)
+        console.log("3.3 Success! Worker zapas added. Data: " + response.id) //JSON.stringify(response))
+    } catch (error) {
+        console.error(error.body)
+    }
+}
+
 async function newDatabase4(parent_page_id, equipmentlist) {
     //создание базы данных "Оборудование"
     try {
@@ -851,123 +954,23 @@ async function newDatabase4(parent_page_id, equipmentlist) {
         const data = await response.json();
         console.log("4. Success! Equipments added. Database_id: " + data.id) // + " data: " + JSON.stringify(data))
 
+        console.log("equipmentlist: ", equipmentlist)
+
         //добавить список работников
         equipmentlist.forEach((equipment, index) => {
             if (equipment.count > 1) {
                 for (let i = 0; i < equipment.count; i++) {
-                    addEquipment(data.id, equipment.icon)
+                    //addEquipment(data.id, equipment.icon)
+                    console.log("equipment: ", equipment)
                 }
             } else {
-                addEquipment(data.id, equipment.icon)
+                //addEquipment(data.id, equipment.icon)
             }          
         });
         
     } catch (error) {
         console.error(error.body)
     }   
-}
-
-//send data to notion
-async function addDate(blockId, day) {
-    try {
-        const response = await notion.pages.create({
-            parent: { database_id: blockId },
-            properties: {
-                Name: {
-                    type: "title",
-                    title: [
-                        {
-                            "type": "text",
-                            "text": {
-                                "content": day,
-                                "link": null
-                            },
-                            "annotations": {
-                                "bold": false,
-                                "italic": false,
-                                "strikethrough": false,
-                                "underline": false,
-                                "code": false,
-                                "color": "default"
-                            },
-                            "plain_text": day,
-                            "href": null
-                        }
-                    ]
-                },
-                Date : {
-                    type: 'date',                   
-                    date: {
-                        "start": "2023-01-01T00:00:00.000",
-                        "end": null,
-                        "time_zone": "Europe/Moscow"
-                    }
-
-                }
-            }
-        })
-        //console.log(response)
-        console.log("3.1 Success! Date added. Data: "  + response.id)//+ JSON.stringify(response))
-    } catch (error) {
-        console.error(error.body)
-    }
-}
-
-
-//send data to notion
-async function addWorker(blockId, worker) {
-    try {
-        const response = await notion.pages.create({
-            parent: { database_id: blockId },
-            properties: {
-                "1. Дата": {
-                    type: 'date',                   
-                    date: {
-                        "start": "2023-01-01T00:00:00.000",
-                        "end": null,
-                        "time_zone": "Europe/Moscow"
-                    }
-
-                },
-                "3. Специализация": {
-                    type: "multi_select",
-                    multi_select: [
-                        {
-                            "name": worker
-                        }
-                    ]
-                }
-            }
-        })
-        //console.log(response)
-        console.log("3 Success! Worker added. Data: " + response.id) //+ JSON.stringify(response))
-    } catch (error) {
-        console.error(error.body)
-    }
-}
-
-//Добавление строк в таблицу "Запасной состав"
-async function addWorkerZapas(blockId) {
-    try {
-        const response = await notion.pages.create({
-            parent: { database_id: blockId },
-            properties: {
-                "1. Дата": {
-                    type: 'date',                   
-                    date: {
-                        "start": "2023-01-01T00:00:00.000",
-                        "end": null,
-                        "time_zone": "Europe/Moscow"
-                    }
-
-                }
-            }
-        })
-        //console.log(response)
-        console.log("3.3 Success! Worker zapas added. Data: " + response.id) //JSON.stringify(response))
-    } catch (error) {
-        console.error(error.body)
-    }
 }
 
 //добавление строки в таблицу Оборудование
