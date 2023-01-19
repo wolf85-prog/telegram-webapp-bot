@@ -776,6 +776,97 @@ async function newDatabase_3(parent_page_id) {
     }
 }
 
+async function newDatabase4(parent_page_id, equipmentlist) {
+    //создание базы данных "Оборудование"
+    try {
+        const body = {
+            "parent": {
+                "type": "page_id",
+                "page_id": parent_page_id
+            },
+            "title": [
+                {
+                    "type": "text",
+                    "text": {
+                        "content": "Оборудование"
+                    }
+                }
+            ],
+            "is_inline": true,
+            "properties": {              
+                "Date": {
+                    "date": {}
+                },
+                "Наименование": {
+                    "multi_select": {
+                        "options": [
+                            {
+                                "name": "Sound",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Light",
+                                "color": "yellow"
+                            },
+                            {
+                                "name": "Video",
+                                "color": "green"
+                            },
+                            {
+                                "name": "Riggers",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "Stage Ground",
+                                "color": "green"
+                            },
+                            {
+                                "name": "Trucks",
+                                "color": "yellow"
+                            },
+                            {
+                                "name": "Production",
+                                "color": "orange"
+                            }
+                        ]
+                    }
+                },
+                "Комментарий": {
+                    "title": {}
+                },                 
+            }
+        }
+
+        // создание базы данных "Оборудование"
+        const response = await fetch('https://api.notion.com/v1/databases', {
+            method: 'post',
+            body: JSON.stringify(body),
+            headers: {
+                'Authorization': token_fetch, //`Bearer ${token}`
+                'Content-Type': 'application/json', 
+                accept: 'application/json',
+                'Notion-Version': '2022-06-28'
+            }
+        });
+        const data = await response.json();
+        console.log("4. Success! Equipments added. Database_id: " + data.id) // + " data: " + JSON.stringify(data))
+
+        //добавить список работников
+        equipmentlist.forEach((equipment, index) => {
+            if (equipment.count > 1) {
+                for (let i = 0; i < equipment.count; i++) {
+                    addEquipment(data.id, equipment.icon)
+                }
+            } else {
+                addEquipment(data.id, equipment.icon)
+            }          
+        });
+        
+    } catch (error) {
+        console.error(error.body)
+    }   
+}
+
 //send data to notion
 async function addDate(blockId, day) {
     try {
@@ -874,6 +965,38 @@ async function addWorkerZapas(blockId) {
         })
         //console.log(response)
         console.log("3.3 Success! Worker zapas added. Data: " + response.id) //JSON.stringify(response))
+    } catch (error) {
+        console.error(error.body)
+    }
+}
+
+//добавление строки в таблицу Оборудование
+async function addEquipment(blockId, equipment) {
+    try {
+        const response = await notion.pages.create({
+            parent: { database_id: blockId },
+            properties: {
+                "Дата": {
+                    type: 'date',                   
+                    date: {
+                        "start": "2023-01-01T00:00:00.000",
+                        "end": null,
+                        "time_zone": "Europe/Moscow"
+                    }
+
+                },
+                "Наименование": {
+                    type: "multi_select",
+                    multi_select: [
+                        {
+                            "name": equipment
+                        }
+                    ]
+                }
+            }
+        })
+        //console.log(response)
+        console.log("3 Success! Equipment added. Data: " + response.id) //+ JSON.stringify(response))
     } catch (error) {
         console.error(error.body)
     }
@@ -978,10 +1101,10 @@ ${equipmentlist.map(item =>' - ' + item.name + ' = ' + item.count + ' шт.').jo
   Адрес: ${geo} 
   Тех. задание: ${teh} 
   
-<b>Специалисты:</b>  
+Специалисты:  
 ${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}
 
-<b>Оборудование:</b>  
+Оборудование:  
 ${equipmentlist.map(item =>' - ' + item.name + ' = ' + item.count + ' шт.').join('\n')}`
           )
   
