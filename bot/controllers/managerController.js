@@ -23,7 +23,7 @@ async function getManagerId(id) {
         console.log("TelegramID: ", id)
         console.log("ManagerId: ", response.results[0].id)
 
-        if (response.results[0].id) {
+        if (response.results[0].id !== 'undefined') {
            return response.results[0].id; 
         } else {
             console.log('Менеджер с таким TelegramID не найден!')
