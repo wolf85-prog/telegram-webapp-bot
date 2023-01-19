@@ -957,12 +957,14 @@ async function newDatabase4(parent_page_id, equipmentlist) {
         //console.log("equipmentlist: ", equipmentlist)
 
         //добавить список работников
+
         equipmentlist.forEach((equipment, index) => {
             if (equipment.count > 1) {
                 for (let i = 0; i < equipment.count; i++) {
                     addEquipment(data.id, equipment.cat)
                     //console.log("equipment: ", equipment)
                 }
+                //addEquipment(data.id, equipment.cat)
             } else {
                 addEquipment(data.id, equipment.icon)
             }          
