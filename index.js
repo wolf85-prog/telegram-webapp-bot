@@ -29,7 +29,7 @@ const chatGiaId = process.env.GIA_CHAT_ID
 var projectId, projectName, projectDate, projectTime, dateStart, manager_id, company_id, Geo, Teh, Worklist, Equipmentlist
 var blockId
 
-const newDatabase4 = require('./bot/common/newDatabase4')
+//const newDatabase4 = require('./bot/common/newDatabase4')
 
 const fs = require('fs');
 const express = require('express');
