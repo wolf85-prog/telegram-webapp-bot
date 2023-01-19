@@ -26,7 +26,7 @@ const chatGroupId = process.env.CHAT_GROUP_ID
 const chatTelegramId = process.env.CHAT_ID
 const chatGiaId = process.env.GIA_CHAT_ID
 
-var projectId, projectName, projectDate, projectTime, dateStart, manager_id, company_id, Geo, Teh, Worklist
+var projectId, projectName, projectDate, projectTime, dateStart, manager_id, company_id, Geo, Teh, Worklist, Equipmentlist
 var blockId
 
 const newDatabase4 = require('./bot/common/newDatabase4')
@@ -100,7 +100,9 @@ bot.on('message', async (msg) => {
 
             let count_fio;
             let count_title;
+            let count_title2;
             const arr_cat = ['Sound', 'Light', 'Video', 'Riggers', 'Stagehands', 'StageGround', 'Trucks', 'Production']
+            const arr_cat2 = ['Sound', 'Light', 'Video', 'Riggers', 'StageGround', 'Trucks', 'Production']
             let i = 0;
             let arr_count = [] 
             let arr_all = [] 
@@ -147,6 +149,37 @@ bot.on('message', async (msg) => {
                     }              
                 })
 
+                // arr_cat2.map((arritem) => {
+                //     count_title2 = 0;
+                //     if (databaseBlock) {
+                //         databaseBlock.map((value) => {
+                //             if (arritem === value.title) {
+                //                 if (value.fio) {
+                //                     count_fio++               
+                //                 }else {
+                //                     count_fio;
+                //                 }  
+                //                 count_title++;
+                //             }
+                //         })
+                //         if (count_fio != 0) {
+                //             const obj = {
+                //                 title2: arritem,
+                //                 count_fio: count_fio,
+                //                 count_title: count_title,
+                //             }
+                //             arr_count.push(obj)
+                //         } else if (count_title !=0) {
+                //             const obj = {
+                //                 title2: arritem,
+                //                 count_fio: count_fio,
+                //                 count_title: count_title,
+                //             }
+                //             arr_count.push(obj) 
+                //         }
+                //     }              
+                // })
+
                 //сохранение массива в 2-х элементный массив
                 if (i % 2 == 0) {
                     arr_all[0] = arr_count
@@ -171,7 +204,6 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
             }, 60000); //каждую минуту 
 
             // 1. отправка через 30 минут 
-
             setTimeout(() => {
                 bot.sendMessage(chat_id, 
                     `${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`                                                    
@@ -192,10 +224,6 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
         
         } else if (text.includes('Запрос на специалистов')) {
                
-        } else if (text.includes('Тестовый')) {
-            await bot.sendMessage(chat_id, 'Ваша заявка отправлена администратору!')
-            //bot.sendMessage(chatTelegramId, `${text} \n \n от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)
-        
         } else {
             await bot.sendMessage(chat_id, `Ваше сообщение "${text}" отправлено администратору!`)
             await bot.sendMessage(chatTelegramId, `${text} \n \n от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)           
@@ -254,7 +282,7 @@ async function getDatabaseId(baseId) {
 }
 
 //Добавление проекта в Notion (addProject send data to notion)
-async function addProject(title, time, teh, managerId, companyId, worklist, geoId) {
+async function addProject(title, time, teh, managerId, companyId, worklist, equipmentlist, geoId) {
     try {
         const response = await notion.pages.create({
             parent: { database_id: databaseId },
@@ -351,6 +379,10 @@ async function addProject(title, time, teh, managerId, companyId, worklist, geoI
             newDatabase_3(res_id);
         }, 9000)
 
+        setTimeout(()=> {
+            newDatabase4(res_id, equipmentlist);
+        }, 13000) 
+
         return res_id;
 
     } catch (error) {
@@ -360,7 +392,7 @@ async function addProject(title, time, teh, managerId, companyId, worklist, geoI
 
 
 //Добавление проекта в Notion без адреса (addProjectNotGeo)
-async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist) {
+async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist, equipmentlist) {
     try {
         const response = await notion.pages.create({
             parent: { database_id: databaseId },
@@ -436,17 +468,19 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
         console.log(new Date())
         console.log("Success! Project not geo added. " + res_id)        
 
-        await newDatabase_1(res_id);
+        newDatabase_1(res_id);
 
-        //setTimeout(()=> {
-            await newDatabase(res_id, worklist);
-        //}, 4000) 
+        setTimeout(()=> {
+             newDatabase(res_id, worklist);
+        }, 4000) 
 
-        //setTimeout(()=> {
-            await newDatabase_3(res_id);
-        //}, 9000) 
+        setTimeout(()=> {
+            newDatabase_3(res_id);
+        }, 9000) 
 
-        await newDatabase4(res_id)
+        setTimeout(()=> {
+            newDatabase4(res_id, equipmentlist);
+        }, 13000) 
 
         return res_id;
 
@@ -902,7 +936,7 @@ app.use('/', router)
 
 //создание страницы (проекта) базы данных проектов
 app.post('/web-data', async (req, res) => {
-    const {queryId, projectname, datestart, geo, teh, managerId, companyId, worklist = []} = req.body;
+    const {queryId, projectname, datestart, geo, teh, managerId, companyId, worklist = [], equipmentlist = []} = req.body;
     const d = new Date(datestart);
     const year = d.getFullYear();
     const month = String(d.getMonth()+1).padStart(2, "0");
@@ -925,12 +959,17 @@ app.post('/web-data', async (req, res) => {
   <b>Адрес:</b> ${geo} 
   <b>Тех. задание:</b> ${teh}
   
-  <b>Специалисты:</b>  
-  ${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}`
+<b>Специалисты:</b>  
+${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}
+
+<b>Оборудование:</b>  
+${equipmentlist.map(item =>' - ' + item.name + ' = ' + item.count + ' шт.').join('\n')}`
               }
         })
-  
-          await bot.sendMessage(chatGroupId, 
+
+        
+        //отправить сообщение в чат-админку
+        await bot.sendMessage(chatGroupId, 
   `Проект успешно создан! 
   
   Название проекта:  ${projectname} 
@@ -939,8 +978,11 @@ app.post('/web-data', async (req, res) => {
   Адрес: ${geo} 
   Тех. задание: ${teh} 
   
-  Специалисты: 
-  ${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}`
+<b>Специалисты:</b>  
+${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}
+
+<b>Оборудование:</b>  
+${equipmentlist.map(item =>' - ' + item.name + ' = ' + item.count + ' шт.').join('\n')}`
           )
   
           projectName = projectname
@@ -949,6 +991,7 @@ app.post('/web-data', async (req, res) => {
           dateStart = datestart
           Teh = teh
           Worklist = worklist
+          Equipmentlist = equipmentlist 
           manager_id = managerId
           company_id = companyId
           Geo = geo        

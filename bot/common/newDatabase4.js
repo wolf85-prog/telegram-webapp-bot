@@ -1,3 +1,4 @@
+require("dotenv").config();
 const addEquipment = require("./addEquipment");
 
 require("dotenv").config();
@@ -80,7 +81,7 @@ module.exports = async function newDatabase4(parent_page_id, equipmentlist) {
 
         //добавить список работников
         equipmentlist.forEach((equipment, index) => {
-            if (worker.count > 1) {
+            if (equipment.count > 1) {
                 for (let i = 0; i < equipment.count; i++) {
                     addEquipment(data.id, equipment.icon)
                 }

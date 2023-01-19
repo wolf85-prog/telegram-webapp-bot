@@ -64,7 +64,7 @@ class DatabaseController {
         //if (id) {
            const base = await getDatabaseId(id);    
         //} else {
-            //console.log('Не валидный id')
+        //    console.log('Не валидный id')
         //}
               
 
