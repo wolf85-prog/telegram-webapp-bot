@@ -954,17 +954,17 @@ async function newDatabase4(parent_page_id, equipmentlist) {
         const data = await response.json();
         console.log("4. Success! Equipments added. Database_id: " + data.id) // + " data: " + JSON.stringify(data))
 
-        console.log("equipmentlist: ", equipmentlist)
+        //console.log("equipmentlist: ", equipmentlist)
 
         //добавить список работников
         equipmentlist.forEach((equipment, index) => {
             if (equipment.count > 1) {
                 for (let i = 0; i < equipment.count; i++) {
-                    //addEquipment(data.id, equipment.icon)
-                    console.log("equipment: ", equipment)
+                    addEquipment(data.id, equipment.cat)
+                    //console.log("equipment: ", equipment)
                 }
             } else {
-                //addEquipment(data.id, equipment.icon)
+                addEquipment(data.id, equipment.icon)
             }          
         });
         
