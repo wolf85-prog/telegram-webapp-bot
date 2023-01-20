@@ -1174,7 +1174,7 @@ bot.on('message', async (msg) => {
       
       
         if (text === '/information') {
-            //const user = await UserModel.findOne({chatId})
+            const user = await UserBot.findOne({chatId})
             await bot.sendMessage(chatId, `Приветствуем тебя, ${msg.from.first_name} ${msg.from.last_name}! Чат-бот предназначен для создания проектов в U.L.E.Y и общения заказчика с администратором проектов.`);
         }
       
