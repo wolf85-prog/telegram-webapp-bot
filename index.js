@@ -1149,7 +1149,7 @@ bot.on('message', async (msg) => {
 
     try {
         if (text === '/start') {
-            await UserBot.create({ first_name, last_name, chatId })
+            await UserBot.create({ chatId })
             await bot.sendMessage(chatId, 'Добро пожаловать в телеграм-бот U.L.E.Y_Projects. Смотрите и создавайте проекты U.L.E.Y в ' +
                 'web-приложении прямо из мессенджера Telegram.', {
                 reply_markup: ({
