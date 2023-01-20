@@ -41,7 +41,7 @@ const path = require('path')
 
 //подключение к БД PostreSQL
 const sequelize = require('./bot/connections/db')
-const UserModel = require('./bot/models/models')
+const {UserModel} = require('./bot/models/models')
 
 const app = express();
 
