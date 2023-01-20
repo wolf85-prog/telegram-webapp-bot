@@ -1147,7 +1147,7 @@ bot.on('message', async (msg) => {
 
     try {
         if (text === '/start') {
-            //await UserModel.create({ first_name: ${msg.from.first_name}, last_name: ${msg.from.last_name}, chatId })
+            await UserModel.create({ first_name: `${msg.from.first_name}`, last_name: `${msg.from.last_name}`, chatId })
             await bot.sendMessage(chatId, 'Добро пожаловать в телеграм-бот U.L.E.Y_Projects. Смотрите и создавайте проекты U.L.E.Y в ' +
                 'web-приложении прямо из мессенджера Telegram.', {
                 reply_markup: ({
@@ -1217,8 +1217,8 @@ const PORT = process.env.PORT || 8000;
 
 const start = async () => {
     try {
-        //await sequelize.authenticate()
-        //await sequelize.sync()
+        await sequelize.authenticate()
+        await sequelize.sync()
         
         httpsServer.listen(PORT, () => {
             console.log('HTTPS Server Bot running on port ' + PORT);
