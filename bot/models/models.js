@@ -25,7 +25,7 @@ const Message = sequelize.define('message', {
     is_bot: {type: DataTypes.BOOLEAN},
 })
 
-UserBot.hasMany(Message)
-Message.belongsTo(UserBot)
+//UserBot.hasMany(Message)
+//Message.belongsTo(UserBot)
 
 module.exports = {User, UserBot, Message}
