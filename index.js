@@ -1142,12 +1142,14 @@ bot.setMyCommands([
 
 bot.on('message', async (msg) => {
     const chatId = msg.chat.id;
+    const first_name = msg.from.first_name
+    const last_name = msg.from.last_name
     const text = msg.text;
     const messageId = msg.message_id;
 
     try {
         if (text === '/start') {
-            //await UserBot.create({ first_name: `${msg.from.first_name}`, last_name: `${msg.from.last_name}`, chatId })
+            await UserBot.create({ first_name, last_name, chatId })
             await bot.sendMessage(chatId, 'Добро пожаловать в телеграм-бот U.L.E.Y_Projects. Смотрите и создавайте проекты U.L.E.Y в ' +
                 'web-приложении прямо из мессенджера Telegram.', {
                 reply_markup: ({
