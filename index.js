@@ -41,7 +41,7 @@ const path = require('path')
 
 //подключение к БД PostreSQL
 const sequelize = require('./bot/connections/db')
-const {UserBot} = require('./bot/models/models')
+const {UserBot, Message} = require('./bot/models/models')
 
 const app = express();
 
@@ -223,7 +223,7 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
             setTimeout(() => { clearInterval(timerId); }, 15600000); //260 минут
         
         } else if (text.includes('Запрос на специалистов')) {
-               
+               const messageDB = await Message.create({text: text, chatId: chat_id})
         } else {
             await bot.sendMessage(chat_id, `Ваше сообщение "${text}" отправлено администратору!`)
             await bot.sendMessage(chatTelegramId, `${text} \n \n от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)           
