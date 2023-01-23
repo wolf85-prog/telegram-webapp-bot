@@ -1079,7 +1079,7 @@ ${equipmentlist.map(item =>' - ' + item.name + ' = ' + item.count + ' шт.').jo
 ${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}
 
 Оборудование:  
-${equipmentlist.map(item =>' - ' + item.name + ' = ' + item.count + ' шт.').join('\n')}`
+${equipmentlist.map(item =>' - ' + item.subname + ' = ' + item.count + ' шт.').join('\n')}`
           )
   
           projectName = projectname
