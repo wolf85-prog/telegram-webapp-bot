@@ -149,37 +149,6 @@ bot.on('message', async (msg) => {
                     }              
                 })
 
-                // arr_cat2.map((arritem) => {
-                //     count_title2 = 0;
-                //     if (databaseBlock) {
-                //         databaseBlock.map((value) => {
-                //             if (arritem === value.title) {
-                //                 if (value.fio) {
-                //                     count_fio++               
-                //                 }else {
-                //                     count_fio;
-                //                 }  
-                //                 count_title++;
-                //             }
-                //         })
-                //         if (count_fio != 0) {
-                //             const obj = {
-                //                 title2: arritem,
-                //                 count_fio: count_fio,
-                //                 count_title: count_title,
-                //             }
-                //             arr_count.push(obj)
-                //         } else if (count_title !=0) {
-                //             const obj = {
-                //                 title2: arritem,
-                //                 count_fio: count_fio,
-                //                 count_title: count_title,
-                //             }
-                //             arr_count.push(obj) 
-                //         }
-                //     }              
-                // })
-
                 //сохранение массива в 2-х элементный массив
                 if (i % 2 == 0) {
                     arr_all[0] = arr_count
@@ -225,7 +194,7 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
         } else if (text.includes('Запрос на специалистов')) {
                const messageDB = await Message.create({text: text, chatId: chat_id})
         } else {
-            await bot.sendMessage(chat_id, `Ваше сообщение "${text}" отправлено администратору!`)
+            await bot.sendMessage(chat_id, `Ваше сообщение "${text}" отправлено!`)
             await bot.sendMessage(chatTelegramId, `${text} \n \n от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)           
         }
     }
