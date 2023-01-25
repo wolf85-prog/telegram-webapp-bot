@@ -24,7 +24,6 @@ const Message = sequelize.define('message', {
     img: {type: DataTypes.STRING}, //путь к файлу;
     to: {type: DataTypes.STRING},
     from: {type: DataTypes.STRING},
-    chatId: {type: DataTypes.STRING},
     is_bot: {type: DataTypes.BOOLEAN},
 })
 
