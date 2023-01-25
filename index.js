@@ -1175,19 +1175,25 @@ bot.on('message', async (msg) => {
         if (text === '/getmessage') {
 
             while (true) {
-                setTimeout(async() => {
-                    //получить сообщения из админской панели
-                    try {
-                        const message_admin = await Message.findAll({where: {to: chatId.toString()}})
+                // setTimeout(async() => {
+                //     //получить сообщения из админской панели
+                //     try {
+                //         const message_admin = await Message.findAll({where: {to: chatId.toString()}})
 
-                        message_admin.map(item =>{
-                            bot.sendMessage(chatId, item.dataValues.text)
-                        })          
+                //         message_admin.map(item =>{
+                //             bot.sendMessage(chatId, item.dataValues.text)
+                //         })          
 
-                    } catch (error) {
-                        console.log(error)
-                    }
-                }, 60000)
+                //     } catch (error) {
+                //         console.log(error)
+                //     }
+                // }, 60000)
+                
+                // увеличение массива на каждой итерации
+                array.push(new Array(10000000));
+
+                const memory = process.memoryUsage();
+                console.log((memory.heapUsed / 1024 / 1024 / 1024).toFixed(4), 'GB');
             }
 
             //получить сообщения из админской панели
