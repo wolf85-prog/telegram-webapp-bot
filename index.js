@@ -1173,7 +1173,7 @@ bot.on('message', async (msg) => {
     
     
         if (text === '/getmessage') {
-
+            const array = [];
             while (true) {
                 // setTimeout(async() => {
                 //     //получить сообщения из админской панели
@@ -1188,7 +1188,7 @@ bot.on('message', async (msg) => {
                 //         console.log(error)
                 //     }
                 // }, 60000)
-                
+
                 // увеличение массива на каждой итерации
                 array.push(new Array(10000000));
 
