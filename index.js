@@ -1172,8 +1172,14 @@ bot.on('message', async (msg) => {
         }
     
     
-        if (text === '/cron') {
-
+        if (text === '/getmessage') {
+            //получить сообщения из админской панели
+            try {
+                const message_admin = await Message.findAll({where: {to: chatId.toString()}})
+                console.log("text: ", message_admin[0].message.dataValues.text)
+            } catch (error) {
+                console.log(error)
+            }
         }
     } catch (error) {
         //await bot.sendMessage(chatId, 'Произошла непредвиденная ошибка!');
