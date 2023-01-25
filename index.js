@@ -207,7 +207,7 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
 
             //получить сообщения из админской панели
             try {
-                const message_admin = await Message.findAll({where: {to: chat_id}})
+                const message_admin = await Message.findAll({where: {to: chat_id.toString()}})
                 console.log(message_admin)
             } catch (error) {
                 console.log(error)
