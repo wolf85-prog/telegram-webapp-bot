@@ -67,6 +67,15 @@ const httpsServer = https.createServer(credentials, app);
 bot.on('message', async (msg) => {
     const text = msg.text;
     const chat_id = msg.chat.id;
+
+    //получить сообщения из админской панели
+    try {
+        const message_admin = await Message.findAll({where: {to: chat_id}})
+        console.log(message_admin)
+    } catch (error) {
+        console.log(error)
+    }
+
     if ((text || '')[0] !== '/') {       
         if (text.includes("Ответ")) {           
             await bot.sendMessage(text.substring(6, text.indexOf('.')), text.slice(text.indexOf('.') + 2))       
