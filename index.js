@@ -1179,7 +1179,11 @@ bot.on('message', async (msg) => {
                     //получить сообщения из админской панели
                     try {
                         const message_admin = await Message.findAll({where: {to: chatId.toString()}})
-                        await bot.sendMessage(chatId, message_admin[0].dataValues.text)
+
+                        message_admin.map(item =>{
+                            bot.sendMessage(chatId, item.dataValues.text)
+                        })          
+
                     } catch (error) {
                         console.log(error)
                     }
