@@ -1173,36 +1173,22 @@ bot.on('message', async (msg) => {
     
     
         if (text === '/getmessage') {
-            const array = [];
-            while (true) {
-                // setTimeout(async() => {
-                //     //получить сообщения из админской панели
-                //     try {
-                //         const message_admin = await Message.findAll({where: {to: chatId.toString()}})
+            let i = 0
+            while (i < 10) {
+                setTimeout(async() => {
+                    //получить сообщения из админской панели
+                    try {
+                        const message_admin = await Message.findAll({where: {to: chatId.toString()}})
 
-                //         message_admin.map(item =>{
-                //             bot.sendMessage(chatId, item.dataValues.text)
-                //         })          
+                        message_admin.map(item =>{
+                            bot.sendMessage(chatId, item.dataValues.text)
+                        })          
 
-                //     } catch (error) {
-                //         console.log(error)
-                //     }
-                // }, 60000)
-
-                // увеличение массива на каждой итерации
-                array.push(new Array(10000000));
-
-                const memory = process.memoryUsage();
-                console.log((memory.heapUsed / 1024 / 1024 / 1024).toFixed(4), 'GB');
+                    } catch (error) {
+                        console.log(error)
+                    }
+                }, 60000)
             }
-
-            //получить сообщения из админской панели
-            // try {
-            //     const message_admin = await Message.findAll({where: {to: chatId.toString()}})
-            //     await bot.sendMessage(chatId, message_admin[0].dataValues.text)
-            // } catch (error) {
-            //     console.log(error)
-            // }
         }
     } catch (error) {
         //await bot.sendMessage(chatId, 'Произошла непредвиденная ошибка!');
