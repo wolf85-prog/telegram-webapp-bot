@@ -1173,13 +1173,26 @@ bot.on('message', async (msg) => {
     
     
         if (text === '/getmessage') {
-            //получить сообщения из админской панели
-            try {
-                const message_admin = await Message.findAll({where: {to: chatId.toString()}})
-                await bot.sendMessage(chatId, message_admin[0].dataValues.text)
-            } catch (error) {
-                console.log(error)
+
+            while (true) {
+                setTimeout(async() => {
+                    //получить сообщения из админской панели
+                    try {
+                        const message_admin = await Message.findAll({where: {to: chatId.toString()}})
+                        await bot.sendMessage(chatId, message_admin[0].dataValues.text)
+                    } catch (error) {
+                        console.log(error)
+                    }
+                }, 60000)
             }
+
+            //получить сообщения из админской панели
+            // try {
+            //     const message_admin = await Message.findAll({where: {to: chatId.toString()}})
+            //     await bot.sendMessage(chatId, message_admin[0].dataValues.text)
+            // } catch (error) {
+            //     console.log(error)
+            // }
         }
     } catch (error) {
         //await bot.sendMessage(chatId, 'Произошла непредвиденная ошибка!');
