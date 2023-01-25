@@ -192,7 +192,18 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
             setTimeout(() => { clearInterval(timerId); }, 15600000); //260 минут
         
         } else if (text.includes('Запрос на специалистов')) {
-               const messageDB = await Message.create({text: text, chatId: chat_id})
+            try {
+                const messageDB = await Message.create(
+                {
+                    text: text, 
+                    from: chat_id, 
+                    to: chatTelegramId,
+                    messageType: 'text',
+                })
+            } catch (error) {
+                console.log(error);
+            }
+               
         } else {
             await bot.sendMessage(chat_id, `Ваше сообщение "${text}" отправлено!`)
             await bot.sendMessage(chatTelegramId, `${text} \n \n от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)           
