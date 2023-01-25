@@ -1174,8 +1174,8 @@ bot.on('message', async (msg) => {
     
         if (text === '/getmessage') {
             let i = 0
-            while (i < 10) {
-                //setTimeout(async() => {
+            while (i < 2) {
+                setTimeout(async() => {
                     //получить сообщения из админской панели
                     try {
                         const message_admin = await Message.findAll({where: {to: chatId.toString()}})
@@ -1187,7 +1187,8 @@ bot.on('message', async (msg) => {
                     } catch (error) {
                         console.log(error)
                     }
-                //}, 60000)
+                }, 5000)
+                i++;
             }
         }
     } catch (error) {
