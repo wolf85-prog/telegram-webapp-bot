@@ -55,15 +55,6 @@ async function getManagers() {
             database_id: databaseManagerId
         });
 
-        const responseResults = response.results.map((page) => {
-            return {
-               id: page.id,
-               title: '',
-
-            };
-        });
-
-        console.log(responseResults);
         return response;
     } catch (error) {
         console.error(error.body)
@@ -76,15 +67,6 @@ async function getCompanys() {
             database_id: databaseCompanyId
         });
 
-        const responseResults = response.results.map((page) => {
-            return {
-               id: page.id,
-               title: '',
-
-            };
-        });
-
-        console.log(responseResults);
         return response;
     } catch (error) {
         console.error(error.body)
