@@ -172,8 +172,13 @@ class ManagerController {
 
     async create(req, res) {
         const {id, firstname, lastname} = req.body;
-        const managers = await createManager(id, firstname, lastname);
-        res.json(managers);
+        try {
+            const managers = await createManager(id, firstname, lastname);
+            res.status(200).json(managers);
+        } catch (err) {
+            console.log(err)
+            res.status(500).json(err);
+        }
     }
 }
 
