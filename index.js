@@ -174,17 +174,17 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
             }, 60000); //каждую минуту 
 
             // 1. отправка через 30 минут 
-            setTimeout(() => {
-                bot.sendMessage(chat_id, 
-                    `${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`                                                    
-                )
-            }, 1800000)
+            // setTimeout(() => {
+            //     bot.sendMessage(chat_id, 
+            //         `${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`                                                    
+            //     )
+            // }, 1800000)
 
-            setTimeout(() => {
-                bot.sendMessage(chat_id, 
-                    `${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`                                                    
-                )
-            }, 3600000)
+            // setTimeout(() => {
+            //     bot.sendMessage(chat_id, 
+            //         `${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`                                                    
+            //     )
+            // }, 3600000)
              
             // 2. отправка через 1 час
             // 3. отправка через 4 часа (260 минут) 
