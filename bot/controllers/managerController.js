@@ -92,6 +92,49 @@ async function getCompanys() {
 }
 
 
+async function createManager(id, firstname, lastname) {
+    try {
+        const response = await notion.pages.create({
+            parent: { database_id: databaseManagerId },
+            properties: {
+                "ФИО": {
+                    type: "title",
+                    title: [
+                        {
+                            "type": "text",
+                            "text": {
+                                "content": firstname + lastname,
+                                "link": null
+                            },
+                            "plain_text": firstname + lastname,
+                        }
+                    ]
+                },
+                TelegramID: {
+                    "type": "rich_text",
+                    "rich_text": [
+                        {
+                            "type": "text",
+                            "text": {
+                                "content": id,
+                                "link": null
+                            },
+                            "plain_text": id,
+                        }
+                    ]
+                }
+            }
+        })
+        //console.log(response)
+        const res_id = response.id;
+
+        return response;
+    } catch (error) {
+        console.error(error.body)
+    }
+}
+
+
 class ManagerController {
 
     async managers(req, res) {
@@ -110,7 +153,7 @@ class ManagerController {
         }
     }
 
-    async managerId(req, res) {
+    async companyId(req, res) {
         const id = req.params.id; // получаем id
         const manager = await getCompanyId(id);
         if(manager){
@@ -128,8 +171,8 @@ class ManagerController {
 
 
     async create(req, res) {
-        const id = req.body.id; // получаем id
-        const managers = "создать менеджера в БД с телеграм ID: " + id;
+        const {id, firstname, lastname} = req.body;
+        const managers = await createManager(id, firstname, lastname);
         res.json(managers);
     }
 }
