@@ -85,10 +85,10 @@ async function createManager(id, firstname, lastname) {
                         {
                             "type": "text",
                             "text": {
-                                "content": firstname + lastname,
+                                "content": firstname +" "+ lastname,
                                 "link": null
                             },
-                            "plain_text": firstname + lastname,
+                            "plain_text": firstname +" "+ lastname,
                         }
                     ]
                 },
@@ -104,7 +104,23 @@ async function createManager(id, firstname, lastname) {
                             "plain_text": id,
                         }
                     ]
-                }
+                },
+                "Должность": {
+                    "type": "select",
+                    "select": {
+                        "id": "e2c4b173-3d60-467f-9597-81a2f8248437",
+                        "name": "Менеджер",
+                        "color": "yellow"
+                    }
+                },
+                "Заказчики": {
+                    "type": "relation",
+                    "relation": [
+                        {
+                            "id": "b27565fe-ce91-4457-983e-5e40c1bcbceb"
+                        }
+                    ],
+                },
             }
         })
         //console.log(response)
