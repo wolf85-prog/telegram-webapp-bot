@@ -20,6 +20,8 @@ router.get("/projects/:id", projectController.projectsId);
 router.get("/managers", managerController.managers);
 router.get("/managers/:id", managerController.managersId);
 router.get("/manager/:id", managerController.managerId);
+//post MANAGER
+router.post("/manager/:id", managerController.create);
 
 //get COMPANYS
 router.get("/companys", managerController.companys);

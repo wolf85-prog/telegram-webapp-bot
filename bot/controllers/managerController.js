@@ -125,6 +125,13 @@ class ManagerController {
         const companys = await getCompanys();
         res.json(companys);
     }
+
+
+    async create(req, res) {
+        const id = req.params.id; // получаем id
+        const managers = "создать менеджера в БД с телеграм ID: " + id;
+        res.json(managers);
+    }
 }
 
 module.exports = new ManagerController()
