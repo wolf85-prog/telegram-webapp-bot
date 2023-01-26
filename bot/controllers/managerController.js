@@ -128,7 +128,7 @@ class ManagerController {
 
 
     async create(req, res) {
-        const id = req.params.id; // получаем id
+        const id = req.body.id; // получаем id
         const managers = "создать менеджера в БД с телеграм ID: " + id;
         res.json(managers);
     }
