@@ -110,68 +110,68 @@ bot.on('message', async (msg) => {
 
             
             // повторить с интервалом 1 минуту
-            let timerId = setInterval(async() => {
-                i++
+//             let timerId = setInterval(async() => {
+//                 i++
                 
-                let databaseBlock = await getDatabaseId(blockId); 
-                //console.log("databaseBlock: ", JSON.stringify(databaseBlock))
+//                 let databaseBlock = await getDatabaseId(blockId); 
+//                 //console.log("databaseBlock: ", JSON.stringify(databaseBlock))
 
-                arr_count = [] 
+//                 arr_count = [] 
                 
-                arr_cat.map((arritem) => {
-                    count_fio = 0;
-                    count_title = 0;
-                    if (databaseBlock) {
-                        databaseBlock.map((value) => {
-                            if (arritem === value.title) {
-                                if (value.fio) {
-                                    count_fio++               
-                                }else {
-                                    count_fio;
-                                }  
-                                count_title++;
-                            }
-                        })
-                        if (count_fio != 0) {
-                            const obj = {
-                                title2: arritem,
-                                count_fio: count_fio,
-                                count_title: count_title,
-                            }
-                            arr_count.push(obj)
-                        } else if (count_title !=0) {
-                            const obj = {
-                                title2: arritem,
-                                count_fio: count_fio,
-                                count_title: count_title,
-                            }
-                            arr_count.push(obj) 
-                        }
-                    }              
-                })
+//                 arr_cat.map((arritem) => {
+//                     count_fio = 0;
+//                     count_title = 0;
+//                     if (databaseBlock) {
+//                         databaseBlock.map((value) => {
+//                             if (arritem === value.title) {
+//                                 if (value.fio) {
+//                                     count_fio++               
+//                                 }else {
+//                                     count_fio;
+//                                 }  
+//                                 count_title++;
+//                             }
+//                         })
+//                         if (count_fio != 0) {
+//                             const obj = {
+//                                 title2: arritem,
+//                                 count_fio: count_fio,
+//                                 count_title: count_title,
+//                             }
+//                             arr_count.push(obj)
+//                         } else if (count_title !=0) {
+//                             const obj = {
+//                                 title2: arritem,
+//                                 count_fio: count_fio,
+//                                 count_title: count_title,
+//                             }
+//                             arr_count.push(obj) 
+//                         }
+//                     }              
+//                 })
 
-                //сохранение массива в 2-х элементный массив
-                if (i % 2 == 0) {
-                    arr_all[0] = arr_count
-                } else {
-                    arr_all[1] = arr_count 
-                }
+//                 //сохранение массива в 2-х элементный массив
+//                 if (i % 2 == 0) {
+//                     arr_all[0] = arr_count
+//                 } else {
+//                     arr_all[1] = arr_count 
+//                 }
 
-                var isEqual = JSON.stringify(arr_all[0]) === JSON.stringify(arr_all[1]);
-                // если есть изменения в составе работников    
-                if (!isEqual) {
-                    //отправка сообщения в чат бота
-                    await bot.sendMessage(chat_id, 
-                        `Запрос на специалистов: 
+//                 var isEqual = JSON.stringify(arr_all[0]) === JSON.stringify(arr_all[1]);
+//                 // если есть изменения в составе работников    
+//                 if (!isEqual) {
+//                     //отправка сообщения в чат бота
+//                     await bot.sendMessage(chat_id, 
+//                         `Запрос на специалистов: 
 
-${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
+// ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
                                                                 
-                    )
-                } else {
+//                     )
+//                 } else {
                     
-                }
+//                 }
 
-            }, 60000); //каждую минуту 
+//             }, 60000); //каждую минуту 
 
             // 1. отправка через 30 минут 
             // setTimeout(() => {
@@ -190,7 +190,7 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
             // 3. отправка через 4 часа (260 минут) 
 
             // остановить вывод через 260 минут
-            setTimeout(() => { clearInterval(timerId); }, 15600000); //260 минут
+            //setTimeout(() => { clearInterval(timerId); }, 15600000); //260 минут
         
         } else if (text.includes('Запрос на специалистов')) {
             try {
