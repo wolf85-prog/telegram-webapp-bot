@@ -1080,7 +1080,7 @@ app.post('/web-data', async (req, res) => {
 ${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}
 
 <b>Оборудование:</b>  
-${equipmentlist.map(item =>' - ' + item.name + ' = ' + item.count + ' шт.').join('\n')}`
+${equipmentlist.map(item =>' - ' + item.subname + ' = ' + item.count + ' шт.').join('\n')}`
               }
         })
 
