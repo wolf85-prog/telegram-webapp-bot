@@ -27,7 +27,11 @@ const Message = sequelize.define('message', {
     is_bot: {type: DataTypes.BOOLEAN},
 })
 
+const Conversation = sequelize.define('conversation', {
+    members: {type: DataTypes.ARRAY(DataTypes.STRING)},
+})
+
 //UserBot.hasMany(Message)
 //Message.belongsTo(UserBot)
 
-module.exports = {User, UserBot, Message}
+module.exports = {User, UserBot, Message, Conversation}

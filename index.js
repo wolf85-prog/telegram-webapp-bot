@@ -41,7 +41,7 @@ const path = require('path')
 
 //подключение к БД PostreSQL
 const sequelize = require('./bot/connections/db')
-const {UserBot, Message} = require('./bot/models/models')
+const {UserBot, Message, Conversation} = require('./bot/models/models')
 
 const app = express();
 
@@ -76,6 +76,18 @@ bot.on('message', async (msg) => {
             //await bot.sendMessage(chat_id, 'Ваша заявка отправлена администратору!')
             await bot.sendMessage(chatTelegramId, `${text} \n \n от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)
             await bot.sendMessage(chatGiaId, `${text} \n \n от ${msg.from.first_name} ${msg.from.last_name} ${chat_id}`)
+
+            // Create a conversation
+            const conversation = {
+                members: [chat_id, chatTelegramId],
+            };
+            //создать беседу в админке в бд
+            try {
+                const savedConversation = await Conversation.create(conversation)
+                console.log("Беседа успешно создана: ", savedConversation) 
+            } catch (error) {
+                console.log(error)
+            }
 
             //добавление геопозиции в БД Площадки (Адрес) и добавление проекта
             if (Geo != '') {
@@ -1138,7 +1150,9 @@ bot.on('message', async (msg) => {
 
     try {
         if (text === '/start') {
+            //добавить пользователя в бд
             await UserBot.create({ firstname: firstname, lastname: lastname, chatId: chatId })
+
             await bot.sendMessage(chatId, 'Добро пожаловать в телеграм-бот U.L.E.Y_Projects. Смотрите и создавайте проекты U.L.E.Y в ' +
                 'web-приложении прямо из мессенджера Telegram.', {
                 reply_markup: ({
