@@ -423,11 +423,6 @@ async function newDatabase_1(parent_page_id) {
                 "Date": {
                     "date": {}
                 },
-                "Taxi": {
-                    "name": "Taxi",
-                    "type": "checkbox",
-                    "checkbox": {}
-                },
                 "Комментарий": {
                     "rich_text": {}
                 }               
@@ -589,7 +584,12 @@ async function newDatabase(parent_page_id, worklist) {
                 },
                 "6. Рейтинг": {
                     "rich_text": {}
-                }
+                },
+                "7. Такси": {
+                    "name": "7. Такси",
+                    "type": "checkbox",
+                    "checkbox": {}
+                },
             }
         }
 
