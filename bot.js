@@ -1200,16 +1200,33 @@ bot.on('message', async (msg) => {
 
         if (text == '/function') {
             newDatabase2()
+
         }
 
         if (text == '/setconversation') {
             try {
-                const conv = await Conversation.create(
-                {
-                    senderId: chatId, 
-                    receiverId: chatTelegramId, 
-                })
-                console.log("conversationId: ", conv.id)
+                //найти беседу
+                const conversation = await Conversation.findAll({
+                    where: {
+                        members: {
+                            [Op.contains]: [chatId]
+                        }
+                    },
+                })             
+
+                //если нет беседы, то создать 
+                if (conversation.length === 0) {
+                    const conv = await Conversation.create(
+                    {
+                        members: [chatId, chatTelegramId],
+                    })
+                    console.log("conversationId: ", conv.id)
+                } else {
+                    console.log('Беседа уже создана в БД')  
+                    console.log("conversationId: ", conversation)  
+                }
+                
+                
             } catch (error) {
                 console.log(error);
             }
