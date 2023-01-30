@@ -1025,10 +1025,6 @@ bot.on('message', async (msg) => {
             const user = await UserBot.findOne({where:{chatId: chatId.toString()}})
             await bot.sendMessage(chatId, `Приветствуем тебя, ${firstname} ${lastname}! Чат-бот предназначен для создания проектов в U.L.E.Y и общения заказчика с администратором проектов.`);
         }
-
-        if (text == '/function') {
-            newDatabase2()
-        }
       
         //обработка сообщений    
         if ((text || '')[0] !== '/') {       
@@ -1201,6 +1197,25 @@ bot.on('message', async (msg) => {
                 console.log(error)
             }
         }
+
+        if (text == '/function') {
+            newDatabase2()
+        }
+
+        if (text == '/setconversation') {
+            try {
+                const conv = await Conversation.create(
+                {
+                    senderId: chatId, 
+                    receiverId: chatTelegramId, 
+                })
+                console.log("conversationId: ", conv.id)
+            } catch (error) {
+                console.log(error);
+            }
+            
+        }
+
     } catch (error) {
         //await bot.sendMessage(chatId, 'Произошла непредвиденная ошибка!');
         console.log('Произошла непредвиденная ошибка! ', error)
