@@ -1224,6 +1224,10 @@ bot.on('message', async (msg) => {
         }
 
         if (text == '/setconversation') {
+            const users = UserBot.findAll()
+
+            console.log("users: ", users)
+
             let conversation_id
             try {
                 //найти беседу
