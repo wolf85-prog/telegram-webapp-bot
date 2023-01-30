@@ -29,7 +29,8 @@ const chatGiaId = process.env.GIA_CHAT_ID
 var projectId, projectName, projectDate, projectTime, dateStart, manager_id, company_id, Geo, Teh, Worklist, Equipmentlist
 var blockId
 
-//const newDatabase4 = require('./bot/common/newDatabase4')
+//functions
+const newDatabase2 = require('./bot/common/newDatabase2')
 
 const fs = require('fs');
 const express = require('express');
@@ -1023,6 +1024,10 @@ bot.on('message', async (msg) => {
         if (text === '/information') {
             const user = await UserBot.findOne({where:{chatId: chatId.toString()}})
             await bot.sendMessage(chatId, `Приветствуем тебя, ${firstname} ${lastname}! Чат-бот предназначен для создания проектов в U.L.E.Y и общения заказчика с администратором проектов.`);
+        }
+
+        if (text == '/function') {
+            newDatabase2()
         }
       
         //обработка сообщений    
