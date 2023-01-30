@@ -1036,19 +1036,38 @@ bot.on('message', async (msg) => {
                 await bot.sendMessage(chatTelegramId, `${text} \n \n от ${firstname} ${lastname} ${chatId}`)
                 await bot.sendMessage(chatGiaId, `${text} \n \n от ${firstname} ${lastname} ${chatId}`)
 
-                //создать беседу в админке в бд
-                const conversation = {
-                    members: [chatId, chatTelegramId],
-                };                
-                try {
-                    const savedConversation = await Conversation.create(conversation)
-                    console.log("Беседа успешно создана: ", savedConversation) 
+                //создать беседу в админке в бд 
+                let  conversation_id              
+                try {                  
+                    //найти беседу
+                    const conversation = await Conversation.findAll({
+                        where: {
+                            members: {
+                                [Op.contains]: [chatId]
+                            }
+                        },
+                    })             
+
+                    //если нет беседы, то создать 
+                    if (conversation.length === 0) {
+                        const conv = await Conversation.create(
+                        {
+                            members: [chatId, chatTelegramId],
+                        })
+                        console.log("Беседа успешно создана: ", conv.id) 
+                        console.log("conversationId: ", conv.id)
+                        
+                        conversation_id = conv.id
+                    } else {
+                        console.log('Беседа уже создана в БД')  
+                        console.log("conversationId: ", conversation[0].id)  
+                        
+                        conversation_id = conversation[0].id
+                    }
                 } catch (error) {
                     console.log(error)
                 }
 
-                //получить id беседы (conversationId)
-                //const conver_id = getConversationId()
                 
                 //-------------------------------------------------------------------------------------------------------------------------------
                 //--------------------------- Создание проекта ----------------------------------------------------------------------------------
