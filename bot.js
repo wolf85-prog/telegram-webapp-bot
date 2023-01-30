@@ -1205,6 +1205,7 @@ bot.on('message', async (msg) => {
         }
 
         if (text == '/setconversation') {
+            let conversation_id
             try {
                 //найти беседу
                 const conversation = await Conversation.findAll({
@@ -1222,11 +1223,20 @@ bot.on('message', async (msg) => {
                         members: [chatId, chatTelegramId],
                     })
                     console.log("conversationId: ", conv.id)
+                    conversation_id = conv.id
                 } else {
                     console.log('Беседа уже создана в БД')  
                     console.log("conversationId: ", conversation[0].id)  
+                    conversation_id = conversation[0].id
                 }
-                
+                const messageDB = await Message.create(
+                    {
+                        text: "Добрый день!", 
+                        from: chatId, 
+                        to: chatTelegramId,
+                        messageType: 'text',
+                        conversationId: conversation_id
+                    })
                 
             } catch (error) {
                 console.log(error);
