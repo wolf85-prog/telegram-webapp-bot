@@ -1224,7 +1224,7 @@ bot.on('message', async (msg) => {
                     console.log("conversationId: ", conv.id)
                 } else {
                     console.log('Беседа уже создана в БД')  
-                    console.log("conversationId: ", conversation)  
+                    console.log("conversationId: ", conversation[0].id)  
                 }
                 
                 
