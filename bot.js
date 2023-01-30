@@ -588,7 +588,7 @@ async function newDatabase(parent_page_id, worklist) {
                     "rich_text": {}
                 },
                 "7. Такси": {
-                    "name": "7. Такси",
+                    "name": "Такси",
                     "type": "checkbox",
                     "checkbox": {}
                 },
