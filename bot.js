@@ -5,6 +5,7 @@ const TelegramBot = require('node-telegram-bot-api');
 const {menuOptions, backOptions} = require('./options')
 const token = process.env.TELEGRAM_API_TOKEN
 const bot = new TelegramBot(token, {polling: true});
+const { Op } = require('sequelize')
 
 // web-приложение
 const webAppUrl = process.env.WEB_APP_URL;
