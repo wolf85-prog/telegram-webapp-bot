@@ -988,7 +988,7 @@ bot.on('message', async (msg) => {
         // команда Старт
         if (text === '/start') {
             //добавить пользователя в бд
-            const user = await UserBot.findOne({where:{chatId}})
+            const user = await UserBot.findOne({where:{chatId: chatId.toString()}})
             if (!user) {
                 await UserBot.create({ firstname: firstname, lastname: lastname, chatId: chatId })
                 console.log('Пользователь добавлен в БД')
