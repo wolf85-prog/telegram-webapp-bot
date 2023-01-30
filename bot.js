@@ -988,8 +988,14 @@ bot.on('message', async (msg) => {
         // команда Старт
         if (text === '/start') {
             //добавить пользователя в бд
-            await UserBot.create({ firstname: firstname, lastname: lastname, chatId: chatId })
-
+            const user = await UserBot.findOne({where:{chatId}})
+            if (!user) {
+                await UserBot.create({ firstname: firstname, lastname: lastname, chatId: chatId })
+                console.log('Пользователь добавлен в БД')
+            } else {
+                console.log('Ошибка работы БД. Пользователь уже существует')
+            }
+        
             await bot.sendMessage(chatId, 'Добро пожаловать в телеграм-бот U.L.E.Y_Projects. Смотрите и создавайте проекты U.L.E.Y в ' +
                 'web-приложении прямо из мессенджера Telegram.', {
                 reply_markup: ({
