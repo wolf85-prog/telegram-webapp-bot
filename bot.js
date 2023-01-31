@@ -1197,7 +1197,7 @@ bot.on('message', async (msg) => {
                     const conversation = await Conversation.findAll({
                         where: {
                             members: {
-                                [Op.contains]: [item.chatId]
+                                [Op.contains]: [chatId]
                             }
                         },
                     })             
@@ -1206,7 +1206,7 @@ bot.on('message', async (msg) => {
                     if (conversation.length === 0) {
                         const conv = await Conversation.create(
                         {
-                            members: [item.chatId, chatTelegramId],
+                            members: [chatId, chatTelegramId],
                         })
                         console.log("conversationId: ", conv.id)
                         conversation_id = conv.id
