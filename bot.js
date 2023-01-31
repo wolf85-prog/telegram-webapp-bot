@@ -1199,6 +1199,7 @@ bot.on('message', async (msg) => {
                     console.log(message)
                     await bot.sendMessage(chatId, message)
                 });
+                console.log(socket);
 
                 await bot.sendMessage(chatId, "Тест")
 
