@@ -1195,12 +1195,10 @@ bot.on('message', async (msg) => {
                 
                 // Подключаемся к серверу
                 let socket = io('ws://localhost:9000');
-                socket?.on('connect', function () {
-                    console.log("Подключение прошло успешно")
-                    socket?.on("welcome", message=> {
-                        console.log(message)
-                    });
+                socket?.on("welcome", message=> {
+                    console.log(message)
                 });
+
                 // сохранить отправленное боту сообщение пользователя в БД
                 let conversation_id
                 try {
