@@ -1199,7 +1199,7 @@ bot.on('message', async (msg) => {
                     console.log(message)
                 });
 
-                socket.current.emit("sendMessage", {
+                socket.emit("sendMessage", {
                     senderId: chatAdminId,
                     receiverId: friendId,
                     text: text,
