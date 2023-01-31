@@ -1186,8 +1186,21 @@ bot.on('message', async (msg) => {
                 // 3. отправка через 4 часа (260 минут) 
 
                 // остановить вывод через 260 минут
-                //setTimeout(() => { clearInterval(timerId); }, 15600000); //260 минут                        
-                
+                //setTimeout(() => { clearInterval(timerId); }, 15600000); //260 минут     
+
+            } else if (text.includes('Запрос на специалистов')) {   
+                // сохранить отправленное боту сообщение пользователя в БД
+                try {
+                    const messageDB = await Message.create(
+                    {
+                        text: text, 
+                        from: chatId, 
+                        to: chatTelegramId,
+                        messageType: 'text',
+                    })
+                } catch (error) {
+                    console.log(error);
+                }
             } else {
                 // сохранить отправленное боту сообщение пользователя в БД
                 try {
