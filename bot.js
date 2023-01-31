@@ -1195,15 +1195,15 @@ bot.on('message', async (msg) => {
                 
                 // Подключаемся к серверу
                 let socket = io('ws://localhost:9000');
-                socket?.on("welcome", message=> {
+                socket?.on("welcome", async message=> {
                     console.log(message)
+                    await bot.sendMessage(chatId, message)
                 });
 
                 // сохранить отправленное боту сообщение пользователя в БД
                 let conversation_id
                 try {
                     //найти беседу
-                    //console.log("item.chatId: ", item.chatId)
                     const conversation = await Conversation.findAll({
                         where: {
                             members: {
