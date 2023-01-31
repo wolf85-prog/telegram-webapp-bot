@@ -1194,14 +1194,12 @@ bot.on('message', async (msg) => {
             } else if (text.includes('Запрос на специалистов')) {  
                 
                 // Подключаемся к серверу
-                let socket = io('http://localhost:9000');
+                let socket = io('https://proj.uley.team:9000');
                 socket.on("welcome", async message=> {
                     console.log(message)
                     await bot.sendMessage(chatId, message)
                 });
                 console.log(socket);
-
-                //await bot.sendMessage(chatId, "Тест")
 
                 // сохранить отправленное боту сообщение пользователя в БД
                 let conversation_id
