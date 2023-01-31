@@ -10,6 +10,9 @@ const { Op } = require('sequelize')
 // web-приложение
 const webAppUrl = process.env.WEB_APP_URL;
 
+//socket.io
+const {io} = require("socket.io-client")
+
 //fetch api
 const fetch = require('node-fetch');
 
