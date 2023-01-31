@@ -1197,9 +1197,13 @@ bot.on('message', async (msg) => {
                 let socket = io('https://proj.uley.team:9000');
                 socket.on("welcome", async message=> {
                     console.log(message)
-                    //await bot.sendMessage(chatId, message)
                 });
-                //console.log(socket);
+
+                socket.current.emit("sendMessage", {
+                    senderId: chatAdminId,
+                    receiverId: friendId,
+                    text: text,
+                })
 
                 // сохранить отправленное боту сообщение пользователя в БД
                 let conversation_id
