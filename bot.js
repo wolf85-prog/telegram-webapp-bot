@@ -1196,10 +1196,10 @@ bot.on('message', async (msg) => {
                 // Подключаемся к серверу
                 let socket = io('https://proj.uley.team:9000');
                 socket.on("welcome", async message=> {
-                    //console.log(message)
-                    await bot.sendMessage(chatId, message)
+                    console.log(message)
+                    //await bot.sendMessage(chatId, message)
                 });
-                console.log(socket);
+                //console.log(socket);
 
                 // сохранить отправленное боту сообщение пользователя в БД
                 let conversation_id
