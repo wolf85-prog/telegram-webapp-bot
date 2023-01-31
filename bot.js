@@ -1200,6 +1200,8 @@ bot.on('message', async (msg) => {
                     await bot.sendMessage(chatId, message)
                 });
 
+                await bot.sendMessage(chatId, "Тест")
+
                 // сохранить отправленное боту сообщение пользователя в БД
                 let conversation_id
                 try {
