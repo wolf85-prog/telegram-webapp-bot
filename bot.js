@@ -1201,7 +1201,7 @@ bot.on('message', async (msg) => {
                 });
                 console.log(socket);
 
-                await bot.sendMessage(chatId, "Тест")
+                //await bot.sendMessage(chatId, "Тест")
 
                 // сохранить отправленное боту сообщение пользователя в БД
                 let conversation_id
