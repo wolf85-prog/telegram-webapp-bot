@@ -1231,14 +1231,14 @@ bot.on('message', async (msg) => {
                         conversation_id = conversation[0].id
                     }
 
-                    // const messageDB = await Message.create(
-                    // {
-                    //     text: text, 
-                    //     from: chatId, 
-                    //     to: chatTelegramId,
-                    //     messageType: 'text',
-                    //     conversationId: conversation_id,
-                    // })
+                    const messageDB = await Message.create(
+                    {
+                        text: text, 
+                        from: chatId, 
+                        to: chatTelegramId,
+                        messageType: 'text',
+                        conversationId: conversation_id,
+                    })
                 } catch (error) {
                     console.log(error);
                 }
