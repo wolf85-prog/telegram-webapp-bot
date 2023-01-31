@@ -1245,13 +1245,38 @@ bot.on('message', async (msg) => {
 
             } else {
                 // сохранить отправленное боту сообщение пользователя в БД
+                let conversation_id
                 try {
+                    //найти беседу
+                    const conversation = await Conversation.findAll({
+                        where: {
+                            members: {
+                                [Op.contains]: [chatId]
+                            }
+                        },
+                    })             
+
+                    //если нет беседы, то создать 
+                    if (conversation.length === 0) {
+                        const conv = await Conversation.create(
+                        {
+                            members: [chatId, chatTelegramId],
+                        })
+                        console.log("conversationId: ", conv.id)
+                        conversation_id = conv.id
+                    } else {
+                        console.log('Беседа уже создана в БД')  
+                        console.log("conversationId: ", conversation[0].id)  
+                        conversation_id = conversation[0].id
+                    }
+
                     const messageDB = await Message.create(
                     {
                         text: text, 
                         from: chatId, 
                         to: chatTelegramId,
                         messageType: 'text',
+                        conversationId: conversation_id,
                     })
                 } catch (error) {
                     console.log(error);
