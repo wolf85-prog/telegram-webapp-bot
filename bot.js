@@ -1201,7 +1201,7 @@ bot.on('message', async (msg) => {
 
                 socket.emit("sendMessage", {
                     senderId: chatTelegramId,
-                    receiverId: friendId,
+                    receiverId: chatId,
                     text: text,
                 })
 
