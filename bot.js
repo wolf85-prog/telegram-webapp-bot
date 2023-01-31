@@ -1188,7 +1188,16 @@ bot.on('message', async (msg) => {
                 // остановить вывод через 260 минут
                 //setTimeout(() => { clearInterval(timerId); }, 15600000); //260 минут     
 
-            } else if (text.includes('Запрос на специалистов')) {   
+            } else if (text.includes('Запрос на специалистов')) {  
+                
+                // Подключаемся к серверу
+                let socket = io('ws://localhost:9000');
+                socket?.on('connect', function () {
+                    console.log("Подключение прошло успешно")
+                    socket?.on("welcome", message=> {
+                        console.log(message)
+                    });
+                });
                 // сохранить отправленное боту сообщение пользователя в БД
                 let conversation_id
                 try {
@@ -1216,14 +1225,14 @@ bot.on('message', async (msg) => {
                         conversation_id = conversation[0].id
                     }
 
-                    const messageDB = await Message.create(
-                    {
-                        text: text, 
-                        from: chatId, 
-                        to: chatTelegramId,
-                        messageType: 'text',
-                        conversationId: conversation_id,
-                    })
+                    // const messageDB = await Message.create(
+                    // {
+                    //     text: text, 
+                    //     from: chatId, 
+                    //     to: chatTelegramId,
+                    //     messageType: 'text',
+                    //     conversationId: conversation_id,
+                    // })
                 } catch (error) {
                     console.log(error);
                 }
