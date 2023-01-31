@@ -1194,8 +1194,8 @@ bot.on('message', async (msg) => {
             } else if (text.includes('Запрос на специалистов')) {  
                 
                 // Подключаемся к серверу
-                let socket = io('ws://localhost:9000');
-                socket?.on("welcome", async message=> {
+                let socket = io('http://localhost:9000');
+                socket.on("welcome", async message=> {
                     console.log(message)
                     await bot.sendMessage(chatId, message)
                 });
