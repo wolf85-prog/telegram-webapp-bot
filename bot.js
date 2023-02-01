@@ -1332,7 +1332,7 @@ bot.on('message', async (msg) => {
                 try {
 
                     //1. добавить пользователя в бд
-                    if (item.tgID !== 'undefined') {
+                    if (item.tgID) {
                         const user = await UserBot.findOne({where:{chatId: item.tgID}})
                         //console.log("user: ", user)
 
