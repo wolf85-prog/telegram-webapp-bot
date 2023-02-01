@@ -1306,7 +1306,7 @@ bot.on('message', async (msg) => {
 
         if (text == '/setconversation') {
             //const users = await UserBot.findAll()
-            const users = [];
+            let users = [];
 
             await fetch('https://proj.uley.team:8000/managers')
                 .then(res => res.json())
