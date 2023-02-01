@@ -59,7 +59,7 @@ async function getManagers() {
             return {
                id: page.id,
                fio: page.properties["ФИО"].title[0]?.plain_text,
-               tgID: page.properties.TelegramID.rich_text,
+               tgID: page.properties.TelegramID.rich_text[0]?.plain_text,
                phone: page.properties["Основной"].phone_number,
             };
         });
