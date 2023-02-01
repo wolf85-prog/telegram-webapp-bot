@@ -1200,6 +1200,11 @@ bot.on('message', async (msg) => {
                     console.log(message)
                 });
 
+                socket.emit("addUser", chatId)
+                socket.on("getUsers", users => {
+                    console.log("users from bot: ", users);
+                })
+
                 socket.emit("sendMessage", {
                     senderId: chatTelegramId,
                     receiverId: chatId,
@@ -1245,6 +1250,7 @@ bot.on('message', async (msg) => {
                 }
 
             } else {
+
                 // сохранить отправленное боту сообщение пользователя в БД
                 let conversation_id
                 try {
