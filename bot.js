@@ -1313,7 +1313,14 @@ bot.on('message', async (msg) => {
                 .then(json => {
                     console.log("Name of the first user in the array:");
                     //console.log("users: ", json)
-                    users = json.slice(0);
+
+                    users = json.map(item => ({
+                        // Так ссылка не скопируется и оригинальный массив останется чист
+                        id: item.id,
+                        fio: item.fio,
+                        tgID: item.tgID,
+                        phone: item.phone,
+                      }))
 
             })     
 
