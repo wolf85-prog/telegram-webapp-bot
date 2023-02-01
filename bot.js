@@ -1317,6 +1317,8 @@ bot.on('message', async (msg) => {
 
             })     
 
+            console.log("user: ", users)
+
             users.map((item) => {  
                 
                 console.log("user: ", item.tgID)
