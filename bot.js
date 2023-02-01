@@ -1317,7 +1317,7 @@ bot.on('message', async (msg) => {
 
             })     
 
-            users.forEach(async function(item, i, users) {   
+            users.map((item) => {  
                 
                 console.log("user: ", item.tgID)
 
