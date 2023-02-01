@@ -1333,15 +1333,15 @@ bot.on('message', async (msg) => {
 
                     //1. добавить пользователя в бд
                     if (item.tgID !== 'undefined') {
-                        const user = await UserBot.findOne({where:{chatId: "5345456"}})
-                        console.log("user: ", user)
+                        const user = await UserBot.findOne({where:{chatId: item.tgID}})
+                        //console.log("user: ", user)
 
-                        // if (!user) {
-                        //     await UserBot.create({ firstname: item.fio, lastname: "", chatId: item.tgID })
-                        //     console.log('Пользователь добавлен в БД')
-                        // } else {
-                        //     console.log('Ошибка работы БД. Пользователь уже существует')
-                        // } 
+                        if (user === null) {
+                            await UserBot.create({ firstname: item.fio, lastname: "", chatId: item.tgID })
+                            console.log('Пользователь добавлен в БД')
+                        } else {
+                            console.log('Ошибка работы БД. Пользователь уже существует')
+                        } 
                     }                  
 
                     //2. найти беседу
