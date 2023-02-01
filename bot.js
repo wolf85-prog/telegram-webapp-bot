@@ -1306,58 +1306,59 @@ bot.on('message', async (msg) => {
 
         if (text == '/setconversation') {
             //const users = await UserBot.findAll()
+            const users = [];
 
-            const users = await fetch('https://proj.uley.team:8000/managers')
+            await fetch('https://proj.uley.team:8000/managers')
                 .then(res => res.json())
                 .then(json => {
                     console.log("Name of the first user in the array:");
-                    console.log("users: ", json)
-            })
+                    //console.log("users: ", json)
+                    users.push(json)
 
-            
+            })     
 
-            // users.forEach(async function(item, i, users) {      
+            users.forEach(async function(item, i, users) {      
 
-            //     let conversation_id
-            //     try {
+                let conversation_id
+                try {
 
-            //         //1. добавить пользователя в бд
-            //         const user = await UserBot.findOne({where:{chatId: item.tgID.toString()}})
-            //         if (!user) {
-            //             await UserBot.create({ firstname: item.fio, lastname: lastname, chatId: item.tgID })
-            //             console.log('Пользователь добавлен в БД')
-            //         } else {
-            //             console.log('Ошибка работы БД. Пользователь уже существует')
-            //         }
+                    //1. добавить пользователя в бд
+                    const user = await UserBot.findOne({where:{chatId: item.tgID.toString()}})
+                    if (!user) {
+                        await UserBot.create({ firstname: item.fio, lastname: lastname, chatId: item.tgID })
+                        console.log('Пользователь добавлен в БД')
+                    } else {
+                        console.log('Ошибка работы БД. Пользователь уже существует')
+                    }
 
-            //         //2. найти беседу
-            //         const conversation = await Conversation.findAll({
-            //             where: {
-            //                 members: {
-            //                     [Op.contains]: [item.tgID]
-            //                 }
-            //             },
-            //         })             
+                    //2. найти беседу
+                    const conversation = await Conversation.findAll({
+                        where: {
+                            members: {
+                                [Op.contains]: [item.tgID]
+                            }
+                        },
+                    })             
 
-            //         //3. если нет беседы, то создать 
-            //         if (conversation.length === 0) {
-            //             const conv = await Conversation.create(
-            //             {
-            //                 members: [item.tgID, chatTelegramId],
-            //             })
-            //             console.log("conversationId: ", conv.id)
-            //             conversation_id = conv.id
-            //         } else {
-            //             console.log('Беседа уже создана в БД')  
-            //             console.log("conversationId: ", conversation[0].id)  
-            //             conversation_id = conversation[0].id
-            //         }
+                    //3. если нет беседы, то создать 
+                    if (conversation.length === 0) {
+                        const conv = await Conversation.create(
+                        {
+                            members: [item.tgID, chatTelegramId],
+                        })
+                        console.log("conversationId: ", conv.id)
+                        conversation_id = conv.id
+                    } else {
+                        console.log('Беседа уже создана в БД')  
+                        console.log("conversationId: ", conversation[0].id)  
+                        conversation_id = conversation[0].id
+                    }
                     
-            //     } catch (error) {
-            //         console.log(error);
-            //     }
+                } catch (error) {
+                    console.log(error);
+                }
 
-            //   });
+              });
             
         }
 
