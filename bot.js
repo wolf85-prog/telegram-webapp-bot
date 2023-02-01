@@ -1311,10 +1311,10 @@ bot.on('message', async (msg) => {
                 .then(res => res.json())
                 .then(json => {
                     console.log("Name of the first user in the array:");
-                    //users = json
+                    console.log("users: ", json)
             })
 
-            console.log("users: ", users)
+            
 
             // users.forEach(async function(item, i, users) {      
 
