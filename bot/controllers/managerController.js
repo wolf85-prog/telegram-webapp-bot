@@ -55,7 +55,7 @@ async function getManagers() {
             database_id: databaseManagerId
         });
 
-        return response;
+        return response.results;
     } catch (error) {
         console.error(error.body)
     }
