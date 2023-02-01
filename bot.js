@@ -1313,7 +1313,7 @@ bot.on('message', async (msg) => {
                 .then(json => {
                     console.log("Name of the first user in the array:");
                     //console.log("users: ", json)
-                    users.push(json)
+                    users = json.slice(0);
 
             })     
 
