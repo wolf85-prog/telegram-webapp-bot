@@ -55,7 +55,16 @@ async function getManagers() {
             database_id: databaseManagerId
         });
 
-        return response.results;
+        const responseResults = response.results.map((page) => {
+            return {
+               id: page.id,
+               fio: page.properties["ФИО"].title[0]?.plain_text,
+               tgID: page.properties.TelegramID.rich_text,
+               phone: page.properties["Основной"].phone_number,
+            };
+        });
+
+        return response.responseResults;
     } catch (error) {
         console.error(error.body)
     }
