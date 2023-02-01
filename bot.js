@@ -26,6 +26,7 @@ const token_fetch = 'Bearer ' + process.env.NOTION_API_KEY;
 const databaseId = process.env.NOTION_DATABASE_ID
 const databaseAddressId = process.env.NOTION_DATABASE_ADDRESS_ID
 const databaseWorkersId = process.env.NOTION_DATABASE_WORKERS_ID
+const databaseManagerId = process.env.NOTION_DATABASE_MANAGER_ID
 const chatGroupId = process.env.CHAT_GROUP_ID
 const chatTelegramId = process.env.CHAT_ID
 const chatGiaId = process.env.GIA_CHAT_ID
@@ -1304,42 +1305,49 @@ bot.on('message', async (msg) => {
         }
 
         if (text == '/setconversation') {
-            const users = await UserBot.findAll()
+            //const users = await UserBot.findAll()
 
-            users.forEach(async function(item, i, users) {
-                //alert( i + ": " + item + " (массив:" + arr + ")" );
+            const users = await fetch('https://proj.uley.team:8000/managers')
+                .then(res => res.json())
+                .then(json => {
+                    console.log("Name of the first user in the array:");
+                    console.log(JSON.stringify(json));
+            })
 
-                let conversation_id
-                try {
-                    //найти беседу
-                    //console.log("item.chatId: ", item.chatId)
-                    const conversation = await Conversation.findAll({
-                        where: {
-                            members: {
-                                [Op.contains]: [item.chatId]
-                            }
-                        },
-                    })             
+            // users.forEach(async function(item, i, users) {
+            //     //alert( i + ": " + item + " (массив:" + arr + ")" );
 
-                    //если нет беседы, то создать 
-                    if (conversation.length === 0) {
-                        const conv = await Conversation.create(
-                        {
-                            members: [item.chatId, chatTelegramId],
-                        })
-                        console.log("conversationId: ", conv.id)
-                        conversation_id = conv.id
-                    } else {
-                        console.log('Беседа уже создана в БД')  
-                        console.log("conversationId: ", conversation[0].id)  
-                        conversation_id = conversation[0].id
-                    }
+            //     let conversation_id
+            //     try {
+            //         //найти беседу
+            //         //console.log("item.chatId: ", item.chatId)
+            //         const conversation = await Conversation.findAll({
+            //             where: {
+            //                 members: {
+            //                     [Op.contains]: [item.chatId]
+            //                 }
+            //             },
+            //         })             
+
+            //         //если нет беседы, то создать 
+            //         if (conversation.length === 0) {
+            //             const conv = await Conversation.create(
+            //             {
+            //                 members: [item.chatId, chatTelegramId],
+            //             })
+            //             console.log("conversationId: ", conv.id)
+            //             conversation_id = conv.id
+            //         } else {
+            //             console.log('Беседа уже создана в БД')  
+            //             console.log("conversationId: ", conversation[0].id)  
+            //             conversation_id = conversation[0].id
+            //         }
                     
-                } catch (error) {
-                    console.log(error);
-                }
+            //     } catch (error) {
+            //         console.log(error);
+            //     }
 
-              });
+            //   });
             
         }
 
