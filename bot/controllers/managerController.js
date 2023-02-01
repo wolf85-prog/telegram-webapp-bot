@@ -64,7 +64,7 @@ async function getManagers() {
             };
         });
 
-        return response.responseResults;
+        return responseResults;
     } catch (error) {
         console.error(error.body)
     }
