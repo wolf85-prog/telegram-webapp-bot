@@ -1,6 +1,5 @@
 const Router = require('express')
 const router = new Router()
-const userRouter = require('./userRouter')
 
 const secretController = require('../controllers/secretController')
 const projectController = require('../controllers/projectController')
@@ -46,7 +45,5 @@ router.get('/page/:id', blockController.pageId);
 //get ADDRESS
 router.get("/address", addressController.address);
 
-
-router.use('/user', userRouter)
 
 module.exports = router
