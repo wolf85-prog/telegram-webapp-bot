@@ -51,15 +51,15 @@ async function getCompanyId(id) {
 
 async function getManagers() {
     try {
-        let results =[]
+        //let results = []
 
         const data = await notion.databases.query({
             database_id: databaseManagerId
         });
 
-        results = [...data, results]
+        //results = [...data, results]
 
-        console.log(results)
+        //console.log(results)
 
         // while(data.has_more) {
         //     data = await notion.databases.query({
@@ -79,7 +79,7 @@ async function getManagers() {
         //     };
         // });
 
-        return results;
+        return data;
     } catch (error) {
         console.error(error.body)
     }
