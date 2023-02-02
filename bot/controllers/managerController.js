@@ -51,20 +51,33 @@ async function getCompanyId(id) {
 
 async function getManagers() {
     try {
-        const response = await notion.databases.query({
+        let results =[]
+
+        let data = await notion.databases.query({
             database_id: databaseManagerId
         });
 
-        const responseResults = response.results.map((page) => {
+        results = [...data, results]
+
+        while(data.has_more) {
+            data = await notion.databases.query({
+                database_id: databaseManagerId,
+                start_cursor: data.next_cursor,
+            }); 
+
+            results = [...results, ...data.results];
+        }
+
+        const managers = results.map((manager) => {
             return {
-               id: page.id,
-               fio: page.properties["ФИО"].title[0]?.plain_text,
-               tgID: page.properties.TelegramID.rich_text[0]?.plain_text,
-               phone: page.properties["Основной"].phone_number,
+               id: manager.id,
+               fio: manager.properties["ФИО"].title[0]?.plain_text,
+               tgID: manager.properties.TelegramID.rich_text[0]?.plain_text,
+               phone: manager.properties["Основной"].phone_number,
             };
         });
 
-        return responseResults;
+        return managers;
     } catch (error) {
         console.error(error.body)
     }
