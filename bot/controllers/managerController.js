@@ -53,13 +53,13 @@ async function getManagers() {
     try {
         let results =[]
 
-        let data = await notion.databases.query({
+        const data = await notion.databases.query({
             database_id: databaseManagerId
         });
 
         results = [...data, results]
 
-        //console.log(results)
+        console.log(results)
 
         // while(data.has_more) {
         //     data = await notion.databases.query({
