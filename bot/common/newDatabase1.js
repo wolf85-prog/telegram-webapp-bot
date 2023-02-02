@@ -2,7 +2,7 @@ require("dotenv").config();
 const token_fetch = 'Bearer ' + process.env.NOTION_API_KEY;
 
 //functions
-const addDate = require('./bot/common/addDate')
+const addDate = require('./addDate')
 
 //создание базы данных "График работы"
 module.exports = async function newDatabase1(parent_page_id) {
