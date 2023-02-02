@@ -282,21 +282,11 @@ async function addProject(title, time, teh, managerId, companyId, worklist, equi
         console.log(new Date())
         console.log("1 Success! Project with geo added. " + res_id)
 
-        //setTimeout(()=> {
-            newDatabase_1(res_id);
-        //}, 2000) 
-
-        setTimeout(()=> {
-            newDatabase(res_id, worklist);
-        }, 4000) 
-
-        setTimeout(()=> {
-            newDatabase_3(res_id);
-        }, 9000)
-
-        setTimeout(()=> {
-            newDatabase4(res_id, equipmentlist);
-        }, 13000) 
+        //создание базы данных "График работы"
+        await newDatabase1(res_id);
+        await newDatabase(res_id, worklist);
+        await newDatabase_3(res_id);
+        await newDatabase4(res_id, equipmentlist);
 
         return res_id;
 
