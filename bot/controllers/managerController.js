@@ -59,27 +59,27 @@ async function getManagers() {
 
         results = [...data, results]
 
-        console.log(results)
+        //console.log(results)
 
-        while(data.has_more) {
-            data = await notion.databases.query({
-                database_id: databaseManagerId,
-                start_cursor: data.next_cursor,
-            }); 
+        // while(data.has_more) {
+        //     data = await notion.databases.query({
+        //         database_id: databaseManagerId,
+        //         start_cursor: data.next_cursor,
+        //     }); 
 
-            results = [...results, ...data.results];
-        }
+        //     results = [...results, ...data.results];
+        // }
 
-        const managers = results.map((manager) => {
-            return {
-               id: manager.id,
-               fio: manager.properties["ФИО"].title[0]?.plain_text,
-               tgID: manager.properties.TelegramID.rich_text[0]?.plain_text,
-               phone: manager.properties["Основной"].phone_number,
-            };
-        });
+        // const managers = results.map((manager) => {
+        //     return {
+        //        id: manager.id,
+        //        fio: manager.properties["ФИО"].title[0]?.plain_text,
+        //        tgID: manager.properties.TelegramID.rich_text[0]?.plain_text,
+        //        phone: manager.properties["Основной"].phone_number,
+        //     };
+        // });
 
-        return managers;
+        return results;
     } catch (error) {
         console.error(error.body)
     }
