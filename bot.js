@@ -35,7 +35,8 @@ var projectId, projectName, projectDate, projectTime, dateStart, manager_id, com
 var blockId
 
 //functions
-const newDatabase2 = require('./bot/common/newDatabase2')
+//const newDatabase2 = require('./bot/common/newDatabase2')
+const newDatabase1 = require('./bot/common/newDatabase1')
 
 const fs = require('fs');
 const express = require('express');
@@ -382,19 +383,19 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
         console.log(new Date())
         console.log("Success! Project not geo added. " + res_id)        
 
-        newDatabase_1(res_id);
+        await newDatabase1(res_id);
 
-        setTimeout(()=> {
-             newDatabase(res_id, worklist);
-        }, 4000) 
+        //setTimeout(()=> {
+            await newDatabase(res_id, worklist);
+        //}, 4000) 
 
-        setTimeout(()=> {
-            newDatabase_3(res_id);
-        }, 9000) 
+        //setTimeout(()=> {
+           await newDatabase_3(res_id);
+        //}, 9000) 
 
-        setTimeout(()=> {
-            newDatabase4(res_id, equipmentlist);
-        }, 13000) 
+        //setTimeout(()=> {
+          await  newDatabase4(res_id, equipmentlist);
+        //}, 13000) 
 
         return res_id;
 
