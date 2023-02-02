@@ -383,19 +383,11 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
         console.log(new Date())
         console.log("Success! Project not geo added. " + res_id)        
 
+        //создание базы данных "График работы"
         await newDatabase1(res_id);
-
-        //setTimeout(()=> {
-            await newDatabase(res_id, worklist);
-        //}, 4000) 
-
-        //setTimeout(()=> {
-           await newDatabase_3(res_id);
-        //}, 9000) 
-
-        //setTimeout(()=> {
-          await  newDatabase4(res_id, equipmentlist);
-        //}, 13000) 
+        await newDatabase(res_id, worklist);
+        await newDatabase_3(res_id);
+        await newDatabase4(res_id, equipmentlist);
 
         return res_id;
 
@@ -407,108 +399,7 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
 //-----------------------------------------------------------------------------------
 
 //создание базы данных "График работы"
-async function newDatabase_1(parent_page_id) {
-    try {
-        const body = {
-            "parent": {
-                "type": "page_id",
-                "page_id": parent_page_id
-            },
-            "title": [
-                {
-                    "type": "text",
-                    "text": {
-                        "content": "График проекта"
-                    }
-                }
-            ],
-            "is_inline": true,
-            "properties": {  
-                "Name": {
-                    "title": {}
-                },              
-                "Date": {
-                    "date": {}
-                },
-                "Комментарий": {
-                    "rich_text": {}
-                }               
-            }
-        }
-
-        // создание базы данных "График проекта"
-        const response = await fetch('https://api.notion.com/v1/databases', {
-            method: 'post',
-            body: JSON.stringify(body),
-            headers: {
-                'Authorization': token_fetch, //`Bearer ${token}`
-                'Content-Type': 'application/json', 
-                accept: 'application/json',
-                'Notion-Version': '2022-06-28'
-            }
-        });
-        const data = await response.json();
-        console.log("2.1 Success! Grafik project added. Database_id: " + data.id) // + " data: " + JSON.stringify(data))
-
-        //добавить даты (День2, День3, День4)
-        addDate(data.id, 'День №4');
-        setTimeout(()=> {
-            addDate(data.id, 'День №3');
-        }, 2000)  
-        setTimeout(()=> {
-            addDate(data.id, 'День №2');
-        }, 4000) 
-        
-    } catch (error) {
-        console.error(error.body)
-    }
-}
-
 //send data to notion
-async function addDate(blockId, day) {
-    try {
-        const response = await notion.pages.create({
-            parent: { database_id: blockId },
-            properties: {
-                Name: {
-                    type: "title",
-                    title: [
-                        {
-                            "type": "text",
-                            "text": {
-                                "content": day,
-                                "link": null
-                            },
-                            "annotations": {
-                                "bold": false,
-                                "italic": false,
-                                "strikethrough": false,
-                                "underline": false,
-                                "code": false,
-                                "color": "default"
-                            },
-                            "plain_text": day,
-                            "href": null
-                        }
-                    ]
-                },
-                Date : {
-                    type: 'date',                   
-                    date: {
-                        "start": "2023-01-01T00:00:00.000",
-                        "end": null,
-                        "time_zone": "Europe/Moscow"
-                    }
-
-                }
-            }
-        })
-        //console.log(response)
-        console.log("3.1 Success! Date added. Data: "  + response.id)//+ JSON.stringify(response))
-    } catch (error) {
-        console.error(error.body)
-    }
-}
 
 
 //send create db notion
