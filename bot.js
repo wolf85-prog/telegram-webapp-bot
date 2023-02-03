@@ -1059,8 +1059,45 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
                 // остановить вывод через 260 минут
                 setTimeout(() => { clearInterval(timerId); }, 15600000); //260 минут     
 
-            } else if (text.includes('Запрос на специалистов')) {  
+            } else if (text.includes('Тестовое сообщение')) {  
             
+                // сохранить отправленное боту сообщение пользователя в БД
+                let conversation_id
+                try {
+                    //найти беседу
+                    const conversation = await Conversation.findAll({
+                        where: {
+                            members: {
+                                [Op.contains]: [chatId]
+                            }
+                        },
+                    })             
+
+                    //если нет беседы, то создать 
+                    if (conversation.length === 0) {
+                        const conv = await Conversation.create(
+                        {
+                            members: [chatId, chatTelegramId],
+                        })
+                        console.log("conversationId: ", conv.id)
+                        conversation_id = conv.id
+                    } else {
+                        console.log('Беседа уже создана в БД')  
+                        console.log("conversationId: ", conversation[0].id)  
+                        conversation_id = conversation[0].id
+                    }
+
+                    const messageDB = await Message.create(
+                    {
+                        text: text, 
+                        from: chatId, 
+                        to: chatTelegramId,
+                        messageType: 'text',
+                        conversationId: conversation_id,
+                    })
+                } catch (error) {
+                    console.log(error);
+                }
 
             } else {
 
