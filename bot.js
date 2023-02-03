@@ -1060,6 +1060,23 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
                 setTimeout(() => { clearInterval(timerId); }, 15600000); //260 минут     
 
             } else if (text.includes('Тестовое сообщение')) {  
+
+                // Подключаемся к серверу socket
+                let socket = io('https://proj.uley.team:9000');
+                socket.on("welcome", async message=> {
+                    console.log(message)
+                });
+
+                socket.emit("addUser", chatId)
+                socket.on("getUsers", users => {
+                    console.log("users from bot: ", users);
+                })
+
+                socket.emit("sendMessage", {
+                    senderId: chatTelegramId,
+                    receiverId: chatId,
+                    text: text,
+                })
             
                 // сохранить отправленное боту сообщение пользователя в БД
                 let conversation_id
