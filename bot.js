@@ -912,6 +912,13 @@ bot.on('message', async (msg) => {
             const user = await UserBot.findOne({where:{chatId: chatId.toString()}})
             await bot.sendMessage(chatId, `Приветствуем тебя, ${firstname} ${lastname}! Чат-бот предназначен для создания проектов в U.L.E.Y и общения заказчика с администратором проектов.`);
         }
+
+        //обработка изображений
+        if (msg.photo && msg.photo[0]) {
+            const image = await bot.getFile({ file_id: msg.photo[0].file_id });
+            console.log(image);
+            await bot.sendMessage(chatId, 'Была загружена картинка! В данный момент изображения не обрабатываются!');
+        }
       
         //обработка сообщений    
         if ((text || '')[0] !== '/') {       
