@@ -915,7 +915,7 @@ bot.on('message', async (msg) => {
 
         //обработка изображений
         if (msg.photo && msg.photo[0]) {
-            const image = await bot.getFile({ file_id: msg.photo[0].file_id });
+            const image = await bot.getFile(msg.photo[0].file_id);
             console.log(image);
             await bot.sendMessage(chatId, 'Была загружена картинка! В данный момент изображения не обрабатываются!');
         }
