@@ -924,7 +924,33 @@ bot.on('message', async (msg) => {
                 const res = await fetch(
                     `https://api.telegram.org/bot${token}/getFile?file_id=${image.file_id}`
                 );
-                console.log(`https://api.telegram.org/bot${token}/getFile?file_id=${image.file_id}`)
+                //console.log(`https://api.telegram.org/bot${token}/getFile?file_id=${image.file_id}`)
+
+                // extract the file path
+                const res2 = await res.json();
+                const filePath = res2.result.file_path;
+
+                // now that we've "file path" we can generate the download link
+                const downloadURL = `https://api.telegram.org/file/bot${token}/${filePath}`;
+
+                // URL of the image
+                const url = 'GFG.jpeg';
+                
+                https.get(downloadURL,(res) => {
+                    // Image will be stored at this path
+                    const path = `${__dirname}/static/img.jpeg`; 
+                    const filePath = fs.createWriteStream(path);
+                    res.pipe(filePath);
+                    filePath.on('finish',() => {
+                        filePath.close();
+                        console.log('Download Completed: ', path); 
+                    })
+                })
+
+                // download the file (in this case it's an image)
+                // download(downloadURL, path.join(__dirname/static, `${image.file_id}.jpg`), () =>
+                //     console.log('Done!')
+                // );
             } catch (error) {
                 console.log(error)
             }
