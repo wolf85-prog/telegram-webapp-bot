@@ -148,3 +148,4 @@
 //03. Инженер Resolume = 1/1 [Video]
 //04. Верхний риггер = 4/4 [Riggers]
 //05. Помощник / Грузчик = 6/8 [Stagehands]
+//${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`

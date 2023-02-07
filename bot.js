@@ -1055,8 +1055,7 @@ bot.on('message', async (msg) => {
                         await bot.sendMessage(chatId, 
                             `Запрос на специалистов: 
 
-${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
-                                                                    
+${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`                                                                   
                         )
                     } else {
                         
@@ -1169,8 +1168,7 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
                 await bot.sendMessage(chatTelegramId, `${text} \n \n от ${firstname} ${lastname} ${chatId}`)           
             }
         }
-    
-    
+   
         if (text === '/getmessage') {
             //получить сообщения из админской панели
             try {
@@ -1181,7 +1179,83 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
             }
         }
 
-        if (text == '/function') {
+// Получить отчет о специалистах    
+//---------------------------------------------------------------------------------------------------------------- 
+        if (text == '/getReports') {
+            let count_fio;
+            let count_title;
+            let count_title2;
+            const arr_cat = ['Sound', 'Light', 'Video', 'Riggers', 'Stagehands', 'StageGround', 'Trucks', 'Production']
+            const arr_cat2 = ['Sound', 'Light', 'Video', 'Riggers', 'StageGround', 'Trucks', 'Production']
+            let i = 0;
+            let arr_count = [] 
+            let arr_all = [] 
+            let blockId2
+
+            const projectId2 = '0b77b5c6-8d7f-485b-a5e3-b42dda907873'
+            if (projectId2 !== 'undefined') {
+                blockId2 = await getBlocks(projectId2);
+                console.log("blockId: ", blockId2)
+            } else {
+                console.log("Проект не добавлен в БД!")
+            }
+
+            let databaseBlock = await getDatabaseId(blockId2); 
+                    //console.log("databaseBlock: ", JSON.stringify(databaseBlock))
+
+                    arr_count = [] 
+                    
+                    arr_cat.map((arritem) => {
+                        count_fio = 0;
+                        count_title = 0;
+                        if (databaseBlock) {
+                            databaseBlock.map((value) => {
+                                if (arritem === value.title) {
+                                    if (value.fio) {
+                                        count_fio++               
+                                    }else {
+                                        count_fio;
+                                    }  
+                                    count_title++;
+                                }
+                            })
+                            if (count_fio != 0) {
+                                const obj = {
+                                    title2: arritem,
+                                    count_fio: count_fio,
+                                    count_title: count_title,
+                                }
+                                arr_count.push(obj)
+                            } else if (count_title !=0) {
+                                const obj = {
+                                    title2: arritem,
+                                    count_fio: count_fio,
+                                    count_title: count_title,
+                                }
+                                arr_count.push(obj) 
+                            }
+                        }              
+                    })
+
+                    //сохранение массива в 2-х элементный массив
+                    if (i % 2 == 0) {
+                        arr_all[0] = arr_count
+                    } else {
+                        arr_all[1] = arr_count 
+                    }
+
+                    var isEqual = JSON.stringify(arr_all[0]) === JSON.stringify(arr_all[1]);
+                    // если есть изменения в составе работников    
+                    if (!isEqual) {
+                        //отправка сообщения в чат бота
+                        await bot.sendMessage(chatId, 
+                            `Запрос на специалистов: 
+
+${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`                                                                   
+                        )
+                    } else {
+                        
+                    }
 
         }
 
