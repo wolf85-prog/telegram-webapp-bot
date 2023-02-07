@@ -1238,10 +1238,10 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
                     //console.log("databaseBlock: ", JSON.stringify(databaseBlock))
 
                     arr_count = [] 
-                    
                     arr_cat.map((arritem) => {
                         count_fio = 0;
                         count_title = 0;
+                        i++; 
                         if (databaseBlock) {
                             databaseBlock.map((value) => {
                                 if (arritem === value.title) {
@@ -1255,7 +1255,7 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
                             })
                             if (count_fio != 0) {
                                 const obj = {
-                                    title: workerlist[i],
+                                    title: workerlist[i-1],
                                     title2: arritem,
                                     count_fio: count_fio,
                                     count_title: count_title,
@@ -1263,15 +1263,14 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
                                 arr_count.push(obj)
                             } else if (count_title !=0) {
                                 const obj = {
-                                    title: workerlist[i],
+                                    title: workerlist[i-1],
                                     title2: arritem,
                                     count_fio: count_fio,
                                     count_title: count_title,
                                 }
                                 arr_count.push(obj) 
                             }
-                        } 
-                        i++;             
+                        }             
                     })
 
                     console.log("arr_count: ", arr_count)
