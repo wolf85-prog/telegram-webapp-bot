@@ -1056,6 +1056,7 @@ bot.on('message', async (msg) => {
                             })
                             if (count_fio != 0) {
                                 const obj = {
+                                    title: Worklist[i-1].spec,
                                     title2: arritem,
                                     count_fio: count_fio,
                                     count_title: count_title,
@@ -1063,13 +1064,15 @@ bot.on('message', async (msg) => {
                                 arr_count.push(obj)
                             } else if (count_title !=0) {
                                 const obj = {
+                                    title: Worklist[i-1].spec,
                                     title2: arritem,
                                     count_fio: count_fio,
                                     count_title: count_title,
                                 }
                                 arr_count.push(obj) 
                             }
-                        }              
+                        }  
+                        i++;
                     })
 
                     //сохранение массива в 2-х элементный массив
@@ -1085,9 +1088,10 @@ bot.on('message', async (msg) => {
                         //отправка сообщения в чат бота
                         await bot.sendMessage(chatId, 
                             `Запрос на специалистов: 
-
-${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`                                                                   
-                         
+                                                                   
+${projectDate}  | ${projectTime}  |  ${projectName}  | U.L.E.Y
+${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']'
+).join('\n')}`                          
                         )
                     } else {
                         
