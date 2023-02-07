@@ -1241,7 +1241,7 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
                     arr_cat.map((arritem) => {
                         count_fio = 0;
                         count_title = 0;
-                        i++; 
+                        
                         if (databaseBlock) {
                             databaseBlock.map((value) => {
                                 if (arritem === value.title) {
@@ -1270,7 +1270,8 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
                                 }
                                 arr_count.push(obj) 
                             }
-                        }             
+                        }  
+                        i++;            
                     })
 
                     console.log("arr_count: ", arr_count)
