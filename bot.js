@@ -930,7 +930,7 @@ bot.on('message', async (msg) => {
                 const downloadURL = `https://api.telegram.org/file/bot${token}/${filePath}`;
 
                 https.get(downloadURL,(res) => {
-                    const filename = Date.now().getMilliseconds()
+                    const filename = Date.now()
                     // Image will be stored at this path
                     const path = `${__dirname}/static/${filename}.jpg`; 
                     const filePath = fs.createWriteStream(path);
