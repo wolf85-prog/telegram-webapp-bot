@@ -1251,9 +1251,9 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
                         await bot.sendMessage(chatId, 
                             `Запрос на специалистов: 
 
-${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' +
+12.00  | 00:00  |  Проект | U.L.E.Y
 
-'0' + i + '.'+ item.spec + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']'
+${arr_count.map(item =>'0' + i + '. '+ item.spec + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']'
 
 ).join('\n')}`                                                                   
                         )
