@@ -1030,9 +1030,9 @@ bot.on('message', async (msg) => {
                 let arr_count = [] 
                 let arr_all = [] 
 
-                const workerlist = Worklist.map((item) => ({
-                    spec: item.spec
-                }))
+                // const workerlist = Worklist.map((item) => ({
+                //     spec: item.spec
+                // }))
 
                 
                 // повторить с интервалом 1 минуту
@@ -1060,7 +1060,7 @@ bot.on('message', async (msg) => {
                             })
                             if (count_fio != 0) {
                                 const obj = {
-                                    title: workerlist[i-1].spec,
+                                    //title: workerlist[i-1].spec,
                                     title2: arritem,
                                     count_fio: count_fio,
                                     count_title: count_title,
@@ -1068,7 +1068,7 @@ bot.on('message', async (msg) => {
                                 arr_count.push(obj)
                             } else if (count_title !=0) {
                                 const obj = {
-                                    title: Worklist[i-1].spec,
+                                    //title: Worklist[i-1].spec,
                                     title2: arritem,
                                     count_fio: count_fio,
                                     count_title: count_title,
@@ -1093,10 +1093,8 @@ bot.on('message', async (msg) => {
                         await bot.sendMessage(chatId, 
                             `Запрос на специалистов: 
                                                                    
-${projectDate} | ${projectTime} | ${projectName} | U.L.E.Y
-
-${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']'
-).join('\n')}`                          
+${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
+                         
                         )
                     } else {
                         
