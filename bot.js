@@ -1089,7 +1089,8 @@ bot.on('message', async (msg) => {
                         await bot.sendMessage(chatId, 
                             `Запрос на специалистов: 
                                                                    
-${projectDate}  | ${projectTime}  |  ${projectName}  | U.L.E.Y
+${projectDate} | ${projectTime} | ${projectName} | U.L.E.Y
+
 ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']'
 ).join('\n')}`                          
                         )
