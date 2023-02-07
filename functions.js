@@ -149,3 +149,7 @@
 //04. Верхний риггер = 4/4 [Riggers]
 //05. Помощник / Грузчик = 6/8 [Stagehands]
 //${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
+
+// ${projectDate}  | ${projectTime}  |  ${projectName}  | U.L.E.Y
+// ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.spec + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']'
+// ).join('\n')}` 
