@@ -9,6 +9,7 @@ const { Op } = require('sequelize')
 
 // web-приложение
 const webAppUrl = process.env.WEB_APP_URL;
+const botApiUrl = process.env.REACT_APP_API_URL
 
 //socket.io
 const {io} = require("socket.io-client")
@@ -939,7 +940,7 @@ bot.on('message', async (msg) => {
                         filePath.close();
                         console.log('Download Completed: ', path); 
                         
-                        sendMyMessage(path, 'image', chatId)
+                        sendMyMessage(`${botApiUrl}/${filename}.jpg`, 'image', chatId)
                     })
                 })
               
