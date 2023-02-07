@@ -920,11 +920,14 @@ bot.on('message', async (msg) => {
             const image = await bot.getFile(msg.photo[0].file_id);
             console.log("image id: ", image);
 
-            const res = await fetch(
-                `https://api.telegram.org/bot${token}/getFile?file_id=${image.file_id}`
-            );
-
-            console.log(`https://api.telegram.org/bot${token}/getFile?file_id=${image.file_id}`)
+            try {
+                const res = await fetch(
+                    `https://api.telegram.org/bot${token}/getFile?file_id=${image.file_id}`
+                );
+                console.log(`https://api.telegram.org/bot${token}/getFile?file_id=${image.file_id}`)
+            } catch (error) {
+                console.log(error)
+            }
 
             await bot.sendMessage(chatId, 'Была загружена картинка! В данный момент изображения не обрабатываются!');
         }
