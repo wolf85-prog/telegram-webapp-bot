@@ -1211,14 +1211,15 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
             }
         }
 
-// Получить отчет о специалистах    
-//---------------------------------------------------------------------------------------------------------------- 
+        // Получить отчет о специалистах    
+        //---------------------------------------------------------------------------------------------------------------- 
         if (text == '/getReports') {
             let count_fio;
             let count_title;
             let count_title2;
             const arr_cat = ['Sound', 'Light', 'Video', 'Riggers', 'Stagehands', 'StageGround', 'Trucks', 'Production']
             const arr_cat2 = ['Sound', 'Light', 'Video', 'Riggers', 'StageGround', 'Trucks', 'Production']
+            const workerlist = ['Звукорежессер', 'Рабочий со светом', 'Грузчик', 'Помошник']
             let i = 0;
             let arr_count = [] 
             let arr_all = [] 
@@ -1254,6 +1255,7 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
                             })
                             if (count_fio != 0) {
                                 const obj = {
+                                    title: workerlist[i],
                                     title2: arritem,
                                     count_fio: count_fio,
                                     count_title: count_title,
@@ -1261,13 +1263,15 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
                                 arr_count.push(obj)
                             } else if (count_title !=0) {
                                 const obj = {
+                                    title: workerlist[i],
                                     title2: arritem,
                                     count_fio: count_fio,
                                     count_title: count_title,
                                 }
                                 arr_count.push(obj) 
                             }
-                        }              
+                        } 
+                        i++;             
                     })
 
                     console.log("arr_count: ", arr_count)
