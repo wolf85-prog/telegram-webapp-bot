@@ -870,6 +870,8 @@ bot.on('message', async (msg) => {
     const text = msg.text;
     const messageId = msg.message_id;
 
+    console.log(msg)
+
     try {
         // обработка команд
 
@@ -916,8 +918,8 @@ bot.on('message', async (msg) => {
         //обработка изображений
         if (msg.photo && msg.photo[0]) {
             //const image = await bot.getFile(msg.photo[0].file_id);
-            console.log(msg.photo[0]);
-            await bot.sendMessage(chatId, 'Была загружена картинка! В данный момент изображения не обрабатываются!');
+            //console.log(msg.photo[0]);
+            //await bot.sendMessage(chatId, 'Была загружена картинка! В данный момент изображения не обрабатываются!');
         }
       
         //обработка сообщений    
