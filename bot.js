@@ -1280,7 +1280,7 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
 
 12.00  | 00:00  |  Проект | U.L.E.Y
 
-${arr_count.map(item =>'0' + i+1 + '. '+ item.spec + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']'
+${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.spec + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']'
 
 ).join('\n')}`                                                                   
                         )
