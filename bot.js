@@ -870,7 +870,7 @@ bot.on('message', async (msg) => {
     const text = msg.text;
     const messageId = msg.message_id;
 
-    console.log(msg)
+    //console.log(msg)
 
     try {
         // обработка команд
@@ -919,6 +919,13 @@ bot.on('message', async (msg) => {
         if (msg.photo && msg.photo[0]) {
             const image = await bot.getFile(msg.photo[0].file_id);
             console.log("image id: ", image);
+
+            const res = await fetch(
+                `https://api.telegram.org/bot${token}/getFile?file_id=${image.file_id}`
+            );
+
+            console.log(`https://api.telegram.org/bot${token}/getFile?file_id=${image.file_id}`)
+
             await bot.sendMessage(chatId, 'Была загружена картинка! В данный момент изображения не обрабатываются!');
         }
       
