@@ -930,8 +930,9 @@ bot.on('message', async (msg) => {
                 const downloadURL = `https://api.telegram.org/file/bot${token}/${filePath}`;
 
                 https.get(downloadURL,(res) => {
+                    const filename = Calendar.getInstance().getTimeInMillis()
                     // Image will be stored at this path
-                    const path = `${__dirname}/static/${image.file_id}.jpg`; 
+                    const path = `${__dirname}/static/${filename}.jpg`; 
                     const filePath = fs.createWriteStream(path);
                     res.pipe(filePath);
                     filePath.on('finish',() => {
@@ -1082,7 +1083,7 @@ bot.on('message', async (msg) => {
                         //отправка сообщения в чат бота
                         await bot.sendMessage(chatId, 
                             `Запрос на специалистов: 
-                            
+
 ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`                                                                   
                          
                         )
