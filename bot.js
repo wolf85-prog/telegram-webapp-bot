@@ -917,9 +917,9 @@ bot.on('message', async (msg) => {
 
         //обработка изображений
         if (msg.photo && msg.photo[0]) {
-            //const image = await bot.getFile(msg.photo[0].file_id);
-            //console.log(msg.photo[0]);
-            //await bot.sendMessage(chatId, 'Была загружена картинка! В данный момент изображения не обрабатываются!');
+            const image = await bot.getFile(msg.photo[0].file_id);
+            console.log("image id: ", image);
+            await bot.sendMessage(chatId, 'Была загружена картинка! В данный момент изображения не обрабатываются!');
         }
       
         //обработка сообщений    
@@ -1192,7 +1192,7 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
             let arr_all = [] 
             let blockId2
 
-            const projectId2 = '0b77b5c6-8d7f-485b-a5e3-b42dda907873'
+            const projectId2 = 'e8ced0e9-b0ab-4a03-93b9-28c8a629ac23'
             if (projectId2 !== 'undefined') {
                 blockId2 = await getBlocks(projectId2);
                 console.log("blockId: ", blockId2)
@@ -1251,7 +1251,11 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
                         await bot.sendMessage(chatId, 
                             `Запрос на специалистов: 
 
-${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`                                                                   
+${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' +
+
+'0' + i + '.'+ item.spec + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']'
+
+).join('\n')}`                                                                   
                         )
                     } else {
                         
