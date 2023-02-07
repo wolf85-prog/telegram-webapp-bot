@@ -165,8 +165,6 @@ async function getBlocks(blockId) {
 
         let res;
         (count >1) ? res = response.results[1].id : res = response.results[0].id     
-        
-        console.log("Blocks Data: "  + res)
 
         return res;
     } catch (error) {
@@ -918,13 +916,11 @@ bot.on('message', async (msg) => {
         //обработка изображений
         if (msg.photo && msg.photo[0]) {
             const image = await bot.getFile(msg.photo[0].file_id);
-            console.log("image id: ", image);
 
             try {
                 const res = await fetch(
                     `https://api.telegram.org/bot${token}/getFile?file_id=${image.file_id}`
                 );
-                //console.log(`https://api.telegram.org/bot${token}/getFile?file_id=${image.file_id}`)
 
                 // extract the file path
                 const res2 = await res.json();
@@ -933,12 +929,9 @@ bot.on('message', async (msg) => {
                 // now that we've "file path" we can generate the download link
                 const downloadURL = `https://api.telegram.org/file/bot${token}/${filePath}`;
 
-                // URL of the image
-                const url = 'GFG.jpeg';
-                
                 https.get(downloadURL,(res) => {
                     // Image will be stored at this path
-                    const path = `${__dirname}/static/img.jpeg`; 
+                    const path = `${__dirname}/static/${image.file_id}.jpg`; 
                     const filePath = fs.createWriteStream(path);
                     res.pipe(filePath);
                     filePath.on('finish',() => {
@@ -947,10 +940,7 @@ bot.on('message', async (msg) => {
                     })
                 })
 
-                // download the file (in this case it's an image)
-                // download(downloadURL, path.join(__dirname/static, `${image.file_id}.jpg`), () =>
-                //     console.log('Done!')
-                // );
+
             } catch (error) {
                 console.log(error)
             }
@@ -1228,9 +1218,10 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
             let arr_all = [] 
             let blockId2
 
-            const projectId2 = 'e8ced0e9-b0ab-4a03-93b9-28c8a629ac23'
+            const projectId2 = '34ae9c1c-3443-47c8-b3c8-ecccf07e5aea'
             if (projectId2 !== 'undefined') {
                 blockId2 = await getBlocks(projectId2);
+                console.log("----------- get Reports------------ ")
                 console.log("blockId: ", blockId2)
             } else {
                 console.log("Проект не добавлен в БД!")
@@ -1289,7 +1280,7 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
 
 12.00  | 00:00  |  Проект | U.L.E.Y
 
-${arr_count.map(item =>'0' + i + '. '+ item.spec + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']'
+${arr_count.map(item =>'0' + i+1 + '. '+ item.spec + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']'
 
 ).join('\n')}`                                                                   
                         )
