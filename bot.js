@@ -1030,6 +1030,10 @@ bot.on('message', async (msg) => {
                 let arr_count = [] 
                 let arr_all = [] 
 
+                const workerlist = Worklist.map((item) => ({
+                    spec: item.spec
+                }))
+
                 
                 // повторить с интервалом 1 минуту
                 let timerId = setInterval(async() => {
@@ -1056,7 +1060,7 @@ bot.on('message', async (msg) => {
                             })
                             if (count_fio != 0) {
                                 const obj = {
-                                    title: Worklist[i-1].spec,
+                                    title: workerlist[i-1].spec,
                                     title2: arritem,
                                     count_fio: count_fio,
                                     count_title: count_title,
