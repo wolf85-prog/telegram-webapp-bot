@@ -1270,6 +1270,8 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
                         }              
                     })
 
+                    console.log("arr_count: ", arr_count)
+
                     //сохранение массива в 2-х элементный массив
                     if (i % 2 == 0) {
                         arr_all[0] = arr_count
