@@ -35,8 +35,8 @@ var projectId, projectName, projectDate, projectTime, dateStart, manager_id, com
 var blockId
 
 //functions
-//const newDatabase2 = require('./bot/common/newDatabase2')
 const newDatabase1 = require('./bot/common/newDatabase1')
+const sendMyMessage = require('./bot/common/sendMyMessage')
 
 const fs = require('fs');
 const express = require('express');
@@ -937,9 +937,11 @@ bot.on('message', async (msg) => {
                     filePath.on('finish',() => {
                         filePath.close();
                         console.log('Download Completed: ', path); 
+                        
+                        sendMyMessage(path, 'image', chatId)
                     })
                 })
-
+              
 
             } catch (error) {
                 console.log(error)
