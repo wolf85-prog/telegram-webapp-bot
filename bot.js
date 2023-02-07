@@ -1278,7 +1278,7 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
                         await bot.sendMessage(chatId, 
                             `Запрос на специалистов: 
 
-12.00  | 00:00  |  Проект | U.L.E.Y
+12.00  | 00:00  |  ${projectName}  | U.L.E.Y
 
 ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.spec + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']'
 
