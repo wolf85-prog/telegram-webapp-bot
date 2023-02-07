@@ -915,8 +915,8 @@ bot.on('message', async (msg) => {
 
         //обработка изображений
         if (msg.photo && msg.photo[0]) {
-            const image = await bot.getFile(msg.photo[0].file_id);
-            console.log(image);
+            //const image = await bot.getFile(msg.photo[0].file_id);
+            console.log(msg.photo[0]);
             await bot.sendMessage(chatId, 'Была загружена картинка! В данный момент изображения не обрабатываются!');
         }
       
@@ -1180,7 +1180,6 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
         }
 
         if (text == '/function') {
-            newDatabase2()
 
         }
 
