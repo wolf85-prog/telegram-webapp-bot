@@ -143,6 +143,57 @@ ${equipmentlist.map(item =>' - ' + item.subname + ' = ' + item.count + ' шт.')
     }
 })
 
+
+//тест
+app.post('/web-test-data', async (req, res) => {
+    const {queryId, projectname, datestart, geo, teh, managerId, companyId, worklist = [], equipmentlist = []} = req.body;
+    const d = new Date(datestart);
+    const year = d.getFullYear();
+    const month = String(d.getMonth()+1).padStart(2, "0");
+    const day = String(d.getDate()).padStart(2, "0");
+    const chas = d.getHours();
+    const minut = String(d.getMinutes()).padStart(2, "0");
+    try {
+        await bot.answerWebAppQuery(queryId, {
+            type: 'article',
+            id: queryId,
+            title: 'Проект успешно создан',
+            input_message_content: {
+                parse_mode: 'HTML',
+                message_text: 
+  `Проект успешно создан!
+  
+  <b>Проект:</b> ${projectname} 
+  <b>Дата:</b> ${day}.${month}.${year}
+  <b>Время:</b> ${chas}:${minut} 
+  <b>Адрес:</b> ${geo} 
+  <b>Тех. задание:</b> ${teh}
+  
+<b>Специалисты:</b>  
+${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}
+
+<b>Оборудование:</b>  
+${equipmentlist.map(item =>' - ' + item.subname + ' = ' + item.count + ' шт.').join('\n')}`
+              }
+        })
+  
+          projectName = projectname
+          projectDate = `${day}.${month}`
+          projectTime = `${chas}:${minut}`
+          dateStart = datestart
+          Teh = teh
+          Worklist = worklist
+          Equipmentlist = equipmentlist 
+          manager_id = managerId
+          company_id = companyId
+          Geo = geo        
+  
+        return res.status(200).json({});
+    } catch (e) {
+        return res.status(500).json({})
+    }
+})
+
 //-------------------------------------------------------------------------------
 //------------------ Функции ----------------------------------------------------
 //-------------------------------------------------------------------------------
