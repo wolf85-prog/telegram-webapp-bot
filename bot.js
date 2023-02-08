@@ -15,7 +15,8 @@ const botApiUrl = process.env.REACT_APP_API_URL
 const {io} = require("socket.io-client")
 
 //fetch api
-const fetch = require('node-fetch');
+//const fetch = require('node-fetch');
+import fetch from 'node-fetch';
 
 //планировщик
 var cron = require('node-cron');
@@ -1010,17 +1011,20 @@ bot.on('message', async (msg) => {
                         projectId = await addProjectNotGeo(projectName, dateStart, Teh, manager_id, company_id, Worklist, Equipmentlist);
                     }
 
+                    blockId = await getBlocks(projectId);
+                    console.log("blockId: ", blockId)
+
                     //получить информацию о проекте (8 секунд)
-                    setTimeout(async () => {
-                        console.log("projectId: ", projectId)
-                        if (projectId !== 'undefined') {
-                            blockId = await getBlocks(projectId);
-                            console.log("blockId: ", blockId)
-                        } else {
-                            console.log("Проект не добавлен в БД!")
-                        }
+                    // setTimeout(async () => {
+                    //     console.log("projectId: ", projectId)
+                    //     if (projectId !== 'undefined') {
+                    //         blockId = await getBlocks(projectId);
+                    //         console.log("blockId: ", blockId)
+                    //     } else {
+                    //         console.log("Проект не добавлен в БД!")
+                    //     }
                         
-                    }, 8000)
+                    // }, 8000)
 
                     // отправить сообщение пользователю через 30 секунд
                     setTimeout(() => {bot.sendMessage(chatId, 'Ваша заявка принята!')}, 30000) // 30 секунд
