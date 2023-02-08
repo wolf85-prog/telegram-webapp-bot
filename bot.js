@@ -1014,6 +1014,9 @@ bot.on('message', async (msg) => {
                 await bot.sendMessage(text.substring(6, text.indexOf('.')), text.slice(text.indexOf('.') + 2)) 
             
             } else if (text.includes('Тестовый добавлен')) {
+                await bot.sendMessage(chatGiaId, `${text} \n \n от ${firstname} ${lastname} ${chatId}`)
+
+                sendMyMessage("Тестовый проект создан", "text", chatId)
 
                 console.log("2. projectName: ", projectName)
 
@@ -1066,6 +1069,7 @@ bot.on('message', async (msg) => {
                     console.log("Ошибка: ", error) 
                 }
 
+            // Проект успешно создан
             } else if (text.includes('Проект успешно создан')) {           
                 await bot.sendMessage(chatTelegramId, `${text} \n \n от ${firstname} ${lastname} ${chatId}`)
                 await bot.sendMessage(chatGiaId, `${text} \n \n от ${firstname} ${lastname} ${chatId}`)
