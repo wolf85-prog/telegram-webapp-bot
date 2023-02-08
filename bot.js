@@ -161,11 +161,11 @@ app.post('/web-test-data', async (req, res) => {
         await bot.answerWebAppQuery(queryId, {
             type: 'article',
             id: queryId,
-            title: 'Тестовый проект добавлен',
+            title: 'Тестовый добавлен',
             input_message_content: {
                 parse_mode: 'HTML',
                 message_text: 
-  `Тестовый проект добавлен!
+  `Тестовый добавлен!
   
   <b>Проект:</b> ${projectname} 
   <b>Дата:</b> ${day}.${month}.${year}
@@ -1008,7 +1008,7 @@ bot.on('message', async (msg) => {
             if (text.includes("Ответ")) {           
                 await bot.sendMessage(text.substring(6, text.indexOf('.')), text.slice(text.indexOf('.') + 2)) 
             
-            } else if (text.includes('Тестовый проект добавлен')) {
+            } else if (text.includes('Тестовый добавлен')) {
                 // try {
                 //     //добавляем chatId в БД
                 //     const proj = await Project.update({
