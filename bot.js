@@ -9,6 +9,7 @@ const { Op } = require('sequelize')
 
 // web-приложение
 const webAppUrl = process.env.WEB_APP_URL;
+const botApiUrl = process.env.REACT_APP_API_URL
 
 //socket.io
 const {io} = require("socket.io-client")
@@ -965,8 +966,9 @@ bot.on('message', async (msg) => {
         }
 
         //обработка изображений
-        if (msg.photo && msg.photo[0]) {
-            const image = await bot.getFile(msg.photo[0].file_id);
+        if (msg.photo && msg.photo[3]) {
+            console.log(msg.photo)
+            const image = await bot.getFile(msg.photo[3].file_id);
 
             try {
                 const res = await fetch(
@@ -981,15 +983,16 @@ bot.on('message', async (msg) => {
                 const downloadURL = `https://api.telegram.org/file/bot${token}/${filePath}`;
 
                 https.get(downloadURL,(res) => {
+                    const filename = Date.now()
                     // Image will be stored at this path
-                    const path = `${__dirname}/static/${image.file_id}.jpg`; 
+                    const path = `${__dirname}/static/${filename}.jpg`; 
                     const filePath = fs.createWriteStream(path);
                     res.pipe(filePath);
                     filePath.on('finish',() => {
                         filePath.close();
                         console.log('Download Completed: ', path); 
                         
-                        sendMyMessage(path, 'image', chatId)
+                        sendMyMessage(`${botApiUrl}/${filename}.jpg`, 'image', chatId)
                     })
                 })
               
@@ -998,7 +1001,7 @@ bot.on('message', async (msg) => {
                 console.log(error)
             }
 
-            await bot.sendMessage(chatId, 'Была загружена картинка! В данный момент изображения не обрабатываются!');
+            await bot.sendMessage(chatId, 'Изображение отправлено администратору!');
         }
       
         //обработка сообщений    
@@ -1078,6 +1081,10 @@ bot.on('message', async (msg) => {
                 let arr_count = [] 
                 let arr_all = [] 
 
+                // const workerlist = Worklist.map((item) => ({
+                //     spec: item.spec
+                // }))
+
                 
                 // повторить с интервалом 1 минуту
                 let timerId = setInterval(async() => {
@@ -1104,6 +1111,7 @@ bot.on('message', async (msg) => {
                             })
                             if (count_fio != 0) {
                                 const obj = {
+                                    //title: workerlist[i-1].spec,
                                     title2: arritem,
                                     count_fio: count_fio,
                                     count_title: count_title,
@@ -1111,13 +1119,15 @@ bot.on('message', async (msg) => {
                                 arr_count.push(obj)
                             } else if (count_title !=0) {
                                 const obj = {
+                                    //title: Worklist[i-1].spec,
                                     title2: arritem,
                                     count_fio: count_fio,
                                     count_title: count_title,
                                 }
                                 arr_count.push(obj) 
                             }
-                        }              
+                        }  
+                        i++;
                     })
 
                     //сохранение массива в 2-х элементный массив
@@ -1133,8 +1143,8 @@ bot.on('message', async (msg) => {
                         //отправка сообщения в чат бота
                         await bot.sendMessage(chatId, 
                             `Запрос на специалистов: 
-                            
-${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`                                                                   
+                                                                   
+${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + ' | ' + 'U.L.E.Y' + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
                          
                         )
                     } else {
@@ -1259,14 +1269,15 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
             }
         }
 
-// Получить отчет о специалистах    
-//---------------------------------------------------------------------------------------------------------------- 
+        // Получить отчет о специалистах    
+        //---------------------------------------------------------------------------------------------------------------- 
         if (text == '/getReports') {
             let count_fio;
             let count_title;
             let count_title2;
             const arr_cat = ['Sound', 'Light', 'Video', 'Riggers', 'Stagehands', 'StageGround', 'Trucks', 'Production']
             const arr_cat2 = ['Sound', 'Light', 'Video', 'Riggers', 'StageGround', 'Trucks', 'Production']
+            const workerlist = ['Звукорежессер', 'Рабочий со светом', 'Грузчик', 'Помошник']
             let i = 0;
             let arr_count = [] 
             let arr_all = [] 
@@ -1285,10 +1296,10 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
                     //console.log("databaseBlock: ", JSON.stringify(databaseBlock))
 
                     arr_count = [] 
-                    
                     arr_cat.map((arritem) => {
                         count_fio = 0;
                         count_title = 0;
+                        
                         if (databaseBlock) {
                             databaseBlock.map((value) => {
                                 if (arritem === value.title) {
@@ -1302,6 +1313,7 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
                             })
                             if (count_fio != 0) {
                                 const obj = {
+                                    title: workerlist[i-1],
                                     title2: arritem,
                                     count_fio: count_fio,
                                     count_title: count_title,
@@ -1309,14 +1321,18 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
                                 arr_count.push(obj)
                             } else if (count_title !=0) {
                                 const obj = {
+                                    title: workerlist[i-1],
                                     title2: arritem,
                                     count_fio: count_fio,
                                     count_title: count_title,
                                 }
                                 arr_count.push(obj) 
                             }
-                        }              
+                        }  
+                        i++;            
                     })
+
+                    console.log("arr_count: ", arr_count)
 
                     //сохранение массива в 2-х элементный массив
                     if (i % 2 == 0) {
