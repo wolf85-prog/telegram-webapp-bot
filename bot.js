@@ -32,8 +32,8 @@ const chatGroupId = process.env.CHAT_GROUP_ID
 const chatTelegramId = process.env.CHAT_ID
 const chatGiaId = process.env.GIA_CHAT_ID
 
-var project_id, projectId, projectName, projectDate, projectTime, dateStart, manager_id, company_id, Geo, Teh, Worklist, Equipmentlist
-var blockId
+let project_id, projectId, projectName, projectDate, projectTime, dateStart, manager_id, company_id, Geo, Teh, Worklist, Equipmentlist
+let blockId
 
 //functions
 const newDatabase1 = require('./bot/common/newDatabase1')
@@ -138,7 +138,6 @@ ${equipmentlist.map(item =>' - ' + item.subname + ' = ' + item.count + ' шт.')
           company_id = companyId
           Geo = geo  
           
-          console.log("1. projectName: ", projectName)
   
         return res.status(200).json({});
     } catch (e) {
@@ -194,6 +193,7 @@ ${equipmentlist.map(item =>' - ' + item.subname + ' = ' + item.count + ' шт.')
         company_id = companyId
         Geo = geo 
       
+        console.log("1. projectName: ", projectName)
   
         return res.status(200).json({});
     } catch (e) {
@@ -1028,7 +1028,7 @@ bot.on('message', async (msg) => {
                         companyId: company_id, 
                         chatId: chatId
                     })
-                    console.log('Проект успешно добавлен в БД! Project: ', res)  
+                    console.log('Проект успешно добавлен в БД! Project: ', JSON.stringify(res))  
 
                     const project = await Project.findOne({where:{id: res.id}})
                     
@@ -1061,78 +1061,6 @@ bot.on('message', async (msg) => {
                     // const workerlist = Worklist.map((item) => ({
                     //     spec: item.spec
                     // }))
-
-                
-                    // повторить с интервалом 1 минуту
-                    let timerId = setInterval(async() => {
-                        
-                        let databaseBlock = await getDatabaseId(blockId); 
-                        //console.log("databaseBlock: ", JSON.stringify(databaseBlock))
-
-                        arr_count = [] 
-                        
-                        arr_cat.map((arritem) => {
-                            count_fio = 0;
-                            count_title = 0;
-                            if (databaseBlock) {
-                                databaseBlock.map((value) => {
-                                    if (arritem === value.title) {
-                                        if (value.fio) {
-                                            count_fio++               
-                                        }else {
-                                            count_fio;
-                                        }  
-                                        count_title++;
-                                    }
-                                })
-                                if (count_fio != 0) {
-                                    const obj = {
-                                        //title: workerlist[i-1].spec,
-                                        title2: arritem,
-                                        count_fio: count_fio,
-                                        count_title: count_title,
-                                    }
-                                    arr_count.push(obj)
-                                } else if (count_title !=0) {
-                                    const obj = {
-                                        //title: Worklist[i-1].spec,
-                                        title2: arritem,
-                                        count_fio: count_fio,
-                                        count_title: count_title,
-                                    }
-                                    arr_count.push(obj) 
-                                }
-                            }  
-                        })
-
-                        //сохранение массива в 2-х элементный массив
-                        if (i % 2 == 0) {
-                            arr_all[0] = arr_count
-                        } else {
-                            arr_all[1] = arr_count 
-                        }
-
-                        var isEqual = JSON.stringify(arr_all[0]) === JSON.stringify(arr_all[1]);
-                        // если есть изменения в составе работников    
-                        if (!isEqual) {
-                            //отправка сообщения в чат бота
-                            await bot.sendMessage(chatId, 
-                                `Запрос на специалистов: 
-                                                                    
-${projectDate} | ${projectTime} | ${projectName} | U.L.E.Y
-
-${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']'
-).join('\n')}`                    
-                            )
-                        } else {
-                            
-                        }
-
-                    }, 60000); //каждую минуту 
-
-
-                    // остановить вывод через 260 минут
-                    setTimeout(() => { clearInterval(timerId); }, 15600000); //260 минут
 
                 } catch (error) {
                     console.log("Ошибка: ", error) 
