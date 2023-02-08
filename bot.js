@@ -1093,7 +1093,7 @@ bot.on('message', async (msg) => {
                                 })
                                 if (count_fio != 0) {
                                     const obj = {
-                                        title: specArr[j],
+                                        title: specArr[j-1],
                                         title2: arritem,
                                         count_fio: count_fio,
                                         count_title: count_title,
@@ -1101,7 +1101,7 @@ bot.on('message', async (msg) => {
                                     arr_count.push(obj)
                                 } else if (count_title !=0) {
                                     const obj = {
-                                        title: specArr[j],
+                                        title: specArr[j-1],
                                         title2: arritem,
                                         count_fio: count_fio,
                                         count_title: count_title,
