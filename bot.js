@@ -136,7 +136,9 @@ ${equipmentlist.map(item =>' - ' + item.subname + ' = ' + item.count + ' шт.')
           Equipmentlist = equipmentlist 
           manager_id = managerId
           company_id = companyId
-          Geo = geo        
+          Geo = geo  
+          
+          console.log("1. projectName: ", projectName)
   
         return res.status(200).json({});
     } catch (e) {
@@ -182,15 +184,15 @@ ${equipmentlist.map(item =>' - ' + item.subname + ' = ' + item.count + ' шт.')
         }) 
 
         projectName = projectname
-          projectDate = `${day}.${month}`
-          projectTime = `${chas}:${minut}`
-          dateStart = datestart
-          Teh = teh
-          Worklist = worklist
-          Equipmentlist = equipmentlist 
-          manager_id = managerId
-          company_id = companyId
-          Geo = geo 
+        projectDate = `${day}.${month}`
+        projectTime = `${chas}:${minut}`
+        dateStart = datestart
+        Teh = teh
+        Worklist = worklist
+        Equipmentlist = equipmentlist 
+        manager_id = managerId
+        company_id = companyId
+        Geo = geo 
       
   
         return res.status(200).json({});
@@ -928,7 +930,6 @@ bot.on('message', async (msg) => {
 
     try {
         // обработка команд
-
         // команда Старт
         if (text === '/start') {
             //добавить пользователя в бд
@@ -968,8 +969,9 @@ bot.on('message', async (msg) => {
             const user = await UserBot.findOne({where:{chatId: chatId.toString()}})
             await bot.sendMessage(chatId, `Приветствуем тебя, ${firstname} ${lastname}! Чат-бот предназначен для создания проектов в U.L.E.Y и общения заказчика с администратором проектов.`);
         }
-
-        //обработка изображений
+//--------------------------------------------------------------------------------------------------
+        
+//обработка изображений
         if (msg.photo && msg.photo[3]) {
             console.log(msg.photo)
             const image = await bot.getFile(msg.photo[3].file_id);
@@ -1004,13 +1006,17 @@ bot.on('message', async (msg) => {
             }
             await bot.sendMessage(chatId, 'Изображение отправлено администратору!');
         }
-      
-        //обработка сообщений    
+//----------------------------------------------------------------------------------------------------------------      
+        
+//обработка сообщений    
         if ((text || '')[0] !== '/') {       
             if (text.includes("Ответ")) {           
                 await bot.sendMessage(text.substring(6, text.indexOf('.')), text.slice(text.indexOf('.') + 2)) 
             
             } else if (text.includes('Тестовый добавлен')) {
+
+                console.log("2. projectName: ", projectName)
+
                 try {
                     //создание проекта в БД
                     const res = await Project.create({ 
@@ -1022,7 +1028,9 @@ bot.on('message', async (msg) => {
                         companyId: company_id, 
                         chatId: chatId
                     })
-                    console.log('Проект успешно добавлен в БД! Project Id: ', res.id)  
+                    console.log('Проект успешно добавлен в БД! Project: ', res)  
+
+                    const project = await Project.findOne({where:{id: res.id}})
                     
                     
                     //получить информацию о проекте (8 секунд)
@@ -1039,7 +1047,7 @@ bot.on('message', async (msg) => {
                     }, 2000)
 
                     // отправить сообщение пользователю через 30 секунд
-                    setTimeout(() => {bot.sendMessage(chatId, 'Ваша тестовая заявка принята!')}, 8000) // 30 секунд
+                    setTimeout(() => {bot.sendMessage(project.chatId, 'Ваша тестовая заявка принята!')}, 4000) // 30 секунд
 
                     let count_fio;
                     let count_title;
