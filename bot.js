@@ -150,7 +150,14 @@ ${equipmentlist.map(item =>' - ' + item.subname + ' = ' + item.count + ' шт.')
 //тест
 app.post('/web-test-data', async (req, res) => {
     const {queryId, projectname, datestart, geo, teh, managerId, companyId, worklist = [], equipmentlist = []} = req.body;
-   
+
+    const d = new Date(datestart);
+    const year = d.getFullYear();
+    const month = String(d.getMonth()+1).padStart(2, "0");
+    const day = String(d.getDate()).padStart(2, "0");
+    const chas = d.getHours();
+    const minut = String(d.getMinutes()).padStart(2, "0");
+    
     try {
         await bot.answerWebAppQuery(queryId, {
             type: 'article',
