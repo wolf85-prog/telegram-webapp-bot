@@ -180,12 +180,17 @@ ${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join(
 ${equipmentlist.map(item =>' - ' + item.subname + ' = ' + item.count + ' шт.').join('\n')}`
               }
         }) 
-        
-        //создание проекта в БД
-        const res = await Project.create({ name: projectname, datestart, teh, geo, managerId, companyId})
-        console.log('Проект успешно добавлен в БД', JSON.stringify(res))   
-        
-        project_id = res.id
+
+        projectName = projectname
+          projectDate = `${day}.${month}`
+          projectTime = `${chas}:${minut}`
+          dateStart = datestart
+          Teh = teh
+          Worklist = worklist
+          Equipmentlist = equipmentlist 
+          manager_id = managerId
+          company_id = companyId
+          Geo = geo 
       
   
         return res.status(200).json({});
@@ -993,13 +998,10 @@ bot.on('message', async (msg) => {
                         
                         sendMyMessage(`${botApiUrl}/${filename}.jpg`, 'image', chatId)
                     })
-                })
-              
-
+                })            
             } catch (error) {
                 console.log(error)
             }
-
             await bot.sendMessage(chatId, 'Изображение отправлено администратору!');
         }
       
@@ -1009,6 +1011,12 @@ bot.on('message', async (msg) => {
                 await bot.sendMessage(text.substring(6, text.indexOf('.')), text.slice(text.indexOf('.') + 2)) 
             
             } else if (text.includes('Тестовый добавлен')) {
+                //создание проекта в БД
+                const res = await Project.create({ name: projectName, datestart: dateStart, teh: Teh, geo: Geo, managerId: manager_id, companyId: company_id})
+                console.log('Проект успешно добавлен в БД', JSON.stringify(res))   
+                
+                project_id = res.id
+
                 // try {
                 //     //добавляем chatId в БД
                 //     const proj = await Project.update({
