@@ -1081,6 +1081,7 @@ bot.on('message', async (msg) => {
                                     arr_count.push(obj) 
                                 }
                             }  
+                            j++; 
                         })
 
                         //сохранение массива в 2-х элементный массив
