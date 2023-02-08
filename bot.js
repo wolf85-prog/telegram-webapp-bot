@@ -1059,31 +1059,30 @@ bot.on('message', async (msg) => {
                                         }else {
                                             count_fio;
                                         }  
-                                        count_title++;
-
-                                        if (count_fio != 0) {
-                                            const obj = {
-                                                title: specArr[j],
-                                                title2: arritem,
-                                                count_fio: count_fio,
-                                                count_title: count_title,
-                                            }
-                                            arr_count.push(obj)
-                                        } else if (count_title !=0) {
-                                            const obj = {
-                                                title: specArr[j],
-                                                title2: arritem,
-                                                count_fio: count_fio,
-                                                count_title: count_title,
-                                            }
-                                            arr_count.push(obj) 
-                                        } 
-
-                                        j++ 
+                                        count_title++; 
                                     }
                                 })
                             }
-                            
+
+                            if (count_fio != 0) {
+                                const obj = {
+                                    title: specArr[j],
+                                    title2: arritem,
+                                    count_fio: count_fio,
+                                    count_title: count_title,
+                                }
+                                arr_count.push(obj)
+                                j++
+                            } else if (count_title !=0) {
+                                const obj = {
+                                    title: specArr[j],
+                                    title2: arritem,
+                                    count_fio: count_fio,
+                                    count_title: count_title,
+                                }
+                                arr_count.push(obj) 
+                                j++
+                            }                        
                         })
 
                         //сохранение массива в 2-х элементный массив
