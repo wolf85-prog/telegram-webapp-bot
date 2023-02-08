@@ -161,11 +161,11 @@ app.post('/web-test-data', async (req, res) => {
         await bot.answerWebAppQuery(queryId, {
             type: 'article',
             id: queryId,
-            title: 'Проект успешно создан',
+            title: 'Тестовый проект добавлен',
             input_message_content: {
                 parse_mode: 'HTML',
                 message_text: 
-  `Проект успешно создан!
+  `Тестовый проект добавлен!
   
   <b>Проект:</b> ${projectname} 
   <b>Дата:</b> ${day}.${month}.${year}
