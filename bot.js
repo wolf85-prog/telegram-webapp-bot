@@ -15,8 +15,8 @@ const botApiUrl = process.env.REACT_APP_API_URL
 const {io} = require("socket.io-client")
 
 //fetch api
-//const fetch = require('node-fetch');
-import fetch from 'node-fetch';
+const fetch = require('node-fetch');
+//import fetch from 'node-fetch';
 
 //планировщик
 var cron = require('node-cron');
