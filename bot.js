@@ -1067,10 +1067,13 @@ bot.on('message', async (msg) => {
                     const arr_cat = ['Sound', 'Light', 'Video', 'Riggers', 'Stagehands', 'StageGround', 'Trucks', 'Production']
                     const arr_cat2 = ['Sound', 'Light', 'Video', 'Riggers', 'StageGround', 'Trucks', 'Production']
                     let i = 0;
+                    let j = 0;
                     let arr_count = [] 
                     let arr_all = [] 
 
-                    setTimeout(async () => {
+                    // повторить с интервалом 1 минуту
+                    let timerId = setInterval(async() => {
+                        i++
                         let databaseBlock = await getDatabaseId(blockId); 
                         //console.log("databaseBlock: ", JSON.stringify(databaseBlock))
                         
@@ -1090,7 +1093,7 @@ bot.on('message', async (msg) => {
                                 })
                                 if (count_fio != 0) {
                                     const obj = {
-                                        title: specArr[i-1],
+                                        title: specArr[j],
                                         title2: arritem,
                                         count_fio: count_fio,
                                         count_title: count_title,
@@ -1098,7 +1101,7 @@ bot.on('message', async (msg) => {
                                     arr_count.push(obj)
                                 } else if (count_title !=0) {
                                     const obj = {
-                                        title: specArr[i-1],
+                                        title: specArr[j],
                                         title2: arritem,
                                         count_fio: count_fio,
                                         count_title: count_title,
@@ -1106,7 +1109,7 @@ bot.on('message', async (msg) => {
                                     arr_count.push(obj) 
                                 }
                             }  
-                            i++
+                            j++
                         })
 
                         //сохранение массива в 2-х элементный массив
@@ -1130,7 +1133,10 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                             )
                         } 
 
-                    }, 5000)    
+                    }, 60000); //каждую минуту   
+
+                    // остановить вывод через 260 минут
+                    setTimeout(() => { clearInterval(timerId); }, 15600000); //260 минут
 
                 } catch (error) {
                     console.log("Ошибка: ", error) 
@@ -1216,7 +1222,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                 
                 // повторить с интервалом 1 минуту
                 let timerId = setInterval(async() => {
-                    
+                    i++
                     let databaseBlock = await getDatabaseId(blockId); 
                     //console.log("databaseBlock: ", JSON.stringify(databaseBlock))
 
