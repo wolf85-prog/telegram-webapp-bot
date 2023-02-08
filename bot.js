@@ -1031,6 +1031,7 @@ bot.on('message', async (msg) => {
                     const arr_cat = ['Sound', 'Light', 'Video', 'Riggers', 'Stagehands', 'StageGround', 'Trucks', 'Production']
                     const arr_cat2 = ['Sound', 'Light', 'Video', 'Riggers', 'StageGround', 'Trucks', 'Production']
                     let i = 0;
+                    let j = 0;
                     let arr_count = [] 
                     let arr_all = [] 
 
