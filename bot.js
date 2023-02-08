@@ -150,13 +150,6 @@ ${equipmentlist.map(item =>' - ' + item.subname + ' = ' + item.count + ' шт.')
 //тест
 app.post('/web-test-data', async (req, res) => {
     const {queryId, projectname, datestart, geo, teh, managerId, companyId, worklist = [], equipmentlist = []} = req.body;
-    
-    const d = new Date(datestart);
-    const year = d.getFullYear();
-    const month = String(d.getMonth()+1).padStart(2, "0");
-    const day = String(d.getDate()).padStart(2, "0");
-    const chas = d.getHours();
-    const minut = String(d.getMinutes()).padStart(2, "0");
    
     try {
         await bot.answerWebAppQuery(queryId, {
@@ -1016,12 +1009,10 @@ bot.on('message', async (msg) => {
             } else if (text.includes('Тестовый добавлен')) {
                 await bot.sendMessage(chatGiaId, `${text} \n \n от ${firstname} ${lastname} ${chatId}`)
 
+                //отправить сообщение в админ-панель
                 sendMyMessage("Тестовый проект создан", "text", chatId)
 
-                console.log("2. projectName: ", projectName)
-
                 const specArr = Worklist.map(item => (item.spec));
-                console.log(specArr)
 
                 try {
                     //создание проекта в БД
@@ -1039,8 +1030,14 @@ bot.on('message', async (msg) => {
                     console.log('Проект успешно добавлен в БД! Project: ', JSON.stringify(res))  
 
                     const project = await Project.findOne({where:{id: res.id}})
-                    
-                    
+
+                    const d = new Date(project.datestart);
+                    const year = d.getFullYear();
+                    const month = String(d.getMonth()+1).padStart(2, "0");
+                    const day = String(d.getDate()).padStart(2, "0");
+                    const chas = d.getHours();
+                    const minut = String(d.getMinutes()).padStart(2, "0");
+                                        
                     //получить информацию о проекте (8 секунд)
                     setTimeout(async () => {
                         projectId = '34ae9c1c-3443-47c8-b3c8-ecccf07e5aea'
@@ -1065,6 +1062,68 @@ bot.on('message', async (msg) => {
                     let i = 0;
                     let arr_count = [] 
                     let arr_all = [] 
+
+                    let databaseBlock = await getDatabaseId(blockId); 
+                    //console.log("databaseBlock: ", JSON.stringify(databaseBlock))
+                    
+                    arr_cat.map((arritem) => {
+                        count_fio = 0;
+                        count_title = 0;
+                        if (databaseBlock) {
+                            databaseBlock.map((value) => {
+                                if (arritem === value.title) {
+                                    if (value.fio) {
+                                        count_fio++               
+                                    }else {
+                                        count_fio;
+                                    }  
+                                    count_title++;
+                                }
+                            })
+                            if (count_fio != 0) {
+                                const obj = {
+                                    title: specArr[i],
+                                    title2: arritem,
+                                    count_fio: count_fio,
+                                    count_title: count_title,
+                                }
+                                arr_count.push(obj)
+                            } else if (count_title !=0) {
+                                const obj = {
+                                    title: specArr[i],
+                                    title2: arritem,
+                                    count_fio: count_fio,
+                                    count_title: count_title,
+                                }
+                                arr_count.push(obj) 
+                            }
+                        }  
+                        i++
+                    })
+
+                    //сохранение массива в 2-х элементный массив
+                    if (i % 2 == 0) {
+                        arr_all[0] = arr_count
+                    } else {
+                        arr_all[1] = arr_count 
+                    }
+
+
+                    var isEqual = JSON.stringify(arr_all[0]) === JSON.stringify(arr_all[1]);
+                    // если есть изменения в составе работников    
+                    if (!isEqual) {
+                        //отправка сообщения в чат бота
+                        await bot.sendMessage(project.chatId, 
+                            `Запрос на специалистов: 
+                                                                   
+${day}.${month} | ${chas}:${minut} | ${project.name} | U.L.E.Y
+
+${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']'
+).join('\n')}`                     
+                        )
+                    } else {
+                        
+                    }
 
 
                 } catch (error) {
