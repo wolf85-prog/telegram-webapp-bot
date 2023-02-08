@@ -1020,11 +1020,16 @@ bot.on('message', async (msg) => {
 
                 console.log("2. projectName: ", projectName)
 
+                const specArr = Worklist.map(item => (item.spec));
+                console.log(specArr)
+
                 try {
                     //создание проекта в БД
                     const res = await Project.create({ 
                         name: projectName, 
                         datestart: dateStart, 
+                        spec: specArr,
+                        equipment: Equipmentlist,
                         teh: Teh, 
                         geo: Geo, 
                         managerId: manager_id, 
@@ -1061,9 +1066,6 @@ bot.on('message', async (msg) => {
                     let arr_count = [] 
                     let arr_all = [] 
 
-                    // const workerlist = Worklist.map((item) => ({
-                    //     spec: item.spec
-                    // }))
 
                 } catch (error) {
                     console.log("Ошибка: ", error) 
