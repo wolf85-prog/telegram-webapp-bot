@@ -1022,8 +1022,8 @@ bot.on('message', async (msg) => {
                 // } catch (error) {
                 //     console.log("Ошибка сохранения chat_id  в бд: ", error) 
                 // }
-                console.log('Тестовый проект добавлен')
-                
+                console.log('Тестовый проект добавлен: ', project_id)
+                console.log('ChatId: ', chatId)
             
             } else if (text.includes('Проект успешно создан')) {           
                 await bot.sendMessage(chatTelegramId, `${text} \n \n от ${firstname} ${lastname} ${chatId}`)
