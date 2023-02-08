@@ -42,9 +42,10 @@ const Project = sequelize.define('project', {
     managerId: {type: DataTypes.STRING},
     companyId: {type: DataTypes.STRING},
     projectId: {type: DataTypes.STRING},
+    chatId: {type: DataTypes.STRING},
 })
 
 //UserBot.hasMany(Message)
 //Message.belongsTo(UserBot)
 
-module.exports = {User, UserBot, Message, Conversation}
+module.exports = {User, UserBot, Message, Conversation, Project}

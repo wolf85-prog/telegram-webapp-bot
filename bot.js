@@ -32,7 +32,7 @@ const chatGroupId = process.env.CHAT_GROUP_ID
 const chatTelegramId = process.env.CHAT_ID
 const chatGiaId = process.env.GIA_CHAT_ID
 
-var projectId, projectName, projectDate, projectTime, dateStart, manager_id, company_id, Geo, Teh, Worklist, Equipmentlist
+var project_id, projectId, projectName, projectDate, projectTime, dateStart, manager_id, company_id, Geo, Teh, Worklist, Equipmentlist
 var blockId
 
 //functions
@@ -49,7 +49,7 @@ const path = require('path')
 
 //подключение к БД PostreSQL
 const sequelize = require('./bot/connections/db')
-const {UserBot, Message, Conversation} = require('./bot/models/models')
+const {UserBot, Message, Conversation, Project} = require('./bot/models/models')
 
 const app = express();
 
@@ -144,16 +144,19 @@ ${equipmentlist.map(item =>' - ' + item.subname + ' = ' + item.count + ' шт.')
     }
 })
 
+//------------------------------------------------------------------------
 
 //тест
 app.post('/web-test-data', async (req, res) => {
     const {queryId, projectname, datestart, geo, teh, managerId, companyId, worklist = [], equipmentlist = []} = req.body;
+    
     const d = new Date(datestart);
     const year = d.getFullYear();
     const month = String(d.getMonth()+1).padStart(2, "0");
     const day = String(d.getDate()).padStart(2, "0");
     const chas = d.getHours();
     const minut = String(d.getMinutes()).padStart(2, "0");
+   
     try {
         await bot.answerWebAppQuery(queryId, {
             type: 'article',
@@ -176,18 +179,14 @@ ${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join(
 <b>Оборудование:</b>  
 ${equipmentlist.map(item =>' - ' + item.subname + ' = ' + item.count + ' шт.').join('\n')}`
               }
-        })
-  
-          projectName = projectname
-          projectDate = `${day}.${month}`
-          projectTime = `${chas}:${minut}`
-          dateStart = datestart
-          Teh = teh
-          Worklist = worklist
-          Equipmentlist = equipmentlist 
-          manager_id = managerId
-          company_id = companyId
-          Geo = geo        
+        }) 
+        
+        //создание проекта в БД
+        const res = await Project.create({ name: projectname, datestart, teh, geo, managerId, companyId})
+        console.log('Проект успешно добавлен в БД', JSON.stringify(res))   
+        
+        //project_id = res.id
+      
   
         return res.status(200).json({});
     } catch (e) {
@@ -1013,6 +1012,15 @@ bot.on('message', async (msg) => {
                 await bot.sendMessage(chatTelegramId, `${text} \n \n от ${firstname} ${lastname} ${chatId}`)
                 await bot.sendMessage(chatGiaId, `${text} \n \n от ${firstname} ${lastname} ${chatId}`)
 
+                //добавляем chatId в БД
+                const proj = await Project.update({
+                    chatId: chatId
+                    }, {
+                    where: {
+                        user_id: 1
+                    }
+                })
+
                 //создать беседу в админке в бд 
                 let  conversation_id              
                 try {                  
@@ -1088,7 +1096,6 @@ bot.on('message', async (msg) => {
                 
                 // повторить с интервалом 1 минуту
                 let timerId = setInterval(async() => {
-                    i++
                     
                     let databaseBlock = await getDatabaseId(blockId); 
                     //console.log("databaseBlock: ", JSON.stringify(databaseBlock))
@@ -1127,7 +1134,6 @@ bot.on('message', async (msg) => {
                                 arr_count.push(obj) 
                             }
                         }  
-                        i++;
                     })
 
                     //сохранение массива в 2-х элементный массив
@@ -1256,16 +1262,6 @@ ${arr_count.map(item =>projectDate +' | ' + projectTime + ' | ' + projectName + 
                 // ответ бота
                 await bot.sendMessage(chatId, `Ваше сообщение "${text}" отправлено!`)
                 await bot.sendMessage(chatTelegramId, `${text} \n \n от ${firstname} ${lastname} ${chatId}`)           
-            }
-        }
-   
-        if (text === '/getmessage') {
-            //получить сообщения из админской панели
-            try {
-                const message_admin = await Message.findAll({where: {to: chatId.toString()}})
-                console.log(message_admin)
-            } catch (error) {
-                console.log(error)
             }
         }
 

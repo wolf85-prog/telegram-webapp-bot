@@ -154,3 +154,14 @@
 
 // ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']'
 // ).join('\n')}` 
+
+//----------------------------------------------------------------------
+// if (text === '/getmessage') {
+//     //получить сообщения из админской панели
+//     try {
+//         const message_admin = await Message.findAll({where: {to: chatId.toString()}})
+//         console.log(message_admin)
+//     } catch (error) {
+//         console.log(error)
+//     }
+// }
