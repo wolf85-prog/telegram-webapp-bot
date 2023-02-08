@@ -1072,7 +1072,7 @@ bot.on('message', async (msg) => {
 
                     setTimeout(async () => {
                         let databaseBlock = await getDatabaseId(blockId); 
-                        console.log("databaseBlock: ", JSON.stringify(databaseBlock))
+                        //console.log("databaseBlock: ", JSON.stringify(databaseBlock))
                         
                         arr_cat.map((arritem) => {
                             count_fio = 0;
@@ -1090,7 +1090,7 @@ bot.on('message', async (msg) => {
                                 })
                                 if (count_fio != 0) {
                                     const obj = {
-                                        title: specArr[i],
+                                        title: specArr[i-1],
                                         title2: arritem,
                                         count_fio: count_fio,
                                         count_title: count_title,
@@ -1098,7 +1098,7 @@ bot.on('message', async (msg) => {
                                     arr_count.push(obj)
                                 } else if (count_title !=0) {
                                     const obj = {
-                                        title: specArr[i],
+                                        title: specArr[i-1],
                                         title2: arritem,
                                         count_fio: count_fio,
                                         count_title: count_title,
@@ -1123,9 +1123,9 @@ bot.on('message', async (msg) => {
                             await bot.sendMessage(project.chatId, 
                                 `Запрос на специалистов: 
                                                                     
-    ${day}.${month} | ${chas}:${minut} | ${project.name} | U.L.E.Y
+${day}.${month} | ${chas}:${minut} | ${project.name} | U.L.E.Y
 
-    ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']'
+${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']'
     ).join('\n')}`                     
                             )
                         } 
