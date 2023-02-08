@@ -31,6 +31,19 @@ const Conversation = sequelize.define('conversation', {
     members: {type: DataTypes.ARRAY(DataTypes.STRING)},
 })
 
+const Project = sequelize.define('project', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    name: {type: DataTypes.STRING},  //название проекта
+    datestart: {type: DataTypes.STRING},  //дата начала проекта
+    spec: {type: DataTypes.ARRAY(DataTypes.STRING)},
+    equipment: {type: DataTypes.ARRAY(DataTypes.STRING)},
+    teh: {type: DataTypes.STRING},
+    geo: {type: DataTypes.STRING},
+    managerId: {type: DataTypes.STRING},
+    companyId: {type: DataTypes.STRING},
+    projectId: {type: DataTypes.STRING},
+})
+
 //UserBot.hasMany(Message)
 //Message.belongsTo(UserBot)
 
