@@ -185,7 +185,7 @@ ${equipmentlist.map(item =>' - ' + item.subname + ' = ' + item.count + ' шт.')
         const res = await Project.create({ name: projectname, datestart, teh, geo, managerId, companyId})
         console.log('Проект успешно добавлен в БД', JSON.stringify(res))   
         
-        //project_id = res.id
+        project_id = res.id
       
   
         return res.status(200).json({});
@@ -1006,20 +1006,21 @@ bot.on('message', async (msg) => {
         //обработка сообщений    
         if ((text || '')[0] !== '/') {       
             if (text.includes("Ответ")) {           
-                await bot.sendMessage(text.substring(6, text.indexOf('.')), text.slice(text.indexOf('.') + 2))       
+                await bot.sendMessage(text.substring(6, text.indexOf('.')), text.slice(text.indexOf('.') + 2)) 
             
-            } else if (text.includes('Проект успешно создан')) {           
-                await bot.sendMessage(chatTelegramId, `${text} \n \n от ${firstname} ${lastname} ${chatId}`)
-                await bot.sendMessage(chatGiaId, `${text} \n \n от ${firstname} ${lastname} ${chatId}`)
-
+            } else if (text.includes('Тестовый проект добавлен')) {
                 //добавляем chatId в БД
                 const proj = await Project.update({
                     chatId: chatId
                     }, {
                     where: {
-                        user_id: 1
+                        id: project_id
                     }
                 })
+            
+            } else if (text.includes('Проект успешно создан')) {           
+                await bot.sendMessage(chatTelegramId, `${text} \n \n от ${firstname} ${lastname} ${chatId}`)
+                await bot.sendMessage(chatGiaId, `${text} \n \n от ${firstname} ${lastname} ${chatId}`)
 
                 //создать беседу в админке в бд 
                 let  conversation_id              
