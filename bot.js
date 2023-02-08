@@ -1009,19 +1009,20 @@ bot.on('message', async (msg) => {
                 await bot.sendMessage(text.substring(6, text.indexOf('.')), text.slice(text.indexOf('.') + 2)) 
             
             } else if (text.includes('Тестовый проект добавлен')) {
-                try {
-                    //добавляем chatId в БД
-                    const proj = await Project.update({
-                        chatId: chatId
-                        }, {
-                        where: {
-                            id: project_id
-                        }
-                    })
-                    console.log("ChatId успешно сохранен в бд: ", JSON.stringify(proj)) 
-                } catch (error) {
-                    console.log("Ошибка сохранения chat_id  в бд: ", error) 
-                }
+                // try {
+                //     //добавляем chatId в БД
+                //     const proj = await Project.update({
+                //         chatId: chatId
+                //         }, {
+                //         where: {
+                //             id: project_id
+                //         }
+                //     })
+                //     console.log("ChatId успешно сохранен в бд: ", JSON.stringify(proj)) 
+                // } catch (error) {
+                //     console.log("Ошибка сохранения chat_id  в бд: ", error) 
+                // }
+                console.log('Тестовый проект добавлен')
                 
             
             } else if (text.includes('Проект успешно создан')) {           
