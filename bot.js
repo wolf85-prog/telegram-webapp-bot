@@ -975,6 +975,7 @@ bot.on('message', async (msg) => {
                 sendMyMessage("Проект создан", "text", chatId)
 
                 const specArr = Worklist.map(item => (item.spec));
+                console.log("specArr ", specArr)
 
                 try {
                     //создание проекта в БД
