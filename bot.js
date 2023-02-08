@@ -1036,7 +1036,6 @@ bot.on('message', async (msg) => {
                     const arr_cat = ['Sound', 'Light', 'Video', 'Riggers', 'Stagehands', 'StageGround', 'Trucks', 'Production']
                     const arr_cat2 = ['Sound', 'Light', 'Video', 'Riggers', 'StageGround', 'Trucks', 'Production']
                     let i = 0;
-                    let j = 0;
                     let arr_count = [] 
                     let arr_all = [] 
 
@@ -1048,7 +1047,7 @@ bot.on('message', async (msg) => {
                         //console.log("databaseBlock: ", JSON.stringify(databaseBlock))
 
                         arr_count = [] 
-                        
+                        let j = 0;
                         arr_cat.map((arritem) => {
                             count_fio = 0;
                             count_title = 0;
@@ -1061,27 +1060,30 @@ bot.on('message', async (msg) => {
                                             count_fio;
                                         }  
                                         count_title++;
+
+                                        if (count_fio != 0) {
+                                            const obj = {
+                                                title: specArr[j],
+                                                title2: arritem,
+                                                count_fio: count_fio,
+                                                count_title: count_title,
+                                            }
+                                            arr_count.push(obj)
+                                        } else if (count_title !=0) {
+                                            const obj = {
+                                                title: specArr[j],
+                                                title2: arritem,
+                                                count_fio: count_fio,
+                                                count_title: count_title,
+                                            }
+                                            arr_count.push(obj) 
+                                        } 
+
+                                        j++ 
                                     }
                                 })
-                                if (count_fio != 0) {
-                                    const obj = {
-                                        title: specArr[j-1],
-                                        title2: arritem,
-                                        count_fio: count_fio,
-                                        count_title: count_title,
-                                    }
-                                    arr_count.push(obj)
-                                } else if (count_title !=0) {
-                                    const obj = {
-                                        title: specArr[j-1],
-                                        title2: arritem,
-                                        count_fio: count_fio,
-                                        count_title: count_title,
-                                    }
-                                    arr_count.push(obj) 
-                                }
-                            }  
-                            j++; 
+                            }
+                            
                         })
 
                         //сохранение массива в 2-х элементный массив
@@ -1105,7 +1107,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                             )
                         } 
 
-                    }, 60000); //каждую минуту 
+                    }, 120000); //каждую 2 минуты 
 
 
                     // остановить вывод через 260 минут
