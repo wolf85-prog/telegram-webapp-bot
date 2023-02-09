@@ -1118,9 +1118,9 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
             } else if (text.includes('Тестовое сообщение')) {  
            
                 // сохранить отправленное боту сообщение пользователя в БД
-                const convId = sendMyMessage(text, 'text', chatId)
+                const convId = await sendMyMessage(text, 'text', chatId)
                 
-                setTimeout(() => {
+                //setTimeout(() => {
                     console.log("convId: ", convId)
 
                     // Подключаемся к серверу socket
@@ -1140,7 +1140,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                         text: text,
                         convId: convId,
                     })
-                }, 3000) 
+                //}, 3000) 
 
             } else {
 
