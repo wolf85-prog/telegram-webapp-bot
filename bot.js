@@ -1028,7 +1028,7 @@ bot.on('message', async (msg) => {
                     // }, 8000)
 
                     // отправить сообщение пользователю через 30 секунд
-                    setTimeout(() => {bot.sendMessage(chatId, 'Ваша заявка принята!')}, 30000) // 30 секунд
+                    setTimeout(() => {bot.sendMessage(project.chatId, 'Ваша заявка принята!')}, 30000) // 30 секунд
 
                     let count_fio;
                     let count_title;
@@ -1095,7 +1095,7 @@ bot.on('message', async (msg) => {
                         // если есть изменения в составе работников    
                         if (!isEqual) {
                             //отправка сообщения в чат бота
-                            await bot.sendMessage(chatId, 
+                            await bot.sendMessage(project.chatId, 
                                 `Запрос на специалистов: 
                                                                     
 ${day}.${month} | ${chas}:${minut} | ${project.name} | U.L.E.Y
