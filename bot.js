@@ -951,7 +951,23 @@ bot.on('message', async (msg) => {
                         filePath.close();
                         console.log('Download Completed: ', path); 
                         
-                        sendMyMessage(`${botApiUrl}/${filename}.jpg`, 'image', chatId)
+                        // сохранить отправленное боту сообщение пользователя в БД
+                        const convId = sendMyMessage(`${botApiUrl}/${filename}.jpg`, 'image', chatId)
+
+                        // Подключаемся к серверу socket
+                        let socket = io('https://proj.uley.team:9000');
+
+                        socket.emit("addUser", chatId)
+                        socket.on("getUsers", users => {
+                            console.log("users from bot: ", users);
+                        })
+
+                        socket.emit("sendMessage", {
+                            senderId: chatId,
+                            receiverId: chatTelegramId,
+                            text: `${botApiUrl}/${filename}.jpg`,
+                            convId: convId,
+                        })
                     })
                 })            
             } catch (error) {
@@ -1143,7 +1159,22 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
             } else {
 
                 // сохранить отправленное боту сообщение пользователя в БД
-                sendMyMessage(text, 'text', chatId)
+                const convId = sendMyMessage(text, 'text', chatId)
+
+                // Подключаемся к серверу socket
+                let socket = io('https://proj.uley.team:9000');
+
+                socket.emit("addUser", chatId)
+                socket.on("getUsers", users => {
+                    console.log("users from bot: ", users);
+                })
+
+                socket.emit("sendMessage", {
+                    senderId: chatId,
+                    receiverId: chatTelegramId,
+                    text: text,
+                    convId: convId,
+                })
 
                 // ответ бота
                 await bot.sendMessage(chatId, `Ваше сообщение "${text}" отправлено!`)
