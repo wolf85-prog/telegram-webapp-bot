@@ -1115,6 +1115,33 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                     console.log(error)
                 }
 
+            } else if (text.includes('Тестовое сообщение')) {  
+           
+                // сохранить отправленное боту сообщение пользователя в БД
+                const convId = await sendMyMessage(text, 'text', chatId)
+                
+                //setTimeout(() => {
+                    console.log("convId: ", convId)
+
+                    // Подключаемся к серверу socket
+                    let socket = io('https://proj.uley.team:9000');
+                    socket.on("welcome", async message=> {
+                        console.log(message)
+                    });
+
+                    socket.emit("addUser", chatId)
+                    socket.on("getUsers", users => {
+                        console.log("users from bot: ", users);
+                    })
+
+                    socket.emit("sendMessage", {
+                        senderId: chatTelegramId,
+                        receiverId: chatId,
+                        text: text,
+                        convId: convId,
+                    })
+                //}, 3000) 
+
             } else {
 
                 // сохранить отправленное боту сообщение пользователя в БД

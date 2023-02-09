@@ -44,6 +44,8 @@ module.exports = async function sendMyMessage(text, typeMessage, chatId) {
             messageType: typeMessage,
             conversationId: conversation_id,
         })
+
+        return conversation_id;
     } catch (error) {
         console.log(error)
     }
