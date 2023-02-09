@@ -1120,6 +1120,8 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                 // сохранить отправленное боту сообщение пользователя в БД
                 const convId = sendMyMessage(text, 'text', chatId)
 
+                console.log("convId: ", convId)
+
                 // Подключаемся к серверу socket
                 let socket = io('https://proj.uley.team:9000');
                 // socket.on("welcome", async message=> {
