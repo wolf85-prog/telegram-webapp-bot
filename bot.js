@@ -992,15 +992,12 @@ bot.on('message', async (msg) => {
                 //отправить сообщение в админ-панель
                 sendMyMessage("Проект создан", "text", chatId)
 
-                const specArr = Worklist.map(item => (item.spec));
-                console.log("specArr ", specArr)
-
                 try {
                     //создание проекта в БД
                     const res = await Project.create({ 
                         name: projectName, 
                         datestart: dateStart, 
-                        spec: specArr,
+                        spec: Worklist,
                         equipment: Equipmentlist,
                         teh: Teh, 
                         geo: Geo, 
@@ -1066,27 +1063,35 @@ bot.on('message', async (msg) => {
                                             count_fio;
                                         }  
                                         count_title++; 
-                                        j++
+                                        //j++
                                     }
                                 })
                             }
 
                             if (count_fio != 0) {
-                                const obj = {
-                                    title: specArr[j-1],
-                                    title2: arritem,
-                                    count_fio: count_fio,
-                                    count_title: count_title,
-                                }
-                                arr_count.push(obj)
+                                project.spec.map((value)=> {
+                                    if (arritem === value.cat) {
+                                        const obj = {
+                                            title: value.spec,
+                                            title2: value.cat,
+                                            count_fio: count_fio,
+                                            count_title: count_title,
+                                        }
+                                        arr_count.push(obj)
+                                    }                                        
+                                })                               
                             } else if (count_title !=0) {
-                                const obj = {
-                                    title: specArr[j-1],
-                                    title2: arritem,
-                                    count_fio: count_fio,
-                                    count_title: count_title,
-                                }
-                                arr_count.push(obj) 
+                                project.spec.map((value)=> {
+                                    if (arritem === value.cat) {
+                                        const obj = {
+                                            title: value.spec,
+                                            title2: value.cat,
+                                            count_fio: count_fio,
+                                            count_title: count_title,
+                                        }
+                                        arr_count.push(obj)
+                                    }                                        
+                                }) 
                             }                        
                         })
 
