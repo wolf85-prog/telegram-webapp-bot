@@ -999,16 +999,14 @@ bot.on('message', async (msg) => {
                 console.log("specArr: ", specArr)
 
                 console.log("Equipmentlist: ", Equipmentlist)
-                
+                let equipArr = [{}]
                 if (Equipmentlist !== '') {
-                    const equipArr = Equipmentlist.map(item => ({
+                    equipArr = Equipmentlist.map(item => ({
                         name: item.spec,
                         subname: item.subname,
                         cat: item.cat
                     }));
-                } else {
-                    const equipArr = [{}]
-                }
+                } 
                 
                 console.log("specArr ", specArr)
 
