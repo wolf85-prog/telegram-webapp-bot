@@ -1003,7 +1003,7 @@ bot.on('message', async (msg) => {
                     const res = await Project.create({ 
                         name: projectName, 
                         datestart: dateStart, 
-                        spec: specArr,
+                        spec: JSON.stringify(specArr),
                         equipment: Equipmentlist,
                         teh: Teh, 
                         geo: Geo, 
@@ -1075,7 +1075,7 @@ bot.on('message', async (msg) => {
                             }
 
                             if (count_fio != 0) {
-                                project.spec.map((value)=> {
+                                JSON.parse(project.spec).map((value)=> {
                                     if (arritem === value.cat) {
                                         const obj = {
                                             title: value.spec,
@@ -1087,7 +1087,7 @@ bot.on('message', async (msg) => {
                                     }                                        
                                 })                               
                             } else if (count_title !=0) {
-                                project.spec.map((value)=> {
+                                JSON.parse(project.spec).map((value)=> {
                                     if (arritem === value.cat) {
                                         const obj = {
                                             title: value.spec,
