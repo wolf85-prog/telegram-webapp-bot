@@ -996,6 +996,20 @@ bot.on('message', async (msg) => {
                     spec: item.spec,
                     cat: item.cat
                 }));
+                console.log("specArr: ", specArr)
+
+                console.log("Equipmentlist: ", Equipmentlist)
+                
+                if (Equipmentlist !== '') {
+                    const equipArr = Equipmentlist.map(item => ({
+                        name: item.spec,
+                        subname: item.subname,
+                        cat: item.cat
+                    }));
+                } else {
+                    const equipArr = [{}]
+                }
+                
                 console.log("specArr ", specArr)
 
                 try {
@@ -1004,7 +1018,7 @@ bot.on('message', async (msg) => {
                         name: projectName, 
                         datestart: dateStart, 
                         spec: JSON.stringify(specArr),
-                        equipment: Equipmentlist,
+                        equipment: JSON.stringify(equipArr),
                         teh: Teh, 
                         geo: Geo, 
                         managerId: manager_id, 
