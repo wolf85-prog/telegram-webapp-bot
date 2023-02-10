@@ -996,9 +996,7 @@ bot.on('message', async (msg) => {
                     spec: item.spec,
                     cat: item.cat
                 }));
-                console.log("specArr: ", specArr)
 
-                console.log("Equipmentlist: ", Equipmentlist)
                 let equipArr = [{}]
                 if (Equipmentlist !== '') {
                     equipArr = Equipmentlist.map(item => ({
@@ -1007,8 +1005,6 @@ bot.on('message', async (msg) => {
                         cat: item.cat
                     }));
                 } 
-                
-                console.log("specArr ", specArr)
 
                 try {
                     //создание проекта в БД
@@ -1068,7 +1064,6 @@ bot.on('message', async (msg) => {
                         //console.log("databaseBlock: ", JSON.stringify(databaseBlock))
 
                         arr_count = [] 
-                        let j = 0;
                         arr_cat.map((arritem) => {
                             count_fio = 0;
                             count_title = 0;
