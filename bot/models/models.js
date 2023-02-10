@@ -35,8 +35,8 @@ const Project = sequelize.define('project', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     name: {type: DataTypes.STRING},  //название проекта
     datestart: {type: DataTypes.STRING},  //дата начала проекта
-    spec: {type: DataTypes.ARRAY(DataTypes.STRING)},
-    equipment: {type: DataTypes.ARRAY(DataTypes.STRING)},
+    spec: {type: DataTypes.STRING},
+    equipment: {type: DataTypes.STRING},
     teh: {type: DataTypes.STRING},
     geo: {type: DataTypes.STRING},
     managerId: {type: DataTypes.STRING},
