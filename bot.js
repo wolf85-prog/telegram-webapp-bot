@@ -992,12 +992,18 @@ bot.on('message', async (msg) => {
                 //отправить сообщение в админ-панель
                 sendMyMessage("Проект создан", "text", chatId)
 
+                const specArr = Worklist.map(item => ({
+                    spec: item.spec,
+                    cat: item.cat
+                }));
+                console.log("specArr ", specArr)
+
                 try {
                     //создание проекта в БД
                     const res = await Project.create({ 
                         name: projectName, 
                         datestart: dateStart, 
-                        spec: Worklist,
+                        spec: specArr,
                         equipment: Equipmentlist,
                         teh: Teh, 
                         geo: Geo, 
