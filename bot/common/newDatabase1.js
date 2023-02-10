@@ -49,13 +49,9 @@ module.exports = async function newDatabase1(parent_page_id) {
         console.log("1. Grafik project added. Database_id: " + data.id) // + " data: " + JSON.stringify(data))
 
         //добавить даты (День2, День3, День4)
-        addDate(data.id, 'День №4');
-        setTimeout(()=> {
-            addDate(data.id, 'День №3');
-        }, 2000)  
-        setTimeout(()=> {
-            addDate(data.id, 'День №2');
-        }, 4000) 
+        await addDate(data.id, 'День №4');
+        await addDate(data.id, 'День №3');
+        await addDate(data.id, 'День №2');
         
     } catch (error) {
         console.error(error.body)

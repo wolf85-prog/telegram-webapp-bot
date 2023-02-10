@@ -16,7 +16,6 @@ const {io} = require("socket.io-client")
 
 //fetch api
 const fetch = require('node-fetch');
-//import fetch from 'node-fetch';
 
 //планировщик
 var cron = require('node-cron');
@@ -38,6 +37,9 @@ let blockId
 
 //functions
 const newDatabase1 = require('./bot/common/newDatabase1')
+//const newDatabase2 = require('./bot/common/newDatabase2')
+//const newDatabase3 = require('./bot/common/newDatabase3')
+//const newDatabase4 = require('./bot/common/newDatabase4')
 const sendMyMessage = require('./bot/common/sendMyMessage')
 
 const fs = require('fs');
@@ -1031,18 +1033,6 @@ bot.on('message', async (msg) => {
                     blockId = await getBlocks(projectId);
                     console.log("blockId: ", blockId)
 
-                    //получить информацию о проекте (8 секунд)
-                    // setTimeout(async () => {
-                    //     console.log("projectId: ", projectId)
-                    //     if (projectId !== 'undefined') {
-                    //         blockId = await getBlocks(projectId);
-                    //         console.log("blockId: ", blockId)
-                    //     } else {
-                    //         console.log("Проект не добавлен в БД!")
-                    //     }
-                        
-                    // }, 8000)
-
                     // отправить сообщение пользователю через 30 секунд
                     setTimeout(() => {bot.sendMessage(project.chatId, 'Ваша заявка принята!')}, 30000) // 30 секунд
 
@@ -1188,6 +1178,8 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
     }
     
   });
+
+
   
   //Ответ на нажатие кнопок настройки и информаци
   bot.on('callback_query', msg => {
@@ -1210,6 +1202,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
 
 // Обработка ошибок, последний middleware
 app.use(errorHandler)
+
 
 const PORT = process.env.PORT || 8000;
 

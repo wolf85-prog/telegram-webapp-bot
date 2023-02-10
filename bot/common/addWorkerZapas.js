@@ -3,7 +3,8 @@ require("dotenv").config();
 const { Client } = require("@notionhq/client");
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
 
-module.exports = async function addWorker(blockId, worker) {
+//Добавление строк в таблицу "Запасной состав"
+module.exports = async function addWorkerZapas(blockId) {
     try {
         const response = await notion.pages.create({
             parent: { database_id: blockId },
@@ -16,19 +17,11 @@ module.exports = async function addWorker(blockId, worker) {
                         "time_zone": "Europe/Moscow"
                     }
 
-                },
-                "3. Специализация": {
-                    type: "multi_select",
-                    multi_select: [
-                        {
-                            "name": worker
-                        }
-                    ]
                 }
             }
         })
         //console.log(response)
-        console.log("3 Success! Worker added. Data: " + response.id) //+ JSON.stringify(response))
+        console.log("3.3 Success! Worker zapas added. Data: " + response.id) //JSON.stringify(response))
     } catch (error) {
         console.error(error.body)
     }
