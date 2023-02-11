@@ -1037,14 +1037,16 @@ bot.on('message', async (msg) => {
                     //-------------------------------------------------------------------------------------------------------------------------------
                     //добавление геопозиции в БД Площадки (Адрес) и добавление проекта
                     if (Geo != '') {
-                        projectId = await addAddress(Geo, projectName, dateStart, Teh, manager_id, company_id, Worklist, Equipmentlist);
+                        projectId = await addAddress(project.geo, project.name, project.datestart, project.teh, project.managerId, project.companyId, Worklist, Equipmentlist);
                     } else {
                         //добавление проекта с названием проекта в базу
-                        projectId = await addProjectNotGeo(projectName, dateStart, Teh, manager_id, company_id, Worklist, Equipmentlist);
+                        projectId = await addProjectNotGeo(project.name, project.datestart, project.teh, project.managerId, project.companyId, Worklist, Equipmentlist);
                     }
+                    //обновить проект 
+                    await Project.update({projectId: projectId},{where: {id: res.id}})
 
-                    blockId = await getBlocks(projectId);
-                    console.log("blockId: ", blockId)
+                    const blockId2 = await getBlocks(Project.projectId);
+                    console.log("blockId: ", blockId2)
 
                     // отправить сообщение пользователю через 30 секунд
                     setTimeout(() => {bot.sendMessage(project.chatId, 'Ваша заявка принята!')}, 30000) // 30 секунд
@@ -1059,7 +1061,7 @@ bot.on('message', async (msg) => {
                     // повторить с интервалом 1 минуту
                     let timerId = setInterval(async() => {
 
-                        let databaseBlock = await getDatabaseId(blockId); 
+                        let databaseBlock = await getDatabaseId(blockId2); 
                         //console.log("databaseBlock: ", JSON.stringify(databaseBlock))
 
                         arr_count = [] 
