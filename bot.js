@@ -944,6 +944,13 @@ bot.on('message', async (msg) => {
                 const project = await Project.findOne({where:{id: 28 }})
                 const projectId2 = project.projectId; //'630297e3-0b77-4317-9064-a5d45537b177'
 
+                const d = new Date(project.datestart);
+                const year = d.getFullYear();
+                const month = String(d.getMonth()+1).padStart(2, "0");
+                const day = String(d.getDate()).padStart(2, "0");
+                const chas = d.getHours();
+                const minut = String(d.getMinutes()).padStart(2, "0");
+
                 blockId = await getBlocks(projectId2);
                 console.log("blockId: ", blockId)
                     
