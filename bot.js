@@ -1046,7 +1046,7 @@ bot.on('message', async (msg) => {
                     }
                     //обновить проект 
                     await Project.update({projectId: projectId},{where: {id: res.id}})
-                    
+
                     const blockId2 = getBlocks(project.projectId);
                     console.log("blockId: ", blockId2)
 
@@ -1136,9 +1136,9 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
 
                 // Подключаемся к серверу socket
                 let socket = io('https://proj.uley.team:9000');
-                socket.on("welcome", async message=> {
-                    console.log(message)
-                });
+                // socket.on("welcome", async message=> {
+                //     console.log(message)
+                // });
 
                 socket.emit("addUser", chatId)
                 socket.on("getUsers", users => {
@@ -1162,7 +1162,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
 
                 socket.emit("addUser", chatId)
                 socket.on("getUsers", users => {
-                    console.log("users from bot: ", users);
+                    //console.log("users from bot: ", users);
                 })
 
                 socket.emit("sendMessage", {
