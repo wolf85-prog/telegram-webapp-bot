@@ -956,18 +956,19 @@ bot.on('message', async (msg) => {
                     
                 // повторить с интервалом 1 минуту
                 let timerId = setInterval(async() => {
-                    i++
                     let databaseBlock = await getDatabaseId(blockId); 
                     console.log("databaseBlock: ", JSON.stringify(databaseBlock))
 
                     arr_count = [] 
-                    arr_cat.map((arritem) => {
+
+                    JSON.parse(project.spec).map((value)=> {
+                        
                         count_fio = 0;
                         count_title = 0;
                         if (databaseBlock) {
-                            databaseBlock.map((value) => {
-                                if (arritem === value.title) {
-                                    if (value.fio) {
+                            databaseBlock.map((db) => {
+                                if (arritem === db.title) {
+                                    if (db.fio) {
                                         count_fio++               
                                     }else {
                                         count_fio;
@@ -976,20 +977,17 @@ bot.on('message', async (msg) => {
                                 }
                             })
                         }
-console.log(JSON.parse(project.spec))
-console.log("count_title: ", count_title)
-
-                        JSON.parse(project.spec).map((value)=> {
-                            const obj = {
-                                title: value.spec,
-                                title2: value.cat,
-                                count_fio: count_fio,
-                                count_title: count_title,
-                            }
-                            arr_count.push(obj)                                     
-                        })
-                       
+                        
+                        const obj = {
+                            title: value.spec,
+                            title2: value.cat,
+                            count_fio: count_fio,
+                            count_title: count_title,
+                        }
+                        arr_count.push(obj)                                     
                     })
+
+                    console.log("arr_count: ", arr_count)
 
                     //сохранение массива в 2-х элементный массив
                     if (i % 2 == 0) {
@@ -1011,7 +1009,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
 ).join('\n')}`                         
                             )
                         } 
-
+                    i++
                     }, 60000); //каждую 2 минуты 
 
 
