@@ -958,7 +958,8 @@ bot.on('message', async (msg) => {
                 let timerId = setInterval(async() => {
                     i++
                     let databaseBlock = await getDatabaseId(blockId); 
-
+                    console.log("databaseBlock: ", JSON.stringify(databaseBlock))
+                    
                     arr_count = [] 
                     arr_cat.map((arritem) => {
                         count_fio = 0;
