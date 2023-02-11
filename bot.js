@@ -996,7 +996,8 @@ bot.on('message', async (msg) => {
 
                 const specArr = Worklist.map(item => ({
                     spec: item.spec,
-                    cat: item.cat
+                    cat: item.cat,
+                    count: item.count,
                 }));
 
                 let equipArr = [{}]
@@ -1004,7 +1005,8 @@ bot.on('message', async (msg) => {
                     equipArr = Equipmentlist.map(item => ({
                         name: item.spec,
                         subname: item.subname,
-                        cat: item.cat
+                        cat: item.cat,
+                        count: item.count,
                     }));
                 } 
 
@@ -1077,7 +1079,7 @@ bot.on('message', async (msg) => {
                                         }else {
                                             count_fio;
                                         }  
-                                        count_title++; 
+                                        //count_title++; 
                                     }
                                 })
                             }
@@ -1086,7 +1088,7 @@ bot.on('message', async (msg) => {
                                 title: value.spec,
                                 title2: value.cat,
                                 count_fio: count_fio,
-                                count_title: count_title,
+                                count_title: value.count,
                             }
                             arr_count.push(obj)                                     
                         })
@@ -1107,10 +1109,10 @@ bot.on('message', async (msg) => {
                             await bot.sendMessage(project.chatId, 
                                 `Запрос на специалистов: 
                                                                         
-    ${day}.${month} | ${chas}:${minut} | ${project.name} | U.L.E.Y
+${day}.${month} | ${chas}:${minut} | ${project.name} | U.L.E.Y
     
-    ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']'
-    ).join('\n')}`                         
+${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']'
+).join('\n')}`                         
                                 )
                             } 
                         i++ 
