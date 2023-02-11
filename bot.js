@@ -967,7 +967,7 @@ bot.on('message', async (msg) => {
                         count_title = 0;
                         if (databaseBlock) {
                             databaseBlock.map((db) => {
-                                if (arritem === db.title) {
+                                if (value.cat === db.title) {
                                     if (db.fio) {
                                         count_fio++               
                                     }else {
