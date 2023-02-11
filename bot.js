@@ -959,7 +959,7 @@ bot.on('message', async (msg) => {
                     i++
                     let databaseBlock = await getDatabaseId(blockId); 
                     console.log("databaseBlock: ", JSON.stringify(databaseBlock))
-                    
+
                     arr_count = [] 
                     arr_cat.map((arritem) => {
                         count_fio = 0;
@@ -976,6 +976,8 @@ bot.on('message', async (msg) => {
                                 }
                             })
                         }
+console.log(JSON.parse(project.spec))
+console.log("count_title: ", count_title)
 
                         JSON.parse(project.spec).map((value)=> {
                             const obj = {
