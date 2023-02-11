@@ -1046,8 +1046,8 @@ bot.on('message', async (msg) => {
                     }
                     //обновить проект 
                     await Project.update({projectId: projectId},{where: {id: res.id}})
-
-                    const blockId2 = await getBlocks(Project.projectId);
+                    
+                    const blockId2 = getBlocks(project.projectId);
                     console.log("blockId: ", blockId2)
 
                     // отправить сообщение пользователю через 30 секунд
