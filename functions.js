@@ -518,3 +518,101 @@
 //       });
     
 // }
+
+//---------------------------------------------------------------
+        // команда Отчеты
+//         if (text === '/getReports') {
+//             let count_fio;
+//             let count_title;
+//             let count_title2;
+//             const arr_cat = ['Sound', 'Light', 'Video', 'Riggers', 'Stagehands', 'StageGround', 'Trucks', 'Production']
+//             const arr_cat2 = ['Sound', 'Light', 'Video', 'Riggers', 'StageGround', 'Trucks', 'Production']
+//             let i = 0;
+//             let arr_count = [] 
+//             let arr_all = [] 
+//             let blockId
+
+//             try {
+//                 //отправить сообщение в админ-панель
+//                 //sendMyMessage("Проект создан", "text", chatId)
+              
+//                 const project = await Project.findOne({where:{id: 28 }})
+//                 const projectId2 = project.projectId; //'630297e3-0b77-4317-9064-a5d45537b177'
+
+//                 const d = new Date(project.datestart);
+//                 const year = d.getFullYear();
+//                 const month = String(d.getMonth()+1).padStart(2, "0");
+//                 const day = String(d.getDate()).padStart(2, "0");
+//                 const chas = d.getHours();
+//                 const minut = String(d.getMinutes()).padStart(2, "0");
+
+//                 blockId = await getBlocks(projectId2);
+//                 console.log("blockId: ", blockId)
+                    
+//                 // повторить с интервалом 1 минуту
+//                 let timerId = setInterval(async() => {
+//                     let databaseBlock = await getDatabaseId(blockId); 
+//                     //console.log("databaseBlock: ", JSON.stringify(databaseBlock))
+
+//                     arr_count = [] 
+
+//                     JSON.parse(project.spec).map((value)=> {
+                        
+//                         count_fio = 0;
+//                         count_title = 0;
+//                         if (databaseBlock) {
+//                             databaseBlock.map((db) => {
+//                                 if (value.cat === db.title) {
+//                                     if (db.fio) {
+//                                         count_fio++               
+//                                     }else {
+//                                         count_fio;
+//                                     }  
+//                                     count_title++; 
+//                                 }
+//                             })
+//                         }
+                        
+//                         const obj = {
+//                             title: value.spec,
+//                             title2: value.cat,
+//                             count_fio: count_fio,
+//                             count_title: count_title,
+//                         }
+//                         arr_count.push(obj)                                     
+//                     })
+
+//                     //console.log("arr_count: ", arr_count)
+
+//                     //сохранение массива в 2-х элементный массив
+//                     if (i % 2 == 0) {
+//                         arr_all[0] = arr_count
+//                     } else {
+//                         arr_all[1] = arr_count 
+//                     }
+
+//                     var isEqual = JSON.stringify(arr_all[0]) === JSON.stringify(arr_all[1]);
+//                      // если есть изменения в составе работников    
+//                     if (!isEqual) {
+//                         //отправка сообщения в чат бота
+//                         await bot.sendMessage(project.chatId, 
+//                             `Запрос на специалистов: 
+                                                                    
+// ${day}.${month} | ${chas}:${minut} | ${project.name} | U.L.E.Y
+
+// ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']'
+// ).join('\n')}`                         
+//                             )
+//                         } 
+//                     i++
+//                     }, 60000); //каждую 2 минуты 
+
+
+//                     // остановить вывод через 260 минут
+//                     setTimeout(() => { clearInterval(timerId); }, 15600000); //260 минут 
+                    
+//                 } catch (error) {
+//                     console.log(error)
+//                 }
+
+//         }
