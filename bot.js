@@ -1065,7 +1065,7 @@ bot.on('message', async (msg) => {
                     // повторить с интервалом 1 минуту
                     let timerId = setInterval(async() => {
 
-                        const blockId2 = await getBlocks(project.projectId);
+                        const blockId2 = await getBlocks(project2.projectId);
                         console.log("blockId " + i + ": " + blockId2)
 
                         let databaseBlock = await getDatabaseId(blockId2); 
