@@ -1045,7 +1045,11 @@ bot.on('message', async (msg) => {
                         projectId = await addProjectNotGeo(project.name, project.datestart, project.teh, project.managerId, project.companyId, Worklist, Equipmentlist);
                     }
                     //обновить проект 
-                    await Project.update({projectId: projectId},{where: {id: res.id}})
+                    if (project.projectId === null) {
+                        await Project.update({projectId: projectId},{where: {id: res.id}})
+                    } else {
+                        console.log("Проект уже обновлен!")
+                    }  
 
                     const blockId2 = await getBlocks(project.projectId);
                     console.log("blockId: ", blockId2)
