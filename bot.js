@@ -1044,14 +1044,14 @@ bot.on('message', async (msg) => {
                         //добавление проекта с названием проекта в базу
                         projectId = await addProjectNotGeo(project.name, project.datestart, project.teh, project.managerId, project.companyId, Worklist, Equipmentlist);
                     }
-                    
+
                     //обновить проект 
                     console.log("project.projectId: ", project.projectId)
-                    if (project.projectId === null) {
+                    //if (project.projectId === null) {
                         await Project.update({projectId: projectId},{where: {id: res.id}})
-                    } else {
-                        console.log("Проект уже обновлен!")
-                    }  
+                    //} else {
+                    //    console.log("Проект уже обновлен!")
+                    //}  
 
                     const blockId2 = await getBlocks(project.projectId);
                     console.log("blockId: ", blockId2)
