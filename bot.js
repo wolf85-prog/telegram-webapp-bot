@@ -1046,9 +1046,11 @@ bot.on('message', async (msg) => {
                     }
 
                     //обновить проект 
-                    const project_upd = await Project.update({projectId: projectId},{where: {id: res.id}})
+                    await Project.update({projectId: projectId},{where: {id: res.id}})
 
-                    console.log("project.projectId: ", project_upd.projectId)
+                    const project2 = await Project.findOne({where:{id: res.id}})
+
+                    console.log("project.projectId: ", project2.projectId)
 
                     // отправить сообщение пользователю через 30 секунд
                     setTimeout(() => {bot.sendMessage(project.chatId, 'Ваша заявка принята!')}, 30000) // 30 секунд
