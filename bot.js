@@ -1023,7 +1023,7 @@ bot.on('message', async (msg) => {
                         companyId: company_id, 
                         chatId: chatId
                     })
-                    console.log('Проект успешно добавлен в БД! Project: ', JSON.stringify(res))  
+                    console.log('Проект успешно добавлен в БД! Project: ')  
 
                     const project = await Project.findOne({where:{id: res.id}})
 
@@ -1046,15 +1046,9 @@ bot.on('message', async (msg) => {
                     }
 
                     //обновить проект 
-                    console.log("project.projectId: ", project.projectId)
-                    //if (project.projectId === null) {
-                        await Project.update({projectId: projectId},{where: {id: res.id}})
-                    //} else {
-                    //    console.log("Проект уже обновлен!")
-                    //}  
+                    await Project.update({projectId: projectId},{where: {id: res.id}})
 
-                    const blockId2 = await getBlocks(project.projectId);
-                    console.log("blockId: ", blockId2)
+                    console.log("project.projectId: ", project.projectId)
 
                     // отправить сообщение пользователю через 30 секунд
                     setTimeout(() => {bot.sendMessage(project.chatId, 'Ваша заявка принята!')}, 30000) // 30 секунд
@@ -1068,6 +1062,9 @@ bot.on('message', async (msg) => {
                     
                     // повторить с интервалом 1 минуту
                     let timerId = setInterval(async() => {
+
+                        const blockId2 = await getBlocks(project.projectId);
+                        console.log("blockId " + i + ": " + blockId2)
 
                         let databaseBlock = await getDatabaseId(blockId2); 
                         //console.log("databaseBlock: ", JSON.stringify(databaseBlock))
