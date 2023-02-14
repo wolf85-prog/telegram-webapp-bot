@@ -927,12 +927,28 @@ bot.on('message', async (msg) => {
 
         if (text == '/sendNotification') {
             //найти пользователей бота
-            const users = await UserBot.findAll()
-            users.map(user => {
-                console.log(user.chatId)
-            })
-            return res.status(200).json(users); 
-        }
+            // const users = await UserBot.findAll()
+            // users.map(user => {
+            //     console.log(user.chatId)
+            // })
+
+            const userbot = await UserBot.findOne({where: {chatId: '805436270'}})
+            await bot.sendMessage(userbot.chatId, `Приветствуем тебя, ${userbot.firstname} ${userbot.lastname}! 
+06.03 | Jagger | Ярославль
+
+P.A. System = 1 шт.
+Light Set = 1 шт. 
+Dj Set = 1 шт.
+
+Тех. задание: 
+— D&B | L-Аcoustics | Mayer | Nexo
+— Pioneer CDJ-2000 | DJM-900 | Alen&Heath XONE
+— Комплект светового оборудования
+
+Условия: Мероприятие на 100-150 человек
+
+Сдать в аренду: +7 (499) 500-14-11 - Менеджер U.L.E.Y`);
+            }
 
 
 //--------------------------------------------------------------------------------------------------
