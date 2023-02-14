@@ -19,16 +19,16 @@ const UserBot = sequelize.define('userbot', {
 const Message = sequelize.define('message', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     conversationId: {type: DataTypes.STRING},
-    messageType: {type: DataTypes.STRING},      //тип сообщения;
+    senderId: {type: DataTypes.STRING},
+    receiverId: {type: DataTypes.STRING},    
     text: {type: DataTypes.STRING}, //текст сообщения;
-    img: {type: DataTypes.STRING}, //путь к файлу;
-    to: {type: DataTypes.STRING},
-    from: {type: DataTypes.STRING},
+    type: {type: DataTypes.STRING},      //тип сообщения;
     is_bot: {type: DataTypes.BOOLEAN},
 })
 
 const Conversation = sequelize.define('conversation', {
     members: {type: DataTypes.ARRAY(DataTypes.STRING)},
+    message: {type:DataTypes.STRING},
 })
 
 const Project = sequelize.define('project', {
@@ -44,8 +44,5 @@ const Project = sequelize.define('project', {
     projectId: {type: DataTypes.STRING},
     chatId: {type: DataTypes.STRING},
 })
-
-//UserBot.hasMany(Message)
-//Message.belongsTo(UserBot)
 
 module.exports = {User, UserBot, Message, Conversation, Project}

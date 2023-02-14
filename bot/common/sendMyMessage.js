@@ -5,13 +5,13 @@ const {UserBot, Message, Conversation} = require('./../../bot/models/models')
 const chatTelegramId = process.env.CHAT_ID
 const { Op } = require('sequelize')
 
-module.exports = async function sendMyMessage(text, typeMessage, chatId) {
+module.exports = async function sendMyMessage(text, typeText, chatId) {
     //создать беседу в админке в бд 
     //сохранить отправленное боту сообщение пользователя в БД
     let  conversation_id              
     try {                  
         //найти беседу
-        const conversation = await Conversation.findAll({
+        const conversation = await Conversation.findOne({
             where: {
                 members: {
                     [Op.contains]: [chatId]
@@ -24,6 +24,7 @@ module.exports = async function sendMyMessage(text, typeMessage, chatId) {
             const conv = await Conversation.create(
             {
                 members: [chatId, chatTelegramId],
+                message: text,
             })
             console.log("Беседа успешно создана: ", conv.id) 
             console.log("conversationId: ", conv.id)
@@ -39,9 +40,9 @@ module.exports = async function sendMyMessage(text, typeMessage, chatId) {
         const messageDB = await Message.create(
         {
             text: text, 
-            from: chatId, 
-            to: chatTelegramId,
-            messageType: typeMessage,
+            senderId: chatId, 
+            receiverId: chatTelegramId,
+            type: typeText,
             conversationId: conversation_id,
         })
 
