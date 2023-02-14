@@ -932,7 +932,7 @@ bot.on('message', async (msg) => {
             //     console.log(user.chatId)
             // })
 
-            const userbot = await UserBot.findOne({where: {chatId: '805436270'}})
+            const userbot = await UserBot.findOne({where: {chatId: '1408579113'}})
             await bot.sendMessage(userbot.chatId, `Приветствуем тебя, ${userbot.firstname} ${userbot.lastname}! 
 06.03 | Jagger | Ярославль
 
