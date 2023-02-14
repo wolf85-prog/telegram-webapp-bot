@@ -927,13 +927,10 @@ bot.on('message', async (msg) => {
 
         if (text == '/sendNotification') {
             //найти пользователей бота
-            // const users = await UserBot.findAll()
-            // users.map(user => {
-            //     console.log(user.chatId)
-            // })
-
-            const userbot = await UserBot.findOne({where: {chatId: '1408579113'}})
-            await bot.sendMessage(userbot.chatId, `Приветствуем тебя, ${userbot.firstname} ${userbot.lastname}! 
+            const users = await UserBot.findAll()
+            //users.map(async (user) => {
+               // console.log(user.chatId)
+                await bot.sendMessage('1408579113', ` 
 06.03 | Jagger | Ярославль
 
 P.A. System = 1 шт.
@@ -947,7 +944,9 @@ Dj Set = 1 шт.
 
 Условия: Мероприятие на 100-150 человек
 
-Сдать в аренду: +7 (499) 500-14-11 - Менеджер U.L.E.Y`);
+Контакты: +7 (499) 500-14-11`);
+                //})
+            
             }
 
 
