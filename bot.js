@@ -925,6 +925,15 @@ bot.on('message', async (msg) => {
             await bot.sendMessage(chatId, `Приветствуем тебя, ${firstname} ${lastname}! Чат-бот предназначен для создания проектов в U.L.E.Y и общения заказчика с администратором проектов.`);
         }
 
+        if (text == '/sendNotification') {
+            //найти пользователей бота
+            const users = await UserBot.findAll()
+            users.map(user => {
+                console.log(user.chatId)
+            })
+            return res.status(200).json(users); 
+        }
+
 
 //--------------------------------------------------------------------------------------------------
         
