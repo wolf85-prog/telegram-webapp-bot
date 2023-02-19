@@ -983,7 +983,7 @@ bot.on('message', async (msg) => {
         
 //обработка сообщений    
         if ((text || '')[0] !== '/') {       
-            if (text.includes("Ответ")) {           
+            if (text.includes("Reply")) {           
                 await bot.sendMessage(text.substring(6, text.indexOf('.')), text.slice(text.indexOf('.') + 2)) 
 
             // Проект успешно создан
