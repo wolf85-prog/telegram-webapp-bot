@@ -925,6 +925,30 @@ bot.on('message', async (msg) => {
             await bot.sendMessage(chatId, `Приветствуем тебя, ${firstname} ${lastname}! Чат-бот предназначен для создания проектов в U.L.E.Y и общения заказчика с администратором проектов.`);
         }
 
+        if (text == '/sendNotification') {
+            //найти пользователей бота
+            const users = await UserBot.findAll()
+            users.map(async (user) => {
+                console.log(user.chatId)
+                await bot.sendMessage(user.chatId, ` 
+06.03 | Jagger | Ярославль
+
+P.A. System = 1 шт.
+Light Set = 1 шт. 
+Dj Set = 1 шт.
+
+Тех. задание: 
+— D&B | L-Аcoustics | Mayer | Nexo
+— Pioneer CDJ-2000 | DJM-900 | Alen&Heath XONE
+— Комплект светового оборудования
+
+Условия: Мероприятие на 100-150 человек
+
+Контакты: +7 (499) 500-14-11`);
+                })
+            
+            }
+
 
 //--------------------------------------------------------------------------------------------------
         
