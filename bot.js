@@ -931,17 +931,16 @@ bot.on('message', async (msg) => {
             const users = await UserBot.findAll()
             users.map(async (user) => {
                 //console.log(user.chatId)
-                //setTimeout(() => {bot.sendMessage(project.chatId, 'Ваша заявка принята!')}, 30000) // 30 секунд
-                setTimeout(() => { 
-                    console.log("Пользователю ID: " + user.chatId + " сообщение отправлено!")
-                    bot.sendMessage(user.chatId, ` 
+                //setTimeout(() => {bot.sendMessage(project.chatId, 'Ваша заявка принята!')}, 30000) // 30 секунд 
+                console.log("Пользователю ID: " + user.chatId + " сообщение отправлено!")
+                await bot.sendMessage(user.chatId, ` 
 21.02 - 22.02 | Craft | Москва
 
 Soundcraft ui24r = 1 шт.
                 
 Условие: м. Профсоюзная | cамовывоз или доставка
 
-Контакты: +7 (499) 500-14-11`)}, 10000);
+Контакты: +7 (499) 500-14-11`);
                 })
             
             }
