@@ -925,26 +925,23 @@ bot.on('message', async (msg) => {
             await bot.sendMessage(chatId, `Приветствуем тебя, ${firstname} ${lastname}! Чат-бот предназначен для создания проектов в U.L.E.Y и общения заказчика с администратором проектов.`);
         }
 
+        //рассылка
         if (text == '/sendNotification') {
             //найти пользователей бота
             const users = await UserBot.findAll()
             users.map(async (user) => {
-                console.log(user.chatId)
-                await bot.sendMessage(user.chatId, ` 
-06.03 | Jagger | Ярославль
+                //console.log(user.chatId)
+                //setTimeout(() => {bot.sendMessage(project.chatId, 'Ваша заявка принята!')}, 30000) // 30 секунд
+                setTimeout(() => { 
+                    console.log("Пользователю ID: " + user.chatId + " сообщение отправлено!")
+                    bot.sendMessage(user.chatId, ` 
+21.02 - 22.02 | Craft | Москва
 
-P.A. System = 1 шт.
-Light Set = 1 шт. 
-Dj Set = 1 шт.
+Soundcraft ui24r = 1 шт.
+                
+Условие: м. Профсоюзная | cамовывоз или доставка
 
-Тех. задание: 
-— D&B | L-Аcoustics | Mayer | Nexo
-— Pioneer CDJ-2000 | DJM-900 | Alen&Heath XONE
-— Комплект светового оборудования
-
-Условия: Мероприятие на 100-150 человек
-
-Контакты: +7 (499) 500-14-11`);
+Контакты: +7 (499) 500-14-11`)}, 10000);
                 })
             
             }
