@@ -17,7 +17,9 @@ module.exports = async function sendMyMessage(text, typeText, chatId) {
                     [Op.contains]: [chatId]
                 }
             },
-        })             
+        })   
+        
+        console.log("conversation: ", conversation)
 
         //если нет беседы, то создать 
         if (conversation) {
