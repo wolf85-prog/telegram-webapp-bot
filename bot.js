@@ -1001,7 +1001,7 @@ Dj Set = 1 шт.
             } catch (error) {
                 console.log(error)
             }
-            await bot.sendMessage(chatId, 'Изображение отправлено администратору!');
+            //await bot.sendMessage(chatId, 'Изображение отправлено администратору!');
         }
 //----------------------------------------------------------------------------------------------------------------      
         
@@ -1202,7 +1202,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                 })
 
                 // ответ бота
-                await bot.sendMessage(chatId, `Ваше сообщение "${text}" отправлено!`)
+                //await bot.sendMessage(chatId, `Ваше сообщение "${text}" отправлено!`)
                 await bot.sendMessage(chatTelegramId, `${text} \n \n от ${firstname} ${lastname} ${chatId}`)           
             }
         }
