@@ -35,22 +35,48 @@ module.exports = async function newDatabase5(parent_page_id) {
                     }
                 },
                 "3. Специализация": {
-                    "type": "rollup",
-                    "rollup": {
-                        "type": "array",
+                    "multi_select": {
+                        "options": [
+                            {
+                                "name": "Sound",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Light",
+                                "color": "yellow"
+                            },
+                            {
+                                "name": "Video",
+                                "color": "green"
+                            },
+                            {
+                                "name": "Riggers",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "Stagehands",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Stage Ground",
+                                "color": "green"
+                            },
+                            {
+                                "name": "Trucks",
+                                "color": "yellow"
+                            },
+                            {
+                                "name": "Production",
+                                "color": "orange"
+                            }
+                        ]
                     }
                 },
                 "4. Комментарий": {
-                    "type": "rollup",
-                    "rollup": {
-                        "type": "array",
-                    }
+                    "rich_text": {}
                 },
                 "5. Телефон": {
-                    "type": "rollup",
-                    "rollup": {
-                        "type": "array",
-                    }
+                    "rich_text": {}
                 },
             }
         }
