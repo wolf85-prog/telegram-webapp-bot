@@ -32,9 +32,9 @@ module.exports = async function sendMyMessage(text, typeText, chatId) {
             conversation_id = conv.id
         } else {
             console.log('Беседа уже создана в БД')  
-            console.log("conversationId: ", conversation[0].id)  
+            console.log("conversationId: ", conversation.id)  
             
-            conversation_id = conversation[0].id
+            conversation_id = conversation.id
         }
 
         const messageDB = await Message.create(
