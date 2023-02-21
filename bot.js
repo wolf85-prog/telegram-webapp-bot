@@ -40,6 +40,7 @@ const newDatabase1 = require('./bot/common/newDatabase1')
 //const newDatabase2 = require('./bot/common/newDatabase2')
 //const newDatabase3 = require('./bot/common/newDatabase3')
 //const newDatabase4 = require('./bot/common/newDatabase4')
+const newDatabase5 = require('./bot/common/newDatabase5')
 const sendMyMessage = require('./bot/common/sendMyMessage')
 
 const fs = require('fs');
@@ -299,6 +300,7 @@ async function addProject(title, time, teh, managerId, companyId, worklist, equi
         await newDatabase(res_id, worklist);
         await newDatabase_3(res_id);
         await newDatabase4(res_id, equipmentlist);
+        await newDatabase5(res_id);
 
         return res_id;
 
@@ -390,6 +392,7 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
         await newDatabase(res_id, worklist);
         await newDatabase_3(res_id);
         await newDatabase4(res_id, equipmentlist);
+        await newDatabase5(res_id);
 
         return res_id;
 
