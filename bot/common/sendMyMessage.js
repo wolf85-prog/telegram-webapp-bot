@@ -20,11 +20,10 @@ module.exports = async function sendMyMessage(text, typeText, chatId) {
         })             
 
         //если нет беседы, то создать 
-        if (conversation.length === 0) {
+        if (conversation.length == 0) {
             const conv = await Conversation.create(
             {
                 members: [chatId, chatTelegramId],
-                message: text,
             })
             console.log("Беседа успешно создана: ", conv.id) 
             console.log("conversationId: ", conv.id)
