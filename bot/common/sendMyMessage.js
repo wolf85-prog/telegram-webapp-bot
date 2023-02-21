@@ -18,6 +18,7 @@ module.exports = async function sendMyMessage(text, typeText, chatId) {
                 }
             },
         })             
+        console.log("conversation: ", conversation)
 
         //если нет беседы, то создать 
         if (conversation.length == 0) {
