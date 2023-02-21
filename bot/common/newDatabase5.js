@@ -38,24 +38,18 @@ module.exports = async function newDatabase5(parent_page_id) {
                     "type": "rollup",
                     "rollup": {
                         "type": "array",
-                        "array": [],
-                        "function": "show_original"
                     }
                 },
                 "4. Комментарий": {
                     "type": "rollup",
                     "rollup": {
                         "type": "array",
-                        "array": [],
-                        "function": "show_original"
                     }
                 },
                 "5. Телефон": {
                     "type": "rollup",
                     "rollup": {
                         "type": "array",
-                        "array": [],
-                        "function": "show_original"
                     }
                 },
             }
