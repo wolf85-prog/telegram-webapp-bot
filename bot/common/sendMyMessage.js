@@ -17,24 +17,25 @@ module.exports = async function sendMyMessage(text, typeText, chatId) {
                     [Op.contains]: [chatId]
                 }
             },
-        })             
+        })   
+        
+        console.log("conversation: ", conversation)
 
         //если нет беседы, то создать 
-        if (conversation.length === 0) {
+        if (!conversation) {
             const conv = await Conversation.create(
             {
                 members: [chatId, chatTelegramId],
-                message: text,
             })
-            console.log("Беседа успешно создана: ", conv.id) 
+            console.log("Беседа успешно создана: ", conv) 
             console.log("conversationId: ", conv.id)
             
             conversation_id = conv.id
         } else {
             console.log('Беседа уже создана в БД')  
-            console.log("conversationId: ", conversation[0].id)  
+            console.log("conversationId: ", conversation.id)  
             
-            conversation_id = conversation[0].id
+            conversation_id = conversation.id
         }
 
         const messageDB = await Message.create(

@@ -206,6 +206,7 @@ async function getDatabaseId(baseId) {
         console.error(error.body)
     }
 }
+//--------------------------------------------------------------------------------------------------
 
 //Добавление проекта в Notion (addProject send data to notion)
 async function addProject(title, time, teh, managerId, companyId, worklist, equipmentlist, geoId) {
@@ -554,7 +555,7 @@ async function addWorker(blockId, worker) {
     }
 }
 
-
+//--------------------------------------------------------------------------------------------------
 
 // создание БД "Запасной состав"
 async function newDatabase_3(parent_page_id) {
@@ -685,7 +686,7 @@ async function addWorkerZapas(blockId) {
         console.error(error.body)
     }
 }
-
+//--------------------------------------------------------------------------------------------------------
 async function newDatabase4(parent_page_id, equipmentlist) {
     //создание базы данных "Оборудование"
     try {
@@ -781,7 +782,7 @@ async function newDatabase4(parent_page_id, equipmentlist) {
         console.error(error.body)
     }   
 }
-
+//---------------------------------------------------------------------------------------------------
 //добавление строки в таблицу Оборудование
 async function addEquipment(blockId, equipment) {
     try {
@@ -813,7 +814,7 @@ async function addEquipment(blockId, equipment) {
         console.error(error.body)
     }
 }
-
+//----------------------------------------------------------------------------------------------------------------
 
 //send data to notion
 async function addAddress(geo, projectname, datestart, teh, managerId, companyId, worklist, equipmentlist) {
@@ -925,24 +926,20 @@ bot.on('message', async (msg) => {
             await bot.sendMessage(chatId, `Приветствуем тебя, ${firstname} ${lastname}! Чат-бот предназначен для создания проектов в U.L.E.Y и общения заказчика с администратором проектов.`);
         }
 
+        //рассылка
         if (text == '/sendNotification') {
             //найти пользователей бота
             const users = await UserBot.findAll()
             users.map(async (user) => {
-                console.log(user.chatId)
+                //console.log(user.chatId)
+                //setTimeout(() => {bot.sendMessage(project.chatId, 'Ваша заявка принята!')}, 30000) // 30 секунд 
+                console.log("Пользователю ID: " + user.chatId + " сообщение отправлено!")
                 await bot.sendMessage(user.chatId, ` 
-06.03 | Jagger | Ярославль
+21.02 - 22.02 | Craft | Москва
 
-P.A. System = 1 шт.
-Light Set = 1 шт. 
-Dj Set = 1 шт.
-
-Тех. задание: 
-— D&B | L-Аcoustics | Mayer | Nexo
-— Pioneer CDJ-2000 | DJM-900 | Alen&Heath XONE
-— Комплект светового оборудования
-
-Условия: Мероприятие на 100-150 человек
+Soundcraft ui24r = 1 шт.
+                
+Условие: м. Профсоюзная | cамовывоз или доставка
 
 Контакты: +7 (499) 500-14-11`);
                 })
@@ -1058,9 +1055,9 @@ Dj Set = 1 шт.
                     const chas = d.getHours();
                     const minut = String(d.getMinutes()).padStart(2, "0");
                 
-                    //-------------------------------------------------------------------------------------------------------------------------------
-                    //--------------------------- Создание проекта ----------------------------------------------------------------------------------
-                    //-------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------
+//--------------------------- Создание проекта ----------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------
                     //добавление геопозиции в БД Площадки (Адрес) и добавление проекта
                     if (Geo != '') {
                         projectId = await addAddress(project.geo, project.name, project.datestart, project.teh, project.managerId, project.companyId, Worklist, Equipmentlist);
@@ -1155,7 +1152,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                 } catch (error) {
                     console.log(error)
                 }
-
+//----------------------------------------------------------------------------------------------------------------
             } else if (text.includes('Тестовое сообщение')) {  
            
                 // сохранить отправленное боту сообщение пользователя в БД
@@ -1165,9 +1162,9 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
 
                 // Подключаемся к серверу socket
                 let socket = io('https://proj.uley.team:9000');
-                // socket.on("welcome", async message=> {
-                //     console.log(message)
-                // });
+                socket.on("welcome", async message=> {
+                    console.log(message)
+                });
 
                 socket.emit("addUser", chatId)
                 socket.on("getUsers", users => {
@@ -1182,7 +1179,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                 })
 
             } else {
-
+//----------------------------------------------------------------------------------------------------------------
                 // сохранить отправленное боту сообщение пользователя в БД
                 const convId = sendMyMessage(text, 'text', chatId)
 
@@ -1214,7 +1211,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
     
   });
 
-
+//--------------------------------------------------------------------------------------------------------------------
   
   //Ответ на нажатие кнопок настройки и информаци
   bot.on('callback_query', msg => {
@@ -1238,7 +1235,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
 // Обработка ошибок, последний middleware
 app.use(errorHandler)
 
-
+//-------------------------------------------------------------------------------------------------------------------------------
 const PORT = process.env.PORT || 8000;
 
 const start = async () => {
