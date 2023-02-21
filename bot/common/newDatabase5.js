@@ -35,48 +35,28 @@ module.exports = async function newDatabase5(parent_page_id) {
                     }
                 },
                 "3. Специализация": {
-                    "multi_select": {
-                        "options": [
-                            {
-                                "name": "Sound",
-                                "color": "blue"
-                            },
-                            {
-                                "name": "Light",
-                                "color": "yellow"
-                            },
-                            {
-                                "name": "Video",
-                                "color": "green"
-                            },
-                            {
-                                "name": "Riggers",
-                                "color": "orange"
-                            },
-                            {
-                                "name": "Stagehands",
-                                "color": "blue"
-                            },
-                            {
-                                "name": "Stage Ground",
-                                "color": "green"
-                            },
-                            {
-                                "name": "Trucks",
-                                "color": "yellow"
-                            },
-                            {
-                                "name": "Production",
-                                "color": "orange"
-                            }
-                        ]
+                    "type": "rollup",
+                    "rollup": {
+                        "type": "array",
+                        "array": [],
+                        "function": "show_original"
                     }
                 },
                 "4. Комментарий": {
-                    "rich_text": {}
+                    "type": "rollup",
+                    "rollup": {
+                        "type": "array",
+                        "array": [],
+                        "function": "show_original"
+                    }
                 },
                 "5. Телефон": {
-                    "rich_text": {}
+                    "type": "rollup",
+                    "rollup": {
+                        "type": "array",
+                        "array": [],
+                        "function": "show_original"
+                    }
                 },
             }
         }

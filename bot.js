@@ -299,8 +299,8 @@ async function addProject(title, time, teh, managerId, companyId, worklist, equi
         await newDatabase1(res_id);
         await newDatabase(res_id, worklist);
         await newDatabase_3(res_id);
-        await newDatabase4(res_id, equipmentlist);
         await newDatabase5(res_id);
+        await newDatabase4(res_id, equipmentlist); 
 
         return res_id;
 
@@ -391,8 +391,8 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
         await newDatabase1(res_id);
         await newDatabase(res_id, worklist);
         await newDatabase_3(res_id);
-        await newDatabase4(res_id, equipmentlist);
         await newDatabase5(res_id);
+        await newDatabase4(res_id, equipmentlist);
 
         return res_id;
 
