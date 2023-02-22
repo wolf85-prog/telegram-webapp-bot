@@ -26,8 +26,8 @@ module.exports = async function newDatabase5(parent_page_id) {
                 "1. Дата": {
                     "date": {}
                 },
-                "2. 👷 ФИО": {    
-                    "name": "👷 ФИО",               
+                "2. ФИО": {    
+                    "name": "ФИО",               
                     "type": "relation",
                     "relation": {
                         "database_id": databaseWorkersId,

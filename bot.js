@@ -39,7 +39,7 @@ let blockId
 const newDatabase1 = require('./bot/common/newDatabase1')
 //const newDatabase2 = require('./bot/common/newDatabase2')
 //const newDatabase3 = require('./bot/common/newDatabase3')
-//const newDatabase4 = require('./bot/common/newDatabase4')
+const newDatabase4 = require('./bot/common/newDatabase4')
 const newDatabase5 = require('./bot/common/newDatabase5')
 const sendMyMessage = require('./bot/common/sendMyMessage')
 
@@ -690,101 +690,103 @@ async function addWorkerZapas(blockId) {
     }
 }
 //--------------------------------------------------------------------------------------------------------
-async function newDatabase4(parent_page_id, equipmentlist) {
-    //создание базы данных "Оборудование"
-    try {
-        const body = {
-            "parent": {
-                "type": "page_id",
-                "page_id": parent_page_id
-            },
-            "title": [
-                {
-                    "type": "text",
-                    "text": {
-                        "content": "Оборудование"
-                    }
-                }
-            ],
-            "is_inline": true,
-            "properties": {              
-                "Дата": {
-                    "date": {}
-                },
-                "Наименование": {
-                    "multi_select": {
-                        "options": [
-                            {
-                                "name": "Sound",
-                                "color": "blue"
-                            },
-                            {
-                                "name": "Light",
-                                "color": "yellow"
-                            },
-                            {
-                                "name": "Video",
-                                "color": "green"
-                            },
-                            {
-                                "name": "Riggers",
-                                "color": "orange"
-                            },
-                            {
-                                "name": "Stage Ground",
-                                "color": "green"
-                            },
-                            {
-                                "name": "Trucks",
-                                "color": "yellow"
-                            },
-                            {
-                                "name": "Production",
-                                "color": "orange"
-                            }
-                        ]
-                    }
-                },
-                "Комментарий": {
-                    "title": {}
-                },                 
-            }
-        }
+// async function newDatabase4(parent_page_id, equipmentlist) {
+//     //создание базы данных "Оборудование"
+//     try {
+//         const body = {
+//             "parent": {
+//                 "type": "page_id",
+//                 "page_id": parent_page_id
+//             },
+//             "title": [
+//                 {
+//                     "type": "text",
+//                     "text": {
+//                         "content": "Оборудование"
+//                     }
+//                 }
+//             ],
+//             "is_inline": true,
+//             "properties": {              
+//                 "Дата": {
+//                     "date": {}
+//                 },
+//                 "Наименование": {
+//                     "multi_select": {
+//                         "options": [
+//                             {
+//                                 "name": "Sound",
+//                                 "color": "blue"
+//                             },
+//                             {
+//                                 "name": "Light",
+//                                 "color": "yellow"
+//                             },
+//                             {
+//                                 "name": "Video",
+//                                 "color": "green"
+//                             },
+//                             {
+//                                 "name": "Riggers",
+//                                 "color": "orange"
+//                             },
+//                             {
+//                                 "name": "Stage Ground",
+//                                 "color": "green"
+//                             },
+//                             {
+//                                 "name": "Trucks",
+//                                 "color": "yellow"
+//                             },
+//                             {
+//                                 "name": "Production",
+//                                 "color": "orange"
+//                             }
+//                         ]
+//                     }
+//                 },
+//                 "Комментарий": {
+//                     "title": {}
+//                 },                 
+//             }
+//         }
 
         // создание базы данных "Оборудование"
-        const response = await fetch('https://api.notion.com/v1/databases', {
-            method: 'post',
-            body: JSON.stringify(body),
-            headers: {
-                'Authorization': token_fetch, //`Bearer ${token}`
-                'Content-Type': 'application/json', 
-                accept: 'application/json',
-                'Notion-Version': '2022-06-28'
-            }
-        });
-        const data = await response.json();
-        console.log("4. Success! Equipments added. Database_id: " + data.id) // + " data: " + JSON.stringify(data))
+//         const response = await fetch('https://api.notion.com/v1/databases', {
+//             method: 'post',
+//             body: JSON.stringify(body),
+//             headers: {
+//                 'Authorization': token_fetch, //`Bearer ${token}`
+//                 'Content-Type': 'application/json', 
+//                 accept: 'application/json',
+//                 'Notion-Version': '2022-06-28'
+//             }
+//         });
+//         const data = await response.json();
+//         console.log("4. Success! Equipments added. Database_id: " + data.id) // + " data: " + JSON.stringify(data))
 
-        //console.log("equipmentlist: ", equipmentlist)
+//         //console.log("equipmentlist: ", equipmentlist)
 
-        //добавить список работников
+//         //добавить список работников
 
-        equipmentlist.forEach((equipment, index) => {
-            if (equipment.count > 1) {
-                for (let i = 0; i < equipment.count; i++) {
-                    addEquipment(data.id, equipment.cat)
-                    //console.log("equipment: ", equipment)
-                }
-                //addEquipment(data.id, equipment.cat)
-            } else {
-                addEquipment(data.id, equipment.icon)
-            }          
-        });
+//         equipmentlist.forEach((equipment, index) => {
+//             if (equipment.count > 1) {
+//                 for (let i = 0; i < equipment.count; i++) {
+//                     addEquipment(data.id, equipment.cat)
+//                     //console.log("equipment: ", equipment)
+//                 }
+//                 //addEquipment(data.id, equipment.cat)
+//             } else {
+//                 addEquipment(data.id, equipment.icon)
+//             }          
+//         });
         
-    } catch (error) {
-        console.error(error.body)
-    }   
-}
+//     } catch (error) {
+//         console.error(error.body)
+//     }   
+// }
+
+
 //---------------------------------------------------------------------------------------------------
 //добавление строки в таблицу Оборудование
 async function addEquipment(blockId, equipment) {
