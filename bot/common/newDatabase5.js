@@ -85,10 +85,10 @@ module.exports = async function newDatabase5(parent_page_id) {
                 // },
                 "4. Комментарий": {
                     "type": "rollup",
-                    // "rollup": {
-                    //     "type": "array",
-                    //     "function": "show_original"
-                    // }
+                    "rollup": {
+                        "rollup_property_name": "2. ФИО",
+                        "function": "show_original"
+                    }
                 },
                 // "5. Телефон": {
                 //     "type": "rollup",
