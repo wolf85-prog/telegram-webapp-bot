@@ -40,7 +40,7 @@ module.exports = async function newDatabase5(parent_page_id) {
                 "3. Специализация": {
                     "type": "rollup",
                     "rollup": {
-                        "rollup_property_name": "Name",
+                        "rollup_property_name": "Specialization",
                         "relation_property_name": "2. ФИО",
                         "function": "show_original"
                     }
