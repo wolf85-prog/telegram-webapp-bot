@@ -2,7 +2,10 @@ require("dotenv").config();
 const token_fetch = 'Bearer ' + process.env.NOTION_API_KEY;
 const databaseWorkersId = process.env.NOTION_DATABASE_WORKERS_ID
 
-// создание БД "Запасной состав"
+//functions
+const addPretendent = require('./addPretendent')
+
+// создание БД "Претенденты"
 module.exports = async function newDatabase5(parent_page_id) {
     try {
         const body = {
@@ -35,48 +38,28 @@ module.exports = async function newDatabase5(parent_page_id) {
                     }
                 },
                 "3. Специализация": {
-                    "multi_select": {
-                        "options": [
-                            {
-                                "name": "Sound",
-                                "color": "blue"
-                            },
-                            {
-                                "name": "Light",
-                                "color": "yellow"
-                            },
-                            {
-                                "name": "Video",
-                                "color": "green"
-                            },
-                            {
-                                "name": "Riggers",
-                                "color": "orange"
-                            },
-                            {
-                                "name": "Stagehands",
-                                "color": "blue"
-                            },
-                            {
-                                "name": "Stage Ground",
-                                "color": "green"
-                            },
-                            {
-                                "name": "Trucks",
-                                "color": "yellow"
-                            },
-                            {
-                                "name": "Production",
-                                "color": "orange"
-                            }
-                        ]
+                    "type": "rollup",
+                    "rollup": {
+                        "type": "array",
+                        "array": [],
+                        "function": "show_original"
                     }
                 },
                 "4. Комментарий": {
-                    "rich_text": {}
+                    "type": "rollup",
+                    "rollup": {
+                        "type": "array",
+                        "array": [],
+                        "function": "show_original"
+                    }
                 },
                 "5. Телефон": {
-                    "rich_text": {}
+                    "type": "rollup",
+                    "rollup": {
+                        "type": "array",
+                        "array": [],
+                        "function": "show_original"
+                    }
                 },
             }
         }
@@ -94,6 +77,8 @@ module.exports = async function newDatabase5(parent_page_id) {
         });
         const data = await response.json();
         console.log("5. Success! Pretendents added. Database_id: " + data.id)// + " data: " + JSON.stringify(data))
+
+        await addPretendent(data.id);
 
     } catch (error) {
         console.error(error.body)
