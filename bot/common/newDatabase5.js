@@ -37,34 +37,34 @@ module.exports = async function newDatabase5(parent_page_id) {
                         "single_property": {}
                     }
                 },
-                "3. Специализация": {
-                    "type": "rollup",
-                    "rollup": {
-                        "type": "array",
-                        "array": [],
-                        "function": "show_original"
-                    }
-                },
-                "4. Комментарий": {
-                    "type": "rollup",
-                    "rollup": {
-                        "type": "array",
-                        "array": [],
-                        "function": "show_original"
-                    }
-                },
-                "5. Телефон": {
-                    "type": "rollup",
-                    "rollup": {
-                        "type": "array",
-                        "array": [],
-                        "function": "show_original"
-                    }
-                },
+                // "3. Специализация": {
+                //     "type": "rollup",
+                //     "rollup": {
+                //         "type": "array",
+                //         "array": [],
+                //         "function": "show_original"
+                //     }
+                // },
+                // "4. Комментарий": {
+                //     "type": "rollup",
+                //     "rollup": {
+                //         "type": "array",
+                //         "array": [],
+                //         "function": "show_original"
+                //     }
+                // },
+                // "5. Телефон": {
+                //     "type": "rollup",
+                //     "rollup": {
+                //         "type": "array",
+                //         "array": [],
+                //         "function": "show_original"
+                //     }
+                // },
             }
         }
 
-        // создание базы данных "Запасной состав"
+        // создание базы данных "Претенденты"
         const response = await fetch('https://api.notion.com/v1/databases', {
             method: 'post',
             body: JSON.stringify(body),
@@ -78,7 +78,7 @@ module.exports = async function newDatabase5(parent_page_id) {
         const data = await response.json();
         console.log("5. Success! Pretendents added. Database_id: " + data.id)// + " data: " + JSON.stringify(data))
 
-        await addPretendent(data.id);
+        //await addPretendent(data.id);
 
     } catch (error) {
         console.error(error.body)
