@@ -86,7 +86,8 @@ module.exports = async function newDatabase5(parent_page_id) {
                 "4. Комментарий": {
                     "type": "rollup",
                     "rollup": {
-                        "rollup_property_name": "2. ФИО",
+                        "rollup_property_name": "Комментарии",
+                        "relation_property_name": "2. ФИО",
                         "function": "show_original"
                     }
                 },
@@ -118,7 +119,7 @@ module.exports = async function newDatabase5(parent_page_id) {
             }
         });
         const data = await response.json();
-        console.log("5. Success! Pretendents added. Database_id: " + data.id)// + " data: " + JSON.stringify(data))
+        console.log("5. Success! Pretendents added. Database_id: " + data.id) //" data: " + JSON.stringify(data))
 
         await addPretendent(data.id);
 
