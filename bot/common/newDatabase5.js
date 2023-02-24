@@ -96,19 +96,19 @@ module.exports = async function newDatabase5(parent_page_id) {
                         "function": "show_original"
                     }
                 },
-                "5. Телефон": {
-                    "type": "rollup",
-                    "rollup": {
-                        "type": "array",
-                        "array": [
-                            {
-                                "type": "phone_number",
-                                "phone_number": ""
-                            }
-                        ],
-                        "function": "show_original"
-                    }
-                },
+                // "5. Телефон": {
+                //     "type": "rollup",
+                //     "rollup": {
+                //         "type": "array",
+                //         "array": [
+                //             {
+                //                 "type": "phone_number",
+                //                 "phone_number": ""
+                //             }
+                //         ],
+                //         "function": "show_original"
+                //     }
+                // },
             }
         }
 
