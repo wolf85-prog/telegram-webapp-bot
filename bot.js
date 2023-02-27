@@ -163,52 +163,52 @@ app.post('/web-test-data', async (req, res) => {
 //-------------------------------------------------------------------------------
 
 //получить id блока заданной страницы по id
-async function getBlocks(blockId) {
-    try {
-        const response = await notion.blocks.children.list({
-            block_id: blockId,
-        });
+// async function getBlocks(blockId) {
+//     try {
+//         const response = await notion.blocks.children.list({
+//             block_id: blockId,
+//         });
 
-        let count = 0;
+//         let count = 0;
 
-        const responseResults = response.results.map((block) => {
-            //if (block.child_database.title == "Основной состав" || block.child_database.title == "Назначенные")
-            if (block.child_database) {
-                count++;
-            }
-        });
+//         const responseResults = response.results.map((block) => {
+//             //if (block.child_database.title == "Основной состав" || block.child_database.title == "Назначенные")
+//             if (block.child_database) {
+//                 count++;
+//             }
+//         });
 
-        let res;
-        (count >1) ? res = response.results[1].id : res = response.results[0].id     
+//         let res;
+//         (count >1) ? res = response.results[1].id : res = response.results[0].id     
 
-        return res;
-    } catch (error) {
-        console.error(error.body)
-    }
-}
+//         return res;
+//     } catch (error) {
+//         console.error(error.body)
+//     }
+// }
 
 
-//получить данные блока по заданному ID
-async function getDatabaseId(baseId) {
-    try {
-        const response = await notion.databases.query({
-            database_id: baseId
-        });
+// //получить данные блока по заданному ID
+// async function getDatabaseId(baseId) {
+//     try {
+//         const response = await notion.databases.query({
+//             database_id: baseId
+//         });
 
-        const responseResults = response.results.map((page) => {
-            return {
-               //id: page.id,
-               fio: page.properties["2. 👷 ФИО"].relation[0]?.id,
-               title: page.properties["3. Специализация"].multi_select[0]?.name,
-               spec: page.properties["3. Специализация"].multi_select[1]?.name                
-            };
-        });
+//         const responseResults = response.results.map((page) => {
+//             return {
+//                //id: page.id,
+//                fio: page.properties["2. 👷 ФИО"].relation[0]?.id,
+//                title: page.properties["3. Специализация"].multi_select[0]?.name,
+//                spec: page.properties["3. Специализация"].multi_select[1]?.name                
+//             };
+//         });
 
-        return responseResults;
-    } catch (error) {
-        console.error(error.body)
-    }
-}
+//         return responseResults;
+//     } catch (error) {
+//         console.error(error.body)
+//     }
+// }
 //--------------------------------------------------------------------------------------------------
 
 //Добавление проекта в Notion (addProject send data to notion)
