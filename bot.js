@@ -198,7 +198,8 @@ async function getDatabaseId(baseId) {
             return {
                //id: page.id,
                fio: page.properties["2. 👷 ФИО"].relation[0]?.id,
-               title: page.properties["3. Специализация"].multi_select[0]?.name              
+               title: page.properties["3. Специализация"].multi_select[0]?.name,
+               spec: page.properties["3. Специализация"].multi_select[1]?.name                
             };
         });
 
@@ -548,7 +549,7 @@ bot.on('message', async (msg) => {
                     if (databaseBlock) {
                         databaseBlock.map((db) => {
                             console.log("value.spec: ", value.spec)
-                            console.log("db.spec: ", db)
+                            console.log("db.spec: ", db.spec)
                             if (value.spec === db.spec) {
                                 if (db.fio) {
                                     count_fio++               
@@ -772,7 +773,7 @@ Soundcraft ui24r = 1 шт.
                             count_title = 0;
                             if (databaseBlock) {
                                 databaseBlock.map((db) => {
-                                    if (value.spec === db.title) {
+                                    if (value.spec === db.spec) {
                                         if (db.fio) {
                                             count_fio++               
                                         }else {
