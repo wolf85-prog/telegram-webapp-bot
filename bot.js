@@ -516,7 +516,7 @@ bot.on('message', async (msg) => {
         // команда запуска получения отчетов
         if (text === '/startgetreports') {
 
-            const project = await Project.findOne({where:{projectId: 'f3dc4872-6489-41a0-b2a6-27d0faff4b60'}})
+            const project = await Project.findOne({where:{projectId: 'd15d5d12-07be-4ec4-b4bb-8090f8a4dd5d'}})
 
             const d = new Date(project.datestart);
             const year = d.getFullYear();
