@@ -68,9 +68,49 @@ module.exports = async function newDatabase(parent_page_id, worklist) {
                                 "name": "Light",
                                 "color": "yellow"
                             },
+                            {
+                                "name": "Художник по свету",
+                                "color": "yellow"
+                            },
+                            {
+                                "name": "Оператор световой пушки",
+                                "color": "yellow"
+                            },
+                            {
+                                "name": "Гафер",
+                                "color": "yellow"
+                            },
+                            {
+                                "name": "Техник по свету",
+                                "color": "yellow"
+                            },
                             //-------- Video ------------------------------
                             {
                                 "name": "Video",
+                                "color": "green"
+                            },
+                            {
+                                "name": "Инженер VMix",
+                                "color": "green"
+                            },
+                            {
+                                "name": "Инженер Resolume",
+                                "color": "green"
+                            },
+                            {
+                                "name": "Оператор Zoom",
+                                "color": "green"
+                            },
+                            {
+                                "name": "Оператор [сameraman]",
+                                "color": "green"
+                            },
+                            {
+                                "name": "Техник монтажа",
+                                "color": "green"
+                            },
+                            {
+                                "name": "IT-специалист",
                                 "color": "green"
                             },
                             //-------- Riggers ------------------------------
@@ -78,9 +118,25 @@ module.exports = async function newDatabase(parent_page_id, worklist) {
                                 "name": "Riggers",
                                 "color": "orange"
                             },
+                            {
+                                "name": "Верхний Риггер",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "Нижний Риггер",
+                                "color": "orange"
+                            },
                             //-------- Stagehands ------------------------------
                             {
                                 "name": "Stagehands",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Помощник \/ Грузчик",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Промоутер",
                                 "color": "blue"
                             },
                             //-------- Stage Ground ------------------------------
@@ -88,14 +144,50 @@ module.exports = async function newDatabase(parent_page_id, worklist) {
                                 "name": "Stage Ground",
                                 "color": "green"
                             },
+                            {
+                                "name": "Риггер [Ground]",
+                                "color": "green"
+                            },
+                            {
+                                "name": "Монтажник [Ground]",
+                                "color": "green"
+                            },
+                            {
+                                "name": "Декоратор",
+                                "color": "green"
+                            },
                             //-------- Trucks ------------------------------
                             {
                                 "name": "Trucks",
                                 "color": "yellow"
                             },
+                            {
+                                "name": "C личным ТС [B/C]",
+                                "color": "yellow"
+                            },
+                            {
+                                "name": "Без личного ТС [B/C]",
+                                "color": "yellow"
+                            },
+                            {
+                                "name": "С гидролифтом",
+                                "color": "yellow"
+                            },
+                            {
+                                "name": "Без гидролифта",
+                                "color": "yellow"
+                            },
                             //-------- Production ------------------------------
                             {
                                 "name": "Production",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "Мероприятие под ключ",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "Отдельные технические задачи",
                                 "color": "orange"
                             }
                         ]
