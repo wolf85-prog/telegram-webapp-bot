@@ -607,7 +607,7 @@ Soundcraft ui24r = 1 шт.
                     
                     //начать получать отчеты
                     console.log('start get reports')
-                    const project2 = await Project.findOne({where:{projectId: project_id}})
+                    const project2 = await Project.findOne({where:{projectId: projectId}})
                     console.log("project.projectId: ", project2.projectId)
 
                     const d = new Date(project2.datestart);
