@@ -582,7 +582,7 @@ Soundcraft ui24r = 1 шт.
                     })
                     console.log('Проект успешно добавлен в БД! Project: ')  
 
-                    const project = await Project.findOne({where:{id: res.id}})
+                    //const project = await Project.findOne({where:{id: res.id}})
                 
 //-------------------------------------------------------------------------------------------------------------------------------
 //--------------------------- Создание проекта ----------------------------------------------------------------------------------
@@ -598,7 +598,7 @@ Soundcraft ui24r = 1 шт.
                     //обновить проект 
                     await Project.update({projectId: projectId},{where: {id: res.id}})
 
-                    //project = await Project.findOne({where:{id: res.id}})
+                    const project = await Project.findOne({where:{id: res.id}})
 
                     // отправить сообщение пользователю через 30 секунд
                     setTimeout(() => {bot.sendMessage(project.chatId, 'Ваша заявка принята!')}, 30000) // 30 секунд
