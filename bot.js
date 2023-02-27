@@ -637,8 +637,8 @@ Soundcraft ui24r = 1 шт.
                             count_title = 0;
                             if (databaseBlock) {
                                 databaseBlock.map((db) => {
-                                    console.log("value.spec: ", value.spec)
-                                    console.log("db.spec: ", db.spec)
+                                    //console.log("value.spec: ", value.spec)
+                                    //console.log("db.spec: ", db.spec)
                                     if (value.spec === db.spec) {
                                         if (db.fio) {
                                             count_fio++               
@@ -658,7 +658,7 @@ Soundcraft ui24r = 1 шт.
                             arr_count.push(obj)                                     
                         })
 
-                        console.log("arr_count: ", arr_count)
+                        //console.log("arr_count: ", arr_count)
 
                         //сохранение массива в 2-х элементный массив
                         if (i % 2 == 0) {
