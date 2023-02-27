@@ -135,8 +135,9 @@ module.exports = async function newDatabase(parent_page_id, worklist) {
         console.log("2 Success! Maincast added. Database_id: " + data.id)// + " data: " + JSON.stringify(data))
 
         //добавить список работников
-        let arrWorks = []
+        
         worklist.forEach((worker) => {
+            let arrWorks = []
             const newCategory = {
                 name: worker.icon,
             }
