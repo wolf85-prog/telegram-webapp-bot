@@ -37,8 +37,8 @@ let blockId
 
 //functions
 const newDatabase1 = require('./bot/common/newDatabase1')
-//const newDatabase2 = require('./bot/common/newDatabase2')
-//const newDatabase3 = require('./bot/common/newDatabase3')
+const newDatabase2 = require('./bot/common/newDatabase2')
+const newDatabase3 = require('./bot/common/newDatabase3')
 const newDatabase4 = require('./bot/common/newDatabase4')
 const newDatabase5 = require('./bot/common/newDatabase5')
 const sendMyMessage = require('./bot/common/sendMyMessage')
@@ -297,8 +297,8 @@ async function addProject(title, time, teh, managerId, companyId, worklist, equi
 
         //создание базы данных "График работы"
         await newDatabase1(res_id);
-        await newDatabase(res_id, worklist);
-        await newDatabase_3(res_id);
+        await newDatabase2(res_id, worklist);
+        await newDatabase3(res_id);
         await newDatabase5(res_id);
         await newDatabase4(res_id, equipmentlist); 
 
@@ -389,8 +389,8 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
 
         //создание базы данных "График работы"
         await newDatabase1(res_id);
-        await newDatabase(res_id, worklist);
-        await newDatabase_3(res_id);
+        await newDatabase2(res_id, worklist);
+        await newDatabase3(res_id);
         await newDatabase5(res_id);
         await newDatabase4(res_id, equipmentlist);
 
@@ -405,287 +405,314 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
 
 
 //send create db notion
-async function newDatabase(parent_page_id, worklist) {
-    try {
-        const body = {
-            "parent": {
-                "type": "page_id",
-                "page_id": parent_page_id
-            },
-            "title": [
-                {
-                    "type": "text",
-                    "text": {
-                        "content": "Основной состав"
-                    }
-                }
-            ],
-            "is_inline": true,
-            "properties": { 
-                "Name": {
-                    "title": {}
-                },
-                "1. Дата": {
-                    "date": {}
-                },
-                "2. 👷 ФИО": {    
-                    "name": "👷 ФИО",               
-                    "type": "relation",
-                    "relation": {
-                        "database_id": databaseWorkersId,
-                        "single_property": {}
-                    }
-                },
-                "3. Специализация": {
-                    "multi_select": {
-                        "options": [
-                            {
-                                "name": "Sound",
-                                "color": "blue"
-                            },
-                            {
-                                "name": "Light",
-                                "color": "yellow"
-                            },
-                            {
-                                "name": "Video",
-                                "color": "green"
-                            },
-                            {
-                                "name": "Riggers",
-                                "color": "orange"
-                            },
-                            {
-                                "name": "Stagehands",
-                                "color": "blue"
-                            },
-                            {
-                                "name": "Stage Ground",
-                                "color": "green"
-                            },
-                            {
-                                "name": "Trucks",
-                                "color": "yellow"
-                            },
-                            {
-                                "name": "Production",
-                                "color": "orange"
-                            }
-                        ]
-                    }
-                },
-                "4. Мерч": {
-                    "name": "Мерч",
-                    "type": "checkbox",
-                    "checkbox": {}
-                },
-                "5. Комментарий": {
-                    "rich_text": {}
-                },
-                "6. Рейтинг": {
-                    "rich_text": {}
-                },
-                "7. Такси": {
-                    "name": "Такси",
-                    "type": "checkbox",
-                    "checkbox": {}
-                },
-            }
-        }
+// async function newDatabase(parent_page_id, worklist) {
+//     try {
+//         const body = {
+//             "parent": {
+//                 "type": "page_id",
+//                 "page_id": parent_page_id
+//             },
+//             "title": [
+//                 {
+//                     "type": "text",
+//                     "text": {
+//                         "content": "Основной состав"
+//                     }
+//                 }
+//             ],
+//             "is_inline": true,
+//             "properties": { 
+//                 "Name": {
+//                     "title": {}
+//                 },
+//                 "1. Дата": {
+//                     "date": {}
+//                 },
+//                 "2. 👷 ФИО": {    
+//                     "name": "👷 ФИО",               
+//                     "type": "relation",
+//                     "relation": {
+//                         "database_id": databaseWorkersId,
+//                         "single_property": {}
+//                     }
+//                 },
+//                 "3. Специализация": {
+//                     "multi_select": {
+//                         "options": [
+//                             {
+//                                 "name": "Sound",
+//                                 "color": "blue"
+//                             },
+//                             {
+//                                 "name": "Звукорежиссер",
+//                                 "color": "blue"
+//                             },
+//                             {
+//                                 "name": "RF-Менеджер",
+//                                 "color": "blue"
+//                             },
+//                             {
+//                                 "name": "Backline",
+//                                 "color": "blue"
+//                             },
+//                             {
+//                                 "name": "Roadie",
+//                                 "color": "blue"
+//                             },
+//                             {
+//                                 "name": "Техник по звуку",
+//                                 "color": "blue"
+//                             },
+//                             //-------- Light ------------------------------
+//                             {
+//                                 "name": "Light",
+//                                 "color": "yellow"
+//                             },
+//                             //-------- Video ------------------------------
+//                             {
+//                                 "name": "Video",
+//                                 "color": "green"
+//                             },
+//                             //-------- Riggers ------------------------------
+//                             {
+//                                 "name": "Riggers",
+//                                 "color": "orange"
+//                             },
+//                             //-------- Stagehands ------------------------------
+//                             {
+//                                 "name": "Stagehands",
+//                                 "color": "blue"
+//                             },
+//                             //-------- Stage Ground ------------------------------
+//                             {
+//                                 "name": "Stage Ground",
+//                                 "color": "green"
+//                             },
+//                             //-------- Trucks ------------------------------
+//                             {
+//                                 "name": "Trucks",
+//                                 "color": "yellow"
+//                             },
+//                             //-------- Production ------------------------------
+//                             {
+//                                 "name": "Production",
+//                                 "color": "orange"
+//                             }
+//                         ]
+//                     }
+//                 },
+//                 "4. Мерч": {
+//                     "name": "Мерч",
+//                     "type": "checkbox",
+//                     "checkbox": {}
+//                 },
+//                 "5. Комментарий": {
+//                     "rich_text": {}
+//                 },
+//                 "6. Рейтинг": {
+//                     "rich_text": {}
+//                 },
+//                 "7. Такси": {
+//                     "name": "Такси",
+//                     "type": "checkbox",
+//                     "checkbox": {}
+//                 },
+//             }
+//         }
 
-        // создание базы данных "Основной состав"
-        const response = await fetch('https://api.notion.com/v1/databases', {
-            method: 'post',
-            body: JSON.stringify(body),
-            headers: {
-                'Authorization': token_fetch, //`Bearer ${token}`
-                'Content-Type': 'application/json', 
-                accept: 'application/json',
-                'Notion-Version': '2022-06-28'
-            }
-        });
-        const data = await response.json();
-        console.log("2 Success! Maincast added. Database_id: " + data.id)// + " data: " + JSON.stringify(data))
+//         // создание базы данных "Основной состав"
+//         const response = await fetch('https://api.notion.com/v1/databases', {
+//             method: 'post',
+//             body: JSON.stringify(body),
+//             headers: {
+//                 'Authorization': token_fetch, //`Bearer ${token}`
+//                 'Content-Type': 'application/json', 
+//                 accept: 'application/json',
+//                 'Notion-Version': '2022-06-28'
+//             }
+//         });
+//         const data = await response.json();
+//         console.log("2 Success! Maincast added. Database_id: " + data.id)// + " data: " + JSON.stringify(data))
 
-        //добавить список работников
-        worklist.forEach((worker, index) => {
-            if (worker.count > 1) {
-                for (let i = 0; i < worker.count; i++) {
-                    addWorker(data.id, worker.icon)
-                }
-            } else {
-                addWorker(data.id, worker.icon)
-            }          
-        });
+//         //добавить список работников
+//         worklist.forEach((worker, index) => {
+//             if (worker.count > 1) {
+//                 for (let i = 0; i < worker.count; i++) {
+//                     addWorker(data.id, worker.icon)
+//                 }
+//             } else {
+//                 addWorker(data.id, worker.icon)
+//             }          
+//         });
         
-    } catch (error) {
-        console.error(error.body)
-    }
-}
+//     } catch (error) {
+//         console.error(error.body)
+//     }
+// }
 
-//send data to notion
-async function addWorker(blockId, worker) {
-    try {
-        const response = await notion.pages.create({
-            parent: { database_id: blockId },
-            properties: {
-                "1. Дата": {
-                    type: 'date',                   
-                    date: {
-                        "start": "2023-01-01T00:00:00.000",
-                        "end": null,
-                        "time_zone": "Europe/Moscow"
-                    }
+// //send data to notion
+// async function addWorker(blockId, worker) {
+//     try {
+//         const response = await notion.pages.create({
+//             parent: { database_id: blockId },
+//             properties: {
+//                 "1. Дата": {
+//                     type: 'date',                   
+//                     date: {
+//                         "start": "2023-01-01T00:00:00.000",
+//                         "end": null,
+//                         "time_zone": "Europe/Moscow"
+//                     }
 
-                },
-                "3. Специализация": {
-                    type: "multi_select",
-                    multi_select: [
-                        {
-                            "name": worker
-                        }
-                    ]
-                }
-            }
-        })
-        //console.log(response)
-        console.log("3 Success! Worker added. Data: " + response.id) //+ JSON.stringify(response))
-    } catch (error) {
-        console.error(error.body)
-    }
-}
+//                 },
+//                 "3. Специализация": {
+//                     type: "multi_select",
+//                     multi_select: [
+//                         {
+//                             "name": worker
+//                         }
+//                     ]
+//                 }
+//             }
+//         })
+//         //console.log(response)
+//         console.log("3 Success! Worker added. Data: " + response.id) //+ JSON.stringify(response))
+//     } catch (error) {
+//         console.error(error.body)
+//     }
+// }
 
 //--------------------------------------------------------------------------------------------------
 
 // создание БД "Запасной состав"
-async function newDatabase_3(parent_page_id) {
-    try {
-        const body = {
-            "parent": {
-                "type": "page_id",
-                "page_id": parent_page_id
-            },
-            "title": [
-                {
-                    "type": "text",
-                    "text": {
-                        "content": "Запасной состав"
-                    }
-                }
-            ],
-            "is_inline": true,
-            "properties": {                
-                "Name": {
-                    "title": {}
-                },
-                "1. Дата": {
-                    "date": {}
-                },
-                "2. 👷 ФИО": {    
-                    "name": "👷 ФИО",               
-                    "type": "relation",
-                    "relation": {
-                        "database_id": databaseWorkersId,
-                        "single_property": {}
-                    }
-                },
-                "3. Специализация": {
-                    "multi_select": {
-                        "options": [
-                            {
-                                "name": "Sound",
-                                "color": "blue"
-                            },
-                            {
-                                "name": "Light",
-                                "color": "yellow"
-                            },
-                            {
-                                "name": "Video",
-                                "color": "green"
-                            },
-                            {
-                                "name": "Riggers",
-                                "color": "orange"
-                            },
-                            {
-                                "name": "Stagehands",
-                                "color": "blue"
-                            },
-                            {
-                                "name": "Stage Ground",
-                                "color": "green"
-                            },
-                            {
-                                "name": "Trucks",
-                                "color": "yellow"
-                            },
-                            {
-                                "name": "Production",
-                                "color": "orange"
-                            }
-                        ]
-                    }
-                },
-                "4. Мерч": {
-                    "name": "Мерч",
-                    "type": "checkbox",
-                    "checkbox": {}
-                },
-                "5. Комментарий": {
-                    "rich_text": {}
-                },
-                "6. Рейтинг": {
-                    "rich_text": {}
-                }
-            }
-        }
+// async function newDatabase_3(parent_page_id) {
+//     try {
+//         const body = {
+//             "parent": {
+//                 "type": "page_id",
+//                 "page_id": parent_page_id
+//             },
+//             "title": [
+//                 {
+//                     "type": "text",
+//                     "text": {
+//                         "content": "Запасной состав"
+//                     }
+//                 }
+//             ],
+//             "is_inline": true,
+//             "properties": {                
+//                 "Name": {
+//                     "title": {}
+//                 },
+//                 "1. Дата": {
+//                     "date": {}
+//                 },
+//                 "2. 👷 ФИО": {    
+//                     "name": "👷 ФИО",               
+//                     "type": "relation",
+//                     "relation": {
+//                         "database_id": databaseWorkersId,
+//                         "single_property": {}
+//                     }
+//                 },
+//                 "3. Специализация": {
+//                     "multi_select": {
+//                         "options": [
+//                             {
+//                                 "name": "Sound",
+//                                 "color": "blue"
+//                             },
+//                             {
+//                                 "name": "Light",
+//                                 "color": "yellow"
+//                             },
+//                             {
+//                                 "name": "Video",
+//                                 "color": "green"
+//                             },
+//                             {
+//                                 "name": "Riggers",
+//                                 "color": "orange"
+//                             },
+//                             {
+//                                 "name": "Stagehands",
+//                                 "color": "blue"
+//                             },
+//                             {
+//                                 "name": "Stage Ground",
+//                                 "color": "green"
+//                             },
+//                             {
+//                                 "name": "Trucks",
+//                                 "color": "yellow"
+//                             },
+//                             {
+//                                 "name": "Production",
+//                                 "color": "orange"
+//                             }
+//                         ]
+//                     }
+//                 },
+//                 "4. Мерч": {
+//                     "name": "Мерч",
+//                     "type": "checkbox",
+//                     "checkbox": {}
+//                 },
+//                 "5. Комментарий": {
+//                     "rich_text": {}
+//                 },
+//                 "6. Рейтинг": {
+//                     "rich_text": {}
+//                 }
+//             }
+//         }
 
-        // создание базы данных "Запасной состав"
-        const response = await fetch('https://api.notion.com/v1/databases', {
-            method: 'post',
-            body: JSON.stringify(body),
-            headers: {
-                'Authorization': token_fetch, //`Bearer ${token}`
-                'Content-Type': 'application/json', 
-                accept: 'application/json',
-                'Notion-Version': '2022-06-28'
-            }
-        });
-        const data = await response.json();
-        console.log("2.3 Success! Secondcast added. Database_id: " + data.id)// + " data: " + JSON.stringify(data))
+//         // создание базы данных "Запасной состав"
+//         const response = await fetch('https://api.notion.com/v1/databases', {
+//             method: 'post',
+//             body: JSON.stringify(body),
+//             headers: {
+//                 'Authorization': token_fetch, //`Bearer ${token}`
+//                 'Content-Type': 'application/json', 
+//                 accept: 'application/json',
+//                 'Notion-Version': '2022-06-28'
+//             }
+//         });
+//         const data = await response.json();
+//         console.log("2.3 Success! Secondcast added. Database_id: " + data.id)// + " data: " + JSON.stringify(data))
         
-        addWorkerZapas(data.id);
-        addWorkerZapas(data.id);
+//         addWorkerZapas(data.id);
+//         addWorkerZapas(data.id);
 
-    } catch (error) {
-        console.error(error.body)
-    }
-}
+//     } catch (error) {
+//         console.error(error.body)
+//     }
+// }
 
-//Добавление строк в таблицу "Запасной состав"
-async function addWorkerZapas(blockId) {
-    try {
-        const response = await notion.pages.create({
-            parent: { database_id: blockId },
-            properties: {
-                "1. Дата": {
-                    type: 'date',                   
-                    date: {
-                        "start": "2023-01-01T00:00:00.000",
-                        "end": null,
-                        "time_zone": "Europe/Moscow"
-                    }
+// //Добавление строк в таблицу "Запасной состав"
+// async function addWorkerZapas(blockId) {
+//     try {
+//         const response = await notion.pages.create({
+//             parent: { database_id: blockId },
+//             properties: {
+//                 "1. Дата": {
+//                     type: 'date',                   
+//                     date: {
+//                         "start": "2023-01-01T00:00:00.000",
+//                         "end": null,
+//                         "time_zone": "Europe/Moscow"
+//                     }
 
-                }
-            }
-        })
-        //console.log(response)
-        console.log("3.3 Success! Worker zapas added. Data: " + response.id) //JSON.stringify(response))
-    } catch (error) {
-        console.error(error.body)
-    }
-}
+//                 }
+//             }
+//         })
+//         //console.log(response)
+//         console.log("3.3 Success! Worker zapas added. Data: " + response.id) //JSON.stringify(response))
+//     } catch (error) {
+//         console.error(error.body)
+//     }
+// }
 
 //----------------------------------------------------------------------------------------------------------------
 

@@ -44,29 +44,56 @@ module.exports = async function newDatabase(parent_page_id, worklist) {
                                 "color": "blue"
                             },
                             {
+                                "name": "Звукорежиссер",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "RF-Менеджер",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Backline",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Roadie",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Техник по звуку",
+                                "color": "blue"
+                            },
+                            //-------- Light ------------------------------
+                            {
                                 "name": "Light",
                                 "color": "yellow"
                             },
+                            //-------- Video ------------------------------
                             {
                                 "name": "Video",
                                 "color": "green"
                             },
+                            //-------- Riggers ------------------------------
                             {
                                 "name": "Riggers",
                                 "color": "orange"
                             },
+                            //-------- Stagehands ------------------------------
                             {
                                 "name": "Stagehands",
                                 "color": "blue"
                             },
+                            //-------- Stage Ground ------------------------------
                             {
                                 "name": "Stage Ground",
                                 "color": "green"
                             },
+                            //-------- Trucks ------------------------------
                             {
                                 "name": "Trucks",
                                 "color": "yellow"
                             },
+                            //-------- Production ------------------------------
                             {
                                 "name": "Production",
                                 "color": "orange"
@@ -110,12 +137,17 @@ module.exports = async function newDatabase(parent_page_id, worklist) {
         //добавить список работников
         worklist.forEach((worker, index) => {
             if (worker.count > 1) {
-                for (let i = 0; i < worker.count; i++) {
-                    addWorker(data.id, worker.icon)
-                }
-            } else {
+                //добавить категорию
                 addWorker(data.id, worker.icon)
-            }          
+                //добавить специальности
+                for (let i = 0; i < worker.count; i++) {
+                    addWorker(data.id, worker.spec)
+                }
+            } else if (worker.count == 1) {
+                addWorker(data.id, worker.icon)
+                addWorker(data.id, worker.spec)
+            }  
+
         });
         
     } catch (error) {
