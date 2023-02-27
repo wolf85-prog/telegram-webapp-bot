@@ -686,13 +686,12 @@ Soundcraft ui24r = 1 шт.
                             count_title = 0;
                             if (databaseBlock) {
                                 databaseBlock.map((db) => {
-                                    if (value.cat === db.title) {
+                                    if (value.spec === db.title) {
                                         if (db.fio) {
                                             count_fio++               
                                         }else {
                                             count_fio;
                                         }  
-                                        //count_title++; 
                                     }
                                 })
                             }
