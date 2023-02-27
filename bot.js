@@ -515,7 +515,7 @@ bot.on('message', async (msg) => {
 
         // команда запуска получения отчетов
         if (text === '/startgetreports') {
-
+            console.log('start get reports')
             const project = await Project.findOne({where:{projectId: 'd15d5d12-07be-4ec4-b4bb-8090f8a4dd5d'}})
 
             const d = new Date(project.datestart);
@@ -547,6 +547,8 @@ bot.on('message', async (msg) => {
                     count_title = 0;
                     if (databaseBlock) {
                         databaseBlock.map((db) => {
+                            console.log("value.spec: ", value.spec)
+                            console.log("db.spec: ", db.spec)
                             if (value.spec === db.spec) {
                                 if (db.fio) {
                                     count_fio++               
