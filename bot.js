@@ -43,6 +43,8 @@ const newDatabase4 = require('./bot/common/newDatabase4')
 const newDatabase5 = require('./bot/common/newDatabase5')
 const sendMyMessage = require('./bot/common/sendMyMessage')
 const getReports = require('./bot/common/getReports')
+const getBlocks = require('./bot/common/getBlocks')
+const getDatabaseId = require('./bot/common/getDatabaseId')
 
 const fs = require('fs');
 const express = require('express');
