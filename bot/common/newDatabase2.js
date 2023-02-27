@@ -229,32 +229,23 @@ module.exports = async function newDatabase(parent_page_id, worklist) {
         //добавить список работников
         
         worklist.forEach((worker) => {
-            let arrWorks = []
-            const newCategory = {
-                name: worker.icon,
-            }
-            const newSpec = {
-                name: worker.spec,
-            }
             
-            arrWorks.push(newCategory)
-            arrWorks.push(newSpec)
-            addWorker(data.id, arrWorks)
+            for (let i = 0; i < worker.count; i++) {
+                let arrWorks = []
+                const newCategory = {
+                    name: worker.icon,
+                }
+                const newSpec = {
+                    name: worker.spec,
+                }
+    
+                arrWorks.push(newCategory)
+                arrWorks.push(newSpec)         
+                
+                addWorker(data.id, arrWorks)
+            }    
             
-            //if (worker.count > 1) {
-                
-                
-                //добавить категорию
-                
-                //добавить специальности
-                // for (let i = 0; i < worker.count; i++) {
-                //     addWorker(data.id, worker.spec)
-                // }
-            //} else if (worker.count == 1) {
-                //arrWorks.push(newSpec)
-                //addWorker(data.id, arrWorks)
-                //addWorker(data.id, worker.spec)
-            //}  
+            
 
         });
         
