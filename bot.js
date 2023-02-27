@@ -548,7 +548,7 @@ bot.on('message', async (msg) => {
                     if (databaseBlock) {
                         databaseBlock.map((db) => {
                             console.log("value.spec: ", value.spec)
-                            console.log("db.spec: ", db.spec)
+                            console.log("db.spec: ", db)
                             if (value.spec === db.spec) {
                                 if (db.fio) {
                                     count_fio++               
