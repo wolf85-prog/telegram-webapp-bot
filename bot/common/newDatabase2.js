@@ -135,17 +135,26 @@ module.exports = async function newDatabase(parent_page_id, worklist) {
         console.log("2 Success! Maincast added. Database_id: " + data.id)// + " data: " + JSON.stringify(data))
 
         //добавить список работников
+        let arrWorks = []
         worklist.forEach((worker, index) => {
             if (worker.count > 1) {
-                //добавить категорию
-                addWorker(data.id, worker.icon)
-                //добавить специальности
-                for (let i = 0; i < worker.count; i++) {
-                    addWorker(data.id, worker.spec)
+                const newSpec = {
+                    name: worker.icon,
                 }
+                arrWorks.push(newSpec)
+                //добавить категорию
+                addWorker(data.id, arrWorks)
+                //добавить специальности
+                // for (let i = 0; i < worker.count; i++) {
+                //     addWorker(data.id, worker.spec)
+                // }
             } else if (worker.count == 1) {
-                addWorker(data.id, worker.icon)
-                addWorker(data.id, worker.spec)
+                const newSpec = {
+                    name: worker.icon,
+                }
+                arrWorks.push(newSpec)
+                addWorker(data.id, arrWorks)
+                //addWorker(data.id, worker.spec)
             }  
 
         });
