@@ -150,65 +150,7 @@ ${equipmentlist.map(item =>' - ' + item.subname + ' = ' + item.count + ' шт.')
     }
 })
 
-//------------------------------------------------------------------------
 
-//тест
-app.post('/web-test-data', async (req, res) => {
-     const {queryId, projectname, datestart, geo, teh, managerId, companyId, worklist = [], equipmentlist = []} = req.body;
-
- })
-
-//-------------------------------------------------------------------------------
-//------------------ Функции ----------------------------------------------------
-//-------------------------------------------------------------------------------
-
-//получить id блока заданной страницы по id
-// async function getBlocks(blockId) {
-//     try {
-//         const response = await notion.blocks.children.list({
-//             block_id: blockId,
-//         });
-
-//         let count = 0;
-
-//         const responseResults = response.results.map((block) => {
-//             //if (block.child_database.title == "Основной состав" || block.child_database.title == "Назначенные")
-//             if (block.child_database) {
-//                 count++;
-//             }
-//         });
-
-//         let res;
-//         (count >1) ? res = response.results[1].id : res = response.results[0].id     
-
-//         return res;
-//     } catch (error) {
-//         console.error(error.body)
-//     }
-// }
-
-
-// //получить данные блока по заданному ID
-// async function getDatabaseId(baseId) {
-//     try {
-//         const response = await notion.databases.query({
-//             database_id: baseId
-//         });
-
-//         const responseResults = response.results.map((page) => {
-//             return {
-//                //id: page.id,
-//                fio: page.properties["2. 👷 ФИО"].relation[0]?.id,
-//                title: page.properties["3. Специализация"].multi_select[0]?.name,
-//                spec: page.properties["3. Специализация"].multi_select[1]?.name                
-//             };
-//         });
-
-//         return responseResults;
-//     } catch (error) {
-//         console.error(error.body)
-//     }
-// }
 //--------------------------------------------------------------------------------------------------
 
 //Добавление проекта в Notion (addProject send data to notion)
@@ -656,15 +598,97 @@ Soundcraft ui24r = 1 шт.
                     //обновить проект 
                     await Project.update({projectId: projectId},{where: {id: res.id}})
 
-                    const project2 = await Project.findOne({where:{id: res.id}})
+                    project = await Project.findOne({where:{id: res.id}})
 
                     // отправить сообщение пользователю через 30 секунд
                     setTimeout(() => {bot.sendMessage(project.chatId, 'Ваша заявка принята!')}, 30000) // 30 секунд
                     
                     //начать получать отчеты
-                    getReports(project2.projectId)
+                    console.log('start get reports')
+                    //const project = await Project.findOne({where:{projectId: project_id}})
+                    console.log("project.projectId: ", project.projectId)
 
-                    
+                    const d = new Date(project.datestart);
+                    const year = d.getFullYear();
+                    const month = String(d.getMonth()+1).padStart(2, "0");
+                    const day = String(d.getDate()).padStart(2, "0");
+                    const chas = d.getHours();
+                    const minut = String(d.getMinutes()).padStart(2, "0");
+
+                    let count_fio;
+                    let i = 0;
+                    let arr_count = [] 
+                    let arr_all = [] 
+
+    
+                    // повторить с интервалом 1 минуту
+                    let timerId = setInterval(async() => {
+
+                        const blockId = await getBlocks(project.projectId);
+                        console.log("blockId " + i + ": " + blockId)
+
+                        let databaseBlock = await getDatabaseId(blockId); 
+                        //console.log("databaseBlock: ", JSON.stringify(databaseBlock))
+
+                        arr_count = [] 
+                        JSON.parse(project.spec).map((value)=> {
+                        
+                            count_fio = 0;
+                            count_title = 0;
+                            if (databaseBlock) {
+                                databaseBlock.map((db) => {
+                                    console.log("value.spec: ", value.spec)
+                                    console.log("db.spec: ", db.spec)
+                                    if (value.spec === db.spec) {
+                                        if (db.fio) {
+                                            count_fio++               
+                                        }else {
+                                            count_fio;
+                                        }  
+                                    }
+                                })
+                            }
+                            
+                            const obj = {
+                                title: value.spec,
+                                title2: value.cat,
+                                count_fio: count_fio,
+                                count_title: value.count,
+                            }
+                            arr_count.push(obj)                                     
+                        })
+
+                        console.log("arr_count: ", arr_count)
+
+                        //сохранение массива в 2-х элементный массив
+                        if (i % 2 == 0) {
+                            arr_all[0] = arr_count
+                        } else {
+                            arr_all[1] = arr_count 
+                        }
+
+                        var isEqual = JSON.stringify(arr_all[0]) === JSON.stringify(arr_all[1]);
+                        // если есть изменения в составе работников    
+                        if (!isEqual) {
+                            //отправка сообщения в чат бота
+                            await bot.sendMessage(project.chatId, 
+                                `Запрос на специалистов: 
+                                                        
+${day}.${month} | ${chas}:${minut} | ${project.name} | U.L.E.Y
+
+${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']'
+).join('\n')}`                         
+                )
+            } 
+            i++ 
+
+        }, 60000); //каждую 1 минуту
+
+
+                    // остановить вывод через 260 минут
+                    setTimeout(() => { clearInterval(timerId); }, 15600000); //260 минут
+
+                                    
                 } catch (error) {
                     console.log(error)
                 }
