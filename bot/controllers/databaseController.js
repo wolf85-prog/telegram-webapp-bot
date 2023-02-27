@@ -33,7 +33,8 @@ async function getDatabaseId(baseId) {
             return {
                //id: page.id,
                fio: page.properties["2. 👷 ФИО"].relation[0]?.id,
-               title: page.properties["3. Специализация"].multi_select[0]?.name              
+               title: page.properties["3. Специализация"].multi_select[0]?.name, 
+               spec: page.properties["3. Специализация"].multi_select[1]?.name              
             };
         });
 
