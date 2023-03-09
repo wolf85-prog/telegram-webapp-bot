@@ -189,7 +189,32 @@ module.exports = async function newDatabase(parent_page_id, worklist) {
                             {
                                 "name": "Отдельные технические задачи",
                                 "color": "orange"
-                            }
+                            },
+                            //-------- Catering ------------------------------
+                            {
+                                "name": "Catering",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Официант",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Бармен",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Повар",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Хостел",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Банкетный менеджер",
+                                "color": "blue"
+                            },
                         ]
                     }
                 },
