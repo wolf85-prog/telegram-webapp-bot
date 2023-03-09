@@ -214,6 +214,89 @@ module.exports = async function newDatabase_3(parent_page_id) {
                                 "name": "Банкетный менеджер",
                                 "color": "blue"
                             },
+                             //-------- Photo ------------------------------
+                             {
+                                "name": "Photo",
+                                "color": "yellow"
+                            },
+                            {
+                                "name": "Свадебная съемка",
+                                "color": "yellow"
+                            },
+                            {
+                                "name": "Репортажная съемка",
+                                "color": "yellow"
+                            },
+                            {
+                                "name": "Портретная съемка",
+                                "color": "yellow"
+                            },
+                            {
+                                "name": "Предметная съемка",
+                                "color": "yellow"
+                            },
+                            {
+                                "name": "Документальная съемка",
+                                "color": "yellow"
+                            },
+                            //-------- Games ------------------------------
+                            {
+                                "name": "Games",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "Аттракционы",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "Надувные фигуры",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "Игровые автоматы",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "Активности",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "Настольные игры",
+                                "color": "orange"
+                            },
+                            //-------- Party ------------------------------
+                            {
+                                "name": "Party",
+                                "color": "green"
+                            },
+                            {
+                                "name": "Кавер-бенд",
+                                "color": "green"
+                            },
+                            {
+                                "name": "Танцевальный коллектив",
+                                "color": "green"
+                            },
+                            {
+                                "name": "Диджей",
+                                "color": "green"
+                            },
+                            {
+                                "name": "Ведущий",
+                                "color": "green"
+                            },
+                            {
+                                "name": "Певец/певица",
+                                "color": "green"
+                            },
+                            {
+                                "name": "Артист оригинального жанра",
+                                "color": "green"
+                            },
+                            {
+                                "name": "Go-Go",
+                                "color": "green"
+                            },
                         ]
                     }
                 },
