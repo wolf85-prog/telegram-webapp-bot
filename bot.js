@@ -504,8 +504,10 @@ bot.on('message', async (msg) => {
                     const filename = Date.now()
                     // Image will be stored at this path
                     let path;
-                    if(msg.document.mime_type === 'application/pdf') {
-                        path = `${__dirname}/static/${filename}.pdf`; 
+                    let ras;
+                    if(msg.document.mime_type) {
+                        ras = msg.document.mime_type.split('/')
+                        path = `${__dirname}/static/${filename}.${ras[1]}`; 
                     }
                     const filePath = fs.createWriteStream(path);
                     res.pipe(filePath);
@@ -514,9 +516,10 @@ bot.on('message', async (msg) => {
                         console.log('Download Completed: ', path); 
                         
                         let convId;
-                        if(msg.document.mime_type === 'application/pdf') {
+                        if(msg.document.mime_type) {
+                            ras = msg.document.mime_type.split('/')
                             // сохранить отправленное боту сообщение пользователя в БД
-                            convId = sendMyMessage(`${botApiUrl}/${filename}.pdf`, 'pdf', chatId)
+                            convId = sendMyMessage(`${botApiUrl}/${filename}.${ras[1]}`, ras[1], chatId)
                         }
 
                         // Подключаемся к серверу socket
@@ -530,7 +533,7 @@ bot.on('message', async (msg) => {
                         socket.emit("sendMessage", {
                             senderId: chatId,
                             receiverId: chatTelegramId,
-                            text: `${botApiUrl}/${filename}.pdf`,
+                            text: `${botApiUrl}/${filename}.${ras[1]}`,
                             convId: convId,
                         })
                     })
