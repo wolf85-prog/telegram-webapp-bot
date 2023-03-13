@@ -487,7 +487,7 @@ bot.on('message', async (msg) => {
         //обработка документов
         if (msg.document) {
             console.log(msg.document)
-            const docum = await bot.getFile(msg.docum.file_id);
+            const docum = await bot.getFile(msg.document.file_id);
             try {
                 const res = await fetch(
                     `https://api.telegram.org/bot${token}/getFile?file_id=${docum.file_id}`
