@@ -548,8 +548,8 @@ bot.on('message', async (msg) => {
                 await bot.sendMessage(chatTelegramId, `${text} \n \n от ${firstname} ${lastname} ${chatId}`)
                 await bot.sendMessage(chatGiaId, `${text} \n \n от ${firstname} ${lastname} ${chatId}`)
 
-                //отправить сообщение в админ-панель
-                sendMyMessage("Проект создан", "text", chatId)
+                //отправить сообщение о создании проекта в админ-панель
+                sendMyMessage(text, "text", chatId)
 
                 const specArr = Worklist.map(item => ({
                     spec: item.spec,
