@@ -487,11 +487,54 @@ bot.on('message', async (msg) => {
         //обработка документов
         if (msg.document) {
             console.log(msg.document)
-            const docum = await bot.getFile(msg.documfile_id);
+            const docum = await bot.getFile(msg.docum.file_id);
             try {
-                // const res = await fetch(
-                //     `https://api.telegram.org/bot${token}/getFile?file_id=${docum.file_id}`
-                // );
+                const res = await fetch(
+                    `https://api.telegram.org/bot${token}/getFile?file_id=${docum.file_id}`
+                );
+
+                // extract the file path
+                const res2 = await res.json();
+                const filePath = res2.result.file_path;
+
+                // now that we've "file path" we can generate the download link
+                const downloadURL = `https://api.telegram.org/file/bot${token}/${filePath}`;
+
+                https.get(downloadURL,(res) => {
+                    const filename = Date.now()
+                    // Image will be stored at this path
+                    const path = '';
+                    if(mime_type === 'application/pdf') {
+                        path = `${__dirname}/static/${filename}.pdf`; 
+                    }
+                    const filePath = fs.createWriteStream(path);
+                    res.pipe(filePath);
+                    filePath.on('finish',() => {
+                        filePath.close();
+                        console.log('Download Completed: ', path); 
+                        
+                        let convId;
+                        if(mime_type === 'application/pdf') {
+                            // сохранить отправленное боту сообщение пользователя в БД
+                            convId = sendMyMessage(`${botApiUrl}/${filename}.pdf`, 'pdf', chatId)
+                        }
+
+                        // Подключаемся к серверу socket
+                        let socket = io('https://proj.uley.team:9000');
+
+                        socket.emit("addUser", chatId)
+                        socket.on("getUsers", users => {
+                            console.log("users from bot: ", users);
+                        })
+
+                        socket.emit("sendMessage", {
+                            senderId: chatId,
+                            receiverId: chatTelegramId,
+                            text: `${botApiUrl}/${filename}.pdf`,
+                            convId: convId,
+                        })
+                    })
+                })
             } catch (error) {
                 
             }
