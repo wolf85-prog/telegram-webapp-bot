@@ -504,7 +504,7 @@ bot.on('message', async (msg) => {
                     const filename = Date.now()
                     // Image will be stored at this path
                     const path = '';
-                    if(mime_type === 'application/pdf') {
+                    if(msg.document.mime_type === 'application/pdf') {
                         path = `${__dirname}/static/${filename}.pdf`; 
                     }
                     const filePath = fs.createWriteStream(path);
@@ -514,7 +514,7 @@ bot.on('message', async (msg) => {
                         console.log('Download Completed: ', path); 
                         
                         let convId;
-                        if(mime_type === 'application/pdf') {
+                        if(msg.document.mime_type === 'application/pdf') {
                             // сохранить отправленное боту сообщение пользователя в БД
                             convId = sendMyMessage(`${botApiUrl}/${filename}.pdf`, 'pdf', chatId)
                         }
