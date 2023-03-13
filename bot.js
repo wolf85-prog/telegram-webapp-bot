@@ -484,8 +484,20 @@ bot.on('message', async (msg) => {
 
 
 //--------------------------------------------------------------------------------------------------
+        //обработка документов
+        if (msg.document) {
+            console.log(msg.document)
+            const docum = await bot.getFile(msg.documfile_id);
+            try {
+                // const res = await fetch(
+                //     `https://api.telegram.org/bot${token}/getFile?file_id=${docum.file_id}`
+                // );
+            } catch (error) {
+                
+            }
+        }
         
-//обработка изображений
+        //обработка изображений
         if (msg.photo && msg.photo[3]) {
             console.log(msg.photo)
             const image = await bot.getFile(msg.photo[3].file_id);
@@ -538,7 +550,7 @@ bot.on('message', async (msg) => {
         }
 //----------------------------------------------------------------------------------------------------------------      
         
-//обработка сообщений    
+        //обработка сообщений    
         if ((text || '')[0] !== '/') {       
             if (text.includes("Reply")) {           
                 await bot.sendMessage(text.substring(6, text.indexOf('.')), text.slice(text.indexOf('.') + 2)) 
