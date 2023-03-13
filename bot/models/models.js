@@ -14,6 +14,7 @@ const UserBot = sequelize.define('userbot', {
     firstname: {type: DataTypes.STRING},
     lastname: {type: DataTypes.STRING},
     chatId: {type: DataTypes.STRING, unique: true},
+    username: {type: DataTypes.STRING},
 })
 
 const Message = sequelize.define('message', {
