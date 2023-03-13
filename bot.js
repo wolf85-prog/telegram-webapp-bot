@@ -503,7 +503,7 @@ bot.on('message', async (msg) => {
                 https.get(downloadURL,(res) => {
                     const filename = Date.now()
                     // Image will be stored at this path
-                    const path = '';
+                    let path;
                     if(msg.document.mime_type === 'application/pdf') {
                         path = `${__dirname}/static/${filename}.pdf`; 
                     }
