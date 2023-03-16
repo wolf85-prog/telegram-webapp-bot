@@ -607,7 +607,7 @@ bot.on('message', async (msg) => {
                 await bot.sendMessage(chatGiaId, `${text} \n \n от ${firstname} ${lastname} ${chatId}`)
 
                 //отправить сообщение о создании проекта в админ-панель
-                sendMyMessage(text, "text", chatId)
+                sendMyMessage(text, "text", chatId, messageId)
 
                 const specArr = Worklist.map(item => ({
                     spec: item.spec,
