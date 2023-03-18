@@ -26,9 +26,7 @@ module.exports = async function newDatabase(parent_page_id, worklist) {
                     "title": {}
                 },
                 "1. Дата": {
-                    "date": {
-                        "format": "eu"
-                    }
+                    "date": {}
                 },
                 "2. 👷 ФИО": {    
                     "name": "👷 ФИО",               
