@@ -353,9 +353,37 @@ module.exports = async function newDatabase(parent_page_id, worklist) {
                 addWorker(data.id, arrWorks)
             }    
             
-            
-
         });
+
+
+        const body2 = {
+
+            "properties": { 
+                "Name": {
+                    "title": {}
+                },
+                "1. Дата": {
+                    "date": {
+                        "format": "eu"
+                    }
+                },
+            }
+        }
+
+        // создание базы данных "Основной состав"
+        const response2 = await fetch('https://api.notion.com/v1/databases/'+ data.id, {
+            method: 'patch',
+            body: JSON.stringify(body2),
+            headers: {
+                'Authorization': token_fetch, //`Bearer ${token}`
+                'Content-Type': 'application/json', 
+                accept: 'application/json',
+                'Notion-Version': '2022-06-28'
+            }
+        });
+        const data2 = await response2.json();
+        console.log("2 Success! Maincast update. Database_id: " + data2.id)// + " data: " + JSON.stringify(data))
+
         
     } catch (error) {
         console.error(error.body)
