@@ -484,8 +484,66 @@ bot.on('message', async (msg) => {
 
 
 //--------------------------------------------------------------------------------------------------
+        //обработка документов
+        if (msg.document) {
+            console.log(msg.document)
+            const docum = await bot.getFile(msg.document.file_id);
+            try {
+                const res = await fetch(
+                    `https://api.telegram.org/bot${token}/getFile?file_id=${docum.file_id}`
+                );
+
+                // extract the file path
+                const res2 = await res.json();
+                const filePath = res2.result.file_path;
+
+                // now that we've "file path" we can generate the download link
+                const downloadURL = `https://api.telegram.org/file/bot${token}/${filePath}`;
+
+                https.get(downloadURL,(res) => {
+                    const filename = Date.now()
+                    // Image will be stored at this path
+                    let path;
+                    let ras;
+                    if(msg.document.mime_type) {
+                        ras = msg.document.mime_type.split('/')
+                        path = `${__dirname}/static/${filename}.${ras[1]}`; 
+                    }
+                    const filePath = fs.createWriteStream(path);
+                    res.pipe(filePath);
+                    filePath.on('finish',() => {
+                        filePath.close();
+                        console.log('Download Completed: ', path); 
+                        
+                        let convId;
+                        if(msg.document.mime_type) {
+                            ras = msg.document.mime_type.split('/')
+                            // сохранить отправленное боту сообщение пользователя в БД
+                            convId = sendMyMessage(`${botApiUrl}/${filename}.${ras[1]}`, ras[1], chatId)
+                        }
+
+                        // Подключаемся к серверу socket
+                        let socket = io('https://proj.uley.team:9000');
+
+                        socket.emit("addUser", chatId)
+                        socket.on("getUsers", users => {
+                            console.log("users from bot: ", users);
+                        })
+
+                        socket.emit("sendMessage", {
+                            senderId: chatId,
+                            receiverId: chatTelegramId,
+                            text: `${botApiUrl}/${filename}.${ras[1]}`,
+                            convId: convId,
+                        })
+                    })
+                })
+            } catch (error) {
+                
+            }
+        }
         
-//обработка изображений
+        //обработка изображений
         if (msg.photo && msg.photo[3]) {
             console.log(msg.photo)
             const image = await bot.getFile(msg.photo[3].file_id);
@@ -538,7 +596,7 @@ bot.on('message', async (msg) => {
         }
 //----------------------------------------------------------------------------------------------------------------      
         
-//обработка сообщений    
+        //обработка сообщений    
         if ((text || '')[0] !== '/') {       
             if (text.includes("Reply")) {           
                 await bot.sendMessage(text.substring(6, text.indexOf('.')), text.slice(text.indexOf('.') + 2)) 
@@ -548,8 +606,8 @@ bot.on('message', async (msg) => {
                 await bot.sendMessage(chatTelegramId, `${text} \n \n от ${firstname} ${lastname} ${chatId}`)
                 await bot.sendMessage(chatGiaId, `${text} \n \n от ${firstname} ${lastname} ${chatId}`)
 
-                //отправить сообщение в админ-панель
-                sendMyMessage("Проект создан", "text", chatId)
+                //отправить сообщение о создании проекта в админ-панель
+                sendMyMessage(text, "text", chatId, messageId)
 
                 const specArr = Worklist.map(item => ({
                     spec: item.spec,

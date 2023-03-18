@@ -14,6 +14,7 @@ const UserBot = sequelize.define('userbot', {
     firstname: {type: DataTypes.STRING},
     lastname: {type: DataTypes.STRING},
     chatId: {type: DataTypes.STRING, unique: true},
+    username: {type: DataTypes.STRING},
 })
 
 const Message = sequelize.define('message', {
@@ -24,6 +25,7 @@ const Message = sequelize.define('message', {
     text: {type: DataTypes.STRING}, //текст сообщения;
     type: {type: DataTypes.STRING},      //тип сообщения;
     is_bot: {type: DataTypes.BOOLEAN},
+    messageId: {type: DataTypes.STRING},
 })
 
 const Conversation = sequelize.define('conversation', {

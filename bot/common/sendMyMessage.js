@@ -5,7 +5,7 @@ const {UserBot, Message, Conversation} = require('./../../bot/models/models')
 const chatTelegramId = process.env.CHAT_ID
 const { Op } = require('sequelize')
 
-module.exports = async function sendMyMessage(text, typeText, chatId) {
+module.exports = async function sendMyMessage(text, typeText, chatId, messageId) {
     //создать беседу в админке в бд 
     //сохранить отправленное боту сообщение пользователя в БД
     let  conversation_id              
@@ -19,7 +19,7 @@ module.exports = async function sendMyMessage(text, typeText, chatId) {
             },
         })   
         
-        console.log("conversation: ", conversation)
+        //console.log("conversation: ", conversation)
 
         //если нет беседы, то создать 
         if (!conversation) {
@@ -45,6 +45,7 @@ module.exports = async function sendMyMessage(text, typeText, chatId) {
             receiverId: chatTelegramId,
             type: typeText,
             conversationId: conversation_id,
+            messageId: messageId,
         })
 
         return conversation_id;
