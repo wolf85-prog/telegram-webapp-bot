@@ -774,7 +774,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                     receiverId: chatTelegramId,
                     text: text,
                     convId: convId,
-                    messageId,
+                    messageId: messageId,
                 })
 
             } else {
@@ -795,7 +795,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                     receiverId: chatTelegramId,
                     text: text,
                     convId: convId,
-                    messageId,
+                    messageId: messageId,
                 })
 
                 // ответ бота
