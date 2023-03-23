@@ -754,7 +754,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
             } else if (text.includes('Тестовое сообщение')) {  
            
                 // сохранить отправленное боту сообщение пользователя в БД
-                const convId = await sendMyMessage(text, 'text', chatId)
+                const convId = await sendMyMessage(text, 'text', chatId, messageId)
                 
                 console.log("convId: ", convId)
 
@@ -774,12 +774,13 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                     receiverId: chatTelegramId,
                     text: text,
                     convId: convId,
+                    messageId: messageId,
                 })
 
             } else {
 //----------------------------------------------------------------------------------------------------------------
                 // сохранить отправленное боту сообщение пользователя в БД
-                const convId = sendMyMessage(text, 'text', chatId)
+                const convId = sendMyMessage(text, 'text', chatId, messageId)
 
                 // Подключаемся к серверу socket
                 let socket = io('https://proj.uley.team:9000');
@@ -794,6 +795,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                     receiverId: chatTelegramId,
                     text: text,
                     convId: convId,
+                    messageId: messageId,
                 })
 
                 // ответ бота
