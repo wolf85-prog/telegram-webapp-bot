@@ -208,7 +208,7 @@ module.exports = async function newDatabase(parent_page_id, worklist) {
                                 "color": "blue"
                             },
                             {
-                                "name": "Хостел",
+                                "name": "Хостеc",
                                 "color": "blue"
                             },
                             {
