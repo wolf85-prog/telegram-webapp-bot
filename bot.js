@@ -182,7 +182,7 @@ async function addProject(title, time, teh, managerId, companyId, worklist, equi
                         "time_zone": "Europe/Moscow"
                     }
                 },
-                TechZadanie: {
+                TechClient: {
                     type: 'rich_text',
                     rich_text: [
                         {
