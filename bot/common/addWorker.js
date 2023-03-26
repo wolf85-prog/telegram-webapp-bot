@@ -8,6 +8,15 @@ module.exports = async function addWorker(blockId, worker) {
         const response = await notion.pages.create({
             parent: { database_id: blockId },
             properties: {
+                "Ставка": {
+                    title:[
+                        {
+                            "text": {
+                                "content": "000.00"
+                            }
+                        }
+                    ]
+                },
                 "1. Дата": {
                     type: 'date',                   
                     date: {
