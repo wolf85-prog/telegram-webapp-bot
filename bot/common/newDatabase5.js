@@ -45,7 +45,15 @@ module.exports = async function newDatabase5(parent_page_id) {
                         "function": "show_original"
                     }
                 },
-                "4. Комментарий": {
+                "4. Ранг": {
+                    "type": "rollup",
+                    "rollup": {
+                        "rollup_property_name": "Rank",
+                        "relation_property_name": "2. ФИО",
+                        "function": "show_original"
+                    }
+                },
+                "5. Комментарий": {
                     "type": "rollup",
                     "rollup": {
                         "rollup_property_name": "Комментарии",
@@ -53,7 +61,7 @@ module.exports = async function newDatabase5(parent_page_id) {
                         "function": "show_original"
                     }
                 },
-                "5. Телефон": {
+                "6. Телефон": {
                     "type": "rollup",
                     "rollup": {
                         "rollup_property_name": "Phone",

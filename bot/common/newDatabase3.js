@@ -21,14 +21,14 @@ module.exports = async function newDatabase_3(parent_page_id) {
             ],
             "is_inline": true,
             "properties": {                
-                "Name": {
+                "Ставка": {
                     "title": {}
                 },
                 "1. Дата": {
                     "date": {}
                 },
-                "2. 👷 ФИО": {    
-                    "name": "👷 ФИО",               
+                "2. ФИО": {    
+                    "name": "ФИО",               
                     "type": "relation",
                     "relation": {
                         "database_id": databaseWorkersId,
