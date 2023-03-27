@@ -889,7 +889,6 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                     let arr_all = [] 
 
                     if (JSON.parse(project2.spec).length > 0) {
-                        console.log("Специалисты: ", project2.spec)
 // начало цикла Специалисты ----------------------------------------------------------------------
                         // повторить с интервалом 1 минуту
                         let timerId = setInterval(async() => {
@@ -963,7 +962,6 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                     
                     } else if (JSON.parse(project2.equipment).length > 0) {
 // начало цикла Оборудование ----------------------------------------------------------------------
-                        console.log("Оборудование: ", project2.equipment)
                         // повторить с интервалом 1 минуту
                         let timerId = setInterval(async() => {
 
