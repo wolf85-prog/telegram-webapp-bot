@@ -685,10 +685,25 @@ bot.on('message', async (msg) => {
                         const blockId = await getBlocks(project2.projectId);
                         console.log("blockId " + i + ": " + blockId)
 
+                        // if (blockId !== 'undefined') { }
+                        // else {
+                        //     console.log('Блок не найден!')
+                        // }
+
                         let databaseBlock = await getDatabaseId(blockId); 
                         //console.log("databaseBlock: ", JSON.stringify(databaseBlock))
 
                         arr_count = [] 
+
+                        const needList = []
+                        if (project2.spec) {
+                            needList = project2.spec
+                        } else if (project2.equipment) {
+                            needList = project2.equipment
+                        }
+
+                        console.log("needList: ", needList)
+
                         JSON.parse(project2.spec).map((value)=> {
                         
                             count_fio = 0;
@@ -738,6 +753,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
 ).join('\n')}`                         
                 )
             } 
+
             i++ 
 
         }, 60000); //каждую 1 минуту
