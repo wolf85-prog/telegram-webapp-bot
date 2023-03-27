@@ -32,7 +32,7 @@ async function getDatabaseId(baseId) {
         const responseResults = response.results.map((page) => {
             return {
                //id: page.id,
-               fio: page.properties["2. 👷 ФИО"].relation[0]?.id,
+               fio: page.properties["2. ФИО"].relation[0]?.id,
                title: page.properties["3. Специализация"].multi_select[0]?.name, 
                spec: page.properties["3. Специализация"].multi_select[1]?.name              
             };
@@ -43,6 +43,7 @@ async function getDatabaseId(baseId) {
         console.error(error.body)
     }
 }
+
 
 async function getDatabaseId2(baseId) {
     try {
@@ -56,18 +57,35 @@ async function getDatabaseId2(baseId) {
     }
 }
 
+//получить данные блока по заданному ID
+async function getDatabaseEquipmentId(baseId) {
+    try {
+        const response = await notion.databases.query({
+            database_id: baseId
+        });
+
+        const responseResults = response.results.map((page) => {
+            return {
+               //id: page.id,
+               category: page.properties["Наименование"].multi_select[0]?.name, 
+               name: page.properties["Наименование"].multi_select[1]?.name              
+            };
+        });
+
+        return responseResults;
+    } catch (error) {
+        console.error(error.body)
+    }
+}
+
 
 class DatabaseController {
 
+    //специалисты
     async databaseId(req, res) {
         const id = req.params.id; // получаем id
 
-        //if (id) {
-           const base = await getDatabaseId(id);    
-        //} else {
-        //    console.log('Не валидный id')
-        //}
-              
+        const base = await getDatabaseId(id);               
 
         if(base){
             res.json(base);
@@ -81,6 +99,20 @@ class DatabaseController {
         const id = req.params.id; // получаем id
         const base = await getDatabaseId2(id);
     
+        if(base){
+            res.json(base);
+        }
+        else{
+            res.json({});
+        }
+    }
+
+    //оборудование
+    async databaseEquipmentId(req, res) {
+        const id = req.params.id; // получаем id
+
+        const base = await getDatabaseEquipmentId(id);               
+
         if(base){
             res.json(base);
         }
