@@ -685,76 +685,79 @@ bot.on('message', async (msg) => {
                         const blockId = await getBlocks(project2.projectId);
                         console.log("blockId " + i + ": " + blockId)
 
-                        // if (blockId !== 'undefined') { }
-                        // else {
-                        //     console.log('Блок не найден!')
-                        // }
-
-                        let databaseBlock = await getDatabaseId(blockId); 
-                        //console.log("databaseBlock: ", JSON.stringify(databaseBlock))
-
-                        arr_count = [] 
-
-                        const needList = []
-                        if (project2.spec) {
-                            needList = project2.spec
-                        } else if (project2.equipment) {
-                            needList = project2.equipment
-                        }
-
-                        console.log("needList: ", needList)
-
-                        JSON.parse(project2.spec).map((value)=> {
-                        
-                            count_fio = 0;
-                            count_title = 0;
-                            if (databaseBlock) {
-                                databaseBlock.map((db) => {
-                                    //console.log("value.spec: ", value.spec)
-                                    //console.log("db.spec: ", db.spec)
-                                    if (value.spec === db.spec) {
-                                        if (db.fio) {
-                                            count_fio++               
-                                        }else {
-                                            count_fio;
-                                        }  
-                                    }
-                                })
+                        if (blockId !== 'undefined') { 
+                            let databaseBlock = await getDatabaseId(blockId); 
+                            //console.log("databaseBlock: ", JSON.stringify(databaseBlock))
+    
+                            arr_count = [] 
+    
+                            const needList = []
+                            if (project2.spec) {
+                                needList = project2.spec
+                            } else if (project2.equipment) {
+                                needList = project2.equipment
                             }
+    
+                            console.log("needList: ", needList)
+    
+                            JSON.parse(project2.spec).map((value)=> {
                             
-                            const obj = {
-                                title: value.spec,
-                                title2: value.cat,
-                                count_fio: count_fio,
-                                count_title: value.count,
+                                count_fio = 0;
+                                count_title = 0;
+                                if (databaseBlock) {
+                                    databaseBlock.map((db) => {
+                                        //console.log("value.spec: ", value.spec)
+                                        //console.log("db.spec: ", db.spec)
+                                        if (value.spec === db.spec) {
+                                            if (db.fio) {
+                                                count_fio++               
+                                            }else {
+                                                count_fio;
+                                            }  
+                                        }
+                                    })
+                                }
+                                
+                                const obj = {
+                                    title: value.spec,
+                                    title2: value.cat,
+                                    count_fio: count_fio,
+                                    count_title: value.count,
+                                }
+                                arr_count.push(obj)                                     
+                            })
+    
+                            //console.log("arr_count: ", arr_count)
+    
+                            //сохранение массива в 2-х элементный массив
+                            if (i % 2 == 0) {
+                                arr_all[0] = arr_count
+                            } else {
+                                arr_all[1] = arr_count 
                             }
-                            arr_count.push(obj)                                     
-                        })
+    
+                            var isEqual = JSON.stringify(arr_all[0]) === JSON.stringify(arr_all[1]);
+                            // если есть изменения в составе работников    
+                            if (!isEqual) {
+                                //отправка сообщения в чат бота
+                                await bot.sendMessage(project2.chatId, 
+                                    `Запрос на специалистов: 
+                                                            
+${day}.${month} | ${chas}:${minut} | ${project2.name} | U.L.E.Y
+    
+${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']'
+    ).join('\n')}`                         
+                                )
+                            } 
+    
+                            i++ 
 
-                        //console.log("arr_count: ", arr_count)
-
-                        //сохранение массива в 2-х элементный массив
-                        if (i % 2 == 0) {
-                            arr_all[0] = arr_count
-                        } else {
-                            arr_all[1] = arr_count 
+                        }                   
+                        else {
+                            console.log('Блок не найден!')
                         }
 
-                        var isEqual = JSON.stringify(arr_all[0]) === JSON.stringify(arr_all[1]);
-                        // если есть изменения в составе работников    
-                        if (!isEqual) {
-                            //отправка сообщения в чат бота
-                            await bot.sendMessage(project2.chatId, 
-                                `Запрос на специалистов: 
-                                                        
-${day}.${month} | ${chas}:${minut} | ${project2.name} | U.L.E.Y
-
-${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']'
-).join('\n')}`                         
-                )
-            } 
-
-            i++ 
+                       
 
         }, 60000); //каждую 1 минуту
 
