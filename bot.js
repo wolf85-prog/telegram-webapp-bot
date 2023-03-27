@@ -678,7 +678,7 @@ bot.on('message', async (msg) => {
                     let arr_count = [] 
                     let arr_all = [] 
 
-                    const needList = []
+                    let needList = []
                     if (project2.spec) {
                         needList = project2.spec
                         console.log("Специалисты: ", needList)
