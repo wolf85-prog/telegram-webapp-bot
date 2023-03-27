@@ -108,11 +108,15 @@ app.post('/web-data', async (req, res) => {
   <b>Адрес:</b> ${geo} 
   <b>Тех. задание:</b> ${teh}
   
+${worklist.length > 0 } ?
 <b>Специалисты:</b>  
 ${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}
+: ''
 
+${equipmentlist.length > 0 } ?
 <b>Оборудование:</b>  
-${equipmentlist.map(item =>' - ' + item.subname + ' = ' + item.count + ' шт.').join('\n')}`
+${equipmentlist.map(item =>' - ' + item.subname + ' = ' + item.count + ' шт.').join('\n')}
+: '' `
               }
         })
 
@@ -127,11 +131,15 @@ ${equipmentlist.map(item =>' - ' + item.subname + ' = ' + item.count + ' шт.')
   Адрес: ${geo} 
   Тех. задание: ${teh} 
   
+  ${worklist.length > 0 } ?
 Специалисты:  
 ${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}
+:''
 
+${equipmentlist.length > 0 } ?
 Оборудование:  
-${equipmentlist.map(item =>' - ' + item.subname + ' = ' + item.count + ' шт.').join('\n')}`
+${equipmentlist.map(item =>' - ' + item.subname + ' = ' + item.count + ' шт.').join('\n')}
+:''`
           )
   
           projectName = projectname
