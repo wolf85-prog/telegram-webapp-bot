@@ -93,13 +93,14 @@ app.post('/web-data', async (req, res) => {
     const chas = d.getHours();
     const minut = String(d.getMinutes()).padStart(2, "0");
     try {
-        await bot.answerWebAppQuery(queryId, {
-            type: 'article',
-            id: queryId,
-            title: 'Проект успешно создан',
-            input_message_content: {
-                parse_mode: 'HTML',
-                message_text: 
+        if (worklist.length > 0) {
+            await bot.answerWebAppQuery(queryId, {
+                type: 'article',
+                id: queryId,
+                title: 'Проект успешно создан',
+                input_message_content: {
+                    parse_mode: 'HTML',
+                    message_text: 
   `Проект успешно создан!
   
   <b>Проект:</b> ${projectname} 
@@ -108,15 +109,8 @@ app.post('/web-data', async (req, res) => {
   <b>Адрес:</b> ${geo} 
   <b>Тех. задание:</b> ${teh}
   
-${worklist.length > 0 } ?
 <b>Специалисты:</b>  
-${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}
-: ''
-
-${equipmentlist.length > 0 } ?
-<b>Оборудование:</b>  
-${equipmentlist.map(item =>' - ' + item.subname + ' = ' + item.count + ' шт.').join('\n')}
-: '' `
+${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}`
               }
         })
 
@@ -131,15 +125,8 @@ ${equipmentlist.map(item =>' - ' + item.subname + ' = ' + item.count + ' шт.')
   Адрес: ${geo} 
   Тех. задание: ${teh} 
   
-  ${worklist.length > 0 } ?
 Специалисты:  
-${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}
-:''
-
-${equipmentlist.length > 0 } ?
-Оборудование:  
-${equipmentlist.map(item =>' - ' + item.subname + ' = ' + item.count + ' шт.').join('\n')}
-:''`
+${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}`
           )
   
           projectName = projectname
@@ -152,7 +139,55 @@ ${equipmentlist.map(item =>' - ' + item.subname + ' = ' + item.count + ' шт.')
           manager_id = managerId
           company_id = companyId
           Geo = geo  
-          
+
+        } else if (equipmentlist.length > 0) {
+            await bot.answerWebAppQuery(queryId, {
+                type: 'article',
+                id: queryId,
+                title: 'Проект успешно создан',
+                input_message_content: {
+                    parse_mode: 'HTML',
+                    message_text: 
+  `Проект успешно создан!
+  
+  <b>Проект:</b> ${projectname} 
+  <b>Дата:</b> ${day}.${month}.${year}
+  <b>Время:</b> ${chas}:${minut} 
+  <b>Адрес:</b> ${geo} 
+  <b>Тех. задание:</b> ${teh}
+
+<b>Оборудование:</b>  
+${equipmentlist.map(item =>' - ' + item.subname + ' = ' + item.count + ' шт.').join('\n')}`
+              }
+        })
+
+        
+        //отправить сообщение в чат-админку
+        await bot.sendMessage(chatGroupId, 
+  `Проект успешно создан! 
+  
+  Название проекта:  ${projectname} 
+  Дата: ${day}.${month}.${year}
+  Время: ${chas}:${minut} 
+  Адрес: ${geo} 
+  Тех. задание: ${teh} 
+
+Оборудование:  
+${equipmentlist.map(item =>' - ' + item.subname + ' = ' + item.count + ' шт.').join('\n')}`
+          )
+  
+          projectName = projectname
+          projectDate = `${day}.${month}`
+          projectTime = `${chas}:${minut}`
+          dateStart = datestart
+          Teh = teh
+          Worklist = worklist
+          Equipmentlist = equipmentlist 
+          manager_id = managerId
+          company_id = companyId
+          Geo = geo  
+
+        } 
   
         return res.status(200).json({});
     } catch (e) {
