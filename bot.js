@@ -140,7 +140,9 @@ ${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join
           company_id = companyId
           Geo = geo  
 
-        } else if (equipmentlist.length > 0) {
+        } 
+        
+        if (equipmentlist.length > 0) {
             await bot.answerWebAppQuery(queryId, {
                 type: 'article',
                 id: queryId,
