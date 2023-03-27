@@ -512,7 +512,6 @@ bot.on('message', async (msg) => {
 
             //начать получать отчеты
             console.log('START GET REPORTS')
-            //const project2 = await Project.findOne({where:{projectId: projectId}})
 
             const d = new Date(project2.datestart);
             const year = d.getFullYear();
@@ -891,7 +890,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
 
                     if (JSON.parse(project2.spec).length > 0) {
                         console.log("Специалисты: ", project2.spec)
-
+// начало цикла Специалисты ----------------------------------------------------------------------
                         // повторить с интервалом 1 минуту
                         let timerId = setInterval(async() => {
 
@@ -946,7 +945,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
 ${day}.${month} | ${chas}:${minut} | ${project2.name} | U.L.E.Y
 
 ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']'
-).join('\n')}`                         
+        ).join('\n')}`                         
                                     )
                                 } 
 
@@ -963,6 +962,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                         setTimeout(() => { clearInterval(timerId); }, 15600000); //260 минут                        
                     
                     } else if (JSON.parse(project2.equipment).length > 0) {
+// начало цикла Оборудование ----------------------------------------------------------------------
                         console.log("Оборудование: ", project2.equipment)
                         // повторить с интервалом 1 минуту
                         let timerId = setInterval(async() => {
@@ -973,16 +973,16 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                             if (blockId !== 'undefined') { 
                                 let databaseBlock = await getDatabaseId(blockId); 
                                 //console.log("databaseBlock: ", JSON.stringify(databaseBlock))
-        
+
                                 arr_count = [] 
-        
+
                                 JSON.parse(project2.equipment).map((value)=> {
                                 
                                     count_name= 0;
                                     if (databaseBlock) {
                                         databaseBlock.map((db) => {
-                                            if (value.category === db.category) {
-                                                if (db.name) {
+                                            if (value.cat === db.category) {
+                                                if (db.subname) {
                                                     count_name++               
                                                 }else {
                                                     count_name;
@@ -992,21 +992,21 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                                     }
                                     
                                     const obj = {
-                                        title: value.name,
-                                        title2: value.category,
+                                        title: value.subname,
+                                        title2: value.cat,
                                         count_name: count_name,
                                         count_title: value.count,
                                     }
                                     arr_count.push(obj)                                     
                                 })
-        
+
                                 //сохранение массива в 2-х элементный массив
                                 if (i % 2 == 0) {
                                     arr_all[0] = arr_count
                                 } else {
                                     arr_all[1] = arr_count 
                                 }
-        
+
                                 var isEqual = JSON.stringify(arr_all[0]) === JSON.stringify(arr_all[1]);
                                 // если есть изменения в составе работников    
                                 if (!isEqual) {
@@ -1015,12 +1015,12 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                                         `Запрос на оборудование: 
                                                             
 ${day}.${month} | ${chas}:${minut} | ${project2.name} | U.L.E.Y
-    
+
 ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_name + '\/' + item.count_title + ' [' + item.title2 + ']'
-    ).join('\n')}`                         
+        ).join('\n')}`                         
                                 )
                             } 
-    
+
                             i++ 
 
                         }                   
