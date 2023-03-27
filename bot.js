@@ -573,8 +573,8 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                             count_name= 0;
                             if (databaseBlock) {
                                 databaseBlock.map((db) => {
-                                    if (value.category === db.category) {
-                                        if (db.name) {
+                                    if (value.cat === db.cat) {
+                                        if (db.subname) {
                                             count_name++               
                                         }else {
                                             count_name;
@@ -584,8 +584,8 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                             }
                             
                             const obj = {
-                                title: value.name,
-                                title2: value.category,
+                                title: value.subname,
+                                title2: value.cat,
                                 count_name: count_name,
                                 count_title: value.count,
                             }
