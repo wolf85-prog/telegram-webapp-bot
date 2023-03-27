@@ -103,11 +103,11 @@ app.post('/web-data', async (req, res) => {
                     message_text: 
   `Проект успешно создан!
   
-  <b>Проект:</b> ${projectname} 
-  <b>Дата:</b> ${day}.${month}.${year}
-  <b>Время:</b> ${chas}:${minut} 
-  <b>Адрес:</b> ${geo} 
-  <b>Тех. задание:</b> ${teh}
+<b>Проект:</b> ${projectname} 
+<b>Дата:</b> ${day}.${month}.${year}
+<b>Время:</b> ${chas}:${minut} 
+<b>Адрес:</b> ${geo} 
+<b>Тех. задание:</b> ${teh}
   
 <b>Специалисты:</b>  
 ${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}`
@@ -119,11 +119,11 @@ ${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join(
         await bot.sendMessage(chatGroupId, 
   `Проект успешно создан! 
   
-  Название проекта:  ${projectname} 
-  Дата: ${day}.${month}.${year}
-  Время: ${chas}:${minut} 
-  Адрес: ${geo} 
-  Тех. задание: ${teh} 
+Название проекта:  ${projectname} 
+Дата: ${day}.${month}.${year}
+Время: ${chas}:${minut} 
+Адрес: ${geo} 
+Тех. задание: ${teh} 
   
 Специалисты:  
 ${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}`
@@ -150,11 +150,11 @@ ${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join
                     message_text: 
   `Проект успешно создан!
   
-  <b>Проект:</b> ${projectname} 
-  <b>Дата:</b> ${day}.${month}.${year}
-  <b>Время:</b> ${chas}:${minut} 
-  <b>Адрес:</b> ${geo} 
-  <b>Тех. задание:</b> ${teh}
+<b>Проект:</b> ${projectname} 
+<b>Дата:</b> ${day}.${month}.${year}
+<b>Время:</b> ${chas}:${minut} 
+<b>Адрес:</b> ${geo} 
+<b>Тех. задание:</b> ${teh}
 
 <b>Оборудование:</b>  
 ${equipmentlist.map(item =>' - ' + item.subname + ' = ' + item.count + ' шт.').join('\n')}`
@@ -166,11 +166,11 @@ ${equipmentlist.map(item =>' - ' + item.subname + ' = ' + item.count + ' шт.')
         await bot.sendMessage(chatGroupId, 
   `Проект успешно создан! 
   
-  Название проекта:  ${projectname} 
-  Дата: ${day}.${month}.${year}
-  Время: ${chas}:${minut} 
-  Адрес: ${geo} 
-  Тех. задание: ${teh} 
+Название проекта:  ${projectname} 
+Дата: ${day}.${month}.${year}
+Время: ${chas}:${minut} 
+Адрес: ${geo} 
+Тех. задание: ${teh} 
 
 Оборудование:  
 ${equipmentlist.map(item =>' - ' + item.subname + ' = ' + item.count + ' шт.').join('\n')}`
