@@ -12,7 +12,6 @@ async function getBlocks(blockId) {
         let count = 0;
 
         const responseResults = response.results.map((block) => {
-            //if (block.child_database.title == "Оборудование" || block.child_database.title == "Назначенные")
             if (block.child_database) {
                 count++;
             }
