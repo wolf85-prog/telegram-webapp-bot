@@ -26,10 +26,76 @@ module.exports = async function newDatabase4(parent_page_id, equipmentlist) {
                 "Наименование": {
                     "multi_select": {
                         "options": [
+                            //----------- Sound ----------------------
                             {
                                 "name": "Sound",
                                 "color": "blue"
                             },
+                            {
+                                "name": "P.A System",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Amplifires",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Monitor wedge",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Mixer Desk",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Stage Rack",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Wireless System",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "IEM",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Microfone",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Backline",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Cat cable",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Power cable",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "XLR",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Powercon",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "SpeaconCat cable",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "IBP",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Other",
+                                "color": "blue"
+                            },
+                            //------------ Light --------------------------------
                             {
                                 "name": "Light",
                                 "color": "yellow"
