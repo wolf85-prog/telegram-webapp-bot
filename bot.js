@@ -573,7 +573,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                             count_name= 0;
                             if (databaseBlock) {
                                 databaseBlock.map((db) => {
-                                    if (value.cat === db.cat) {
+                                    if (value.cat === db.category) {
                                         if (db.subname) {
                                             count_name++               
                                         }else {
