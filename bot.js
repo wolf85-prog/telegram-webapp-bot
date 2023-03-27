@@ -678,6 +678,17 @@ bot.on('message', async (msg) => {
                     let arr_count = [] 
                     let arr_all = [] 
 
+                    const needList = []
+                    if (project2.spec) {
+                        needList = project2.spec
+                        console.log("Специалисты: ", needList)
+                    } else if (project2.equipment) {
+                        needList = project2.equipment
+                        console.log("Оборудование: ", needList)
+                    }
+    
+                    console.log("needList: ", needList)
+
     
                     // повторить с интервалом 1 минуту
                     let timerId = setInterval(async() => {
@@ -691,23 +702,12 @@ bot.on('message', async (msg) => {
     
                             arr_count = [] 
     
-                            const needList = []
-                            if (project2.spec) {
-                                needList = project2.spec
-                            } else if (project2.equipment) {
-                                needList = project2.equipment
-                            }
-    
-                            console.log("needList: ", needList)
-    
                             JSON.parse(project2.spec).map((value)=> {
                             
                                 count_fio = 0;
                                 count_title = 0;
                                 if (databaseBlock) {
                                     databaseBlock.map((db) => {
-                                        //console.log("value.spec: ", value.spec)
-                                        //console.log("db.spec: ", db.spec)
                                         if (value.spec === db.spec) {
                                             if (db.fio) {
                                                 count_fio++               
@@ -726,8 +726,6 @@ bot.on('message', async (msg) => {
                                 }
                                 arr_count.push(obj)                                     
                             })
-    
-                            //console.log("arr_count: ", arr_count)
     
                             //сохранение массива в 2-х элементный массив
                             if (i % 2 == 0) {
