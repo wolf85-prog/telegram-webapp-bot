@@ -461,7 +461,15 @@ bot.on('message', async (msg) => {
 
         // команда запуска получения отчетов
         if (text === '/startgetreports') {
-            
+
+            const project2 = 'bd040741-c0c3-4091-b5f9-380bf111e9ef'; //'630297e3-0b77-4317-9064-a5d45537b177'
+
+            if (JSON.parse(project2.spec).length > 0) {
+                console.log("Специалисты: ", project2.spec)
+            } else if (JSON.parse(project2.equipment).length > 0) {
+                console.log("Оборудование: ", project2.equipment)
+            }
+
         }
 
         //рассылка
@@ -480,7 +488,7 @@ bot.on('message', async (msg) => {
 Контакты: +7 (499) 500-14-11`);
                 })
             
-            }
+        }
 
 
 //--------------------------------------------------------------------------------------------------
