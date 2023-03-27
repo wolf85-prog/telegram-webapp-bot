@@ -678,16 +678,11 @@ bot.on('message', async (msg) => {
                     let arr_count = [] 
                     let arr_all = [] 
 
-                    let needList = []
-                    if (project2.spec) {
-                        needList = project2.spec
-                        console.log("Специалисты: ", needList)
-                    } else if (project2.equipment) {
-                        needList = project2.equipment
-                        console.log("Оборудование: ", needList)
+                    if (JSON.parse(project2.spec).length > 0) {
+                        console.log("Специалисты: ", project2.spec)
+                    } else if (JSON.parse(project2.equipment).length > 0) {
+                        console.log("Оборудование: ", project2.equipment)
                     }
-    
-                    console.log("needList: ", needList)
 
     
                     // повторить с интервалом 1 минуту
