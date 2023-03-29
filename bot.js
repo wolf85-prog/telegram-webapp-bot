@@ -740,7 +740,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
 
                         socket.emit("addUser", chatId)
                         socket.on("getUsers", users => {
-                            console.log("users from bot: ", users);
+                            //console.log("users from bot: ", users);
                         })
 
                         socket.emit("sendMessage", {
@@ -791,7 +791,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
 
                         socket.emit("addUser", chatId)
                         socket.on("getUsers", users => {
-                            console.log("users from bot: ", users);
+                            //console.log("users from bot: ", users);
                         })
 
                         socket.emit("sendMessage", {
@@ -1055,9 +1055,6 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                 });
 
                 socket.emit("addUser", chatId)
-                socket.on("getUsers", users => {
-                    console.log("users from bot: ", users);
-                })
 
                 socket.emit("sendMessage", {
                     senderId: chatId,
