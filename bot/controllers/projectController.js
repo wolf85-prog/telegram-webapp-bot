@@ -12,7 +12,7 @@ async function getProjects() {
         const responseResults = response.results.map((page) => {
             return {
                id: page.id,
-            //    title: page.properties.Name.title[0]?.plain_text,
+               title: page.properties.Name.title[0]?.plain_text,
             //    time: page.properties.Date.date,
             //    time_start: page.properties.Date.date.start,
             //    time_created: page.created_time,
