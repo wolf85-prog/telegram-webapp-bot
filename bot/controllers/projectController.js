@@ -16,12 +16,12 @@ async function getProjects() {
             //    time: page.properties.Date.date,
             //    time_start: page.properties.Date.date.start,
             //    time_created: page.created_time,
-            //    geo: '',//page.properties.Address.rollup.array,
-            //    teh: page.properties.TechZadanie.rich_text,
-            //    status_id: page.properties.Status.select,
-            //    manager: page.properties.Manager.relation[0]?.id,
-            //    company: page.properties.Company.relation[0]?.id,
-            //    worklist:'',
+               geo: '',//page.properties.Address.rollup.array,
+               teh: page.properties.TechZadanie.rich_text,
+               status_id: page.properties.Status.select,
+               manager: page.properties.Manager.relation[0]?.id,
+               company: page.properties.Company.relation[0]?.id,
+               worklist:'',
             };
         });
 
