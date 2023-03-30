@@ -239,31 +239,6 @@ module.exports = async function newDatabase_3(parent_page_id) {
                                 "name": "Документальная съемка",
                                 "color": "yellow"
                             },
-                            //-------- Games ------------------------------
-                            {
-                                "name": "Games",
-                                "color": "orange"
-                            },
-                            {
-                                "name": "Аттракционы",
-                                "color": "orange"
-                            },
-                            {
-                                "name": "Надувные фигуры",
-                                "color": "orange"
-                            },
-                            {
-                                "name": "Игровые автоматы",
-                                "color": "orange"
-                            },
-                            {
-                                "name": "Активности",
-                                "color": "orange"
-                            },
-                            {
-                                "name": "Настольные игры",
-                                "color": "orange"
-                            },
                             //-------- Party ------------------------------
                             {
                                 "name": "Party",
@@ -296,6 +271,36 @@ module.exports = async function newDatabase_3(parent_page_id) {
                             {
                                 "name": "Go-Go",
                                 "color": "green"
+                            },
+                             //-------- Games ------------------------------
+                             {
+                                "name": "Games",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "Аттракционы",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "Надувные фигуры",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "Игровые автоматы",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "Активности",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "Настольные игры",
+                                "color": "orange"
+                            },
+                             //-------- Blacklist ------------------------------
+                             {
+                                "name": "Blacklist",
+                                "color": "gray"
                             },
                         ]
                     }
