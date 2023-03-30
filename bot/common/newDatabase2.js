@@ -298,6 +298,11 @@ module.exports = async function newDatabase(parent_page_id, worklist) {
                                 "name": "Настольные игры",
                                 "color": "orange"
                             },
+                             //-------- Blacklist ------------------------------
+                             {
+                                "name": "Blacklist",
+                                "color": "gray"
+                            },
                         ]
                     }
                 },
