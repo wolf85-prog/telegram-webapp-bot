@@ -27,7 +27,7 @@ module.exports = async function addProject(title, time, teh, managerId, companyI
                         "time_zone": "Europe/Moscow"
                     }
                 },
-                TechZadanie: {
+                TechClient: {
                     type: 'rich_text',
                     rich_text: [
                         {
