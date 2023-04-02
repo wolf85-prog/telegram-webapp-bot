@@ -898,7 +898,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
 
                             if (blockId === 'undefined') { 
                                 console.log("Блок не найден!")
-                                /console.log("databaseBlock не найден!")
+                                console.log("databaseBlock не найден!")
                             }
 
                             //if (blockId !== 'undefined') { 
