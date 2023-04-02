@@ -908,11 +908,14 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                                 arr_count = [] 
 
                                 JSON.parse(project2.spec).map((value)=> {
+
+                                    console.log("value: ", value)
                                 
                                     count_fio = 0;
                                     count_title = 0;
                                     if (databaseBlock) {
                                         databaseBlock.map((db) => {
+                                            console.log("db: ", db)
                                             if (value.spec === db.spec) {
                                                 if (db.fio) {
                                                     count_fio++               
