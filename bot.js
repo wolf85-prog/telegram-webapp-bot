@@ -898,7 +898,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
 
                             //if (blockId !== 'undefined') { 
                                 let databaseBlock = await getDatabaseId(blockId); 
-                                console.log("databaseBlock: ", JSON.stringify(databaseBlock))
+                                //console.log("databaseBlock: ", JSON.stringify(databaseBlock))
 
                                 JSON.parse(project2.spec).map((value)=> {
                                     console.log("value: ", value)                                
@@ -927,8 +927,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                                     }
                                     arr_count.push(obj)                                     
                                 })
-
-                                console.log("arr_count (spec): ", arr_count)
+                                //console.log("arr_count (spec): ", arr_count)
 
                                 //сохранение массива в 2-х элементный массив
                                 if (i % 2 == 0) {
