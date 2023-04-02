@@ -892,23 +892,15 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
 // начало цикла Специалисты ----------------------------------------------------------------------
                         // повторить с интервалом 1 минуту
                         let timerId = setInterval(async() => {
-
+                            arr_count = [] 
                             const blockId = await getBlocks(project2.projectId);
                             console.log("blockId " + i + ": " + blockId)
 
-                            if (blockId === 'undefined') { 
-                                console.log("Блок не найден!")
-                                console.log("databaseBlock не найден!")
-                            }
-
                             //if (blockId !== 'undefined') { 
                                 let databaseBlock = await getDatabaseId(blockId); 
-                                //console.log("databaseBlock: ", JSON.stringify(databaseBlock))
-
-                                arr_count = [] 
+                                console.log("databaseBlock: ", JSON.stringify(databaseBlock))
 
                                 JSON.parse(project2.spec).map((value)=> {
-
                                     console.log("value: ", value)
                                 
                                     count_fio = 0;
