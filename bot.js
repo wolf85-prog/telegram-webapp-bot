@@ -901,8 +901,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                                 console.log("databaseBlock: ", JSON.stringify(databaseBlock))
 
                                 JSON.parse(project2.spec).map((value)=> {
-                                    console.log("value: ", value)
-                                
+                                    console.log("value: ", value)                                
                                     count_fio = 0;
                                     count_title = 0;
                                     if (databaseBlock) {
@@ -916,6 +915,8 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                                                 }  
                                             }
                                         })
+                                    } else {
+                                        console.log("База данных не найдена")
                                     }
                                     
                                     const obj = {
