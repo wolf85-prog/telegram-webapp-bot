@@ -896,7 +896,12 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                             const blockId = await getBlocks(project2.projectId);
                             console.log("blockId " + i + ": " + blockId)
 
-                            if (blockId !== 'undefined') { 
+                            if (blockId === 'undefined') { 
+                                console.log("Блок не найден!")
+                                /console.log("databaseBlock не найден!")
+                            }
+
+                            //if (blockId !== 'undefined') { 
                                 let databaseBlock = await getDatabaseId(blockId); 
                                 //console.log("databaseBlock: ", JSON.stringify(databaseBlock))
 
@@ -927,6 +932,8 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                                     arr_count.push(obj)                                     
                                 })
 
+                                console.log("arr_count (spec): ", arr_count)
+
                                 //сохранение массива в 2-х элементный массив
                                 if (i % 2 == 0) {
                                     arr_all[0] = arr_count
@@ -950,10 +957,10 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
 
                                 i++ 
 
-                            }                   
-                            else {
-                                console.log('Блок не найден!')
-                            }
+                            //}                   
+                            //else {
+                            //    console.log('Блок не найден!')
+                            //}
 
                         }, 60000); //каждую 1 минуту
 
@@ -968,7 +975,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                             const blockId = await getBlocks(project2.projectId);
                             console.log("blockId " + i + ": " + blockId)
 
-                            if (blockId !== 'undefined') { 
+                            //if (blockId !== 'undefined') { 
                                 let databaseBlock = await getDatabaseId(blockId); 
                                 //console.log("databaseBlock: ", JSON.stringify(databaseBlock))
 
@@ -998,6 +1005,8 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                                     arr_count.push(obj)                                     
                                 })
 
+                                console.log("arr_count (equipment): ", arr_count)
+
                                 //сохранение массива в 2-х элементный массив
                                 if (i % 2 == 0) {
                                     arr_all[0] = arr_count
@@ -1021,10 +1030,10 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
 
                             i++ 
 
-                        }                   
-                        else {
-                            console.log('Блок не найден!')
-                        }
+                        //}                   
+                        // else {
+                        //     console.log('Блок не найден!')
+                        // }
 
                        
 
