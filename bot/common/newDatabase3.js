@@ -310,12 +310,35 @@ module.exports = async function newDatabase_3(parent_page_id) {
                     "type": "checkbox",
                     "checkbox": {}
                 },
-                "5. Комментарий": {
+                "5. КомТег": {
+                    "multi_select": {
+                        "options": [
+                            {
+                                "name": "Опоздание",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Невыход",
+                                "color": "yellow"
+                            },
+                            {
+                                "name": "Не компетентен",
+                                "color": "green"
+                            },
+                            {
+                                "name": "Нарушение субординации",
+                                "color": "red"
+                            },
+                            {
+                                "name": "Нетрезвый вид",
+                                "color": "purple"
+                            },
+                        ]
+                    }
+                },
+                "6. Комментарий": {
                     "rich_text": {}
                 },
-                "6. Рейтинг": {
-                    "rich_text": {}
-                }
             }
         }
 

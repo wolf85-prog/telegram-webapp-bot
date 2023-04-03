@@ -34,7 +34,7 @@ module.exports = async function addDate(blockId, day) {
                 Date : {
                     type: 'date',                   
                     date: {
-                        "start": "2023-01-01T00:00:00.000",
+                        "start": "2023-04-01T00:00:00.000",
                         "end": null,
                         "time_zone": "Europe/Moscow"
                     }
