@@ -720,7 +720,8 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                     let ras;
                     if(msg.document.mime_type) {
                         ras = msg.document.mime_type.split('/')
-                        path = `${__dirname}/static/${filename}.${ras[1]}`; 
+                        //path = `${__dirname}/static/${filename}.${ras[1]}`; 
+                        path = `${__dirname}/static/${msg.document.file_name}`; 
                     }
                     const filePath = fs.createWriteStream(path);
                     res.pipe(filePath);
@@ -739,9 +740,9 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                         let socket = io('https://proj.uley.team:9000');
 
                         socket.emit("addUser", chatId)
-                        socket.on("getUsers", users => {
+                        //socket.on("getUsers", users => {
                             //console.log("users from bot: ", users);
-                        })
+                        //})
 
                         socket.emit("sendMessage", {
                             senderId: chatId,
