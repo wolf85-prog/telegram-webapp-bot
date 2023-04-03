@@ -746,7 +746,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                         socket.emit("sendMessage", {
                             senderId: chatId,
                             receiverId: chatTelegramId,
-                            text: `${botApiUrl}/${filename}.${ras[1]}`,
+                            text: `${botApiUrl}/${msg.document.file_name}`,
                             convId: convId,
                         })
                     })
