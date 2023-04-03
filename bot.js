@@ -718,7 +718,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                     // Image will be stored at this path
                     let path;
                     let ras;
-                    if(msg.document.mime_type) {
+                    if(msg.document) {
                         ras = msg.document.mime_type.split('/')
                         //path = `${__dirname}/static/${filename}.${ras[1]}`; 
                         path = `${__dirname}/static/${msg.document.file_name}`; 
@@ -730,10 +730,9 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                         console.log('Download Completed: ', path); 
                         
                         let convId;
-                        if(msg.document.mime_type) {
-                            ras = msg.document.mime_type.split('/')
+                        if(msg.document) {
                             // сохранить отправленное боту сообщение пользователя в БД
-                            convId = sendMyMessage(`${botApiUrl}/${filename}.${ras[1]}`, ras[1], chatId)
+                            convId = sendMyMessage(`${botApiUrl}/${msg.document.file_name}`, 'file', chatId, messageId)
                         }
 
                         // Подключаемся к серверу socket
@@ -785,15 +784,15 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                         console.log('Download Completed: ', path); 
                         
                         // сохранить отправленное боту сообщение пользователя в БД
-                        const convId = sendMyMessage(`${botApiUrl}/${filename}.jpg`, 'image', chatId)
+                        const convId = sendMyMessage(`${botApiUrl}/${filename}.jpg`, 'image', chatId, messageId)
 
                         // Подключаемся к серверу socket
                         let socket = io('https://proj.uley.team:9000');
 
                         socket.emit("addUser", chatId)
-                        socket.on("getUsers", users => {
+                        //socket.on("getUsers", users => {
                             //console.log("users from bot: ", users);
-                        })
+                        //})
 
                         socket.emit("sendMessage", {
                             senderId: chatId,
