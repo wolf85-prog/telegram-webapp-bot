@@ -529,8 +529,8 @@ bot.on('message', async (msg) => {
         // команда запуска получения отчетов
         //if (text === '/startgetreports') {
         if(text.includes('/startgetreports')) {
-            const chars = str.split(' ');
-            console.log(chars[1])
+            const project = text.split(' ');
+            console.log(project[1])
 
             //const project2 = 'bd040741-c0c3-4091-b5f9-380bf111e9ef'; 
             //const project2 = await Project.findOne({where:{projectId: 'bd040741-c0c3-4091-b5f9-380bf111e9ef'}})//'630297e3-0b77-4317-9064-a5d45537b177'
