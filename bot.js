@@ -238,6 +238,17 @@ async function addProject(title, time, teh, managerId, companyId, worklist, equi
                         }
                         ],
                 },
+                TechPoster: {
+                    type: 'rich_text',
+                    rich_text: [
+                        {
+                            type: 'text',
+                            text: {
+                                content: 'Данные | Данные | Данные * 10 — 12 часов * 0 000.00 — 0 000.00 руб/час ',
+                            },
+                        }
+                        ],
+                },
                 Status: {
                     type: 'select',
                     select: {
@@ -335,6 +346,17 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
                             type: 'text',
                             text: {
                                 content: teh,
+                            },
+                        }
+                        ],
+                },
+                TechPoster: {
+                    type: 'rich_text',
+                    rich_text: [
+                        {
+                            type: 'text',
+                            text: {
+                                content: 'Данные | Данные | Данные * 10 — 12 часов * 0 000.00 — 0 000.00 руб/час ',
                             },
                         }
                         ],
