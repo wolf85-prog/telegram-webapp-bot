@@ -533,7 +533,7 @@ bot.on('message', async (msg) => {
             const project2 = await Project.findOne({where:{projectId: 'bd040741-c0c3-4091-b5f9-380bf111e9ef'}})//'630297e3-0b77-4317-9064-a5d45537b177'
 
             //начать получать отчеты
-            console.log('START GET REPORTS')
+            console.log('START GET TEST REPORTS')
 
             const d = new Date(project2.datestart);
             const year = d.getFullYear();
@@ -923,12 +923,12 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                                 //console.log("databaseBlock: ", JSON.stringify(databaseBlock))
 
                                 JSON.parse(project2.spec).map((value)=> {
-                                    console.log("value: ", value)                                
+                                    //console.log("value: ", value)                                
                                     count_fio = 0;
                                     count_title = 0;
                                     if (databaseBlock) {
                                         databaseBlock.map((db) => {
-                                            console.log("db: ", db)
+                                            //console.log("db: ", db)
                                             if (value.spec === db.spec) {
                                                 if (db.fio) {
                                                     count_fio++               
@@ -1022,7 +1022,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                                     arr_count.push(obj)                                     
                                 })
 
-                                console.log("arr_count (equipment): ", arr_count)
+                                //console.log("arr_count (equipment): ", arr_count)
 
                                 //сохранение массива в 2-х элементный массив
                                 if (i % 2 == 0) {
