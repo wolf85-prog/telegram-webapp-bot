@@ -937,20 +937,25 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
   
   //Ответ на нажатие кнопок настройки и информаци
   bot.on('callback_query', msg => {
-      const data = msg.data;
-      const chatId = msg.message.chat.id;
+    const data = msg.data;
+    const chatId = msg.message.chat.id;
   
-      if (data === '/menu') {
-          return bot.sendMessage(chatId, 'Смотрите и создавайте Notion-проекты в web-приложении прямо из мессенджера Telegram.', {
-              reply_markup: ({
-                  inline_keyboard:[
-                      [{text: 'Информация', callback_data:'Информация'}, {text: 'Настройки', callback_data:'Настройки'}],
-                      [{text: 'Открыть Notion-проекты', web_app: {url: webAppUrl}}],
-                  ]
-              })
-          })
-      }
-      bot.sendMessage(chatId, `Вы нажали кнопку ${data}`, backOptions)
+    if (data === '/menu') {
+        return bot.sendMessage(chatId, 'Смотрите и создавайте Notion-проекты в web-приложении прямо из мессенджера Telegram.', {
+            reply_markup: ({
+                inline_keyboard:[
+                    [{text: 'Информация', callback_data:'Информация'}, {text: 'Настройки', callback_data:'Настройки'}],
+                    [{text: 'Открыть Notion-проекты', web_app: {url: webAppUrl}}],
+                ]
+            })
+        })
+    }
+
+    if (data === '/report') {
+        return bot.sendMessage(chatGiaId, 'Пользователь нажал кнопку')
+    }
+
+    bot.sendMessage(chatId, `Вы нажали кнопку ${data}`, backOptions)
   });
 
 
