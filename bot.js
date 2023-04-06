@@ -10,6 +10,7 @@ const { Op } = require('sequelize')
 // web-приложение
 const webAppUrl = process.env.WEB_APP_URL;
 const botApiUrl = process.env.REACT_APP_API_URL
+const socketUrl = process.env.SOCKET_APP_URL
 
 //socket.io
 const {io} = require("socket.io-client")
@@ -567,7 +568,7 @@ bot.on('message', async (msg) => {
                         }
 
                         // Подключаемся к серверу socket
-                        let socket = io('https://proj.uley.team:9000');
+                        let socket = io(socketUrl);
 
                         socket.emit("addUser", chatId)
                         //socket.on("getUsers", users => {
@@ -618,7 +619,7 @@ bot.on('message', async (msg) => {
                         const convId = sendMyMessage(`${botApiUrl}/${filename}.jpg`, 'image', chatId, messageId)
 
                         // Подключаемся к серверу socket
-                        let socket = io('https://proj.uley.team:9000');
+                        let socket = io(socketUrl);
 
                         socket.emit("addUser", chatId)
                         //socket.on("getUsers", users => {
@@ -884,7 +885,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                 console.log("convId: ", convId)
 
                 // Подключаемся к серверу socket
-                let socket = io('https://proj.uley.team:9000');
+                let socket = io(socketUrl);
                 socket.on("welcome", async message=> {
                     console.log(message)
                 });
@@ -905,7 +906,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                 const convId = sendMyMessage(text, 'text', chatId, messageId)
 
                 // Подключаемся к серверу socket
-                let socket = io('https://proj.uley.team:9000');
+                let socket = io(socketUrl);
 
                 socket.emit("addUser", chatId)
                 socket.on("getUsers", users => {
@@ -953,7 +954,18 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
 
     if (data === '/report') {
         //отправить сообщение о создании проекта в админ-панель
-        return sendMyMessage('Пользователь нажал кнопку в рассылке', "text", chatId)
+        const convId = sendMyMessage('Пользователь нажал кнопку в рассылке', "text", chatId)
+
+        // Подключаемся к серверу socket
+        let socket = io(socketUrl);
+        socket.emit("addUser", chatId)
+        socket.emit("sendMessage", {
+            senderId: chatId,
+            receiverId: chatTelegramId,
+            text: 'Пользователь нажал кнопку в рассылке',
+            convId: convId,
+        })
+
         //return bot.sendMessage(chatId, 'Пользователь нажал кнопку в рассылке')
     }
 
