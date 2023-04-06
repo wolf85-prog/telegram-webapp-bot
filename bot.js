@@ -952,7 +952,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
     }
 
     if (data === '/report') {
-        return bot.sendMessage(chatTelegramId, 'Пользователь нажал кнопку в рассылке')
+        return bot.sendMessage(chatId, 'Пользователь нажал кнопку в рассылке')
     }
 
     bot.sendMessage(chatId, `Вы нажали кнопку ${data}`, backOptions)
