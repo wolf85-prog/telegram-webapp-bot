@@ -952,7 +952,9 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
     }
 
     if (data === '/report') {
-        return bot.sendMessage(chatId, 'Пользователь нажал кнопку в рассылке')
+        //отправить сообщение о создании проекта в админ-панель
+        return sendMyMessage('Пользователь нажал кнопку в рассылке', "text", chatId)
+        //return bot.sendMessage(chatId, 'Пользователь нажал кнопку в рассылке')
     }
 
     bot.sendMessage(chatId, `Вы нажали кнопку ${data}`, backOptions)
