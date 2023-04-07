@@ -5,24 +5,11 @@ const databaseId = process.env.NOTION_DATABASE_ID
 
 async function getProjects() {
     try {
-        let results = []
-
-        const data = await notion.databases.query({
+        const response = await notion.databases.query({
             database_id: databaseId
         });
 
-        results = [...data.results]
-
-        while(data.has_more) {
-            data = await notion.databases.query({
-                database_id: databaseManagerId,
-                start_cursor: data.next_cursor,
-            }); 
-
-            results = [...results, ...data.results];
-        }
-
-        const projects = results.map((page) => {
+        const responseResults = response.results.map((page) => {
             return {
                id: page.id,
                title: page.properties.Name.title[0]?.plain_text,
@@ -38,7 +25,7 @@ async function getProjects() {
             };
         });
 
-        return projects;
+        return responseResults;
     } catch (error) {
         console.error(error.body)
     }
