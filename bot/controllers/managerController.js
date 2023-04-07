@@ -74,6 +74,7 @@ async function getManagers() {
                fio: manager.properties["ФИО"].title[0]?.plain_text,
                tgID: manager.properties.TelegramID.rich_text[0]?.plain_text,
                phone: manager.properties["Основной"].phone_number,
+               comment: manager.properties["Комментарий"].rich_text[0]?.plain_text,
             };
         });
 
