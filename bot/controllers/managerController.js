@@ -74,10 +74,36 @@ async function getManagers() {
                fio: manager.properties["ФИО"].title[0]?.plain_text,
                tgID: manager.properties.TelegramID.rich_text[0]?.plain_text,
                phone: manager.properties["Основной"].phone_number,
+               city: manager.properties["Основной"].phone_number,
             };
         });
 
         return managers;
+    } catch (error) {
+        console.error(error.body)
+    }
+}
+
+async function getManagers2() {
+    try {
+        let results = []
+
+        let data = await notion.databases.query({
+            database_id: databaseManagerId
+        });
+
+        results = [...data.results]
+
+        while(data.has_more) {
+            data = await notion.databases.query({
+                database_id: databaseManagerId,
+                start_cursor: data.next_cursor,
+            }); 
+
+            results = [...results, ...data.results];
+        }
+
+        return results;
     } catch (error) {
         console.error(error.body)
     }
@@ -159,6 +185,11 @@ class ManagerController {
 
     async managers(req, res) {
         const managers = await getManagers();
+        res.json(managers);
+    }
+
+    async managers2(req, res) {
+        const managers = await getManagers2();
         res.json(managers);
     }
 

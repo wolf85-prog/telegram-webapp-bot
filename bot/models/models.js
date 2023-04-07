@@ -47,4 +47,33 @@ const Project = sequelize.define('project', {
     chatId: {type: DataTypes.STRING},
 })
 
-module.exports = {User, UserBot, Message, Conversation, Project}
+const Distribution = sequelize.define('distribution', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}, 
+    name: {type: DataTypes.STRING},  //название рассылки
+    text: {type: DataTypes.STRING}, //текст сообщения;
+    image: {type: DataTypes.STRING}, //ссылка на картинку;
+    button: {type: DataTypes.STRING}, //текст кнопки;
+    receivers: {type: DataTypes.STRING}, //массив получателей;
+    datestart: {type: DataTypes.STRING},  //дата начала рассылки
+    delivered: {type: DataTypes.BOOLEAN}, //доставлено
+})
+
+const Report = sequelize.define('report', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}, 
+    name: {type: DataTypes.STRING},  //название проекта
+    text: {type: DataTypes.STRING}, //текст сообщения;
+    receiverId: {type: DataTypes.STRING}, //чат-id получателя;
+    date: {type: DataTypes.STRING},  //дата отправки отчета
+    delivered: {type: DataTypes.BOOLEAN}, //доставлено
+})
+
+
+module.exports = {
+    User, 
+    UserBot, 
+    Message, 
+    Conversation, 
+    Project, 
+    Distribution,
+    Report
+}
