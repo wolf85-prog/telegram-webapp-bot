@@ -18,6 +18,7 @@ router.get("/projects/:id", projectController.projectsId);
 
 //get MANAGERS
 router.get("/managers", managerController.managers);
+router.get("/managers2", managerController.managers2);
 router.get("/managers/:id", managerController.managersId);
 router.get("/manager/:id", managerController.companyId);
 
