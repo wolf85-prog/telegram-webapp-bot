@@ -794,9 +794,8 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                                     const convId = sendMyMessage(text, 'text', project2.chatId, messageId)
 
                                     // Подключаемся к серверу socket
-                                    let socket = io(socketUrl);
-
-                                    socket.emit("addUser", project2.chatId)
+                                    //let socket = io(socketUrl);
+                                    //socket.emit("addUser", project2.chatId)
 
                                     //отправить сообщение в админку
                                     socket.emit("sendMessage", {
