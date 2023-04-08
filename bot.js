@@ -652,7 +652,7 @@ bot.on('message', async (msg) => {
                 await bot.sendMessage(chatGiaId, `${text} \n \n от ${firstname} ${lastname} ${chatId}`)
 
                 //отправить сообщение о создании проекта в админ-панель
-                sendMyMessage(text, "text", chatId, messageId)
+                const convId = sendMyMessage(text, "text", chatId, messageId)
                  // Подключаемся к серверу socket
                 let socket = io(socketUrl);
                  socket.emit("addUser", chatId)
@@ -794,8 +794,8 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                                     const convId = sendMyMessage(text, 'text', project2.chatId, messageId)
 
                                     // Подключаемся к серверу socket
-                                    //let socket = io(socketUrl);
-                                    //socket.emit("addUser", project2.chatId)
+                                    let socket = io(socketUrl);
+                                    socket.emit("addUser", project2.chatId)
 
                                     //отправить сообщение в админку
                                     socket.emit("sendMessage", {
