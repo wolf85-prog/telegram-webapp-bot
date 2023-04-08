@@ -653,6 +653,17 @@ bot.on('message', async (msg) => {
 
                 //отправить сообщение о создании проекта в админ-панель
                 sendMyMessage(text, "text", chatId, messageId)
+                 // Подключаемся к серверу socket
+                let socket = io(socketUrl);
+                 socket.emit("addUser", chatId)
+                 //отправить сообщение в админку
+                 socket.emit("sendMessage", {
+                     senderId: chatId,
+                     receiverId: chatTelegramId,
+                     text: text,
+                     convId: convId,
+                     messageId: messageId,
+                 })
 
                 const specArr = Worklist.map(item => ({
                     spec: item.spec,
