@@ -721,14 +721,13 @@ bot.on('message', async (msg) => {
                     let arr_all = [] 
 
                     if (JSON.parse(project2.spec).length > 0) {
-// начало цикла Специалисты ----------------------------------------------------------------------
+                        // начало цикла Специалисты ----------------------------------------------------------------------
                         // повторить с интервалом 1 минуту
                         let timerId = setInterval(async() => {
                             arr_count = [] 
                             const blockId = await getBlocks(project2.projectId);
                             console.log("blockId " + i + ": " + blockId)
 
-                            //if (blockId !== 'undefined') { 
                                 let databaseBlock = await getDatabaseId(blockId); 
                                 //console.log("databaseBlock: ", JSON.stringify(databaseBlock))
 
@@ -771,23 +770,34 @@ bot.on('message', async (msg) => {
                                 var isEqual = JSON.stringify(arr_all[0]) === JSON.stringify(arr_all[1]);
                                 // если есть изменения в составе работников    
                                 if (!isEqual) {
-                                    //отправка сообщения в чат бота
-                                    await bot.sendMessage(project2.chatId, 
-                                    `Запрос на специалистов: 
+                                    const text = `Запрос на специалистов: 
                                         
 ${day}.${month} | ${chas}:${minut} | ${project2.name} | U.L.E.Y
+                                    
+${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
+                                    
+                                    //отправка сообщения в чат бота
+                                    await bot.sendMessage(project2.chatId, text)
 
-${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']'
-        ).join('\n')}`                         
-                                    )
+                                    // сохранить отправленное боту сообщение пользователя в БД
+                                    const convId = sendMyMessage(text, 'text', project2.chatId, messageId)
+
+                                    // Подключаемся к серверу socket
+                                    let socket = io(socketUrl);
+
+                                    socket.emit("addUser", project2.chatId)
+
+                                    //отправить сообщение в админку
+                                    socket.emit("sendMessage", {
+                                        senderId: project2.chatId,
+                                        receiverId: chatTelegramId,
+                                        text: text,
+                                        convId: convId,
+                                        messageId: messageId,
+                                    })
                                 } 
 
                                 i++ 
-
-                            //}                   
-                            //else {
-                            //    console.log('Блок не найден!')
-                            //}
 
                         }, 60000); //каждую 1 минуту
 
@@ -795,7 +805,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                         setTimeout(() => { clearInterval(timerId); }, 15600000); //260 минут                        
                     
                     } else if (JSON.parse(project2.equipment).length > 0) {
-// начало цикла Оборудование ----------------------------------------------------------------------
+                        // начало цикла Оборудование ----------------------------------------------------------------------
                         // повторить с интервалом 1 минуту
                         let timerId = setInterval(async() => {
 
@@ -844,34 +854,40 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                                 var isEqual = JSON.stringify(arr_all[0]) === JSON.stringify(arr_all[1]);
                                 // если есть изменения в составе работников    
                                 if (!isEqual) {
-                                    //отправка сообщения в чат бота
-                                    await bot.sendMessage(project2.chatId, 
-                                        `Запрос на оборудование: 
-                                                            
+                                    const text = `Запрос на специалистов: 
+                                        
 ${day}.${month} | ${chas}:${minut} | ${project2.name} | U.L.E.Y
+                                    
+${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
+                                    
+                                    //отправка сообщения в чат бота
+                                    await bot.sendMessage(project2.chatId, text)
 
-${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_name + '\/' + item.count_title + ' [' + item.title2 + ']'
-        ).join('\n')}`                         
-                                )
-                            } 
+                                    // сохранить отправленное боту сообщение пользователя в БД
+                                    const convId = sendMyMessage(text, 'text', project2.chatId, messageId)
 
-                            i++ 
+                                    // Подключаемся к серверу socket
+                                    let socket = io(socketUrl);
 
-                        //}                   
-                        // else {
-                        //     console.log('Блок не найден!')
-                        // }
+                                    socket.emit("addUser", project2.chatId)
 
-                       
+                                    //отправить сообщение в админку
+                                    socket.emit("sendMessage", {
+                                        senderId: project2.chatId,
+                                        receiverId: chatTelegramId,
+                                        text: text,
+                                        convId: convId,
+                                        messageId: messageId,
+                                    })
+                                } 
+
+                                i++ 
 
         }, 60000); //каждую 1 минуту
 
-
-                    // остановить вывод через 260 минут
-                    setTimeout(() => { clearInterval(timerId); }, 15600000); //260 минут
-
+                        // остановить вывод через 260 минут
+                        setTimeout(() => { clearInterval(timerId); }, 15600000); //260 минут
                     }
-
                                     
                 } catch (error) {
                     console.log(error)
