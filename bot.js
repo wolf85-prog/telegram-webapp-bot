@@ -757,19 +757,19 @@ bot.on('message', async (msg) => {
                                                 }  
                                             }
                                         })
+                                                                        
+                                        const obj = {
+                                            title: value.spec,
+                                            title2: value.cat,
+                                            count_fio: count_fio,
+                                            count_title: value.count,
+                                        }
+                                        arr_count.push(obj)  
+                                        
                                     } else {
                                         console.log("База данных не найдена")
                                     }
-                                    
-                                    const obj = {
-                                        title: value.spec,
-                                        title2: value.cat,
-                                        count_fio: count_fio,
-                                        count_title: value.count,
-                                    }
-                                    arr_count.push(obj)                                     
                                 })
-                                //console.log("arr_count (spec): ", arr_count)
 
                                 //сохранение массива в 2-х элементный массив
                                 if (i % 2 == 0) {
@@ -811,7 +811,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
 
                         }, 60000); //каждую 1 минуту
 
-                        // остановить вывод через 260 минут
+                        // остановить вывод через 260 минут (2 часа 40 минут)
                         setTimeout(() => { clearInterval(timerId); }, 15600000); //260 минут                        
                     
                     } else if (JSON.parse(project2.equipment).length > 0) {
@@ -840,19 +840,19 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                                                     count_name;
                                                 }  
                                             }
-                                        })
-                                    }
+                                        })                                   
                                     
-                                    const obj = {
-                                        title: value.subname,
-                                        title2: value.cat,
-                                        count_name: count_name,
-                                        count_title: value.count,
-                                    }
-                                    arr_count.push(obj)                                     
+                                        const obj = {
+                                            title: value.subname,
+                                            title2: value.cat,
+                                            count_name: count_name,
+                                            count_title: value.count,
+                                        }
+                                        arr_count.push(obj)  
+                                    } else {
+                                        console.log("База данных не найдена")
+                                    }                                   
                                 })
-
-                                //console.log("arr_count (equipment): ", arr_count)
 
                                 //сохранение массива в 2-х элементный массив
                                 if (i % 2 == 0) {
