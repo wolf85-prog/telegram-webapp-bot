@@ -993,7 +993,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
         })
 
 
-        return bot.sendMessage(chatId, 'Вы нажали кнопку')
+        return bot.sendMessage(chatId, 'Ваша заявка принята!')
     }
 
     bot.sendMessage(chatId, `Вы нажали кнопку ${data}`, backOptions)
