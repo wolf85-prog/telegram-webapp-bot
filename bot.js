@@ -528,7 +528,14 @@ bot.on('message', async (msg) => {
         }
 
 
-        //--------------------------------------------------------------------------------------------------
+        // команда Добавить таблицу Претенденты
+        if (text === '/addpretendents') {
+            const project_id = 'e9fcd9a3-726f-4ae7-bc01-a9d2c84a3e0e'; 
+            await newDatabase5(project_id);
+        }
+
+
+//--------------------------------------------------------------------------------------------------
         //обработка документов
         if (msg.document) {
             console.log(msg.document)
@@ -993,7 +1000,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
         })
 
 
-        return bot.sendMessage(chatId, 'Ваша заявка принята!')
+        return bot.sendMessage(chatId, 'Ваша заявка принята! Мы свяжемся с вами в ближайшее время.')
     }
 
     bot.sendMessage(chatId, `Вы нажали кнопку ${data}`, backOptions)
