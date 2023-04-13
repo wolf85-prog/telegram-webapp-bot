@@ -868,3 +868,56 @@
 
 
 // }
+
+
+
+
+
+//newDatabase5
+// "properties": {                
+//     "Name": {
+//         "title": {}
+//     },
+//     "1. Дата": {
+//         "date": {}
+//     },
+//     "2. ФИО": {    
+//         "name": "ФИО",               
+//         "type": "relation",
+//         "relation": {
+//             "database_id": databaseWorkersId,
+//             "single_property": {}
+//         }
+//     },
+//     "3. Специализация": {
+//         "type": "rollup",
+//         "rollup": {
+//             "rollup_property_name": "Specialization",
+//             "relation_property_name": "2. ФИО",
+//             "function": "show_original"
+//         }
+//     },
+//     "4. Ранг": {
+//         "type": "rollup",
+//         "rollup": {
+//             "rollup_property_name": "Rank",
+//             "relation_property_name": "2. ФИО",
+//             "function": "show_original"
+//         }
+//     },
+//     "5. Комментарий": {
+//         "type": "rollup",
+//         "rollup": {
+//             "rollup_property_name": "Комментарии",
+//             "relation_property_name": "2. ФИО",
+//             "function": "show_original"
+//         }
+//     },
+//     "6. Телефон": {
+//         "type": "rollup",
+//         "rollup": {
+//             "rollup_property_name": "Phone",
+//             "relation_property_name": "2. ФИО",
+//             "function": "show_original"
+//         }
+//     },
