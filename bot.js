@@ -402,10 +402,57 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
         console.log("Success! Project not geo added. " + res_id)        
 
         //создание базы данных "График работы"
+        // let result1
+        // let i = 0;
+        // 1)
+        // result1 = await newDatabase1(res_id);
+        // if (!result1) {   
+            // while (i < 10) {
+            //     console.log("Ошибка создания таблицы! Попытка №" + i+1 + "Пробуем еще раз...")
+            //     console.log("Пробуем еще раз...")
+            //     result1 = await newDatabase1(res_id);
+            //     i++;
+            // }
+        //} else {
+            //создание базы данных "Основной состав"
+            // 2)
+            //result2 = await newDatabase2(res_id, worklist);
+            // let i = 0;
+            // if (!result2) {  
+                // while (i < 10) {
+                //     console.log("Ошибка создания таблицы! Попытка №" + i+1 + "Пробуем еще раз...")
+                //     console.log("Пробуем еще раз...")
+                //     result2 = await newDatabase2(res_id);
+                //     i++;
+                // }
+            //} else {
+                //создание базы данных "Запасной состав"
+                // 3)
+                //result3 = await newDatabase3(res_id, worklist);
+                // let i = 0;
+                // if (!result3) {  
+                    // while (i < 10) {
+                    //     console.log("Ошибка создания таблицы! Попытка №" + i+1 + "Пробуем еще раз...")
+                    //     console.log("Пробуем еще раз...")
+                    //     result3 = await newDatabase3(res_id);
+                    //     i++;
+                    // }
+                //} else {
+            //}
+        //}
+
         await newDatabase1(res_id);
+        
+        //создание базы данных "Основной состав"
         await newDatabase2(res_id, worklist);
+        
+        //создание базы данных "Запасной состав"
         await newDatabase3(res_id);
+        
+        //создание базы данных "Претенденты"
         await newDatabase5(res_id);
+        
+        //создание базы данных "Оборудование"
         await newDatabase4(res_id, equipmentlist);
 
         return res_id;

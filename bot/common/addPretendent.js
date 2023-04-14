@@ -9,7 +9,18 @@ module.exports = async function addPretendent(blockId) {
         const response = await notion.pages.create({
             parent: { database_id: blockId },
             properties: {
-                Name: {
+                "1. Ставка": {
+                    type: 'rich_text',
+                    rich_text: [
+                        {
+                            type: 'text',
+                            text: {
+                                content: "0 000.00 — 0 000.00",
+                            },
+                        }
+                    ],
+                },
+                "2. Тех. задание": {
                     type: "title",
                     title: [
                         {
@@ -30,7 +41,7 @@ module.exports = async function addPretendent(blockId) {
                             "href": null
                         }
                     ]
-                }
+                },
             }
         })
         //console.log(response)
