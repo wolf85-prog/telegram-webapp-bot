@@ -22,17 +22,14 @@ module.exports = async function newDatabase5(parent_page_id) {
                 }
             ],
             "is_inline": true,
-            "properties": {   
-                // "1. Ставка": {
-                //     "rich_text": {}
-                // },             
-                "2. Тех. задание": {
+            "properties": {                
+                "Name": {
                     "title": {}
                 },
-                "3. Дата": {
+                "1. Дата": {
                     "date": {}
                 },
-                "4. ФИО": {    
+                "2. ФИО": {    
                     "name": "ФИО",               
                     "type": "relation",
                     "relation": {
@@ -40,7 +37,7 @@ module.exports = async function newDatabase5(parent_page_id) {
                         "single_property": {}
                     }
                 },
-                "5. Специализация": {
+                "3. Специализация": {
                     "type": "rollup",
                     "rollup": {
                         "rollup_property_name": "Specialization",
@@ -48,7 +45,7 @@ module.exports = async function newDatabase5(parent_page_id) {
                         "function": "show_original"
                     }
                 },
-                "6. Ранг": {
+                "4. Ранг": {
                     "type": "rollup",
                     "rollup": {
                         "rollup_property_name": "Rank",
@@ -56,7 +53,7 @@ module.exports = async function newDatabase5(parent_page_id) {
                         "function": "show_original"
                     }
                 },
-                "7. Комментарий": {
+                "5. Комментарий": {
                     "type": "rollup",
                     "rollup": {
                         "rollup_property_name": "Комментарии",
@@ -64,7 +61,7 @@ module.exports = async function newDatabase5(parent_page_id) {
                         "function": "show_original"
                     }
                 },
-                "8. Телефон": {
+                "6. Телефон": {
                     "type": "rollup",
                     "rollup": {
                         "rollup_property_name": "Phone",
