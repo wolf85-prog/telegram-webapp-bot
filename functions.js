@@ -945,7 +945,7 @@
 //         "type": "rollup",
 //         "rollup": {
 //             "rollup_property_name": "Specialization",
-//             "relation_property_name": "2. ФИО",
+//             "relation_property_name": "4. ФИО",
 //             "function": "show_original"
 //         }
 //     },
@@ -953,7 +953,7 @@
 //         "type": "rollup",
 //         "rollup": {
 //             "rollup_property_name": "Rank",
-//             "relation_property_name": "2. ФИО",
+//             "relation_property_name": "4. ФИО",
 //             "function": "show_original"
 //         }
 //     },
@@ -961,7 +961,7 @@
 //         "type": "rollup",
 //         "rollup": {
 //             "rollup_property_name": "Комментарии",
-//             "relation_property_name": "2. ФИО",
+//             "relation_property_name": "4. ФИО",
 //             "function": "show_original"
 //         }
 //     },
@@ -969,7 +969,7 @@
 //         "type": "rollup",
 //         "rollup": {
 //             "rollup_property_name": "Phone",
-//             "relation_property_name": "2. ФИО",
+//             "relation_property_name": "4. ФИО",
 //             "function": "show_original"
 //         }
 //     },
