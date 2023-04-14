@@ -29,10 +29,10 @@ module.exports = async function newDatabase5(parent_page_id) {
                 "2. Тех. задание": {
                     "title": {}
                 },
-                "1. Дата": {
+                "3. Дата": {
                     "date": {}
                 },
-                "2. ФИО": {    
+                "4. ФИО": {    
                     "name": "ФИО",               
                     "type": "relation",
                     "relation": {
@@ -40,35 +40,35 @@ module.exports = async function newDatabase5(parent_page_id) {
                         "single_property": {}
                     }
                 },
-                "3. Специализация": {
+                "5. Специализация": {
                     "type": "rollup",
                     "rollup": {
                         "rollup_property_name": "Specialization",
-                        "relation_property_name": "2. ФИО",
+                        "relation_property_name": "4. ФИО",
                         "function": "show_original"
                     }
                 },
-                "4. Ранг": {
+                "6. Ранг": {
                     "type": "rollup",
                     "rollup": {
                         "rollup_property_name": "Rank",
-                        "relation_property_name": "2. ФИО",
+                        "relation_property_name": "4. ФИО",
                         "function": "show_original"
                     }
                 },
-                "5. Комментарий": {
+                "7. Комментарий": {
                     "type": "rollup",
                     "rollup": {
                         "rollup_property_name": "Комментарии",
-                        "relation_property_name": "2. ФИО",
+                        "relation_property_name": "4. ФИО",
                         "function": "show_original"
                     }
                 },
-                "6. Телефон": {
+                "8. Телефон": {
                     "type": "rollup",
                     "rollup": {
                         "rollup_property_name": "Phone",
-                        "relation_property_name": "2. ФИО",
+                        "relation_property_name": "4. ФИО",
                         "function": "show_original"
                     }
                 },
