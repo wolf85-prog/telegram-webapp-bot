@@ -530,7 +530,8 @@ bot.on('message', async (msg) => {
     const text = msg.text;
     const messageId = msg.message_id;
 
-    console.log(msg)
+    console.log("msg: ", msg)
+    console.log("text: ", text)
 
     try {
         // обработка команд
@@ -1055,7 +1056,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
 
 
 // Обработка ошибок, последний middleware
-//app.use(errorHandler)
+app.use(errorHandler)
 
 //-------------------------------------------------------------------------------------------------------------------------------
 const PORT = process.env.PORT || 8000;
