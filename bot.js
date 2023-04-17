@@ -530,8 +530,8 @@ bot.on('message', async (msg) => {
     const text = msg.text;
     const messageId = msg.message_id;
 
-    console.log("msg: ", msg)
-    console.log("text: ", text)
+    //console.log("msg: ", msg)
+    //console.log("text: ", text)
 
     try {
         // обработка команд
@@ -639,7 +639,7 @@ bot.on('message', async (msg) => {
                     })
                 })
             } catch (error) {
-                
+                console.log(error)
             }
         }
 //----------------------------------------------------------------------------------------------------------------          
@@ -692,7 +692,6 @@ bot.on('message', async (msg) => {
             } catch (error) {
                 console.log(error)
             }
-            //await bot.sendMessage(chatId, 'Изображение отправлено администратору!');
         }
 //----------------------------------------------------------------------------------------------------------------      
         
@@ -1009,7 +1008,6 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
         }
 
     } catch (error) {
-        //await bot.sendMessage(chatId, 'Произошла непредвиденная ошибка!');
         console.log('Произошла непредвиденная ошибка! ', error)
     }
     
