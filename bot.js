@@ -697,7 +697,7 @@ bot.on('message', async (msg) => {
 //----------------------------------------------------------------------------------------------------------------      
         
         //обработка сообщений    
-        if ((text || '')[0] !== '/' && text !== 'undefined') {       
+        if ((text || '')[0] !== '/' && text) {       
             if (text.includes("Reply")) {           
                 await bot.sendMessage(text.substring(6, text.indexOf('.')), text.slice(text.indexOf('.') + 2)) 
 
