@@ -27,6 +27,7 @@ const Message = sequelize.define('message', {
     type: {type: DataTypes.STRING},      //тип сообщения;
     is_bot: {type: DataTypes.BOOLEAN},
     messageId: {type: DataTypes.STRING},
+    buttons: {type: DataTypes.STRING},   //названия кнопок;
 })
 
 const Conversation = sequelize.define('conversation', {
