@@ -644,8 +644,9 @@ bot.on('message', async (msg) => {
         }
 //----------------------------------------------------------------------------------------------------------------          
         //обработка изображений
-        if (msg.photo && msg.photo[2]) {
+        if (msg.photo) {
             console.log(msg.photo)
+            console.log(msg.photo.length)
             const image = await bot.getFile(msg.photo[3].file_id);
 
             try {
