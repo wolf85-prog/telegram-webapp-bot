@@ -530,7 +530,7 @@ bot.on('message', async (msg) => {
     const text = msg.text;
     const messageId = msg.message_id;
 
-    //console.log(msg)
+    console.log(msg)
 
     try {
         // обработка команд
@@ -641,7 +641,7 @@ bot.on('message', async (msg) => {
                 
             }
         }
-        
+//----------------------------------------------------------------------------------------------------------------          
         //обработка изображений
         if (msg.photo && msg.photo[3]) {
             console.log(msg.photo)
@@ -1055,7 +1055,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
 
 
 // Обработка ошибок, последний middleware
-app.use(errorHandler)
+//app.use(errorHandler)
 
 //-------------------------------------------------------------------------------------------------------------------------------
 const PORT = process.env.PORT || 8000;
