@@ -788,11 +788,16 @@ bot.on('message', async (msg) => {
 
                     if (JSON.parse(project2.spec).length > 0) {
                         // начало цикла Специалисты ----------------------------------------------------------------------
+                        
+                        // 86400 секунд в дне
+                        var minutCount = 0;
+
                         // повторить с интервалом 1 минуту
                         let timerId = setInterval(async() => {
+                            minutCount++  // a day has passed
                             arr_count = [] 
                             const blockId = await getBlocks(project2.projectId);
-                            console.log("blockId " + i + ": " + blockId)
+                            //console.log("blockId " + i + ": " + blockId)
 
                                 let databaseBlock = await getDatabaseId(blockId); 
                                 //console.log("databaseBlock: ", JSON.stringify(databaseBlock))
@@ -866,8 +871,11 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
 
                         }, 60000); //каждую 1 минуту
 
-                        // остановить вывод через 260 минут (2 часа 40 минут)
-                        setTimeout(() => { clearInterval(timerId); }, 15600000); //260 минут                        
+                        // остановить вывод через 30 дней
+                        if (minutCount == 43200) {
+                            clearInterval(timerId);
+                        }
+                        //setTimeout(() => { clearInterval(timerId); }, 15600000); //260 минут                        
                     
                     } else if (JSON.parse(project2.equipment).length > 0) {
                         // начало цикла Оборудование ----------------------------------------------------------------------
@@ -875,7 +883,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                         let timerId = setInterval(async() => {
 
                             const blockId = await getBlocks(project2.projectId);
-                            console.log("blockId " + i + ": " + blockId)
+                            //console.log("blockId " + i + ": " + blockId)
 
                             //if (blockId !== 'undefined') { 
                                 let databaseBlock = await getDatabaseId(blockId); 
@@ -951,7 +959,12 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
         }, 60000); //каждую 1 минуту
 
                         // остановить вывод через 260 минут
-                        setTimeout(() => { clearInterval(timerId); }, 15600000); //260 минут
+                        //setTimeout(() => { clearInterval(timerId); }, 15600000); //260 минут
+                        
+                        // остановить вывод через 30 дней
+                        if (minutCount == 43200) {
+                            clearInterval(timerId);
+                        }
                     }
                                     
                 } catch (error) {
