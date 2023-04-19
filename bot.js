@@ -846,7 +846,7 @@ ${day}.${month} | ${chas}:${minut} | ${project2.name} | U.L.E.Y
 ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
                                     
                                         //отправка сообщения в чат бота
-                                        bot.sendMessage(project2.chatId, text)
+                                        const response = bot.sendMessage(project2.chatId, text)
 
                                         // сохранить отправленное боту сообщение пользователя в БД
                                         const convId = sendMyMessage(text, 'text', project2.chatId, messageId)
@@ -857,8 +857,8 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                                             name: project2.name,
                                             text: text, 
                                             receiverId: project2.chatId,
-                                            date: typeText,
-                                            delivered:'',
+                                            date: i,
+                                            delivered: response ? true : false,
                                         })
 
                                         // Подключаемся к серверу socket
