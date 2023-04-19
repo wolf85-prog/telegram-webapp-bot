@@ -137,7 +137,7 @@ async function getCompany(id) {
         const company = response.map((item) => {
             return {
                id: item.id,
-               company: item.properties["Название компании"].title[0].text.content,
+               company: item.properties["Название компании"],
             };
         });
 
