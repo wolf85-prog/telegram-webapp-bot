@@ -134,7 +134,14 @@ async function getCompany(id) {
             }
         });
 
-        return response;
+        const company = response.map((item) => {
+            return {
+               id: item.id,
+               company: item.properties["Название компании"].title[0].text.content,
+            };
+        });
+
+        return company;
     } catch (error) {
         console.error(error.body)
     }
