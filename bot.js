@@ -852,14 +852,14 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                                         const convId = sendMyMessage(text, 'text', project2.chatId, messageId)
 
                                         //сохранить отчет в БД
-                                        const reportDB = Report.create(
-                                        {
-                                            name: project2.name,
-                                            text: text, 
-                                            receiverId: project2.chatId,
-                                            date: i,
-                                            delivered: response ? true : false,
-                                        })
+                                        // const reportDB = Report.create(
+                                        // {
+                                        //     name: project2.name,
+                                        //     text: text, 
+                                        //     receiverId: project2.chatId,
+                                        //     date: i,
+                                        //     delivered: response ? true : false,
+                                        // })
 
                                         // Подключаемся к серверу socket
                                         let socket = io(socketUrl);
