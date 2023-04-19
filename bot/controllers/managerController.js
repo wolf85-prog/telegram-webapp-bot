@@ -122,7 +122,7 @@ async function getCompanys() {
     }
 }
 
-async function getCompany() {
+async function getCompany(id) {
     try {
         const response = await notion.databases.query({
             database_id: databaseCompanyId,
@@ -239,7 +239,7 @@ class ManagerController {
 
     async company(req, res) {
         const id = req.params.id; // получаем id
-        console.log(id)
+        //console.log(id)
         const company = await getCompany(id);
         if(company){
             res.json(company);
