@@ -127,8 +127,10 @@ async function getCompany(id) {
         const response = await notion.databases.query({
             database_id: databaseCompanyId,
             "filter": {
-                "property": "id",
-                "id": id
+                "property": "Менеджеры",
+                "relation": {
+                    "contains": id
+                },
             }
         });
 
