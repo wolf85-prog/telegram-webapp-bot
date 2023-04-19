@@ -122,6 +122,22 @@ async function getCompanys() {
     }
 }
 
+async function getCompany() {
+    try {
+        const response = await notion.databases.query({
+            database_id: databaseCompanyId,
+            "filter": {
+                "property": "id",
+                "id": id
+            }
+        });
+
+        return response;
+    } catch (error) {
+        console.error(error.body)
+    }
+}
+
 
 async function createManager(id, firstname, lastname) {
     try {
@@ -219,6 +235,16 @@ class ManagerController {
     async companys(req, res) {
         const companys = await getCompanys();
         res.json(companys);
+    }
+
+    async company(req, res) {
+        const company = await getCompany(id);
+        if(company){
+            res.json(company);
+        }
+        else{
+            res.json({});
+        }
     }
 
 

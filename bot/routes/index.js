@@ -27,6 +27,7 @@ router.post("/manager", managerController.create);
 
 //get COMPANYS
 router.get("/companys", managerController.companys);
+router.get("/company/:id", managerController.company);
 
 
 //get DATABASE (специалисты)
