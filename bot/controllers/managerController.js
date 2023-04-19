@@ -238,6 +238,7 @@ class ManagerController {
     }
 
     async company(req, res) {
+        const id = req.params.id; // получаем id
         const company = await getCompany(id);
         if(company){
             res.json(company);
