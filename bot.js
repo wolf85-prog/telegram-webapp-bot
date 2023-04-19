@@ -57,7 +57,7 @@ const path = require('path')
 
 //подключение к БД PostreSQL
 const sequelize = require('./bot/connections/db')
-const {UserBot, Message, Conversation, Project} = require('./bot/models/models')
+const {UserBot, Message, Conversation, Project, Report} = require('./bot/models/models')
 
 const app = express();
 
@@ -799,76 +799,88 @@ bot.on('message', async (msg) => {
                             const blockId = await getBlocks(project2.projectId);
                             //console.log("blockId " + i + ": " + blockId)
 
-                                let databaseBlock = await getDatabaseId(blockId); 
-                                //console.log("databaseBlock: ", JSON.stringify(databaseBlock))
+                            let databaseBlock = await getDatabaseId(blockId); 
+                            //console.log("databaseBlock: ", JSON.stringify(databaseBlock))
 
-                                JSON.parse(project2.spec).map((value)=> {
-                                    //console.log("value: ", value)                                
-                                    count_fio = 0;
-                                    count_title = 0;
-                                    if (databaseBlock) {
-                                        databaseBlock.map((db) => {
-                                            //console.log("db: ", db)
-                                            if (value.spec === db.spec) {
-                                                if (db.fio) {
-                                                    count_fio++               
-                                                }else {
-                                                    count_fio;
-                                                }  
-                                            }
-                                        })
-                                                                        
-                                        const obj = {
-                                            title: value.spec,
-                                            title2: value.cat,
-                                            count_fio: count_fio,
-                                            count_title: value.count,
+                            JSON.parse(project2.spec).map((value)=> {
+                                //console.log("value: ", value)                                
+                                count_fio = 0;
+                                count_title = 0;
+                                
+                                //если бд ноушена доступна
+                                if (databaseBlock) {
+                                    databaseBlock.map((db) => {
+                                        //console.log("db: ", db)
+                                        if (value.spec === db.spec) {
+                                            if (db.fio) {
+                                                count_fio++               
+                                            }else {
+                                                count_fio;
+                                            }  
                                         }
-                                        arr_count.push(obj)  
-                                        
-                                    } else {
-                                        console.log("База данных не найдена")
+                                    })
+                                                                        
+                                    const obj = {
+                                        title: value.spec,
+                                        title2: value.cat,
+                                        count_fio: count_fio,
+                                        count_title: value.count,
                                     }
-                                })
+                                    arr_count.push(obj)  
 
-                                //сохранение массива в 2-х элементный массив
-                                if (i % 2 == 0) {
-                                    arr_all[0] = arr_count
-                                } else {
-                                    arr_all[1] = arr_count 
-                                }
+                                    //сохранение массива в 2-х элементный массив
+                                    if (i % 2 == 0) {
+                                        arr_all[0] = arr_count
+                                    } else {
+                                        arr_all[1] = arr_count 
+                                    }
 
-                                var isEqual = JSON.stringify(arr_all[0]) === JSON.stringify(arr_all[1]);
-                                // если есть изменения в составе работников    
-                                if (!isEqual) {
-                                    const text = `Запрос на специалистов: 
+                                    var isEqual = JSON.stringify(arr_all[0]) === JSON.stringify(arr_all[1]);
+                                        
+                                    // если есть изменения в составе работников    
+                                    if (!isEqual) {
+                                        const text = `Запрос на специалистов: 
                                         
 ${day}.${month} | ${chas}:${minut} | ${project2.name} | U.L.E.Y
                                     
 ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
                                     
-                                    //отправка сообщения в чат бота
-                                    await bot.sendMessage(project2.chatId, text)
+                                        //отправка сообщения в чат бота
+                                        bot.sendMessage(project2.chatId, text)
 
-                                    // сохранить отправленное боту сообщение пользователя в БД
-                                    const convId = sendMyMessage(text, 'text', project2.chatId, messageId)
+                                        // сохранить отправленное боту сообщение пользователя в БД
+                                        const convId = sendMyMessage(text, 'text', project2.chatId, messageId)
 
-                                    // Подключаемся к серверу socket
-                                    let socket = io(socketUrl);
-                                    socket.emit("addUser", project2.chatId)
+                                        //сохранить отчет в БД
+                                        const reportDB = Report.create(
+                                        {
+                                            name: project2.name,
+                                            text: text, 
+                                            receiverId: project2.chatId,
+                                            date: typeText,
+                                            delivered:'',
+                                        })
 
-                                    //отправить сообщение в админку
-                                    socket.emit("sendMessage", {
-                                        senderId: project2.chatId,
-                                        receiverId: chatTelegramId,
-                                        text: text,
-                                        convId: convId,
-                                        messageId: messageId,
-                                    })
-                                } 
+                                        // Подключаемся к серверу socket
+                                        let socket = io(socketUrl);
+                                        socket.emit("addUser", project2.chatId)
 
-                                i++ 
+                                        //отправить сообщение в админку
+                                        socket.emit("sendMessage", {
+                                            senderId: project2.chatId,
+                                            receiverId: chatTelegramId,
+                                            text: text,
+                                            convId: convId,
+                                            messageId: messageId,
+                                        })   
+                                    } // end if
+                                   
+                                } else {
+                                    console.log("База данных не найдена")
+                                }
+                            }) // map end
 
+                            i++ // счетчик интервалов
                         }, 60000); //каждую 1 минуту
 
                         // остановить вывод через 30 дней
@@ -891,9 +903,9 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
 
                                 arr_count = [] 
 
-                                JSON.parse(project2.equipment).map((value)=> {
-                                
+                                JSON.parse(project2.equipment).map((value)=> {                              
                                     count_name= 0;
+                                    
                                     if (databaseBlock) {
                                         databaseBlock.map((db) => {
                                             if (value.cat === db.category) {
@@ -912,50 +924,51 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                                             count_title: value.count,
                                         }
                                         arr_count.push(obj)  
-                                    } else {
-                                        console.log("База данных не найдена")
-                                    }                                   
-                                })
+                                    
 
-                                //сохранение массива в 2-х элементный массив
-                                if (i % 2 == 0) {
-                                    arr_all[0] = arr_count
-                                } else {
-                                    arr_all[1] = arr_count 
-                                }
+                                        //сохранение массива в 2-х элементный массив
+                                        if (i % 2 == 0) {
+                                            arr_all[0] = arr_count
+                                        } else {
+                                            arr_all[1] = arr_count 
+                                        }
 
-                                var isEqual = JSON.stringify(arr_all[0]) === JSON.stringify(arr_all[1]);
-                                // если есть изменения в составе работников    
-                                if (!isEqual) {
-                                    const text = `Запрос на специалистов: 
+                                        var isEqual = JSON.stringify(arr_all[0]) === JSON.stringify(arr_all[1]);
+                                        // если есть изменения в составе работников    
+                                        if (!isEqual) {
+                                            const text = `Запрос на специалистов: 
                                         
 ${day}.${month} | ${chas}:${minut} | ${project2.name} | U.L.E.Y
                                     
 ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
                                     
-                                    //отправка сообщения в чат бота
-                                    await bot.sendMessage(project2.chatId, text)
+                                            //отправка сообщения в чат бота
+                                            bot.sendMessage(project2.chatId, text)
 
-                                    // сохранить отправленное боту сообщение пользователя в БД
-                                    const convId = sendMyMessage(text, 'text', project2.chatId, messageId)
+                                            // сохранить отправленное боту сообщение пользователя в БД
+                                            const convId = sendMyMessage(text, 'text', project2.chatId, messageId)
 
-                                    // Подключаемся к серверу socket
-                                    let socket = io(socketUrl);
+                                            // Подключаемся к серверу socket
+                                            let socket = io(socketUrl);
 
-                                    socket.emit("addUser", project2.chatId)
+                                            socket.emit("addUser", project2.chatId)
 
-                                    //отправить сообщение в админку
-                                    socket.emit("sendMessage", {
-                                        senderId: project2.chatId,
-                                        receiverId: chatTelegramId,
-                                        text: text,
-                                        convId: convId,
-                                        messageId: messageId,
-                                    })
-                                } 
+                                            //отправить сообщение в админку
+                                            socket.emit("sendMessage", {
+                                                senderId: project2.chatId,
+                                                receiverId: chatTelegramId,
+                                                text: text,
+                                                convId: convId,
+                                                messageId: messageId,
+                                            })
+                                        } // end if
 
-                                i++ 
+                                    } else {
+                                        console.log("База данных не найдена")
+                                    }                                   
+                                }) // end map
 
+                            i++ //счетчик интервалов
         }, 60000); //каждую 1 минуту
 
                         // остановить вывод через 260 минут
