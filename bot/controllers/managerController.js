@@ -123,7 +123,7 @@ async function getCompanys() {
             };
         });
 
-        return companys;
+        return response;
     } catch (error) {
         console.error(error.body)
     }
