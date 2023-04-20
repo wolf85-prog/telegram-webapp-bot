@@ -111,24 +111,11 @@ async function getManagers2() {
 
 async function getCompanys() {
     try {
-        let results = []
-
-        let data = await notion.databases.query({
+        const response = await notion.databases.query({
             database_id: databaseCompanyId
         });
 
-        results = [...data.results]
-
-        while(data.has_more) {
-            data = await notion.databases.query({
-                database_id: databaseCompanyId,
-                start_cursor: data.next_cursor,
-            }); 
-
-            results = [...results, ...data.results];
-        }
-
-        const companys = results.map((company) => {
+        const companys = response.results.map((company) => {
             return {
                 id: company.id,
                 managers: company.properties["Менеджеры"].relation,
