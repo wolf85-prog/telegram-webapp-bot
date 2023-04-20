@@ -118,7 +118,7 @@ async function getCompanys() {
         const companys = response.results.map((company) => {
             return {
                 id: company.id,
-                managers: company.properties["Менеджеры"].relation,
+                managers: company.properties["Менеджеры"].relation[0].id,
                 title: company.properties["Название компании"].title[0].plain_text,
             };
         });
