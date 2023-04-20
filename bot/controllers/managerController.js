@@ -115,13 +115,13 @@ async function getCompanys() {
             database_id: databaseCompanyId
         });
 
-        const companys = response.results.map((company) => {
-            return {
-                id: company.id,
-                // managers: company.properties["Менеджеры"].relation[0].id,
-                title: company.properties["Название компании"].title[0].plain_text,
-            };
-        });
+        // const companys = response.results.map((company) => {
+        //     return {
+        //         id: company.id,
+        //         // managers: company.properties["Менеджеры"].relation[0].id,
+        //         title: company.properties["Название компании"].title[0].plain_text,
+        //     };
+        // });
 
         return response;
     } catch (error) {
