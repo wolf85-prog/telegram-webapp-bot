@@ -115,6 +115,13 @@ async function getCompanys() {
             database_id: databaseCompanyId
         });
 
+        const responseResults = response.results.map((page) => {
+            return {
+               id: page.id,
+               title: page.properties["Название компании"].title[0].plain_text,
+            };
+        });
+
         // const companys = response.results.map((company) => {
         //     return {
         //         id: company.id,
@@ -123,7 +130,7 @@ async function getCompanys() {
         //     };
         // });
 
-        return response;
+        return responseResults;
     } catch (error) {
         console.error(error.body)
     }
