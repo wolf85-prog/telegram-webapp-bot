@@ -121,7 +121,7 @@ async function getCompanys() {
 
         while(data.has_more) {
             data = await notion.databases.query({
-                database_id: databaseManagerId,
+                database_id: databaseCompanyId,
                 start_cursor: data.next_cursor,
             }); 
 
