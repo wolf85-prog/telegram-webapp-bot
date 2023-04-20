@@ -75,7 +75,6 @@ async function getManagers() {
                tgID: manager.properties.TelegramID.rich_text[0]?.plain_text,
                phone: manager.properties["Основной"].phone_number,
                comment: manager.properties["Комментарий"].rich_text[0]?.plain_text,
-               company: manager.properties["Заказчики"].relation[0],
             };
         });
 
@@ -112,11 +111,32 @@ async function getManagers2() {
 
 async function getCompanys() {
     try {
-        const response = await notion.databases.query({
+        let results = []
+
+        let data = await notion.databases.query({
             database_id: databaseCompanyId
         });
 
-        return response;
+        results = [...data.results]
+
+        while(data.has_more) {
+            data = await notion.databases.query({
+                database_id: databaseManagerId,
+                start_cursor: data.next_cursor,
+            }); 
+
+            results = [...results, ...data.results];
+        }
+
+        const companys = results.map((company) => {
+            return {
+                id: company.id,
+                managers: company.properties["Менеджеры"].relation,
+                title: company.properties["Название компании"].title[0].plain_text,
+            };
+        });
+
+        return companys;
     } catch (error) {
         console.error(error.body)
     }
