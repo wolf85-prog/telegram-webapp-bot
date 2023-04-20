@@ -686,6 +686,7 @@ bot.on('message', async (msg) => {
                             senderId: chatId,
                             receiverId: chatTelegramId,
                             text: `${botApiUrl}/${filename}.jpg`,
+                            type: 'image',
                             convId: convId,
                         })
                     })
@@ -1024,6 +1025,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                     senderId: chatId,
                     receiverId: chatTelegramId,
                     text: text,
+                    type: 'text',
                     convId: convId,
                     messageId: messageId,
                 })
