@@ -115,13 +115,13 @@ async function getCompanys() {
             database_id: databaseCompanyId
         });
 
-        const responseResults = response.results.map((page) => {
-            return {
-               id: page.id,
-               //managers: page.properties.Менеджеры.relation[0].id,
-               title: page.properties["Название компании"].title[0].plain_text,
-            };
-        });
+        // const responseResults = response.results.map((page) => {
+        //     return {
+        //        id: page.id,
+        //        //managers: page.properties.Менеджеры.relation[0].id,
+        //        title: page.properties["Название компании"].title[0].plain_text,
+        //     };
+        // });
 
         // const companys = response.results.map((company) => {
         //     return {
@@ -131,7 +131,7 @@ async function getCompanys() {
         //     };
         // });
 
-        return responseResults;
+        return response.results;
     } catch (error) {
         console.error(error.body)
     }
