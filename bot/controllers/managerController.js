@@ -118,8 +118,8 @@ async function getCompanys() {
         const responseResults = response.results.map((page) => {
             return {
                id: page.id,
-               managers: page.properties.Менеджеры.relation[0].id,
-            //    title: page.properties["Название компании"].title[0].plain_text,
+               //managers: page.properties.Менеджеры.relation[0].id,
+               title: page.properties["Название компании"].title[0].plain_text,
             };
         });
 
