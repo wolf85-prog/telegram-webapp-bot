@@ -2,6 +2,8 @@ require("dotenv").config();
 const addWorkerZapas = require("./addWorkerZapas");
 const token_fetch = 'Bearer ' + process.env.NOTION_API_KEY;
 const databaseWorkersId = process.env.NOTION_DATABASE_WORKERS_ID
+//fetch api
+const fetch = require('node-fetch');
 
 // создание БД "Запасной состав"
 module.exports = async function newDatabase_3(parent_page_id) {

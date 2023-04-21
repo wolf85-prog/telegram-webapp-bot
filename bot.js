@@ -852,17 +852,15 @@ bot.on('message', async (msg) => {
                             )
                             .then((response) => response.json())
                             .then((data) => {
-                                console.log("project_name: ", data.properties.Name.title[0]?.plain_text);
+                                //console.log("project_name: ", data.properties.Name.title[0]?.plain_text);
                                 project_name = data.properties.Name.title[0]?.plain_text;
                             });
-                            //const project_name = res.json() //res.properties.Name.title[0]?.plain_text;
-                            //console.log("project_name: ", project_name)
                                             
                             //3) отправить сообщение если есть изменения в составе работников    
                             if (!isEqual) {
                                 const text = `Запрос на специалистов: 
                                         
-${day}.${month} | ${chas}:${minut} | ${project2.name} | U.L.E.Y
+${day}.${month} | ${chas}:${minut} | ${project_name} | U.L.E.Y
                                     
 ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
                                     

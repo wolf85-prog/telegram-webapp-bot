@@ -1,6 +1,8 @@
 require("dotenv").config();
 const addEquipment = require("./addEquipment");
 const token_fetch = 'Bearer ' + process.env.NOTION_API_KEY;
+//fetch api
+const fetch = require('node-fetch');
 
 module.exports = async function newDatabase4(parent_page_id, equipmentlist) {
     //создание базы данных "Оборудование"

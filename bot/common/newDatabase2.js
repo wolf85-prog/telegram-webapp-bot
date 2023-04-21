@@ -3,6 +3,8 @@ const token_fetch = 'Bearer ' + process.env.NOTION_API_KEY;
 const databaseWorkersId = process.env.NOTION_DATABASE_WORKERS_ID
 //functions
 const addWorker = require('./addWorker')
+//fetch api
+const fetch = require('node-fetch');
 
 //send create db notion
 module.exports = async function newDatabase(parent_page_id, worklist) {
