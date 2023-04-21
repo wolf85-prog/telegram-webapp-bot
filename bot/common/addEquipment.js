@@ -30,6 +30,6 @@ module.exports = async function addEquipment(blockId, equipment) {
         //console.log(response)
         console.log("3 Success! Equipment added. Data: " + response.id) //+ JSON.stringify(response))
     } catch (error) {
-        console.error(error.body)
+        console.error(error.message)
     }
 }

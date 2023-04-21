@@ -27,7 +27,7 @@ async function getProjects() {
 
         return responseResults;
     } catch (error) {
-        console.error(error.body)
+        console.error(error.message)
     }
 }
 
@@ -39,7 +39,7 @@ async function getProjects2() {
 
         return response;
     } catch (error) {
-        console.error(error.body)
+        console.error(error.message)
     }
 }
 
@@ -82,7 +82,7 @@ async function getProjectsId(managerId) {
         //console.log("Projects Data: "  + JSON.stringify(responseResults))
         return responseResults;
     } catch (error) {
-        console.error(error.body)
+        console.error(error.message)
     }
 }
 

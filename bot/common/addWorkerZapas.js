@@ -32,6 +32,6 @@ module.exports = async function addWorkerZapas(blockId) {
         //console.log(response)
         console.log("3.3 Success! Worker zapas added. Data: " + response.id) //JSON.stringify(response))
     } catch (error) {
-        console.error(error.body)
+        console.error(error.message)
     }
 }

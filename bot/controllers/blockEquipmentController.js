@@ -24,7 +24,7 @@ async function getBlocks(blockId) {
 
         return res;
     } catch (error) {
-        console.error(error.body)
+        console.error(error.message)
     }
 }
 
@@ -37,7 +37,7 @@ async function getBlocks2(blockId) {
 
         return response;
     } catch (error) {
-        console.error(error.body)
+        console.error(error.message)
     }
 }
 
@@ -50,7 +50,7 @@ async function getBlockId(blockId) {
 
         return response;
     } catch (error) {
-        console.error(error.body)
+        console.error(error.message)
     }
 }
 
@@ -63,7 +63,7 @@ async function getPage(pageId) {
 
         return response;
     } catch (error) {
-        console.error(error.body)
+        console.error(error.message)
     }
 }
 

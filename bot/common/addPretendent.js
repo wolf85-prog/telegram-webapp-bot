@@ -47,6 +47,6 @@ module.exports = async function addPretendent(blockId) {
         //console.log(response)
         console.log("5.1 Pretendent added. Data: "  + response.id)//+ JSON.stringify(response))
     } catch (error) {
-        console.error(error.body)
+        console.error(error.message)
     }
 }

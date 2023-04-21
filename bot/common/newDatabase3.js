@@ -360,6 +360,6 @@ module.exports = async function newDatabase_3(parent_page_id) {
         await addWorkerZapas(data.id);
 
     } catch (error) {
-        console.error(error.body)
+        console.error(error.message)
     }
 }

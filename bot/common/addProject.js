@@ -101,6 +101,6 @@ module.exports = async function addProject(title, time, teh, managerId, companyI
         return res_id;
 
     } catch (error) {
-        console.error(error.body)
+        console.error(error.message)
     }
 }

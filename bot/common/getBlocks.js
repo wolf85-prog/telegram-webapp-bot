@@ -24,6 +24,6 @@ module.exports = async function getBlocks(blockId) {
 
         return res;
     } catch (error) {
-        console.error(error.body)
+        console.error(error.message)
     }
 }

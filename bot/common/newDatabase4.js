@@ -155,6 +155,6 @@ module.exports = async function newDatabase4(parent_page_id, equipmentlist) {
         });
         
     } catch (error) {
-        console.error(error.body)
+        console.error(error.message)
     }   
 }

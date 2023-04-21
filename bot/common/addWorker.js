@@ -35,6 +35,6 @@ module.exports = async function addWorker(blockId, worker) {
         //console.log(response)
         console.log("3 Success! Worker added. Data: " + response.id) //+ JSON.stringify(response))
     } catch (error) {
-        console.error(error.body)
+        console.error(error.message)
     }
 }

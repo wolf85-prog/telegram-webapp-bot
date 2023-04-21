@@ -21,7 +21,7 @@ async function getAddress() {
         //console.log(responseResults);
         return response;
     } catch (error) {
-        console.error(error.body)
+        console.error(error.message)
     }
 }
 

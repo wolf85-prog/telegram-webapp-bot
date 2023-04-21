@@ -26,7 +26,7 @@ async function getManagerId(id) {
         return response.results[0].id; 
         
     } catch (error) {
-        console.error(error.body)
+        console.error(error.message)
     }
 }
 
@@ -45,7 +45,7 @@ async function getCompanyId(id) {
         console.log("CompanyId: ", response.results[0].properties.Заказчики.relation[0].id)
         return response.results[0].properties.Заказчики.relation[0].id;
     } catch (error) {
-        console.error(error.body)
+        console.error(error.message)
     }
 }
 
@@ -80,7 +80,7 @@ async function getManagers() {
 
         return managers;
     } catch (error) {
-        console.error(error.body)
+        console.error(error.message)
     }
 }
 
@@ -105,7 +105,7 @@ async function getManagers2() {
 
         return results;
     } catch (error) {
-        console.error(error.body)
+        console.error(error.message)
     }
 }
 
@@ -132,7 +132,7 @@ async function getCompanys() {
 
         return responseResults;
     } catch (error) {
-        console.error(error.body)
+        console.error(error.message)
     }
 }
 
@@ -157,7 +157,7 @@ async function getCompany(id) {
 
         return company;
     } catch (error) {
-        console.error(error.body)
+        console.error(error.message)
     }
 }
 
@@ -216,7 +216,7 @@ async function createManager(id, firstname, lastname) {
 
         return response;
     } catch (error) {
-        console.error(error.body)
+        console.error(error.message)
     }
 }
 

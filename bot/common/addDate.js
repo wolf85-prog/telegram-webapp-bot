@@ -45,6 +45,6 @@ module.exports = async function addDate(blockId, day) {
         //console.log(response)
         console.log("1.1 Date added. Data: "  + response.id)//+ JSON.stringify(response))
     } catch (error) {
-        console.error(error.body)
+        console.error(error.message)
     }
 }

@@ -12,7 +12,7 @@ async function getDatabase() {
 
         return response;
     } catch (error) {
-        console.error(error.body)
+        console.error(error.message)
     }
 }
 
@@ -40,7 +40,7 @@ async function getDatabaseId(baseId) {
 
         return responseResults;
     } catch (error) {
-        console.error(error.body)
+        console.error(error.message)
     }
 }
 
@@ -53,7 +53,7 @@ async function getDatabaseId2(baseId) {
 
         return response;
     } catch (error) {
-        console.error(error.body)
+        console.error(error.message)
     }
 }
 
@@ -74,7 +74,7 @@ async function getDatabaseEquipmentId(baseId) {
 
         return responseResults;
     } catch (error) {
-        console.error(error.body)
+        console.error(error.message)
     }
 }
 

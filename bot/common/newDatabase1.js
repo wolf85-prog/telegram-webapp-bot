@@ -54,6 +54,6 @@ module.exports = async function newDatabase1(parent_page_id) {
         await addDate(data.id, 'День №2');
         
     } catch (error) {
-        console.error(error.body)
+        console.error(error.message)
     }
 }

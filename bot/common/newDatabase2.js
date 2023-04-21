@@ -388,6 +388,6 @@ module.exports = async function newDatabase(parent_page_id, worklist) {
         });
         
     } catch (error) {
-        console.error(error.body)
+        console.error(error.message)
     }
 }

@@ -45,6 +45,6 @@ module.exports = async function addAddress(geo, projectname, datestart, teh, man
         return project_id
 
     } catch (error) {
-        console.error(error.body)
+        console.error(error.message)
     }
 }

@@ -308,7 +308,7 @@ async function addProject(title, time, teh, managerId, companyId, worklist, equi
         return res_id;
 
     } catch (error) {
-        console.error(error.body)
+        console.error(error.message)
     }
 }
 
@@ -458,7 +458,7 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
         return res_id;
 
     } catch (error) {
-        console.error(error.body)
+        console.error(error.message)
     }
 }
 
@@ -509,7 +509,7 @@ async function addAddress(geo, projectname, datestart, teh, managerId, companyId
         return project_id
 
     } catch (error) {
-        console.error(error.body)
+        console.error(error.message)
     }
 }
 
