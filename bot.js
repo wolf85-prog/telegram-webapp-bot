@@ -801,17 +801,17 @@ bot.on('message', async (msg) => {
                             console.log("blockId " + i + ": " + blockId)
 
                             let databaseBlock = await getDatabaseId(blockId); 
-                            //console.log("databaseBlock: ", JSON.stringify(databaseBlock))
+                            console.log("databaseBlock: ", JSON.stringify(databaseBlock))
 
                             JSON.parse(project2.spec).map((value)=> {
-                                //console.log("value: ", value)                                
+                                console.log("value: ", value)                                
                                 count_fio = 0;
                                 count_title = 0;
                                 
                                 //если бд ноушена доступна
                                 if (databaseBlock) {
                                     databaseBlock.map((db) => {
-                                        //console.log("db: ", db)
+                                        console.log("db: ", db)
                                         if (value.spec === db.spec) {
                                             if (db.fio) {
                                                 count_fio++               
