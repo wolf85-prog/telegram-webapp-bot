@@ -87,6 +87,26 @@ async function getProjectsId(managerId) {
 }
 
 
+//получить проект по его id
+async function getProjectId(projectId) {
+    try {
+        const response = await notion.databases.retrieve({
+            database_id: projectId,
+            
+        });
+
+        const responseResults = response.results.map((page) => {
+            return {
+               id: page.id,
+               title: page.properties.Name.title[0]?.plain_text,
+            };
+        });
+        return response;
+    } catch (error) {
+        console.error(error.message)
+    }
+}
+
 
 class ProjectController {
     
@@ -108,6 +128,17 @@ class ProjectController {
         }
         else{
             res.json([]);
+        }
+    }
+
+    async projectId(req, res) {
+        const id = req.params.id; // получаем id
+        const project = await getProjectId(id);
+        if(project){
+            res.json(project);
+        }
+        else{
+            res.json({});
         }
     }
 }

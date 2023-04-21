@@ -877,7 +877,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                                     } // end if
                                    
                                 } else {
-                                    console.log("База данных не найдена")
+                                    console.log("База данных не найдена! Проект ID: " + project2.projectId)
                                 }
                             }) // map end
 
@@ -965,7 +965,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                                         } // end if
 
                                     } else {
-                                        console.log("База данных не найдена")
+                                        console.log("База данных не найдена! Проект ID: " + project2.projectId)
                                     }                                   
                                 }) // end map
 
