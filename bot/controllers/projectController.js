@@ -95,13 +95,9 @@ async function getProjectId(projectId) {
             
         });
 
-        const responseResults = (()=> {
-            return {
-              title: response.properties.Name.title[0]?.plain_text,  
-            }           
-        })
-        console.log(responseResults)
-        return responseResults;
+        //title: response.properties.Name.title[0]?.plain_text,  
+
+        return response;
     } catch (error) {
         console.error(error.message)
     }
