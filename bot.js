@@ -33,6 +33,7 @@ const chatGroupId = process.env.CHAT_GROUP_ID
 const chatTelegramId = process.env.CHAT_ID
 const chatGiaId = process.env.GIA_CHAT_ID
 
+
 let project_id, projectId, projectName, projectDate, projectTime, dateStart, manager_id, company_id, Geo, Teh, Worklist, Equipmentlist
 let blockId
 
@@ -843,6 +844,13 @@ bot.on('message', async (msg) => {
                             }) // map spec end
 
                             var isEqual = JSON.stringify(arr_all[0]) === JSON.stringify(arr_all[1]);
+
+                            //получить название проекта из ноушена
+                            const res = await fetch(
+                                 `${botApiUrl}/project/${project2.projectId}`
+                            );
+                            const project_name = res.json() //res.properties.Name.title[0]?.plain_text;
+                            console.log("project_name: ", project_name)
                                             
                             //3) отправить сообщение если есть изменения в составе работников    
                             if (!isEqual) {
