@@ -821,59 +821,61 @@ bot.on('message', async (msg) => {
                                             }  
                                         }
                                     })
-                                                                        
+                                                                                                       
                                     const obj = {
                                         title: value.spec,
                                         title2: value.cat,
                                         count_fio: count_fio,
                                         count_title: value.count,
                                     }
-                                    arr_count.push(obj)  
+                                    arr_count.push(obj) 
+                                } else {
+                                    console.log("База данных не найдена! Проект ID: " + project2.projectId)
+                                }     
 
-                                    console.log("arr_count: ", arr_count)
+                                console.log("arr_count: ", arr_count)
 
-                                    //сохранение массива в 2-х элементный массив
-                                    if (i % 2 == 0) {
-                                        arr_all[0] = arr_count
-                                    } else {
-                                        arr_all[1] = arr_count 
-                                    }
+                                //сохранение массива в 2-х элементный массив
+                                if (i % 2 == 0) {
+                                    arr_all[0] = arr_count
+                                } else {
+                                    arr_all[1] = arr_count 
+                                }
 
-                                    var isEqual = JSON.stringify(arr_all[0]) === JSON.stringify(arr_all[1]);
-                                        
-                                    // если есть изменения в составе работников    
-                                    if (!isEqual) {
-                                        const text = `Запрос на специалистов: 
+                                var isEqual = JSON.stringify(arr_all[0]) === JSON.stringify(arr_all[1]);
+                                            
+                                // если есть изменения в составе работников    
+                                if (!isEqual) {
+                                    const text = `Запрос на специалистов: 
                                         
 ${day}.${month} | ${chas}:${minut} | ${project2.name} | U.L.E.Y
                                     
 ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
                                     
-                                        //отправка сообщения в чат бота
-                                        const response = bot.sendMessage(project2.chatId, text)
+                                    //отправка сообщения в чат бота
+                                    const response = bot.sendMessage(project2.chatId, text)
 
-                                        // сохранить отправленное боту сообщение пользователя в БД
-                                        //const convId = sendMyMessage(text, 'text', project2.chatId, messageId)
+                                    // сохранить отправленное боту сообщение пользователя в БД
+                                    //const convId = sendMyMessage(text, 'text', project2.chatId, messageId)
 
-                                        // Подключаемся к серверу socket
-                                        //let socket = io(socketUrl);
-                                        //socket.emit("addUser", project2.chatId)
+                                    // Подключаемся к серверу socket
+                                    //let socket = io(socketUrl);
+                                    //socket.emit("addUser", project2.chatId)
 
-                                        //отправить сообщение в админку
-                                        // socket.emit("sendMessage", {
+                                    //отправить сообщение в админку
+                                    // socket.emit("sendMessage", {
                                         //     senderId: project2.chatId,
                                         //     receiverId: chatTelegramId,
                                         //     text: text,
                                         //     type: 'text',
                                         //     convId: convId,
                                         //     messageId: messageId,
-                                        // })   
-                                    } // end if
+                                    // })  
+
+                                } // end if
                                    
-                                } else {
-                                    console.log("База данных не найдена! Проект ID: " + project2.projectId)
-                                }
-                            }) // map end
+                                
+                            }) // map spec end
 
                             i++ // счетчик интервалов
                         }, 60000); //каждую 1 минуту
