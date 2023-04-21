@@ -846,12 +846,14 @@ bot.on('message', async (msg) => {
                             var isEqual = JSON.stringify(arr_all[0]) === JSON.stringify(arr_all[1]);
 
                             //получить название проекта из ноушена
+                            let project_name;
                             const res = await fetch(
                                  `${botApiUrl}/project/${project2.projectId}`
                             )
                             .then((response) => response.json())
                             .then((data) => {
-                                console.log("project_name: ", data);
+                                console.log("project_name: ", data.properties.Name.title[0]?.plain_text);
+                                project_name = data.properties.Name.title[0]?.plain_text;
                             });
                             //const project_name = res.json() //res.properties.Name.title[0]?.plain_text;
                             //console.log("project_name: ", project_name)

@@ -1,5 +1,7 @@
 require("dotenv").config();
 const token_fetch = 'Bearer ' + process.env.NOTION_API_KEY;
+//fetch api
+const fetch = require('node-fetch');
 
 //functions
 const addDate = require('./addDate')
