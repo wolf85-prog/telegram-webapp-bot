@@ -798,7 +798,7 @@ bot.on('message', async (msg) => {
                             minutCount++  // a day has passed
                             arr_count = [] 
                             const blockId = await getBlocks(project2.projectId);
-                            console.log("blockId " + i + ": " + blockId)
+                            console.log("blockId " + i + ": " + blockId + "Проект ID: " + project2.projectId)
 
                             let databaseBlock = await getDatabaseId(blockId); 
                             console.log("databaseBlock: ", JSON.stringify(databaseBlock))
