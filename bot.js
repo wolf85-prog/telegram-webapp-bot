@@ -798,7 +798,7 @@ bot.on('message', async (msg) => {
                             minutCount++  // a day has passed
                             arr_count = [] 
                             const blockId = await getBlocks(project2.projectId);
-                            //console.log("blockId " + i + ": " + blockId)
+                            console.log("blockId " + i + ": " + blockId)
 
                             let databaseBlock = await getDatabaseId(blockId); 
                             //console.log("databaseBlock: ", JSON.stringify(databaseBlock))
@@ -851,16 +851,6 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
 
                                         // сохранить отправленное боту сообщение пользователя в БД
                                         const convId = sendMyMessage(text, 'text', project2.chatId, messageId)
-
-                                        //сохранить отчет в БД
-                                        // const reportDB = Report.create(
-                                        // {
-                                        //     name: project2.name,
-                                        //     text: text, 
-                                        //     receiverId: project2.chatId,
-                                        //     date: i,
-                                        //     delivered: response ? true : false,
-                                        // })
 
                                         // Подключаемся к серверу socket
                                         let socket = io(socketUrl);
@@ -1004,6 +994,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                     senderId: chatId,
                     receiverId: chatTelegramId,
                     text: text,
+                    type: 'text',
                     convId: convId,
                     messageId: messageId,
                 })
