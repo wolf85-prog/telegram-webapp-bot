@@ -95,12 +95,12 @@ async function getProjectId(projectId) {
             
         });
 
-        const responseResults = response.results.map((page) => {
-            return {
-               id: page.id,
-               title: page.properties.Name.title[0]?.plain_text,
-            };
-        });
+        // const responseResults = response.results.map((page) => {
+        //     return {
+        //        id: page.id,
+        //        title: page.properties.Name.title[0]?.plain_text,
+        //     };
+        // });
         return response;
     } catch (error) {
         console.error(error.message)
