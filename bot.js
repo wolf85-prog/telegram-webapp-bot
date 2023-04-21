@@ -861,6 +861,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                                             senderId: project2.chatId,
                                             receiverId: chatTelegramId,
                                             text: text,
+                                            type: 'text',
                                             convId: convId,
                                             messageId: messageId,
                                         })   
@@ -949,6 +950,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                                                 senderId: project2.chatId,
                                                 receiverId: chatTelegramId,
                                                 text: text,
+                                                type: 'text',
                                                 convId: convId,
                                                 messageId: messageId,
                                             })
