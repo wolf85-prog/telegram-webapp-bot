@@ -848,9 +848,13 @@ bot.on('message', async (msg) => {
                             //получить название проекта из ноушена
                             const res = await fetch(
                                  `${botApiUrl}/project/${project2.projectId}`
-                            );
-                            const project_name = res.json() //res.properties.Name.title[0]?.plain_text;
-                            console.log("project_name: ", project_name)
+                            )
+                            .then((response) => response.json())
+                            .then((data) => {
+                                console.log("project_name: ", data);
+                            });
+                            //const project_name = res.json() //res.properties.Name.title[0]?.plain_text;
+                            //console.log("project_name: ", project_name)
                                             
                             //3) отправить сообщение если есть изменения в составе работников    
                             if (!isEqual) {
