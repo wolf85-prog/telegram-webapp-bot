@@ -798,7 +798,7 @@ bot.on('message', async (msg) => {
                             minutCount++  // a day has passed
                             arr_count = [] 
                             const blockId = await getBlocks(project2.projectId);
-                            console.log("blockId " + i + ": " + blockId + "Проект ID: " + project2.projectId)
+                            console.log("blockId " + i + ": " + blockId + " Проект ID: " + project2.projectId)
 
                             let databaseBlock = await getDatabaseId(blockId); 
                             console.log("databaseBlock: ", JSON.stringify(databaseBlock))
@@ -810,6 +810,7 @@ bot.on('message', async (msg) => {
                                 
                                 //если бд ноушена доступна
                                 if (databaseBlock) {
+                                    console.log("databaseBlock2: ", JSON.stringify(databaseBlock))
                                     databaseBlock.map((db) => {
                                         console.log("db: ", db)
                                         if (value.spec === db.spec) {
@@ -828,6 +829,8 @@ bot.on('message', async (msg) => {
                                         count_title: value.count,
                                     }
                                     arr_count.push(obj)  
+
+                                    console.log("arr_count: ", arr_count)
 
                                     //сохранение массива в 2-х элементный массив
                                     if (i % 2 == 0) {
@@ -850,21 +853,21 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                                         const response = bot.sendMessage(project2.chatId, text)
 
                                         // сохранить отправленное боту сообщение пользователя в БД
-                                        const convId = sendMyMessage(text, 'text', project2.chatId, messageId)
+                                        //const convId = sendMyMessage(text, 'text', project2.chatId, messageId)
 
                                         // Подключаемся к серверу socket
-                                        let socket = io(socketUrl);
-                                        socket.emit("addUser", project2.chatId)
+                                        //let socket = io(socketUrl);
+                                        //socket.emit("addUser", project2.chatId)
 
                                         //отправить сообщение в админку
-                                        socket.emit("sendMessage", {
-                                            senderId: project2.chatId,
-                                            receiverId: chatTelegramId,
-                                            text: text,
-                                            type: 'text',
-                                            convId: convId,
-                                            messageId: messageId,
-                                        })   
+                                        // socket.emit("sendMessage", {
+                                        //     senderId: project2.chatId,
+                                        //     receiverId: chatTelegramId,
+                                        //     text: text,
+                                        //     type: 'text',
+                                        //     convId: convId,
+                                        //     messageId: messageId,
+                                        // })   
                                     } // end if
                                    
                                 } else {
