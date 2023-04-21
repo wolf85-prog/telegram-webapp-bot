@@ -103,7 +103,7 @@ async function getProjectId(projectId) {
         });
         return response;
     } catch (error) {
-        console.error(error.message)
+        console.log(error.message)
     }
 }
 
