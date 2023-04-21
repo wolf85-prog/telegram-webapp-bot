@@ -90,8 +90,8 @@ async function getProjectsId(managerId) {
 //получить проект по его id
 async function getProjectId(projectId) {
     try {
-        const response = await notion.databases.retrieve({
-            database_id: projectId,
+        const response = await notion.pages.retrieve({
+            page_id: projectId,
             
         });
 
@@ -103,7 +103,7 @@ async function getProjectId(projectId) {
         });
         return response;
     } catch (error) {
-        console.log(error.message)
+        console.error(error.message)
     }
 }
 
