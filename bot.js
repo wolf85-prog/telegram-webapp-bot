@@ -798,21 +798,20 @@ bot.on('message', async (msg) => {
                             minutCount++  // a day has passed
                             arr_count = [] 
                             const blockId = await getBlocks(project2.projectId);
-                            console.log("blockId " + i + ": " + blockId + " Проект ID: " + project2.projectId)
+                            console.log("blockId " + i + ": " + blockId + " Проект ID: " + project2.name)
 
                             let databaseBlock = await getDatabaseId(blockId); 
-                            console.log("databaseBlock: ", JSON.stringify(databaseBlock))
+                            //console.log("databaseBlock: ", JSON.stringify(databaseBlock))
 
                             JSON.parse(project2.spec).map((value)=> {
-                                console.log("value: ", value)                                
+                                //console.log("value: ", value)                                
                                 count_fio = 0;
                                 count_title = 0;
                                 
                                 //если бд ноушена доступна
                                 if (databaseBlock) {
-                                    console.log("databaseBlock2: ", JSON.stringify(databaseBlock))
                                     databaseBlock.map((db) => {
-                                        console.log("db: ", db)
+                                        //console.log("db: ", db)
                                         if (value.spec === db.spec) {
                                             if (db.fio) {
                                                 count_fio++               
@@ -832,8 +831,7 @@ bot.on('message', async (msg) => {
                                 } else {
                                     console.log("База данных не найдена! Проект ID: " + project2.projectId)
                                 }     
-
-                                console.log("arr_count: ", arr_count)
+                                //console.log("arr_count: ", arr_count)
 
                                 //сохранение массива в 2-х элементный массив
                                 if (i % 2 == 0) {
@@ -857,21 +855,21 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                                 const response = bot.sendMessage(project2.chatId, text)
 
                                 // сохранить отправленное боту сообщение пользователя в БД
-                                //const convId = sendMyMessage(text, 'text', project2.chatId, messageId)
+                                const convId = sendMyMessage(text, 'text', project2.chatId, messageId)
 
-                                // Подключаемся к серверу socket
-                                //let socket = io(socketUrl);
-                                //socket.emit("addUser", project2.chatId)
+                                //Подключаемся к серверу socket
+                                let socket = io(socketUrl);
+                                socket.emit("addUser", project2.chatId)
 
                                 //отправить сообщение в админку
-                                // socket.emit("sendMessage", {
-                                        //     senderId: project2.chatId,
-                                        //     receiverId: chatTelegramId,
-                                        //     text: text,
-                                        //     type: 'text',
-                                        //     convId: convId,
-                                        //     messageId: messageId,
-                                // })  
+                                socket.emit("sendMessage", {
+                                            senderId: project2.chatId,
+                                            receiverId: chatTelegramId,
+                                            text: text,
+                                            type: 'text',
+                                            convId: convId,
+                                            messageId: messageId,
+                                })  
 
                             } // end if
 
