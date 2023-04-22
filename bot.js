@@ -831,7 +831,7 @@ bot.on('message', async (msg) => {
                                     }
                                     arr_count.push(obj) 
                                 } else {
-                                    console.log("База данных не найдена! Проект ID: " + project2.projectId)
+                                    console.log("База данных не найдена! Проект ID: " + project2.name)
                                 }     
                                 //console.log("arr_count: ", arr_count)
 
