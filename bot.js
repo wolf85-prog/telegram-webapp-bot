@@ -927,16 +927,16 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                                             count_title: value.count,
                                         }
                                         arr_count.push(obj)  
+                                        
+                                        //сохранение массива в 2-х элементный массив
+                                        if (i % 2 == 0) {
+                                            arr_all[0] = arr_count
+                                        } else {
+                                            arr_all[1] = arr_count 
+                                        }
                                     } else {
-                                        console.log("База данных не найдена! Проект ID: " + project2.projectId)
+                                        console.log("База данных не найдена! Проект ID: " + project2.name)
                                     }  
-
-                                    //сохранение массива в 2-х элементный массив
-                                    if (i % 2 == 0) {
-                                        arr_all[0] = arr_count
-                                    } else {
-                                        arr_all[1] = arr_count 
-                                    }
 
                             }) // map equipment end
                                 
