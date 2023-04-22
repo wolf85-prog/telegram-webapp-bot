@@ -830,17 +830,16 @@ bot.on('message', async (msg) => {
                                         count_title: value.count,
                                     }
                                     arr_count.push(obj) 
+
+                                    //сохранение массива в 2-х элементный массив
+                                    if (i % 2 == 0) {
+                                        arr_all[0] = arr_count
+                                    } else {
+                                        arr_all[1] = arr_count 
+                                    }
                                 } else {
                                     console.log("База данных не найдена! Проект ID: " + project2.name)
-                                }     
-                                //console.log("arr_count: ", arr_count)
-
-                                //сохранение массива в 2-х элементный массив
-                                if (i % 2 == 0) {
-                                    arr_all[0] = arr_count
-                                } else {
-                                    arr_all[1] = arr_count 
-                                }
+                                }                                  
                             }) // map spec end
 
                             var isEqual = JSON.stringify(arr_all[0]) === JSON.stringify(arr_all[1]);
