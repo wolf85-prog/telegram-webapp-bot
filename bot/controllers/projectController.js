@@ -91,8 +91,7 @@ async function getProjectsId(managerId) {
 async function getProjectId(projectId) {
     try {
         const response = await notion.pages.retrieve({
-            page_id: projectId,
-            
+            page_id: projectId,           
         });
 
         //title: response.properties.Name.title[0]?.plain_text,  

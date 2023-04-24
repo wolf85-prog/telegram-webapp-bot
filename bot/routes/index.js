@@ -22,6 +22,7 @@ router.get("/managers", managerController.managers);
 router.get("/managers2", managerController.managers2);
 router.get("/managers/:id", managerController.managersId);
 router.get("/manager/:id", managerController.companyId);
+router.get("/manager/name/:id", managerController.managerName);
 
 //post MANAGER
 router.post("/manager", managerController.create);
@@ -29,6 +30,7 @@ router.post("/manager", managerController.create);
 //get COMPANYS
 router.get("/companys", managerController.companys);
 router.get("/company/:id", managerController.company);
+router.get("/company/name/:id", managerController.companyName);
 
 
 //get DATABASE (специалисты)

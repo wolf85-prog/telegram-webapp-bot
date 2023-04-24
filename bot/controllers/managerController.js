@@ -30,6 +30,19 @@ async function getManagerId(id) {
     }
 }
 
+//получить имя менеджера по его id
+async function getManagerName(id) {
+    try {
+        const manager = await notion.pages.retrieve({
+            page_id: id,
+        });
+
+        return manager;
+    } catch (error) {
+        console.error(error.message)
+    }
+}
+
 //получить id компании заказчика
 async function getCompanyId(id) {
     try {
@@ -161,6 +174,19 @@ async function getCompany(id) {
     }
 }
 
+//получить имя заказчика по его id
+async function getCompanyName(id) {
+    try {
+        const company = await notion.pages.retrieve({
+            page_id: id,
+        });
+
+        return company;
+    } catch (error) {
+        console.error(error.message)
+    }
+}
+
 
 async function createManager(id, firstname, lastname) {
     try {
@@ -227,6 +253,7 @@ class ManagerController {
         const managers = await getManagers();
         res.json(managers);
     }
+    
 
     async managers2(req, res) {
         const managers = await getManagers2();
@@ -242,6 +269,11 @@ class ManagerController {
         else{
             res.json({});
         }
+    }
+
+    async managerName(req, res) {
+        const manager = await getManagerName();
+        res.json(manager);
     }
 
     async companyId(req, res) {
@@ -264,6 +296,18 @@ class ManagerController {
         const id = req.params.id; // получаем id
         //console.log(id)
         const company = await getCompany(id);
+        if(company){
+            res.json(company);
+        }
+        else{
+            res.json({});
+        }
+    }
+
+    async companyName(req, res) {
+        const id = req.params.id; // получаем id
+        //console.log(id)
+        const company = await getCompanyName(id);
         if(company){
             res.json(company);
         }
