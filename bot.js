@@ -544,7 +544,7 @@ bot.on('message', async (msg) => {
                 await UserBot.create({ firstname: firstname, lastname: lastname, chatId: chatId })
                 console.log('Пользователь добавлен в БД')
             } else {
-                console.log('Ошибка работы БД. Пользователь уже существует')
+                console.log('Отмена добавления в БД. Пользователь уже существует')
             }
         
             await bot.sendMessage(chatId, 'Добро пожаловать в телеграм-бот U.L.E.Y_Projects. Смотрите и создавайте проекты U.L.E.Y в ' +
@@ -989,6 +989,15 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                 }
 //----------------------------------------------------------------------------------------------------------------
             } else if (text.includes('Тестовое сообщение')) {  
+
+                //добавление пользователя в БД
+                const user = await UserBot.findOne({where:{chatId: chatId.toString()}})
+                if (!user) {
+                    await UserBot.create({ firstname: firstname, lastname: lastname, chatId: chatId })
+                    console.log('Пользователь добавлен в БД')
+                } else {
+                    console.log('Отмена операции! Пользователь уже существует')
+                }
            
                 // сохранить отправленное боту сообщение пользователя в БД
                 const convId = await sendMyMessage(text, 'text', chatId, messageId)
@@ -1014,6 +1023,15 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
 
             } else {
 //----------------------------------------------------------------------------------------------------------------
+                //добавление пользователя в БД
+                const user = await UserBot.findOne({where:{chatId: chatId.toString()}})
+                if (!user) {
+                    await UserBot.create({ firstname: firstname, lastname: lastname, chatId: chatId })
+                    console.log('Пользователь добавлен в БД')
+                } else {
+                    console.log('Отмена операции! Пользователь уже существует')
+                }
+
                 // сохранить отправленное боту сообщение пользователя в БД
                 const convId = sendMyMessage(text, 'text', chatId, messageId)
 
