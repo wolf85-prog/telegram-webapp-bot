@@ -15,7 +15,7 @@ module.exports = async function addPretendent(blockId) {
                         {
                             type: 'text',
                             text: {
-                                content: "0 000.00 — 0 000.00",
+                                content: "0 000.00 — 0 000.00 руб/час * 0 — 0 часов",
                             },
                         }
                     ],
@@ -26,7 +26,7 @@ module.exports = async function addPretendent(blockId) {
                         {
                             "type": "text",
                             "text": {
-                                "content": "",
+                                "content": "Техническое Задание текстом подробно",
                                 "link": null
                             },
                             "annotations": {
@@ -37,7 +37,7 @@ module.exports = async function addPretendent(blockId) {
                                 "code": false,
                                 "color": "default"
                             },
-                            "plain_text": "",
+                            "plain_text": "Техническое Задание текстом подробно",
                             "href": null
                         }
                     ]
