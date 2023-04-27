@@ -667,18 +667,14 @@ bot.on('message', async (msg) => {
                                     
                     //3) отправить сообщение если есть изменения в составе работников     
                     if (!isEqual) {
-                        //отправка сообщения в чат бота
-                        await bot.sendMessage(project2.chatId, 
-                            `Запрос на специалистов: 
+                        const text = `Запрос на специалистов: 
+                                
+${day}.${month} | ${chas}:${minut} | ${project_name} | U.L.E.Y
                             
-${day}.${month} | ${chas}:${minut} | ${project2.name} | U.L.E.Y
-
-${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']'
-).join('\n')}`                         
-                        )
-
+${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
+                            
                         //отправка сообщения в чат бота
-                        const response = bot.sendMessage(project2.chatId, text)
+                        await bot.sendMessage(project2.chatId, text)
 
                         // сохранить отправленное боту сообщение пользователя в БД
                         const convId = sendMyMessage(text, 'text', project2.chatId, messageId)
