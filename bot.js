@@ -653,8 +653,19 @@ bot.on('message', async (msg) => {
                     }) // map spec end
 
                     var isEqual = JSON.stringify(arr_all[0]) === JSON.stringify(arr_all[1]);
-                        
-                    // если есть изменения в составе работников    
+
+                    //получить название проекта из ноушена
+                    let project_name;
+                    const res = await fetch(
+                         `${botApiUrl}/project/${project2.projectId}`
+                    )
+                    .then((response) => response.json())
+                    .then((data) => {
+                        //console.log("project_name: ", data.properties.Name.title[0]?.plain_text);
+                        project_name = data.properties.Name.title[0]?.plain_text;
+                    });
+                                    
+                    //3) отправить сообщение если есть изменения в составе работников     
                     if (!isEqual) {
                         //отправка сообщения в чат бота
                         await bot.sendMessage(project2.chatId, 
