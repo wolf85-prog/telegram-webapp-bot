@@ -585,12 +585,11 @@ bot.on('message', async (msg) => {
 
         if(text.startsWith('/startreports')) {
             const project = text.split(' ');
-            console.log(project[1])
 
             const project2 = await Project.findOne({ where:{ projectId: project[1] } })
 
             //начать получать отчеты
-            console.log('START GET TEST REPORTS')
+            console.log('START GET TEST REPORTS ' + project2.name)
 
             const d = new Date(project2.datestart);
             const year = d.getFullYear();
@@ -601,14 +600,14 @@ bot.on('message', async (msg) => {
 
             let count_fio;
             let i = 0;
-            let arr_count = [] 
             let arr_all = [] 
 
             if (JSON.parse(project2.spec).length > 0) {
-                console.log("Специалисты: ", project2.spec)
+                //console.log("Специалисты: ", project2.spec)
 
                 // повторить с интервалом 1 минуту
                 let timerId = setInterval(async() => {
+                    arr_count = [] 
 
                     //1)получить блок и бд
                     const blockId = await getBlocks(project2.projectId);
@@ -908,7 +907,6 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
 
                     let count_fio;
                     let i = 0;
-                    let arr_count = [] 
                     let arr_all = [] 
 
                     if (JSON.parse(project2.spec).length > 0) {
