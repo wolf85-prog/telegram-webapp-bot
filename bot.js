@@ -640,7 +640,7 @@ bot.on('message', async (msg) => {
                             }
                             arr_count.push(obj) 
 
-                            //console.log("arr_count: ", arr_count)
+                            console.log("arr_count: ", arr_count)
 
                             //сохранение массива в 2-х элементный массив
                             if (i % 2 == 0) {
