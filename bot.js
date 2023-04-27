@@ -676,6 +676,26 @@ ${day}.${month} | ${chas}:${minut} | ${project2.name} | U.L.E.Y
 ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']'
 ).join('\n')}`                         
                         )
+
+                        //отправка сообщения в чат бота
+                        const response = bot.sendMessage(project2.chatId, text)
+
+                        // сохранить отправленное боту сообщение пользователя в БД
+                        const convId = sendMyMessage(text, 'text', project2.chatId, messageId)
+
+                        //Подключаемся к серверу socket
+                        let socket = io(socketUrl);
+                        socket.emit("addUser", project2.chatId)
+
+                        //отправить сообщение в админку
+                        socket.emit("sendMessage", {
+                                    senderId: project2.chatId,
+                                    receiverId: chatTelegramId,
+                                    text: text,
+                                    type: 'text',
+                                    convId: convId,
+                                    messageId: messageId,
+                        })
                     } //end if
 
                     i++ 
