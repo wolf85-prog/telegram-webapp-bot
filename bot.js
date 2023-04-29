@@ -471,7 +471,7 @@ async function addAddress(geo, projectname, datestart, teh, managerId, companyId
         const response = await notion.pages.create({
             parent: { database_id: databaseAddressId },
             properties: {
-                "Название": {
+                "Название площадки": {
                     type: "title",
                     title: [
                         {
@@ -762,7 +762,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                     })
                 })
             } catch (error) {
-                console.log(error)
+                console.log(error.message)
             }
         }
 //----------------------------------------------------------------------------------------------------------------          
@@ -815,7 +815,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                     })
                 })            
             } catch (error) {
-                console.log(error)
+                console.log(error.message)
             }
         }
 //----------------------------------------------------------------------------------------------------------------      
@@ -922,7 +922,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
 
                             //1)получить блок и бд
                             const blockId = await getBlocks(project2.projectId);
-                            console.log("blockId " + i + ": " + blockId + " Проект ID: " + project2.name)
+                            //console.log("blockId " + i + ": " + blockId + " Проект ID: " + project2.name)
                             let databaseBlock = await getDatabaseId(blockId); 
 
                             //2) проверить массив специалистов
@@ -1106,7 +1106,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                     }
                                     
                 } catch (error) {
-                    console.log(error)
+                    console.log(error.message)
                 }
 //----------------------------------------------------------------------------------------------------------------
             } else if (text.includes('Тестовое сообщение')) {  
@@ -1180,7 +1180,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
         }
 
     } catch (error) {
-        console.log('Произошла непредвиденная ошибка! ', error)
+        console.log('Произошла непредвиденная ошибка! ', error.message)
     }
     
   });
@@ -1241,7 +1241,7 @@ const start = async () => {
         });
 
     } catch (error) {
-        console.log('Подключение к БД сломалось!', error)
+        console.log('Подключение к БД сломалось!', error.message)
     }
 }
 
