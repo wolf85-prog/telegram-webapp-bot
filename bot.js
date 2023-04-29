@@ -828,10 +828,10 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
             // Проект успешно создан
             } else if (text.startsWith('Проект успешно создан')) {           
                 const response = await bot.sendMessage(chatTelegramId, `${text} \n \n от ${firstname} ${lastname} ${chatId}`)
-                console.log("response: ", response)
+                //console.log("response: ", response)
 
                 //отправить сообщение о создании проекта в админ-панель
-                const convId = sendMyMessage(text, "text", chatId, messageId)
+                const convId = sendMyMessage(text, "text", chatId, response.message_id)
                  // Подключаемся к серверу socket
                 let socket = io(socketUrl);
                  socket.emit("addUser", chatId)
@@ -841,7 +841,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                      receiverId: chatTelegramId,
                      text: text,
                      convId: convId,
-                     messageId: messageId,
+                     messageId: response.message_id,
                  })
 
                 const specArr = Worklist.map(item => ({
@@ -986,10 +986,10 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                                     
                                 //отправка сообщения в чат бота
                                 const respose = await bot.sendMessage(project2.chatId, text)
-                                console.log("respose: ", respose)
+                                //console.log("respose: ", respose)
 
                                 // сохранить отправленное боту сообщение пользователя в БД
-                                const convId = sendMyMessage(text, 'text', project2.chatId, messageId)
+                                const convId = sendMyMessage(text, 'text', project2.chatId, response.message_id)
 
                                 //Подключаемся к серверу socket
                                 let socket = io(socketUrl);
@@ -1002,7 +1002,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                                             text: text,
                                             type: 'text',
                                             convId: convId,
-                                            messageId: messageId,
+                                            messageId: response.message_id,
                                 })  
 
                             } // end if
@@ -1073,10 +1073,10 @@ ${day}.${month} | ${chas}:${minut} | ${project2.name} | U.L.E.Y
 ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
                                     
                                 //отправка сообщения в чат бота
-                                bot.sendMessage(project2.chatId, text)
+                                const response = bot.sendMessage(project2.chatId, text)
 
                                 // сохранить отправленное боту сообщение пользователя в БД
-                                const convId = sendMyMessage(text, 'text', project2.chatId, messageId)
+                                const convId = sendMyMessage(text, 'text', project2.chatId, response.message_id)
 
                                 // Подключаемся к серверу socket
                                 let socket = io(socketUrl);
@@ -1090,7 +1090,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                                     text: text,
                                     type: 'text',
                                     convId: convId,
-                                    messageId: messageId,
+                                    messageId: response.message_id,
                                 })
                             } // end if
 
@@ -1110,7 +1110,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                     console.log(error.message)
                 }
 //----------------------------------------------------------------------------------------------------------------
-            } else if (text.includes('Тестовое сообщение')) {  
+            } else if (text.startsWith('Тестовое сообщение')) {  
 
                 //добавление пользователя в БД
                 const user = await UserBot.findOne({where:{chatId: chatId.toString()}})
