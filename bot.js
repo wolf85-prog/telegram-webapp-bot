@@ -822,13 +822,13 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
         
         //обработка сообщений    
         if ((text || '')[0] !== '/' && text) {       
-            if (text.includes("Reply")) {           
+            if (text.startsWith("Reply")) {           
                 await bot.sendMessage(text.substring(6, text.indexOf('.')), text.slice(text.indexOf('.') + 2)) 
 
             // Проект успешно создан
-            } else if (text.includes('Проект успешно создан')) {           
-                await bot.sendMessage(chatTelegramId, `${text} \n \n от ${firstname} ${lastname} ${chatId}`)
-                await bot.sendMessage(chatGiaId, `${text} \n \n от ${firstname} ${lastname} ${chatId}`)
+            } else if (text.startsWith('Проект успешно создан')) {           
+                const response = await bot.sendMessage(chatTelegramId, `${text} \n \n от ${firstname} ${lastname} ${chatId}`)
+                console.log("response: ", response)
 
                 //отправить сообщение о создании проекта в админ-панель
                 const convId = sendMyMessage(text, "text", chatId, messageId)
@@ -985,7 +985,8 @@ ${day}.${month} | ${chas}:${minut} | ${project_name} | U.L.E.Y
 ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
                                     
                                 //отправка сообщения в чат бота
-                                const response = bot.sendMessage(project2.chatId, text)
+                                const respose = await bot.sendMessage(project2.chatId, text)
+                                console.log("respose: ", respose)
 
                                 // сохранить отправленное боту сообщение пользователя в БД
                                 const convId = sendMyMessage(text, 'text', project2.chatId, messageId)
