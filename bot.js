@@ -853,7 +853,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                 do {
                     currentDate = Date.now();
                     //console.log("Пауза: ", currentDate - date)
-                } while (currentDate - date < 4000);
+                } while (currentDate - date < 6000);
                 console.log("Продолжение...")
 
                 //массив специалистов
