@@ -34,17 +34,17 @@ const chatTelegramId = process.env.CHAT_ID
 const chatGiaId = process.env.GIA_CHAT_ID
 
 
-let projectId=''; 
-let projectName='';
-let projectDate='';
-let projectTime='';
-let dateStart='';
-let manager_id='';
-let company_id='';
-let Geo='';
-let Teh='';
-let Worklist='';
-let Equipmentlist='';
+let projectId; 
+let projectName;
+let projectDate;
+let projectTime;
+let dateStart;
+let manager_id;
+let company_id;
+let Geo;
+let Teh;
+let Worklist;
+let Equipmentlist;
 
 //functions
 const newDatabase1 = require('./bot/common/newDatabase1')
@@ -838,6 +838,8 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
             } else if (text.startsWith('Проект успешно создан')) {           
                 const response = await bot.sendMessage(chatTelegramId, `${text} \n \n от ${firstname} ${lastname} ${chatId}`)
 
+                console.log("lets: ", projectName + " " + projectDate + " " +dateStart + Teh + " "+ Worklist + manager_id)
+
                 //отправить сообщение о создании проекта в админ-панель
                 const convId = sendMyMessage(text, "text", chatId, response.message_id)
                 
@@ -992,8 +994,12 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                             )
                             .then((response) => response.json())
                             .then((data) => {
-                                //console.log("project_name: ", data.properties.Name.title[0]?.plain_text);
-                                project_name = data.properties.Name.title[0]?.plain_text;
+                                console.log("project_name: ", data);
+                                if (data) {
+                                    project_name = data?.properties.Name.title[0]?.plain_text;
+                                }  else {
+                                    project_name = project2.name
+                                }                             
                             });
                                             
                             //3) отправить сообщение если есть изменения в составе работников    
