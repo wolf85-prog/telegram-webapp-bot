@@ -34,8 +34,15 @@ const chatTelegramId = process.env.CHAT_ID
 const chatGiaId = process.env.GIA_CHAT_ID
 
 
-let project_id, projectId, projectName, projectDate, projectTime, dateStart, manager_id, company_id, Geo, Teh, Worklist, Equipmentlist
-let blockId
+let projectId=''; 
+let projectName='';
+let dateStart='';
+let manager_id='';
+let company_id='';
+let Geo='';
+let Teh='';
+let Worklist='';
+let Equipmentlist='';
 
 //functions
 const newDatabase1 = require('./bot/common/newDatabase1')
@@ -828,15 +835,16 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
             // Проект успешно создан
             } else if (text.startsWith('Проект успешно создан')) {           
                 const response = await bot.sendMessage(chatTelegramId, `${text} \n \n от ${firstname} ${lastname} ${chatId}`)
-                //console.log("response: ", response)
 
                 //отправить сообщение о создании проекта в админ-панель
                 const convId = sendMyMessage(text, "text", chatId, response.message_id)
-                 // Подключаемся к серверу socket
+                
+                // Подключаемся к серверу socket
                 let socket = io(socketUrl);
-                 socket.emit("addUser", chatId)
-                 //отправить сообщение в админку
-                 socket.emit("sendMessage", {
+                socket.emit("addUser", chatId)
+                 
+                //отправить сообщение в админку
+                socket.emit("sendMessage", {
                      senderId: chatId,
                      receiverId: chatTelegramId,
                      text: text,
@@ -844,11 +852,14 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                      messageId: response.message_id,
                  })
 
-                const specArr = Worklist.map(item => ({
-                    spec: item.spec,
-                    cat: item.cat,
-                    count: item.count,
-                }));
+                let specArr = [{}]
+                if (Worklist !== '') {
+                    specArr = Worklist.map(item => ({
+                        spec: item.spec,
+                        cat: item.cat,
+                        count: item.count,
+                    }));
+                }
 
                 let equipArr = [{}]
                 if (Equipmentlist !== '') {
@@ -873,7 +884,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                         companyId: company_id, 
                         chatId: chatId
                     })
-                    
+
                     console.log('Проект успешно добавлен в БД! Project: ' + res.name)  
 
                     const project = await Project.findOne({where:{id: res.id}})
