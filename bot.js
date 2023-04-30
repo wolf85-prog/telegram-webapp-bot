@@ -141,6 +141,8 @@ ${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join
           company_id = companyId
           Geo = geo  
 
+          console.log("Сохранение данных в переменных: ", projectName)
+
         } 
         
         if (equipmentlist.length > 0) {
