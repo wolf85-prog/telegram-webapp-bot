@@ -856,6 +856,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                     //console.log("Пауза: ", currentDate - date)
                 } while (currentDate - date < 2000);
 
+                //массив специалистов
                 let specArr = []
                 if (Worklist !== '') {
                     specArr = Worklist.map(item => ({
@@ -865,6 +866,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                     }));
                 }
 
+                //массив оборудования
                 let equipArr = []
                 if (Equipmentlist !== '') {
                     equipArr = Equipmentlist.map(item => ({
@@ -913,8 +915,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                     
                     const project2 = await Project.findOne({where:{id: res.id}})
                     //начать получать отчеты
-                    console.log('START GET REPORTS: ' + project2.id + " " + project2.name)
-                    //const project2 = await Project.findOne({where:{projectId: projectId}})                  
+                    console.log('START GET REPORTS: ' + project2.id + " " + project2.name)                  
 
                     const d = new Date(project2.datestart);
                     const year = d.getFullYear();
@@ -1009,11 +1010,11 @@ ${day}.${month} | ${chas}:${minut} | ${project_name} | U.L.E.Y
 ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
                                     
                                 //отправка сообщения в чат бота
-                                const respose = await bot.sendMessage(project2.chatId, text)
+                                const report = await bot.sendMessage(project2.chatId, text)
                                 //console.log("respose: ", respose)
 
                                 // сохранить отправленное боту сообщение пользователя в БД
-                                const convId = sendMyMessage(text, 'text', project2.chatId, response.message_id)
+                                const convId = sendMyMessage(text, 'text', project2.chatId, report.message_id)
 
                                 //Подключаемся к серверу socket
                                 let socket = io(socketUrl);
@@ -1026,7 +1027,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                                             text: text,
                                             type: 'text',
                                             convId: convId,
-                                            messageId: response.message_id,
+                                            messageId: report.message_id,
                                 })  
 
                             } // end if
@@ -1097,10 +1098,10 @@ ${day}.${month} | ${chas}:${minut} | ${project2.name} | U.L.E.Y
 ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
                                     
                                 //отправка сообщения в чат бота
-                                const response = bot.sendMessage(project2.chatId, text)
+                                const report2 = bot.sendMessage(project2.chatId, text)
 
                                 // сохранить отправленное боту сообщение пользователя в БД
-                                const convId = sendMyMessage(text, 'text', project2.chatId, response.message_id)
+                                const convId = sendMyMessage(text, 'text', project2.chatId, report2.message_id)
 
                                 // Подключаемся к серверу socket
                                 let socket = io(socketUrl);
@@ -1114,7 +1115,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                                     text: text,
                                     type: 'text',
                                     convId: convId,
-                                    messageId: response.message_id,
+                                    messageId: report2.message_id,
                                 })
                             } // end if
 
