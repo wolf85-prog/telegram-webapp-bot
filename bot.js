@@ -853,7 +853,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                 let currentDate = null;
                 do {
                     currentDate = Date.now();
-                    console.log("Пауза: ", currentDate - date)
+                    //console.log("Пауза: ", currentDate - date)
                 } while (currentDate - date < 2000);
 
                 let specArr = []
