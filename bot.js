@@ -858,6 +858,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
 
                 //массив специалистов
                 let specArr = []
+                console.log("Worklist: ", Worklist)
                 if (Worklist !== '') {
                     specArr = Worklist.map(item => ({
                         spec: item.spec,
