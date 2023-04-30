@@ -34,17 +34,7 @@ const chatTelegramId = process.env.CHAT_ID
 const chatGiaId = process.env.GIA_CHAT_ID
 
 
-let projectId; 
-let projectName;
-let projectDate;
-let projectTime;
-let dateStart;
-let manager_id;
-let company_id;
-let Geo;
-let Teh;
-let Worklist;
-let Equipmentlist;
+let projectName, projectDate, projectTime, dateStart, manager_id, company_id, Geo, Teh, Worklist, Equipmentlist;
 
 //functions
 const newDatabase1 = require('./bot/common/newDatabase1')
@@ -856,7 +846,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                      messageId: response.message_id,
                  })
 
-                let specArr = [{}]
+                let specArr = []
                 if (Worklist !== '') {
                     specArr = Worklist.map(item => ({
                         spec: item.spec,
@@ -865,7 +855,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                     }));
                 }
 
-                let equipArr = [{}]
+                let equipArr = []
                 if (Equipmentlist !== '') {
                     equipArr = Equipmentlist.map(item => ({
                         name: item.spec,
