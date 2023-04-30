@@ -34,7 +34,7 @@ const chatTelegramId = process.env.CHAT_ID
 const chatGiaId = process.env.GIA_CHAT_ID
 
 
-let projectName, projectDate, projectTime, dateStart, manager_id, company_id, Geo, Teh, Worklist, Equipmentlist;
+let projectId, projectName, projectDate, projectTime, dateStart, manager_id, company_id, Geo, Teh, Worklist, Equipmentlist;
 
 //functions
 const newDatabase1 = require('./bot/common/newDatabase1')
@@ -830,7 +830,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
             } else if (text.startsWith('Проект успешно создан')) {           
                 const response = await bot.sendMessage(chatTelegramId, `${text} \n \n от ${firstname} ${lastname} ${chatId}`)
 
-                console.log("lets: ", projectName + " " + projectDate + " " +dateStart + Teh + " "+ Worklist + manager_id)
+                //console.log("lets: ", projectName + " " + projectDate + " " +dateStart + Teh + " "+ Worklist + manager_id)
 
                 //отправить сообщение о создании проекта в админ-панель
                 const convId = sendMyMessage(text, "text", chatId, response.message_id)
@@ -880,10 +880,9 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                         companyId: company_id, 
                         chatId: chatId
                     })
-                    console.log('Res.id: ' + res.id) 
 
                     console.log('Проект успешно добавлен в БД! Project: ' + res.name)  
-                    console.log('ProjectName: ' + projectName)  
+                    console.log("lets2: ", projectName + " " + projectDate + " " +dateStart + Teh + " "+ Worklist + manager_id)
 
                     const project = await Project.findOne({where:{id: res.id}})
                 
@@ -986,7 +985,6 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                             )
                             .then((response) => response.json())
                             .then((data) => {
-                                console.log("project_name: ", data);
                                 if (data) {
                                     project_name = data?.properties.Name.title[0]?.plain_text;
                                 }  else {
