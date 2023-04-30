@@ -830,8 +830,6 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
             } else if (text.startsWith('Проект успешно создан')) {           
                 const response = await bot.sendMessage(chatTelegramId, `${text} \n \n от ${firstname} ${lastname} ${chatId}`)
 
-                //console.log("lets: ", projectName + " " + projectDate + " " +dateStart + Teh + " "+ Worklist + manager_id)
-
                 //отправить сообщение о создании проекта в админ-панель
                 const convId = sendMyMessage(text, "text", chatId, response.message_id)
                 
@@ -854,7 +852,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                 do {
                     currentDate = Date.now();
                     //console.log("Пауза: ", currentDate - date)
-                } while (currentDate - date < 2000);
+                } while (currentDate - date < 4000);
 
                 //массив специалистов
                 let specArr = []
@@ -878,6 +876,8 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                 } 
 
                 try {
+                    console.log("lets2: ", projectName + " " + projectDate + " " +dateStart + Teh + " "+ Worklist + manager_id)
+
                     //создание проекта в БД
                     const res = await Project.create({ 
                         name: projectName, 
@@ -892,8 +892,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                     })
 
                     console.log('Проект успешно добавлен в БД! Project: ' + res.name)  
-                    console.log("lets2: ", projectName + " " + projectDate + " " +dateStart + Teh + " "+ Worklist + manager_id)
-
+                    
                     const project = await Project.findOne({where:{id: res.id}})
                 
 //-------------------------------------------------------------------------------------------------------------------------------
