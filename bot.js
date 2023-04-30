@@ -36,6 +36,8 @@ const chatGiaId = process.env.GIA_CHAT_ID
 
 let projectId=''; 
 let projectName='';
+let projectDate='';
+let projectTime='';
 let dateStart='';
 let manager_id='';
 let company_id='';
