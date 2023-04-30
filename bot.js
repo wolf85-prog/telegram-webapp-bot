@@ -873,7 +873,8 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                         companyId: company_id, 
                         chatId: chatId
                     })
-                    console.log('Проект успешно добавлен в БД! Project: ')  
+                    
+                    console.log('Проект успешно добавлен в БД! Project: ' + res.name)  
 
                     const project = await Project.findOne({where:{id: res.id}})
                 
