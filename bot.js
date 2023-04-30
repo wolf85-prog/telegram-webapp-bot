@@ -848,6 +848,13 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                      messageId: response.message_id,
                  })
 
+                //пауза 2 секунды
+                const date = Date.now();
+                let currentDate = null;
+                do {
+                    currentDate = Date.now();
+                } while (currentDate - date < 2000);
+
                 let specArr = []
                 if (Worklist !== '') {
                     specArr = Worklist.map(item => ({
