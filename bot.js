@@ -847,12 +847,14 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                  })
 
                 //пауза 2 секунды
+                console.log("Пауза...")
                 const date = Date.now();
                 let currentDate = null;
                 do {
                     currentDate = Date.now();
                     //console.log("Пауза: ", currentDate - date)
                 } while (currentDate - date < 4000);
+                console.log("Продолжение...")
 
                 //массив специалистов
                 let specArr = []
