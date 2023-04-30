@@ -894,9 +894,10 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                     // отправить сообщение пользователю через 30 секунд
                     setTimeout(() => {bot.sendMessage(project.chatId, 'Ваша заявка принята!')}, 30000) // 30 секунд
                     
+                    const project2 = await Project.findOne({where:{id: res.id}})
                     //начать получать отчеты
-                    console.log('START GET REPORTS')
-                    const project2 = await Project.findOne({where:{projectId: projectId}})
+                    console.log('START GET REPORTS: ' + project2.id + " " + project2.name)
+                    //const project2 = await Project.findOne({where:{projectId: projectId}})                  
 
                     const d = new Date(project2.datestart);
                     const year = d.getFullYear();
@@ -908,6 +909,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                     let count_fio;
                     let i = 0;
                     let arr_all = [] 
+                    let databaseBlock
 
                     if (JSON.parse(project2.spec).length > 0) {
                         // начало цикла Специалисты ----------------------------------------------------------------------
@@ -921,9 +923,11 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                             arr_count = [] 
 
                             //1)получить блок и бд
-                            const blockId = await getBlocks(project2.projectId);
-                            //console.log("blockId " + i + ": " + blockId + " Проект ID: " + project2.name)
-                            let databaseBlock = await getDatabaseId(blockId); 
+                            if (project2.projectId) {
+                                const blockId = await getBlocks(project2.projectId);
+                                //console.log("blockId " + i + ": " + blockId + " Проект ID: " + project2.name) 
+                                databaseBlock = await getDatabaseId(blockId); 
+                            }
 
                             //2) проверить массив специалистов
                             JSON.parse(project2.spec).map((value)=> {
