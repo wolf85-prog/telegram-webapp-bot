@@ -954,7 +954,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                             }
 
                             //2) проверить массив специалистов
-                            console.log(project2.name + "project2.spec: " + project2.spec)
+                            console.log(project2.name + " - project2.spec: " + project2.spec)
                             JSON.parse(project2.spec).map((value)=> {
                                 //console.log("value: ", value)                                
                                 count_fio = 0;
