@@ -95,6 +95,20 @@ app.post('/web-data', async (req, res) => {
     const minut = String(d.getMinutes()).padStart(2, "0");
     try {
         if (worklist.length > 0) {
+
+            console.log("Начинаю сохранять данные по заявке...")
+            projectName = projectname
+            projectDate = `${day}.${month}`
+            projectTime = `${chas}:${minut}`
+            dateStart = datestart
+            Teh = teh
+            Worklist = worklist
+            Equipmentlist = equipmentlist 
+            manager_id = managerId
+            company_id = companyId
+            Geo = geo   
+            console.log("Сохранение данных завершено: ", projectName)
+            
             await bot.answerWebAppQuery(queryId, {
                 type: 'article',
                 id: queryId,
@@ -130,19 +144,6 @@ ${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join(
 ${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}`
           )
   
-          console.log("Начинаю сохранять данные по заявке...")
-          projectName = projectname
-          projectDate = `${day}.${month}`
-          projectTime = `${chas}:${minut}`
-          dateStart = datestart
-          Teh = teh
-          Worklist = worklist
-          Equipmentlist = equipmentlist 
-          manager_id = managerId
-          company_id = companyId
-          Geo = geo  
-
-          console.log("Сохранение данных завершено: ", projectName)
 
         } 
         
