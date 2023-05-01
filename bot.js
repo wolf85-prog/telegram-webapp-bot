@@ -130,6 +130,7 @@ ${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join(
 ${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}`
           )
   
+          console.log("Начинаю сохранять данные по заявке...")
           projectName = projectname
           projectDate = `${day}.${month}`
           projectTime = `${chas}:${minut}`
@@ -141,7 +142,7 @@ ${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join
           company_id = companyId
           Geo = geo  
 
-          console.log("Сохранение данных в переменных: ", projectName)
+          console.log("Сохранение данных завершено: ", projectName)
 
         } 
         
@@ -830,6 +831,8 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
             } else if (text.startsWith('Проект успешно создан')) {           
                 const response = await bot.sendMessage(chatTelegramId, `${text} \n \n от ${firstname} ${lastname} ${chatId}`)
 
+                console.log("Отправляю сообщение в админ-панель...")
+
                 //отправить сообщение о создании проекта в админ-панель
                 const convId = sendMyMessage(text, "text", chatId, response.message_id)
                 
@@ -847,14 +850,14 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                  })
 
                 //пауза 2 секунды
-                console.log("Пауза...")
-                const date = Date.now();
-                let currentDate = null;
-                do {
-                    currentDate = Date.now();
-                    //console.log("Пауза: ", currentDate - date)
-                } while (currentDate - date < 6000);
-                console.log("Продолжение...")
+                // console.log("Пауза...")
+                // const date = Date.now();
+                // let currentDate = null;
+                // do {
+                //     currentDate = Date.now();
+                //     //console.log("Пауза: ", currentDate - date)
+                // } while (currentDate - date < 6000);
+                // console.log("Продолжение...")
 
                 //массив специалистов
                 let specArr = []
