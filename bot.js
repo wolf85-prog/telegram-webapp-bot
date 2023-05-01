@@ -981,7 +981,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                                     }
                                     arr_count.push(obj) 
 
-                                    console.log("arr_count: ", JSON.stringify(arr_count))
+                                    //console.log("arr_count: ", JSON.stringify(arr_count))
 
                                     //сохранение массива в 2-х элементный массив
                                     if (i % 2 == 0) {
