@@ -982,6 +982,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                                     }
                                 } else {
                                     console.log("База данных не найдена! Проект ID: " + project2.name)
+                                    //clearTimeout(timerId);
                                 }                                  
                             }) // map spec end
 
