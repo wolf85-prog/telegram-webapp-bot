@@ -923,6 +923,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
 
                     let count_fio;
                     let i = 0;
+                    let j = 0;
                     let arr_all = [] 
                     let databaseBlock
 
@@ -952,6 +953,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                                 
                                 //если бд ноушена доступна
                                 if (databaseBlock) {
+                                    j = 0
                                     databaseBlock.map((db) => {
                                         //console.log("db: ", db)
                                         if (value.spec === db.spec) {
@@ -981,7 +983,10 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                                     }
                                 } else {
                                     console.log("База данных не найдена! Проект ID: " + project2.name)
-                                    //clearTimeout(timerId);
+                                    j++ //счетчик ошибок доступа к БД ноушена
+                                    if (j > 20) {
+                                        clearTimeout(timerId);
+                                    }
                                 }                                  
                             }) // map spec end
 
