@@ -133,7 +133,7 @@ async function getCompanys() {
                id: page.id,
                //propertys: page.properties
                managers: page.properties["Менеджеры"].relation,
-               title: page.properties["Название компании"].title[0].text.content,
+               title: page.properties["Название компании"].title[0],
                
             };
         });
