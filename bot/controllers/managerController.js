@@ -132,19 +132,10 @@ async function getCompanys() {
             return {
                id: page.id,
                //propertys: page.properties
-               managers: page.properties["Менеджеры"].relation,
                title: page.properties["Название компании"].title[0]?.plain_text,
-               
+               managers: page.properties["Менеджеры"].relation,        
             };
         });
-
-        // const companys = response.results.map((company) => {
-        //     return {
-        //         id: company.id,
-        //         // managers: company.properties["Менеджеры"].relation,
-        //         title: company.properties["Название компании"].title[0].plain_text,
-        //     };
-        // });
 
         return responseResults;
     } catch (error) {
