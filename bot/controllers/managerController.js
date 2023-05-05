@@ -131,10 +131,10 @@ async function getCompanys() {
         const responseResults = response.results.map((page) => {
             return {
                id: page.id,
-               propertys: page.properties,
+               //propertys: page.properties,
                title: page.properties["Название компании"].title[0]?.plain_text,
                managers: page.properties["Менеджеры"].relation,  
-               //city: page.properties     
+               city: page.properties["Город"].rich_text[0]?.plain_text,  
             };
         });
 
