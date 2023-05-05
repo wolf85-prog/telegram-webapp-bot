@@ -132,7 +132,7 @@ async function getCompanys() {
             return {
                id: page.id,
                //propertys: page.properties
-               managers: company.properties["Менеджеры"].relation,
+               managers: page.properties["Менеджеры"].relation,
                
             };
         });
