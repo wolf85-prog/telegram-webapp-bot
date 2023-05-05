@@ -932,7 +932,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                         // 86400 секунд в дне
                         var minutCount = 0;
 
-                        // повторить с интервалом 1 минуту
+                        // СТАРТ повторить с интервалом 1 минуту
                         let timerId = setInterval(async() => {
                             minutCount++  // a day has passed
                             arr_count = [] 
@@ -940,12 +940,11 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                             //1)получить блок и бд
                             if (project2.projectId) {
                                 const blockId = await getBlocks(project2.projectId);
-                                //console.log("blockId " + i + ": " + blockId + " Проект ID: " + project2.name) 
+                                console.log("Проект ID: " + project2.name + " - project2.spec: " + project2.spec) 
                                 databaseBlock = await getDatabaseId(blockId); 
                             }
 
                             //2) проверить массив специалистов
-                            //console.log(project2.name + " - project2.spec: " + project2.spec)
                             JSON.parse(project2.spec).map((value)=> {
                                 //console.log("value: ", value)                                
                                 count_fio = 0;
