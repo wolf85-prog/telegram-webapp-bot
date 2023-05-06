@@ -984,7 +984,9 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                                 } else {
                                     console.log("База данных не найдена! Проект ID: " + project2.name)
                                     j++ //счетчик ошибок доступа к БД ноушена
+                                    console.log("Ошибка № " + j)
                                     if (j > 20) {
+                                        console.log("Цикл проекта " + project2.name + " завершен!")
                                         clearTimeout(timerId);
                                     }
                                 }                                  
@@ -1038,7 +1040,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                             } // end if
 
                             i++ // счетчик интервалов
-                        }, 60000); //каждую 1 минуту
+                        }, 120000); //каждую 1 минуту
 
                         // остановить вывод через 30 дней
                         if (minutCount == 43200) {
