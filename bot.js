@@ -945,7 +945,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                             //1)получить блок и бд
                             if (project2.projectId) {
                                 const blockId = await getBlocks(project2.projectId);
-                                console.log("Проект ID: " + project2.name + " - project2.spec: " + project2.spec) 
+                                console.log(new Date() + " Проект ID: " + project2.name + " - project2.spec: " + project2.spec) 
                                 databaseBlock = await getDatabaseId(blockId); 
                             }
 
@@ -991,7 +991,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                                     console.log("База данных не найдена! Проект ID: " + project2.name)
                                     j++ //счетчик ошибок доступа к БД ноушена
                                     console.log("Ошибка № " + j)
-                                    if (j > 20) {
+                                    if (j > 10) {
                                         console.log("Цикл проекта " + project2.name + " завершен!")
                                         clearTimeout(timerId);
                                     }
