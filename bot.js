@@ -926,6 +926,8 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                     let j = 0;
                     let arr_all = [] 
                     let databaseBlock
+                    let m = 0;
+                    let n = 0;
 
                     if (JSON.parse(project2.spec).length > 0) {
                         // начало цикла Специалисты ----------------------------------------------------------------------
@@ -937,6 +939,8 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                         let timerId = setInterval(async() => {
                             minutCount++  // a day has passed
                             arr_count = [] 
+                            n=0;
+                            m=0;
 
                             //1)получить блок и бд
                             if (project2.projectId) {
@@ -951,10 +955,13 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                                 count_fio = 0;
                                 count_title = 0;
                                 
+                                m++
+
                                 //если бд ноушена доступна
                                 if (databaseBlock) {
                                     j = 0
                                     databaseBlock.map((db) => {
+                                        n++
                                         //console.log("db: ", db)
                                         if (value.spec === db.spec) {
                                             if (db.fio) {
@@ -972,8 +979,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                                         count_title: value.count,
                                     }
                                     arr_count.push(obj) 
-
-                                    //console.log("arr_count: ", JSON.stringify(arr_count))
+                                    console.log("arr_count: " + 'm=' + m + " n= " + n +" " + JSON.stringify(arr_count))
 
                                     //сохранение массива в 2-х элементный массив
                                     if (i % 2 == 0) {
