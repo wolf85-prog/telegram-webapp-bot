@@ -15,7 +15,7 @@ const {io} = require("socket.io-client")
 //fetch api
 const fetch = require('node-fetch');
 
-module.exports = async function getReports(project) {
+module.exports = async function getReports(project, bot) {
     console.log('START GET REPORTS: ' + project.id + " " + project.name)
 
     const d = new Date(project.datestart);

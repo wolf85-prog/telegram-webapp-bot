@@ -911,7 +911,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                     const project2 = await Project.findOne({where:{id: res.id}})                   
                     
                     //начать получать отчеты
-                    getReports(project2)
+                    getReports(project2, bot)
                                     
                 } catch (error) {
                     console.log(error.message)
