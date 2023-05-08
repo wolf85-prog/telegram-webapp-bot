@@ -4,6 +4,10 @@ const {Project} = require('./../models/models')
 const getBlocks = require('./getBlocks')
 const getDatabaseId = require('./getDatabaseId')
 const sendMyMessage = require('./sendMyMessage')
+// web-приложение
+const webAppUrl = process.env.WEB_APP_URL;
+const botApiUrl = process.env.REACT_APP_API_URL
+const socketUrl = process.env.SOCKET_APP_URL
 
 //socket.io
 const {io} = require("socket.io-client")
