@@ -8,6 +8,7 @@ const sendMyMessage = require('./sendMyMessage')
 const webAppUrl = process.env.WEB_APP_URL;
 const botApiUrl = process.env.REACT_APP_API_URL
 const socketUrl = process.env.SOCKET_APP_URL
+const chatTelegramId = process.env.CHAT_ID
 
 //socket.io
 const {io} = require("socket.io-client")
