@@ -30,7 +30,7 @@ module.exports = async function getReports(project, bot) {
     let i = 0;
     let j = 0;
     let databaseBlock
-    let arr_count = [] 
+    //let arr_count = [] 
     let arr_all = [] 
 
     if (JSON.parse(project.spec).length > 0) {
@@ -108,6 +108,9 @@ module.exports = async function getReports(project, bot) {
             });
 
             var isEqual = JSON.stringify(arr_all[0]) === JSON.stringify(arr_all[1]);
+
+            console.log(JSON.stringify(arr_all[0]))
+            console.log(JSON.stringify(arr_all[1]))
                 
             //3) отправить сообщение если есть изменения в составе работников    
             if (!isEqual) {
