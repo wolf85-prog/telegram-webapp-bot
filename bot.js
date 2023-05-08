@@ -939,13 +939,11 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                         let timerId = setInterval(async() => {
                             minutCount++  // a day has passed
                             arr_count = [] 
-                            n=0;
-                            m=0;
 
                             //1)получить блок и бд
                             if (project2.projectId) {
                                 const blockId = await getBlocks(project2.projectId);
-                                console.log(new Date() + " Проект ID: " + project2.name + " - project2.spec: " + project2.spec) 
+                                //console.log(new Date() + " Проект ID: " + project2.name + " - project2.spec: " + project2.spec) 
                                 databaseBlock = await getDatabaseId(blockId); 
                             }
 
@@ -954,14 +952,11 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                                 //console.log("value: ", value)                                
                                 count_fio = 0;
                                 count_title = 0;
-                                
-                                m++
 
                                 //если бд ноушена доступна
                                 if (databaseBlock) {
                                     j = 0
                                     databaseBlock.map((db) => {
-                                        n++
                                         //console.log("db: ", db)
                                         if (value.spec === db.spec) {
                                             if (db.fio) {
@@ -979,7 +974,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                                         count_title: value.count,
                                     }
                                     arr_count.push(obj) 
-                                    console.log("arr_count "+ i + ' m=' + m + " n= " + n +" " + JSON.stringify(arr_count))
+                                    //console.log("arr_count "+ i  + JSON.stringify(arr_count))
 
                                     //сохранение массива в 2-х элементный массив
                                     if (i % 2 == 0) {
