@@ -46,7 +46,7 @@ module.exports = async function getReports(project, bot) {
             //1)получить блок и бд
             if (project.projectId) {
                 const blockId = await getBlocks(project.projectId);
-                //console.log(new Date() + " Проект ID: " + project.name + " - project.spec: " + project.spec) 
+                console.log(new Date() + " Проект ID: " + project.name) 
                 databaseBlock = await getDatabaseId(blockId); 
             }
 
@@ -109,8 +109,8 @@ module.exports = async function getReports(project, bot) {
 
             var isEqual = JSON.stringify(arr_all[0]) === JSON.stringify(arr_all[1]);
 
-            console.log(JSON.stringify(arr_all[0]))
-            console.log(JSON.stringify(arr_all[1]))
+            //console.log(JSON.stringify(arr_all[0]))
+            //console.log(JSON.stringify(arr_all[1]))
                 
             //3) отправить сообщение если есть изменения в составе работников    
             if (!isEqual) {
