@@ -30,7 +30,7 @@ module.exports = async function getReports(project, bot) {
     let i = 0;
     let j = 0;
     let databaseBlock
-    //let arr_count = [] 
+    let arr_count
     let arr_all = [] 
 
     if (JSON.parse(project.spec).length > 0) {
