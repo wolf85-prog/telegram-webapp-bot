@@ -168,11 +168,11 @@ module.exports = async function newDatabase(parent_page_id, worklist) {
                                 "color": "yellow"
                             },
                             {
-                                "name": "C личным ТС [B/C]",
+                                "name": "C личным ТС [B\/C]",
                                 "color": "yellow"
                             },
                             {
-                                "name": "Без личного ТС [B/C]",
+                                "name": "Без личного ТС [B\/C]",
                                 "color": "yellow"
                             },
                             {
@@ -268,7 +268,7 @@ module.exports = async function newDatabase(parent_page_id, worklist) {
                                 "color": "green"
                             },
                             {
-                                "name": "Певец/певица",
+                                "name": "Певец \/ певица",
                                 "color": "green"
                             },
                             {
@@ -285,23 +285,27 @@ module.exports = async function newDatabase(parent_page_id, worklist) {
                                 "color": "orange"
                             },
                             {
-                                "name": "Аттракционы",
+                                "name": "Квесты",
                                 "color": "orange"
                             },
                             {
-                                "name": "Надувные фигуры",
+                                "name": "Квизы",
                                 "color": "orange"
                             },
                             {
-                                "name": "Игровые автоматы",
+                                "name": "Аниматоры",
                                 "color": "orange"
                             },
                             {
-                                "name": "Активности",
+                                "name": "Настольные игры \/ игровые автоматы",
                                 "color": "orange"
                             },
                             {
-                                "name": "Настольные игры",
+                                "name": "Пневмокостюмы \/ ростовые куклы",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "Активности \/ аттракционы",
                                 "color": "orange"
                             },
                              //-------- Blacklist ------------------------------
