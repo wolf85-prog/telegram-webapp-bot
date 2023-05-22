@@ -209,7 +209,7 @@ module.exports = async function newDatabase_3(parent_page_id) {
                                 "color": "blue"
                             },
                             {
-                                "name": "Хостеc",
+                                "name": "Хостес",
                                 "color": "blue"
                             },
                             {
