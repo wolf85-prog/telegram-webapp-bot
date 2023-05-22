@@ -124,11 +124,22 @@ async function getManagers2() {
 
 async function getCompanys() {
     try {
-        const response = await notion.databases.query({
+        let data = await notion.databases.query({
             database_id: databaseCompanyId
         });
 
-        const responseResults = response.results.map((page) => {
+        results = [...data.results]
+
+        while(data.has_more) {
+            data = await notion.databases.query({
+                database_id: databaseCompanyId,
+                start_cursor: data.next_cursor,
+            }); 
+
+            results = [...results, ...data.results];
+        }
+
+        const responseResults = results.map((page) => {
             return {
                id: page.id,
                //propertys: page.properties,
@@ -137,6 +148,8 @@ async function getCompanys() {
                city: page.properties["Город"].rich_text[0]?.plain_text,  
             };
         });
+
+        console.log("companys size: ", results.length)
 
         return responseResults;
     } catch (error) {

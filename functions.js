@@ -974,3 +974,230 @@
 //         }
 //     },
 // }
+
+
+//-------------------------------------------------
+                    //console.log('START GET REPORTS: ' + project2.id + " " + project2.name)                  
+
+                    // const d = new Date(project2.datestart);
+                    // const year = d.getFullYear();
+                    // const month = String(d.getMonth()+1).padStart(2, "0");
+                    // const day = String(d.getDate()).padStart(2, "0");
+                    // const chas = d.getHours();
+                    // const minut = String(d.getMinutes()).padStart(2, "0");
+
+//                     let count_fio;
+//                     let i = 0;
+//                     let j = 0;
+//                     let arr_all = [] 
+//                     let databaseBlock
+
+//                     if (JSON.parse(project2.spec).length > 0) {
+//                         // начало цикла Специалисты ----------------------------------------------------------------------
+                        
+//                         // 86400 секунд в дне
+//                         var minutCount = 0;
+
+//                         // СТАРТ повторить с интервалом 1 минуту
+//                         let timerId = setInterval(async() => {
+//                             minutCount++  // a day has passed
+//                             arr_count = [] 
+
+//                             //1)получить блок и бд
+//                             if (project2.projectId) {
+//                                 const blockId = await getBlocks(project2.projectId);
+//                                 //console.log(new Date() + " Проект ID: " + project2.name + " - project2.spec: " + project2.spec) 
+//                                 databaseBlock = await getDatabaseId(blockId); 
+//                             }
+
+//                             //2) проверить массив специалистов
+//                             JSON.parse(project2.spec).map((value)=> {
+//                                 //console.log("value: ", value)                                
+//                                 count_fio = 0;
+//                                 count_title = 0;
+
+//                                 //если бд ноушена доступна
+//                                 if (databaseBlock) {
+//                                     j = 0
+//                                     databaseBlock.map((db) => {
+//                                         //console.log("db: ", db)
+//                                         if (value.spec === db.spec) {
+//                                             if (db.fio) {
+//                                                 count_fio++               
+//                                             }else {
+//                                                 count_fio;
+//                                             }  
+//                                         }
+//                                     })
+                                                                                                       
+//                                     const obj = {
+//                                         title: value.spec,
+//                                         title2: value.cat,
+//                                         count_fio: count_fio,
+//                                         count_title: value.count,
+//                                     }
+//                                     arr_count.push(obj) 
+//                                     //console.log("arr_count "+ i  + JSON.stringify(arr_count))
+
+//                                     //сохранение массива в 2-х элементный массив
+//                                     if (i % 2 == 0) {
+//                                         arr_all[0] = arr_count
+//                                     } else {
+//                                         arr_all[1] = arr_count 
+//                                     }
+//                                 } else {
+//                                     console.log("База данных не найдена! Проект ID: " + project2.name)
+//                                     j++ //счетчик ошибок доступа к БД ноушена
+//                                     console.log("Ошибка № " + j)
+//                                     if (j > 10) {
+//                                         console.log("Цикл проекта " + project2.name + " завершен!")
+//                                         clearTimeout(timerId);
+//                                     }
+//                                 }                                  
+//                             }) // map spec end
+
+//                             var isEqual = JSON.stringify(arr_all[0]) === JSON.stringify(arr_all[1]);
+
+//                             //получить название проекта из ноушена
+//                             let project_name;
+//                             const res = await fetch(
+//                                  `${botApiUrl}/project/${project2.projectId}`
+//                             )
+//                             .then((response) => response.json())
+//                             .then((data) => {
+//                                 if (data) {
+//                                     project_name = data?.properties.Name.title[0]?.plain_text;
+//                                 }  else {
+//                                     project_name = project2.name
+//                                 }                             
+//                             });
+                                            
+//                             //3) отправить сообщение если есть изменения в составе работников    
+//                             if (!isEqual) {
+//                                 const text = `Запрос на специалистов: 
+                                        
+// ${day}.${month} | ${chas}:${minut} | ${project_name} | U.L.E.Y
+                                    
+// ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
+                                    
+//                                 //отправка сообщения в чат бота
+//                                 const report = await bot.sendMessage(project2.chatId, text)
+//                                 //console.log("respose: ", respose)
+
+//                                 // сохранить отправленное боту сообщение пользователя в БД
+//                                 const convId = sendMyMessage(text, 'text', project2.chatId, report.message_id)
+
+//                                 //Подключаемся к серверу socket
+//                                 let socket = io(socketUrl);
+//                                 socket.emit("addUser", project2.chatId)
+
+//                                 //отправить сообщение в админку
+//                                 socket.emit("sendMessage", {
+//                                             senderId: project2.chatId,
+//                                             receiverId: chatTelegramId,
+//                                             text: text,
+//                                             type: 'text',
+//                                             convId: convId,
+//                                             messageId: report.message_id,
+//                                 })  
+
+//                             } // end if
+
+//                             i++ // счетчик интервалов
+//                         }, 120000); //каждые 2 минуты
+
+//                         // остановить вывод через 30 дней
+//                         if (minutCount == 43200) {
+//                             clearInterval(timerId);
+//                         }                    
+                    
+//                     } else if (JSON.parse(project2.equipment).length > 0) {
+//                         // начало цикла Оборудование ----------------------------------------------------------------------
+//                         // повторить с интервалом 1 минуту
+//                         let timerId = setInterval(async() => {
+
+//                             const blockId = await getBlocks(project2.projectId);
+//                             //console.log("blockId " + i + ": " + blockId)
+
+//                             let databaseBlock = await getDatabaseId(blockId); 
+//                             //console.log("databaseBlock: ", JSON.stringify(databaseBlock))
+
+//                             arr_count = [] 
+
+//                             JSON.parse(project2.equipment).map((value)=> {                              
+//                                     count_name= 0;
+                                    
+//                                     if (databaseBlock) {
+//                                         databaseBlock.map((db) => {
+//                                             if (value.cat === db.category) {
+//                                                 if (db.subname) {
+//                                                     count_name++               
+//                                                 }else {
+//                                                     count_name;
+//                                                 }  
+//                                             }
+//                                         })                                   
+                                    
+//                                         const obj = {
+//                                             title: value.subname,
+//                                             title2: value.cat,
+//                                             count_name: count_name,
+//                                             count_title: value.count,
+//                                         }
+//                                         arr_count.push(obj)  
+                                        
+//                                         //сохранение массива в 2-х элементный массив
+//                                         if (i % 2 == 0) {
+//                                             arr_all[0] = arr_count
+//                                         } else {
+//                                             arr_all[1] = arr_count 
+//                                         }
+//                                     } else {
+//                                         console.log("База данных не найдена! Проект ID: " + project2.name)
+//                                     }  
+
+//                             }) // map equipment end
+                                
+//                             var isEqual = JSON.stringify(arr_all[0]) === JSON.stringify(arr_all[1]);
+                                
+//                             // если есть изменения в составе работников    
+//                             if (!isEqual) {
+//                                 const text = `Запрос на специалистов: 
+                                        
+// ${day}.${month} | ${chas}:${minut} | ${project2.name} | U.L.E.Y
+                                    
+// ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
+                                    
+//                                 //отправка сообщения в чат бота
+//                                 const report2 = bot.sendMessage(project2.chatId, text)
+
+//                                 // сохранить отправленное боту сообщение пользователя в БД
+//                                 const convId = sendMyMessage(text, 'text', project2.chatId, report2.message_id)
+
+//                                 // Подключаемся к серверу socket
+//                                 let socket = io(socketUrl);
+
+//                                 socket.emit("addUser", project2.chatId)
+
+//                                 //отправить сообщение в админку
+//                                 socket.emit("sendMessage", {
+//                                     senderId: project2.chatId,
+//                                     receiverId: chatTelegramId,
+//                                     text: text,
+//                                     type: 'text',
+//                                     convId: convId,
+//                                     messageId: report2.message_id,
+//                                 })
+//                             } // end if
+
+//                             i++ //счетчик интервалов
+//                         }, 60000); //каждую 1 минуту
+
+//                         // остановить вывод через 260 минут
+//                         //setTimeout(() => { clearInterval(timerId); }, 15600000); //260 минут
+                        
+//                         // остановить вывод через 30 дней
+//                         if (minutCount == 43200) {
+//                             clearInterval(timerId);
+//                         }
+//                     }
