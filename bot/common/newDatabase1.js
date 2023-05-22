@@ -30,6 +30,36 @@ module.exports = async function newDatabase1(parent_page_id) {
                 "Date": {
                     "date": {}
                 },
+                "Status": {
+                    "multi_select": {
+                        "options": [
+                            {
+                                "name": "Погрузка",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "Монтаж",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Дежурство",
+                                "color": "green"
+                            },
+                            {
+                                "name": "Мероприятие",
+                                "color": "purple"
+                            },
+                            {
+                                "name": "Эфир",
+                                "color": "yellow"
+                            },
+                            {
+                                "name": "Демонтаж",
+                                "color": "blue"
+                            },
+                        ]
+                    }
+                },
                 "Комментарий": {
                     "rich_text": {}
                 }               
