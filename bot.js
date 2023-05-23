@@ -733,6 +733,7 @@ bot.on('message', async (msg) => {
                      senderId: chatId,
                      receiverId: chatTelegramId,
                      text: text,
+                     type: 'text',
                      convId: convId,
                      messageId: response.message_id,
                  })
@@ -855,9 +856,6 @@ bot.on('message', async (msg) => {
                 let socket = io(socketUrl);
 
                 socket.emit("addUser", chatId)
-                socket.on("getUsers", users => {
-                    //console.log("users from bot: ", users);
-                })
 
                 socket.emit("sendMessage", {
                     senderId: chatId,
@@ -867,6 +865,7 @@ bot.on('message', async (msg) => {
                     convId: convId,
                     messageId: messageId,
                 })
+
 
                 // ответ бота
                 //await bot.sendMessage(chatId, `Ваше сообщение "${text}" отправлено!`)
