@@ -606,7 +606,7 @@ bot.on('message', async (msg) => {
             const vcard = msg.contact.vcard
             
             const response = await bot.sendContact(chatTelegramId, phone, firstname, lastname, vcard)    
-            const text_contact = `${firstname} ${lastname}: \n \n  ${phone}`
+            const text_contact = `${phone} ${firstname} ${lastname}`
 
             console.log("Отправляю контакт в админ-панель...")
 
