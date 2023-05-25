@@ -604,7 +604,28 @@ bot.on('message', async (msg) => {
             const firstname = msg.contact.first_name
             const lastname = msg.contact.last_name
             const vcard = msg.contact.vcard
-            await bot.sendContact(chatTelegramId, phone, firstname, lastname, vcard)  
+            
+            const response = await bot.sendContact(chatTelegramId, phone, firstname, lastname, vcard)    
+            const text_contact = `${firstname} ${lastname}: \n \n  ${phone}`
+
+            console.log("Отправляю контакт в админ-панель...")
+
+            //отправить сообщение о контакте в админ-панель
+            const convId = sendMyMessage(text_contact, "text", chatId, response.message_id)
+                
+                // Подключаемся к серверу socket
+                let socket = io(socketUrl);
+                socket.emit("addUser", chatId)
+                 
+                //отправить сообщение в админку
+                socket.emit("sendMessage", {
+                     senderId: chatId,
+                     receiverId: chatTelegramId,
+                     text: text_contact,
+                     type: 'text',
+                     convId: convId,
+                     messageId: response.message_id,
+                 })
         }
 //--------------------------------------------------------------------------------------------------
         //обработка документов
