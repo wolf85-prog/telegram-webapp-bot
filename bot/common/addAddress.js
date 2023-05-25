@@ -37,7 +37,7 @@ module.exports = async function addAddress(geo, projectname, datestart, teh, man
             },
         })
         //console.log(response)
-        console.log("Success! Entry address added. " + response.id)
+        console.log("Адрес добавлен! " + response.id)
 
         //добавление проекта с названием проекта в базу
         const project_id = await addProject(projectname, datestart, teh, managerId, companyId, worklist, response.id);

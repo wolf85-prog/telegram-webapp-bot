@@ -595,7 +595,17 @@ bot.on('message', async (msg) => {
             console.log('START GET TEST REPORTS ' + project2.name)
         }
 
+//------------------------------------------------------------------------------------------------
 
+        //обработка контактов
+        if (msg.contact) {
+            await bot.sendMessage(chatId, `Ваш контакт получен!`)
+            const phone = msg.contact.phone_number
+            const firstname = msg.contact.first_name
+            const lastname = msg.contact.last_name
+            const vcard = msg.contact.vcard
+            await bot.sendContact(chatTelegramId, phone, firstname, lastname, vcard)  
+        }
 //--------------------------------------------------------------------------------------------------
         //обработка документов
         if (msg.document) {

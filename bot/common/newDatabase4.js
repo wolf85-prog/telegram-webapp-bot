@@ -143,7 +143,7 @@ module.exports = async function newDatabase4(parent_page_id, equipmentlist) {
             }
         });
         const data = await response.json();
-        console.log("4. Success! Equipments added. Database_id: " + data.id) // + " data: " + JSON.stringify(data))
+        console.log("4. Оборудование добавлено! Database_id: " + data.id) // + " data: " + JSON.stringify(data))
 
         //добавить список работников
         equipmentlist.forEach((equipment, index) => {

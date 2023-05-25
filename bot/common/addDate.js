@@ -3,6 +3,10 @@ require("dotenv").config();
 const { Client } = require("@notionhq/client");
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
 
+// текущая дата
+const dateNow = new Date();
+const date = dateNow.getFullYear() + "-0" + ((dateNow.getMonth())+1) + "-01T00:00:00.000"
+
 //send data to notion
 module.exports = async function addDate(blockId, day) {
     try {
@@ -34,7 +38,7 @@ module.exports = async function addDate(blockId, day) {
                 Date : {
                     type: 'date',                   
                     date: {
-                        "start": "2023-04-01T00:00:00.000",
+                        "start": date,
                         "end": null,
                         "time_zone": "Europe/Moscow"
                     }
@@ -43,7 +47,7 @@ module.exports = async function addDate(blockId, day) {
             }
         })
         //console.log(response)
-        console.log("1.1 Date added. Data: "  + response.id)//+ JSON.stringify(response))
+        console.log("1.1 Дата добавлена! Data: "  + response.id)//+ JSON.stringify(response))
     } catch (error) {
         console.error(error.message)
     }

@@ -356,7 +356,7 @@ module.exports = async function newDatabase_3(parent_page_id) {
             }
         });
         const data = await response.json();
-        console.log("2.3 Success! Secondcast added. Database_id: " + data.id)// + " data: " + JSON.stringify(data))
+        console.log("2.3 Запасной состав добавлено! Database_id: " + data.id)// + " data: " + JSON.stringify(data))
         
         await addWorkerZapas(data.id);
         await addWorkerZapas(data.id);

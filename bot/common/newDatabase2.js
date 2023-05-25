@@ -370,7 +370,7 @@ module.exports = async function newDatabase(parent_page_id, worklist) {
             }
         });
         const data = await response.json();
-        console.log("2 Success! Maincast added. Database_id: " + data.id)// + " data: " + JSON.stringify(data))
+        console.log("2 Основной состав добавлен!. Database_id: " + data.id)// + " data: " + JSON.stringify(data))
 
         //добавить список работников
         

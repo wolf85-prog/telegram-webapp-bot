@@ -84,7 +84,7 @@ module.exports = async function addProject(title, time, teh, managerId, companyI
         //console.log(response)
         const res_id = response.id;
         console.log(new Date())
-        console.log("1 Success! Project with geo added. " + res_id)
+        console.log("1 Проект с адресом добавлено! " + res_id)
 
         //setTimeout(()=> {
             newDatabase_1(res_id);

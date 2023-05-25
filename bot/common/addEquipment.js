@@ -3,6 +3,10 @@ require("dotenv").config();
 const { Client } = require("@notionhq/client");
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
 
+// текущая дата
+const dateNow = new Date();
+const date = dateNow.getFullYear() + "-0" + ((dateNow.getMonth())+1) + "-01T00:00:00.000"
+
 module.exports = async function addEquipment(blockId, equipment) {
     try {
         const response = await notion.pages.create({
@@ -11,7 +15,7 @@ module.exports = async function addEquipment(blockId, equipment) {
                 "Дата": {
                     type: 'date',                   
                     date: {
-                        "start": "2023-04-01T00:00:00.000",
+                        "start": date,
                         "end": null,
                         "time_zone": "Europe/Moscow"
                     }
@@ -28,7 +32,7 @@ module.exports = async function addEquipment(blockId, equipment) {
             }
         })
         //console.log(response)
-        console.log("3 Success! Equipment added. Data: " + response.id) //+ JSON.stringify(response))
+        console.log("3. Оборудование добавлено! Data: " + response.id) //+ JSON.stringify(response))
     } catch (error) {
         console.error(error.message)
     }
