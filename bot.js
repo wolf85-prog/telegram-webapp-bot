@@ -609,7 +609,7 @@ bot.on('message', async (msg) => {
             const response2 = await bot.sendContact(chatGiaId, phone, firstname, lastname, vcard)   
             const text_contact = `${phone} ${firstname} ${lastname}`
 
-            console.log("Отправляю контакт в админ-панель...")
+            console.log("Отправляю контакт в админ-панель...", response)
 
             //отправить сообщение о контакте в админ-панель
             const convId = sendMyMessage(text_contact, "text", chatId, response.message_id)
