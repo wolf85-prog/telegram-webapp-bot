@@ -608,10 +608,10 @@ bot.on('message', async (msg) => {
             //const response2 = await bot.sendContact(chatGiaId, phone, firstname, lastname, vcard)   
             const text_contact = `${phone} ${firstname} ${lastname}`
 
-            console.log("Отправляю контакт в админ-панель...", response)
+            console.log("Отправляю контакт в админ-панель...")
 
             //отправить сообщение о контакте в админ-панель
-            const convId = sendMyMessage(text_contact, "text", chatId, response.message_id)
+            const convId = sendMyMessage(text_contact, "text", chatId, messageId)
                 
                 // Подключаемся к серверу socket
                 let socket = io(socketUrl);
@@ -624,7 +624,7 @@ bot.on('message', async (msg) => {
                      text: text_contact,
                      type: 'text',
                      convId: convId,
-                     messageId: response.message_id,
+                     messageId: messageId,
                  })
         }
 //--------------------------------------------------------------------------------------------------
