@@ -871,6 +871,8 @@ bot.on('message', async (msg) => {
 
             } else {
 //----------------------------------------------------------------------------------------------------------------
+                //обработка исходящего сообщения
+
                 //добавление пользователя в БД
                 const user = await UserBot.findOne({where:{chatId: chatId.toString()}})
                 if (!user) {
@@ -880,8 +882,16 @@ bot.on('message', async (msg) => {
                     console.log('Отмена операции! Пользователь уже существует')
                 }
 
+                let str_text
+
+                if (msg.reply_to_message) {
+                   str_text = `"${msg.reply_to_message.text}_reply_${text}"`
+                } else {
+                    str_text = text
+                }
+
                 // сохранить отправленное боту сообщение пользователя в БД
-                const convId = sendMyMessage(text, 'text', chatId, messageId)
+                const convId = sendMyMessage(str_text, 'text', chatId, messageId)
 
                 // Подключаемся к серверу socket
                 let socket = io(socketUrl);
@@ -891,7 +901,7 @@ bot.on('message', async (msg) => {
                 socket.emit("sendMessage", {
                     senderId: chatId,
                     receiverId: chatTelegramId,
-                    text: text,
+                    text: str_text,
                     type: 'text',
                     convId: convId,
                     messageId: messageId,
@@ -900,7 +910,7 @@ bot.on('message', async (msg) => {
 
                 // ответ бота
                 //await bot.sendMessage(chatId, `Ваше сообщение "${text}" отправлено!`)
-                await bot.sendMessage(chatTelegramId, `${text} \n \n от ${firstname} ${lastname} ${chatId}`)           
+                await bot.sendMessage(chatTelegramId, `${str_text} \n \n от ${firstname} ${lastname} ${chatId}`)           
             }
         }
 
