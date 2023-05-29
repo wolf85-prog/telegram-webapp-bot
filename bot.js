@@ -806,6 +806,18 @@ bot.on('message', async (msg) => {
                         chatId: chatId
                     })
 
+                    //очистить переменные
+                    projectName = '';
+                    projectDate = '';
+                    projectTime = '';
+                    dateStart = '';
+                    Teh = '';
+                    Worklist = [];
+                    Equipmentlist = [];
+                    manager_id = '';
+                    company_id = '';
+                    Geo = '';
+
                     console.log('Проект успешно добавлен в БД! Project: ' + res.name)  
                     
                     const project = await Project.findOne({where:{id: res.id}})
