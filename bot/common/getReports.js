@@ -46,7 +46,7 @@ module.exports = async function getReports(project, bot) {
             //1)получить блок и бд
             if (project.projectId) {
                 const blockId = await getBlocks(project.projectId);
-                console.log(new Date() + " Проект ID: " + project.name) 
+                //console.log(new Date() + " Проект ID: " + project.name) 
                 databaseBlock = await getDatabaseId(blockId); 
             }
 
