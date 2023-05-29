@@ -885,7 +885,7 @@ bot.on('message', async (msg) => {
                 let str_text
 
                 if (msg.reply_to_message) {
-                   str_text = `"${msg.reply_to_message.text}_reply_${text}"`
+                   str_text = `${msg.reply_to_message.text}_reply_${text}`
                 } else {
                     str_text = text
                 }
