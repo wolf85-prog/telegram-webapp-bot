@@ -735,7 +735,7 @@ bot.on('message', async (msg) => {
 
                 //массив оборудования
                 let equipArr = []
-                console.log("Сохраняю Equipmentlist в БД: ", Worklist)
+                console.log("Сохраняю Equipmentlist в БД: ", Equipmentlist)
                 if (Equipmentlist !== '') {
                     equipArr = Equipmentlist.map(item => ({
                         name: item.spec,
