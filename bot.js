@@ -849,12 +849,13 @@ bot.on('message', async (msg) => {
                 }
 
                 let str_text
-
                 if (msg.reply_to_message) {
-                   str_text = `${msg.reply_to_message.text}_reply_${text}`
+                   str_text = `${msg.reply_to_message.message_id}_reply_${text}`
+                   
                 } else {
                     str_text = text
                 }
+                console.log("str_text: ", str_text)
 
                 // сохранить отправленное боту сообщение пользователя в БД
                 const convId = sendMyMessage(str_text, 'text', chatId, messageId)
