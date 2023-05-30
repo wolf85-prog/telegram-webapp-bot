@@ -300,14 +300,13 @@ async function addProject(title, time, teh, managerId, companyId, worklist, equi
         //console.log(response)
         const res_id = response.id;
         console.log(new Date())
-        console.log("1 Success! Project with geo added. " + res_id)
+        console.log("1. Проект с адресом успешно добавлен! " + res_id)
 
-        //создание базы данных "График работы"
-        await newDatabase1(res_id);
-        await newDatabase2(res_id, worklist);
-        await newDatabase3(res_id);
-        await newDatabase5(res_id);
-        await newDatabase4(res_id, equipmentlist); 
+        await newDatabase1(res_id);                //создание базы данных "График работы"    
+        await newDatabase2(res_id, worklist);      //создание базы данных "Основной состав"   
+        await newDatabase3(res_id);                //создание базы данных "Запасной состав"
+        await newDatabase5(res_id);                //создание базы данных "Претенденты"   
+        await newDatabase4(res_id, equipmentlist); //создание базы данных "Оборудование"
 
         return res_id;
 
@@ -403,61 +402,14 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
         //console.log(response)
         const res_id = response.id;
         console.log(new Date())
-        console.log("Success! Project not geo added. " + res_id)        
+        console.log("1. Проект без адреса успешно добавлен! " + res_id)        
 
-        //создание базы данных "График работы"
-        // let result1
-        // let i = 0;
-        // 1)
-        // result1 = await newDatabase1(res_id);
-        // if (!result1) {   
-            // while (i < 10) {
-            //     console.log("Ошибка создания таблицы! Попытка №" + i+1 + "Пробуем еще раз...")
-            //     console.log("Пробуем еще раз...")
-            //     result1 = await newDatabase1(res_id);
-            //     i++;
-            // }
-        //} else {
-            //создание базы данных "Основной состав"
-            // 2)
-            //result2 = await newDatabase2(res_id, worklist);
-            // let i = 0;
-            // if (!result2) {  
-                // while (i < 10) {
-                //     console.log("Ошибка создания таблицы! Попытка №" + i+1 + "Пробуем еще раз...")
-                //     console.log("Пробуем еще раз...")
-                //     result2 = await newDatabase2(res_id);
-                //     i++;
-                // }
-            //} else {
-                //создание базы данных "Запасной состав"
-                // 3)
-                //result3 = await newDatabase3(res_id, worklist);
-                // let i = 0;
-                // if (!result3) {  
-                    // while (i < 10) {
-                    //     console.log("Ошибка создания таблицы! Попытка №" + i+1 + "Пробуем еще раз...")
-                    //     console.log("Пробуем еще раз...")
-                    //     result3 = await newDatabase3(res_id);
-                    //     i++;
-                    // }
-                //} else {
-            //}
-        //}
-
-        await newDatabase1(res_id);
         
-        //создание базы данных "Основной состав"
-        await newDatabase2(res_id, worklist);
-        
-        //создание базы данных "Запасной состав"
-        await newDatabase3(res_id);
-        
-        //создание базы данных "Претенденты"
-        await newDatabase5(res_id);
-        
-        //создание базы данных "Оборудование"
-        await newDatabase4(res_id, equipmentlist);
+        await newDatabase1(res_id);                //создание базы данных "График работы"    
+        await newDatabase2(res_id, worklist);      //создание базы данных "Основной состав"   
+        await newDatabase3(res_id);                //создание базы данных "Запасной состав"
+        await newDatabase5(res_id);                //создание базы данных "Претенденты"   
+        await newDatabase4(res_id, equipmentlist); //создание базы данных "Оборудование"
 
         return res_id;
 
@@ -772,7 +724,7 @@ bot.on('message', async (msg) => {
 
                 //массив специалистов
                 let specArr = []
-                console.log("Worklist: ", Worklist)
+                console.log("Сохраняю Worklist в БД: ", Worklist)
                 if (Worklist !== '') {
                     specArr = Worklist.map(item => ({
                         spec: item.spec,
@@ -783,6 +735,7 @@ bot.on('message', async (msg) => {
 
                 //массив оборудования
                 let equipArr = []
+                console.log("Сохраняю Equipmentlist в БД: ", Worklist)
                 if (Equipmentlist !== '') {
                     equipArr = Equipmentlist.map(item => ({
                         name: item.spec,
@@ -807,6 +760,7 @@ bot.on('message', async (msg) => {
                     })
 
                     //очистить переменные
+                    console.log("Очищаю переменные...")
                     projectName = '';
                     projectDate = '';
                     projectTime = '';
@@ -826,11 +780,11 @@ bot.on('message', async (msg) => {
 //--------------------------- Создание проекта ----------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------------------------------------
                     //добавление геопозиции в БД Площадки (Адрес) и добавление проекта
-                    if (Geo != '') {
-                        projectId = await addAddress(project.geo, project.name, project.datestart, project.teh, project.managerId, project.companyId, Worklist, Equipmentlist);
+                    if (project.geo != '') {
+                        projectId = await addAddress(project.geo, project.name, project.datestart, project.teh, project.managerId, project.companyId, specArr, equipArr);
                     } else {
                         //добавление проекта с названием проекта в базу
-                        projectId = await addProjectNotGeo(project.name, project.datestart, project.teh, project.managerId, project.companyId, Worklist, Equipmentlist);
+                        projectId = await addProjectNotGeo(project.name, project.datestart, project.teh, project.managerId, project.companyId, specArr, equipArr);
                     }
 
                     //обновить проект 
