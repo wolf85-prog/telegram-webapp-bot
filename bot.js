@@ -855,7 +855,7 @@ bot.on('message', async (msg) => {
                 } else {
                     str_text = text
                 }
-                console.log("str_text: ", str_text)
+                console.log("Входящее сообщение: ", str_text)
 
                 // сохранить отправленное боту сообщение пользователя в БД
                 const convId = sendMyMessage(str_text, 'text', chatId, messageId)
