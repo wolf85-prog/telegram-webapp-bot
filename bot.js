@@ -766,8 +766,8 @@ bot.on('message', async (msg) => {
                     projectTime = '';
                     dateStart = '';
                     Teh = '';
-                    Worklist = [];
-                    Equipmentlist = [];
+                    //Worklist = [];
+                    //Equipmentlist = [];
                     manager_id = '';
                     company_id = '';
                     Geo = '';
@@ -781,10 +781,10 @@ bot.on('message', async (msg) => {
 //-------------------------------------------------------------------------------------------------------------------------------
                     //добавление геопозиции в БД Площадки (Адрес) и добавление проекта
                     if (project.geo != '') {
-                        projectId = await addAddress(project.geo, project.name, project.datestart, project.teh, project.managerId, project.companyId, specArr, equipArr);
+                        projectId = await addAddress(project.geo, project.name, project.datestart, project.teh, project.managerId, project.companyId, Worklist, Equipmentlist);
                     } else {
                         //добавление проекта с названием проекта в базу
-                        projectId = await addProjectNotGeo(project.name, project.datestart, project.teh, project.managerId, project.companyId, specArr, equipArr);
+                        projectId = await addProjectNotGeo(project.name, project.datestart, project.teh, project.managerId, project.companyId, Worklist, Equipmentlist);
                     }
 
                     //обновить проект 
