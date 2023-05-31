@@ -232,7 +232,7 @@ async function createManager(id, firstname, lastname) {
                     "select": {
                         "id": "e2c4b173-3d60-467f-9597-81a2f8248437",
                         "name": "Менеджер",
-                        "color": "yellow"
+                        "color": "blue"
                     }
                 },
                 "Заказчики": {
