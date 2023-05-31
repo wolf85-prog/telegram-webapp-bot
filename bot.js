@@ -848,6 +848,7 @@ bot.on('message', async (msg) => {
                     console.log('Отмена операции! Пользователь уже существует')
                 }
 
+                //обработка пересылаемых сообщений
                 let str_text
                 if (msg.reply_to_message) {
                    str_text = `${msg.reply_to_message.message_id}_reply_${text}`

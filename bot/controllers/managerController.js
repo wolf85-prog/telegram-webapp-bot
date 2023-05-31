@@ -21,9 +21,9 @@ async function getManagerId(id) {
         console.log("----------------Открытие приложения--------------------")
         console.log("-------------------------------------------------------")
         console.log("TelegramID: ", id)
-        console.log("ManagerId: ", response.results[0].id)
+        console.log("ManagerId: ", response.results[0]?.id)
 
-        return response.results[0].id; 
+        return response.results[0]?.id; 
         
     } catch (error) {
         console.error(error.message)

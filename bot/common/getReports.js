@@ -109,8 +109,6 @@ module.exports = async function getReports(project, bot) {
 
             var isEqual = JSON.stringify(arr_all[0]) === JSON.stringify(arr_all[1]);
 
-            //console.log(JSON.stringify(arr_all[0]))
-            //console.log(JSON.stringify(arr_all[1]))
                 
             //3) отправить сообщение если есть изменения в составе работников    
             if (!isEqual) {
@@ -199,7 +197,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                 
             // если есть изменения в составе работников    
             if (!isEqual) {
-                const text = `Запрос на специалистов: 
+                const text = `Запрос на оборудование: 
                         
 ${day}.${month} | ${chas}:${minut} | ${project.name} | U.L.E.Y
                     
