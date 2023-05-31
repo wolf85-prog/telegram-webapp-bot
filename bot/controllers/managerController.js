@@ -337,9 +337,9 @@ class ManagerController {
         try {
             const managers = await createManager(id, firstname, lastname);
             res.status(200).json(managers);
-        } catch (err) {
-            console.log(err)
-            res.status(500).json(err);
+        } catch (error) {
+            console.error(error.message)
+            res.status(500).json(error);
         }
     }
 }
