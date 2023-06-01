@@ -34,7 +34,7 @@ module.exports = async function addWorkerZapas(blockId) {
             }
         })
         //console.log(response)
-        console.log("3.3 Специалист в Запасной состав добавлен! Data: " + response.id) //JSON.stringify(response))
+        console.log("3.1 Специалист в Запасной состав добавлен! Data: " + response.id) //JSON.stringify(response))
     } catch (error) {
         console.error(error.message)
     }

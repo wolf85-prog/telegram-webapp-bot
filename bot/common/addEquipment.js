@@ -32,7 +32,7 @@ module.exports = async function addEquipment(blockId, equipment) {
             }
         })
         //console.log(response)
-        console.log("4.1 Оборудование добавлено! Data: " + response.id) //+ JSON.stringify(response))
+        console.log("5.1 Оборудование добавлено! Data: " + response.id) //+ JSON.stringify(response))
     } catch (error) {
         console.error(error.message)
     }

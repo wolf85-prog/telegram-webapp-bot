@@ -45,7 +45,7 @@ module.exports = async function addPretendent(blockId) {
             }
         })
         //console.log(response)
-        console.log("5.1 Претенденты добавлено!. Data: "  + response.id)//+ JSON.stringify(response))
+        console.log("4.1 Претендент добавлен!. Data: "  + response.id)//+ JSON.stringify(response))
     } catch (error) {
         console.error(error.message)
     }

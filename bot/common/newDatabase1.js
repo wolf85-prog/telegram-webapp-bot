@@ -78,7 +78,7 @@ module.exports = async function newDatabase1(parent_page_id) {
             }
         });
         const data = await response.json();
-        console.log("1. График проектов добавлено!. Database_id: " + data.id) // + " data: " + JSON.stringify(data))
+        console.log("1. Таблица График проектов добавлена! Database_id: " + data.id) // + " data: " + JSON.stringify(data))
 
         //добавить даты (День2, День3, День4)
         await addDate(data.id, 'День №4');

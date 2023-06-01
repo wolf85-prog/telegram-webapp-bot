@@ -37,7 +37,7 @@ module.exports = async function addWorker(blockId, worker) {
             }
         })
         //console.log(response)
-        console.log("3. Специалист в Основной состав добавлен! Data: " + response.id) //+ JSON.stringify(response))
+        console.log("2.1 Специалист в Основной состав добавлен! Data: " + response.id) //+ JSON.stringify(response))
     } catch (error) {
         console.error(error.message)
     }
