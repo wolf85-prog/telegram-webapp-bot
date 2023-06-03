@@ -851,7 +851,8 @@ bot.on('message', async (msg) => {
                 //обработка пересылаемых сообщений
                 let str_text
                 if (msg.reply_to_message) {
-                   str_text = `${msg.reply_to_message.message_id}_reply_${text}`                 
+                    const message = await Message.findOne({where:{messageId: msg.reply_to_message.message_id.toString()}}) 
+                   str_text = `${message}_reply_${text}`                 
                 } else {
                     str_text = text
                 }
