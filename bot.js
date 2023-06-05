@@ -895,6 +895,7 @@ bot.on('message', async (msg) => {
   bot.on('callback_query', msg => {
     const data = msg.data;
     const chatId = msg.message.chat.id;
+    const messageId = msg.message.message_id;
   
     if (data === '/menu') {
         return bot.sendMessage(chatId, 'Смотрите и создавайте Notion-проекты в web-приложении прямо из мессенджера Telegram.', {
@@ -919,6 +920,7 @@ bot.on('message', async (msg) => {
             receiverId: chatTelegramId,
             text: 'Пользователь нажал кнопку в рассылке',
             convId: convId,
+            messageId: messageId,
         })
 
 
