@@ -21,6 +21,7 @@ router.get("/project/:id", projectController.projectId);
 router.get("/managers", managerController.managers);
 router.get("/managers2", managerController.managers2);
 router.get("/managers/:id", managerController.managersId);
+router.get("/managers/chat/:id", managerController.managersChatId);
 router.get("/manager/:id", managerController.companyId);
 router.get("/manager/name/:id", managerController.managerName);
 

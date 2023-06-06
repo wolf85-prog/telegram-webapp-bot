@@ -4,8 +4,24 @@ const notion = new Client({ auth: process.env.NOTION_API_KEY });
 const databaseManagerId = process.env.NOTION_DATABASE_MANAGER_ID
 const databaseCompanyId = process.env.NOTION_DATABASE_COMPANY_ID
 
-//получить id менеджера по его TelegramID
+//получить TelegramID менеджера по его id
 async function getManagerId(id) {
+    try {
+        const manager = await notion.pages.retrieve({
+            page_id: id,
+        });
+
+        console.log("ManagerChatId: ", manager.properties.TelegramID.rich_text[0]?.plain_text)
+
+        return manager.properties.TelegramID.rich_text[0]?.plain_text; 
+        
+    } catch (error) {
+        console.error(error.message)
+    }
+}
+
+//получить id менеджера по его TelegramID
+async function getManagerChatId(id) {
     try {
         const response = await notion.databases.query({
             database_id: databaseManagerId, 
@@ -263,6 +279,17 @@ class ManagerController {
     async managersId(req, res) {
         const id = req.params.id; // получаем id
         const manager = await getManagerId(id);
+        if(manager){
+            res.json(manager);
+        }
+        else{
+            res.json({});
+        }
+    }
+
+    async managersChatId(req, res) {
+        const id = req.params.id; // получаем id
+        const manager = await getManagerChatId(id);
         if(manager){
             res.json(manager);
         }
