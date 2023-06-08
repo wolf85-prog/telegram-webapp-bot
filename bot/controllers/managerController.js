@@ -11,8 +11,6 @@ async function getManagerId(id) {
             page_id: id,
         });
 
-        console.log("ManagerChatId: ", manager.properties.TelegramID.rich_text[0]?.plain_text)
-
         return manager.properties.TelegramID.rich_text[0]?.plain_text; 
         
     } catch (error) {

@@ -153,7 +153,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
             .then((response) => response.json())
             .then((data) => {
                 if (data) {
-                    console.log("Manager TelegramId: ", data)
+                    //console.log("Manager TelegramId: ", data)
                     chatId_manager = data
                 } else {
                     console.log("Manager TelegramId не найден!")
