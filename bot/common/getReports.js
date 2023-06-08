@@ -81,6 +81,8 @@ module.exports = async function getReports(project, bot) {
                         }
                         arr_count.push(obj) 
                     }
+
+                    console.log(arr_date)
                         
 
                     //сохранение массива в 2-х элементный массив
