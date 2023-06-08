@@ -795,6 +795,58 @@ bot.on('message', async (msg) => {
                     
                     const project2 = await Project.findOne({where:{id: res.id}})                   
                     
+
+                    //1-й отчет
+                    let arr_count = []
+
+                    const d = new Date(project2.datestart);
+                    const year = d.getFullYear();
+                    const month = String(d.getMonth()+1).padStart(2, "0");
+                    const day = String(d.getDate()).padStart(2, "0");
+                    const chas = d.getHours();
+                    const minut = String(d.getMinutes()).padStart(2, "0");
+
+                    if (JSON.parse(project2.spec).length > 0) {
+
+                        JSON.parse(project2.spec).map((value)=> {  
+                            const obj = {
+                                title: value.spec,
+                                title2: value.cat,
+                                count_fio: '0',
+                                count_title: value.count,
+                            }
+                            arr_count.push(obj)
+
+                        })
+
+                        //1) отправить сообщение о составе работников    
+                        const text = `Запрос на специалистов: 
+                        
+${day}.${month} | ${chas}:${minut} | ${project2.name} | U.L.E.Y
+                    
+${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
+
+                        const report = await bot.sendMessage(project2.chatId, text)
+                        
+                        // сохранить отправленное боту сообщение пользователя в БД
+                        const convId = sendMyMessage(text, 'text', project2.chatId, report.message_id)
+
+                        //Подключаемся к серверу socket
+                        let socket = io(socketUrl);
+                        socket.emit("addUser", project2.chatId)
+
+                        //отправить сообщение в админку
+                        socket.emit("sendMessage", {
+                                    senderId: project2.chatId,
+                                    receiverId: chatTelegramId,
+                                    text: text,
+                                    type: 'text',
+                                    convId: convId,
+                                    messageId: report.message_id,
+                        })
+                    }
+                    
+                    //2-й и последующие отчеты
                     //начать получать отчеты
                     getReports(project2, bot)
                                     
