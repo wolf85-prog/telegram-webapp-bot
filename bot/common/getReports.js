@@ -10,6 +10,8 @@ const botApiUrl = process.env.REACT_APP_API_URL
 const socketUrl = process.env.SOCKET_APP_URL
 const chatTelegramId = process.env.CHAT_ID
 
+const {specData} = require('./../data/specData');
+
 //socket.io
 const {io} = require("socket.io-client")
 

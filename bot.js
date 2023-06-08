@@ -791,7 +791,7 @@ bot.on('message', async (msg) => {
                     await Project.update({projectId: projectId},{where: {id: res.id}})
 
                     // отправить сообщение пользователю через 30 секунд
-                    setTimeout(() => {bot.sendMessage(project.chatId, 'Ваша заявка принята!')}, 30000) // 30 секунд                   
+                    setTimeout(() => {bot.sendMessage(project.chatId, 'Ваша заявка принята!')}, 25000) // 30 секунд                   
                     
                     const project2 = await Project.findOne({where:{id: res.id}})                   
                     
@@ -826,24 +826,27 @@ ${day}.${month} | ${chas}:${minut} | ${project2.name} | U.L.E.Y
                     
 ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
 
-                        const report = await bot.sendMessage(project2.chatId, text)
-                        
-                        // сохранить отправленное боту сообщение пользователя в БД
-                        const convId = sendMyMessage(text, 'text', project2.chatId, report.message_id)
+                        // отправить отчет пользователю через 40 секунд
+                        setTimeout(async() => {                    
+                            const report = await bot.sendMessage(project2.chatId, text)
+                            
+                            // сохранить отправленное боту сообщение пользователя в БД
+                            const convId = sendMyMessage(text, 'text', project2.chatId, report.message_id)
 
-                        //Подключаемся к серверу socket
-                        let socket = io(socketUrl);
-                        socket.emit("addUser", project2.chatId)
+                            //Подключаемся к серверу socket
+                            let socket = io(socketUrl);
+                            socket.emit("addUser", project2.chatId)
 
-                        //отправить сообщение в админку
-                        socket.emit("sendMessage", {
-                                    senderId: project2.chatId,
-                                    receiverId: chatTelegramId,
-                                    text: text,
-                                    type: 'text',
-                                    convId: convId,
-                                    messageId: report.message_id,
-                        })
+                            //отправить сообщение в админку
+                            socket.emit("sendMessage", {
+                                        senderId: project2.chatId,
+                                        receiverId: chatTelegramId,
+                                        text: text,
+                                        type: 'text',
+                                        convId: convId,
+                                        messageId: report.message_id,
+                            })
+                        }, 40000) // 40 секунд 
                     }
                     
                     //2-й и последующие отчеты
