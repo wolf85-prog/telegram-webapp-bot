@@ -46,9 +46,9 @@ module.exports = async function getReports(project, bot) {
         //1)получить блок и бд
         if (project.projectId) {
             const blockId = await getBlocks(project.projectId);
-            console.log("i: " + i + " " +  new Date() + " Проект2: " + project.name) 
+            console.log("i: " + i + " " +  new Date() + " Проект: " + project.name) 
             databaseBlock = await getDatabaseId(blockId); 
-            console.log("databaseBlock: ", databaseBlock)
+            //console.log("databaseBlock: ", databaseBlock)
         }
 
         //2) проверить массив специалистов из ноушен (2-й отчет)
