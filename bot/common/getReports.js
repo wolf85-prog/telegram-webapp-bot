@@ -37,6 +37,7 @@ module.exports = async function getReports(project, bot) {
         
     // повторить с интервалом 1 минуту
     let timerId = setInterval(async() => {
+        console.log("Начало цикла отчетов. TimerId: ", timerId)
         minutCount++  // a day has passed
         arr_count = []
         arr_count2 = [] 
@@ -116,7 +117,7 @@ module.exports = async function getReports(project, bot) {
         });
 
         //получить дату из Основного состава проекта в ноушена
-        let project_date = arr_date[0].split('+')[0];
+        let project_date = arr_date[0]?.split('+')[0];
         const d = new Date(project_date);
         const year = d.getFullYear();
         const month = String(d.getMonth()+1).padStart(2, "0");
