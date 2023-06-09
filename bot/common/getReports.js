@@ -26,9 +26,9 @@ module.exports = async function getReports(project, bot) {
     let i = 0;
     let j = 0;
     let databaseBlock;
-    let arr_count, arr_count2, arr_date;
+    let arr_count, arr_count2, allDate;
     let arr_all = [];
-    let arr_all2 = [];
+    let date_db;
 
 
     // начало цикла Специалисты ----------------------------------------------------------------------
@@ -41,7 +41,7 @@ module.exports = async function getReports(project, bot) {
         minutCount++  // a day has passed
         arr_count = []
         arr_count2 = [] 
-        arr_date = []
+        allDate = []
 
         //1)получить блок и бд
         if (project.projectId) {
@@ -51,58 +51,76 @@ module.exports = async function getReports(project, bot) {
             //console.log("databaseBlock: ", databaseBlock)
         }
 
-        //2) проверить массив специалистов из ноушен (2-й отчет)
-        specData.map((specObject)=> {
-            specObject.models.map((spec)=> {
-                //console.log(spec.name)
-                count_fio = 0;
-                count_title = 0;
-
-                if (databaseBlock) {   
-                    j = 0
-                    databaseBlock.map((db) => {
-                        if (spec.name === db.spec) {
-                            if (db.fio) {
-                                count_fio++               
-                            }else {
-                                count_fio;
-                            } 
-                            count_title++
-                            arr_date.push(db.date)
-                        }               
-                    })
-                    //для второго отчета
-                    if (count_title > 0) {
-                        const obj = {
-                            //date: db.date,
-                            title: spec.name,
-                            title2: specObject.icon,
-                            count_fio: count_fio,
-                            count_title: count_title,
-                        }
-                        arr_count.push(obj) 
-                    }
-                        
-
-                    //сохранение массива в 2-х элементный массив
-                    if (i % 2 == 0) {
-                        arr_all[0] = arr_count
-                    } else {
-                        arr_all[1] = arr_count 
-                    }
-                    
-                } else {
-                    console.log("База данных не найдена! Проект ID: " + project.name)
-                    j++ //счетчик ошибок доступа к БД ноушена
-                    console.log("Ошибка № " + j)
-                    if (j > 10) {
-                        console.log("Цикл проекта " + project.name + " завершен!")
-                        clearTimeout(timerId);
-                    }
-                } 
-
+        //получить массив дат
+        if (databaseBlock) {   
+            databaseBlock.map((db) => {
+                allDate.push(db.date)           
             })
-        })// map spec end
+        }
+
+        //получить уникальные даты из Основного состава по возрастанию
+        dates = [...allDate].filter((el, ind) => ind === allDate.indexOf(el));
+        const sortedDates = [...dates].sort((a, b) => {       
+            var dateA = new Date(a), dateB = new Date(b) 
+            return dateA-dateB  //сортировка по возрастающей дате  
+        })
+
+        //2) проверить массив специалистов из ноушен (2-й отчет)
+        sortedDates.map((date1)=> {   
+            specData.map((specObject)=> {
+                specObject.models.map((spec)=> {
+                    //console.log(spec.name)
+                    count_fio = 0;
+                    count_title = 0;
+
+                    if (databaseBlock) {   
+                        j = 0
+                        databaseBlock.map((db) => {
+                            if (db.date === date1) {
+                                if (spec.name === db.spec) {
+                                    if (db.fio) {
+                                        count_fio++               
+                                    }else {
+                                        count_fio;
+                                    } 
+                                    count_title++
+                                    date_db = db.date
+                                } 
+                            }                              
+                        })
+
+                        //для второго отчета
+                        if (count_title > 0) {
+                            const obj = {
+                                date: date_db,
+                                title: spec.name,
+                                title2: specObject.icon,
+                                count_fio: count_fio,
+                                count_title: count_title,
+                            }
+                            arr_count.push(obj)        
+                        }
+
+                        //сохранение массива в 2-х элементный массив
+                        if (i % 2 == 0) {
+                            arr_all[0] = arr_count
+                        } else {
+                            arr_all[1] = arr_count 
+                        }
+                        
+                    } else {
+                        console.log("База данных не найдена! Проект ID: " + project.name)
+                        j++ //счетчик ошибок доступа к БД ноушена
+                        console.log("Ошибка № " + j)
+                        if (j > 10) {
+                            console.log("Цикл проекта " + project.name + " завершен!")
+                            clearTimeout(timerId);
+                        }
+                    } 
+
+                })
+            })// map spec end
+        })
 
         //получить название проекта из ноушена
         let project_name;   
@@ -116,26 +134,11 @@ module.exports = async function getReports(project, bot) {
             }                             
         });
 
-        //получить дату из Основного состава проекта в ноушена
-        let project_date = arr_date[0]?.split('+')[0];
-        const d = new Date(project_date);
-        const year = d.getFullYear();
-        const month = String(d.getMonth()+1).padStart(2, "0");
-        const day = String(d.getDate()).padStart(2, "0");
-        const chas = d.getHours();
-        const minut = String(d.getMinutes()).padStart(2, "0");
-
         //сравнить два массива и узнать есть ли изменения
         let isEqual = JSON.stringify(arr_all[0]) === JSON.stringify(arr_all[1]);
 
         if (!isEqual) {
-            //2-й и последующие отчеты
-            const text = `Запрос на специалистов: 
-                    
-${day}.${month} | ${chas}:${minut} | ${project_name} | U.L.E.Y
-                
-${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`                    
-            
+
             //получить менеджера проекта из ноушена
             let project_manager;
             const res = await fetch(`${botApiUrl}/project/${project.projectId}`)
@@ -161,24 +164,45 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                 }                             
             });
 
-            const report = await bot.sendMessage(chatId_manager, text) 
-            
-            // сохранить отправленное боту сообщение пользователя в БД
-            const convId = sendMyMessage(text, 'text', chatId_manager, report.message_id)
 
-            //Подключаемся к серверу socket
-            let socket = io(socketUrl);
-            socket.emit("addUser", chatId_manager)
+            //отправить сообщение по каждой дате
+            sortedDates.forEach((date, i)=> {
+                const arr_copy = [...arr_count].filter((item)=> date === item.date)
 
-            //отправить сообщение в админку
-            socket.emit("sendMessage", {
-                        senderId: chatId_manager,
-                        receiverId: chatTelegramId,
-                        text: text,
-                        type: 'text',
-                        convId: convId,
-                        messageId: report.message_id,
-            }) 
+                const d = new Date(date.split('+')[0]);
+                const month = String(d.getMonth()+1).padStart(2, "0");
+                const day = String(d.getDate()).padStart(2, "0");
+                const chas = d.getHours();
+                const minut = String(d.getMinutes()).padStart(2, "0");
+
+                const text = `Запрос на специалистов: 
+                            
+${day}.${month} | ${chas}:${minut} | ${project_name} | U.L.E.Y
+
+${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`                           
+
+                setTimeout(async()=> {
+                    const report = await bot.sendMessage(chatId_manager, text)                         
+                    
+                    // сохранить отправленное боту сообщение пользователя в БД
+                    const convId = sendMyMessage(text, 'text', chatId_manager, report.message_id)
+
+                    //Подключаемся к серверу socket
+                    let socket = io(socketUrl);
+                    socket.emit("addUser", chatId_manager)
+
+                    //отправить сообщение в админку
+                    socket.emit("sendMessage", {
+                                senderId: chatId_manager,
+                                receiverId: chatTelegramId,
+                                text: text,
+                                type: 'text',
+                                convId: convId,
+                                messageId: report.message_id,
+                    }) 
+                }, 1000 * ++i)   
+            })
+ 
         }// end if
     
         i++ // счетчик интервалов
@@ -189,135 +213,3 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
         clearInterval(timerId);
     }
 }
-
-
-
-   
-
-            //2) проверить массив специалистов
-            // JSON.parse(project.spec).map((value)=> {           
-            //     count_fio = 0;
-            //     count_title = 0;
-
-            //     //если бд ноушена доступна
-            //     if (databaseBlock) {
-            //         j = 0
-            //         databaseBlock.map((db) => {
-            //             if (value.spec === db.spec) {
-            //                 if (db.fio) {
-            //                     count_fio++               
-            //                 }else {
-            //                     count_fio;
-            //                 }  
-            //             }
-            //         })
-
-            //         const obj = {
-            //             title: value.spec,
-            //             title2: value.cat,
-            //             count_fio: count_fio,
-            //             count_title: value.count,
-            //         }
-            //         arr_count.push(obj) 
-
-            //         //сохранение массива в 2-х элементный массив
-            //         if (i % 2 == 0) {
-            //             arr_all[0] = arr_count
-            //         } else {
-            //             arr_all[1] = arr_count 
-            //         }
-            //     } else {
-            //         console.log("База данных не найдена! Проект ID: " + project.name)
-            //         j++ //счетчик ошибок доступа к БД ноушена
-            //         console.log("Ошибка № " + j)
-            //         if (j > 10) {
-            //             console.log("Цикл проекта " + project.name + " завершен!")
-            //             clearTimeout(timerId);
-            //         }
-            //     }                                          
-            // }) // map spec end
-
-            //получить название проекта из ноушена
-            // let project_name;
-            // const res = await fetch(
-            //      `${botApiUrl}/project/${project.projectId}`
-            // )
-            // .then((response) => response.json())
-            // .then((data) => {
-            //     if (data) {
-            //         project_name = data?.properties.Name.title[0]?.plain_text;
-            //     }  else {
-            //         project_name = project.name
-            //     }                             
-            // });
-
-            // var isEqual = JSON.stringify(arr_all[0]) === JSON.stringify(arr_all[1]);
-
-                
-            //3) отправить сообщение если есть изменения в составе работников    
-//             if (!isEqual) {
-//                 const text = `Запрос на специалистов: 
-                        
-// ${day}.${month} | ${chas}:${minut} | ${project_name} | U.L.E.Y
-                    
-// ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
-
- 
-                
-//                     //получить менеджера проекта из ноушена
-//                     let project_manager;
-//                     const res = await fetch(
-//                         `${botApiUrl}/project/${project.projectId}`
-//                     )
-//                     .then((response) => response.json())
-//                     .then((data) => {
-//                         if (data) {
-//                             project_manager = data?.properties.Manager.relation[0]?.id;
-//                         }  else {
-//                             project_manager = ''
-//                         }                             
-//                     });
-
-//                     //получить chatId менеджера проекта из ноушена
-//                     let chatId_manager;
-//                     const chat = await fetch(
-//                         `${botApiUrl}/managers/${project_manager}`
-//                     )
-//                     .then((response) => response.json())
-//                     .then((data) => {
-//                         if (data) {
-//                             console.log("Manager TelegramId: ", data)
-//                             chatId_manager = data
-//                         }  else {
-//                             console.log("Manager TelegramId не найден!")
-//                         }                             
-//                     });
-
-//                     const report2 = await bot.sendMessage(chatId_manager, text2)
-
-//                     // сохранить отправленное боту сообщение пользователя в БД
-//                     const convId = sendMyMessage(text2, 'text', chatId_manager, report2.message_id)
-
-//                     //Подключаемся к серверу socket
-//                     let socket = io(socketUrl);
-//                     socket.emit("addUser", chatId_manager)
-
-//                     //отправить сообщение в админку
-//                     socket.emit("sendMessage", {
-//                                 senderId: chatId_manager,
-//                                 receiverId: chatTelegramId,
-//                                 text: text2,
-//                                 type: 'text',
-//                                 convId: convId,
-//                                 messageId: report2.message_id,
-//                     }) 
-                
-
-
-//             } // end if
-            
-//             i++ // счетчик интервалов
-//         }, 60000); //каждую 1 минуту
-
-//     }
-
