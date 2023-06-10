@@ -37,7 +37,7 @@ module.exports = async function getReports(project, bot) {
         
     // повторить с интервалом 1 минуту
     let timerId = setInterval(async() => {
-        console.log("Начало цикла отчетов. TimerId: ", timerId)
+        //console.log("Начало цикла отчетов. TimerId: ", timerId)
         minutCount++  // a day has passed
         arr_count = []
         arr_count2 = [] 
@@ -139,37 +139,9 @@ module.exports = async function getReports(project, bot) {
 
         if (!isEqual) {
 
-            //получить менеджера проекта из ноушена
-            let project_manager;
-            const res = await fetch(`${botApiUrl}/project/${project.projectId}`)
-            .then((response) => response.json())
-            .then((data) => {
-                if (data) {
-                    project_manager = data?.properties.Manager.relation[0]?.id;
-                }  else {
-                    project_manager = '';
-                }                             
-            });
-
-            //получить TelegramID менеджера проекта из ноушена
-            let chatId_manager;
-            const chat = await fetch(`${botApiUrl}/managers/${project_manager}`)
-            .then((response) => response.json())
-            .then((data) => {
-                if (data) {
-                    //console.log("Manager TelegramId: ", data)
-                    chatId_manager = data
-                } else {
-                    console.log("Manager TelegramId не найден!")
-                }                             
-            });
-
-
-            //отправить сообщение по каждой дате
-            sortedDates.forEach((date, i)=> {
-                const arr_copy = [...arr_count].filter((item)=> date === item.date)
-
-                const d = new Date(date.split('+')[0]);
+            // 1-й отчет
+            if (i < 1) {
+                const d = new Date(project.datestart);
                 const month = String(d.getMonth()+1).padStart(2, "0");
                 const day = String(d.getDate()).padStart(2, "0");
                 const chas = d.getHours();
@@ -179,31 +151,98 @@ module.exports = async function getReports(project, bot) {
                             
 ${day}.${month} | ${chas}:${minut} | ${project_name} | U.L.E.Y
 
-${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`                           
+${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`    
 
-                setTimeout(async()=> {
-                    const report = await bot.sendMessage(chatId_manager, text)                         
+                //отаправить 1-й отчет
+                const report = await bot.sendMessage(chatId_manager, text)                         
                     
-                    // сохранить отправленное боту сообщение пользователя в БД
-                    const convId = sendMyMessage(text, 'text', chatId_manager, report.message_id)
+                // сохранить отправленное боту сообщение пользователя в БД
+                const convId = await sendMyMessage(text, 'text', chatId_manager, report.message_id)
 
-                    //Подключаемся к серверу socket
-                    let socket = io(socketUrl);
-                    socket.emit("addUser", chatId_manager)
+                //Подключаемся к серверу socket
+                let socket = io(socketUrl);
+                socket.emit("addUser", chatId_manager)
 
-                    //отправить сообщение в админку
-                    socket.emit("sendMessage", {
-                                senderId: chatId_manager,
-                                receiverId: chatTelegramId,
-                                text: text,
-                                type: 'text',
-                                convId: convId,
-                                messageId: report.message_id,
-                    }) 
-                }, 1000 * ++i)   
-            })
+                //отправить сообщение в админку
+                socket.emit("sendMessage", {
+                    enderId: chatId_manager,
+                    receiverId: chatTelegramId,
+                    text: text,
+                    type: 'text',
+                    convId: convId,
+                    messageId: report.message_id,
+                })
+  
+            } else {
+                // 2-й отчет
+
+                //получить менеджера проекта из ноушена
+                let project_manager;
+                const res = await fetch(`${botApiUrl}/project/${project.projectId}`)
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data) {
+                        project_manager = data?.properties.Manager.relation[0]?.id;
+                    }  else {
+                        project_manager = '';
+                    }                             
+                });
+
+                //получить TelegramID менеджера проекта из ноушена
+                let chatId_manager;
+                const chat = await fetch(`${botApiUrl}/managers/${project_manager}`)
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data) {
+                        //console.log("Manager TelegramId: ", data)
+                        chatId_manager = data
+                    } else {
+                        console.log("Manager TelegramId не найден!")
+                    }                             
+                });
+
+
+                //отправить сообщение по каждой дате
+                sortedDates.forEach((date, i)=> {
+                    const arr_copy = [...arr_count].filter((item)=> date === item.date)
+
+                    const d = new Date(date.split('+')[0]);
+                    const month = String(d.getMonth()+1).padStart(2, "0");
+                    const day = String(d.getDate()).padStart(2, "0");
+                    const chas = d.getHours();
+                    const minut = String(d.getMinutes()).padStart(2, "0");
+
+                    const text = `Запрос на специалистов: 
+                                
+    ${day}.${month} | ${chas}:${minut} | ${project_name} | U.L.E.Y
+
+    ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`                           
+
+                    //отправка сообщений по таймеру
+                    setTimeout(async()=> {
+                        const report = await bot.sendMessage(chatId_manager, text)                         
+                        
+                        // сохранить отправленное боту сообщение пользователя в БД
+                        const convId = await sendMyMessage(text, 'text', chatId_manager, report.message_id)
+
+                        //Подключаемся к серверу socket
+                        let socket = io(socketUrl);
+                        socket.emit("addUser", chatId_manager)
+
+                        //отправить сообщение в админку
+                        socket.emit("sendMessage", {
+                                    senderId: chatId_manager,
+                                    receiverId: chatTelegramId,
+                                    text: text,
+                                    type: 'text',
+                                    convId: convId,
+                                    messageId: report.message_id,
+                        }) 
+                    }, 1000 * ++i)   
+                })
+            }// end if i
  
-        }// end if
+        }// end if isEqual
     
         i++ // счетчик интервалов
     }, 60000); //каждую 1 минуту

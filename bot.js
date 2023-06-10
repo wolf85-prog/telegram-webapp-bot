@@ -563,7 +563,7 @@ bot.on('message', async (msg) => {
             console.log("Отправляю контакт в админ-панель...")
 
             //отправить сообщение о контакте в админ-панель
-            const convId = sendMyMessage(text_contact, "text", chatId, messageId)
+            const convId = await sendMyMessage(text_contact, "text", chatId, messageId)
                 
                 // Подключаемся к серверу socket
                 let socket = io(socketUrl);
@@ -608,24 +608,19 @@ bot.on('message', async (msg) => {
                     }
                     const filePath = fs.createWriteStream(path);
                     res.pipe(filePath);
-                    filePath.on('finish',() => {
+                    filePath.on('finish', async () => {
                         filePath.close();
                         console.log('Download Completed: ', path); 
                         
                         let convId;
                         if(msg.document) {
                             // сохранить отправленное боту сообщение пользователя в БД
-                            convId = sendMyMessage(`${botApiUrl}/${msg.document.file_name}`, 'file', chatId, messageId)
+                            convId = await sendMyMessage(`${botApiUrl}/${msg.document.file_name}`, 'file', chatId, messageId)
                         }
 
                         // Подключаемся к серверу socket
                         let socket = io(socketUrl);
-
                         socket.emit("addUser", chatId)
-                        //socket.on("getUsers", users => {
-                            //console.log("users from bot: ", users);
-                        //})
-
                         socket.emit("sendMessage", {
                             senderId: chatId,
                             receiverId: chatTelegramId,
@@ -663,12 +658,12 @@ bot.on('message', async (msg) => {
                     const path = `${__dirname}/static/${filename}.jpg`; 
                     const filePath = fs.createWriteStream(path);
                     res.pipe(filePath);
-                    filePath.on('finish',() => {
+                    filePath.on('finish', async () => {
                         filePath.close();
                         console.log('Download Completed: ', path); 
                         
                         // сохранить отправленное боту сообщение пользователя в БД
-                        const convId = sendMyMessage(`${botApiUrl}/${filename}.jpg`, 'image', chatId, messageId)
+                        const convId = await sendMyMessage(`${botApiUrl}/${filename}.jpg`, 'image', chatId, messageId)
 
                         // Подключаемся к серверу socket
                         let socket = io(socketUrl);
@@ -705,7 +700,7 @@ bot.on('message', async (msg) => {
                 console.log("Отправляю сообщение в админ-панель...")
 
                 //отправить сообщение о создании проекта в админ-панель
-                const convId = sendMyMessage(text, "text", chatId, response.message_id)
+                const convId = await sendMyMessage(text, "text", chatId, response.message_id)
                 
                 // Подключаемся к серверу socket
                 let socket = io(socketUrl);
@@ -797,59 +792,58 @@ bot.on('message', async (msg) => {
                     
 
                     //1-й отчет
-                    let arr_count = []
+//                     let arr_count = []
 
-                    const d = new Date(project2.datestart);
-                    const year = d.getFullYear();
-                    const month = String(d.getMonth()+1).padStart(2, "0");
-                    const day = String(d.getDate()).padStart(2, "0");
-                    const chas = d.getHours();
-                    const minut = String(d.getMinutes()).padStart(2, "0");
+//                     const d = new Date(project2.datestart);
+//                     const year = d.getFullYear();
+//                     const month = String(d.getMonth()+1).padStart(2, "0");
+//                     const day = String(d.getDate()).padStart(2, "0");
+//                     const chas = d.getHours();
+//                     const minut = String(d.getMinutes()).padStart(2, "0");
 
-                    if (JSON.parse(project2.spec).length > 0) {
+//                     if (JSON.parse(project2.spec).length > 0) {
 
-                        JSON.parse(project2.spec).map((value)=> {  
-                            const obj = {
-                                title: value.spec,
-                                title2: value.cat,
-                                count_fio: '0',
-                                count_title: value.count,
-                            }
-                            arr_count.push(obj)
+//                         JSON.parse(project2.spec).map((value)=> {  
+//                             const obj = {
+//                                 title: value.spec,
+//                                 title2: value.cat,
+//                                 count_fio: '0',
+//                                 count_title: value.count,
+//                             }
+//                             arr_count.push(obj)
 
-                        })
+//                         })
 
-                        //1) отправить сообщение о составе работников    
-                        const text = `Запрос на специалистов: 
+//                         //1) отправить сообщение о составе работников    
+//                         const text = `Запрос на специалистов: 
                         
-${day}.${month} | ${chas}:${minut} | ${project2.name} | U.L.E.Y
+// ${day}.${month} | ${chas}:${minut} | ${project2.name} | U.L.E.Y
                     
-${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
+// ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
 
-                        // отправить отчет пользователю через 40 секунд
-                        setTimeout(async() => {                    
-                            const report = await bot.sendMessage(project2.chatId, text)
+//                         // отправить отчет пользователю через 40 секунд
+//                         setTimeout(async() => {                    
+//                             const report = await bot.sendMessage(project2.chatId, text)
                             
-                            // сохранить отправленное боту сообщение пользователя в БД
-                            const convId = sendMyMessage(text, 'text', project2.chatId, report.message_id)
+//                             // сохранить отправленное боту сообщение пользователя в БД
+//                             const convId = sendMyMessage(text, 'text', project2.chatId, report.message_id)
 
-                            //Подключаемся к серверу socket
-                            let socket = io(socketUrl);
-                            socket.emit("addUser", project2.chatId)
+//                             //Подключаемся к серверу socket
+//                             let socket = io(socketUrl);
+//                             socket.emit("addUser", project2.chatId)
 
-                            //отправить сообщение в админку
-                            socket.emit("sendMessage", {
-                                        senderId: project2.chatId,
-                                        receiverId: chatTelegramId,
-                                        text: text,
-                                        type: 'text',
-                                        convId: convId,
-                                        messageId: report.message_id,
-                            })
-                        }, 40000) // 40 секунд 
-                    }
+//                             //отправить сообщение в админку
+//                             socket.emit("sendMessage", {
+//                                         senderId: project2.chatId,
+//                                         receiverId: chatTelegramId,
+//                                         text: text,
+//                                         type: 'text',
+//                                         convId: convId,
+//                                         messageId: report.message_id,
+//                             })
+//                         }, 40000) // 40 секунд 
+//                     }
                     
-                    //2-й и последующие отчеты
                     //начать получать отчеты
                     getReports(project2, bot)
                                     
@@ -947,7 +941,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
 //--------------------------------------------------------------------------------------------------------------------
   
   //Ответ на нажатие кнопок настройки и информаци
-  bot.on('callback_query', msg => {
+  bot.on('callback_query', async (msg) => {
     const data = msg.data;
     const chatId = msg.message.chat.id;
     const messageId = msg.message.message_id;
@@ -965,7 +959,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
 
     if (data === '/report') {
         //отправить сообщение о создании проекта в админ-панель
-        const convId = sendMyMessage('Пользователь нажал кнопку в рассылке', "text", chatId)
+        const convId = await sendMyMessage('Пользователь нажал кнопку в рассылке', "text", chatId)
 
         // Подключаемся к серверу socket
         let socket = io(socketUrl);
