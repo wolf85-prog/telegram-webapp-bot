@@ -154,18 +154,18 @@ ${day}.${month} | ${chas}:${minut} | ${project_name} | U.L.E.Y
 ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`    
 
                 //отаправить 1-й отчет
-                const report = await bot.sendMessage(chatId_manager, text)                         
+                const report = await bot.sendMessage(project.chatId, text)                         
                     
                 // сохранить отправленное боту сообщение пользователя в БД
-                const convId = await sendMyMessage(text, 'text', chatId_manager, report.message_id)
+                const convId = await sendMyMessage(text, 'text', project.chatId, report.message_id)
 
                 //Подключаемся к серверу socket
                 let socket = io(socketUrl);
-                socket.emit("addUser", chatId_manager)
+                socket.emit("addUser", project.chatId)
 
                 //отправить сообщение в админку
                 socket.emit("sendMessage", {
-                    enderId: chatId_manager,
+                    enderId: project.chatId,
                     receiverId: chatTelegramId,
                     text: text,
                     type: 'text',
