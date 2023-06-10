@@ -165,7 +165,7 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
 
                 //отправить сообщение в админку
                 socket.emit("sendMessage", {
-                    enderId: project.chatId,
+                    senderId: project.chatId,
                     receiverId: chatTelegramId,
                     text: text,
                     type: 'text',
