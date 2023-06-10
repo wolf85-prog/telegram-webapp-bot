@@ -245,7 +245,7 @@ async function createManager(id, firstname, lastname) {
                     "type": "relation",
                     "relation": [
                         {
-                            "id": "2061b358-0e23-4574-a69a-854a3e5dff00"
+                            "id": "85d03a1f-a403-4de8-99a7-de1079e99ed8"
                         }
                     ],
                 },
