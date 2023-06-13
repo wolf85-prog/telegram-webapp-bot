@@ -4,10 +4,10 @@ const { Client } = require("@notionhq/client");
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
 
 // текущая дата
-const dateNow = new Date();
-const date = dateNow.getFullYear() + "-0" + ((dateNow.getMonth())+1) + "-01T00:00:00.000"
+//const dateNow = new Date();
+//const date = dateNow.getFullYear() + "-0" + ((dateNow.getMonth())+1) + "-01T00:00:00.000"
 
-module.exports = async function addWorker(blockId, worker) {
+module.exports = async function addWorker(blockId, worker, date) {
     try {
         const response = await notion.pages.create({
             parent: { database_id: blockId },
