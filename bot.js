@@ -555,11 +555,12 @@ bot.on('message', async (msg) => {
             const res = await fetch(`${botApiUrl}/project/${project[1]}`)
             .then((response) => response.json())
             .then((data) => {
-                console.log("проект найден!", data)                            
+                console.log("проект найден!", data) 
+                //начать получать отчеты
+                getReportsNotion(data, bot)                           
             });
 
-            //начать получать отчеты
-            getReportsNotion(res, bot)
+            
         }
 
 //------------------------------------------------------------------------------------------------
