@@ -552,10 +552,10 @@ bot.on('message', async (msg) => {
         if(text.startsWith('/startreports2')) {
             const project = text.split(' ');
 
-            const res = await fetch(`${botApiUrl}/project/${project[1]}`)
+            const res = await fetch(`${botApiUrl}/project/${project[1].toString}`)
             .then((response) => response.json())
             .then((data) => {
-                console.log("проект найден!")                            
+                console.log("проект найден!", data)                            
             });
 
             //начать получать отчеты
