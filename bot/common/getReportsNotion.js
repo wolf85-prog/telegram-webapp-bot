@@ -19,7 +19,7 @@ const {io} = require("socket.io-client")
 const fetch = require('node-fetch');
 
 module.exports = async function getReportsNotion(project, bot) {
-    console.log('START GET NOTION REPORTS: ' + project.id + " " + project.properties.name)
+    console.log('START GET NOTION REPORTS: ' + project.properties.name)
 
     let count_fio, count_fio2;
     let count_title;
