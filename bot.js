@@ -549,10 +549,10 @@ bot.on('message', async (msg) => {
         }
 
 
-        if(text.startsWith('/startreports2')) {
+        if(text.startsWith('/startnotionreports')) {
             const project = text.split(' ');
 
-            const res = await fetch(`${botApiUrl}/project/${project[1].toString}`)
+            const res = await fetch(`${botApiUrl}/project/${project[1]}`)
             .then((response) => response.json())
             .then((data) => {
                 console.log("проект найден!", data)                            
