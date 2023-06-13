@@ -57,7 +57,8 @@ const path = require('path')
 
 //подключение к БД PostreSQL
 const sequelize = require('./bot/connections/db')
-const {UserBot, Message, Conversation, Project, Report} = require('./bot/models/models')
+const {UserBot, Message, Conversation, Project, Report} = require('./bot/models/models');
+const getReportsNotion = require("./bot/common/getReportsNotion");
 
 const app = express();
 
@@ -545,6 +546,20 @@ bot.on('message', async (msg) => {
 
             //начать получать отчеты
             getReports(project2, bot)
+        }
+
+
+        if(text.startsWith('/startreports2')) {
+            const project = text.split(' ');
+
+            const res = await fetch(`${botApiUrl}/project/${project[1]}`)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("проект найден!")                            
+            });
+
+            //начать получать отчеты
+            getReportsNotion(res, bot)
         }
 
 //------------------------------------------------------------------------------------------------
