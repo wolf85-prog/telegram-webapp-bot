@@ -29,7 +29,7 @@ async function getDatabaseId(baseId) {
             database_id: baseId
         });
 
-        const responseResults = response.results.forEach((page) => {
+        const responseResults = response.results.filter((page) => page.properties["1. Дата"].date !== null).map((page) => {
             //if (page.properties["1. Дата"].date) {
                 return {
                     date: page.properties["1. Дата"].date?.start,
