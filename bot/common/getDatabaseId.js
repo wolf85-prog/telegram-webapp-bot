@@ -9,15 +9,13 @@ module.exports = async function getDatabaseId(baseId) {
             database_id: baseId
         });
 
-        const responseResults = response.results.map((page) => {
-            if (page.properties["1. Дата"].date) {
-                return {
+        const responseResults = response.results.filter((page) => page.properties["1. Дата"].date !== null).map((page) => {
+            return {
                 date: page.properties["1. Дата"].date?.start,
                 fio: page.properties["2. ФИО"].relation[0]?.id,
                 title: page.properties["3. Специализация"].multi_select[0]?.name,
                 spec: page.properties["3. Специализация"].multi_select[1]?.name                
-                };
-            }
+            };
         });
 
         return responseResults;
