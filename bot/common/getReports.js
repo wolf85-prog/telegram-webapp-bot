@@ -76,6 +76,8 @@ module.exports = async function getReports(project, bot) {
             return dateA-dateB  //сортировка по возрастающей дате  
         })
 
+        console.log("sortedDates: ", sortedDates)
+
         //2) проверить массив специалистов из ноушен (2-й отчет)
         sortedDates.map((date1)=> {   
             specData.map((specObject)=> {
