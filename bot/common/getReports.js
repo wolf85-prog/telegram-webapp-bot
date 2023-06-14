@@ -76,8 +76,6 @@ module.exports = async function getReports(project, bot) {
             return dateA-dateB  //сортировка по возрастающей дате  
         })
 
-        console.log("sortedDates: ", sortedDates)
-
         //2) проверить массив специалистов из ноушен (2-й отчет)
         sortedDates.map((date1)=> {   
             specData.map((specObject)=> {
@@ -139,7 +137,6 @@ module.exports = async function getReports(project, bot) {
 
         //сравнить два массива и узнать есть ли изменения
         let isEqual = JSON.stringify(arr_all[0]) === JSON.stringify(arr_all[1]);
-        console.log(arr_count)
 
         if (!isEqual) {
 
@@ -198,7 +195,6 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                 .then((response) => response.json())
                 .then((data) => {
                     if (data) {
-                        //console.log("Manager TelegramId: ", data)
                         chatId_manager = data
                     } else {
                         console.log("Manager TelegramId не найден!")
