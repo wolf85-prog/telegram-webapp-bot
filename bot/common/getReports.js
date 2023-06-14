@@ -45,12 +45,20 @@ module.exports = async function getReports(project, bot) {
 
         //1)получить блок и бд
         if (project.projectId) {
-            const blockId = await getBlocks(project.projectId);
+            console.log("i: " + i + " " +  new Date() + " Проект: " + project.name) 
+            
+            const blockId = await getBlocks(project.projectId);            
             if (blockId) {
-                console.log("i: " + i + " " +  new Date() + " Проект: " + project.name) 
+                j = 0    
                 databaseBlock = await getDatabaseId(blockId);   
             } else {
-                console.log("Проект не найден!")
+                console.log("База данных не найдена! Проект ID: " + project.name)
+                j++ //счетчик ошибок доступа к БД ноушена
+                console.log("Ошибка № " + j)
+                if (j > 5) {
+                    console.log("Цикл проекта " + project.name + " завершен!")
+                    clearTimeout(timerId);
+                }
             }
         }
 
@@ -77,7 +85,6 @@ module.exports = async function getReports(project, bot) {
                     count_title = 0;
 
                     if (databaseBlock) {   
-                        j = 0
                         databaseBlock.map((db) => {
                             if (db.date === date1) {
                                 if (spec.name === db.spec) {
@@ -111,16 +118,7 @@ module.exports = async function getReports(project, bot) {
                             arr_all[1] = arr_count 
                         }
                         
-                    } else {
-                        console.log("База данных не найдена! Проект ID: " + project.name)
-                        j++ //счетчик ошибок доступа к БД ноушена
-                        console.log("Ошибка № " + j)
-                        if (j > 10) {
-                            console.log("Цикл проекта " + project.name + " завершен!")
-                            clearTimeout(timerId);
-                        }
                     } 
-
                 })
             })// map spec end
         })
