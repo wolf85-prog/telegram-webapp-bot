@@ -65,9 +65,7 @@ module.exports = async function getReports(project, bot) {
         //получить массив дат
         if (databaseBlock) {   
             databaseBlock.map((db) => {
-                if (db !== null) {
-                   allDate.push(db?.date)   
-                }                        
+                allDate.push(db?.date)                        
             })
         }
 
