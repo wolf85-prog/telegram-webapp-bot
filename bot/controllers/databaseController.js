@@ -41,7 +41,7 @@ async function getDatabaseId(baseId) {
             
         });
 
-        return response.results;
+        return responseResults;
     } catch (error) {
         console.error(error.message)
     }
