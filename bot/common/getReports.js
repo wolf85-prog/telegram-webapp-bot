@@ -46,9 +46,12 @@ module.exports = async function getReports(project, bot) {
         //1)получить блок и бд
         if (project.projectId) {
             const blockId = await getBlocks(project.projectId);
-            console.log("i: " + i + " " +  new Date() + " Проект: " + project.name) 
-            databaseBlock = await getDatabaseId(blockId); 
-            //console.log("databaseBlock: ", databaseBlock)
+            if (blockId) {
+                console.log("i: " + i + " " +  new Date() + " Проект: " + project.name) 
+                databaseBlock = await getDatabaseId(blockId);   
+            } else {
+                console.log("Проект не найден!")
+            }
         }
 
         //получить массив дат

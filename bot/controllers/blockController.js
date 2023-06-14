@@ -10,16 +10,13 @@ async function getBlocks(blockId) {
         });
 
         let count = 0;
+        let res;
 
         const responseResults = response.results.map((block) => {
-            //if (block.child_database.title == "Основной состав" || block.child_database.title == "Назначенные")
-            if (block.child_database) {
-                count++;
+            if (block.child_database?.title === "Основной состав"){
+               res = block.id 
             }
-        });
-
-        let res;
-        (count >1) ? res = response.results[1].id : res = response.results[0].id     
+        });     
         
         console.log("Blocks Data: "  + res)
 
