@@ -30,15 +30,15 @@ async function getDatabaseId(baseId) {
         });
 
         const responseResults = response.results.map((page) => {
-            if (page.properties["1. Дата"].date !== null) {
+           // if (page.properties["1. Дата"].date !== null) {
                 return {
                 //id: page.id,
-                date: page.properties["1. Дата"].date.start,
+                date: page.properties["1. Дата"].date?.start,
                 fio: page.properties["2. ФИО"].relation[0]?.id,
                 title: page.properties["3. Специализация"].multi_select[0]?.name, 
                 spec: page.properties["3. Специализация"].multi_select[1]?.name              
                 };
-            }
+           // }
         });
         //const responseResults = response
 
