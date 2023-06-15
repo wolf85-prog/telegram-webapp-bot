@@ -918,7 +918,6 @@ bot.on('message', async (msg) => {
                 let reply_id;
                 if (msg.reply_to_message) {
                     const message = await Message.findOne({where:{messageId: msg.reply_to_message.message_id.toString()}}) 
-                    console.log(message.dataValues.text)
                    str_text = `${message.dataValues.text}_reply_${text}`  
                    reply_id = msg.reply_to_message.message_id              
                 } else {
@@ -927,7 +926,6 @@ bot.on('message', async (msg) => {
 
                 // сохранить отправленное боту сообщение пользователя в БД
                 const convId = await sendMyMessage(str_text, 'text', chatId, messageId, reply_id)
-                console.log("send convId: ", convId)
 
                 // Подключаемся к серверу socket
                 let socket = io(socketUrl);
