@@ -926,7 +926,7 @@ bot.on('message', async (msg) => {
                 }
 
                 // сохранить отправленное боту сообщение пользователя в БД
-                const convId = await sendMyMessage(str_text, 'text', chatId, messageId)
+                const convId = await sendMyMessage(str_text, 'text', chatId, messageId, reply_id)
                 console.log("send convId: ", convId)
 
                 // Подключаемся к серверу socket
