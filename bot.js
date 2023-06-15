@@ -939,6 +939,7 @@ bot.on('message', async (msg) => {
                     type: 'text',
                     convId: convId,
                     messageId: messageId,
+                    replyId: msg.reply_to_message?.message_id,
                 })
 
 
