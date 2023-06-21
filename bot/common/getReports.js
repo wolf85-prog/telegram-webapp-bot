@@ -42,6 +42,7 @@ module.exports = async function getReports(project, bot) {
         arr_count = []
         arr_count2 = [] 
         allDate = []
+        arr_all = []
 
         //1)получить блок и бд
         if (project.projectId) {
@@ -76,8 +77,19 @@ module.exports = async function getReports(project, bot) {
             return dateA-dateB  //сортировка по возрастающей дате  
         })
 
+        const datesObj = []
+
+        sortedDates.map((item) =>{
+            const obj = {
+                date: item,
+                consilience: false,
+            }
+            datesObj.push(obj)  
+        })
+
         //2) проверить массив специалистов из ноушен (2-й отчет)
-        sortedDates.map((date1)=> {   
+        datesObj.map((item, ind)=> {  
+            arr_count2 = []  
             specData.map((specObject)=> {
                 specObject.models.map((spec)=> {
                     //console.log(spec.name)
@@ -108,37 +120,32 @@ module.exports = async function getReports(project, bot) {
                                 count_fio: count_fio,
                                 count_title: count_title,
                             }
-                            arr_count.push(obj)        
-                        }
-
-                        //сохранение массива в 2-х элементный массив
-                        if (i % 2 == 0) {
-                            arr_all[0] = arr_count
-                        } else {
-                            arr_all[1] = arr_count 
-                        }
-                        
+                            arr_count2.push(obj)        
+                        }                  
                     } 
                 })
             })// map spec end
+
+            arr_count.push(arr_count2)
         })
 
-        //получить название проекта из ноушена
-        let project_name;   
-        const res = await fetch(`${botApiUrl}/project/${project.projectId}`)
-        .then((response) => response.json())
-        .then((data) => {
-            if (data) {
-                project_name = data?.properties.Name.title[0]?.plain_text;
-            }  else {
-                project_name = project.name
-            }                             
-        });
+        datesObj.map((item, index) =>{
+            arr_all.push(arr_count[index])
+        })
 
-        //сравнить два массива и узнать есть ли изменения
-        let isEqual = JSON.stringify(arr_all[0]) === JSON.stringify(arr_all[1]);
+        //сохранение массива в 2-х элементный массив
+        if (i % 2 == 0) {
+            all[0] = arr_all
+        } else {
+            all[1] = arr_all
+        }
 
-        if (!isEqual) {
+        datesObj.map((item, index) =>{
+            datesObj[index].consilience = JSON.stringify(all[0] ? all[0][index] : '') === JSON.stringify(all[1] ? all[1][index] : ''); 
+        })
+
+
+//        if (!isEqual) {
 
             // 1-й отчет
             if (i < 1) {
@@ -177,9 +184,21 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
             } else {
                 // 2-й отчет
 
+                //получить название проекта из ноушена
+                let project_name;   
+                await fetch(`${botApiUrl}/project/${project.projectId}`)
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data) {
+                        project_name = data?.properties.Name.title[0]?.plain_text;
+                    }  else {
+                        project_name = project.name
+                    }                             
+                });
+
                 //получить менеджера проекта из ноушена
                 let project_manager;
-                const res = await fetch(`${botApiUrl}/project/${project.projectId}`)
+                await fetch(`${botApiUrl}/project/${project.projectId}`)
                 .then((response) => response.json())
                 .then((data) => {
                     if (data) {
@@ -203,8 +222,9 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
 
 
                 //отправить сообщение по каждой дате
-                sortedDates.forEach((date, i)=> {
-                    const arr_copy = [...arr_count].filter((item)=> date === item.date)
+                datesObj.forEach((date, i)=> {
+                    //const arr_copy = [...arr_count].filter((item)=> date === item.date)
+                    const arr_copy = arr_all[i]
 
                     const d = new Date(date.split('+')[0]);
                     const month = String(d.getMonth()+1).padStart(2, "0");
@@ -242,7 +262,7 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                 })
             }// end if i
  
-        }// end if isEqual
+        //}// end if isEqual
     
         i++ // счетчик интервалов
     }, 120000); //каждую 1 минуту
