@@ -264,7 +264,7 @@ ${arr_count0.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + it
                         datesObj[i].consilience = true
                         const arr_copy = arr_all[i]
 
-                        const d = new Date(date.split('+')[0]);
+                        const d = new Date(date.date.split('+')[0]);
                         const month = String(d.getMonth()+1).padStart(2, "0");
                         const day = String(d.getDate()).padStart(2, "0");
                         const chas = d.getHours();
