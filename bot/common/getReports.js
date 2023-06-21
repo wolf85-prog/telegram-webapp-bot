@@ -150,6 +150,7 @@ module.exports = async function getReports(project, bot) {
 
             // 1-й отчет
             if (i < 1) {
+
                 const d = new Date(project.datestart);
                 const month = String(d.getMonth()+1).padStart(2, "0");
                 const day = String(d.getDate()).padStart(2, "0");
@@ -160,7 +161,7 @@ module.exports = async function getReports(project, bot) {
                             
 ${day}.${month} | ${chas}:${minut} | ${project.name} | U.L.E.Y
 
-${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`    
+${arr_all.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`    
 
                 //отаправить 1-й отчет
                 const report = await bot.sendMessage(project.chatId, text)                         
