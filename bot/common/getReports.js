@@ -28,6 +28,7 @@ module.exports = async function getReports(project, bot) {
     let databaseBlock;
     let arr_count, arr_count2, allDate;
     let arr_all = [];
+    let all = [];
     let date_db;
 
 
