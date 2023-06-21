@@ -702,6 +702,63 @@ bot.on('message', async (msg) => {
                 console.log(error.message)
             }
         }
+//---------------------------------------------------------------------------------------------------------------
+
+ //обработка аудио сообщений
+ if (msg.voice) {
+    await bottest.sendMessage(chatId, `Ваше аудио-сообщение получено!`)
+    const voice = await bottest.getFile(msg.voice.file_id);
+
+    try {
+        const res = await fetch(
+            `https://api.telegram.org/bot${token}/getFile?file_id=${voice.file_id}`
+        );
+
+        // extract the file path
+        const res2 = await res.json();
+        const filePath = res2.result.file_path;
+
+        // now that we've "file path" we can generate the download link
+        const downloadURL = `https://api.telegram.org/file/bot${token}/${filePath}`;
+
+        https.get(downloadURL,(res) => {
+            const filename = Date.now()
+            // Image will be stored at this path
+            let path;
+            let ras;
+            if(msg.voice) {
+                ras = msg.voice.mime_type.split('/')
+                //path = `${__dirname}/static/${filename}.${ras[1]}`; 
+                path = `${__dirname}/static/${msg.voice.file_unique_id}.${ras[1]}`; 
+            }
+            const filePath = fs.createWriteStream(path);
+            res.pipe(filePath);
+            filePath.on('finish', async () => {
+                filePath.close();
+                console.log('Download Completed: ', path); 
+                
+                let convId;
+                if(msg.voice) {
+                    // сохранить отправленное боту сообщение пользователя в БД
+                    convId = await sendMyMessage(`${botApiUrl}/${msg.voice.file_name}`, 'file', chatId, messageId)
+                }
+
+                // Подключаемся к серверу socket
+                let socket = io(socketUrl);
+                socket.emit("addUser", chatId)
+                socket.emit("sendMessage", {
+                    senderId: chatId,
+                    receiverId: chatTelegramId,
+                    text: `${botApiUrl}/${msg.voice.file_name}`,
+                    convId: convId,
+                })
+            })
+        })            
+    } catch (error) {
+        console.log(error.message)
+    }
+}
+
 //----------------------------------------------------------------------------------------------------------------      
         
         //обработка сообщений    
@@ -805,60 +862,6 @@ bot.on('message', async (msg) => {
                     setTimeout(() => {bot.sendMessage(project.chatId, 'Ваша заявка принята!')}, 25000) // 30 секунд                   
                     
                     const project2 = await Project.findOne({where:{id: res.id}})                   
-                    
-
-                    //1-й отчет
-//                     let arr_count = []
-
-//                     const d = new Date(project2.datestart);
-//                     const year = d.getFullYear();
-//                     const month = String(d.getMonth()+1).padStart(2, "0");
-//                     const day = String(d.getDate()).padStart(2, "0");
-//                     const chas = d.getHours();
-//                     const minut = String(d.getMinutes()).padStart(2, "0");
-
-//                     if (JSON.parse(project2.spec).length > 0) {
-
-//                         JSON.parse(project2.spec).map((value)=> {  
-//                             const obj = {
-//                                 title: value.spec,
-//                                 title2: value.cat,
-//                                 count_fio: '0',
-//                                 count_title: value.count,
-//                             }
-//                             arr_count.push(obj)
-
-//                         })
-
-//                         //1) отправить сообщение о составе работников    
-//                         const text = `Запрос на специалистов: 
-                        
-// ${day}.${month} | ${chas}:${minut} | ${project2.name} | U.L.E.Y
-                    
-// ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`
-
-//                         // отправить отчет пользователю через 40 секунд
-//                         setTimeout(async() => {                    
-//                             const report = await bot.sendMessage(project2.chatId, text)
-                            
-//                             // сохранить отправленное боту сообщение пользователя в БД
-//                             const convId = sendMyMessage(text, 'text', project2.chatId, report.message_id)
-
-//                             //Подключаемся к серверу socket
-//                             let socket = io(socketUrl);
-//                             socket.emit("addUser", project2.chatId)
-
-//                             //отправить сообщение в админку
-//                             socket.emit("sendMessage", {
-//                                         senderId: project2.chatId,
-//                                         receiverId: chatTelegramId,
-//                                         text: text,
-//                                         type: 'text',
-//                                         convId: convId,
-//                                         messageId: report.message_id,
-//                             })
-//                         }, 40000) // 40 секунд 
-//                     }
                     
                     //начать получать отчеты
                     getReports(project2, bot)
