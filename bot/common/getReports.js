@@ -26,7 +26,7 @@ module.exports = async function getReports(project, bot) {
     let i = 0;
     let j = 0;
     let databaseBlock;
-    let arr_count, arr_count2, allDate;
+    let arr_count0, arr_count, arr_count2, allDate;
     let arr_all = [];
     let all = [];
     let date_db;
@@ -40,6 +40,7 @@ module.exports = async function getReports(project, bot) {
     let timerId = setInterval(async() => {
         //console.log("Начало цикла отчетов. TimerId: ", timerId)
         minutCount++  // a day has passed
+        arr_count0 = []
         arr_count = []
         arr_count2 = [] 
         allDate = []
@@ -64,6 +65,38 @@ module.exports = async function getReports(project, bot) {
             }
         }
 
+
+        //2) проверить массив специалистов (1-й отчет)
+            JSON.parse(project.spec).map((value)=> {           
+                count_fio = 0;
+                count_fio2 = 0;
+                count_title = 0;
+
+                //если бд ноушена доступна
+                if (databaseBlock) {
+                    databaseBlock.map((db) => {
+                        if (value.spec === db.spec) {
+                            if (db.fio) {
+                                count_fio++               
+                            }else {
+                                count_fio;
+                            } 
+                        }
+                    })
+
+                    //для первого отчета
+                    const obj = {
+                        title: value.spec,
+                        title2: value.cat,
+                        count_fio: count_fio,
+                        count_title: value.count,
+                    }
+                    arr_count0.push(obj) 
+
+                }                                           
+            }) // map spec end
+
+        //--------------------------------------------------------------------------------
         //получить массив дат
         if (databaseBlock) {   
             databaseBlock.map((db) => {
@@ -145,7 +178,7 @@ module.exports = async function getReports(project, bot) {
             datesObj[index].consilience = JSON.stringify(all[0] ? all[0][index] : '') === JSON.stringify(all[1] ? all[1][index] : ''); 
         })
 
-        console.log(arr_count)
+        console.log(arr_count0)
 
 
 //        if (!isEqual) {
@@ -163,7 +196,7 @@ module.exports = async function getReports(project, bot) {
                             
 ${day}.${month} | ${chas}:${minut} | ${project.name} | U.L.E.Y
 
-${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`    
+${arr_count0.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`    
 
                 //отаправить 1-й отчет
                 const report = await bot.sendMessage(project.chatId, text)                         
