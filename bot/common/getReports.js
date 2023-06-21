@@ -98,7 +98,7 @@ module.exports = async function getReports(project, bot) {
 
                     if (databaseBlock) {   
                         databaseBlock.map((db) => {
-                            if (db.date === date1) {
+                            if (db.date === item.date) {
                                 if (spec.name === db.spec) {
                                     if (db.fio) {
                                         count_fio++               
@@ -223,42 +223,44 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
 
                 //отправить сообщение по каждой дате
                 datesObj.forEach((date, i)=> {
-                    //const arr_copy = [...arr_count].filter((item)=> date === item.date)
-                    const arr_copy = arr_all[i]
+                    if (!date.consilience) { 
+                        datesObj[i].consilience = true
+                        const arr_copy = arr_all[i]
 
-                    const d = new Date(date.split('+')[0]);
-                    const month = String(d.getMonth()+1).padStart(2, "0");
-                    const day = String(d.getDate()).padStart(2, "0");
-                    const chas = d.getHours();
-                    const minut = String(d.getMinutes()).padStart(2, "0");
+                        const d = new Date(date.split('+')[0]);
+                        const month = String(d.getMonth()+1).padStart(2, "0");
+                        const day = String(d.getDate()).padStart(2, "0");
+                        const chas = d.getHours();
+                        const minut = String(d.getMinutes()).padStart(2, "0");
 
-                    const text = `Запрос на специалистов: 
+                        const text = `Запрос на специалистов: 
                                 
 ${day}.${month} | ${chas}:${minut} | ${project_name} | U.L.E.Y
 
 ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`                           
 
-                    //отправка сообщений по таймеру
-                    setTimeout(async()=> {
-                        const report = await bot.sendMessage(chatId_manager, text)                         
-                        
-                        // сохранить отправленное боту сообщение пользователя в БД
-                        const convId = await sendMyMessage(text, 'text', chatId_manager, report.message_id)
+                        //отправка сообщений по таймеру
+                        setTimeout(async()=> {
+                            const report = await bot.sendMessage(chatId_manager, text)                         
+                            
+                            // сохранить отправленное боту сообщение пользователя в БД
+                            const convId = await sendMyMessage(text, 'text', chatId_manager, report.message_id)
 
-                        //Подключаемся к серверу socket
-                        let socket = io(socketUrl);
-                        socket.emit("addUser", chatId_manager)
+                            //Подключаемся к серверу socket
+                            let socket = io(socketUrl);
+                            socket.emit("addUser", chatId_manager)
 
-                        //отправить сообщение в админку
-                        socket.emit("sendMessage", {
-                                    senderId: chatId_manager,
-                                    receiverId: chatTelegramId,
-                                    text: text,
-                                    type: 'text',
-                                    convId: convId,
-                                    messageId: report.message_id,
-                        }) 
-                    }, 2500 * ++i)   
+                            //отправить сообщение в админку
+                            socket.emit("sendMessage", {
+                                        senderId: chatId_manager,
+                                        receiverId: chatTelegramId,
+                                        text: text,
+                                        type: 'text',
+                                        convId: convId,
+                                        messageId: report.message_id,
+                            }) 
+                        }, 2500 * ++i)   
+                    }
                 })
             }// end if i
  
