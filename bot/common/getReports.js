@@ -145,45 +145,47 @@ module.exports = async function getReports(project, bot) {
             datesObj[index].consilience = JSON.stringify(all[0] ? all[0][index] : '') === JSON.stringify(all[1] ? all[1][index] : ''); 
         })
 
+        console.log(arr_count)
+
 
 //        if (!isEqual) {
 
             // 1-й отчет
-//             if (i < 1) {
+            if (i < 1) {
 
-//                 const d = new Date(project.datestart);
-//                 const month = String(d.getMonth()+1).padStart(2, "0");
-//                 const day = String(d.getDate()).padStart(2, "0");
-//                 const chas = d.getHours();
-//                 const minut = String(d.getMinutes()).padStart(2, "0");
+                const d = new Date(project.datestart);
+                const month = String(d.getMonth()+1).padStart(2, "0");
+                const day = String(d.getDate()).padStart(2, "0");
+                const chas = d.getHours();
+                const minut = String(d.getMinutes()).padStart(2, "0");
 
-//                 const text = `Запрос на специалистов: 
+                const text = `Запрос на специалистов: 
                             
-// ${day}.${month} | ${chas}:${minut} | ${project.name} | U.L.E.Y
+${day}.${month} | ${chas}:${minut} | ${project.name} | U.L.E.Y
 
-// ${arr_all.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`    
+${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`    
 
-//                 //отаправить 1-й отчет
-//                 const report = await bot.sendMessage(project.chatId, text)                         
+                //отаправить 1-й отчет
+                const report = await bot.sendMessage(project.chatId, text)                         
                     
-//                 // сохранить отправленное боту сообщение пользователя в БД
-//                 const convId = await sendMyMessage(text, 'text', project.chatId, report.message_id)
+                // сохранить отправленное боту сообщение пользователя в БД
+                const convId = await sendMyMessage(text, 'text', project.chatId, report.message_id)
 
-//                 //Подключаемся к серверу socket
-//                 let socket = io(socketUrl);
-//                 socket.emit("addUser", project.chatId)
+                //Подключаемся к серверу socket
+                let socket = io(socketUrl);
+                socket.emit("addUser", project.chatId)
 
-//                 //отправить сообщение в админку
-//                 socket.emit("sendMessage", {
-//                     senderId: project.chatId,
-//                     receiverId: chatTelegramId,
-//                     text: text,
-//                     type: 'text',
-//                     convId: convId,
-//                     messageId: report.message_id,
-//                 })
+                //отправить сообщение в админку
+                socket.emit("sendMessage", {
+                    senderId: project.chatId,
+                    receiverId: chatTelegramId,
+                    text: text,
+                    type: 'text',
+                    convId: convId,
+                    messageId: report.message_id,
+                })
   
-//             } else {
+            } else {
                 // 2-й отчет
 
                 //получить название проекта из ноушена
@@ -264,7 +266,7 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                         }, 2500 * ++i)   
                     }
                 })
-           // }// end if i
+            }// end if i
  
         //}// end if isEqual
     
