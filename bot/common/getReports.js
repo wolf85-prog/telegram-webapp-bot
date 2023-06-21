@@ -158,7 +158,7 @@ module.exports = async function getReports(project, bot) {
 
                 const text = `Запрос на специалистов: 
                             
-${day}.${month} | ${chas}:${minut} | ${project_name} | U.L.E.Y
+${day}.${month} | ${chas}:${minut} | ${project.name} | U.L.E.Y
 
 ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`    
 
