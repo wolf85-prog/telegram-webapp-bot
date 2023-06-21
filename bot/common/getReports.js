@@ -178,7 +178,7 @@ module.exports = async function getReports(project, bot) {
             datesObj[index].consilience = JSON.stringify(all[0] ? all[0][index] : '') === JSON.stringify(all[1] ? all[1][index] : ''); 
         })
 
-        console.log(arr_count0)
+        //console.log(arr_count0)
 
 
 //        if (!isEqual) {
