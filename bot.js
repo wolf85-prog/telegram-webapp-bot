@@ -44,6 +44,8 @@ const newDatabase4 = require('./bot/common/newDatabase4')
 const newDatabase5 = require('./bot/common/newDatabase5')
 const sendMyMessage = require('./bot/common/sendMyMessage')
 const getReports = require('./bot/common/getReports')
+const getReportsNotion = require("./bot/common/getReportsNotion");
+const getReportsTest = require("./bot/common/getReportsTest");
 const getBlocks = require('./bot/common/getBlocks')
 const getDatabaseId = require('./bot/common/getDatabaseId')
 
@@ -58,7 +60,6 @@ const path = require('path')
 //подключение к БД PostreSQL
 const sequelize = require('./bot/connections/db')
 const {UserBot, Message, Conversation, Project, Report} = require('./bot/models/models');
-const getReportsNotion = require("./bot/common/getReportsNotion");
 
 const app = express();
 
@@ -545,7 +546,7 @@ bot.on('message', async (msg) => {
             const project2 = await Project.findOne({ where:{ id: project[1] } })
 
             //начать получать отчеты
-            getReports(project2, bot)
+            getReportsTest(project2, bot)
         }
 
 
