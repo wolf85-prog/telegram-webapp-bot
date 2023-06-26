@@ -738,21 +738,21 @@ bot.on('message', async (msg) => {
                 filePath.close();
                 console.log('Download Completed: ', path); 
                 
-                let convId;
-                if(msg.voice) {
-                    // сохранить отправленное боту сообщение пользователя в БД
-                    convId = await sendMyMessage(`${botApiUrl}/${msg.voice.file_name}`, 'file', chatId, messageId)
-                }
+                // let convId;
+                // if(msg.voice) {
+                //     // сохранить отправленное боту сообщение пользователя в БД
+                //     convId = await sendMyMessage(`${botApiUrl}/${msg.voice.file_name}`, 'file', chatId, messageId)
+                // }
 
                 // Подключаемся к серверу socket
-                let socket = io(socketUrl);
-                socket.emit("addUser", chatId)
-                socket.emit("sendMessage", {
-                    senderId: chatId,
-                    receiverId: chatTelegramId,
-                    text: `${botApiUrl}/${msg.voice.file_name}`,
-                    convId: convId,
-                })
+                // let socket = io(socketUrl);
+                // socket.emit("addUser", chatId)
+                // socket.emit("sendMessage", {
+                //     senderId: chatId,
+                //     receiverId: chatTelegramId,
+                //     text: `${botApiUrl}/${msg.voice.file_name}`,
+                //     convId: convId,
+                // })
             })
         })            
     } catch (error) {
