@@ -707,8 +707,8 @@ bot.on('message', async (msg) => {
 
  //обработка аудио сообщений
  if (msg.voice) {
-    await bottest.sendMessage(chatId, `Ваше аудио-сообщение получено!`)
-    const voice = await bottest.getFile(msg.voice.file_id);
+    await bot.sendMessage(chatId, `Ваше аудио-сообщение получено!`)
+    const voice = await bot.getFile(msg.voice.file_id);
 
     try {
         const res = await fetch(
