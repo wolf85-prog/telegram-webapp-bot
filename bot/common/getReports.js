@@ -174,17 +174,13 @@ module.exports = async function getReports(project, bot) {
             all[1] = arr_all
         }
 
+        //записываем для каждой даты есть ли изменения
         datesObj.map((item, index) =>{
             datesObj[index].consilience = JSON.stringify(all[0] ? all[0][index] : '') === JSON.stringify(all[1] ? all[1][index] : ''); 
         })
 
-        //console.log(arr_count0)
-
-
-//        if (!isEqual) {
-
-            // 1-й отчет
-            if (i < 1) {
+        // 1-й отчет
+        if (i < 1) {
 
                 const d = new Date(project.datestart);
                 const month = String(d.getMonth()+1).padStart(2, "0");
@@ -218,7 +214,7 @@ ${arr_count0.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + it
                     messageId: report.message_id,
                 })
   
-            } else {
+        } else {
                 // 2-й отчет
 
                 //получить название проекта из ноушена
@@ -260,16 +256,16 @@ ${arr_count0.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + it
 
                 //отправить сообщение по каждой дате
                 datesObj.forEach((date, i)=> {
-                    // const d = new Date(date.date.split('+')[0]);
-                    // const d2 = new Date()
-                    // console.log("Текущая дата: ", new Date())
-                    // console.log("Дата: ", d)
+                    const d = new Date(date.date.split('+')[0]);
+                    const d2 = new Date()
+                    console.log("Текущая дата: ", d2)
+                    console.log("Дата: ", d)
 
-                    // if(d > d2) {
-                    //     console.log('первая дата больше текущей');
-                    //   } else {
-                    //     console.log('текущая дата больше или даты равны');
-                    //   }
+                    if(d > d2) {
+                        console.log('первая дата больше текущей');
+                      } else {
+                        console.log('текущая дата больше или даты равны');
+                      }
 
                     if (!date.consilience) { 
                         datesObj[i].consilience = true
@@ -310,12 +306,10 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                         }, 2500 * ++i)   
                     }
                 })
-            }// end if i
- 
-        //}// end if isEqual
+        } // end if i
     
         i++ // счетчик интервалов
-    }, 120000); //каждую 1 минуту
+    }, 120000); //каждые 2 минуты
 
     // остановить вывод через 30 дней
     if (minutCount == 43200) {
