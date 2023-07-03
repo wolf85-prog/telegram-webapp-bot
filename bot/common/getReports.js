@@ -258,8 +258,8 @@ ${arr_count0.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + it
             datesObj.forEach((date, i)=> {
                 const d = new Date(date.date.split('+')[0]);
                 const d2 = new Date()
-                console.log("Текущая дата: ", d2)
-                console.log("Дата: ", d)
+                //console.log("Текущая дата: ", d2)
+                //console.log("Дата: ", d)
 
                 if(d >= d2) {
                     //console.log('первая дата больше текущей или даты равны');
