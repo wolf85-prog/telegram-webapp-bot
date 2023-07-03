@@ -254,18 +254,15 @@ ${arr_count0.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + it
                 });
 
 
-                //отправить сообщение по каждой дате
-                datesObj.forEach((date, i)=> {
-                    const d = new Date(date.date.split('+')[0]);
-                    const d2 = new Date()
-                    console.log("Текущая дата: ", d2)
-                    console.log("Дата: ", d)
+            //отправить сообщение по каждой дате
+            datesObj.forEach((date, i)=> {
+                const d = new Date(date.date.split('+')[0]);
+                const d2 = new Date()
+                console.log("Текущая дата: ", d2)
+                console.log("Дата: ", d)
 
-                    if(d > d2) {
-                        console.log('первая дата больше текущей');
-                      } else {
-                        console.log('текущая дата больше или даты равны');
-                      }
+                if(d >= d2) {
+                    //console.log('первая дата больше текущей или даты равны');
 
                     if (!date.consilience) { 
                         datesObj[i].consilience = true
@@ -305,7 +302,10 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                             }) 
                         }, 2500 * ++i)   
                     }
-                })
+                } else {
+                    console.log('основная дата меньше текущей');
+                }
+            })
         } // end if i
     
         i++ // счетчик интервалов
