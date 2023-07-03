@@ -283,7 +283,8 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                         //отправка сообщений по таймеру
                         setTimeout(async()=> {
                             const report = await bot.sendMessage(chatId_manager, text)                         
-                            
+                            console.log('Отчет отправлен заказчику! ', date.date);
+
                             // сохранить отправленное боту сообщение пользователя в БД
                             const convId = await sendMyMessage(text, 'text', chatId_manager, report.message_id)
 
@@ -303,7 +304,7 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                         }, 2500 * ++i)   
                     }
                 } else {
-                    console.log('основная дата меньше текущей');
+                    console.log('Отчет не отправлен! Основная дата меньше текущей');
                 }
             })
         } // end if i
