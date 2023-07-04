@@ -1,5 +1,5 @@
-
-const dataEquipment = [
+module.exports = {   
+dataEquipment: [
     {
         id: 1,
         name: 'SOUND',
@@ -237,6 +237,7 @@ const dataEquipment = [
             },
         ]
     }
-];
+]
+}
 
-export default dataEquipment;
+//export default dataEquipment;
