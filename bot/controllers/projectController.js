@@ -43,6 +43,18 @@ async function getProjects2() {
     }
 }
 
+async function getProjects3() {
+    try {
+        const response = await notion.databases.query({
+            database_id: databaseId
+        });
+
+        return response;
+    } catch (error) {
+        console.error(error.message)
+    }
+}
+
 //получить все проекты менеджера по id
 async function getProjectsId(managerId) {
     //console.log("managerId: ", managerId)
@@ -112,6 +124,11 @@ class ProjectController {
 
     async projects2(req, res) {
         const projects = await getProjects2();
+        res.json(projects);
+    }
+
+    async projects3(req, res) {
+        const projects = await getProjects3();
         res.json(projects);
     }
 

@@ -14,6 +14,7 @@ router.get('/secret', secretController.secretInfo)
 // get PROJECTS  
 router.get("/projects", projectController.projects);
 router.get("/projects2", projectController.projects2);
+router.get("/projects3", projectController.projects3);
 router.get("/projects/:id", projectController.projectsId);
 router.get("/project/:id", projectController.projectId);
 
