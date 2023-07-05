@@ -69,7 +69,6 @@ module.exports = async function getReportsTest(project, bot) {
         //2) проверить массив специалистов (1-й отчет)
             JSON.parse(project.spec).map((value)=> {           
                 count_fio = 0;
-                count_fio2 = 0;
                 count_title = 0;
 
                 //если бд ноушена доступна
@@ -199,7 +198,7 @@ ${day}.${month} | ${chas}:${minut} | ${project.name} | U.L.E.Y
 ${arr_count0.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`    
 
                 //отаправить 1-й отчет
-                const report = await bot.sendMessage(project.chatId, text)                         
+                //const report = await bot.sendMessage(project.chatId, text)                         
                     
                 // сохранить отправленное боту сообщение пользователя в БД
 
@@ -277,10 +276,21 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                             console.log('Отчет отправлен заказчику! ', date.date);
 
                             // сохранить отправленное боту сообщение пользователя в БД
+                            const convId = await sendMyMessage(text, 'text', chatId_manager, report.message_id)
 
                             //Подключаемся к серверу socket
+                            let socket = io(socketUrl);
+                            socket.emit("addUser", chatId_manager)
 
                             //отправить сообщение в админку
+                            socket.emit("sendMessage", {
+                                        senderId: chatId_manager,
+                                        receiverId: chatTelegramId,
+                                        text: text,
+                                        type: 'text',
+                                        convId: convId,
+                                        messageId: report.message_id,
+                            }) 
                         }, 2500 * ++i)   
                     }
                 } else {

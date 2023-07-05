@@ -21,13 +21,14 @@ const fetch = require('node-fetch');
 module.exports = async function getReportsNotion(project, bot) {
     console.log('START GET NOTION REPORTS: ' + project.properties.Name.title[0]?.plain_text)
 
-    let count_fio, count_fio2;
+    let count_fio;
     let count_title;
     let i = 0;
     let j = 0;
     let databaseBlock;
-    let arr_count, arr_count2, allDate;
+    let arr_count0, arr_count, arr_count2, allDate;
     let arr_all = [];
+    let all = [];
     let date_db;
 
 
@@ -39,22 +40,66 @@ module.exports = async function getReportsNotion(project, bot) {
     let timerId = setInterval(async() => {
         //console.log("Начало цикла отчетов. TimerId: ", timerId)
         minutCount++  // a day has passed
+        arr_count0 = []
         arr_count = []
         arr_count2 = [] 
         allDate = []
+        arr_all = []
 
         //1)получить блок и бд
         if (project.projectId) {
-            const blockId = await getBlocks(project.projectId);
             console.log("i: " + i + " " +  new Date() + " Проект: " + project.name) 
-            databaseBlock = await getDatabaseId(blockId); 
-            //console.log("databaseBlock: ", databaseBlock)
+            
+            const blockId = await getBlocks(project.projectId);            
+            if (blockId) {
+                j = 0    
+                databaseBlock = await getDatabaseId(blockId);   
+            } else {
+                console.log("База данных не найдена! Проект ID: " + project.name)
+                j++ //счетчик ошибок доступа к БД ноушена
+                console.log("Ошибка № " + j)
+                if (j > 5) {
+                    console.log("Цикл проекта " + project.name + " завершен!")
+                    clearTimeout(timerId);
+                }
+            }
         }
 
+
+        //2) проверить массив специалистов (1-й отчет)
+            JSON.parse(project.spec).map((value)=> {           
+                count_fio = 0;
+                count_title = 0;
+
+                //если бд ноушена доступна
+                if (databaseBlock) {
+                    databaseBlock.map((db) => {
+                        if (value.spec === db.spec) {
+                            if (db.fio) {
+                                count_fio++               
+                            }else {
+                                count_fio;
+                            } 
+                        }
+                    })
+
+                    //для первого отчета
+                    const obj = {
+                        title: value.spec,
+                        title2: value.cat,
+                        count_fio: count_fio,
+                        count_title: value.count,
+                    }
+                    arr_count0.push(obj) 
+
+                }                                           
+            }) // map spec end
+
+        //--------------------------------------------------------------------------------
         //получить массив дат
         if (databaseBlock) {   
             databaseBlock.map((db) => {
-                allDate.push(db.date)           
+                allDate.push(db?.date)                        
             })
         }
 
@@ -65,8 +110,19 @@ module.exports = async function getReportsNotion(project, bot) {
             return dateA-dateB  //сортировка по возрастающей дате  
         })
 
+        const datesObj = []
+
+        sortedDates.map((item) =>{
+            const obj = {
+                date: item,
+                consilience: false,
+            }
+            datesObj.push(obj)  
+        })
+
         //2) проверить массив специалистов из ноушен (2-й отчет)
-        sortedDates.map((date1)=> {   
+        datesObj.map((item, ind)=> {  
+            arr_count2 = []  
             specData.map((specObject)=> {
                 specObject.models.map((spec)=> {
                     //console.log(spec.name)
@@ -74,9 +130,8 @@ module.exports = async function getReportsNotion(project, bot) {
                     count_title = 0;
 
                     if (databaseBlock) {   
-                        j = 0
                         databaseBlock.map((db) => {
-                            if (db.date === date1) {
+                            if (db.date === item.date) {
                                 if (spec.name === db.spec) {
                                     if (db.fio) {
                                         count_fio++               
@@ -98,49 +153,36 @@ module.exports = async function getReportsNotion(project, bot) {
                                 count_fio: count_fio,
                                 count_title: count_title,
                             }
-                            arr_count.push(obj)        
-                        }
-
-                        //сохранение массива в 2-х элементный массив
-                        if (i % 2 == 0) {
-                            arr_all[0] = arr_count
-                        } else {
-                            arr_all[1] = arr_count 
-                        }
-                        
-                    } else {
-                        console.log("База данных не найдена! Проект ID: " + project.name)
-                        j++ //счетчик ошибок доступа к БД ноушена
-                        console.log("Ошибка № " + j)
-                        if (j > 10) {
-                            console.log("Цикл проекта " + project.name + " завершен!")
-                            clearTimeout(timerId);
-                        }
+                            arr_count2.push(obj)        
+                        }                  
                     } 
-
                 })
             })// map spec end
+
+            arr_count.push(arr_count2)
         })
 
-        //получить название проекта из ноушена
-        let project_name;   
-        const res = await fetch(`${botApiUrl}/project/${project.projectId}`)
-        .then((response) => response.json())
-        .then((data) => {
-            if (data) {
-                project_name = data?.properties.Name.title[0]?.plain_text;
-            }  else {
-                project_name = project.name
-            }                             
-        });
+        datesObj.map((item, index) =>{
+            arr_all.push(arr_count[index])
+        })
 
-        //сравнить два массива и узнать есть ли изменения
-        let isEqual = JSON.stringify(arr_all[0]) === JSON.stringify(arr_all[1]);
+        //сохранение массива в 2-х элементный массив
+        if (i % 2 == 0) {
+            all[0] = arr_all
+        } else {
+            all[1] = arr_all
+        }
 
-        if (!isEqual) {
+        datesObj.map((item, index) =>{
+            datesObj[index].consilience = JSON.stringify(all[0] ? all[0][index] : '') === JSON.stringify(all[1] ? all[1][index] : ''); 
+        })
+
+
+//        if (!isEqual) {
 
             // 1-й отчет
             if (i < 1) {
+
                 const d = new Date(project.datestart);
                 const month = String(d.getMonth()+1).padStart(2, "0");
                 const day = String(d.getDate()).padStart(2, "0");
@@ -149,36 +191,36 @@ module.exports = async function getReportsNotion(project, bot) {
 
                 const text = `Запрос на специалистов: 
                             
-${day}.${month} | ${chas}:${minut} | ${project_name} | U.L.E.Y
+${day}.${month} | ${chas}:${minut} | ${project.name} | U.L.E.Y
 
-${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`    
+${arr_count0.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`    
 
                 //отаправить 1-й отчет
-                const report = await bot.sendMessage(project.chatId, text)                         
+                //const report = await bot.sendMessage(project.chatId, text)                         
                     
                 // сохранить отправленное боту сообщение пользователя в БД
-                const convId = await sendMyMessage(text, 'text', project.chatId, report.message_id)
 
                 //Подключаемся к серверу socket
-                let socket = io(socketUrl);
-                socket.emit("addUser", project.chatId)
 
                 //отправить сообщение в админку
-                socket.emit("sendMessage", {
-                    senderId: project.chatId,
-                    receiverId: chatTelegramId,
-                    text: text,
-                    type: 'text',
-                    convId: convId,
-                    messageId: report.message_id,
-                })
   
             } else {
                 // 2-й отчет
+                //получить название проекта из ноушена
+                let project_name;   
+                await fetch(`${botApiUrl}/project/${project.projectId}`)
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data) {
+                        project_name = data?.properties.Name.title[0]?.plain_text;
+                    }  else {
+                        project_name = project.name
+                    }                             
+                });
 
                 //получить менеджера проекта из ноушена
                 let project_manager;
-                const res = await fetch(`${botApiUrl}/project/${project.projectId}`)
+                await fetch(`${botApiUrl}/project/${project.projectId}`)
                 .then((response) => response.json())
                 .then((data) => {
                     if (data) {
@@ -194,7 +236,6 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                 .then((response) => response.json())
                 .then((data) => {
                     if (data) {
-                        //console.log("Manager TelegramId: ", data)
                         chatId_manager = data
                     } else {
                         console.log("Manager TelegramId не найден!")
@@ -202,47 +243,57 @@ ${arr_count.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + ite
                 });
 
 
-                //отправить сообщение по каждой дате
-                sortedDates.forEach((date, i)=> {
-                    const arr_copy = [...arr_count].filter((item)=> date === item.date)
+            //отправить сообщение по каждой дате
+            datesObj.forEach((date, i)=> {
+                const d = new Date(date.date.split('+')[0]);
+                const d2 = new Date()
 
-                    const d = new Date(date.split('+')[0]);
-                    const month = String(d.getMonth()+1).padStart(2, "0");
-                    const day = String(d.getDate()).padStart(2, "0");
-                    const chas = d.getHours();
-                    const minut = String(d.getMinutes()).padStart(2, "0");
+                if(d >= d2) {
+                    //console.log('первая дата больше текущей или даты равны');
+                    if (!date.consilience) { 
+                        datesObj[i].consilience = true
+                        const arr_copy = arr_all[i]
 
-                    const text = `Запрос на специалистов: 
+                        const d = new Date(date.date.split('+')[0]);
+                        const month = String(d.getMonth()+1).padStart(2, "0");
+                        const day = String(d.getDate()).padStart(2, "0");
+                        const chas = d.getHours();
+                        const minut = String(d.getMinutes()).padStart(2, "0");
+
+                        const text = `Запрос на специалистов: 
                                 
 ${day}.${month} | ${chas}:${minut} | ${project_name} | U.L.E.Y
 
 ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`                           
 
-                    //отправка сообщений по таймеру
-                    setTimeout(async()=> {
-                        const report = await bot.sendMessage(chatId_manager, text)                         
-                        
-                        // сохранить отправленное боту сообщение пользователя в БД
-                        const convId = await sendMyMessage(text, 'text', chatId_manager, report.message_id)
+                        //отправка сообщений по таймеру
+                        setTimeout(async()=> {
+                            const report = await bot.sendMessage(chatId_manager, text)                         
+                            console.log('Отчет отправлен заказчику! ', date.date);
 
-                        //Подключаемся к серверу socket
-                        let socket = io(socketUrl);
-                        socket.emit("addUser", chatId_manager)
+                            // сохранить отправленное боту сообщение пользователя в БД
+                            const convId = await sendMyMessage(text, 'text', chatId_manager, report.message_id)
 
-                        //отправить сообщение в админку
-                        socket.emit("sendMessage", {
-                                    senderId: chatId_manager,
-                                    receiverId: chatTelegramId,
-                                    text: text,
-                                    type: 'text',
-                                    convId: convId,
-                                    messageId: report.message_id,
-                        }) 
-                    }, 1000 * ++i)   
-                })
-            }// end if i
- 
-        }// end if isEqual
+                            //Подключаемся к серверу socket
+                            let socket = io(socketUrl);
+                            socket.emit("addUser", chatId_manager)
+
+                            //отправить сообщение в админку
+                            socket.emit("sendMessage", {
+                                        senderId: chatId_manager,
+                                        receiverId: chatTelegramId,
+                                        text: text,
+                                        type: 'text',
+                                        convId: convId,
+                                        messageId: report.message_id,
+                            }) 
+                        }, 2500 * ++i)   
+                    }
+                } else {
+                    console.log('Отчет не отправлен! Основная дата меньше текущей');
+                }
+            })
+        }// end if i
     
         i++ // счетчик интервалов
     }, 120000); //каждую 1 минуту
