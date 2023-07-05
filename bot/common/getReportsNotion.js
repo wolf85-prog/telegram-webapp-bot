@@ -67,33 +67,6 @@ module.exports = async function getReportsNotion(project, bot) {
 
 
         //2) проверить массив специалистов (1-й отчет)
-            JSON.parse(project.spec).map((value)=> {           
-                count_fio = 0;
-                count_title = 0;
-
-                //если бд ноушена доступна
-                if (databaseBlock) {
-                    databaseBlock.map((db) => {
-                        if (value.spec === db.spec) {
-                            if (db.fio) {
-                                count_fio++               
-                            }else {
-                                count_fio;
-                            } 
-                        }
-                    })
-
-                    //для первого отчета
-                    const obj = {
-                        title: value.spec,
-                        title2: value.cat,
-                        count_fio: count_fio,
-                        count_title: value.count,
-                    }
-                    arr_count0.push(obj) 
-
-                }                                           
-            }) // map spec end
 
         //--------------------------------------------------------------------------------
         //получить массив дат
