@@ -174,6 +174,8 @@ module.exports = async function getReports(project, bot) {
             all[1] = arr_all
         }
 
+        
+
         //записываем для каждой даты есть ли изменения
         datesObj.map((item, index) =>{
             datesObj[index].consilience = JSON.stringify(all[0] ? all[0][index] : '') === JSON.stringify(all[1] ? all[1][index] : ''); 
@@ -257,13 +259,9 @@ ${arr_count0.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + it
             //отправить сообщение по каждой дате
             datesObj.forEach((date, i)=> {
                 const d = new Date(date.date.split('+')[0]);
-                const d2 = new Date()
-                //console.log("Текущая дата: ", d2)
-                //console.log("Дата: ", d)
+                const d2 = new Date() //Текущая дата: ", d2)
 
                 if(d >= d2) {
-                    //console.log('первая дата больше текущей или даты равны');
-
                     if (!date.consilience) { 
                         datesObj[i].consilience = true
                         const arr_copy = arr_all[i]
