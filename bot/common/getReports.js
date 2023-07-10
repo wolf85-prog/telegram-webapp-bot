@@ -163,22 +163,29 @@ module.exports = async function getReports(project, bot) {
             arr_count.push(arr_count2)
         })
 
+        //перебрать все даты и создать общий массив
         datesObj.map((item, index) =>{
             arr_all.push(arr_count[index])
         })
 
-        //сохранение массива в 2-х элементный массив
-        if (i % 2 == 0) {
-            all[0] = arr_all
-        } else {
-            all[1] = arr_all
-        }
 
+        //пропустить пустые массивы
+        if (arr_all.length > 0 ) {
+            //сохранение массива в 2-х элементный массив
+            if (i % 2 == 0) {
+                all[0] = arr_all
+            } else {
+                all[1] = arr_all
+            }
+        } 
         
 
         //записываем для каждой даты есть ли изменения
         datesObj.map((item, index) =>{
-            datesObj[index].consilience = JSON.stringify(all[0] ? all[0][index] : '') === JSON.stringify(all[1] ? all[1][index] : ''); 
+            //проверка на существование массива (чтобы не выводить первый отчет и пустые)
+            if (all[1] && all[0]) {
+                datesObj[index].consilience = JSON.stringify(all[0][index]) === JSON.stringify(all[1][index]);  
+             }
         })
 
         // 1-й отчет
