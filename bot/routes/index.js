@@ -8,6 +8,7 @@ const databaseController = require('../controllers/databaseController')
 const blockController = require('../controllers/blockController')
 const blockEquipmentController = require('../controllers/blockEquipmentController')
 const addressController = require('../controllers/addressController')
+const workerController = require('../controllers/workerController')
 
 router.get('/secret', secretController.secretInfo)
 
@@ -61,5 +62,8 @@ router.get('/page/:id', blockController.pageId);
 //get ADDRESS
 router.get("/address", addressController.address);
 
+
+//get WORKERS
+router.get("/workers", workerController.workers);
 
 module.exports = router

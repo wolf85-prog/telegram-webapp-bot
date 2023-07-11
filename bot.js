@@ -49,6 +49,7 @@ const getReportsTest = require("./bot/common/getReportsTest");
 const getBlocks = require('./bot/common/getBlocks')
 const getDatabaseId = require('./bot/common/getDatabaseId')
 const addPretendent = require('./bot/common/addPretendent')
+const getBlocksP = require('./bot/common/getBlocksP')
 
 const fs = require('fs');
 const express = require('express');
@@ -971,7 +972,7 @@ bot.on('message', async (msg) => {
         const projectId = data.split(' ');
         console.log("projectId: ", projectId[1])
 
-        const blockId = await getBlocks(projectId[1]); 
+        const blockId = await getBlocksP(projectId[1]); 
         
         //Добавить специалиста в таблицу Претенденты
         await addPretendent(blockId);
