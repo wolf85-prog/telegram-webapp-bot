@@ -162,25 +162,28 @@ module.exports = async function getReportsTest(project, bot) {
             arr_count.push(arr_count2)
         })
 
+        //перебрать все даты и создать общий массив
         datesObj.map((item, index) =>{
             arr_all.push(arr_count[index])
         })
 
-        //сохранение массива в 2-х элементный массив
-        if (i % 2 == 0) {
-            all[0] = arr_all
-        } else {
-            all[1] = arr_all
+        //пропустить пустые массивы
+        if (arr_all.length > 0 ) {
+            //сохранение массива в 2-х элементный массив
+            if (i % 2 == 0) {
+                all[0] = arr_all
+            } else {
+                all[1] = arr_all
+            }
         }
 
+        //записываем для каждой даты есть ли изменения
         datesObj.map((item, index) =>{
-            datesObj[index].consilience = JSON.stringify(all[0] ? all[0][index] : '') === JSON.stringify(all[1] ? all[1][index] : ''); 
+            //проверка на существование массива (чтобы не выводить первый отчет и пустые)
+            if (all[1] && all[0]) {
+                datesObj[index].consilience = JSON.stringify(all[0][index]) === JSON.stringify(all[1][index]);  
+            }
         })
-
-        console.log(arr_all)
-
-
-//        if (!isEqual) {
 
             // 1-й отчет
             if (i < 1) {
@@ -252,8 +255,6 @@ ${arr_count0.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + it
                 const d2 = new Date()
 
                 if(d >= d2) {
-                    //console.log('первая дата больше текущей или даты равны');
-
                     if (!date.consilience) { 
                         datesObj[i].consilience = true
                         const arr_copy = arr_all[i]
