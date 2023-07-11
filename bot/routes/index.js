@@ -46,6 +46,7 @@ router.get('/database/equipment/:id', databaseController.databaseEquipmentId); /
 
 //get BLOCK (специалисты)
 router.get('/blocks/:id', blockController.blocksId); //получить id таблицы/блока "Основной состав" ("4a74b62a-2f46-4fae-9e4b-9c700cb1b2f1")
+router.get('/blocksp/:id', blockController.blocksPId); //получить id таблицы/блока "Претенденты"
 router.get('/blocks2/:id', blockController.blocksId2); //подробная инфа
 router.get('/block/:id', blockController.blockId); // получить данные доп. таблиц
 

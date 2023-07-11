@@ -48,6 +48,7 @@ const getReportsNotion = require("./bot/common/getReportsNotion");
 const getReportsTest = require("./bot/common/getReportsTest");
 const getBlocks = require('./bot/common/getBlocks')
 const getDatabaseId = require('./bot/common/getDatabaseId')
+const addPretendent = require('./bot/common/addPretendent')
 
 const fs = require('fs');
 const express = require('express');
@@ -870,39 +871,6 @@ bot.on('message', async (msg) => {
                 } catch (error) {
                     console.log(error.message)
                 }
-//----------------------------------------------------------------------------------------------------------------
-            } else if (text.startsWith('Тестовое сообщение')) {  
-
-                //добавление пользователя в БД
-                const user = await UserBot.findOne({where:{chatId: chatId.toString()}})
-                if (!user) {
-                    await UserBot.create({ firstname: firstname, lastname: lastname, chatId: chatId })
-                    console.log('Пользователь добавлен в БД')
-                } else {
-                    console.log('Отмена операции! Пользователь уже существует')
-                }
-           
-                // сохранить отправленное боту сообщение пользователя в БД
-                const convId = await sendMyMessage(text, 'text', chatId, messageId)
-                
-                console.log("convId: ", convId)
-
-                // Подключаемся к серверу socket
-                let socket = io(socketUrl);
-                socket.on("welcome", async message=> {
-                    console.log(message)
-                });
-
-                socket.emit("addUser", chatId)
-
-                socket.emit("sendMessage", {
-                    senderId: chatId,
-                    receiverId: chatTelegramId,
-                    text: text,
-                    type: 'text',
-                    convId: convId,
-                    messageId: messageId,
-                })
 
             } else {
 //----------------------------------------------------------------------------------------------------------------
@@ -996,6 +964,55 @@ bot.on('message', async (msg) => {
 
         return bot.sendMessage(chatId, 'Ваша заявка принята! Мы свяжемся с вами в ближайшее время.')
     }
+
+
+    //нажатие на кнопку "Принять"
+    if (data.startsWith('/accept')) {
+        const projectId = data.split(' ');
+        console.log("projectId: ", projectId[1])
+
+        const blockId = await getBlocks(projectId[1]); 
+        
+        //Добавить специалиста в таблицу Претенденты
+        await addPretendent(blockId);
+
+        //отправить сообщение в админ-панель
+        const convId = await sendMyMessage('Пользователь нажал кнопку "Принять" в рассылке', "text", chatId)
+
+        // Подключаемся к серверу socket
+        let socket = io(socketUrl);
+        socket.emit("addUser", chatId)
+        socket.emit("sendMessage", {
+            senderId: chatId,
+            receiverId: chatTelegramId,
+            text: 'Пользователь нажал кнопку "Принять" в рассылке',
+            convId: convId,
+            messageId: messageId,
+        })
+
+        return bot.sendMessage(chatId, 'Ваша заявка принята! Мы свяжемся с вами в ближайшее время.')
+    }
+
+    //нажатие на кнопку "Отклонить"
+    if (data === '/cancel') {
+        //отправить сообщение в админ-панель
+        const convId = await sendMyMessage('Пользователь нажал кнопку "Отклонить" в рассылке', "text", chatId)
+
+        // Подключаемся к серверу socket
+        let socket = io(socketUrl);
+        socket.emit("addUser", chatId)
+        socket.emit("sendMessage", {
+            senderId: chatId,
+            receiverId: chatTelegramId,
+            text: 'Пользователь нажал кнопку "Отклонить" в рассылке',
+            convId: convId,
+            messageId: messageId,
+        })
+
+
+        return bot.sendMessage(chatId, 'Спасибо!')
+    }
+
 
     bot.sendMessage(chatId, `Вы нажали кнопку ${data}`, backOptions)
   });

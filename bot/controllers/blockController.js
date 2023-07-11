@@ -2,7 +2,7 @@ require("dotenv").config();
 const { Client } = require("@notionhq/client");
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
 
-//получить id блока заданной страницы по id
+//получить id блока "Основной состав" заданной страницы по id
 async function getBlocks(blockId) {
     try {
         const response = await notion.blocks.children.list({
@@ -17,8 +17,28 @@ async function getBlocks(blockId) {
                res = block.id 
             }
         });     
-        
-        console.log("Blocks Data: "  + res)
+
+        return res;
+    } catch (error) {
+        console.error(error.message)
+    }
+}
+
+//получить id блока "Претенденты" заданной страницы по id
+async function getBlocksP(blockId) {
+    try {
+        const response = await notion.blocks.children.list({
+            block_id: blockId,
+        });
+
+        let count = 0;
+        let res;
+
+        const responseResults = response.results.map((block) => {
+            if (block.child_database?.title === "Претенденты"){
+               res = block.id 
+            }
+        });     
 
         return res;
     } catch (error) {
@@ -71,6 +91,17 @@ class BlockController {
     async blocksId(req, res) {
         const id = req.params.id; // получаем id
         const blocks = await getBlocks(id);
+        if(blocks){
+            res.json(blocks);
+        }
+        else{
+            res.json({});
+        }
+    }
+
+    async blocksPId(req, res) {
+        const id = req.params.id; // получаем id
+        const blocks = await getBlocksP(id);
         if(blocks){
             res.json(blocks);
         }
