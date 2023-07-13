@@ -62,10 +62,25 @@ async function getProjectsId(managerId) {
         const response = await notion.databases.query({
             database_id: databaseId,
             "filter": {
-                "property": "Manager",
-                "relation": {
-                    "contains": managerId
-                },
+                "and": [
+                    {
+                        "property": "Manager",
+                        "relation": {
+                            "contains": managerId
+                        },
+                    },
+                    {
+                        // "property": "Date",
+                        // "date": {
+                        //     "after": "2023-05-31"
+                        // }
+                        "timestamp": "created_time",
+                        "created_time": {
+                            "after": "2023-05-31"
+                        }
+                    }
+                ]
+                
             },
             "sorts": [{ 
                 "timestamp": "created_time", 
