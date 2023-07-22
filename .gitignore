@@ -1,5 +1,3 @@
 /node_modules
-/admin
-/admin-panel
 .env
 .idea
