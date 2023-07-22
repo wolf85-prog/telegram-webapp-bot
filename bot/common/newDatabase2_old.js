@@ -24,13 +24,40 @@ module.exports = async function newDatabase(parent_page_id, worklist, time) {
             ],
             "is_inline": true,
             "properties": { 
-                "Ставка": {
-                    "title": {}
-                },
                 "1. Дата": {
                     "date": {}
                 },
-                "2. ФИО": {    
+                "2. Статус": {
+                    "multi_select": {
+                        "options": [
+                            {
+                                "name": "Подгрузка",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "Монтаж",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Дежурство",
+                                "color": "green"
+                            },
+                            {
+                                "name": "Мероприятие",
+                                "color": "purple"
+                            },
+                            {
+                                "name": "Эфир",
+                                "color": "yellow"
+                            },
+                            {
+                                "name": "Демонтаж",
+                                "color": "blue"
+                            },
+                        ]
+                    }
+                },
+                "3. ФИО": {    
                     "name": "ФИО",               
                     "type": "relation",
                     "relation": {
@@ -38,7 +65,7 @@ module.exports = async function newDatabase(parent_page_id, worklist, time) {
                         "single_property": {}
                     }
                 },
-                "3. Специализация": {
+                "4. Специализация": {
                     "multi_select": {
                         "options": [
                             {
@@ -321,6 +348,24 @@ module.exports = async function newDatabase(parent_page_id, worklist, time) {
                     "type": "checkbox",
                     "checkbox": {}
                 },
+
+                "0. Ставка": {
+                    "multi_select": {
+                        "options": [
+                            {
+                                "name": "RUB 8,000.00"
+                            },
+                            {
+                                "name": "RUB 10,000.00"
+                            },
+                        ]
+                    }
+                },
+                "1/2": {
+                    "name": "1/2",
+                    "type": "checkbox",
+                    "checkbox": {}
+                },
                 "5. КомТег": {
                     "multi_select": {
                         "options": [
@@ -346,10 +391,13 @@ module.exports = async function newDatabase(parent_page_id, worklist, time) {
                             },
                         ]
                     }
+                },                
+                "Комментарий": {
+                    "title": {}
                 },
-                "6. Комментарий": {
-                    "rich_text": {}
-                },
+                // "9. Комментарий": {
+                //     "rich_text": {}
+                // },
                 "7. Такси": {
                     "name": "Такси",
                     "type": "checkbox",
