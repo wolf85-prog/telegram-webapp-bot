@@ -431,7 +431,7 @@ module.exports = async function newDatabase(parent_page_id, worklist, time) {
                     name: worker.spec,
                 }
     
-                arrWorks.push(newCategory)
+                //arrWorks.push(newCategory)
                 arrWorks.push(newSpec)         
                 
                 addWorker(data.id, arrWorks, time)
