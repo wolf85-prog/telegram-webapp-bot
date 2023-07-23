@@ -8,12 +8,12 @@ const dateNow = new Date();
 const date = dateNow.getFullYear() + "-0" + ((dateNow.getMonth())+1) + "-01T00:00:00.000"
 
 //send data to notion
-module.exports = async function addDate(blockId, day, day2) {
+module.exports = async function addDate(blockId, day) {
     try {
         const response = await notion.pages.create({
             parent: { database_id: blockId },
             properties: {
-                "Комментарий": {
+                Name: {
                     type: "title",
                     title: [
                         {
@@ -35,36 +35,7 @@ module.exports = async function addDate(blockId, day, day2) {
                         }
                     ]
                 },
-                "График №1": {
-                    "multi_select": {
-                        "options": [
-                            {
-                                "name": day,
-                                "color": "blue"
-                            },
-                        ]
-                    }
-                },
-                "Дата №1" : {
-                    type: 'date',                   
-                    date: {
-                        "start": date,
-                        "end": null,
-                        "time_zone": "Europe/Moscow"
-                    }
-
-                },
-                "График №2": {
-                    "multi_select": {
-                        "options": [
-                            {
-                                "name": day2,
-                                "color": "orange"
-                            },
-                        ]
-                    }
-                },
-                "Дата №2" : {
+                Date : {
                     type: 'date',                   
                     date: {
                         "start": date,
@@ -73,8 +44,6 @@ module.exports = async function addDate(blockId, day, day2) {
                     }
 
                 }
-
-
             }
         })
         //console.log(response)

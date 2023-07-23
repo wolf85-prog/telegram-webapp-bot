@@ -30,7 +30,7 @@ module.exports = async function addWorker(blockId, worker, date) {
                     }
 
                 },
-                "4. Специализация": {
+                "3. Специализация": {
                     type: "multi_select",
                     multi_select: worker
                 }

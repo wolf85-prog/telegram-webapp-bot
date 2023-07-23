@@ -23,13 +23,13 @@ module.exports = async function newDatabase_3(parent_page_id) {
             ],
             "is_inline": true,
             "properties": {                
-                "1. Чек": {
+                "Ставка": {
                     "title": {}
                 },
-                "2. Дата": {
+                "1. Дата": {
                     "date": {}
                 },
-                "3. ФИО": {    
+                "2. ФИО": {    
                     "name": "ФИО",               
                     "type": "relation",
                     "relation": {
@@ -37,7 +37,7 @@ module.exports = async function newDatabase_3(parent_page_id) {
                         "single_property": {}
                     }
                 },
-                "4. Специализация": {
+                "3. Специализация": {
                     "multi_select": {
                         "options": [
                             {
@@ -306,6 +306,11 @@ module.exports = async function newDatabase_3(parent_page_id) {
                             },
                         ]
                     }
+                },
+                "4. Мерч": {
+                    "name": "Мерч",
+                    "type": "checkbox",
+                    "checkbox": {}
                 },
                 "5. КомТег": {
                     "multi_select": {

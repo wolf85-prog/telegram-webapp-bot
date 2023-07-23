@@ -12,16 +12,16 @@ module.exports = async function addWorker(blockId, worker, date) {
         const response = await notion.pages.create({
             parent: { database_id: blockId },
             properties: {
-                "Ставка": {
+                "1. Чек-ин": {
                     title:[
                         {
                             "text": {
-                                "content": "000.00"
+                                "content": "✅"
                             }
                         }
                     ]
                 },
-                "1. Дата": {
+                "2. Дата": {
                     type: 'date',                   
                     date: {
                         "start": date,
@@ -30,10 +30,17 @@ module.exports = async function addWorker(blockId, worker, date) {
                     }
 
                 },
-                "3. Специализация": {
+                "5. Специализация": {
                     type: "multi_select",
                     multi_select: worker
-                }
+                },
+                "9. Ставка": {
+                    "type": "select",
+                    "select": {
+                        "name": "№1",
+                        "color": "blue"
+                    }
+                },
             }
         })
         //console.log(response)

@@ -26,10 +26,10 @@ module.exports = async function newDatabase5(parent_page_id) {
             "is_inline": true,
             "properties": {                
                 "1. Ставка": {
-                    "rich_text": {}
+                    "title": {}
                 },             
                 "2. Тех. Задание": {
-                    "title": {}
+                    "rich_text": {}
                 },
                 "3. Дата": {
                     "date": {}

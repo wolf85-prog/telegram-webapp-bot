@@ -13,16 +13,16 @@ module.exports = async function addWorkerZapas(blockId) {
         const response = await notion.pages.create({
             parent: { database_id: blockId },
             properties: {
-                "Ставка": {
+                "1. Чек-ин": {
                     title:[
                         {
                             "text": {
-                                "content": "000.00"
+                                "content": "✅"
                             }
                         }
                     ]
                 },
-                "1. Дата": {
+                "2. Дата": {
                     type: 'date',                   
                     date: {
                         "start": date,

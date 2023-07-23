@@ -24,59 +24,45 @@ module.exports = async function newDatabase1(parent_page_id) {
             ],
             "is_inline": true,
             "properties": {  
-                "Комментарий": {
+                "Name": {
                     "title": {}
-                },                             
-                "График №1": {
+                },              
+                "Date": {
+                    "date": {}
+                },
+                "Status": {
                     "multi_select": {
                         "options": [
                             {
-                                "name": "День №1",
+                                "name": "Погрузка",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "Монтаж",
                                 "color": "blue"
                             },
                             {
-                                "name": "День №2",
-                                "color": "blue"
+                                "name": "Дежурство",
+                                "color": "green"
                             },
                             {
-                                "name": "День №3",
-                                "color": "blue"
+                                "name": "Мероприятие",
+                                "color": "purple"
                             },
                             {
-                                "name": "День №4",
+                                "name": "Эфир",
+                                "color": "yellow"
+                            },
+                            {
+                                "name": "Демонтаж",
                                 "color": "blue"
                             },
                         ]
                     }
                 },
-                "Дата №1": {
-                    "date": {}
-                },
-                "График №2": {
-                    "multi_select": {
-                        "options": [
-                            {
-                                "name": "День №5",
-                                "color": "orange"
-                            },
-                            {
-                                "name": "День №6",
-                                "color": "orange"
-                            },
-                            {
-                                "name": "День №7",
-                                "color": "orange"
-                            },
-                            {
-                                "name": "День №8",
-                                "color": "orange"
-                            },
-                        ]
-                    }
-                },
-                "Дата №2": {
-                    "date": {}
-                },
+                "Комментарий": {
+                    "rich_text": {}
+                }               
             }
         }
 

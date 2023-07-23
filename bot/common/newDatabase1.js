@@ -24,45 +24,59 @@ module.exports = async function newDatabase1(parent_page_id) {
             ],
             "is_inline": true,
             "properties": {  
-                "Name": {
+                "Комментарий": {
                     "title": {}
-                },              
-                "Date": {
-                    "date": {}
-                },
-                "Status": {
+                },                             
+                "График №1": {
                     "multi_select": {
                         "options": [
                             {
-                                "name": "Погрузка",
+                                "name": "День №1",
                                 "color": "orange"
                             },
                             {
-                                "name": "Монтаж",
-                                "color": "blue"
+                                "name": "День №2",
+                                "color": "orange"
                             },
                             {
-                                "name": "Дежурство",
-                                "color": "green"
+                                "name": "День №3",
+                                "color": "orange"
                             },
                             {
-                                "name": "Мероприятие",
-                                "color": "purple"
-                            },
-                            {
-                                "name": "Эфир",
-                                "color": "yellow"
-                            },
-                            {
-                                "name": "Демонтаж",
-                                "color": "blue"
+                                "name": "День №4",
+                                "color": "orange"
                             },
                         ]
                     }
                 },
-                "Комментарий": {
-                    "rich_text": {}
-                }               
+                "Дата №1": {
+                    "date": {}
+                },
+                "График №2": {
+                    "multi_select": {
+                        "options": [
+                            {
+                                "name": "День №5",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "День №6",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "День №7",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "День №8",
+                                "color": "orange"
+                            },
+                        ]
+                    }
+                },
+                "Дата №2": {
+                    "date": {}
+                },
             }
         }
 
@@ -81,9 +95,10 @@ module.exports = async function newDatabase1(parent_page_id) {
         console.log("1. Таблица График проектов добавлена! Database_id: " + data.id) // + " data: " + JSON.stringify(data))
 
         //добавить даты (День2, День3, День4)
-        await addDate(data.id, 'День №4');
-        await addDate(data.id, 'День №3');
-        await addDate(data.id, 'День №2');
+        await addDate(data.id, 'День №4', 'День №8');
+        await addDate(data.id, 'День №3', 'День №7');
+        await addDate(data.id, 'День №2', 'День №6');
+        await addDate(data.id, 'День №1', 'День №5');
         
     } catch (error) {
         console.error(error.message)

@@ -247,7 +247,7 @@ async function addProject(title, time, teh, managerId, companyId, worklist, equi
                         }
                         ],
                 },
-                TechPoster: {
+                "Постер": {
                     type: 'rich_text',
                     rich_text: [
                         {
@@ -368,7 +368,7 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
                         }
                         ],
                 },
-                TechPoster: {
+                "Постер": {
                     type: 'rich_text',
                     rich_text: [
                         {
