@@ -36,14 +36,12 @@ module.exports = async function addDate(blockId, day, day2) {
                     ]
                 },
                 "График №1": {
-                    "multi_select": {
-                        "options": [
-                            {
-                                "name": day,
-                                "color": "blue"
-                            },
-                        ]
-                    }
+                    "multi_select": [
+                        {
+                            "name": day,
+                            "color": "blue"
+                        },
+                    ]
                 },
                 "Дата №1" : {
                     type: 'date',                   
@@ -55,14 +53,12 @@ module.exports = async function addDate(blockId, day, day2) {
 
                 },
                 "График №2": {
-                    "multi_select": {
-                        "options": [
-                            {
-                                "name": day2,
-                                "color": "orange"
-                            },
-                        ]
-                    }
+                    "multi_select": [
+                        {
+                            "name": day2,
+                            "color": "orange"
+                        },
+                    ]
                 },
                 "Дата №2" : {
                     type: 'date',                   

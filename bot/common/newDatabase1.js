@@ -32,19 +32,19 @@ module.exports = async function newDatabase1(parent_page_id) {
                         "options": [
                             {
                                 "name": "День №1",
-                                "color": "orange"
+                                "color": "blue"
                             },
                             {
                                 "name": "День №2",
-                                "color": "orange"
+                                "color": "blue"
                             },
                             {
                                 "name": "День №3",
-                                "color": "orange"
+                                "color": "blue"
                             },
                             {
                                 "name": "День №4",
-                                "color": "orange"
+                                "color": "blue"
                             },
                         ]
                     }
