@@ -152,7 +152,8 @@ module.exports = async function newDatabase4(parent_page_id, equipmentlist) {
                     addEquipment(data.id, equipment.icon)
                 }
             } else {
-                addEquipment(data.id, equipment.icon)
+                addEquipment(data.id, "")
+                addEquipment(data.id, "")
             }          
         });
         
