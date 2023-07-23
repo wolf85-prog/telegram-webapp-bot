@@ -13,7 +13,7 @@ module.exports = async function addDate(blockId, day, day2) {
         const response = await notion.pages.create({
             parent: { database_id: blockId },
             properties: {
-                "Комментарий": {
+                "1. Комментарий": {
                     type: "title",
                     title: [
                         {
@@ -35,7 +35,7 @@ module.exports = async function addDate(blockId, day, day2) {
                         }
                     ]
                 },
-                "График №1": {
+                "2. График №1": {
                     "multi_select": [
                         {
                             "name": day,
@@ -43,7 +43,7 @@ module.exports = async function addDate(blockId, day, day2) {
                         },
                     ]
                 },
-                "Дата №1" : {
+                "3. Дата №1" : {
                     type: 'date',                   
                     date: {
                         "start": date,
@@ -52,7 +52,7 @@ module.exports = async function addDate(blockId, day, day2) {
                     }
 
                 },
-                "График №2": {
+                "4. График №2": {
                     "multi_select": [
                         {
                             "name": day2,
@@ -60,7 +60,7 @@ module.exports = async function addDate(blockId, day, day2) {
                         },
                     ]
                 },
-                "Дата №2" : {
+                "5. Дата №2" : {
                     type: 'date',                   
                     date: {
                         "start": date,

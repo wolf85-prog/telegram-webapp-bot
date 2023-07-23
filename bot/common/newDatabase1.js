@@ -24,10 +24,10 @@ module.exports = async function newDatabase1(parent_page_id) {
             ],
             "is_inline": true,
             "properties": {  
-                "Комментарий": {
+                "1. Комментарий": {
                     "title": {}
                 },                             
-                "График №1": {
+                "2. График №1": {
                     "multi_select": {
                         "options": [
                             {
@@ -129,10 +129,10 @@ module.exports = async function newDatabase1(parent_page_id) {
                         ]
                     }
                 },
-                "Дата №1": {
+                "3. Дата №1": {
                     "date": {}
                 },
-                "График №2": {
+                "4. График №2": {
                     "multi_select": {
                         "options": [
                             {
@@ -234,7 +234,7 @@ module.exports = async function newDatabase1(parent_page_id) {
                         ]
                     }
                 },
-                "Дата №2": {
+                "5. Дата №2": {
                     "date": {}
                 },
             }
