@@ -299,16 +299,13 @@ async function addProject(title, time, teh, managerId, companyId, worklist, equi
                     ],
                     "has_more": false
                 },
-                "Специфика": {
-                    "multi_select": {
-                        "options": [
-                            // {
-                            //     "name": "Станддарт",
-                            //     "color": "blue"
-                            // },
-                        ]
-                    }
-                },
+                // "Специфика": {
+                //     "multi_select": {
+                //         "options": [
+                            
+                //         ]
+                //     }
+                // },
             }
         })
         //console.log(response)
@@ -411,16 +408,13 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
                         }
                     ]
                 },
-                "Специфика": {
-                    "multi_select": {
-                        "options": [
-                            // {
-                            //     "name": "Станддарт",
-                            //     "color": "blue"
-                            // },
-                        ]
-                    }
-                },
+                // "Специфика": {
+                //     "multi_select": {
+                //         "options": [
+                            
+                //         ]
+                //     }
+                // },
             }
         })
         //console.log(response)
