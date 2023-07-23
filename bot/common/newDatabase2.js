@@ -68,7 +68,7 @@ module.exports = async function newDatabase(parent_page_id, worklist, time) {
                         "single_property": {}
                     }
                 },
-                "3. Специализация": {
+                "5. Специализация": {
                     "multi_select": {
                         "options": [
                             {
