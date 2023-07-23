@@ -28,7 +28,7 @@ module.exports = async function newDatabase5(parent_page_id) {
                 "1. Ставка": {
                     "rich_text": {}
                 },             
-                "2. Тех. задание": {
+                "2. Тех. Задание": {
                     "title": {}
                 },
                 "3. Дата": {
