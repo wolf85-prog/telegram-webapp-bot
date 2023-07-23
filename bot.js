@@ -411,15 +411,6 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
                         }
                     ]
                 },
-                "Площадка": {
-                    "type": "relation",
-                    "relation": [
-                        {
-                            "id": geoId
-                        }
-                    ],
-                    "has_more": false
-                },
                 "Специфика": {
                     "multi_select": {
                         "options": [
