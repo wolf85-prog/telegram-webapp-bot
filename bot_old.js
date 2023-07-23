@@ -228,7 +228,7 @@ async function addProject(title, time, teh, managerId, companyId, worklist, equi
                         }
                     ]
                 },
-                "Дата": {
+                Date: {
                     type: 'date',
                     date: {
                         "start": time,
@@ -236,7 +236,7 @@ async function addProject(title, time, teh, managerId, companyId, worklist, equi
                         "time_zone": "Europe/Moscow"
                     }
                 },
-                "Тех. задание": {
+                TechClient: {
                     type: 'rich_text',
                     rich_text: [
                         {
@@ -258,7 +258,7 @@ async function addProject(title, time, teh, managerId, companyId, worklist, equi
                         }
                         ],
                 },
-                "Статус проекта": {
+                Status: {
                     type: 'select',
                     select: {
                         "id": "4f52b59e-2d7f-4a13-976f-f9773274825d",
@@ -266,7 +266,7 @@ async function addProject(title, time, teh, managerId, companyId, worklist, equi
                         "color": "blue"
                     }
                 },
-                "Город": {
+                City: {
                     type: 'select',
                     select: {
                         "id": "4e370773-fb5d-4ef7-bd2a-eaa91e5919e0",
@@ -274,7 +274,7 @@ async function addProject(title, time, teh, managerId, companyId, worklist, equi
                         "color": "brown"
                     }
                 },
-                "Менеджер": {
+                Manager: {
                     type: "relation",
                     relation: [
                         {
@@ -282,7 +282,7 @@ async function addProject(title, time, teh, managerId, companyId, worklist, equi
                         }
                     ]
                 },
-                "Компания": {
+                Company: {
                     type: "relation",
                     relation: [
                         {
@@ -298,17 +298,7 @@ async function addProject(title, time, teh, managerId, companyId, worklist, equi
                         }
                     ],
                     "has_more": false
-                },
-                "Специфика": {
-                    "multi_select": {
-                        "options": [
-                            // {
-                            //     "name": "Станддарт",
-                            //     "color": "blue"
-                            // },
-                        ]
-                    }
-                },
+                }
             }
         })
         //console.log(response)
@@ -349,7 +339,7 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
                         }
                     ]
                 },
-                "Дата": {
+                Date: {
                     type: 'date',
                     date: {
                         "start": time,
@@ -357,7 +347,7 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
                         "time_zone": "Europe/Moscow"
                     }
                 },
-                "Тех. задание": {
+                TechClient: {
                     type: 'rich_text',
                     rich_text: [
                         {
@@ -379,7 +369,7 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
                         }
                         ],
                 },
-                "Статус проекта": {
+                Status: {
                     type: 'select',
                     select: {
                         "id": "4f52b59e-2d7f-4a13-976f-f9773274825d",
@@ -387,7 +377,7 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
                         "color": "blue"
                     }
                 },
-                "Город": {
+                City: {
                     type: 'select',
                     select: {
                         "id": "4e370773-fb5d-4ef7-bd2a-eaa91e5919e0",
@@ -395,7 +385,7 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
                         "color": "brown"
                     }
                 },
-                "Менеджер": {
+                Manager: {
                     type: "relation",
                     relation: [
                         {
@@ -403,32 +393,13 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
                         }
                     ]
                 },
-                "Компания": {
+                Company: {
                     type: "relation",
                     relation: [
                         {
                             "id": companyId
                         }
                     ]
-                },
-                "Площадка": {
-                    "type": "relation",
-                    "relation": [
-                        {
-                            "id": geoId
-                        }
-                    ],
-                    "has_more": false
-                },
-                "Специфика": {
-                    "multi_select": {
-                        "options": [
-                            // {
-                            //     "name": "Станддарт",
-                            //     "color": "blue"
-                            // },
-                        ]
-                    }
                 },
             }
         })
