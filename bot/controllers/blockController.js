@@ -93,23 +93,39 @@ async function createBlock(blockId) {
         const response = await notion.blocks.children.append({
             block_id: blockId,
             children: [
+                // {
+                //     //...other keys excluded
+                //     "type": "to_do",
+                //     "to_do": {
+                //       "rich_text": [{
+                //         "type": "text",
+                //         "text": {
+                //           "content": "Finish Q3 goals",
+                //           "link": null
+                //         }
+                //       }],
+                //       "checked": false,
+                //       "color": "default",
+                //     }
+                // }
+                
                 {
-                    //...other keys excluded
-                    "type": "to_do",
-                    "to_do": {
-                      "rich_text": [{
-                        "type": "text",
-                        "text": {
-                          "content": "Finish Q3 goals",
-                          "link": null
+                    "type": "column_list",
+                    "column_list": {
+                        "type": "column",
+                        "column": {
+                            "to_do": {
+                                "rich_text": [{
+                                    "type": "text",
+                                    "text": {
+                                        "content": "Finish Q3 goals",
+                                        "link": null
+                                    }
+                                }],
+                                "checked": false,
+                                "color": "default",
+                            }
                         }
-                      }],
-                      "checked": false,
-                      "color": "default",
-                    //   "children":[{
-                    //     "type": "paragraph"
-                    //     // ..other keys excluded
-                    //   }]
                     }
                 }
             ],
