@@ -92,23 +92,7 @@ async function createBlock(blockId) {
     try {
         const response = await notion.blocks.children.append({
             block_id: blockId,
-            children: [
-                // {
-                //     //...other keys excluded
-                //     "type": "to_do",
-                //     "to_do": {
-                //       "rich_text": [{
-                //         "type": "text",
-                //         "text": {
-                //           "content": "Finish Q3 goals",
-                //           "link": null
-                //         }
-                //       }],
-                //       "checked": false,
-                //       "color": "default",
-                //     }
-                // }
-                
+            children: [              
                 {
                     "object": "block",
                     "type": "column_list",
@@ -119,32 +103,36 @@ async function createBlock(blockId) {
                           "type": "column",
                           "column": {
                             "children": [
-                              {
-                                "object": "block",
-                                "type": "paragraph",
-                                "paragraph": {
-                                    "rich_text": [{
+                                {
+                                    "object": "block",
+                                    "type": "to_do",
+                                    "to_do": {
+                                      "rich_text": [{
                                         "type": "text",
                                         "text": {
-                                            "content": "Finish Q1 goals",
-                                            "link": null
+                                          "content": "Finish Q1 goals",
+                                          "link": null
                                         }
-                                    }],
-                                }
-                              },
-                              {
-                                "object": "block",
-                                "type": "paragraph",
-                                "paragraph": {
-                                    "rich_text": [{
+                                      }],
+                                      "checked": false,
+                                      "color": "default",
+                                    }
+                                },
+                                {
+                                    "object": "block",
+                                    "type": "to_do",
+                                    "to_do": {
+                                      "rich_text": [{
                                         "type": "text",
                                         "text": {
-                                            "content": "Finish Q2 goals",
-                                            "link": null
+                                          "content": "Finish Q2 goals",
+                                          "link": null
                                         }
-                                    }],
-                                }
-                              }
+                                      }],
+                                      "checked": false,
+                                      "color": "default",
+                                    }
+                                },
                             ]
                           }
                         },
@@ -153,32 +141,36 @@ async function createBlock(blockId) {
                           "type": "column",
                           "column": {
                             "children": [
-                              {
-                                "object": "block",
-                                "type": "paragraph",
-                                "paragraph": {
-                                    "rich_text": [{
+                                {
+                                    "object": "block",
+                                    "type": "to_do",
+                                    "to_do": {
+                                      "rich_text": [{
                                         "type": "text",
                                         "text": {
-                                            "content": "Finish Q3 goals",
-                                            "link": null
+                                          "content": "Finish Q3 goals",
+                                          "link": null
                                         }
-                                    }],
-                                }
-                              },
-                              {
-                                "object": "block",
-                                "type": "paragraph",
-                                "paragraph": {
-                                    "rich_text": [{
+                                      }],
+                                      "checked": false,
+                                      "color": "default",
+                                    }
+                                },
+                                {
+                                    "object": "block",
+                                    "type": "to_do",
+                                    "to_do": {
+                                      "rich_text": [{
                                         "type": "text",
                                         "text": {
-                                            "content": "Finish Q4 goals",
-                                            "link": null
+                                          "content": "Finish Q3 goals",
+                                          "link": null
                                         }
-                                    }],
-                                }
-                              }
+                                      }],
+                                      "checked": false,
+                                      "color": "default",
+                                    }
+                                },
                             ]
                           }
                         }
