@@ -230,7 +230,7 @@ ${arr_count0.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + it
                 .then((response) => response.json())
                 .then((data) => {
                     if (data) {
-                        project_manager = data?.properties.Manager.relation[0]?.id;
+                        project_manager = data?.properties["Менеджер"].relation[0]?.id;
                     }  else {
                         project_manager = '';
                     }                             

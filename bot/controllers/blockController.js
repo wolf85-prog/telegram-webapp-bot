@@ -72,6 +72,22 @@ async function getBlockId(blockId) {
     }
 }
 
+
+//получить данные дочерних блоков по заданному ID
+async function getBlocksChildrenId(blockId) {
+    try {
+
+        const response = await notion.blocks.children.list({
+            block_id: blockId,
+            page_size: 50,
+        });
+
+        return response;
+    } catch (error) {
+        console.error(error.message)
+    }
+}
+
 //получить данные страницы по заданному ID
 async function getPage(pageId) {
     try {
@@ -124,6 +140,12 @@ class BlockController {
     async blockId(req, res) {
         const id = req.params.id; // получаем id
         const blocks = await getBlockId(id);
+        res.json(blocks);
+    }
+
+    async blocksChildrenId(req, res) {
+        const id = req.params.id; // получаем id
+        const blocks = await getBlocksChildrenId(id);
         res.json(blocks);
     }
 

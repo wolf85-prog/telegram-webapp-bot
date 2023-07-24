@@ -51,6 +51,8 @@ router.get('/blocksp/:id', blockController.blocksPId); //получить id т�
 router.get('/blocks2/:id', blockController.blocksId2); //подробная инфа
 router.get('/block/:id', blockController.blockId); // получить данные доп. таблиц
 
+router.get('/blocks/children/:id', blockController.blocksChildrenId); // получить данные дочерних блоков
+
 //get BLOCK (оборудование)
 router.get('/blocks/equipment/:id', blockEquipmentController.blocksId); //получить id таблицы/блока "Основной состав" ("4a74b62a-2f46-4fae-9e4b-9c700cb1b2f1")
 router.get('/blocks2/equipment/:id', blockEquipmentController.blocksId2); //подробная инфа
