@@ -110,12 +110,12 @@ async function createBlock(blockId) {
                                       "rich_text": [{
                                         "type": "text",
                                         "text": {
-                                          "content": "Finish Q1 goals",
+                                          "content": "Предварительная смета",
                                           "link": null
                                         }
                                       }],
                                       "checked": false,
-                                      "color": "default",
+                                      "color": "green",
                                     }
                                 },
                                 {
@@ -125,12 +125,12 @@ async function createBlock(blockId) {
                                       "rich_text": [{
                                         "type": "text",
                                         "text": {
-                                          "content": "Finish Q2 goals",
+                                          "content": "Постер",
                                           "link": null
                                         }
                                       }],
                                       "checked": false,
-                                      "color": "default",
+                                      "color": "purple",
                                     }
                                 },
                             ]
@@ -148,12 +148,12 @@ async function createBlock(blockId) {
                                       "rich_text": [{
                                         "type": "text",
                                         "text": {
-                                          "content": "Finish Q3 goals",
+                                          "content": "Калькулятор",
                                           "link": null
                                         }
                                       }],
                                       "checked": false,
-                                      "color": "default",
+                                      "color": "blue",
                                     }
                                 },
                                 {
@@ -163,12 +163,12 @@ async function createBlock(blockId) {
                                       "rich_text": [{
                                         "type": "text",
                                         "text": {
-                                          "content": "Finish Q3 goals",
+                                          "content": "Финальная смета",
                                           "link": null
                                         }
                                       }],
                                       "checked": false,
-                                      "color": "default",
+                                      "color": "pink",
                                     }
                                 },
                             ]
