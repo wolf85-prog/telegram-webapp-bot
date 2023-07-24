@@ -29,16 +29,13 @@ async function getDatabaseId(baseId) {
             database_id: baseId
         });
 
-        const responseResults = response.results.filter((page) => page.properties["1. Дата"].date !== null).map((page) => {
-            //if (page.properties["1. Дата"].date) {
-                return {
-                    date: page.properties["1. Дата"].date?.start,
-                    fio: page.properties["2. ФИО"].relation[0]?.id,
-                    //title: page.properties["3. Специализация"].multi_select[0]?.name, 
-                    spec: page.properties["3. Специализация"].multi_select[1]?.name              
-                };
-            //}
-            
+        const responseResults = response.results.filter((page) => page.properties["2. Дата"].date !== null).map((page) => {
+            return {
+                date: page.properties["2. Дата"].date?.start,
+                fio: page.properties["4. ФИО"].relation[0]?.id,
+                //title: page.properties["3. Специализация"].multi_select[0]?.name,
+                spec: page.properties["5. Специализация"].multi_select[0]?.name                
+            };
         });
 
         return responseResults;
