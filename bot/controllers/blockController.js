@@ -180,7 +180,7 @@ async function createBlock(blockId) {
                 {
                     "type": "table",
                     "table": {
-                        "table_width": 2,
+                        "table_width": 3,
                         "has_column_header": false,
                         "has_row_header": true,
                         "children": [
