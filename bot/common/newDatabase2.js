@@ -384,7 +384,7 @@ module.exports = async function newDatabase(parent_page_id, worklist, time) {
                     "type": "select",
                     "select": {}
                 },
-                "90. Такси": {
+                "0. Такси": {
                     "name": "Такси",
                     "type": "checkbox",
                     "checkbox": {}
