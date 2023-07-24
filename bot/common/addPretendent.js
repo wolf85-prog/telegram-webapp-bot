@@ -8,6 +8,10 @@ module.exports = async function addPretendent(blockId) {
     try {
         const response = await notion.pages.create({
             parent: { database_id: blockId },
+            icon: {
+                type: "emoji",
+                emoji: "✅"
+            },
             properties: {
                 "1. Ставка": {
                     type: "title",
@@ -15,7 +19,7 @@ module.exports = async function addPretendent(blockId) {
                         {
                             type: 'text',
                             text: {
-                                content: "✅ 0 000.00 — 0 000.00 руб/час * 0 — 0 часов",
+                                content: "0 000.00 — 0 000.00 руб/час * 0 — 0 часов",
                             },
                             "annotations": {
                                 "bold": false,

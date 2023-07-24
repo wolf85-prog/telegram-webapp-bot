@@ -201,7 +201,7 @@ module.exports = async function getReports(project, bot) {
                             
 ${day}.${month} | ${chas}:${minut} | ${project.name} | U.L.E.Y
 
-${arr_count0.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`    
+${arr_count0.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title).join('\n')}`    
 
                 //отаправить 1-й отчет
                 const report = await bot.sendMessage(project.chatId, text)                         
@@ -283,7 +283,7 @@ ${arr_count0.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + it
                                 
 ${day}.${month} | ${chas}:${minut} | ${project_name} | U.L.E.Y
 
-${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title + ' [' + item.title2 + ']').join('\n')}`                           
+${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title).join('\n')}`                           
 
                         //отправка сообщений по таймеру
                         setTimeout(async()=> {

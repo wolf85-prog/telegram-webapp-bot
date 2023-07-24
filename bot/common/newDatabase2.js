@@ -382,7 +382,18 @@ module.exports = async function newDatabase(parent_page_id, worklist, time) {
                 },
                 "9. Ставка": {
                     "type": "select",
-                    "select": {}
+                    "select": {
+                        "options": [
+                            {
+                                "name": "№1",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "№2",
+                                "color": "blue"
+                            }
+                          ]
+                    }
                 },
                 "90. Такси": {
                     "name": "Такси",

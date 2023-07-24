@@ -12,16 +12,20 @@ module.exports = async function addWorkerZapas(blockId) {
     try {
         const response = await notion.pages.create({
             parent: { database_id: blockId },
+            icon: {
+                type: "emoji",
+                emoji: "✅"
+            },
             properties: {
-                "1. Чек-ин": {
-                    title:[
-                        {
-                            "text": {
-                                "content": "✅"
-                            }
-                        }
-                    ]
-                },
+                // "1. Чек-ин": {
+                //     title:[
+                //         {
+                //             "text": {
+                //                 "content": ""
+                //             }
+                //         }
+                //     ]
+                // },
                 "2. Дата": {
                     type: 'date',                   
                     date: {
