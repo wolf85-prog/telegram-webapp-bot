@@ -121,15 +121,16 @@ async function createBlock(blockId) {
                             "children": [
                               {
                                 "object": "block",
-                                "type": 'rich_text',
-                                "rich_text": [
-                                    {
-                                        "type": 'text',
+                                "type": "paragraph",
+                                "paragraph": {
+                                    "rich_text": [{
+                                        "type": "text",
                                         "text": {
-                                            "content": "text text text",
-                                        },
-                                    }
-                                ],
+                                            "content": "Finish Q3 goals",
+                                            "link": null
+                                        }
+                                    }],
+                                }
                               }
                             ]
                           }
@@ -141,15 +142,16 @@ async function createBlock(blockId) {
                             "children": [
                               {
                                 "object": "block",
-                                "type": 'rich_text',
-                                "rich_text": [
-                                    {
-                                        "type": 'text',
+                                "type": "paragraph",
+                                "paragraph": {
+                                    "rich_text": [{
+                                        "type": "text",
                                         "text": {
-                                            "content": "text text text",
-                                        },
-                                    }
-                                ],
+                                            "content": "Finish Q3 goals",
+                                            "link": null
+                                        }
+                                    }],
+                                }
                               }
                             ]
                           }
