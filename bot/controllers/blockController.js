@@ -112,20 +112,20 @@ async function createBlock(blockId) {
                 {
                     "type": "column_list",
                     "column_list": {
-                        "type": "column",
-                        "column": {
-                            "to_do": {
-                                "rich_text": [{
-                                    "type": "text",
-                                    "text": {
-                                        "content": "Finish Q3 goals",
-                                        "link": null
-                                    }
-                                }],
-                                "checked": false,
-                                "color": "default",
-                            }
-                        }
+                        // "type": "column",
+                        // "column": {
+                        //     "to_do": {
+                        //         "rich_text": [{
+                        //             "type": "text",
+                        //             "text": {
+                        //                 "content": "Finish Q3 goals",
+                        //                 "link": null
+                        //             }
+                        //         }],
+                        //         "checked": false,
+                        //         "color": "default",
+                        //     }
+                        // }
                     }
                 }
             ],
