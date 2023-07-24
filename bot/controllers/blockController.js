@@ -106,10 +106,10 @@ async function createBlock(blockId) {
                       }],
                       "checked": false,
                       "color": "default",
-                      "children":[{
-                        "type": "paragraph"
-                        // ..other keys excluded
-                      }]
+                    //   "children":[{
+                    //     "type": "paragraph"
+                    //     // ..other keys excluded
+                    //   }]
                     }
                 }
             ],
