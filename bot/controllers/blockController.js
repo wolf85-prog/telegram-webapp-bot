@@ -110,22 +110,55 @@ async function createBlock(blockId) {
                 // }
                 
                 {
+                    "object": "block",
                     "type": "column_list",
                     "column_list": {
-                        // "type": "column",
-                        // "column": {
-                        //     "to_do": {
-                        //         "rich_text": [{
-                        //             "type": "text",
-                        //             "text": {
-                        //                 "content": "Finish Q3 goals",
-                        //                 "link": null
-                        //             }
-                        //         }],
-                        //         "checked": false,
-                        //         "color": "default",
-                        //     }
-                        // }
+                      "children": [
+                        {
+                          "object": "block",
+                          "type": "column",
+                          "column": {
+                            "children": [
+                              {
+                                "object": "block",
+                                "type": "paragraph",
+                                "paragraph": {
+                                  "text": [
+                                    {
+                                      "type": "text",
+                                      "text": {
+                                        "content": "some text here"
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "object": "block",
+                          "type": "column",
+                          "column": {
+                            "children": [
+                              {
+                                "object": "block",
+                                "type": "paragraph",
+                                "paragraph": {
+                                  "text": [
+                                    {
+                                      "type": "text",
+                                      "text": {
+                                        "content": "some text here"
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        }
+                    ]
                     }
                 }
             ],
