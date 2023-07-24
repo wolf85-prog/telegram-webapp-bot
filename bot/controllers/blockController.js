@@ -126,7 +126,20 @@ async function createBlock(blockId) {
                                     "rich_text": [{
                                         "type": "text",
                                         "text": {
-                                            "content": "Finish Q3 goals",
+                                            "content": "Finish Q1 goals",
+                                            "link": null
+                                        }
+                                    }],
+                                }
+                              },
+                              {
+                                "object": "block",
+                                "type": "paragraph",
+                                "paragraph": {
+                                    "rich_text": [{
+                                        "type": "text",
+                                        "text": {
+                                            "content": "Finish Q2 goals",
                                             "link": null
                                         }
                                     }],
@@ -148,6 +161,19 @@ async function createBlock(blockId) {
                                         "type": "text",
                                         "text": {
                                             "content": "Finish Q3 goals",
+                                            "link": null
+                                        }
+                                    }],
+                                }
+                              },
+                              {
+                                "object": "block",
+                                "type": "paragraph",
+                                "paragraph": {
+                                    "rich_text": [{
+                                        "type": "text",
+                                        "text": {
+                                            "content": "Finish Q4 goals",
                                             "link": null
                                         }
                                     }],
