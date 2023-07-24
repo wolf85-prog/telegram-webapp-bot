@@ -37,6 +37,7 @@ const chatGiaId = process.env.GIA_CHAT_ID
 let projectId, projectName, projectDate, projectTime, dateStart, manager_id, company_id, Geo, Teh, Worklist, Equipmentlist;
 
 //functions
+const addTable = require('./bot/common/addTable')
 const newDatabase1 = require('./bot/common/newDatabase1')
 const newDatabase2 = require('./bot/common/newDatabase2')
 const newDatabase3 = require('./bot/common/newDatabase3')
@@ -313,6 +314,8 @@ async function addProject(title, time, teh, managerId, companyId, worklist, equi
         console.log(new Date())
         console.log("1. Проект с адресом успешно добавлен! " + res_id)
 
+        await addTable(res_id)                     //создать верхний блок
+
         await newDatabase1(res_id);                //создание базы данных "График работы"    
         await newDatabase2(res_id, worklist, time);//создание базы данных "Основной состав"   
         await newDatabase3(res_id);                //создание базы данных "Запасной состав"
@@ -408,13 +411,6 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
                         }
                     ]
                 },
-                // "Специфика": {
-                //     "multi_select": {
-                //         "options": [
-                            
-                //         ]
-                //     }
-                // },
             }
         })
         //console.log(response)
@@ -422,6 +418,7 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
         console.log(new Date())
         console.log("1. Проект без адреса успешно добавлен! " + res_id)        
 
+        await addTable(res_id)                     //создать верхний блок
         
         await newDatabase1(res_id);                //создание базы данных "График работы"    
         await newDatabase2(res_id, worklist, time);      //создание базы данных "Основной состав"   
