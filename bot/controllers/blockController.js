@@ -88,6 +88,47 @@ async function getBlocksChildrenId(blockId) {
     }
 }
 
+async function createBlock(blockId) {
+    try {
+        const response = await notion.blocks.children.append({
+            block_id: blockId,
+            children: [
+                {
+                    "heading_2": {
+                      "rich_text": [
+                        {
+                          "text": {
+                            "content": "Lacinato kale"
+                          }
+                        }
+                      ]
+                    }
+                },
+                {
+                    "paragraph": {
+                      "rich_text": [
+                        {
+                          "text": {
+                            "content": "Lacinato kale is a variety of kale with a long tradition in Italian cuisine, especially that of Tuscany. It is also known as Tuscan kale, Italian kale, dinosaur kale, kale, flat back kale, palm tree kale, or black Tuscan palm.",
+                            "link": {
+                              "url": "https://en.wikipedia.org/wiki/Lacinato_kale"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                }
+            ],
+        })
+        //console.log(response)
+        const res_id = response.id;
+
+        return response;
+    } catch (error) {
+        console.error(error.message)
+    }
+}
+
 //получить данные страницы по заданному ID
 async function getPage(pageId) {
     try {
@@ -147,6 +188,17 @@ class BlockController {
         const id = req.params.id; // получаем id
         const blocks = await getBlocksChildrenId(id);
         res.json(blocks);
+    }
+
+    async appendBlock(req, res) {
+        const id = req.params.id; // получаем id
+        try {
+            const block = await createBlock(id);
+            res.status(200).json(block);
+        } catch (error) {
+            console.error(error.message)
+            res.status(500).json(error);
+        }
     }
 
     async pageId(req, res) {

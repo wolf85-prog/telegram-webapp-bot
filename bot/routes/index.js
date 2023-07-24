@@ -52,6 +52,7 @@ router.get('/blocks2/:id', blockController.blocksId2); //подробная ин
 router.get('/block/:id', blockController.blockId); // получить данные доп. таблиц
 
 router.get('/blocks/children/:id', blockController.blocksChildrenId); // получить данные дочерних блоков
+router.path("/blocks/children/:id", blockController.appendBlock); // добавить дочерний блок
 
 //get BLOCK (оборудование)
 router.get('/blocks/equipment/:id', blockEquipmentController.blocksId); //получить id таблицы/блока "Основной состав" ("4a74b62a-2f46-4fae-9e4b-9c700cb1b2f1")
