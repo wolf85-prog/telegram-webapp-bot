@@ -36,7 +36,7 @@ module.exports = async function addProject(title, time, teh, managerId, companyI
                                 content: teh,
                             },
                         }
-                        ],
+                    ],
                 },
                 Status: {
                     type: 'select',

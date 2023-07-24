@@ -121,17 +121,15 @@ async function createBlock(blockId) {
                             "children": [
                               {
                                 "object": "block",
-                                "type": "paragraph",
-                                "paragraph": {
-                                  "text": [
+                                "type": 'rich_text',
+                                "rich_text": [
                                     {
-                                      "type": "text",
-                                      "text": {
-                                        "content": "some text here"
-                                      }
+                                        "type": 'text',
+                                        "text": {
+                                            "content": "text text text",
+                                        },
                                     }
-                                  ]
-                                }
+                                ],
                               }
                             ]
                           }
@@ -143,17 +141,15 @@ async function createBlock(blockId) {
                             "children": [
                               {
                                 "object": "block",
-                                "type": "paragraph",
-                                "paragraph": {
-                                  "text": [
+                                "type": 'rich_text',
+                                "rich_text": [
                                     {
-                                      "type": "text",
-                                      "text": {
-                                        "content": "some text here"
-                                      }
+                                        "type": 'text',
+                                        "text": {
+                                            "content": "text text text",
+                                        },
                                     }
-                                  ]
-                                }
+                                ],
                               }
                             ]
                           }
