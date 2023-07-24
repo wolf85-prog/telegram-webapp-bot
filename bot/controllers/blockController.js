@@ -178,67 +178,78 @@ async function createBlock(blockId) {
                     }
                 },
                 {
-                    "type": "table_row",
-                    "table_row": {
-                      "cells": [
-                        [
-                          {
-                            "type": "text",
-                            "text": {
-                              "content": "column 1 content",
-                              "link": null
-                            },
-                            "annotations": {
-                              "bold": false,
-                              "italic": false,
-                              "strikethrough": false,
-                              "underline": false,
-                              "code": false,
-                              "color": "default"
-                            },
-                            "plain_text": "column 1 content",
-                            "href": null
-                          }
-                        ],
-                        [
-                          {
-                            "type": "text",
-                            "text": {
-                              "content": "column 2 content",
-                              "link": null
-                            },
-                            "annotations": {
-                              "bold": false,
-                              "italic": false,
-                              "strikethrough": false,
-                              "underline": false,
-                              "code": false,
-                              "color": "default"
-                            },
-                            "plain_text": "column 2 content",
-                            "href": null
-                          }
-                        ],
-                        [
-                          {
-                            "type": "text",
-                            "text": {
-                              "content": "column 3 content",
-                              "link": null
-                            },
-                            "annotations": {
-                              "bold": false,
-                              "italic": false,
-                              "strikethrough": false,
-                              "underline": false,
-                              "code": false,
-                              "color": "default"
-                            },
-                            "plain_text": "column 3 content",
-                            "href": null
-                          }
+                    "type": "table",
+                    "table": {
+                        "table_width": 2,
+                        "has_column_header": false,
+                        "has_row_header": true,
+                        "children": [
+                            {
+                                //...other keys excluded
+                                "type": "table_row",
+                                "table_row": {
+                                  "cells": [
+                                    [
+                                      {
+                                        "type": "text",
+                                        "text": {
+                                          "content": "column 1 content",
+                                          "link": null
+                                        },
+                                        "annotations": {
+                                          "bold": false,
+                                          "italic": false,
+                                          "strikethrough": false,
+                                          "underline": false,
+                                          "code": false,
+                                          "color": "default"
+                                        },
+                                        "plain_text": "column 1 content",
+                                        "href": null
+                                      }
+                                    ],
+                                    [
+                                      {
+                                        "type": "text",
+                                        "text": {
+                                          "content": "column 2 content",
+                                          "link": null
+                                        },
+                                        "annotations": {
+                                          "bold": false,
+                                          "italic": false,
+                                          "strikethrough": false,
+                                          "underline": false,
+                                          "code": false,
+                                          "color": "default"
+                                        },
+                                        "plain_text": "column 2 content",
+                                        "href": null
+                                      }
+                                    ],
+                                    [
+                                      {
+                                        "type": "text",
+                                        "text": {
+                                          "content": "column 3 content",
+                                          "link": null
+                                        },
+                                        "annotations": {
+                                          "bold": false,
+                                          "italic": false,
+                                          "strikethrough": false,
+                                          "underline": false,
+                                          "code": false,
+                                          "color": "default"
+                                        },
+                                        "plain_text": "column 3 content",
+                                        "href": null
+                                      }
+                                    ]
+                                  ]
+                                }
+                            }
                         ]
-                      ]
                     }
                 }
             ],
