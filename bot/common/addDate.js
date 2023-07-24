@@ -12,29 +12,11 @@ module.exports = async function addDate(blockId, day, day2) {
     try {
         const response = await notion.pages.create({
             parent: { database_id: blockId },
+            icon: {
+                type: "emoji",
+                emoji: "🔔"
+            },
             properties: {
-                "1. Комментарий": {
-                    type: "title",
-                    title: [
-                        {
-                            "type": "text",
-                            "text": {
-                                "content": "🔔",
-                                "link": null
-                            },
-                            "annotations": {
-                                "bold": false,
-                                "italic": false,
-                                "strikethrough": false,
-                                "underline": false,
-                                "code": false,
-                                "color": "default"
-                            },
-                            "plain_text": "🔔",
-                            "href": null
-                        }
-                    ]
-                },
                 "2. График №1": {
                     "multi_select": [
                         {
