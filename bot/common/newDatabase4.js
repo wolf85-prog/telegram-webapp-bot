@@ -1,5 +1,6 @@
 require("dotenv").config();
 const addEquipment = require("./addEquipment");
+const addEquipmentEmpty = require("./addEquipmentEmpty");
 const token_fetch = 'Bearer ' + process.env.NOTION_API_KEY;
 //fetch api
 const fetch = require('node-fetch');
@@ -152,8 +153,8 @@ module.exports = async function newDatabase4(parent_page_id, equipmentlist) {
                     addEquipment(data.id, equipment.icon)
                 }
             } else {
-                addEquipment(data.id, "")
-                addEquipment(data.id, "")
+                addEquipmentEmpty(data.id)
+                addEquipmentEmpty(data.id)
             }          
         });
         

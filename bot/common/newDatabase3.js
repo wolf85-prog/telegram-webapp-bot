@@ -1,5 +1,6 @@
 require("dotenv").config();
 const addWorkerZapas = require("./addWorkerZapas");
+const addWorkerZapasX = require("./addWorkerZapasX");
 const token_fetch = 'Bearer ' + process.env.NOTION_API_KEY;
 const databaseWorkersId = process.env.NOTION_DATABASE_WORKERS_ID
 //fetch api
@@ -355,6 +356,7 @@ module.exports = async function newDatabase_3(parent_page_id) {
         
         await addWorkerZapas(data.id);
         await addWorkerZapas(data.id);
+        await addWorkerZapasX(data.id);
 
     } catch (error) {
         console.error(error.message)

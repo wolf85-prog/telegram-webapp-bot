@@ -390,7 +390,7 @@ module.exports = async function newDatabase(parent_page_id, worklist, time) {
                             },
                             {
                                 "name": "№2",
-                                "color": "blue"
+                                "color": "orange"
                             }
                           ]
                     }

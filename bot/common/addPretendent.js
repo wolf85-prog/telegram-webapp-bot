@@ -10,7 +10,7 @@ module.exports = async function addPretendent(blockId) {
             parent: { database_id: blockId },
             icon: {
                 type: "emoji",
-                emoji: "✅"
+                emoji: "➡️"
             },
             properties: {
                 "1. Ставка": {
