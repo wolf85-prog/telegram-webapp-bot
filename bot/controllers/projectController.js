@@ -49,7 +49,18 @@ async function getProjects3() {
             database_id: databaseId
         });
 
-        return response;
+        const d2 = new Date()
+
+        const responseResults = response.results.filter((page) => new Date(page.properties["Дата"].date.start) > d2).map((page) => {
+                return {
+                    id: page.id,
+                    name: page.properties.Name.title[0]?.plain_text,
+                    datestart: page.properties["Дата"].date.start,
+                    crmID: page.properties.Crm_ID.rich_text[0]?.plain_text               
+                };
+        });
+
+        return responseResults;
     } catch (error) {
         console.error(error.message)
     }
