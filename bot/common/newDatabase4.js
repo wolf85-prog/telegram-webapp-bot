@@ -149,10 +149,12 @@ module.exports = async function newDatabase4(parent_page_id, equipmentlist) {
         //добавить список работников
         equipmentlist.forEach((equipment, index) => {
             if (equipment.count > 1) {
+                console.log("Список оборудования не пуст. Добавляю строки с оборудованием")
                 for (let i = 0; i < equipment.count; i++) {
                     addEquipment(data.id, equipment.icon)
                 }
             } else {
+                console.log("Список оборудования пуст. Добавляю пустые строки")
                 addEquipmentEmpty(data.id)
                 addEquipmentEmpty(data.id)
             }          
