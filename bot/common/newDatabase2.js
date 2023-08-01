@@ -53,34 +53,34 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                                 "name": "Сопровождение",
                                 "color": "pink"
                             },
-                            {
-                                "name": "Тесты \/ Чеки",
-                                "color": "green"
-                            },
-                            {
-                                "name": "Эфир",
-                                "color": "yellow"
-                            },
-                            {
-                                "name": "Демонтаж",
-                                "color": "blue"
-                            },
-                            {
-                                "name": "Сборы",
-                                "color": "orange"
-                            },
-                            {
-                                "name": "Выезд \/ Перелет",
-                                "color": "purple"
-                            },
-                            {
-                                "name": "Водитель ТС",
-                                "color": "pink"
-                            },
-                            {
-                                "name": "Отмена",
-                                "color": "red"
-                            },
+                            // {
+                            //     "name": "Тесты \/ Чеки",
+                            //     "color": "green"
+                            // },
+                            // {
+                            //     "name": "Эфир",
+                            //     "color": "yellow"
+                            // },
+                            // {
+                            //     "name": "Демонтаж",
+                            //     "color": "blue"
+                            // },
+                            // {
+                            //     "name": "Сборы",
+                            //     "color": "orange"
+                            // },
+                            // {
+                            //     "name": "Выезд \/ Перелет",
+                            //     "color": "purple"
+                            // },
+                            // {
+                            //     "name": "Водитель ТС",
+                            //     "color": "pink"
+                            // },
+                            // {
+                            //     "name": "Отмена",
+                            //     "color": "red"
+                            // },
                         ]
                     }
                 },
@@ -434,22 +434,22 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                                 "name": "Доп. расходы",
                                 "color": "green"
                             },
-                            {
-                                "name": "Суточные",
-                                "color": "pink"
-                            },
-                            {
-                                "name": "Старший",
-                                "color": "blue"
-                            },
-                            {
-                                "name": "Премия",
-                                "color": "orange"
-                            },
-                            {
-                                "name": "Герой дня",
-                                "color": "puple"
-                            },
+                            // {
+                            //     "name": "Суточные",
+                            //     "color": "pink"
+                            // },
+                            // {
+                            //     "name": "Старший",
+                            //     "color": "blue"
+                            // },
+                            // {
+                            //     "name": "Премия",
+                            //     "color": "orange"
+                            // },
+                            // {
+                            //     "name": "Герой дня",
+                            //     "color": "puple"
+                            // },
                         ]
                     }
                 },
@@ -471,7 +471,7 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                           ]
                     }
                 },
-                "90. Такси": {
+                "0. Такси": {
                     "name": "Такси",
                     "type": "checkbox",
                     "checkbox": {}
