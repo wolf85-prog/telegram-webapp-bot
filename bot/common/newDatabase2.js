@@ -50,12 +50,32 @@ module.exports = async function newDatabase(parent_page_id, worklist, time) {
                                 "color": "purple"
                             },
                             {
+                                "name": "Сопровождение",
+                                "color": "pink"
+                            },
+                            {
+                                "name": "Тесты / чеки",
+                                "color": "green"
+                            },
+                            {
                                 "name": "Эфир",
                                 "color": "yellow"
                             },
                             {
                                 "name": "Демонтаж",
                                 "color": "blue"
+                            },
+                            {
+                                "name": "Сборы",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "Выезд / перелет",
+                                "color": "purple"
+                            },
+                            {
+                                "name": "Водитель ТС",
+                                "color": "pink"
                             },
                         ]
                     }
@@ -360,7 +380,11 @@ module.exports = async function newDatabase(parent_page_id, worklist, time) {
                             },
                             {
                                 "name": "Невыход",
-                                "color": "yellow"
+                                "color": "orange"
+                            },
+                            {
+                                "name": "Без мерча",
+                                "color": "purple"
                             },
                             {
                                 "name": "Не компетентен",
@@ -368,11 +392,59 @@ module.exports = async function newDatabase(parent_page_id, worklist, time) {
                             },
                             {
                                 "name": "Нарушение субординации",
-                                "color": "red"
+                                "color": "pink"
                             },
                             {
                                 "name": "Нетрезвый вид",
-                                "color": "purple"
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Повышенная ставка",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "Такси [корпоративное]",
+                                "color": "green"
+                            },
+                            {
+                                "name": "Такси [личные расходы]",
+                                "color": "puple"
+                            },
+                            {
+                                "name": "Общ. транспорт",
+                                "color": "pink"
+                            },
+                            {
+                                "name": "Каршеринг",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "ГСМ",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "Компенсация",
+                                "color": "puple"
+                            },
+                            {
+                                "name": "Доп. расходы",
+                                "color": "green"
+                            },
+                            {
+                                "name": "Суточные",
+                                "color": "pink"
+                            },
+                            {
+                                "name": "Старший",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Премия",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "Герой дня",
+                                "color": "puple"
                             },
                         ]
                     }

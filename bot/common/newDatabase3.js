@@ -312,24 +312,16 @@ module.exports = async function newDatabase_3(parent_page_id) {
                     "multi_select": {
                         "options": [
                             {
-                                "name": "Опоздание",
-                                "color": "blue"
-                            },
-                            {
-                                "name": "Невыход",
-                                "color": "yellow"
-                            },
-                            {
-                                "name": "Не компетентен",
+                                "name": "100.00 рублей",
                                 "color": "green"
                             },
                             {
-                                "name": "Нарушение субординации",
-                                "color": "red"
+                                "name": "НЕ вышел на связь",
+                                "color": "pink"
                             },
                             {
-                                "name": "Нетрезвый вид",
-                                "color": "purple"
+                                "name": "Вышел в основу",
+                                "color": "blue"
                             },
                         ]
                     }

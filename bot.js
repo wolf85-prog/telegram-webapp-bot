@@ -572,9 +572,42 @@ bot.on('message', async (msg) => {
                 console.log("проект найден!") 
                 //начать получать отчеты
                 getReportsNotion(data, bot)                           
-            });
+            }); 
+        }
 
+         // startreports {id проекта}
+         if(text.startsWith('/startposter')) {
+            const poster = host + '/files/pre/2023-04-05T10:43:25.626Z.png'
+
+            const fileOptions = {
+                // Explicitly specify the MIME type.
+                contentType: 'application/pdf',
+              };
             
+            if (poster) {
+                await bottest.sendPhoto(chatId, poster, {
+                    reply_markup: ({
+                        inline_keyboard:[
+                            [{text: 'Подтвердить', callback_data:'Информация'}]
+                        ]
+                    }),
+                    fileOptions
+                });
+            } else {
+                console.error(error);
+            }
+
+            const projectId = 'dbd0cc0d-6c66-4df7-9df8-f46e60b68fad';
+            const block1 = await getBlocks(projectId)
+            console.log(block1.results[0].id)
+            
+            const block2 = await getBlocks(block1.results[0].id)
+            console.log(block2.results[0].id)
+            
+            const block3 = await getBlocks(block2.results[0].id)
+            console.log(block3.results[0].id)
+ 
+            await addDate(block3.results[0].id);
         }
 
 //------------------------------------------------------------------------------------------------
