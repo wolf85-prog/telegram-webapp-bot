@@ -318,7 +318,7 @@ async function addProject(title, time, teh, managerId, companyId, worklist, equi
 
         await addTable(res_id)                     //создать верхний блок
 
-        await newDatabase1(res_id);                //создание базы данных "График работы"    
+        //await newDatabase1(res_id);                //создание базы данных "График работы"    
         await newDatabase2(res_id, worklist, time);//создание базы данных "Основной состав"   
         await newDatabase3(res_id);                //создание базы данных "Запасной состав"
         await newDatabase5(res_id);                //создание базы данных "Претенденты"   
@@ -422,7 +422,7 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
 
         await addTable(res_id)                     //создать верхний блок
         
-        await newDatabase1(res_id);                //создание базы данных "График работы"    
+        //await newDatabase1(res_id);                //создание базы данных "График работы"    
         await newDatabase2(res_id, worklist, time);//создание базы данных "Основной состав"   
         await newDatabase3(res_id);                //создание базы данных "Запасной состав"
         await newDatabase5(res_id);                //создание базы данных "Претенденты"   
