@@ -1,13 +1,13 @@
 require("dotenv").config();
-const addWorkerZapas = require("./addWorkerZapas");
-const addWorkerZapasX = require("./addWorkerZapasX");
 const token_fetch = 'Bearer ' + process.env.NOTION_API_KEY;
 const databaseWorkersId = process.env.NOTION_DATABASE_WORKERS_ID
+//functions
+const addWorker = require('./addWorker')
 //fetch api
 const fetch = require('node-fetch');
 
-// создание БД "Основной состав"
-module.exports = async function newDatabase2(parent_page_id) {
+//send create db notion
+module.exports = async function newDatabase2(parent_page_id, worklist, time) {
     try {
         const body = {
             "parent": {
@@ -23,7 +23,7 @@ module.exports = async function newDatabase2(parent_page_id) {
                 }
             ],
             "is_inline": true,
-            "properties": {                
+            "properties": { 
                 "1. Чек-ин": {
                     "title": {}
                 },
@@ -53,34 +53,34 @@ module.exports = async function newDatabase2(parent_page_id) {
                                 "name": "Сопровождение",
                                 "color": "pink"
                             },
-                            {
-                                "name": "Тесты \/ Чеки",
-                                "color": "green"
-                            },
-                            {
-                                "name": "Эфир",
-                                "color": "yellow"
-                            },
-                            {
-                                "name": "Демонтаж",
-                                "color": "blue"
-                            },
-                            {
-                                "name": "Сборы",
-                                "color": "orange"
-                            },
-                            {
-                                "name": "Выезд \/ Перелет",
-                                "color": "purple"
-                            },
-                            {
-                                "name": "Водитель ТС",
-                                "color": "pink"
-                            },
-                            {
-                                "name": "Отмена",
-                                "color": "red"
-                            },
+                            // {
+                            //     "name": "Тесты \/ Чеки",
+                            //     "color": "green"
+                            // },
+                            // {
+                            //     "name": "Эфир",
+                            //     "color": "yellow"
+                            // },
+                            // {
+                            //     "name": "Демонтаж",
+                            //     "color": "blue"
+                            // },
+                            // {
+                            //     "name": "Сборы",
+                            //     "color": "orange"
+                            // },
+                            // {
+                            //     "name": "Выезд \/ Перелет",
+                            //     "color": "purple"
+                            // },
+                            // {
+                            //     "name": "Водитель ТС",
+                            //     "color": "pink"
+                            // },
+                            // {
+                            //     "name": "Отмена",
+                            //     "color": "red"
+                            // },
                         ]
                     }
                 },
@@ -169,6 +169,10 @@ module.exports = async function newDatabase2(parent_page_id) {
                                 "name": "IT-специалист",
                                 "color": "green"
                             },
+                            {
+                                "name": "Оператор-постановщик",
+                                "color": "green"
+                            },
                             //-------- Riggers ------------------------------
                             {
                                 "name": "Riggers",
@@ -218,11 +222,11 @@ module.exports = async function newDatabase2(parent_page_id) {
                                 "color": "yellow"
                             },
                             {
-                                "name": "C личным ТС [B/C]",
+                                "name": "C личным ТС [B\/C]",
                                 "color": "yellow"
                             },
                             {
-                                "name": "Без личного ТС [B/C]",
+                                "name": "Без личного ТС [B\/C]",
                                 "color": "yellow"
                             },
                             {
@@ -296,8 +300,8 @@ module.exports = async function newDatabase2(parent_page_id) {
                                 "name": "Документальная съемка",
                                 "color": "yellow"
                             },
-                            //-------- Party ------------------------------
-                            {
+                             //-------- Party ------------------------------
+                             {
                                 "name": "Party",
                                 "color": "green"
                             },
@@ -318,7 +322,7 @@ module.exports = async function newDatabase2(parent_page_id) {
                                 "color": "green"
                             },
                             {
-                                "name": "Певец/певица",
+                                "name": "Певец \/ певица",
                                 "color": "green"
                             },
                             {
@@ -335,23 +339,27 @@ module.exports = async function newDatabase2(parent_page_id) {
                                 "color": "orange"
                             },
                             {
-                                "name": "Аттракционы",
+                                "name": "Квесты",
                                 "color": "orange"
                             },
                             {
-                                "name": "Надувные фигуры",
+                                "name": "Квизы",
                                 "color": "orange"
                             },
                             {
-                                "name": "Игровые автоматы",
+                                "name": "Аниматоры",
                                 "color": "orange"
                             },
                             {
-                                "name": "Активности",
+                                "name": "Настольные игры \/ игровые автоматы",
                                 "color": "orange"
                             },
                             {
-                                "name": "Настольные игры",
+                                "name": "Пневмокостюмы \/ ростовые куклы",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "Активности \/ аттракционы",
                                 "color": "orange"
                             },
                              //-------- Blacklist ------------------------------
@@ -362,31 +370,117 @@ module.exports = async function newDatabase2(parent_page_id) {
                         ]
                     }
                 },
-                "5. КомТег": {
+                "6. Мерч": {
+                    "name": "Мерч",
+                    "type": "checkbox",
+                    "checkbox": {}
+                },
+                "7. КомТег": {
                     "multi_select": {
                         "options": [
                             {
-                                "name": "100.00 рублей",
+                                "name": "Опоздание",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Невыход",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "Без мерча",
+                                "color": "purple"
+                            },
+                            {
+                                "name": "Не компетентен",
                                 "color": "green"
                             },
                             {
-                                "name": "НЕ вышел на связь",
+                                "name": "Нарушение субординации",
                                 "color": "pink"
                             },
                             {
-                                "name": "Вышел в основу",
+                                "name": "Нетрезвый вид",
                                 "color": "blue"
+                            },
+                            {
+                                "name": "Повышенная ставка",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "Такси [корпоративное]",
+                                "color": "green"
+                            },
+                            {
+                                "name": "Такси [личные расходы]",
+                                "color": "purple"
+                            },
+                            {
+                                "name": "Общ. транспорт",
+                                "color": "pink"
+                            },
+                            {
+                                "name": "Каршеринг",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "ГСМ",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "Компенсация",
+                                "color": "purple"
+                            },
+                            {
+                                "name": "Доп. расходы",
+                                "color": "green"
+                            },
+                            {
+                                "name": "Суточные",
+                                "color": "pink"
+                            },
+                            {
+                                "name": "Старший",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Премия",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "Герой дня",
+                                "color": "purple"
                             },
                         ]
                     }
                 },
-                "6. Комментарий": {
+                "8. Комментарий": {
                     "rich_text": {}
+                },
+                "9. Ставка": {
+                    "type": "select",
+                    "select": {
+                        "options": [
+                            {
+                                "name": "№1",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "№2",
+                                "color": "orange"
+                            }
+                          ]
+                    }
+                },
+                "0. Такси": {
+                    "name": "Такси",
+                    "type": "checkbox",
+                    "checkbox": {}
                 },
             }
         }
 
-        // создание базы данных "Запасной состав"
+
+        // создание базы данных "Основной состав"
         const response = await fetch('https://api.notion.com/v1/databases', {
             method: 'post',
             body: JSON.stringify(body),
@@ -397,13 +491,30 @@ module.exports = async function newDatabase2(parent_page_id) {
                 'Notion-Version': '2022-06-28'
             }
         });
-        const data = await response.json();
-        console.log("2. Таблица Основной состав добавлена! Database_id: " + data.id)// + " data: " + JSON.stringify(data))
         
-        //await addWorkerZapasX(data.id);
-        //await addWorkerZapas(data.id);
-        //await addWorkerZapas(data.id);
+        const data = await response.json();
+        console.log(response)
+        console.log("2. Таблица Основной состав добавлена! Database_id: " + data.id)// + " data: " + JSON.stringify(data))
 
+        //добавить список работников        
+        worklist.forEach((worker) => {           
+            for (let i = 0; i < worker.count; i++) {
+                let arrWorks = []
+                const newCategory = {
+                    name: worker.icon,
+                }
+                const newSpec = {
+                    name: worker.spec,
+                }
+    
+                //arrWorks.push(newCategory)
+                arrWorks.push(newSpec)         
+                
+                addWorker(data.id, arrWorks, time)
+            }    
+            
+        });
+        
     } catch (error) {
         console.error(error.message)
     }

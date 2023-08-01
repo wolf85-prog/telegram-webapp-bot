@@ -1,13 +1,13 @@
 require("dotenv").config();
+const addWorkerZapas = require("./addWorkerZapas");
+const addWorkerZapasX = require("./addWorkerZapasX");
 const token_fetch = 'Bearer ' + process.env.NOTION_API_KEY;
 const databaseWorkersId = process.env.NOTION_DATABASE_WORKERS_ID
-//functions
-const addWorker = require('./addWorker')
 //fetch api
 const fetch = require('node-fetch');
 
-//send create db notion
-module.exports = async function newDatabase2(parent_page_id, worklist, time) {
+// создание БД "Основной состав"
+module.exports = async function newDatabase2(parent_page_id) {
     try {
         const body = {
             "parent": {
@@ -23,7 +23,7 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                 }
             ],
             "is_inline": true,
-            "properties": { 
+            "properties": {                
                 "1. Чек-ин": {
                     "title": {}
                 },
@@ -53,34 +53,34 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                                 "name": "Сопровождение",
                                 "color": "pink"
                             },
-                            // {
-                            //     "name": "Тесты \/ Чеки",
-                            //     "color": "green"
-                            // },
-                            // {
-                            //     "name": "Эфир",
-                            //     "color": "yellow"
-                            // },
-                            // {
-                            //     "name": "Демонтаж",
-                            //     "color": "blue"
-                            // },
-                            // {
-                            //     "name": "Сборы",
-                            //     "color": "orange"
-                            // },
-                            // {
-                            //     "name": "Выезд \/ Перелет",
-                            //     "color": "purple"
-                            // },
-                            // {
-                            //     "name": "Водитель ТС",
-                            //     "color": "pink"
-                            // },
-                            // {
-                            //     "name": "Отмена",
-                            //     "color": "red"
-                            // },
+                            {
+                                "name": "Тесты \/ Чеки",
+                                "color": "green"
+                            },
+                            {
+                                "name": "Эфир",
+                                "color": "yellow"
+                            },
+                            {
+                                "name": "Демонтаж",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Сборы",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "Выезд \/ Перелет",
+                                "color": "purple"
+                            },
+                            {
+                                "name": "Водитель ТС",
+                                "color": "pink"
+                            },
+                            {
+                                "name": "Отмена",
+                                "color": "red"
+                            },
                         ]
                     }
                 },
@@ -169,10 +169,6 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                                 "name": "IT-специалист",
                                 "color": "green"
                             },
-                            {
-                                "name": "Оператор-постановщик",
-                                "color": "green"
-                            },
                             //-------- Riggers ------------------------------
                             {
                                 "name": "Riggers",
@@ -222,11 +218,11 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                                 "color": "yellow"
                             },
                             {
-                                "name": "C личным ТС [B\/C]",
+                                "name": "C личным ТС [B/C]",
                                 "color": "yellow"
                             },
                             {
-                                "name": "Без личного ТС [B\/C]",
+                                "name": "Без личного ТС [B/C]",
                                 "color": "yellow"
                             },
                             {
@@ -300,8 +296,8 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                                 "name": "Документальная съемка",
                                 "color": "yellow"
                             },
-                             //-------- Party ------------------------------
-                             {
+                            //-------- Party ------------------------------
+                            {
                                 "name": "Party",
                                 "color": "green"
                             },
@@ -322,7 +318,7 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                                 "color": "green"
                             },
                             {
-                                "name": "Певец \/ певица",
+                                "name": "Певец/певица",
                                 "color": "green"
                             },
                             {
@@ -339,27 +335,23 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                                 "color": "orange"
                             },
                             {
-                                "name": "Квесты",
+                                "name": "Аттракционы",
                                 "color": "orange"
                             },
                             {
-                                "name": "Квизы",
+                                "name": "Надувные фигуры",
                                 "color": "orange"
                             },
                             {
-                                "name": "Аниматоры",
+                                "name": "Игровые автоматы",
                                 "color": "orange"
                             },
                             {
-                                "name": "Настольные игры \/ игровые автоматы",
+                                "name": "Активности",
                                 "color": "orange"
                             },
                             {
-                                "name": "Пневмокостюмы \/ ростовые куклы",
-                                "color": "orange"
-                            },
-                            {
-                                "name": "Активности \/ аттракционы",
+                                "name": "Настольные игры",
                                 "color": "orange"
                             },
                              //-------- Blacklist ------------------------------
@@ -428,59 +420,38 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                             },
                             {
                                 "name": "Компенсация",
-                                "color": "puple"
+                                "color": "purple"
                             },
                             {
                                 "name": "Доп. расходы",
                                 "color": "green"
                             },
-                            // {
-                            //     "name": "Суточные",
-                            //     "color": "pink"
-                            // },
-                            // {
-                            //     "name": "Старший",
-                            //     "color": "blue"
-                            // },
-                            // {
-                            //     "name": "Премия",
-                            //     "color": "orange"
-                            // },
-                            // {
-                            //     "name": "Герой дня",
-                            //     "color": "puple"
-                            // },
-                        ]
-                    }
-                },
-                "8. Комментарий": {
-                    "rich_text": {}
-                },
-                "9. Ставка": {
-                    "type": "select",
-                    "select": {
-                        "options": [
                             {
-                                "name": "№1",
+                                "name": "Суточные",
+                                "color": "pink"
+                            },
+                            {
+                                "name": "Старший",
                                 "color": "blue"
                             },
                             {
-                                "name": "№2",
+                                "name": "Премия",
                                 "color": "orange"
-                            }
-                          ]
+                            },
+                            {
+                                "name": "Герой дня",
+                                "color": "puple"
+                            },
+                        ]
                     }
                 },
-                "0. Такси": {
-                    "name": "Такси",
-                    "type": "checkbox",
-                    "checkbox": {}
+                "6. Комментарий": {
+                    "rich_text": {}
                 },
             }
         }
 
-
-        // создание базы данных "Основной состав"
+        // создание базы данных "Запасной состав"
         const response = await fetch('https://api.notion.com/v1/databases', {
             method: 'post',
             body: JSON.stringify(body),
@@ -491,30 +462,13 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                 'Notion-Version': '2022-06-28'
             }
         });
-        
         const data = await response.json();
-        console.log(response)
         console.log("2. Таблица Основной состав добавлена! Database_id: " + data.id)// + " data: " + JSON.stringify(data))
-
-        //добавить список работников        
-        worklist.forEach((worker) => {           
-            for (let i = 0; i < worker.count; i++) {
-                let arrWorks = []
-                const newCategory = {
-                    name: worker.icon,
-                }
-                const newSpec = {
-                    name: worker.spec,
-                }
-    
-                //arrWorks.push(newCategory)
-                arrWorks.push(newSpec)         
-                
-                //addWorker(data.id, arrWorks, time)
-            }    
-            
-        });
         
+        //await addWorkerZapasX(data.id);
+        //await addWorkerZapas(data.id);
+        //await addWorkerZapas(data.id);
+
     } catch (error) {
         console.error(error.message)
     }
