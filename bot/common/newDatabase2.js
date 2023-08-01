@@ -479,7 +479,6 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
             }
         }
 
-        console.log("parenPageId", parent_page_id)
 
         // создание базы данных "Основной состав"
         const response = await fetch('https://api.notion.com/v1/databases', {
@@ -492,7 +491,9 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                 'Notion-Version': '2022-06-28'
             }
         });
+        
         const data = await response.json();
+        console.log(response)
         console.log("2. Таблица Основной состав добавлена! Database_id: " + data.id)// + " data: " + JSON.stringify(data))
 
         //добавить список работников        
@@ -509,7 +510,7 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                 //arrWorks.push(newCategory)
                 arrWorks.push(newSpec)         
                 
-                addWorker(data.id, arrWorks, time)
+                //addWorker(data.id, arrWorks, time)
             }    
             
         });
