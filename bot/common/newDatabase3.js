@@ -7,7 +7,7 @@ const databaseWorkersId = process.env.NOTION_DATABASE_WORKERS_ID
 const fetch = require('node-fetch');
 
 // создание БД "Запасной состав"
-module.exports = async function newDatabase_3(parent_page_id) {
+module.exports = async function newDatabase3(parent_page_id) {
     try {
         const body = {
             "parent": {

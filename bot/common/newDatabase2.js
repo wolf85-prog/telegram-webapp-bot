@@ -7,7 +7,7 @@ const addWorker = require('./addWorker')
 const fetch = require('node-fetch');
 
 //send create db notion
-module.exports = async function newDatabase(parent_page_id, worklist, time) {
+module.exports = async function newDatabase2(parent_page_id, worklist, time) {
     try {
         const body = {
             "parent": {
