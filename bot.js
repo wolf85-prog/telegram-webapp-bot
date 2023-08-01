@@ -892,7 +892,7 @@ bot.on('message', async (msg) => {
                         const crmId = await getProject(projectId)
 
                         //https://proj.uley.team/files/1370/pre/1370_805436270_customer.pdf
-                        const poster = `${host}/files/${crmId}/pre/${crmId}_${chatId}_customer.pdf`
+                        const poster = `https://proj.uley.team/files/${crmId}/pre/${crmId}_${chatId}_customer.pdf`
 
                         const fileOptions = {
                             // Explicitly specify the MIME type.
