@@ -886,43 +886,43 @@ bot.on('message', async (msg) => {
                     getReports(project2, bot)
 
                     // отправить предварительную смету
-                    setTimeout(async() => {
-                        const projectId = project2.projectId //'dbd0cc0d-6c66-4df7-9df8-f46e60b68fad';
+                    // setTimeout(async() => {
+                    //     const projectId = project2.projectId //'dbd0cc0d-6c66-4df7-9df8-f46e60b68fad';
 
-                        const crmId = await getProject(projectId)
+                    //     const crmId = await getProject(projectId)
 
-                        //https://proj.uley.team/files/1370/pre/1370_805436270_customer.pdf
-                        const poster = `https://proj.uley.team/files/${crmId}/pre/${crmId}_${chatId}_customer.pdf`
+                    //     //https://proj.uley.team/files/1370/pre/1370_805436270_customer.pdf
+                    //     const poster = `https://proj.uley.team/files/${crmId}/pre/${crmId}_${chatId}_customer.pdf`
 
-                        const fileOptions = {
-                            // Explicitly specify the MIME type.
-                            contentType: 'application/pdf',
-                          };
+                    //     const fileOptions = {
+                    //         // Explicitly specify the MIME type.
+                    //         contentType: 'application/pdf',
+                    //       };
                         
-                        if (poster) {
-                            await bot.sendPhoto(chatId, poster, {
-                                reply_markup: ({
-                                    inline_keyboard:[
-                                        [{text: 'Подтвердить', callback_data:'Информация'}]
-                                    ]
-                                }),
-                                fileOptions
-                            });
-                        } else {
-                            console.error(error);
-                        }
+                    //     if (poster) {
+                    //         await bot.sendPhoto(chatId, poster, {
+                    //             reply_markup: ({
+                    //                 inline_keyboard:[
+                    //                     [{text: 'Подтвердить', callback_data:'Информация'}]
+                    //                 ]
+                    //             }),
+                    //             fileOptions
+                    //         });
+                    //     } else {
+                    //         console.error(error);
+                    //     }
             
-                        const block1 = await getBlocks(projectId)
-                        console.log(block1.results[0].id)
+                    //     const block1 = await getBlocks(projectId)
+                    //     console.log(block1.results[0].id)
                         
-                        const block2 = await getBlocks(block1.results[0].id)
-                        console.log(block2.results[0].id)
+                    //     const block2 = await getBlocks(block1.results[0].id)
+                    //     console.log(block2.results[0].id)
                         
-                        const block3 = await getBlocks(block2.results[0].id)
-                        console.log(block3.results[0].id)
+                    //     const block3 = await getBlocks(block2.results[0].id)
+                    //     console.log(block3.results[0].id)
              
-                        await updateToDo(block3.results[0].id);
-                    }, 180000) // 3 минуты 
+                    //     await updateToDo(block3.results[0].id);
+                    // }, 180000) // 3 минуты 
                     
                                     
                 } catch (error) {
