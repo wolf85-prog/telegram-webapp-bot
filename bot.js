@@ -39,7 +39,7 @@ let projectId, projectName, projectDate, projectTime, dateStart, manager_id, com
 //functions
 const addTable = require('./bot/common/addTable')
 const newDatabase1 = require('./bot/common/newDatabase1')
-const newDatabase2 = require('./bot/common/newDatabase2')
+const newDatabase2 = require('./bot/common/newDatabase2_old')
 const newDatabase3 = require('./bot/common/newDatabase3')
 const newDatabase4 = require('./bot/common/newDatabase4')
 const newDatabase5 = require('./bot/common/newDatabase5')
