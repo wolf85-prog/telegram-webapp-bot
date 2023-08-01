@@ -493,7 +493,7 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
         });
         
         const data = await response.json();
-        console.log(response)
+        //console.log(response)
         console.log("2. Таблица Основной состав добавлена! Database_id: " + data.id)// + " data: " + JSON.stringify(data))
 
         //добавить список работников        
