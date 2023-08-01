@@ -63,6 +63,8 @@ const path = require('path')
 //подключение к БД PostreSQL
 const sequelize = require('./bot/connections/db')
 const {UserBot, Message, Conversation, Project, Report} = require('./bot/models/models');
+const updateToDo = require("./bot/common/updateToDo");
+const getProject = require("./bot/common/getProject");
 
 const app = express();
 
@@ -577,37 +579,7 @@ bot.on('message', async (msg) => {
 
          // startreports {id проекта}
          if(text.startsWith('/startposter')) {
-            const poster = host + '/files/pre/2023-04-05T10:43:25.626Z.png'
-
-            const fileOptions = {
-                // Explicitly specify the MIME type.
-                contentType: 'application/pdf',
-              };
             
-            if (poster) {
-                await bottest.sendPhoto(chatId, poster, {
-                    reply_markup: ({
-                        inline_keyboard:[
-                            [{text: 'Подтвердить', callback_data:'Информация'}]
-                        ]
-                    }),
-                    fileOptions
-                });
-            } else {
-                console.error(error);
-            }
-
-            const projectId = 'dbd0cc0d-6c66-4df7-9df8-f46e60b68fad';
-            const block1 = await getBlocks(projectId)
-            console.log(block1.results[0].id)
-            
-            const block2 = await getBlocks(block1.results[0].id)
-            console.log(block2.results[0].id)
-            
-            const block3 = await getBlocks(block2.results[0].id)
-            console.log(block3.results[0].id)
- 
-            await addDate(block3.results[0].id);
         }
 
 //------------------------------------------------------------------------------------------------
@@ -908,10 +880,50 @@ bot.on('message', async (msg) => {
                     // отправить сообщение пользователю через 30 секунд
                     setTimeout(() => {bot.sendMessage(project.chatId, 'Ваша заявка принята!')}, 25000) // 30 секунд                   
                     
-                    const project2 = await Project.findOne({where:{id: res.id}})                   
+                    const project2 = await Project.findOne({where:{id: res.id}})  
                     
                     //начать получать отчеты
                     getReports(project2, bot)
+
+                    // отправить предварительную смету
+                    setTimeout(async() => {
+                        const projectId = project2.projectId //'dbd0cc0d-6c66-4df7-9df8-f46e60b68fad';
+
+                        const crmId = await getProject(projectId)
+
+                        //https://proj.uley.team/files/1370/pre/1370_805436270_customer.pdf
+                        const poster = `${host}/files/${crmId}/pre/${crmId}_${chatId}_customer.pdf`
+
+                        const fileOptions = {
+                            // Explicitly specify the MIME type.
+                            contentType: 'application/pdf',
+                          };
+                        
+                        if (poster) {
+                            await bot.sendPhoto(chatId, poster, {
+                                reply_markup: ({
+                                    inline_keyboard:[
+                                        [{text: 'Подтвердить', callback_data:'Информация'}]
+                                    ]
+                                }),
+                                fileOptions
+                            });
+                        } else {
+                            console.error(error);
+                        }
+            
+                        const block1 = await getBlocks(projectId)
+                        console.log(block1.results[0].id)
+                        
+                        const block2 = await getBlocks(block1.results[0].id)
+                        console.log(block2.results[0].id)
+                        
+                        const block3 = await getBlocks(block2.results[0].id)
+                        console.log(block3.results[0].id)
+             
+                        await updateToDo(block3.results[0].id);
+                    }, 180000) // 3 минуты 
+                    
                                     
                 } catch (error) {
                     console.log(error.message)
