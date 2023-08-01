@@ -31,7 +31,7 @@ module.exports = async function newDatabase(parent_page_id, worklist, time) {
                     "multi_select": {
                         "options": [
                             {
-                                "name": "Подгрузка",
+                                "name": "Погрузка",
                                 "color": "orange"
                             },
                             {
