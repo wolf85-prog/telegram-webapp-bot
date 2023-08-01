@@ -17,17 +17,17 @@ module.exports = async function addWorkerZapasX(blockId) {
                 type: "emoji",
                 emoji: "❌"
             },
-            // properties: {
-            //     "2. Дата": {
-            //         type: 'date',                   
-            //         date: {
-            //             "start": '',
-            //             "end": null,
-            //             "time_zone": "Europe/Moscow"
-            //         }
+            properties: {
+                "2. Дата": {
+                    type: 'date',                   
+                    date: {
+                        "start": '',
+                        "end": null,
+                        "time_zone": "Europe/Moscow"
+                    }
 
-            //     }
-            // }
+                }
+            }
         })
         //console.log(response)
         console.log("3.1 Специалист в Запасной состав добавлен! Data: " + response.id) //JSON.stringify(response))
