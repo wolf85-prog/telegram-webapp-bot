@@ -30,7 +30,61 @@ module.exports = async function newDatabase2(parent_page_id) {
                 "2. Дата": {
                     "date": {}
                 },
-                "3. ФИО": {    
+                "3. Статус": {
+                    "multi_select": {
+                        "options": [
+                            {
+                                "name": "Погрузка",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "Монтаж",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Дежурство",
+                                "color": "green"
+                            },
+                            {
+                                "name": "Мероприятие",
+                                "color": "purple"
+                            },
+                            {
+                                "name": "Сопровождение",
+                                "color": "pink"
+                            },
+                            {
+                                "name": "Тесты \/ Чеки",
+                                "color": "green"
+                            },
+                            {
+                                "name": "Эфир",
+                                "color": "yellow"
+                            },
+                            {
+                                "name": "Демонтаж",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Сборы",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "Выезд \/ Перелет",
+                                "color": "purple"
+                            },
+                            {
+                                "name": "Водитель ТС",
+                                "color": "pink"
+                            },
+                            {
+                                "name": "Отмена",
+                                "color": "red"
+                            },
+                        ]
+                    }
+                },
+                "4. ФИО": {    
                     "name": "ФИО",               
                     "type": "relation",
                     "relation": {
@@ -38,7 +92,7 @@ module.exports = async function newDatabase2(parent_page_id) {
                         "single_property": {}
                     }
                 },
-                "4. Специализация": {
+                "5. Специализация": {
                     "multi_select": {
                         "options": [
                             {
