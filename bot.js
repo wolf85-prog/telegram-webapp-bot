@@ -415,12 +415,12 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
                 },
             }
         })
-        console.log(response)
+        //console.log(response)
         const res_id = response.id;
         console.log(new Date())
         console.log("1. Проект без адреса успешно добавлен! " + res_id)        
 
-        await addTable(res_id)                     //создать верхний блок
+        await addTable(res_id);                     //создать верхний блок
         
         //await newDatabase1(res_id);                //создание базы данных "График работы"    
         await newDatabase2(res_id, worklist, time);//создание базы данных "Основной состав"   

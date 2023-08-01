@@ -479,6 +479,8 @@ module.exports = async function newDatabase(parent_page_id, worklist, time) {
             }
         }
 
+        console.log("parenPageId", parent_page_id)
+
         // создание базы данных "Основной состав"
         const response = await fetch('https://api.notion.com/v1/databases', {
             method: 'post',

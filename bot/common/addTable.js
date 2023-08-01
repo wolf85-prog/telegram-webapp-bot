@@ -465,7 +465,7 @@ module.exports = async function addTable(blockId) {
                 }
             ],
         })
-        //console.log(response)
+        console.log(response)
         //const res_id = response.id;
 
         //return response;
