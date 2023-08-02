@@ -33,6 +33,7 @@ const chatGroupId = process.env.CHAT_GROUP_ID
 const chatTelegramId = process.env.CHAT_ID
 const chatGiaId = process.env.GIA_CHAT_ID
 const host = process.env.HOST
+const hostAdmin = process.env.HOST_ADMIN
 
 let projectId, projectName, projectDate, projectTime, dateStart, manager_id, company_id, Geo, Teh, Worklist, Equipmentlist;
 
@@ -66,6 +67,7 @@ const sequelize = require('./bot/connections/db')
 const {UserBot, Message, Conversation, Project, Report} = require('./bot/models/models');
 const updateToDo = require("./bot/common/updateToDo");
 const getProject = require("./bot/common/getProject");
+const sendMessageAdmin = require("./bot/common/sendMessageAdmin");
 
 const app = express();
 
@@ -1006,6 +1008,8 @@ bot.on('message', async (msg) => {
         console.log("projectId: ", projectId[1])
         console.log("Начинаю обрабатывать запрос подтверждения сметы...")
 
+        const crmId = getProject(projectId[1])
+
         const block1 = await getBlock(projectId[1])
         console.log("block1: ", block1.results[0].id)
                         
@@ -1032,7 +1036,25 @@ bot.on('message', async (msg) => {
         })
 
 
-        return bot.sendMessage(chatId, 'Ваша заявка принята! Мы свяжемся с вами в ближайшее время.')
+        const poster = `${host}/files/${crmId}/pre/${crmId}_${chatId}_customer.pdf`
+
+        //сохранение сообщения в базе данных
+		await sendMessageAdmin(poster, "image", chatId, messageId, true, 'Подтверждаю')
+
+		//сохранить в контексте
+        //addNewMessage(chatId, poster, 'image', 'Потдверждаю', convId, messageId);
+        socket.emit("sendAdmin", { 
+			senderId: chatTelegramId,
+			receiverId: chatId,
+			text: poster,
+			type: 'image',
+			buttons: 'Подтверждаю',
+			convId: convId,
+			messageId,
+		})
+
+
+        return bot.sendMessage(chatId, 'Предварительная смета одобрена!')
     }
 
     if (data === '/report') {
