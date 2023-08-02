@@ -905,7 +905,7 @@ bot.on('message', async (msg) => {
                         
                         if (poster) {
                             console.log("Отправляю постер...")
-                            await bot.sendPhoto(chatId, poster, {
+                            await bot.sendDocument(chatId, poster, {
                                 reply_markup: ({
                                     inline_keyboard:[
                                         [{text: 'Подтвердить', callback_data:'/smeta ' + projectId}]
