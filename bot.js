@@ -1005,7 +1005,7 @@ bot.on('message', async (msg) => {
         console.log("projectId: ", projectId[1])
         console.log("Начинаю обрабатывать запрос подтверждения сметы...")
 
-        const block1 = await getBlocks(projectId)
+        const block1 = await getBlocks(projectId[1])
         console.log(block1.results[0].id)
                         
         const block2 = await getBlocks(block1.results[0].id)
