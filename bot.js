@@ -51,6 +51,7 @@ const getBlocks = require('./bot/common/getBlocks')
 const getDatabaseId = require('./bot/common/getDatabaseId')
 const addPretendent = require('./bot/common/addPretendent')
 const getBlocksP = require('./bot/common/getBlocksP')
+const getBlock = require('./bot/common/getBlock')
 
 const fs = require('fs');
 const express = require('express');
@@ -1005,14 +1006,14 @@ bot.on('message', async (msg) => {
         console.log("projectId: ", projectId[1])
         console.log("Начинаю обрабатывать запрос подтверждения сметы...")
 
-        const block1 = await getBlocks(projectId[1])
-        console.log(block1.results[0].id)
+        const block1 = await getBlock(projectId[1])
+        console.log("block1: ", block1.results[0].id)
                         
         const block2 = await getBlocks(block1.results[0].id)
-        console.log(block2.results[0].id)
+        console.log("block2: ", block2.results[0].id)
                         
         const block3 = await getBlocks(block2.results[0].id)
-        console.log(block3.results[0].id)
+        console.log("block3: ", block3.results[0].id)
              
         await updateToDo(block3.results[0].id);
 
