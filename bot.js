@@ -887,6 +887,7 @@ bot.on('message', async (msg) => {
                     // отправить предварительную смету
                     setTimeout(async() => {
                         const projectId = project2.projectId //'dbd0cc0d-6c66-4df7-9df8-f46e60b68fad';
+                        console.log("projectId: ", projectId)
 
                         const crmId = await getProject(projectId)
                         console.log(crmId)
@@ -903,29 +904,20 @@ bot.on('message', async (msg) => {
                         
                         if (poster) {
                             console.log("Отправляю постер...")
-                            // await bot.sendPhoto(chatId, poster, {
-                            //     reply_markup: ({
-                            //         inline_keyboard:[
-                            //             [{text: 'Подтвердить', callback_data:'Информация'}]
-                            //         ]
-                            //     }),
-                            //     fileOptions
-                            // });
+                            await bot.sendPhoto(chatId, poster, {
+                                reply_markup: ({
+                                    inline_keyboard:[
+                                        [{text: 'Подтвердить', callback_data:'/smeta ' + projectId}]
+                                    ]
+                                }),
+                                fileOptions
+                            });
                             
                         } else {
+                            console.log("Возникла ошибка при отправке...")
                             console.error(error);
                         }
             
-                        const block1 = await getBlocks(projectId)
-                        console.log(block1.results[0].id)
-                        
-                        const block2 = await getBlocks(block1.results[0].id)
-                        console.log(block2.results[0].id)
-                        
-                        const block3 = await getBlocks(block2.results[0].id)
-                        console.log(block3.results[0].id)
-             
-                        await updateToDo(block3.results[0].id);
                     }, 180000) // 3 минуты 
                     
                                     
@@ -1007,7 +999,42 @@ bot.on('message', async (msg) => {
         })
     }
 
+    if (data.startsWith('/smeta')) {
+        const projectId = data.split(' ');
+        console.log("projectId: ", projectId[1])
+        console.log("Начинаю обрабатывать запрос подтверждения сметы...")
+
+        const block1 = await getBlocks(projectId)
+        console.log(block1.results[0].id)
+                        
+        const block2 = await getBlocks(block1.results[0].id)
+        console.log(block2.results[0].id)
+                        
+        const block3 = await getBlocks(block2.results[0].id)
+        console.log(block3.results[0].id)
+             
+        await updateToDo(block3.results[0].id);
+
+        //отправить сообщение о создании проекта в админ-панель
+        const convId = await sendMyMessage('Пользователь нажал кнопку в рассылке', "text", chatId)
+
+        // Подключаемся к серверу socket
+        let socket = io(socketUrl);
+        socket.emit("addUser", chatId)
+        socket.emit("sendMessage", {
+            senderId: chatId,
+            receiverId: chatTelegramId,
+            text: 'Пользователь нажал кнопку в рассылке',
+            convId: convId,
+            messageId: messageId,
+        })
+
+
+        return bot.sendMessage(chatId, 'Ваша заявка принята! Мы свяжемся с вами в ближайшее время.')
+    }
+
     if (data === '/report') {
+
         //отправить сообщение о создании проекта в админ-панель
         const convId = await sendMyMessage('Пользователь нажал кнопку в рассылке', "text", chatId)
 
