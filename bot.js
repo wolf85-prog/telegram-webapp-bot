@@ -32,6 +32,7 @@ const databaseManagerId = process.env.NOTION_DATABASE_MANAGER_ID
 const chatGroupId = process.env.CHAT_GROUP_ID
 const chatTelegramId = process.env.CHAT_ID
 const chatGiaId = process.env.GIA_CHAT_ID
+const host = process.env.HOST
 
 let projectId, projectName, projectDate, projectTime, dateStart, manager_id, company_id, Geo, Teh, Worklist, Equipmentlist;
 
@@ -890,10 +891,10 @@ bot.on('message', async (msg) => {
                         console.log("projectId: ", projectId)
 
                         const crmId = await getProject(projectId)
-                        console.log(crmId)
+                        console.log("crmId: ", crmId)
 
                         //const poster = https://proj.uley.team/files/1370/pre/1370_805436270_customer.pdf
-                        const poster = `${botApiUrl}/files/${crmId}/pre/${crmId}_${chatId}_customer.pdf`
+                        const poster = `${host}/files/${crmId}/pre/${crmId}_${chatId}_customer.pdf`
 
                         console.log("poster: ", poster)
                         
