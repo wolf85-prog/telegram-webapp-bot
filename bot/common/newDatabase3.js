@@ -346,7 +346,7 @@ module.exports = async function newDatabase3(parent_page_id) {
         const data = await response.json();
         console.log("3. Таблица Запасной состав добавлена! Database_id: " + data.id)// + " data: " + JSON.stringify(data))
         
-        //await addWorkerZapasX(data.id);
+        await addWorkerZapasX(data.id);
         await addWorkerZapas(data.id);
         await addWorkerZapas(data.id);
 

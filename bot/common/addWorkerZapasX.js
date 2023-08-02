@@ -18,15 +18,24 @@ module.exports = async function addWorkerZapasX(blockId) {
                 emoji: "❌"
             },
             properties: {
-                "2. Дата": {
-                    type: 'date',                   
-                    date: {
-                        "start": '',
-                        "end": null,
-                        "time_zone": "Europe/Moscow"
-                    }
+                "1. Чек-ин": {
+                    title:[
+                        {
+                            "text": {
+                                "content": " "
+                            }
+                        }
+                    ]
+                },
+                // "2. Дата": {
+                //     type: 'date',                   
+                //     date: {
+                //         "start": '',
+                //         "end": null,
+                //         "time_zone": "Europe/Moscow"
+                //     }
 
-                }
+                // }
             }
         })
         //console.log(response)

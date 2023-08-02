@@ -471,7 +471,7 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                           ]
                     }
                 },
-                "0. Такси": {
+                "90. Такси": {
                     "name": "Такси",
                     "type": "checkbox",
                     "checkbox": {}
