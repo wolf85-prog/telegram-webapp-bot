@@ -53,34 +53,34 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                                 "name": "Сопровождение",
                                 "color": "pink"
                             },
-                            // {
-                            //     "name": "Тесты \/ Чеки",
-                            //     "color": "green"
-                            // },
-                            // {
-                            //     "name": "Эфир",
-                            //     "color": "yellow"
-                            // },
-                            // {
-                            //     "name": "Демонтаж",
-                            //     "color": "blue"
-                            // },
-                            // {
-                            //     "name": "Сборы",
-                            //     "color": "orange"
-                            // },
-                            // {
-                            //     "name": "Выезд \/ Перелет",
-                            //     "color": "purple"
-                            // },
-                            // {
-                            //     "name": "Водитель ТС",
-                            //     "color": "pink"
-                            // },
-                            // {
-                            //     "name": "Отмена",
-                            //     "color": "red"
-                            // },
+                            {
+                                "name": "Тесты \/ Чеки",
+                                "color": "green"
+                            },
+                            {
+                                "name": "Эфир",
+                                "color": "yellow"
+                            },
+                            {
+                                "name": "Демонтаж",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Сборы",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "Выезд \/ Перелет",
+                                "color": "purple"
+                            },
+                            {
+                                "name": "Водитель ТС",
+                                "color": "pink"
+                            },
+                            {
+                                "name": "Отмена",
+                                "color": "red"
+                            },
                         ]
                     }
                 },
