@@ -907,26 +907,26 @@ bot.on('message', async (msg) => {
                           };
                           
                         let i = 0;
-                        while (i < 3000) {
-                            if (poster) {
-                                console.log("Отправляю постер...")
-                                await bot.sendDocument(chatId, poster, {
-                                    reply_markup: ({
-                                        inline_keyboard:[
-                                            [{text: 'Подтвердить', callback_data:'/smeta ' + projectId}]
-                                        ]
-                                    }),
-                                    fileOptions
-                                });
+                        //while (i < 3000) {
+                            // if (poster) {
+                            //     console.log("Отправляю постер...")
+                            //     await bot.sendDocument(chatId, poster, {
+                            //         reply_markup: ({
+                            //             inline_keyboard:[
+                            //                 [{text: 'Подтвердить', callback_data:'/smeta ' + projectId}]
+                            //             ]
+                            //         }),
+                            //         fileOptions
+                            //     });
 
-                                break; 
+                            //     //break; 
                                 
-                            } else {
-                                console.log("Файл для отправки не доступен! Попытка № " + i)
-                                //console.error(error);
-                            }
-                            i++;
-                        }                       
+                            // } else {
+                            //     console.log("Файл для отправки не доступен! Попытка № " + i)
+                            //     //console.error(error);
+                            // }
+                            // i++;
+                       // }                       
             
                     }, 180000) // 3 минуты 
                     
