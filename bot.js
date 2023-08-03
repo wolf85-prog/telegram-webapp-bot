@@ -1031,7 +1031,7 @@ bot.on('message', async (msg) => {
         console.log("poster: ", poster)
 
         //сохранение сообщения в базе данных
-		await sendMessageAdmin(poster, "image", chatId, messageId, true, 'Подтверждаю')
+		const convId = await sendMessageAdmin(poster, "image", chatId, messageId, true, 'Подтверждаю')
 
         // Подключаемся к серверу socket
         let socket = io(socketUrl);
@@ -1050,7 +1050,7 @@ bot.on('message', async (msg) => {
 		})
 
         //отправить сообщение о создании проекта в админ-панель
-        const convId = await sendMyMessage('Пользователь нажал кнопку в рассылке', "text", chatId)
+        await sendMyMessage('Пользователь нажал кнопку в рассылке', "text", chatId)
 
         socket.emit("sendMessage", {
             senderId: chatId,
