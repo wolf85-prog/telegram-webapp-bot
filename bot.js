@@ -896,8 +896,8 @@ bot.on('message', async (msg) => {
                         const crmId = await getProject(projectId)
                         console.log("crmId: ", crmId)
 
-                        //const poster = https://proj.uley.team/files/1370/pre/1370_805436270_customer.pdf
-                        const poster = `${host}/files/${crmId}/pre/${crmId}_${chatId}_customer.pdf`
+                        const poster = 'https://proj.uley.team/files/1389/pre/1389_1408579113_customer.pdf'
+                        //const poster = `${host}/files/${crmId}/pre/${crmId}_${chatId}_customer.pdf`
 
                         console.log("poster: ", poster)
                         
@@ -908,23 +908,23 @@ bot.on('message', async (msg) => {
                           
                         let i = 0;
                         //while (i < 3000) {
-                            // if (poster) {
-                            //     console.log("Отправляю постер...")
-                            //     await bot.sendDocument(chatId, poster, {
-                            //         reply_markup: ({
-                            //             inline_keyboard:[
-                            //                 [{text: 'Подтвердить', callback_data:'/smeta ' + projectId}]
-                            //             ]
-                            //         }),
-                            //         fileOptions
-                            //     });
+                            if (poster) {
+                                console.log("Отправляю постер...")
+                                await bot.sendDocument(chatId, poster, {
+                                    reply_markup: ({
+                                        inline_keyboard:[
+                                            [{text: 'Подтвердить', callback_data:'/smeta ' + projectId}]
+                                        ]
+                                    }),
+                                    fileOptions
+                                });
 
-                            //     //break; 
+                                //break; 
                                 
-                            // } else {
-                            //     console.log("Файл для отправки не доступен! Попытка № " + i)
-                            //     //console.error(error);
-                            // }
+                            } else {
+                                console.log("Файл для отправки не доступен! Попытка № " + i)
+                                //console.error(error);
+                            }
                             // i++;
                        // }                       
             
