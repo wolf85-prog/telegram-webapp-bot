@@ -905,22 +905,28 @@ bot.on('message', async (msg) => {
                             // Explicitly specify the MIME type.
                             contentType: 'application/pdf',
                           };
-                        
-                        if (poster) {
-                            console.log("Отправляю постер...")
-                            await bot.sendDocument(chatId, poster, {
-                                reply_markup: ({
-                                    inline_keyboard:[
-                                        [{text: 'Подтвердить', callback_data:'/smeta ' + projectId}]
-                                    ]
-                                }),
-                                fileOptions
-                            });
-                            
-                        } else {
-                            console.log("Возникла ошибка при отправке...")
-                            console.error(error);
-                        }
+                          
+                        let i = 0;
+                        while (i < 3000) {
+                            if (poster) {
+                                console.log("Отправляю постер...")
+                                await bot.sendDocument(chatId, poster, {
+                                    reply_markup: ({
+                                        inline_keyboard:[
+                                            [{text: 'Подтвердить', callback_data:'/smeta ' + projectId}]
+                                        ]
+                                    }),
+                                    fileOptions
+                                });
+
+                                break; 
+                                
+                            } else {
+                                console.log("Файл для отправки не доступен! Попытка № " + i)
+                                //console.error(error);
+                            }
+                            i++;
+                        }                       
             
                     }, 180000) // 3 минуты 
                     
