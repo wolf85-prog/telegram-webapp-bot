@@ -1027,21 +1027,6 @@ bot.on('message', async (msg) => {
              
         await updateToDo(block3.results[0].id);
 
-        //отправить сообщение о создании проекта в админ-панель
-        const convId = await sendMyMessage('Пользователь нажал кнопку в рассылке', "text", chatId)
-
-        // Подключаемся к серверу socket
-        let socket = io(socketUrl);
-        socket.emit("addUser", chatId)
-        socket.emit("sendMessage", {
-            senderId: chatId,
-            receiverId: chatTelegramId,
-            text: 'Пользователь нажал кнопку в рассылке',
-            convId: convId,
-            messageId: messageId,
-        })
-
-
         const poster = `${host}/files/${crmId}/pre/${crmId}_${chatId}_customer.pdf`
         console.log("poster: ", poster)
 
@@ -1060,6 +1045,34 @@ bot.on('message', async (msg) => {
 			messageId,
 		})
 
+        //отправить сообщение о создании проекта в админ-панель
+        const convId = await sendMyMessage('Пользователь нажал кнопку в рассылке', "text", chatId)
+
+        // Подключаемся к серверу socket
+        let socket = io(socketUrl);
+        socket.emit("addUser", chatId)
+        socket.emit("sendMessage", {
+            senderId: chatId,
+            receiverId: chatTelegramId,
+            text: 'Пользователь нажал кнопку в рассылке',
+            convId: convId,
+            messageId: messageId,
+        })
+
+
+        //отправить сообщение о создании проекта в админ-панель
+        await sendMessageAdmin('Предварительная смета одобрена!', "text", chatId, messageId, true)
+        
+        // Подключаемся к серверу socket
+        socket.emit("sendAdmin", { 
+			senderId: chatTelegramId,
+			receiverId: chatId,
+			text: 'Предварительная смета одобрена!',
+			type: 'text',
+			buttons: '',
+			convId: convId,
+			messageId,
+		})
 
         return bot.sendMessage(chatId, 'Предварительная смета одобрена!')
     }
