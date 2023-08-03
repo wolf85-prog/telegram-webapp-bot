@@ -1033,6 +1033,10 @@ bot.on('message', async (msg) => {
         //сохранение сообщения в базе данных
 		await sendMessageAdmin(poster, "image", chatId, messageId, true, 'Подтверждаю')
 
+        // Подключаемся к серверу socket
+        let socket = io(socketUrl);
+        socket.emit("addUser", chatId)
+
 		//сохранить в контексте
         //addNewMessage(chatId, poster, 'image', 'Потдверждаю', convId, messageId);
         socket.emit("sendAdmin", { 
@@ -1048,15 +1052,13 @@ bot.on('message', async (msg) => {
         //отправить сообщение о создании проекта в админ-панель
         const convId = await sendMyMessage('Пользователь нажал кнопку в рассылке', "text", chatId)
 
-        // Подключаемся к серверу socket
-        let socket = io(socketUrl);
-        socket.emit("addUser", chatId)
         socket.emit("sendMessage", {
             senderId: chatId,
             receiverId: chatTelegramId,
             text: 'Пользователь нажал кнопку в рассылке',
             convId: convId,
             messageId: messageId,
+            replyId: ''
         })
 
 
