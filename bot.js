@@ -1037,6 +1037,7 @@ bot.on('message', async (msg) => {
 
 
         const poster = `${host}/files/${crmId}/pre/${crmId}_${chatId}_customer.pdf`
+        console.log("poster: ", poster)
 
         //сохранение сообщения в базе данных
 		await sendMessageAdmin(poster, "image", chatId, messageId, true, 'Подтверждаю')
