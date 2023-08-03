@@ -46,7 +46,8 @@ module.exports = async function sendMessageAdmin(text, typeText, chatId, message
             type: typeText,
             conversationId: conversation_id,
             messageId: messageId,
-            replyId: replyId,
+            is_bot,
+            buttons
         })
 
         return conversation_id;
