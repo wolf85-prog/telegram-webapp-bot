@@ -68,6 +68,7 @@ const {UserBot, Message, Conversation, Project, Report} = require('./bot/models/
 const updateToDo = require("./bot/common/updateToDo");
 const getProject = require("./bot/common/getProject");
 const sendMessageAdmin = require("./bot/common/sendMessageAdmin");
+const getProjectNew = require("./bot/common/getProjectNew");
 
 const app = express();
 
@@ -1163,8 +1164,14 @@ const start = async () => {
         await sequelize.authenticate()
         await sequelize.sync()
         
-        httpsServer.listen(PORT, () => {
+        httpsServer.listen(PORT, async () => {
             console.log('HTTPS Server Bot running on port ' + PORT);
+
+            console.log('Запуск отчетов проектов...');
+            const arrProjects = await getProjectNew()
+            arrProjects.map((project) => {
+                console.log("Новый проект: ", project.name)
+            })
         });
 
     } catch (error) {
