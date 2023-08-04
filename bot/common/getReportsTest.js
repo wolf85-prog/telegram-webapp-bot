@@ -18,8 +18,8 @@ const {io} = require("socket.io-client")
 //fetch api
 const fetch = require('node-fetch');
 
-module.exports = async function getReportsTest(project, bot) {
-    console.log('START GET REPORTS TEST: ' + project.id + " " + project.name)
+module.exports = async function getReportsTest(projectId, projectName, bot) {
+    console.log('START GET REPORTS TEST: ' + projectId + " " + projectName)
 
     let count_fio, count_fio2;
     let count_title;
@@ -47,19 +47,19 @@ module.exports = async function getReportsTest(project, bot) {
         arr_all = []
 
         //1)получить блок и бд
-        if (project.projectId) {
-            console.log("i: " + i + " " +  new Date() + " Проект: " + project.name) 
+        if (projectId) {
+            console.log("i: " + i + " " +  new Date() + " Проект: " + projectName) 
             
-            const blockId = await getBlocks(project.projectId);            
+            const blockId = await getBlocks(projectId);            
             if (blockId) {
                 j = 0    
                 databaseBlock = await getDatabaseId(blockId);   
             } else {
-                console.log("База данных не найдена! Проект ID: " + project.name)
+                console.log("База данных не найдена! Проект ID: " + projectName)
                 j++ //счетчик ошибок доступа к БД ноушена
                 console.log("Ошибка № " + j)
                 if (j > 5) {
-                    console.log("Цикл проекта " + project.name + " завершен!")
+                    console.log("Цикл проекта " + projectName + " завершен!")
                     clearTimeout(timerId);
                 }
             }
@@ -67,33 +67,33 @@ module.exports = async function getReportsTest(project, bot) {
 
 
         //2) проверить массив специалистов (1-й отчет)
-            JSON.parse(project.spec).map((value)=> {           
-                count_fio = 0;
-                count_title = 0;
+            // JSON.parse(project.spec).map((value)=> {           
+            //     count_fio = 0;
+            //     count_title = 0;
 
-                //если бд ноушена доступна
-                if (databaseBlock) {
-                    databaseBlock.map((db) => {
-                        if (value.spec === db.spec) {
-                            if (db.fio) {
-                                count_fio++               
-                            }else {
-                                count_fio;
-                            } 
-                        }
-                    })
+            //     //если бд ноушена доступна
+            //     if (databaseBlock) {
+            //         databaseBlock.map((db) => {
+            //             if (value.spec === db.spec) {
+            //                 if (db.fio) {
+            //                     count_fio++               
+            //                 }else {
+            //                     count_fio;
+            //                 } 
+            //             }
+            //         })
 
-                    //для первого отчета
-                    const obj = {
-                        title: value.spec,
-                        title2: value.cat,
-                        count_fio: count_fio,
-                        count_title: value.count,
-                    }
-                    arr_count0.push(obj) 
+            //         //для первого отчета
+            //         const obj = {
+            //             title: value.spec,
+            //             title2: value.cat,
+            //             count_fio: count_fio,
+            //             count_title: value.count,
+            //         }
+            //         arr_count0.push(obj) 
 
-                }                                           
-            }) // map spec end
+            //     }                                           
+            // }) // map spec end
 
         //--------------------------------------------------------------------------------
         //получить массив дат
@@ -188,17 +188,17 @@ module.exports = async function getReportsTest(project, bot) {
             // 1-й отчет
             if (i < 1) {
 
-                const d = new Date(project.datestart);
-                const month = String(d.getMonth()+1).padStart(2, "0");
-                const day = String(d.getDate()).padStart(2, "0");
-                const chas = d.getHours();
-                const minut = String(d.getMinutes()).padStart(2, "0");
+//                 const d = new Date(project.datestart);
+//                 const month = String(d.getMonth()+1).padStart(2, "0");
+//                 const day = String(d.getDate()).padStart(2, "0");
+//                 const chas = d.getHours();
+//                 const minut = String(d.getMinutes()).padStart(2, "0");
 
-                const text = `Запрос на специалистов: 
+//                 const text = `Запрос на специалистов: 
                             
-${day}.${month} | ${chas}:${minut} | ${project.name} | U.L.E.Y
+// ${day}.${month} | ${chas}:${minut} | ${project.name} | U.L.E.Y
 
-${arr_count0.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title).join('\n')}`    
+// ${arr_count0.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title).join('\n')}`    
 
                 //отаправить 1-й отчет
                 //const report = await bot.sendMessage(project.chatId, text)                         
@@ -214,19 +214,19 @@ ${arr_count0.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + it
 
                 //получить название проекта из ноушена
                 let project_name;   
-                await fetch(`${botApiUrl}/project/${project.projectId}`)
+                await fetch(`${botApiUrl}/project/${projectId}`)
                 .then((response) => response.json())
                 .then((data) => {
                     if (data) {
                         project_name = data?.properties.Name.title[0]?.plain_text;
                     }  else {
-                        project_name = project.name
+                        project_name = projectName
                     }                             
                 });
 
                 //получить менеджера проекта из ноушена
                 let project_manager;
-                await fetch(`${botApiUrl}/project/${project.projectId}`)
+                await fetch(`${botApiUrl}/project/${projectId}`)
                 .then((response) => response.json())
                 .then((data) => {
                     if (data) {
