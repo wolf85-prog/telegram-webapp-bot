@@ -568,6 +568,17 @@ bot.on('message', async (msg) => {
             getReportsTest(project2, bot)
         }
 
+        if(text.startsWith('/startnotif')) {
+            // Подключаемся к серверу socket
+            let socket = io(socketUrl);
+            socket.emit("addUser", chatId)
+             
+            //отправить сообщение в админку
+            socket.emit("sendNotif", {
+                 sound,
+             })
+        }
+
 
         if(text.startsWith('/startnotionreports')) {
             const project = text.split(' ');
@@ -925,6 +936,7 @@ bot.on('message', async (msg) => {
                        // }                       
             
                     }, 240000) // 4 минуты 
+
                     
                                     
                 } catch (error) {
@@ -1146,9 +1158,12 @@ const start = async () => {
         
         httpsServer.listen(PORT, async () => {
             console.log('HTTPS Server Bot running on port ' + PORT);
-
-            console.log('Запуск отчетов проектов...');
+            //получить новые проекты
             const arrProjects = await getProjectNew()
+
+            //запуск отчетов
+            console.log('Запуск отчетов проектов...');
+            
             arrProjects.map(async (project, i) => {
                 console.log("Новый проект: " + project.name + " - " + project.id)
                 
@@ -1157,6 +1172,25 @@ const start = async () => {
                     getReportsTest(project.id, project.name, bot)
                 }, 2000 * ++i)     
             })
+
+            //запуск оповещений
+            arrProjects.map(async (project, i) => {
+                console.log("Старт проекта: " + project.datestart)
+                
+                // setTimeout(function(){
+                //     //начать получать отчеты
+                //     getReportsTest(project.id, project.name, bot)
+                // }, 2000 * ++i)   
+                
+                console.log("запуск оповещения (2-х часовая готовность)")
+                // cron.schedule('*/1 15 04 8 *',()=>{
+                //     console.log('then at 2023-08-04 15:01:00')
+                // }, {
+                //     scheduled: true,
+                //     timezone: "Europe/Moscow"
+                // });
+            })
+
         });
 
     } catch (error) {
