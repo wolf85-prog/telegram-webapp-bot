@@ -19,9 +19,9 @@ const {io} = require("socket.io-client")
 const fetch = require('node-fetch');
 
 module.exports = async function getReportsTest(projectId, projectName, bot) {
-    console.log('START GET REPORTS TEST: ' + projectId + " " + projectName)
+    console.log('START GET REPORTS TEST: ' + projectName)
 
-    let count_fio, count_fio2;
+    let count_fio;
     let count_title;
     let i = 0;
     let j = 0;
@@ -55,7 +55,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                 j = 0    
                 databaseBlock = await getDatabaseId(blockId);   
             } else {
-                console.log("База данных не найдена! Проект ID: " + projectName)
+                console.log("База данных не найдена! Проект: " + projectName)
                 j++ //счетчик ошибок доступа к БД ноушена
                 console.log("Ошибка № " + j)
                 if (j > 5) {
