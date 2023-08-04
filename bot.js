@@ -581,11 +581,6 @@ bot.on('message', async (msg) => {
             }); 
         }
 
-         // startreports {id проекта}
-         if(text.startsWith('/startposter')) {
-            
-        }
-
 //------------------------------------------------------------------------------------------------
 
         //обработка контактов
@@ -1062,21 +1057,6 @@ bot.on('message', async (msg) => {
             replyId: ''
         })
 
-
-        //отправить сообщение о создании проекта в админ-панель
-        // await sendMessageAdmin('Предварительная смета одобрена!', "text", chatId, messageId, true)
-        
-        // // Подключаемся к серверу socket
-        // socket.emit("sendAdmin", { 
-		// 	senderId: chatTelegramId,
-		// 	receiverId: chatId,
-		// 	text: 'Предварительная смета одобрена!',
-		// 	type: 'text',
-		// 	buttons: '',
-		// 	convId: convId,
-		// 	messageId,
-		// })
-
         return bot.sendMessage(chatId, 'Предварительная смета одобрена!')
     }
 
@@ -1171,6 +1151,10 @@ const start = async () => {
             const arrProjects = await getProjectNew()
             arrProjects.map((project) => {
                 console.log("Новый проект: ", project.name)
+                setTimeout(function(){
+                    //начать получать отчеты
+                    getReportsTest(project.id, bot)
+                }, 2000 * ++i)     
             })
         });
 
