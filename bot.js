@@ -896,8 +896,8 @@ bot.on('message', async (msg) => {
                         const crmId = await getProject(projectId)
                         console.log("crmId: ", crmId)
 
-                        const poster = 'https://proj.uley.team/files/1389/pre/1389_1408579113_customer.pdf'
-                        //const poster = `${host}/files/${crmId}/pre/${crmId}_${chatId}_customer.pdf`
+                        //const poster = 'https://proj.uley.team/files/1389/pre/1389_1408579113_customer.pdf'
+                        const poster = `${host}/files/${crmId}/pre/${crmId}_${chatId}_customer.pdf`
 
                         console.log("poster: ", poster)
                         
@@ -928,7 +928,7 @@ bot.on('message', async (msg) => {
                             // i++;
                        // }                       
             
-                    }, 180000) // 3 минуты 
+                    }, 240000) // 4 минуты 
                     
                                     
                 } catch (error) {
@@ -1050,12 +1050,12 @@ bot.on('message', async (msg) => {
 		})
 
         //отправить сообщение о создании проекта в админ-панель
-        await sendMyMessage('Пользователь нажал кнопку в рассылке', "text", chatId)
+        await sendMyMessage('Предварительная смета одобрена!', "text", chatId)
 
         socket.emit("sendMessage", {
             senderId: chatId,
             receiverId: chatTelegramId,
-            text: 'Пользователь нажал кнопку в рассылке',
+            text: 'Предварительная смета одобрена!',
             convId: convId,
             messageId: messageId,
             replyId: ''
@@ -1063,18 +1063,18 @@ bot.on('message', async (msg) => {
 
 
         //отправить сообщение о создании проекта в админ-панель
-        await sendMessageAdmin('Предварительная смета одобрена!', "text", chatId, messageId, true)
+        // await sendMessageAdmin('Предварительная смета одобрена!', "text", chatId, messageId, true)
         
-        // Подключаемся к серверу socket
-        socket.emit("sendAdmin", { 
-			senderId: chatTelegramId,
-			receiverId: chatId,
-			text: 'Предварительная смета одобрена!',
-			type: 'text',
-			buttons: '',
-			convId: convId,
-			messageId,
-		})
+        // // Подключаемся к серверу socket
+        // socket.emit("sendAdmin", { 
+		// 	senderId: chatTelegramId,
+		// 	receiverId: chatId,
+		// 	text: 'Предварительная смета одобрена!',
+		// 	type: 'text',
+		// 	buttons: '',
+		// 	convId: convId,
+		// 	messageId,
+		// })
 
         return bot.sendMessage(chatId, 'Предварительная смета одобрена!')
     }
