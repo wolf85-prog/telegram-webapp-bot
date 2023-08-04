@@ -574,9 +574,7 @@ bot.on('message', async (msg) => {
             socket.emit("addUser", chatId)
              
             //отправить сообщение в админку
-            socket.emit("sendNotif", {
-                 sound,
-             })
+            socket.emit("sendNotif")
         }
 
 
@@ -1165,7 +1163,7 @@ const start = async () => {
             console.log('Запуск отчетов проектов...');
             
             arrProjects.map(async (project, i) => {
-                console.log("Новый проект: " + project.name + " - " + project.id)
+                console.log("Новый проект: " + project.name + " - " + datestart)
                 
                 setTimeout(function(){
                     //начать получать отчеты
@@ -1174,22 +1172,22 @@ const start = async () => {
             })
 
             //запуск оповещений
-            arrProjects.map(async (project, i) => {
-                console.log("Старт проекта: " + project.datestart)
+            //arrProjects.map(async (project, i) => {
+                //console.log("Старт проекта: " + project.datestart)
                 
                 // setTimeout(function(){
                 //     //начать получать отчеты
                 //     getReportsTest(project.id, project.name, bot)
                 // }, 2000 * ++i)   
                 
-                console.log("запуск оповещения (2-х часовая готовность)")
+                //console.log("запуск оповещения (2-х часовая готовность)")
                 // cron.schedule('*/1 15 04 8 *',()=>{
                 //     console.log('then at 2023-08-04 15:01:00')
                 // }, {
                 //     scheduled: true,
                 //     timezone: "Europe/Moscow"
                 // });
-            })
+            //})
 
         });
 
