@@ -1163,7 +1163,7 @@ const start = async () => {
             console.log('Запуск отчетов проектов...');
             
             arrProjects.map(async (project, i) => {
-                console.log("Новый проект: " + project.name + " - " + datestart)
+                console.log("Новый проект: " + project.name + " - " + project.datestart)
                 
                 setTimeout(function(){
                     //начать получать отчеты
