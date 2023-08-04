@@ -1015,7 +1015,7 @@ bot.on('message', async (msg) => {
         console.log("projectId: ", projectId[1])
         console.log("Начинаю обрабатывать запрос подтверждения сметы...")
 
-        const crmId = getProject(projectId[1])
+        const crmId = await getProject(projectId[1])
 
         const block1 = await getBlock(projectId[1])
         console.log("block1: ", block1.results[0].id)
