@@ -1149,11 +1149,12 @@ const start = async () => {
 
             console.log('Запуск отчетов проектов...');
             const arrProjects = await getProjectNew()
-            arrProjects.map((project, i) => {
-                console.log("Новый проект: ", project.name, project.id)
+            arrProjects.map(async (project, i) => {
+                console.log("Новый проект: ", project.name)
+                const project2 = await Project.findOne({ where:{ projectId: project.id } })
                 setTimeout(function(){
                     //начать получать отчеты
-                    getReportsTest(project.id, bot)
+                    getReportsTest(project2, bot)
                 }, 2000 * ++i)     
             })
         });
