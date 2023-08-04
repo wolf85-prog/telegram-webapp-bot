@@ -1150,7 +1150,7 @@ const start = async () => {
             console.log('Запуск отчетов проектов...');
             const arrProjects = await getProjectNew()
             arrProjects.map((project, i) => {
-                console.log("Новый проект: ", project.name)
+                console.log("Новый проект: ", project.name, project.id)
                 setTimeout(function(){
                     //начать получать отчеты
                     getReportsTest(project.id, bot)
