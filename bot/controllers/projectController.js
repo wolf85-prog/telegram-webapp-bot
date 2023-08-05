@@ -140,6 +140,25 @@ async function getProjectId(projectId) {
     }
 }
 
+//получить проект по его CrmId
+async function getProjectCrmId(crmId) {
+    try {
+        const response = await notion.databases.query({
+            database_id: databaseId,
+            filter: {
+                property: "Crm_ID",
+                rich_text: {
+                    "contains": crmId
+                }
+            },         
+        });  
+
+        return response;
+    } catch (error) {
+        console.error(error.message)
+    }
+}
+
 
 class ProjectController {
     
@@ -172,6 +191,17 @@ class ProjectController {
     async projectId(req, res) {
         const id = req.params.id; // получаем id
         const project = await getProjectId(id);
+        if(project){
+            res.json(project);
+        }
+        else{
+            res.json({});
+        }
+    }
+
+    async projectCrmId(req, res) {
+        const id = req.params.id; // получаем id
+        const project = await getProjectCrmId(id);
         if(project){
             res.json(project);
         }

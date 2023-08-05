@@ -18,6 +18,7 @@ router.get("/projects2", projectController.projects2);
 router.get("/projects3", projectController.projects3);
 router.get("/projects/:id", projectController.projectsId);
 router.get("/project/:id", projectController.projectId);
+router.get("/project/crm/:id", projectController.projectCrmId);
 
 //get MANAGERS
 router.get("/managers", managerController.managers);
