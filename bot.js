@@ -568,43 +568,6 @@ bot.on('message', async (msg) => {
             getReportsTest(project2, bot)
         }
 
-        if(text.startsWith('/startnotif')) {
-            var date = new Date('2023-08-05T15:55');
-            var timeDiff = date.getTime() - 7200000;  //(за 2 часа)
-            var timeDiff2 = date.getTime() - 3600000; //(за 1 час)
-            var timeDiff3 = date.getTime() - 1800000; //(за 30 минут)
-            var timeDiff4 = date.getTime() - 900000;  //(за 15 минут)
-            const date2 = new Date(timeDiff)
-            const date3 = new Date(timeDiff2)
-            const date4 = new Date(timeDiff3)
-            const date5 = new Date(timeDiff4)
-
-            console.log("Дата и время: ", date);  
-            console.log("Дата и время (за 2 часа): ", date2); 
-            console.log("Дата и время (за 1 час): ", date3); 
-            console.log("Дата и время (за 30 минут): ", date4); 
-            console.log("Дата и время (за 15 минут): ", date5); 
-
-            const month = String(date2.getMonth()+1).padStart(2, "0");
-            const day = String(date2.getDate()).padStart(2, "0");
-            const chas = date2.getHours();
-            const min = String(date2.getMinutes()).padStart(2, "0");
-
-
-            console.log("запуск оповещения (2-х часовая готовность)")
-            task1 = cron.schedule(`${min} ${chas} ${day} ${month} *`, () =>  {
-                console.log('Задача 1 в ' + date2 + ' запущена!');
-                        
-                //отправить сообщение в админку
-                //Подключаемся к серверу socket
-                let socket = io(socketUrl);
-                socket.emit("addUser", chatId)
-                socket.emit("sendNotif")
-            }, {
-                scheduled: true,
-                timezone: "Europe/Moscow"
-            });
-        }
 
         if(text.startsWith('/stopnotif')) {
             task1.stop();
@@ -936,7 +899,7 @@ bot.on('message', async (msg) => {
                         console.log("crmId: ", crmId)
 
                         //const poster = 'https://proj.uley.team/files/1389/pre/1389_1408579113_customer.pdf'
-                        const poster = `${host}/files/${crmId}/pre/${crmId}_${chatId}_customer.pdf`
+                        const poster = `${host}/files/${crmId}/pre/${crmId}_${chatId}_customer_1.pdf`
 
                         console.log("poster: ", poster)
                         
@@ -1022,8 +985,6 @@ bot.on('message', async (msg) => {
                         timezone: "Europe/Moscow"
                     });
 
-                    //task1.stop();
-                    //console.log("Задача 1 остановлена!"); 
 
                     // console.log("запуск оповещения (1-х часовая готовность)")
                     // task2 = cron.schedule('18 16 04 08 *', () =>  {
@@ -1146,7 +1107,7 @@ bot.on('message', async (msg) => {
              
         await updateToDo(block3.results[0].id);
 
-        const poster = `${host}/files/${crmId}/pre/${crmId}_${chatId}_customer.pdf`
+        const poster = `${host}/files/${crmId}/pre/${crmId}_${chatId}_customer_1.pdf`
         console.log("poster: ", poster)
 
         // Подключаемся к серверу socket
