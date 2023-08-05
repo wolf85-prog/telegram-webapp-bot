@@ -940,7 +940,23 @@ bot.on('message', async (msg) => {
                                     fileOptions
                                 });
 
-                                //break; 
+                                //сохранение сметы в базе данных
+                                const convId = await sendMessageAdmin(poster, "image", chatId, messageId, true, 'Подтверждаю')
+
+                                // Подключаемся к серверу socket
+                                let socket = io(socketUrl);
+                                socket.emit("addUser", chatId)
+
+                                //сохранить в контексте (отправка) сметы в админку
+                                socket.emit("sendAdmin", { 
+                                    senderId: chatTelegramId,
+                                    receiverId: chatId,
+                                    text: poster,
+                                    type: 'image',
+                                    buttons: 'Подтверждаю',
+                                    convId: convId,
+                                    messageId,
+                                })
                                 
                             } else {
                                 console.log("Файл для отправки не доступен! Попытка № " + i)
@@ -1112,26 +1128,11 @@ bot.on('message', async (msg) => {
         const poster = `${host}/files/${crmId}/pre/${crmId}_${chatId}_customer.pdf`
         console.log("poster: ", poster)
 
-        //сохранение сообщения в базе данных
-		const convId = await sendMessageAdmin(poster, "image", chatId, messageId, true, 'Подтверждаю')
-
         // Подключаемся к серверу socket
         let socket = io(socketUrl);
         socket.emit("addUser", chatId)
 
-		//сохранить в контексте
-        //addNewMessage(chatId, poster, 'image', 'Потдверждаю', convId, messageId);
-        socket.emit("sendAdmin", { 
-			senderId: chatTelegramId,
-			receiverId: chatId,
-			text: poster,
-			type: 'image',
-			buttons: 'Подтверждаю',
-			convId: convId,
-			messageId,
-		})
-
-        //отправить сообщение о создании проекта в админ-панель
+        //отправить сообщение об одобрении сметы проекта в админ-панель
         await sendMyMessage('Предварительная смета одобрена!', "text", chatId)
 
         socket.emit("sendMessage", {
