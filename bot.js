@@ -569,7 +569,7 @@ bot.on('message', async (msg) => {
         }
 
         if(text.startsWith('/startnotif')) {
-            var date = new Date('2023-08-03T17:43');
+            var date = new Date('2023-08-05T15:55');
             var timeDiff = date.getTime() - 7200000;  //(за 2 часа)
             var timeDiff2 = date.getTime() - 3600000; //(за 1 час)
             var timeDiff3 = date.getTime() - 1800000; //(за 30 минут)
@@ -585,12 +585,25 @@ bot.on('message', async (msg) => {
             console.log("Дата и время (за 30 минут): ", date4); 
             console.log("Дата и время (за 15 минут): ", date5); 
 
-            // Подключаемся к серверу socket
-            let socket = io(socketUrl);
-            socket.emit("addUser", chatId)
-             
-            //отправить сообщение в админку
-            socket.emit("sendNotif")
+            const day = date2.getDay();
+            const month = date2.getMonth()
+            const chas = date2.getHours() 
+            const min = date2.getMinutes() 
+
+
+            console.log("запуск оповещения (2-х часовая готовность)")
+            task1 = cron.schedule(`${min} ${chas} ${day} ${month} *`, () =>  {
+                console.log('Задача 1 в ' + date2 + ' запущена!');
+                        
+                //отправить сообщение в админку
+                //Подключаемся к серверу socket
+                let socket = io(socketUrl);
+                socket.emit("addUser", chatId)
+                socket.emit("sendNotif")
+            }, {
+                scheduled: true,
+                timezone: "Europe/Moscow"
+            });
         }
 
         if(text.startsWith('/stopnotif')) {
@@ -1000,6 +1013,9 @@ bot.on('message', async (msg) => {
                         console.log('Задача 1 в ' + date2 + ' запущена!');
                         
                         //отправить сообщение в админку
+                        //Подключаемся к серверу socket
+                        let socket = io(socketUrl);
+                        socket.emit("addUser", chatId)
                         socket.emit("sendNotif")
                     }, {
                         scheduled: true,
