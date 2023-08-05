@@ -999,14 +999,14 @@ bot.on('message', async (msg) => {
 
                     console.log("Дата и время: ", date);  
                     console.log("Дата и время (за 2 часа): ", date2); 
-                    // console.log("Дата и время (за 1 час): ", date3); 
-                    // console.log("Дата и время (за 30 минут): ", date4); 
-                    // console.log("Дата и время (за 15 минут): ", date5); 
+                    console.log("Дата и время (за 1 час): ", date3); 
+                    console.log("Дата и время (за 30 минут): ", date4); 
+                    console.log("Дата и время (за 15 минут): ", date5); 
 
-                    const day = date2.getDay();
-                    const month = date2.getMonth()
-                    const chas = date2.getHours() 
-                    const min = date2.getMinutes() 
+                    const month = String(date2.getMonth()+1).padStart(2, "0");
+                    const day = String(date2.getDate()).padStart(2, "0");
+                    const chas = date2.getHours();
+                    const min = String(date2.getMinutes()).padStart(2, "0");
 
                     console.log("запуск оповещения (2-х часовая готовность)")
                     task1 = cron.schedule(`${min} ${chas} ${day} ${month} *`, () =>  {
