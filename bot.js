@@ -593,6 +593,11 @@ bot.on('message', async (msg) => {
             socket.emit("sendNotif")
         }
 
+        if(text.startsWith('/stopnotif')) {
+            task1.stop();
+            console.log("Задача 1 остановлена!"); 
+        }
+
 
         if(text.startsWith('/startnotionreports')) {
             const project = text.split(' ');
@@ -1001,8 +1006,8 @@ bot.on('message', async (msg) => {
                         timezone: "Europe/Moscow"
                     });
 
-                    task1.stop();
-                    console.log("Задача 1 остановлена!"); 
+                    //task1.stop();
+                    //console.log("Задача 1 остановлена!"); 
 
                     // console.log("запуск оповещения (1-х часовая готовность)")
                     // task2 = cron.schedule('18 16 04 08 *', () =>  {
@@ -1133,7 +1138,7 @@ bot.on('message', async (msg) => {
         socket.emit("addUser", chatId)
 
         //отправить сообщение об одобрении сметы проекта в админ-панель
-        await sendMyMessage('Предварительная смета одобрена!', "text", chatId)
+        const convId = await sendMyMessage('Предварительная смета одобрена!', "text", chatId)
 
         socket.emit("sendMessage", {
             senderId: chatId,
