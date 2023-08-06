@@ -1,5 +1,6 @@
 require("dotenv").config();
 const { Client } = require("@notionhq/client");
+const notion = new Client({ auth: process.env.NOTION_API_KEY });
 const databaseId = process.env.NOTION_DATABASE_ID
 //fetch api
 const fetch = require('node-fetch');
