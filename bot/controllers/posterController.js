@@ -44,9 +44,10 @@ class PosterController {
             //sendPosterToTelegram = await $host_bot.post(url_send_poster);
 
             // создание базы данных "Основной состав"
-            const response2 = await fetch('url_send_poster', {
-                method: 'post',
-            });
+            const response2 = await fetch(url_send_poster);
+            // .then((response) => response.json())
+            // .then((data) => {                                                
+            // });
         
             const data = await response2.json();
 
