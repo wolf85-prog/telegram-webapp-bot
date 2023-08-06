@@ -8,6 +8,7 @@ const fetch = require('node-fetch');
 const sendMessageAdmin = require("./../common/sendMessageAdmin");
 //socket.io
 const {io} = require("socket.io-client")
+const socketUrl = process.env.SOCKET_APP_URL
 
 class PosterController {
 
@@ -56,7 +57,7 @@ class PosterController {
             const data = await response2.json();
 
             //сохранение сметы в базе данных
-            const convId = await sendMessageAdmin(poster, "image", chatId, messageId, true, 'Подтверждаю')
+            const convId = await sendMessageAdmin(poster, "image", chatId, null, true, 'Подтверждаю')
 
             // Подключаемся к серверу socket
             let socket = io(socketUrl);
