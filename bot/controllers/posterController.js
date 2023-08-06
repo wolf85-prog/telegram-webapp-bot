@@ -39,7 +39,7 @@ class PosterController {
             });
 
             console.log("Отправляю постер...")
-            const url_send_poster = `https://api.telegram.org/bot${token}/sendDocument?chat_id=${chatId}&poster&reply_markup=${keyboard}`
+            const url_send_poster = `https://api.telegram.org/bot${token}/sendDocument?chat_id=${chatId}&document=${poster}&reply_markup=${keyboard}`
             console.log(url_send_poster)
             //sendPosterToTelegram = await $host_bot.post(url_send_poster);
 
