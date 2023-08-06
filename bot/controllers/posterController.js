@@ -18,7 +18,7 @@ class PosterController {
         const {crmId, chatId, ver} = req.body;
         try {
             //const poster = 'https://proj.uley.team/files/1389/pre/1389_1408579113_customer.pdf'
-            const poster = `${host}/files/${crmId}/pre/${crmId}_${chatId}_customer.pdf`
+            const poster = `${host}/files/${crmId}/pre/${crmId}_${chatId}_customer_${ver}.pdf`
             console.log("poster API: ", poster)
 
             const response = await notion.databases.query({
@@ -46,13 +46,9 @@ class PosterController {
             console.log("Отправляю постер...")
             const url_send_poster = `https://api.telegram.org/bot${token}/sendDocument?chat_id=${chatId}&document=${poster}&reply_markup=${keyboard}`
             console.log(url_send_poster)
-            //sendPosterToTelegram = await $host_bot.post(url_send_poster);
 
             // создание базы данных "Основной состав"
             const response2 = await fetch(url_send_poster);
-            // .then((response) => response.json())
-            // .then((data) => {                                                
-            // });
         
             const data = await response2.json();
 
