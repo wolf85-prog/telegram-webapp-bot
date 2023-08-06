@@ -300,10 +300,14 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                 } else {
                     console.log('Отчет не отправлен! Основная дата меньше текущей');
                 }
-
+            })
+        }// end if i
+ 
 //-----------------------------------------------------------------------------------------
+        sortedDates.map((item) =>{
                 //отправка напоминания
                 //var date = new Date(project2.datestart);
+                const d = new Date(item.date.split('+')[0]);
                 var timeDiff = d.getTime() - 7200000;
                 var timeDiff2 = d.getTime() - 3600000;
                 var timeDiff3 = d.getTime() - 1800000;
@@ -313,32 +317,25 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                 const date4 = new Date(timeDiff3)
                 const date5 = new Date(timeDiff4)
 
-                console.log("Дата и время: ", d);  
-                console.log("Дата и время (за 2 часа): ", date2); 
-                console.log("Дата и время (за 1 час): ", date3); 
-                console.log("Дата и время (за 30 минут): ", date4); 
-                console.log("Дата и время (за 15 минут): ", date5); 
-
+                //console.log("Дата и время (за 2 часа): ", date2); 
                 const month = String(date2.getMonth()+1).padStart(2, "0");
                 const day = String(date2.getDate()).padStart(2, "0");
                 const chas = date2.getHours();
                 const min = String(date2.getMinutes()).padStart(2, "0");
 
                 console.log("запуск оповещения (2-х часовая готовность)")
-                task1 = cron.schedule(`${min} ${chas} ${day} ${month} *`, () =>  {
-                    console.log('Задача 1 в ' + date2 + ' запущена!');
+                // task1 = cron.schedule(`${min} ${chas} ${day} ${month} *`, () =>  {
+                //     console.log('Задача 1 в ' + date2 + ' запущена!');
                     
-                    //отправить сообщение в админку
-                    let socket = io(socketUrl);
-                    socket.emit("sendNotif")
-                }, {
-                    scheduled: true,
-                    timezone: "Europe/Moscow"
-                });
+                //     //отправить сообщение в админку
+                //     let socket = io(socketUrl);
+                //     socket.emit("sendNotif")
+                // }, {
+                //     scheduled: true,
+                //     timezone: "Europe/Moscow"
+                // });
+        })
 //-------------------------------------------------------------------------------------------
-            })
-        }// end if i
- 
     
         i++ // счетчик интервалов
     }, 120000); //каждую 1 минуту
