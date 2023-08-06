@@ -4,7 +4,7 @@ const notion = new Client({ auth: process.env.NOTION_API_KEY });
 const databaseId = process.env.NOTION_DATABASE_ID
 //fetch api
 const fetch = require('node-fetch');
-const bot = new TelegramBot(token, {polling: true});
+//const bot = new TelegramBot(token, {polling: true});
 
 class PosterController {
 
@@ -31,13 +31,13 @@ class PosterController {
             const projectId = response.results[0].id
             console.log(projectId)
 
-            await bot.sendDocument(chatId, poster, {
-                reply_markup: ({
-                    inline_keyboard:[
-                        [{text: 'Подтвердить', callback_data:'/smeta ' + projectId}]
-                    ]
-                })
-            });
+            // await bot.sendDocument(chatId, poster, {
+            //     reply_markup: ({
+            //         inline_keyboard:[
+            //             [{text: 'Подтвердить', callback_data:'/smeta ' + projectId}]
+            //         ]
+            //     })
+            // });
 
             //Передаем данные боту
             // const keyboard = JSON.stringify({
