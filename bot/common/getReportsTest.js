@@ -295,50 +295,44 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                                         convId: convId,
                                         messageId: report.message_id,
                             }) 
-                        }, 2500 * ++i)   
+                        }, 2500 * ++i)  
+//---------------------------------------------------------------------------------------------------
+                        //отправка напоминания
+                        //var date = new Date(project2.datestart);
+                        //const d = new Date(item.split('+')[0]);
+                        var timeDiff = d.getTime() - 7200000;
+                        var timeDiff2 = d.getTime() - 3600000;
+                        var timeDiff3 = d.getTime() - 1800000;
+                        var timeDiff4 = d.getTime() - 900000;
+                        const date2 = new Date(timeDiff)
+                        const date3 = new Date(timeDiff2)
+                        const date4 = new Date(timeDiff3)
+                        const date5 = new Date(timeDiff4)
+
+                        //console.log("Дата и время (за 2 часа): ", date2); 
+                        const month2 = String(date2.getMonth()+1).padStart(2, "0");
+                        const day2 = String(date2.getDate()).padStart(2, "0");
+                        const chas2 = date2.getHours();
+                        const min2 = String(date2.getMinutes()).padStart(2, "0");
+
+                        console.log("запуск оповещения (2-х часовая готовность)")
+                        task1 = cron.schedule(`${min2} ${chas2} ${day2} ${month2} *`, () =>  {
+                            console.log('СТАРТ - Задача 1 в ' + date2 + ' запущена!');
+                            
+                            //отправить сообщение в админку
+                            let socket = io(socketUrl);
+                            socket.emit("sendNotif")
+                        }, {
+                            scheduled: true,
+                            timezone: "Europe/Moscow"
+                        }); 
+//----------------------------------------------------------------------------------------------
                     }
                 } else {
                     console.log('Отчет не отправлен! Основная дата меньше текущей');
                 }
             })
         }// end if i
- 
-        //console.log(sortedDates)
-//-----------------------------------------------------------------------------------------
-        sortedDates.map((item) =>{
-                //отправка напоминания
-                //var date = new Date(project2.datestart);
-                const d = new Date(item.split('+')[0]);
-                var timeDiff = d.getTime() - 7200000;
-                var timeDiff2 = d.getTime() - 3600000;
-                var timeDiff3 = d.getTime() - 1800000;
-                var timeDiff4 = d.getTime() - 900000;
-                const date2 = new Date(timeDiff)
-                const date3 = new Date(timeDiff2)
-                const date4 = new Date(timeDiff3)
-                const date5 = new Date(timeDiff4)
-
-                //console.log("Дата и время (за 2 часа): ", date2); 
-                const month = String(date2.getMonth()+1).padStart(2, "0");
-                const day = String(date2.getDate()).padStart(2, "0");
-                const chas = date2.getHours();
-                const min = String(date2.getMinutes()).padStart(2, "0");
-
-                console.log("запуск оповещения (2-х часовая готовность)")
-                task1 = cron.schedule(`${min} ${chas} ${day} ${month} *`, () =>  {
-                    console.log('СТАРТ - Задача 1 в ' + date2 + ' запущена!');
-                    
-                    //отправить сообщение в админку
-                    let socket = io(socketUrl);
-                    socket.emit("sendNotif")
-                }, {
-                    scheduled: true,
-                    timezone: "Europe/Moscow"
-                });
-
-                task1.stop();
-        })
-//-------------------------------------------------------------------------------------------
     
         i++ // счетчик интервалов
     }, 120000); //каждую 1 минуту
