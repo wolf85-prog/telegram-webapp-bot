@@ -9,6 +9,7 @@ const blockController = require('../controllers/blockController')
 const blockEquipmentController = require('../controllers/blockEquipmentController')
 const addressController = require('../controllers/addressController')
 const workerController = require('../controllers/workerController')
+const posterController = require('../controllers/posterController')
 
 router.get('/secret', secretController.secretInfo)
 
@@ -69,5 +70,8 @@ router.get("/address", addressController.address);
 
 //get WORKERS
 router.get("/workers", workerController.workers);
+
+//-----------------POSTER---------------------------------
+router.post('/poster/send', posterController.sendPoster)
 
 module.exports = router
