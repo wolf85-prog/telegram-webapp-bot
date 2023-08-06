@@ -308,7 +308,7 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
         sortedDates.map((item) =>{
                 //отправка напоминания
                 //var date = new Date(project2.datestart);
-                const d = new Date(item.date.split('+')[0]);
+                const d = new Date(item.split('+')[0]);
                 var timeDiff = d.getTime() - 7200000;
                 var timeDiff2 = d.getTime() - 3600000;
                 var timeDiff3 = d.getTime() - 1800000;
