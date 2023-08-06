@@ -890,100 +890,42 @@ bot.on('message', async (msg) => {
                     //начать получать отчеты
                     getReports(project2, bot)
 
-                    // отправить предварительную смету
-                    // setTimeout(async() => {
-                    //     const projectId = project2.projectId //'dbd0cc0d-6c66-4df7-9df8-f46e60b68fad';
-                    //     console.log("projectId: ", projectId)
 
-                    //     const crmId = await getProject(projectId)
-                    //     console.log("crmId: ", crmId)
+                    // //отправка напоминания
+                    // var date = new Date(project2.datestart);
+                    // var timeDiff = date.getTime() - 7200000;
+                    // var timeDiff2 = date.getTime() - 3600000;
+                    // var timeDiff3 = date.getTime() - 1800000;
+                    // var timeDiff4 = date.getTime() - 900000;
+                    // const date2 = new Date(timeDiff)
+                    // const date3 = new Date(timeDiff2)
+                    // const date4 = new Date(timeDiff3)
+                    // const date5 = new Date(timeDiff4)
 
-                    //     //const poster = 'https://proj.uley.team/files/1389/pre/1389_1408579113_customer.pdf'
-                    //     const poster = `${host}/files/${crmId}/pre/${crmId}_${chatId}_customer_1.pdf`
+                    // console.log("Дата и время: ", date);  
+                    // console.log("Дата и время (за 2 часа): ", date2); 
+                    // console.log("Дата и время (за 1 час): ", date3); 
+                    // console.log("Дата и время (за 30 минут): ", date4); 
+                    // console.log("Дата и время (за 15 минут): ", date5); 
 
-                    //     console.log("poster: ", poster)
+                    // const month = String(date2.getMonth()+1).padStart(2, "0");
+                    // const day = String(date2.getDate()).padStart(2, "0");
+                    // const chas = date2.getHours();
+                    // const min = String(date2.getMinutes()).padStart(2, "0");
+
+                    // console.log("запуск оповещения (2-х часовая готовность)")
+                    // task1 = cron.schedule(`${min} ${chas} ${day} ${month} *`, () =>  {
+                    //     console.log('Задача 1 в ' + date2 + ' запущена!');
                         
-                    //     const fileOptions = {
-                    //         // Explicitly specify the MIME type.
-                    //         contentType: 'application/pdf',
-                    //       };
-                          
-                    //     let i = 0;
-                    //     //while (i < 3000) {
-                    //         if (poster) {
-                    //             console.log("Отправляю постер...")
-                    //             await bot.sendDocument(chatId, poster, {
-                    //                 reply_markup: ({
-                    //                     inline_keyboard:[
-                    //                         [{text: 'Подтвердить', callback_data:'/smeta ' + projectId}]
-                    //                     ]
-                    //                 }),
-                    //                 fileOptions
-                    //             });
-
-                    //             //сохранение сметы в базе данных
-                    //             const convId = await sendMessageAdmin(poster, "image", chatId, messageId, true, 'Подтверждаю')
-
-                    //             // Подключаемся к серверу socket
-                    //             let socket = io(socketUrl);
-                    //             socket.emit("addUser", chatId)
-
-                    //             //сохранить в контексте (отправка) сметы в админку
-                    //             socket.emit("sendAdmin", { 
-                    //                 senderId: chatTelegramId,
-                    //                 receiverId: chatId,
-                    //                 text: poster,
-                    //                 type: 'image',
-                    //                 buttons: 'Подтверждаю',
-                    //                 convId: convId,
-                    //                 messageId,
-                    //             })
-                                
-                    //         } else {
-                    //             console.log("Файл для отправки не доступен! Попытка № " + i)
-                    //             //console.error(error);
-                    //         }
-                    //         // i++;
-                    //    // }                       
-            
-                    // }, 240000) // 4 минуты 
-
-
-                    //отправка напоминания
-                    var date = new Date(project2.datestart);
-                    var timeDiff = date.getTime() - 7200000;
-                    var timeDiff2 = date.getTime() - 3600000;
-                    var timeDiff3 = date.getTime() - 1800000;
-                    var timeDiff4 = date.getTime() - 900000;
-                    const date2 = new Date(timeDiff)
-                    const date3 = new Date(timeDiff2)
-                    const date4 = new Date(timeDiff3)
-                    const date5 = new Date(timeDiff4)
-
-                    console.log("Дата и время: ", date);  
-                    console.log("Дата и время (за 2 часа): ", date2); 
-                    console.log("Дата и время (за 1 час): ", date3); 
-                    console.log("Дата и время (за 30 минут): ", date4); 
-                    console.log("Дата и время (за 15 минут): ", date5); 
-
-                    const month = String(date2.getMonth()+1).padStart(2, "0");
-                    const day = String(date2.getDate()).padStart(2, "0");
-                    const chas = date2.getHours();
-                    const min = String(date2.getMinutes()).padStart(2, "0");
-
-                    console.log("запуск оповещения (2-х часовая готовность)")
-                    task1 = cron.schedule(`${min} ${chas} ${day} ${month} *`, () =>  {
-                        console.log('Задача 1 в ' + date2 + ' запущена!');
-                        
-                        //отправить сообщение в админку
-                        //Подключаемся к серверу socket
-                        let socket = io(socketUrl);
-                        socket.emit("addUser", chatId)
-                        socket.emit("sendNotif")
-                    }, {
-                        scheduled: true,
-                        timezone: "Europe/Moscow"
-                    });
+                    //     //отправить сообщение в админку
+                    //     //Подключаемся к серверу socket
+                    //     let socket = io(socketUrl);
+                    //     socket.emit("addUser", chatId)
+                    //     socket.emit("sendNotif")
+                    // }, {
+                    //     scheduled: true,
+                    //     timezone: "Europe/Moscow"
+                    // });
 
 
                     // console.log("запуск оповещения (1-х часовая готовность)")
