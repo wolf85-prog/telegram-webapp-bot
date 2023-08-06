@@ -891,62 +891,62 @@ bot.on('message', async (msg) => {
                     getReports(project2, bot)
 
                     // отправить предварительную смету
-                    setTimeout(async() => {
-                        const projectId = project2.projectId //'dbd0cc0d-6c66-4df7-9df8-f46e60b68fad';
-                        console.log("projectId: ", projectId)
+                    // setTimeout(async() => {
+                    //     const projectId = project2.projectId //'dbd0cc0d-6c66-4df7-9df8-f46e60b68fad';
+                    //     console.log("projectId: ", projectId)
 
-                        const crmId = await getProject(projectId)
-                        console.log("crmId: ", crmId)
+                    //     const crmId = await getProject(projectId)
+                    //     console.log("crmId: ", crmId)
 
-                        //const poster = 'https://proj.uley.team/files/1389/pre/1389_1408579113_customer.pdf'
-                        const poster = `${host}/files/${crmId}/pre/${crmId}_${chatId}_customer_1.pdf`
+                    //     //const poster = 'https://proj.uley.team/files/1389/pre/1389_1408579113_customer.pdf'
+                    //     const poster = `${host}/files/${crmId}/pre/${crmId}_${chatId}_customer_1.pdf`
 
-                        console.log("poster: ", poster)
+                    //     console.log("poster: ", poster)
                         
-                        const fileOptions = {
-                            // Explicitly specify the MIME type.
-                            contentType: 'application/pdf',
-                          };
+                    //     const fileOptions = {
+                    //         // Explicitly specify the MIME type.
+                    //         contentType: 'application/pdf',
+                    //       };
                           
-                        let i = 0;
-                        //while (i < 3000) {
-                            if (poster) {
-                                console.log("Отправляю постер...")
-                                await bot.sendDocument(chatId, poster, {
-                                    reply_markup: ({
-                                        inline_keyboard:[
-                                            [{text: 'Подтвердить', callback_data:'/smeta ' + projectId}]
-                                        ]
-                                    }),
-                                    fileOptions
-                                });
+                    //     let i = 0;
+                    //     //while (i < 3000) {
+                    //         if (poster) {
+                    //             console.log("Отправляю постер...")
+                    //             await bot.sendDocument(chatId, poster, {
+                    //                 reply_markup: ({
+                    //                     inline_keyboard:[
+                    //                         [{text: 'Подтвердить', callback_data:'/smeta ' + projectId}]
+                    //                     ]
+                    //                 }),
+                    //                 fileOptions
+                    //             });
 
-                                //сохранение сметы в базе данных
-                                const convId = await sendMessageAdmin(poster, "image", chatId, messageId, true, 'Подтверждаю')
+                    //             //сохранение сметы в базе данных
+                    //             const convId = await sendMessageAdmin(poster, "image", chatId, messageId, true, 'Подтверждаю')
 
-                                // Подключаемся к серверу socket
-                                let socket = io(socketUrl);
-                                socket.emit("addUser", chatId)
+                    //             // Подключаемся к серверу socket
+                    //             let socket = io(socketUrl);
+                    //             socket.emit("addUser", chatId)
 
-                                //сохранить в контексте (отправка) сметы в админку
-                                socket.emit("sendAdmin", { 
-                                    senderId: chatTelegramId,
-                                    receiverId: chatId,
-                                    text: poster,
-                                    type: 'image',
-                                    buttons: 'Подтверждаю',
-                                    convId: convId,
-                                    messageId,
-                                })
+                    //             //сохранить в контексте (отправка) сметы в админку
+                    //             socket.emit("sendAdmin", { 
+                    //                 senderId: chatTelegramId,
+                    //                 receiverId: chatId,
+                    //                 text: poster,
+                    //                 type: 'image',
+                    //                 buttons: 'Подтверждаю',
+                    //                 convId: convId,
+                    //                 messageId,
+                    //             })
                                 
-                            } else {
-                                console.log("Файл для отправки не доступен! Попытка № " + i)
-                                //console.error(error);
-                            }
-                            // i++;
-                       // }                       
+                    //         } else {
+                    //             console.log("Файл для отправки не доступен! Попытка № " + i)
+                    //             //console.error(error);
+                    //         }
+                    //         // i++;
+                    //    // }                       
             
-                    }, 240000) // 4 минуты 
+                    // }, 240000) // 4 минуты 
 
 
                     //отправка напоминания
