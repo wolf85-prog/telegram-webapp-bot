@@ -2,8 +2,12 @@ require("dotenv").config();
 const { Client } = require("@notionhq/client");
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
 const databaseId = process.env.NOTION_DATABASE_ID
+const chatTelegramId = process.env.CHAT_ID
 //fetch api
 const fetch = require('node-fetch');
+const sendMessageAdmin = require("./../common/sendMessageAdmin");
+//socket.io
+const {io} = require("socket.io-client")
 
 class PosterController {
 
@@ -52,22 +56,22 @@ class PosterController {
             const data = await response2.json();
 
             //сохранение сметы в базе данных
-            //const convId = await sendMessageAdmin(poster, "image", chatId, messageId, true, 'Подтверждаю')
+            const convId = await sendMessageAdmin(poster, "image", chatId, messageId, true, 'Подтверждаю')
 
             // Подключаемся к серверу socket
-            // let socket = io(socketUrl);
-            // socket.emit("addUser", chatId)
+            let socket = io(socketUrl);
+            socket.emit("addUser", chatId)
 
             // //сохранить в контексте (отправка) сметы в админку
-            // socket.emit("sendAdmin", { 
-            //     senderId: chatTelegramId,
-            //     receiverId: chatId,
-            //     text: poster,
-            //     type: 'image',
-            //     buttons: 'Подтверждаю',
-            //     convId: convId,
-            //     messageId,
-            // })
+            socket.emit("sendAdmin", { 
+                senderId: chatTelegramId,
+                receiverId: chatId,
+                text: poster,
+                type: 'image',
+                buttons: 'Подтверждаю',
+                convId: convId,
+                //messageId,
+            })
 
             return res.status(200).json("Poster has been sent successfully");
         } catch (error) {
