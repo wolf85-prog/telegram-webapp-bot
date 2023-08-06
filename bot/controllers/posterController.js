@@ -1,5 +1,6 @@
 require("dotenv").config();
-const {getProjectCrmId} = require('../controllers/projectController')
+const { Client } = require("@notionhq/client");
+const databaseId = process.env.NOTION_DATABASE_ID
 //fetch api
 const fetch = require('node-fetch');
 
@@ -14,7 +15,19 @@ class PosterController {
             const poster = `${host}/files/${crmId}/pre/${crmId}_${chatId}_customer.pdf`
             console.log("poster API: ", poster)
 
-            const projectId = await getProjectCrmId(crmId)
+            const response = await notion.databases.query({
+                database_id: databaseId,
+                filter: {
+                    property: "Crm_ID",
+                    rich_text: {
+                        "contains": crmId
+                    }
+                },         
+            });
+
+            //const project = await getProjectCrmId(crmId)
+            const projectId = response.properties.results[0].id
+            console.log(projectId)
 
             //Передаем данные боту
             const keyboard = JSON.stringify({
@@ -29,11 +42,11 @@ class PosterController {
             //sendPosterToTelegram = await $host_bot.post(url_send_poster);
 
             // создание базы данных "Основной состав"
-            const response = await fetch('url_send_poster', {
+            const response2 = await fetch('url_send_poster', {
                 method: 'post',
             });
         
-            const data = await response.json();
+            const data = await response2.json();
 
             //сохранение сметы в базе данных
             //const convId = await sendMessageAdmin(poster, "image", chatId, messageId, true, 'Подтверждаю')
