@@ -18,6 +18,9 @@ const {io} = require("socket.io-client")
 //fetch api
 const fetch = require('node-fetch');
 
+//планировщик
+var cron = require('node-cron');
+
 module.exports = async function getReports(project, bot) {
     console.log('START GET REPORTS: ' + project.id + " " + project.name)
 
