@@ -4,7 +4,6 @@ const notion = new Client({ auth: process.env.NOTION_API_KEY });
 const databaseId = process.env.NOTION_DATABASE_ID
 //fetch api
 const fetch = require('node-fetch');
-//const bot = new TelegramBot(token, {polling: true});
 
 class PosterController {
 
@@ -31,32 +30,25 @@ class PosterController {
             const projectId = response.results[0].id
             console.log(projectId)
 
-            // await bot.sendDocument(chatId, poster, {
-            //     reply_markup: ({
-            //         inline_keyboard:[
-            //             [{text: 'Подтвердить', callback_data:'/smeta ' + projectId}]
-            //         ]
-            //     })
-            // });
 
             //Передаем данные боту
-            // const keyboard = JSON.stringify({
-            //     inline_keyboard:[
-            //         [{text: 'Подтвердить', callback_data:'/smeta ' + projectId}]
-            //     ]
-            // });
+            const keyboard = JSON.stringify({
+                inline_keyboard:[
+                    [{text: 'Подтвердить', callback_data:'/smeta ' + projectId}]
+                ]
+            });
 
             console.log("Отправляю постер...")
-            // const url_send_poster = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${chatId}&reply_markup=${keyboard}`
-            // console.log(url_send_poster)
-            // //sendPosterToTelegram = await $host_bot.post(url_send_poster);
+            const url_send_poster = `https://api.telegram.org/bot${token}/sendDocument?chat_id=${chatId}&poster&reply_markup=${keyboard}`
+            console.log(url_send_poster)
+            //sendPosterToTelegram = await $host_bot.post(url_send_poster);
 
-            // // создание базы данных "Основной состав"
-            // const response2 = await fetch('url_send_poster', {
-            //     method: 'post',
-            // });
+            // создание базы данных "Основной состав"
+            const response2 = await fetch('url_send_poster', {
+                method: 'post',
+            });
         
-            //const data = await response2.json();
+            const data = await response2.json();
 
             //сохранение сметы в базе данных
             //const convId = await sendMessageAdmin(poster, "image", chatId, messageId, true, 'Подтверждаю')
