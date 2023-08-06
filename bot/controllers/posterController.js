@@ -13,7 +13,7 @@ class PosterController {
         const {crmId, chatId, ver} = req.body;
         try {
             //const poster = 'https://proj.uley.team/files/1389/pre/1389_1408579113_customer.pdf'
-            const poster = `${host}/files/${crmId}/pre/${crmId}_${chatId}_customer_${ver}.pdf`
+            const poster = `${host}/files/${crmId}/pre/${crmId}_${chatId}_customer.pdf`
             console.log("poster API: ", poster)
 
             const response = await notion.databases.query({
@@ -27,7 +27,7 @@ class PosterController {
             });
 
             //const project = await getProjectCrmId(crmId)
-            const projectId = response.properties.results[0].id
+            const projectId = response.results[0].id
             console.log(projectId)
 
             //Передаем данные боту
