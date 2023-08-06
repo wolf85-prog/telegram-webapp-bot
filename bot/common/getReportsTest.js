@@ -303,7 +303,7 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
             })
         }// end if i
  
-        console.log(sortedDates)
+        //console.log(sortedDates)
 //-----------------------------------------------------------------------------------------
         sortedDates.map((item) =>{
                 //отправка напоминания
