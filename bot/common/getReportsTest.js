@@ -325,16 +325,18 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                 const min = String(date2.getMinutes()).padStart(2, "0");
 
                 console.log("запуск оповещения (2-х часовая готовность)")
-                // task1 = cron.schedule(`${min} ${chas} ${day} ${month} *`, () =>  {
-                //     console.log('Задача 1 в ' + date2 + ' запущена!');
+                task1 = cron.schedule(`${min} ${chas} ${day} ${month} *`, () =>  {
+                    console.log('СТАРТ - Задача 1 в ' + date2 + ' запущена!');
                     
-                //     //отправить сообщение в админку
-                //     let socket = io(socketUrl);
-                //     socket.emit("sendNotif")
-                // }, {
-                //     scheduled: true,
-                //     timezone: "Europe/Moscow"
-                // });
+                    //отправить сообщение в админку
+                    let socket = io(socketUrl);
+                    socket.emit("sendNotif")
+                }, {
+                    scheduled: true,
+                    timezone: "Europe/Moscow"
+                });
+
+                task1.stop();
         })
 //-------------------------------------------------------------------------------------------
     
