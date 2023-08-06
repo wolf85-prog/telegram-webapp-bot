@@ -1172,24 +1172,6 @@ const start = async () => {
                 }, 2000 * ++i)     
             })
 
-            //запуск оповещений
-            //arrProjects.map(async (project, i) => {
-                //console.log("Старт проекта: " + project.datestart)
-                
-                // setTimeout(function(){
-                //     //начать получать отчеты
-                //     getReportsTest(project.id, project.name, bot)
-                // }, 2000 * ++i)   
-                
-                //console.log("запуск оповещения (2-х часовая готовность)")
-                // cron.schedule('*/1 15 04 8 *',()=>{
-                //     console.log('then at 2023-08-04 15:01:00')
-                // }, {
-                //     scheduled: true,
-                //     timezone: "Europe/Moscow"
-                // });
-            //})
-
         });
 
     } catch (error) {
