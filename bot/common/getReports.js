@@ -280,11 +280,11 @@ ${arr_count0.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + it
                         const month = String(d.getMonth()+1).padStart(2, "0");
                         const day = String(d.getDate()).padStart(2, "0");
                         const chas = d.getHours();
-                        const minut = String(d.getMinutes()).padStart(2, "0");
+                        const min = String(d.getMinutes()).padStart(2, "0");
 
                         const text = `Запрос на специалистов: 
                                 
-${day}.${month} | ${chas}:${minut} | ${project_name} | U.L.E.Y
+${day}.${month} | ${chas}:${min} | ${project_name} | U.L.E.Y
 
 ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title).join('\n')}`                           
 
@@ -335,7 +335,84 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                             
                             //отправить сообщение в админку
                             let socket = io(socketUrl);
-                            socket.emit("sendNotif")
+                            socket.emit("sendNotif", {
+                                task: 1
+                            })
+                        }, {
+                            scheduled: true,
+                            timezone: "Europe/Moscow"
+                        });
+
+                        //часовая готовность
+                        const month3 = String(date3.getMonth()+1).padStart(2, "0");
+                        const day3 = String(date3.getDate()).padStart(2, "0");
+                        const chas3 = date3.getHours();
+                        const min3 = String(date3.getMinutes()).padStart(2, "0");
+
+                        console.log("запуск оповещения (1-х часовая готовность)")
+                        task2 = cron.schedule(`${min3} ${chas3} ${day3} ${month3} *`, () =>  {
+                            console.log('СТАРТ - Задача 2 в ' + date3 + ' запущена!');
+                            
+                            //отправить сообщение в админку
+                            let socket = io(socketUrl);
+                            socket.emit("sendNotif", {
+                                task: 2
+                            })
+                        }, {
+                            scheduled: true,
+                            timezone: "Europe/Moscow"
+                        });
+
+                        //30-минутная готовность
+                        const month4 = String(date4.getMonth()+1).padStart(2, "0");
+                        const day4 = String(date4.getDate()).padStart(2, "0");
+                        const chas4 = date4.getHours();
+                        const min4 = String(date4.getMinutes()).padStart(2, "0");
+
+                        console.log("запуск оповещения (30-мин готовность)")
+                        task3 = cron.schedule(`${min4} ${chas4} ${day4} ${month4} *`, () =>  {
+                            console.log('СТАРТ - Задача 3 в ' + date4 + ' запущена!');
+                            
+                            //отправить сообщение в админку
+                            let socket = io(socketUrl);
+                            socket.emit("sendNotif", {
+                                task: 3
+                            })
+                        }, {
+                            scheduled: true,
+                            timezone: "Europe/Moscow"
+                        });
+
+                        //15-минутная готовность
+                        const month5 = String(date5.getMonth()+1).padStart(2, "0");
+                        const day5 = String(date5.getDate()).padStart(2, "0");
+                        const chas5 = date5.getHours();
+                        const min5 = String(date5.getMinutes()).padStart(2, "0");
+
+                        console.log("запуск оповещения (15-мин готовность)")
+                        task4 = cron.schedule(`${min5} ${chas5} ${day5} ${month5} *`, () =>  {
+                            console.log('СТАРТ - Задача 4 в ' + date5 + ' запущена!');
+                            
+                            //отправить сообщение в админку
+                            let socket = io(socketUrl);
+                            socket.emit("sendNotif", {
+                                task: 4
+                            })
+                        }, {
+                            scheduled: true,
+                            timezone: "Europe/Moscow"
+                        });
+
+                        //0 готовность
+                        console.log("запуск оповещения (0 готовность)")
+                        task5 = cron.schedule(`${min} ${chas} ${day} ${month} *`, () =>  {
+                            console.log('СТАРТ - Задача 5 в ' + d + ' запущена!');
+                            
+                            //отправить сообщение в админку
+                            let socket = io(socketUrl);
+                            socket.emit("sendNotif", {
+                                task: 5
+                            })
                         }, {
                             scheduled: true,
                             timezone: "Europe/Moscow"
