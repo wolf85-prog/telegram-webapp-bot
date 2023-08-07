@@ -569,9 +569,13 @@ bot.on('message', async (msg) => {
         }
 
 
-        if(text.startsWith('/stopnotif')) {
-            task1.stop();
-            console.log("Задача 1 остановлена!"); 
+        if(text.startsWith('/startnotif')) {
+            //task1.stop();
+            //console.log("Задача 1 остановлена!");
+            let socket = io(socketUrl);
+            socket.emit("sendNotif", {
+                task: 2
+            }) 
         }
 
 
