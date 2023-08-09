@@ -327,7 +327,7 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                                 task: 1
                             })
 
-                            arrTaskCount1[i] = 1
+                            arrTaskCount1[i] = 1 //фиксация выполнения задачи
                             console.log("Task1 Count: ", arrTaskCount1)
                         }, {
                             scheduled: true,
@@ -338,7 +338,7 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
 
                         //запуск очистки задач
                         cron.schedule('0 */2 * * *', () => {
-                            console.log('запуск очистки системы ...');
+                            console.log('запуск очистки системы ... ', arrTaskCount1);
                             arrTaskCount1.forEach((item, ind)=>{
                                 if (item[ind] === 1) {
                                     arrTask1[ind].stop()
