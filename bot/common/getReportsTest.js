@@ -317,8 +317,7 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                         const min2 = String(date2.getMinutes()).padStart(2, "0");
 
                         console.log("запуск оповещения (2-х часовая готовность)")
-                        arrTaskCount1[i] = 0
-                        arrTask1[i] = cron.schedule(`${min2} ${chas2} ${day2} ${month2} *`, () =>  {
+                        let task1 = cron.schedule(`${min2} ${chas2} ${day2} ${month2} *`, () =>  {
                             console.log('СТАРТ - Задача 1 в ' + date2 + ' запущена!');
                             
                             //отправить сообщение в админку
@@ -327,25 +326,33 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                                 task: 1
                             })
 
-                            arrTaskCount1[i] = 1 //фиксация выполнения задачи
-                            console.log("Task1 Count: ", arrTaskCount1)
+                            //arrTaskCount1[i] = 1 //фиксация выполнения задачи
+
                         }, {
                             scheduled: true,
                             timezone: "Europe/Moscow"
                         }); 
 
-                        console.log("Task1 Count: ", arrTaskCount1)
+                        const obj = {
+                            task: 1,
+                            count: 0,
+                            project: projectId
+                        }
+
+                        arrTask1.push(obj)
+
+                        console.log("Task1: ", arrTask1)
 
                         //запуск очистки задач
-                        cron.schedule('0 */2 * * *', () => {
-                            console.log('запуск очистки системы ... ', arrTaskCount1);
-                            arrTaskCount1.forEach((item, ind)=>{
-                                if (item[ind] === 1) {
-                                    arrTask1[ind].stop()
-                                    сonsole.log('Задача ' + ind + ' остановлена!');
-                                }
-                            })                           
-                        });
+                        // cron.schedule('0 */2 * * *', () => {
+                        //     console.log('запуск очистки системы ... ', arrTaskCount1);
+                        //     arrTaskCount1.forEach((item, ind)=>{
+                        //         if (item[ind] === 1) {
+                        //             arrTask1[ind].stop()
+                        //             сonsole.log('Задача ' + ind + ' остановлена!');
+                        //         }
+                        //     })                           
+                        // });
 
 
                         //60-минутная готовность
