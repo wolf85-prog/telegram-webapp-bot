@@ -330,7 +330,7 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                         const min2 = String(date2.getMinutes()).padStart(2, "0");
 
                         console.log("запуск оповещения (2-х часовая готовность)")
-                        task1 = cron.schedule(`${min2} ${chas2} ${day2} ${month2} *`, () =>  {
+                        let task1 = cron.schedule(`${min2} ${chas2} ${day2} ${month2} *`, () =>  {
                             console.log('СТАРТ - Задача 1 в ' + date2 + ' запущена!');
                             
                             //отправить сообщение в админку
@@ -342,6 +342,14 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                             scheduled: true,
                             timezone: "Europe/Moscow"
                         });
+
+                        const obj = {
+                            task: task1,
+                            count: 0,
+                            project: project.id
+                        }
+                        arrTask1.push(obj)
+                        console.log("Task1: ", arrTask1)
 
                         //часовая готовность
                         const month3 = String(date3.getMonth()+1).padStart(2, "0");
