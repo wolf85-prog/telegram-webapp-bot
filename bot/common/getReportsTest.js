@@ -34,7 +34,6 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
     let all = [];
     let date_db;
 
-
     // начало цикла Специалисты ----------------------------------------------------------------------
     // 86400 секунд в дне
     var minutCount = 0;
@@ -188,8 +187,8 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
             }
         })
 
-            // 1-й отчет
-            if (i < 1) {
+        // 1-й отчет
+        if (i < 1) {
 
 //                 const d = new Date(project.datestart);
 //                 const month = String(d.getMonth()+1).padStart(2, "0");
@@ -212,45 +211,47 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
 
                 //отправить сообщение в админку
   
-            } else {
-                // 2-й отчет
+        } else {
+            // 2-й отчет
 
-                //получить название проекта из ноушена
-                let project_name;   
-                await fetch(`${botApiUrl}/project/${projectId}`)
-                .then((response) => response.json())
-                .then((data) => {
-                    if (data) {
-                        project_name = data?.properties.Name.title[0]?.plain_text;
-                    }  else {
-                        project_name = projectName
-                    }                             
-                });
+            //получить название проекта из ноушена
+            let project_name;   
+            await fetch(`${botApiUrl}/project/${projectId}`)
+            .then((response) => response.json())
+            .then((data) => {
+                if (data) {
+                    project_name = data?.properties.Name.title[0]?.plain_text;
+                }  else {
+                    project_name = projectName
+                }                             
+            });
 
-                //получить менеджера проекта из ноушена
-                let project_manager;
-                await fetch(`${botApiUrl}/project/${projectId}`)
-                .then((response) => response.json())
-                .then((data) => {
-                    if (data) {
-                        project_manager = data?.properties["Менеджер"].relation[0]?.id;
-                    }  else {
-                        project_manager = '';
-                    }                             
-                });
+            //получить менеджера проекта из ноушена
+            let project_manager;
+            await fetch(`${botApiUrl}/project/${projectId}`)
+            .then((response) => response.json())
+            .then((data) => {
+                if (data) {
+                    project_manager = data?.properties["Менеджер"].relation[0]?.id;
+                }  else {
+                    project_manager = '';
+                }                             
+            });
 
-                //получить TelegramID менеджера проекта из ноушена
-                let chatId_manager;
-                const chat = await fetch(`${botApiUrl}/managers/${project_manager}`)
-                .then((response) => response.json())
-                .then((data) => {
-                    if (data) {
-                        chatId_manager = data
-                    } else {
-                        console.log("Manager TelegramId не найден!")
-                    }                             
-                });
+            //получить TelegramID менеджера проекта из ноушена
+            let chatId_manager;
+            const chat = await fetch(`${botApiUrl}/managers/${project_manager}`)
+            .then((response) => response.json())
+            .then((data) => {
+                if (data) {
+                    chatId_manager = data
+                } else {
+                    console.log("Manager TelegramId не найден!")
+                }                             
+            });
 
+            let arrTask1 = []
+            let arrTaskCount1 = []
 
             //отправить сообщение по каждой дате
             datesObj.forEach((date, i)=> {
@@ -309,14 +310,15 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                         const date4 = new Date(timeDiff3)
                         const date5 = new Date(timeDiff4)
 
-                        //console.log("Дата и время (за 2 часа): ", date2); 
+                        //120-минутная готовность 
                         const month2 = String(date2.getMonth()+1).padStart(2, "0");
                         const day2 = String(date2.getDate()).padStart(2, "0");
                         const chas2 = date2.getHours();
                         const min2 = String(date2.getMinutes()).padStart(2, "0");
 
                         console.log("запуск оповещения (2-х часовая готовность)")
-                        task1 = cron.schedule(`${min2} ${chas2} ${day2} ${month2} *`, () =>  {
+                        arrTaskCount1[i] = 0
+                        arrTask1[i] = cron.schedule(`${min2} ${chas2} ${day2} ${month2} *`, () =>  {
                             console.log('СТАРТ - Задача 1 в ' + date2 + ' запущена!');
                             
                             //отправить сообщение в админку
@@ -324,19 +326,36 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                             socket.emit("sendNotif", {
                                 task: 1
                             })
+
+                            arrTaskCount1[i] = 1
+                            console.log("Task1 Count: ", arrTaskCount1)
                         }, {
                             scheduled: true,
                             timezone: "Europe/Moscow"
                         }); 
 
-                        //часовая готовность
+                        console.log("Task1 Count: ", arrTaskCount1)
+
+                        //запуск очистки задач
+                        cron.schedule('0 */2 * * *', () => {
+                            console.log('запуск очистки системы ...');
+                            arrTaskCount1.forEach((item, ind)=>{
+                                if (item[ind] === 1) {
+                                    arrTask1[ind].stop()
+                                    сonsole.log('Задача ' + ind + ' остановлена!');
+                                }
+                            })                           
+                        });
+
+
+                        //60-минутная готовность
                         const month3 = String(date3.getMonth()+1).padStart(2, "0");
                         const day3 = String(date3.getDate()).padStart(2, "0");
                         const chas3 = date3.getHours();
                         const min3 = String(date3.getMinutes()).padStart(2, "0");
 
                         console.log("запуск оповещения (1-х часовая готовность)")
-                        task2 = cron.schedule(`${min3} ${chas3} ${day3} ${month3} *`, () =>  {
+                        const task2 = cron.schedule(`${min3} ${chas3} ${day3} ${month3} *`, () =>  {
                             console.log('СТАРТ - Задача 2 в ' + date3 + ' запущена!');
                             
                             //отправить сообщение в админку
@@ -356,7 +375,7 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                         const min4 = String(date4.getMinutes()).padStart(2, "0");
 
                         console.log("запуск оповещения (30-мин готовность)")
-                        task3 = cron.schedule(`${min4} ${chas4} ${day4} ${month4} *`, () =>  {
+                        let task3 = cron.schedule(`${min4} ${chas4} ${day4} ${month4} *`, () =>  {
                             console.log('СТАРТ - Задача 3 в ' + date4 + ' запущена!');
                             
                             //отправить сообщение в админку
@@ -376,7 +395,7 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                         const min5 = String(date5.getMinutes()).padStart(2, "0");
 
                         console.log("запуск оповещения (15-мин готовность)")
-                        task4 = cron.schedule(`${min5} ${chas5} ${day5} ${month5} *`, () =>  {
+                        let task4 = cron.schedule(`${min5} ${chas5} ${day5} ${month5} *`, () =>  {
                             console.log('СТАРТ - Задача 4 в ' + date5 + ' запущена!');
                             
                             //отправить сообщение в админку
@@ -391,7 +410,7 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
 
                         //0 готовность
                         console.log("запуск оповещения (0 готовность)")
-                        task5 = cron.schedule(`${min} ${chas} ${day} ${month} *`, () =>  {
+                        let task5 = cron.schedule(`${min} ${chas} ${day} ${month} *`, () =>  {
                             console.log('СТАРТ - Задача 5 в ' + d + ' запущена!');
                             
                             //отправить сообщение в админку

@@ -893,68 +893,6 @@ bot.on('message', async (msg) => {
                     
                     //начать получать отчеты
                     getReports(project2, bot)
-
-
-                    // //отправка напоминания
-                    // var date = new Date(project2.datestart);
-                    // var timeDiff = date.getTime() - 7200000;
-                    // var timeDiff2 = date.getTime() - 3600000;
-                    // var timeDiff3 = date.getTime() - 1800000;
-                    // var timeDiff4 = date.getTime() - 900000;
-                    // const date2 = new Date(timeDiff)
-                    // const date3 = new Date(timeDiff2)
-                    // const date4 = new Date(timeDiff3)
-                    // const date5 = new Date(timeDiff4)
-
-                    // console.log("Дата и время: ", date);  
-                    // console.log("Дата и время (за 2 часа): ", date2); 
-                    // console.log("Дата и время (за 1 час): ", date3); 
-                    // console.log("Дата и время (за 30 минут): ", date4); 
-                    // console.log("Дата и время (за 15 минут): ", date5); 
-
-                    // const month = String(date2.getMonth()+1).padStart(2, "0");
-                    // const day = String(date2.getDate()).padStart(2, "0");
-                    // const chas = date2.getHours();
-                    // const min = String(date2.getMinutes()).padStart(2, "0");
-
-                    // console.log("запуск оповещения (2-х часовая готовность)")
-                    // task1 = cron.schedule(`${min} ${chas} ${day} ${month} *`, () =>  {
-                    //     console.log('Задача 1 в ' + date2 + ' запущена!');
-                        
-                    //     //отправить сообщение в админку
-                    //     //Подключаемся к серверу socket
-                    //     let socket = io(socketUrl);
-                    //     socket.emit("addUser", chatId)
-                    //     socket.emit("sendNotif")
-                    // }, {
-                    //     scheduled: true,
-                    //     timezone: "Europe/Moscow"
-                    // });
-
-
-                    // console.log("запуск оповещения (1-х часовая готовность)")
-                    // task2 = cron.schedule('18 16 04 08 *', () =>  {
-                    //     console.log('Задача 2 в '  + date3);
-                    // }, {
-                    //         scheduled: true,
-                    //         timezone: "Europe/Moscow"
-                    // });
-
-                    // console.log("запуск оповещения (30-ти минутная готовность)")
-                    // task3 = cron.schedule('18 16 04 08 *', () =>  {
-                    //     console.log('Задача 3 в '  + date4);
-                    // }, {
-                    //         scheduled: true,
-                    //         timezone: "Europe/Moscow"
-                    // });
-
-                    // console.log("запуск оповещения (15-ти минутная готовность)")
-                    // task4 = cron.schedule('18 16 04 08 *', () =>  {
-                    //     console.log('Задача 4 в '  + date5);
-                    // }, {
-                    //         scheduled: true,
-                    //         timezone: "Europe/Moscow"
-                    // });
                     
                                     
                 } catch (error) {

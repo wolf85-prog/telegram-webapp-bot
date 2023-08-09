@@ -39,7 +39,7 @@ module.exports = async function getReports(project, bot) {
     // 86400 секунд в дне
     var minutCount = 0;
         
-    // повторить с интервалом 1 минуту
+    // повторить с интервалом 2 минуты
     let timerId = setInterval(async() => {
         //console.log("Начало цикла отчетов. TimerId: ", timerId)
         minutCount++  // a day has passed
