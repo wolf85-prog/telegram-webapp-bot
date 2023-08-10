@@ -54,6 +54,10 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                                 "color": "pink"
                             },
                             {
+                                "name": "Полный цикл",
+                                "color": "blue"
+                            },
+                            {
                                 "name": "Тесты \/ Чеки",
                                 "color": "green"
                             },
@@ -449,6 +453,10 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                             {
                                 "name": "Герой дня",
                                 "color": "purple"
+                            },
+                            {
+                                "name": "Высотные работы",
+                                "color": "brown"
                             },
                         ]
                     }
