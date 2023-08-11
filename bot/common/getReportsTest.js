@@ -299,8 +299,6 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                         }, 2500 * ++i)  
 //---------------------------------------------------------------------------------------------------
                         //отправка напоминания
-                        //var date = new Date(project2.datestart);
-                        //const d = new Date(item.split('+')[0]);
                         var timeDiff = d.getTime() - 7200000;
                         var timeDiff2 = d.getTime() - 3600000;
                         var timeDiff3 = d.getTime() - 1800000;
@@ -325,34 +323,10 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                             socket.emit("sendNotif", {
                                 task: 1
                             })
-
-                            //arrTaskCount1[i] = 1 //фиксация выполнения задачи
-
                         }, {
                             scheduled: true,
                             timezone: "Europe/Moscow"
-                        }); 
-
-                        const obj = {
-                            task: 1,
-                            count: 0,
-                            project: projectId
-                        }
-
-                        arrTask1.push(obj)
-
-                        console.log("Task1: ", arrTask1)
-
-                        //запуск очистки задач
-                        // cron.schedule('0 */2 * * *', () => {
-                        //     console.log('запуск очистки системы ... ', arrTaskCount1);
-                        //     arrTaskCount1.forEach((item, ind)=>{
-                        //         if (item[ind] === 1) {
-                        //             arrTask1[ind].stop()
-                        //             сonsole.log('Задача ' + ind + ' остановлена!');
-                        //         }
-                        //     })                           
-                        // });
+                        });
 
 
                         //60-минутная готовность
