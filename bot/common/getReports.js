@@ -330,7 +330,7 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
 
                         console.log("запуск оповещения (2-х часовая готовность)")
                         const timeoutObj1 = setTimeout(() => {
-                            const data = 'СТАРТ - Задача 1 в ' + d + ' запущена!';
+                            const data = 'СТАРТ - Задача 1 в ' + d + ' запущена!' + '\n';
                             const fileName = _dirname  + '/tasks.txt';
                             fs.appendFileSync(fileName, data);
 
