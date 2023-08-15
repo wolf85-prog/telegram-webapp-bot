@@ -18,8 +18,12 @@ const {io} = require("socket.io-client")
 //fetch api
 const fetch = require('node-fetch');
 
-//планировщик
-var cron = require('node-cron');
+// подключаем модуль для работы с файловой системой
+const fs = require('fs');
+const path = require('path')
+
+// путь к текущей директории
+const _dirname = path.resolve(__dirname, '/logs') 
 
 module.exports = async function getReportsTest(projectId, projectName, bot) {
     console.log('START GET REPORTS TEST: ' + projectName)
@@ -314,7 +318,10 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
 
                         console.log("запуск оповещения (2-х часовая готовность)")
                         const timeoutObj1 = setTimeout(() => {
-                            console.log('СТАРТ - Задача 1 в ' + d + ' запущена!');
+                            const data = 'СТАРТ - Задача 1 в ' + d + ' запущена!';
+                            const fileName = _dirname  + 'tasks.txt';
+                            fs.appendFileSync(fileName, data);
+                            
                             //отправить сообщение в админку
                             let socket = io(socketUrl);
                             socket.emit("sendNotif", {

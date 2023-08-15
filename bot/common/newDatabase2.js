@@ -55,31 +55,35 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                             },
                             {
                                 "name": "Полный цикл",
-                                "color": "blue"
-                            },
-                            {
-                                "name": "Тесты \/ Чеки",
-                                "color": "green"
-                            },
-                            {
-                                "name": "Эфир",
-                                "color": "yellow"
+                                "color": "orange"
                             },
                             {
                                 "name": "Демонтаж",
                                 "color": "blue"
                             },
                             {
+                                "name": "Эфир",
+                                "color": "green"
+                            },
+                            {
+                                "name": "Тесты \/ Чеки",
+                                "color": "purple"
+                            },
+                            {
                                 "name": "Сборы",
+                                "color": "pink"
+                            },
+                            {
+                                "name": "Работа на складе",
                                 "color": "orange"
                             },
                             {
                                 "name": "Выезд \/ Перелет",
-                                "color": "purple"
+                                "color": "blue"
                             },
                             {
                                 "name": "Водитель ТС",
-                                "color": "pink"
+                                "color": "green"
                             },
                             {
                                 "name": "Отмена",
