@@ -28,6 +28,12 @@ const _dirname = path.resolve(__dirname, '/logs')
 module.exports = async function getReportsTest(projectId, projectName, bot) {
     console.log('START GET REPORTS TEST: ' + projectName)
 
+    const fileName = _dirname  + 'tasks.txt';
+    console.log("fileName: ", fileName)
+
+    const data = 'СТАРТ - Задача запущена!';
+    fs.appendFileSync(fileName, data);
+
     let count_fio;
     let count_title;
     let i = 0;
