@@ -22,7 +22,7 @@ const fs = require('fs');
 const path = require('path')
 
 // путь к текущей директории
-const _dirname = path.resolve(__dirname, '/logs') 
+const _dirname = path.resolve(__dirname, 'logs') 
 
 module.exports = async function getReports(project, bot) {
     console.log('START GET REPORTS: ' + project.id + " " + project.name)
@@ -331,7 +331,7 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                         console.log("запуск оповещения (2-х часовая готовность)")
                         const timeoutObj1 = setTimeout(() => {
                             const data = 'СТАРТ - Задача 1 в ' + d + ' запущена!';
-                            const fileName = _dirname  + 'tasks.txt';
+                            const fileName = _dirname  + '/tasks.txt';
                             fs.appendFileSync(fileName, data);
 
                             //отправить сообщение в админку
