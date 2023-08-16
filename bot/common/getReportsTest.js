@@ -332,7 +332,10 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                         //60-минутная готовность
                         console.log("запуск оповещения (1-х часовая готовность)")
                         setTimeout(() => {
-                            console.log('СТАРТ - Задача 2 в ' + d + ' запущена!' + '\n');
+                            const data = 'СТАРТ - Задача 2 в ' + d + ' запущена!' + '\n';
+                            const fileName = _dirname  + '/tasks.txt';
+                            fs.appendFileSync(fileName, data);
+
                             //отправить сообщение в админку
                             let socket = io(socketUrl);
                             socket.emit("sendNotif", {
@@ -343,7 +346,10 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                         //30-минутная готовность
                         console.log("запуск оповещения (30-минутна готовность)")
                         setTimeout(() => {
-                            console.log('СТАРТ - Задача 3 в ' + d + ' запущена!' + '\n');
+                            const data = 'СТАРТ - Задача 3 в ' + d + ' запущена!' + '\n';
+                            const fileName = _dirname  + '/tasks.txt';
+                            fs.appendFileSync(fileName, data);
+                            
                             //отправить сообщение в админку
                             let socket = io(socketUrl);
                             socket.emit("sendNotif", {
@@ -354,7 +360,10 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                         //15-минутная готовность
                         console.log("запуск оповещения (15-минутная готовность)")
                         setTimeout(() => {
-                            console.log('СТАРТ - Задача 4 в ' + d + ' запущена!' + '\n');
+                            const data = 'СТАРТ - Задача 4 в ' + d + ' запущена!' + '\n';
+                            const fileName = _dirname  + '/tasks.txt';
+                            fs.appendFileSync(fileName, data);
+
                             //отправить сообщение в админку
                             let socket = io(socketUrl);
                             socket.emit("sendNotif", {
@@ -365,7 +374,10 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                         //0 готовность
                         console.log("запуск оповещения (0 готовность)")
                         setTimeout(() => {
-                            console.log('СТАРТ - Задача 5 в ' + d + ' запущена!' + '\n');
+                            const data = 'СТАРТ - Задача 5 в ' + d + ' запущена!' + '\n';
+                            const fileName = _dirname  + '/tasks.txt';
+                            fs.appendFileSync(fileName, data);
+
                             //отправить сообщение в админку
                             let socket = io(socketUrl);
                             socket.emit("sendNotif", {
