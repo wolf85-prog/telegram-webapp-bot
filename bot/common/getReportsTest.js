@@ -260,14 +260,14 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
             let arrTaskCount1 = []
 
             //отправить сообщение по каждой дате
-            datesObj.forEach((date, ind)=> {
+            datesObj.forEach((date, i)=> {
                 const d = new Date(date.date.split('+')[0]);
                 const d2 = new Date()
 
                 if(d >= d2) {
                     if (!date.consilience) { 
-                        datesObj[ind].consilience = true
-                        const arr_copy = arr_all[ind]
+                        datesObj[i].consilience = true
+                        const arr_copy = arr_all[i]
 
                         const d = new Date(date.date.split('+')[0]);
                         const month = String(d.getMonth()+1).padStart(2, "0");
