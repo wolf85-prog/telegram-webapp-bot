@@ -38,6 +38,12 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
     let all = [];
     let date_db;
 
+    let tasks1 = []
+    let tasks2 = []
+    let tasks3 = []
+    let tasks4 = []
+    let tasks5 = []
+
     // начало цикла Специалисты ----------------------------------------------------------------------
     // 86400 секунд в дне
     var minutCount = 0;
@@ -219,28 +225,24 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
             // 2-й отчет
 
             //получить название проекта из ноушена
-            let project_name;   
+            let project_name;  
+            let project_manager; 
+            let project_status;
+
             await fetch(`${botApiUrl}/project/${projectId}`)
             .then((response) => response.json())
             .then((data) => {
                 if (data) {
                     project_name = data?.properties.Name.title[0]?.plain_text;
+                    project_manager = data?.properties["Менеджер"].relation[0]?.id;
+                    project_status = data?.properties["Статус проекта"].select.name
                 }  else {
                     project_name = projectName
+                    project_manager = '';
+                    project_status ='';
                 }                             
             });
 
-            //получить менеджера проекта из ноушена
-            let project_manager;
-            await fetch(`${botApiUrl}/project/${projectId}`)
-            .then((response) => response.json())
-            .then((data) => {
-                if (data) {
-                    project_manager = data?.properties["Менеджер"].relation[0]?.id;
-                }  else {
-                    project_manager = '';
-                }                             
-            });
 
             //получить TelegramID менеджера проекта из ноушена
             let chatId_manager;
@@ -258,14 +260,14 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
             let arrTaskCount1 = []
 
             //отправить сообщение по каждой дате
-            datesObj.forEach((date, i)=> {
+            datesObj.forEach((date, ind)=> {
                 const d = new Date(date.date.split('+')[0]);
                 const d2 = new Date()
 
                 if(d >= d2) {
                     if (!date.consilience) { 
-                        datesObj[i].consilience = true
-                        const arr_copy = arr_all[i]
+                        datesObj[ind].consilience = true
+                        const arr_copy = arr_all[ind]
 
                         const d = new Date(date.date.split('+')[0]);
                         const month = String(d.getMonth()+1).padStart(2, "0");
@@ -304,192 +306,110 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
 //---------------------------------------------------------------------------------------------------
 
                         //отправка напоминания
-                        var timeDiff = d.getTime() - 7200000; //120 минут
-                        var timeDiff2 = d.getTime() - 3600000;//60 минут
-                        var timeDiff3 = d.getTime() - 1800000;//30 минут
-                        var timeDiff4 = d.getTime() - 900000; //15 минут
-                        var timeDiff5 = d.getTime();          //0 минут
+                        if (project_status === 'Load' || project_status === 'Ready' || project_status === 'On Air') {
+                            var timeDiff = d.getTime() - 7200000; //120 минут
+                            var timeDiff2 = d.getTime() - 3600000;//60 минут
+                            var timeDiff3 = d.getTime() - 1800000;//30 минут
+                            var timeDiff4 = d.getTime() - 900000; //15 минут
+                            var timeDiff5 = d.getTime();          //0 минут
 
-                        const milliseconds = timeDiff - Date.now(); //120 минут
-                        const milliseconds2 = timeDiff2 - Date.now(); //60 минут
-                        const milliseconds3 = timeDiff3 - Date.now(); //30 минут
-                        const milliseconds4 = timeDiff4 - Date.now(); //15 минут
-                        const milliseconds5 = timeDiff5 - Date.now(); //0 минут
+                            const milliseconds = timeDiff - Date.now(); //120 минут
+                            const milliseconds2 = timeDiff2 - Date.now(); //60 минут
+                            const milliseconds3 = timeDiff3 - Date.now(); //30 минут
+                            const milliseconds4 = timeDiff4 - Date.now(); //15 минут
+                            const milliseconds5 = timeDiff5 - Date.now(); //0 минут
 
-                        console.log("запуск оповещения (2-х часовая готовность)")
-                        const timeoutObj1 = setTimeout(() => {
-                            const data = 'СТАРТ - Задача 1 в ' + d + ' запущена!' + '\n';
-                            const fileName = _dirname  + '/tasks.txt';
-                            fs.appendFileSync(fileName, data);
-                            
-                            //отправить сообщение в админку
-                            let socket = io(socketUrl);
-                            socket.emit("sendNotif", {
-                                task: 1
-                            })
-                        }, milliseconds) 
+                            // clearTimeout(tasks1[i]);
+                            // clearTimeout(tasks2[i]);
+                            // clearTimeout(tasks3[i]);
+                            // clearTimeout(tasks4[i]);
+                            // clearTimeout(tasks5[i]);
 
-                        //60-минутная готовность
-                        console.log("запуск оповещения (1-х часовая готовность)")
-                        setTimeout(() => {
-                            const data = 'СТАРТ - Задача 2 в ' + d + ' запущена!' + '\n';
+                            //120-минутная готовность
+                            const data = 'Задача 1 в ' + timeDiff + ' ' + project_name + '\n';
                             const fileName = _dirname  + '/tasks.txt';
                             fs.appendFileSync(fileName, data);
 
-                            //отправить сообщение в админку
-                            let socket = io(socketUrl);
-                            socket.emit("sendNotif", {
-                                task: 2
-                            })
-                        }, milliseconds2) 
+                            tasks1[i] = setTimeout(() => {
+                                const data = 'СТАРТ - Задача 1 в ' + d + ' запущена! Проект: ' + project_name + '\n';
+                                const fileName = _dirname  + '/tasks.txt';
+                                fs.appendFileSync(fileName, data);
+                                
+                                //отправить сообщение в админку
+                                let socket = io(socketUrl);
+                                socket.emit("sendNotif", {
+                                    task: 1
+                                })
+                            }, milliseconds) 
 
-                        //30-минутная готовность
-                        console.log("запуск оповещения (30-минутна готовность)")
-                        setTimeout(() => {
-                            const data = 'СТАРТ - Задача 3 в ' + d + ' запущена!' + '\n';
-                            const fileName = _dirname  + '/tasks.txt';
+                            //60-минутная готовность
+                            const data2 = 'Задача 2 в ' + timeDiff2 + ' ' + project_name + '\n';
+                            const fileName2 = _dirname  + '/tasks.txt';
+                            fs.appendFileSync(fileName2, data2);
+
+                            tasks2[i] = setTimeout(() => {
+                                const data = 'СТАРТ - Задача 2 в ' + d + ' запущена! Проект: ' + project_name + '\n';
+                                const fileName = _dirname  + '/tasks.txt';
+                                fs.appendFileSync(fileName, data);
+
+                                //отправить сообщение в админку
+                                let socket = io(socketUrl);
+                                socket.emit("sendNotif", {
+                                    task: 2
+                                })
+                            }, milliseconds2) 
+
+                            //30-минутная готовность
+                            const data3 = 'Задача 3 в ' + timeDiff3 + ' ' + project_name + '\n';
+                            const fileName3 = _dirname  + '/tasks.txt';
+                            fs.appendFileSync(fileName3, data3);
+
+                            tasks3[i] = setTimeout(() => {
+                                const data = 'СТАРТ - Задача 3 в ' + d + ' запущена! Проект: ' + project_name + '\n';
+                                const fileName = _dirname  + '/tasks.txt';
+                                fs.appendFileSync(fileName, data);
+                                
+                                //отправить сообщение в админку
+                                let socket = io(socketUrl);
+                                socket.emit("sendNotif", {
+                                    task: 3
+                                })
+                            }, milliseconds3) 
+
+                            //15-минутная готовность
+                            const data4 = 'Задача 4 в ' + timeDiff4 + ' ' + project_name + '\n';
+                            const fileName4 = _dirname  + '/tasks.txt';
+                            fs.appendFileSync(fileName4, data4);
+
+                            tasks4[i] = setTimeout(() => {
+                                const data = 'СТАРТ - Задача 4 в ' + d + ' запущена! Проект: ' + project_name + '\n';
+                                const fileName = _dirname  + '/tasks.txt';
+                                fs.appendFileSync(fileName, data);
+
+                                //отправить сообщение в админку
+                                let socket = io(socketUrl);
+                                socket.emit("sendNotif", {
+                                    task: 4
+                                })
+                            }, milliseconds4) 
+
+                            //0 готовность
+                            const data5 = 'Задача 5 в ' + timeDiff5 + ' ' + project_name + '\n';
+                            const fileName5 = _dirname  + '/tasks.txt';
                             fs.appendFileSync(fileName, data);
-                            
-                            //отправить сообщение в админку
-                            let socket = io(socketUrl);
-                            socket.emit("sendNotif", {
-                                task: 3
-                            })
-                        }, milliseconds3) 
 
-                        //15-минутная готовность
-                        console.log("запуск оповещения (15-минутная готовность)")
-                        setTimeout(() => {
-                            const data = 'СТАРТ - Задача 4 в ' + d + ' запущена!' + '\n';
-                            const fileName = _dirname  + '/tasks.txt';
-                            fs.appendFileSync(fileName, data);
+                            tasks5[i] = setTimeout(() => {
+                                const data = 'СТАРТ - Задача 5 в ' + d + ' запущена! Проект: ' + project_name + '\n';
+                                const fileName = _dirname  + '/tasks.txt';
+                                fs.appendFileSync(fileName, data);
 
-                            //отправить сообщение в админку
-                            let socket = io(socketUrl);
-                            socket.emit("sendNotif", {
-                                task: 4
-                            })
-                        }, milliseconds4) 
-
-                        //0 готовность
-                        console.log("запуск оповещения (0 готовность)")
-                        setTimeout(() => {
-                            const data = 'СТАРТ - Задача 5 в ' + d + ' запущена!' + '\n';
-                            const fileName = _dirname  + '/tasks.txt';
-                            fs.appendFileSync(fileName, data);
-
-                            //отправить сообщение в админку
-                            let socket = io(socketUrl);
-                            socket.emit("sendNotif", {
-                                task: 5
-                            })
-                        }, milliseconds5)
-
-                        //отправка напоминания
-                        // var timeDiff = d.getTime() - 7200000;
-                        // var timeDiff2 = d.getTime() - 3600000;
-                        // var timeDiff3 = d.getTime() - 1800000;
-                        // var timeDiff4 = d.getTime() - 900000;
-                        // const date2 = new Date(timeDiff)
-                        // const date3 = new Date(timeDiff2)
-                        // const date4 = new Date(timeDiff3)
-                        // const date5 = new Date(timeDiff4)
-
-                        //120-минутная готовность 
-                        // const month2 = String(date2.getMonth()+1).padStart(2, "0");
-                        // const day2 = String(date2.getDate()).padStart(2, "0");
-                        // const chas2 = date2.getHours();
-                        // const min2 = String(date2.getMinutes()).padStart(2, "0");
-
-                        // console.log("запуск оповещения (2-х часовая готовность)")
-                        // let task1 = cron.schedule(`${min2} ${chas2} ${day2} ${month2} *`, () =>  {
-                        //     console.log('СТАРТ - Задача 1 в ' + date2 + ' запущена!');
-                            
-                        //     //отправить сообщение в админку
-                        //     let socket = io(socketUrl);
-                        //     socket.emit("sendNotif", {
-                        //         task: 1
-                        //     })
-                        // }, {
-                        //     scheduled: true,
-                        //     timezone: "Europe/Moscow"
-                        // });
-
-
-                        // //60-минутная готовность
-                        // const month3 = String(date3.getMonth()+1).padStart(2, "0");
-                        // const day3 = String(date3.getDate()).padStart(2, "0");
-                        // const chas3 = date3.getHours();
-                        // const min3 = String(date3.getMinutes()).padStart(2, "0");
-
-                        // console.log("запуск оповещения (1-х часовая готовность)")
-                        // const task2 = cron.schedule(`${min3} ${chas3} ${day3} ${month3} *`, () =>  {
-                        //     console.log('СТАРТ - Задача 2 в ' + date3 + ' запущена!');
-                            
-                        //     //отправить сообщение в админку
-                        //     let socket = io(socketUrl);
-                        //     socket.emit("sendNotif", {
-                        //         task: 2
-                        //     })
-                        // }, {
-                        //     scheduled: true,
-                        //     timezone: "Europe/Moscow"
-                        // });
-
-                        // //30-минутная готовность
-                        // const month4 = String(date4.getMonth()+1).padStart(2, "0");
-                        // const day4 = String(date4.getDate()).padStart(2, "0");
-                        // const chas4 = date4.getHours();
-                        // const min4 = String(date4.getMinutes()).padStart(2, "0");
-
-                        // console.log("запуск оповещения (30-мин готовность)")
-                        // let task3 = cron.schedule(`${min4} ${chas4} ${day4} ${month4} *`, () =>  {
-                        //     console.log('СТАРТ - Задача 3 в ' + date4 + ' запущена!');
-                            
-                        //     //отправить сообщение в админку
-                        //     let socket = io(socketUrl);
-                        //     socket.emit("sendNotif", {
-                        //         task: 3
-                        //     })
-                        // }, {
-                        //     scheduled: true,
-                        //     timezone: "Europe/Moscow"
-                        // });
-
-                        // //15-минутная готовность
-                        // const month5 = String(date5.getMonth()+1).padStart(2, "0");
-                        // const day5 = String(date5.getDate()).padStart(2, "0");
-                        // const chas5 = date5.getHours();
-                        // const min5 = String(date5.getMinutes()).padStart(2, "0");
-
-                        // console.log("запуск оповещения (15-мин готовность)")
-                        // let task4 = cron.schedule(`${min5} ${chas5} ${day5} ${month5} *`, () =>  {
-                        //     console.log('СТАРТ - Задача 4 в ' + date5 + ' запущена!');
-                            
-                        //     //отправить сообщение в админку
-                        //     let socket = io(socketUrl);
-                        //     socket.emit("sendNotif", {
-                        //         task: 4
-                        //     })
-                        // }, {
-                        //     scheduled: true,
-                        //     timezone: "Europe/Moscow"
-                        // });
-
-                        // //0 готовность
-                        // console.log("запуск оповещения (0 готовность)")
-                        // let task5 = cron.schedule(`${min} ${chas} ${day} ${month} *`, () =>  {
-                        //     console.log('СТАРТ - Задача 5 в ' + d + ' запущена!');
-                            
-                        //     //отправить сообщение в админку
-                        //     let socket = io(socketUrl);
-                        //     socket.emit("sendNotif", {
-                        //         task: 5
-                        //     })
-                        // }, {
-                        //     scheduled: true,
-                        //     timezone: "Europe/Moscow"
-                        // });
+                                //отправить сообщение в админку
+                                let socket = io(socketUrl);
+                                socket.emit("sendNotif", {
+                                    task: 5
+                                })
+                            }, milliseconds5)
+                        }
 //----------------------------------------------------------------------------------------------
                     }
                 } else {
