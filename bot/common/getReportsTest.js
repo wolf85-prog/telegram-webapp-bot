@@ -38,11 +38,8 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
     let all = [];
     let date_db;
 
-    let tasks1 = []
-    let tasks2 = []
-    let tasks3 = []
-    let tasks4 = []
-    let tasks5 = []
+    let task1, task2, task3, task4, task5
+
 
     // начало цикла Специалисты ----------------------------------------------------------------------
     // 86400 секунд в дне
@@ -262,7 +259,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
             //отправить сообщение по каждой дате
             datesObj.forEach((date, i)=> {
                 const d = new Date(date.date.split('+')[0]);
-                const d2 = new Date()
+                const d2 = new Date().getTime() + 10800000
 
                 if(d >= d2) {
                     if (!date.consilience) { 
@@ -305,109 +302,99 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                         }, 2500 * ++i)  
 //---------------------------------------------------------------------------------------------------
 
+                        //создаю оповещения
+
                         //отправка напоминания
                         if (project_status === 'Load' || project_status === 'Ready' || project_status === 'On Air') {
+
                             var timeDiff = d.getTime() - 7200000; //120 минут
                             var timeDiff2 = d.getTime() - 3600000;//60 минут
                             var timeDiff3 = d.getTime() - 1800000;//30 минут
                             var timeDiff4 = d.getTime() - 900000; //15 минут
                             var timeDiff5 = d.getTime();          //0 минут
 
-                            const milliseconds = timeDiff - Date.now(); //120 минут
-                            const milliseconds2 = timeDiff2 - Date.now(); //60 минут
-                            const milliseconds3 = timeDiff3 - Date.now(); //30 минут
-                            const milliseconds4 = timeDiff4 - Date.now(); //15 минут
-                            const milliseconds5 = timeDiff5 - Date.now(); //0 минут
+                            const date2 = new Date(timeDiff)
+                            const date3 = new Date(timeDiff2)
+                            const date4 = new Date(timeDiff3)
+                            const date5 = new Date(timeDiff4)
+                            const date6 = new Date(timeDiff5)
+                            const dateNow = new Date(d2)
 
-                            // clearTimeout(tasks1[i]);
-                            // clearTimeout(tasks2[i]);
-                            // clearTimeout(tasks3[i]);
-                            // clearTimeout(tasks4[i]);
-                            // clearTimeout(tasks5[i]);
+                            const milliseconds = Math.floor((date2 - dateNow)); //120 минут
+                            const milliseconds2 = Math.floor((date3 - dateNow)); //60 минут
+                            const milliseconds3 = Math.floor((date4 - dateNow)); //30 минут
+                            const milliseconds4 = Math.floor((date5 - dateNow)); //15 минут
+                            const milliseconds5 = Math.floor((date6 - dateNow)); //0 минут
 
                             //120-минутная готовность
-                            const data = 'Задача 1 в ' + timeDiff + ' ' + project_name + '\n';
-                            const fileName = _dirname  + '/tasks.txt';
-                            fs.appendFileSync(fileName, data);
-
-                            tasks1[i] = setTimeout(() => {
-                                const data = 'СТАРТ - Задача 1 в ' + d + ' запущена! Проект: ' + project_name + '\n';
-                                const fileName = _dirname  + '/tasks.txt';
-                                fs.appendFileSync(fileName, data);
-                                
+                            if (task1) {
+                                clearTimeout(task1);    
+                                console.log("Задача 1 удалена! " + project_name)                       
+                            } 
+                            console.log("!!!!Планирую запуск сообщения 1...!!!!")     
+                            task1 = setTimeout(async() => {
                                 //отправить сообщение в админку
                                 let socket = io(socketUrl);
                                 socket.emit("sendNotif", {
                                     task: 1
-                                })
+                                }) 
                             }, milliseconds) 
+ 
 
                             //60-минутная готовность
-                            const data2 = 'Задача 2 в ' + timeDiff2 + ' ' + project_name + '\n';
-                            const fileName2 = _dirname  + '/tasks.txt';
-                            fs.appendFileSync(fileName2, data2);
-
-                            tasks2[i] = setTimeout(() => {
-                                const data = 'СТАРТ - Задача 2 в ' + d + ' запущена! Проект: ' + project_name + '\n';
-                                const fileName = _dirname  + '/tasks.txt';
-                                fs.appendFileSync(fileName, data);
-
+                            if (task2) {
+                                clearTimeout(task2);    
+                                console.log("Задача 2 удалена! " + project_name)                       
+                            } 
+                            console.log("!!!!Планирую запуск сообщения 2...!!!!")     
+                            task2 = setTimeout(async() => {
                                 //отправить сообщение в админку
                                 let socket = io(socketUrl);
                                 socket.emit("sendNotif", {
                                     task: 2
-                                })
-                            }, milliseconds2) 
+                                }) 
+                            }, milliseconds2)
 
                             //30-минутная готовность
-                            const data3 = 'Задача 3 в ' + timeDiff3 + ' ' + project_name + '\n';
-                            const fileName3 = _dirname  + '/tasks.txt';
-                            fs.appendFileSync(fileName3, data3);
-
-                            tasks3[i] = setTimeout(() => {
-                                const data = 'СТАРТ - Задача 3 в ' + d + ' запущена! Проект: ' + project_name + '\n';
-                                const fileName = _dirname  + '/tasks.txt';
-                                fs.appendFileSync(fileName, data);
-                                
+                            if (task3) {
+                                clearTimeout(task3);    
+                                console.log("Задача 3 удалена! " + project_name)                       
+                            } 
+                            console.log("!!!!Планирую запуск сообщения 3...!!!!")     
+                            task3 = setTimeout(async() => {
                                 //отправить сообщение в админку
                                 let socket = io(socketUrl);
                                 socket.emit("sendNotif", {
                                     task: 3
-                                })
-                            }, milliseconds3) 
+                                }) 
+                            }, milliseconds3)
 
                             //15-минутная готовность
-                            const data4 = 'Задача 4 в ' + timeDiff4 + ' ' + project_name + '\n';
-                            const fileName4 = _dirname  + '/tasks.txt';
-                            fs.appendFileSync(fileName4, data4);
-
-                            tasks4[i] = setTimeout(() => {
-                                const data = 'СТАРТ - Задача 4 в ' + d + ' запущена! Проект: ' + project_name + '\n';
-                                const fileName = _dirname  + '/tasks.txt';
-                                fs.appendFileSync(fileName, data);
-
+                            if (task4) {
+                                clearTimeout(task4);    
+                                console.log("Задача 4 удалена! " + project_name)                       
+                            } 
+                            console.log("!!!!Планирую запуск сообщения 4...!!!!")     
+                            task4 = setTimeout(async() => {
                                 //отправить сообщение в админку
                                 let socket = io(socketUrl);
                                 socket.emit("sendNotif", {
                                     task: 4
-                                })
-                            }, milliseconds4) 
+                                }) 
+                            }, milliseconds4)
 
                             //0 готовность
-                            const data5 = 'Задача 5 в ' + timeDiff5 + ' ' + project_name + '\n';
-                            const fileName5 = _dirname  + '/tasks.txt';
-                            fs.appendFileSync(fileName, data);
-
-                            tasks5[i] = setTimeout(() => {
-                                const data = 'СТАРТ - Задача 5 в ' + d + ' запущена! Проект: ' + project_name + '\n';
-                                const fileName = _dirname  + '/tasks.txt';
-                                fs.appendFileSync(fileName, data);
-
+                            if (task5) {
+                                clearTimeout(task5);    
+                                console.log("Задача 5 удалена! " + project_name)                       
+                            } 
+                            console.log("!!!!Планирую запуск сообщения 5...!!!!")     
+                            task5 = setTimeout(async() => {
                                 //отправить сообщение в админку
                                 let socket = io(socketUrl);
                                 socket.emit("sendNotif", {
                                     task: 5
-                                })
+                                }) 
                             }, milliseconds5)
                         }
 //----------------------------------------------------------------------------------------------
