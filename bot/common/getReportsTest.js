@@ -9,21 +9,53 @@ const webAppUrl = process.env.WEB_APP_URL;
 const botApiUrl = process.env.REACT_APP_API_URL
 const socketUrl = process.env.SOCKET_APP_URL
 const chatTelegramId = process.env.CHAT_ID
-
 const {specData} = require('../data/specData');
-
 //socket.io
 const {io} = require("socket.io-client")
-
 //fetch api
 const fetch = require('node-fetch');
-
 // подключаем модуль для работы с файловой системой
 const fs = require('fs');
 const path = require('path')
-
 // путь к текущей директории
 const _dirname = path.resolve(__dirname, 'logs') 
+
+const getDates = async(projectId, projectName) => {
+    arr_count0 = []
+    arr_count = []
+    arr_count2 = [] 
+    allDate = []
+    arr_all = []
+
+    //1)получить блок и бд
+    if (projectId) {         
+        const blockId = await getBlocks(projectId);            
+        if (blockId) {   
+            databaseBlock = await getDatabaseId(blockId);   
+        } else {
+            console.log("Ошибка доступа к БД Основной состав!")
+        }
+    }
+        
+    //--------------------------------------------------------------------------------
+    //получить массив дат
+    if (databaseBlock) {   
+        databaseBlock.map((db) => {
+            allDate.push(db?.date)                        
+        })
+    } else {
+        console.log("Даты не определны! Проект: " + projectName)
+    }
+
+    //получить уникальные даты из Основного состава по возрастанию
+    const dates = [...allDate].filter((el, ind) => ind === allDate.indexOf(el));
+    const sortedDates = [...dates].sort((a, b) => {       
+        var dateA = new Date(a), dateB = new Date(b) 
+        return dateA-dateB  //сортировка по возрастающей дате  
+    })
+
+    return sortedDates
+}
 
 module.exports = async function getReportsTest(projectId, projectName, bot) {
     console.log('START GET REPORTS TEST: ' + projectName)
@@ -40,6 +72,107 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
 
     let task1, task2, task3, task4, task5
 
+    //создаю оповещения
+    //получить название проекта из ноушена
+    let project_name;  
+    let project_status;
+
+    await fetch(`${botApiUrl}/project/${projectId}`)
+    .then((response) => response.json())
+    .then((data) => {
+        if (data) {
+            project_name = data?.properties.Name.title[0]?.plain_text;
+            project_status = data?.properties["Статус проекта"].select.name
+        }  else {
+            project_name = projectName
+            project_status ='';
+        }                             
+    });
+
+    const datesObj = getDates(projectId, project_name)
+
+    if (datesObj.length > 0) {
+        //отправить сообщение по каждой дате
+        datesObj.forEach((date, i)=> {
+            const d = new Date(date.split('+')[0]);
+            const d2 = new Date().getTime() + 10800000
+
+            if(d >= d2) {
+                //отправка напоминания
+                if (project_status === 'Load' || project_status === 'Ready' || project_status === 'On Air') {
+
+                    var timeDiff = d.getTime() - 7200000; //120 минут
+                    var timeDiff2 = d.getTime() - 3600000;//60 минут
+                    var timeDiff3 = d.getTime() - 1800000;//30 минут
+                    var timeDiff4 = d.getTime() - 900000; //15 минут
+                    var timeDiff5 = d.getTime();          //0 минут
+
+                    const date2 = new Date(timeDiff)
+                    const date3 = new Date(timeDiff2)
+                    const date4 = new Date(timeDiff3)
+                    const date5 = new Date(timeDiff4)
+                    const date6 = new Date(timeDiff5)
+                    const dateNow = new Date(d2)
+
+                    const milliseconds = Math.floor((date2 - dateNow)); //120 минут
+                    const milliseconds2 = Math.floor((date3 - dateNow)); //60 минут
+                    const milliseconds3 = Math.floor((date4 - dateNow)); //30 минут
+                    const milliseconds4 = Math.floor((date5 - dateNow)); //15 минут
+                    const milliseconds5 = Math.floor((date6 - dateNow)); //0 минут
+
+                    //120-минутная готовность
+                    console.log("!!!!Планирую запуск сообщения 1...!!!!")     
+                    task1 = setTimeout(async() => {
+                        //отправить сообщение в админку
+                        let socket = io(socketUrl);
+                        socket.emit("sendNotif", {
+                            task: 1
+                        }) 
+                    }, milliseconds) 
+
+                    //60-минутная готовность
+                    console.log("!!!!Планирую запуск сообщения 2...!!!!")     
+                    task2 = setTimeout(async() => {
+                        //отправить сообщение в админку
+                        let socket = io(socketUrl);
+                        socket.emit("sendNotif", {
+                            task: 2
+                        }) 
+                    }, milliseconds2)
+
+                    //30-минутная готовность
+                    console.log("!!!!Планирую запуск сообщения 3...!!!!")     
+                    task3 = setTimeout(async() => {
+                        //отправить сообщение в админку
+                        let socket = io(socketUrl);
+                        socket.emit("sendNotif", {
+                            task: 3
+                        }) 
+                    }, milliseconds3)
+
+                    //15-минутная готовность
+                    console.log("!!!!Планирую запуск сообщения 4...!!!!")     
+                    task4 = setTimeout(async() => {
+                        //отправить сообщение в админку
+                        let socket = io(socketUrl);
+                        socket.emit("sendNotif", {
+                            task: 4
+                        }) 
+                    }, milliseconds4)
+
+                    //0 готовность
+                    console.log("!!!!Планирую запуск сообщения 5...!!!!")     
+                    task5 = setTimeout(async() => {
+                        //отправить сообщение в админку
+                        let socket = io(socketUrl);
+                        socket.emit("sendNotif", {
+                            task: 5
+                        }) 
+                    }, milliseconds5)
+                }
+            }
+        })
+    }
 
     // начало цикла Специалисты ----------------------------------------------------------------------
     // 86400 секунд в дне
@@ -75,34 +208,8 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
         }
 
 
-        //2) проверить массив специалистов (1-й отчет)
-            // JSON.parse(project.spec).map((value)=> {           
-            //     count_fio = 0;
-            //     count_title = 0;
-
-            //     //если бд ноушена доступна
-            //     if (databaseBlock) {
-            //         databaseBlock.map((db) => {
-            //             if (value.spec === db.spec) {
-            //                 if (db.fio) {
-            //                     count_fio++               
-            //                 }else {
-            //                     count_fio;
-            //                 } 
-            //             }
-            //         })
-
-            //         //для первого отчета
-            //         const obj = {
-            //             title: value.spec,
-            //             title2: value.cat,
-            //             count_fio: count_fio,
-            //             count_title: value.count,
-            //         }
-            //         arr_count0.push(obj) 
-
-            //     }                                           
-            // }) // map spec end
+        //2) проверить массив специалистов (1-й отчет)                           
+        //......
 
         //--------------------------------------------------------------------------------
         //получить массив дат
@@ -113,7 +220,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
         }
 
         //получить уникальные даты из Основного состава по возрастанию
-        dates = [...allDate].filter((el, ind) => ind === allDate.indexOf(el));
+        const dates = [...allDate].filter((el, ind) => ind === allDate.indexOf(el));
         const sortedDates = [...dates].sort((a, b) => {       
             var dateA = new Date(a), dateB = new Date(b) 
             return dateA-dateB  //сортировка по возрастающей дате  
@@ -196,31 +303,9 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
 
         // 1-й отчет
         if (i < 1) {
-
-//                 const d = new Date(project.datestart);
-//                 const month = String(d.getMonth()+1).padStart(2, "0");
-//                 const day = String(d.getDate()).padStart(2, "0");
-//                 const chas = d.getHours();
-//                 const minut = String(d.getMinutes()).padStart(2, "0");
-
-//                 const text = `Запрос на специалистов: 
-                            
-// ${day}.${month} | ${chas}:${minut} | ${project.name} | U.L.E.Y
-
-// ${arr_count0.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title).join('\n')}`    
-
-                //отаправить 1-й отчет
-                //const report = await bot.sendMessage(project.chatId, text)                         
-                    
-                // сохранить отправленное боту сообщение пользователя в БД
-
-                //Подключаемся к серверу socket
-
-                //отправить сообщение в админку
-  
+            //...
         } else {
             // 2-й отчет
-
             //получить название проекта из ноушена
             let project_name;  
             let project_manager; 
@@ -252,9 +337,6 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                     console.log("Manager TelegramId не найден!")
                 }                             
             });
-
-            let arrTask1 = []
-            let arrTaskCount1 = []
 
             //отправить сообщение по каждой дате
             datesObj.forEach((date, i)=> {
@@ -301,9 +383,7 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                             }) 
                         }, 2500 * ++i)  
 //---------------------------------------------------------------------------------------------------
-
                         //создаю оповещения
-
                         //отправка напоминания
                         if (project_status === 'Load' || project_status === 'Ready' || project_status === 'On Air') {
 
@@ -325,6 +405,10 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                             const milliseconds3 = Math.floor((date4 - dateNow)); //30 минут
                             const milliseconds4 = Math.floor((date5 - dateNow)); //15 минут
                             const milliseconds5 = Math.floor((date6 - dateNow)); //0 минут
+
+                            // const data = 'СТАРТ - Задача 1 в ' + d + ' запущена! Проект: ' + project_name + '\n';
+                            // const fileName = _dirname  + '/tasks.txt';
+                            // fs.appendFileSync(fileName, data);
 
                             //120-минутная готовность
                             if (task1) {

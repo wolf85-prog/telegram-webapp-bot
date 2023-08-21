@@ -115,6 +115,10 @@ module.exports = async function newDatabase3(parent_page_id) {
                                 "name": "IT-специалист",
                                 "color": "green"
                             },
+                            {
+                                "name": "Оператор-постановщик",
+                                "color": "green"
+                            },
                             //-------- Riggers ------------------------------
                             {
                                 "name": "Riggers",
@@ -164,11 +168,11 @@ module.exports = async function newDatabase3(parent_page_id) {
                                 "color": "yellow"
                             },
                             {
-                                "name": "C личным ТС [B/C]",
+                                "name": "C личным ТС [B\/C]",
                                 "color": "yellow"
                             },
                             {
-                                "name": "Без личного ТС [B/C]",
+                                "name": "Без личного ТС [B\/C]",
                                 "color": "yellow"
                             },
                             {
@@ -242,8 +246,8 @@ module.exports = async function newDatabase3(parent_page_id) {
                                 "name": "Документальная съемка",
                                 "color": "yellow"
                             },
-                            //-------- Party ------------------------------
-                            {
+                             //-------- Party ------------------------------
+                             {
                                 "name": "Party",
                                 "color": "green"
                             },
@@ -264,7 +268,7 @@ module.exports = async function newDatabase3(parent_page_id) {
                                 "color": "green"
                             },
                             {
-                                "name": "Певец/певица",
+                                "name": "Певец \/ певица",
                                 "color": "green"
                             },
                             {
@@ -281,23 +285,27 @@ module.exports = async function newDatabase3(parent_page_id) {
                                 "color": "orange"
                             },
                             {
-                                "name": "Аттракционы",
+                                "name": "Квесты",
                                 "color": "orange"
                             },
                             {
-                                "name": "Надувные фигуры",
+                                "name": "Квизы",
                                 "color": "orange"
                             },
                             {
-                                "name": "Игровые автоматы",
+                                "name": "Аниматоры",
                                 "color": "orange"
                             },
                             {
-                                "name": "Активности",
+                                "name": "Настольные игры \/ игровые автоматы",
                                 "color": "orange"
                             },
                             {
-                                "name": "Настольные игры",
+                                "name": "Пневмокостюмы \/ ростовые куклы",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "Активности \/ аттракционы",
                                 "color": "orange"
                             },
                              //-------- Blacklist ------------------------------

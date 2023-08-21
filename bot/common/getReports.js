@@ -24,6 +24,44 @@ const path = require('path')
 // путь к текущей директории
 const _dirname = path.resolve(__dirname, 'logs') 
 
+
+const getDates = async(projectId, projectName) => {
+    arr_count0 = []
+    arr_count = []
+    arr_count2 = [] 
+    allDate = []
+    arr_all = []
+
+    //1)получить блок и бд
+    if (projectId) {
+        const blockId = await getBlocks(projectId);            
+        if (blockId) {   
+            databaseBlock = await getDatabaseId(blockId);   
+        } else {
+            console.log("Ошибка доступа к БД Основной состав!")
+        }
+    }
+        
+    //--------------------------------------------------------------------------------
+    //получить массив дат
+    if (databaseBlock) {   
+        databaseBlock.map((db) => {
+            allDate.push(db?.date)                        
+        })
+    } else {
+        console.log("Даты не определны! Проект: " + projectName)
+    }
+
+    //получить уникальные даты из Основного состава по возрастанию
+    const dates = [...allDate].filter((el, ind) => ind === allDate.indexOf(el));
+    const sortedDates = [...dates].sort((a, b) => {       
+        var dateA = new Date(a), dateB = new Date(b) 
+        return dateA-dateB  //сортировка по возрастающей дате  
+    })
+
+    return sortedDates
+}
+
 module.exports = async function getReports(project, bot) {
     console.log('START GET REPORTS: ' + project.id + " " + project.name)
 
@@ -39,6 +77,107 @@ module.exports = async function getReports(project, bot) {
 
     let task1, task2, task3, task4, task5
 
+    //создаю оповещения
+    //получить название проекта из ноушена
+    let project_name;  
+    let project_status;
+
+    await fetch(`${botApiUrl}/project/${project.id}`)
+    .then((response) => response.json())
+    .then((data) => {
+        if (data) {
+            project_name = data?.properties.Name.title[0]?.plain_text;
+            project_status = data?.properties["Статус проекта"].select.name
+        }  else {
+            project_name = project.name
+            project_status ='';
+        }                             
+    });
+    
+    const datesObj = getDates(project.id, project_name)
+
+    if (datesObj.length > 0) {
+        //отправить сообщение по каждой дате
+        datesObj.forEach((date, i)=> {
+            const d = new Date(date.split('+')[0]);
+            const d2 = new Date().getTime() + 10800000
+
+            if(d >= d2) {
+                //отправка напоминания
+                if (project_status === 'Load' || project_status === 'Ready' || project_status === 'On Air') {
+
+                    var timeDiff = d.getTime() - 7200000; //120 минут
+                    var timeDiff2 = d.getTime() - 3600000;//60 минут
+                    var timeDiff3 = d.getTime() - 1800000;//30 минут
+                    var timeDiff4 = d.getTime() - 900000; //15 минут
+                    var timeDiff5 = d.getTime();          //0 минут
+
+                    const date2 = new Date(timeDiff)
+                    const date3 = new Date(timeDiff2)
+                    const date4 = new Date(timeDiff3)
+                    const date5 = new Date(timeDiff4)
+                    const date6 = new Date(timeDiff5)
+                    const dateNow = new Date(d2)
+
+                    const milliseconds = Math.floor((date2 - dateNow)); //120 минут
+                    const milliseconds2 = Math.floor((date3 - dateNow)); //60 минут
+                    const milliseconds3 = Math.floor((date4 - dateNow)); //30 минут
+                    const milliseconds4 = Math.floor((date5 - dateNow)); //15 минут
+                    const milliseconds5 = Math.floor((date6 - dateNow)); //0 минут
+
+                    //120-минутная готовность
+                    console.log("!!!!Планирую запуск сообщения 1...!!!!")     
+                    task1 = setTimeout(async() => {
+                        //отправить сообщение в админку
+                        let socket = io(socketUrl);
+                        socket.emit("sendNotif", {
+                            task: 1
+                        }) 
+                    }, milliseconds) 
+
+                    //60-минутная готовность
+                    console.log("!!!!Планирую запуск сообщения 2...!!!!")     
+                    task2 = setTimeout(async() => {
+                        //отправить сообщение в админку
+                        let socket = io(socketUrl);
+                        socket.emit("sendNotif", {
+                            task: 2
+                        }) 
+                    }, milliseconds2)
+
+                    //30-минутная готовность
+                    console.log("!!!!Планирую запуск сообщения 3...!!!!")     
+                    task3 = setTimeout(async() => {
+                        //отправить сообщение в админку
+                        let socket = io(socketUrl);
+                        socket.emit("sendNotif", {
+                            task: 3
+                        }) 
+                    }, milliseconds3)
+
+                    //15-минутная готовность
+                    console.log("!!!!Планирую запуск сообщения 4...!!!!")     
+                    task4 = setTimeout(async() => {
+                        //отправить сообщение в админку
+                        let socket = io(socketUrl);
+                        socket.emit("sendNotif", {
+                            task: 4
+                        }) 
+                    }, milliseconds4)
+
+                    //0 готовность
+                    console.log("!!!!Планирую запуск сообщения 5...!!!!")     
+                    task5 = setTimeout(async() => {
+                        //отправить сообщение в админку
+                        let socket = io(socketUrl);
+                        socket.emit("sendNotif", {
+                            task: 5
+                        }) 
+                    }, milliseconds5)
+                }
+            }
+        })
+    }
 
     // начало цикла Специалисты ----------------------------------------------------------------------
     // 86400 секунд в дне
