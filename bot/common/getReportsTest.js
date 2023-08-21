@@ -89,6 +89,8 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
         }                             
     });
 
+    console.log("Статус проекта " + projectName + " - " + project_status ? project_status : "не определен")
+
     const datesObj = getDates(projectId, project_name)
 
     if (datesObj.length > 0) {
