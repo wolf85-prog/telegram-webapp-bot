@@ -88,7 +88,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
         }                             
     });
 
-    console.log('START GET REPORTS 2: ' + projectName + " - " + project_status)
+    console.log('START GET REPORTS 2: ' + project_name + " - " + project_status)
 
     const datesObj = await getDates(projectId, project_name)
     console.log(datesObj)
