@@ -89,7 +89,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
         }                             
     });
 
-    console.log("Статус проекта " + projectName + " - " + project_status ? project_status : "не определен")
+    console.log("Статус проекта " + projectName + " - " + project_status)
 
     const datesObj = getDates(projectId, project_name)
 
