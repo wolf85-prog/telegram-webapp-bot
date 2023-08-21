@@ -58,7 +58,6 @@ const getDates = async(projectId, projectName) => {
 }
 
 module.exports = async function getReportsTest(projectId, projectName, bot) {
-    console.log('START GET REPORTS TEST: ' + projectName)
 
     let count_fio;
     let count_title;
@@ -89,11 +88,12 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
         }                             
     });
 
-    console.log("Статус проекта " + projectName + " - " + project_status)
+    console.log('START GET REPORTS 2: ' + projectName + " - " + project_status)
 
     const datesObj = getDates(projectId, project_name)
+    console.log(datesObj)
 
-    if (datesObj.length > 0) {
+    if (datesObj) {
         //отправить сообщение по каждой дате
         datesObj.forEach((date, i)=> {
             const d = new Date(date.split('+')[0]);
