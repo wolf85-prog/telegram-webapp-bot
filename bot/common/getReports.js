@@ -80,7 +80,7 @@ module.exports = async function getReports(project, bot) {
     let project_name;  
     let project_status;
 
-    await fetch(`${botApiUrl}/project/${projectId}`)
+    await fetch(`${botApiUrl}/project/${project.projectId}`)
     .then((response) => response.json())
     .then((data) => {
         if (data) {
