@@ -101,7 +101,7 @@ module.exports = async function getReports(project, bot) {
         //отправить сообщение по каждой дате
         datesObj.forEach((date, i)=> {
             const d = new Date(date.split('+')[0]);
-            const d2 = new Date().getTime() + 10800000
+            const d2 = new Date().getTime()
 
             if(d >= d2) {
                 //отправка напоминания
@@ -118,7 +118,8 @@ module.exports = async function getReports(project, bot) {
                     const date4 = new Date(timeDiff3)
                     const date5 = new Date(timeDiff4)
                     const date6 = new Date(timeDiff5)
-                    const dateNow = new Date(d2)
+                    const d3 = new Date().getTime() + 10800000
+                    const dateNow = new Date(d3)
 
                     const milliseconds = Math.floor((date2 - dateNow)); //120 минут
                     const milliseconds2 = Math.floor((date3 - dateNow)); //60 минут
