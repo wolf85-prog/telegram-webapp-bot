@@ -1,4 +1,5 @@
 require("dotenv").config();
+const getAllProjects = require("./getAllProjects");
 const getBlocks = require('./getBlocks')
 const getDatabaseId = require('./getDatabaseId')
 
