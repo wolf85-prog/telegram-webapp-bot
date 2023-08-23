@@ -1119,7 +1119,7 @@ const start = async () => {
                         const obj = {
                             id: page.id,
                             name: page.name,
-                            date: project.datestart,
+                            date: project.date,
                         }
                         arr.push(obj)
                     }
@@ -1140,7 +1140,7 @@ const start = async () => {
                         getReportsTest(project.id, project.name, bot)
                     }, 2000 * ++i)     
                 })
-            }, 5000) 
+            }, 6000) 
     
 
         });
