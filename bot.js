@@ -1127,13 +1127,13 @@ const start = async () => {
             })
 
             setTimeout(()=>{
-                console.log("arr: ", arr)
+                //console.log("arr: ", arr)
 
                 //запуск отчетов
-                console.log('Запуск отчетов проектов...');
+                console.log('Запускаю отчеты проектов...');
                 
                 arr.map(async (project, i) => {
-                    console.log("Новый проект: " + project.name + " - " + project.datestart)
+                    console.log(project.name + " - " + project.date)
                     
                     setTimeout(function(){
                         //начать получать отчеты
