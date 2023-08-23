@@ -1107,20 +1107,20 @@ const start = async () => {
             const arrProjects = await getAllProjects()
 
             const arr2 = arrProjects.map(async(page)=> {
-                const blockId = await getBlocks(page.id);
-                if (blockId) { 
-                    databaseBlock = await getDatabaseId(blockId);  
-                    if (databaseBlock && databaseBlock?.length !== 0) {
-                        //let project = databaseBlock.find(item => new Date(item.date) >= d)
-                        // return {
-                        //     id: page.id,
-                        //     name: page.name,
-                        //     datestart: project.date,
-                        // }
-                        //arr.push("проект")
-                        //console.log(arr)
-                    }               
-                }  
+                // const blockId = await getBlocks(page.id);
+                // if (blockId) { 
+                //     databaseBlock = await getDatabaseId(blockId);  
+                //     if (databaseBlock && databaseBlock?.length !== 0) {
+                //         //let project = databaseBlock.find(item => new Date(item.date) >= d)
+                //         // return {
+                //         //     id: page.id,
+                //         //     name: page.name,
+                //         //     datestart: project.date,
+                //         // }
+                //         //arr.push("проект")
+                //         //console.log(arr)
+                //     }               
+                // }  
                 
                 return {
                     id: page.id,
