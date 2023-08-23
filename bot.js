@@ -1102,6 +1102,7 @@ const start = async () => {
             
             //получить новые проекты
             const arrProjects = await getProjectNew()
+            console.log(arrProjects)
 
             //запуск отчетов
             console.log('Запуск отчетов проектов...');
