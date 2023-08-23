@@ -24,6 +24,7 @@ module.exports = async function getProjectNew() {
                     arr.push(obj)
                 }
             }
+            console.log(arr)
         })
 
         return arr;  
