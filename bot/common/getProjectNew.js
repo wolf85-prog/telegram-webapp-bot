@@ -9,7 +9,7 @@ module.exports = async function getProjectNew() {
     try {
         const d = new Date()
         const arrProjects = await getAllProjects()
-        console.log("arrProjects: ", arrProjects)
+        //console.log("arrProjects: ", arrProjects)
 
         const responseResults = arrProjects.map(async(page)=> {
             const blockId = await getBlocks(page.id);
@@ -26,7 +26,7 @@ module.exports = async function getProjectNew() {
                 }
             }
         })
-        //console.log(arr)
+        console.log(responseResults)
         return responseResults;  
     } catch (error) {
         console.error(error.message)
