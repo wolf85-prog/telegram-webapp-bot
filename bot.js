@@ -69,6 +69,7 @@ const updateToDo = require("./bot/common/updateToDo");
 const getProject = require("./bot/common/getProject");
 const sendMessageAdmin = require("./bot/common/sendMessageAdmin");
 const getProjectNew = require("./bot/common/getProjectNew");
+const getAllProjects = require("./bot/common/getAllProjects");
 
 const app = express();
 
@@ -1101,7 +1102,29 @@ const start = async () => {
             console.log('HTTPS Server Bot running on port ' + PORT);
             
             //получить новые проекты
-            const arrProjects = await getProjectNew()
+            let arr = []
+            const d = new Date()
+            const arrProjects = await getAllProjects()
+
+            arrProjects.forEach(async(page)=> {
+                const blockId = await getBlocks(page.id);
+                if (blockId) { 
+                    databaseBlock = await getDatabaseId(blockId);  
+                    if (databaseBlock && databaseBlock?.length !== 0) {
+                        //let project = databaseBlock.find(item => new Date(item.date) >= d)
+                        // return {
+                        //     id: page.id,
+                        //     name: page.name,
+                        //     datestart: project.date,
+                        // }
+                        arr.push("проект")
+                        //console.log(arr)
+                    }               
+                }        
+            })
+
+            console.log(arr)
+            //const arrProjects = await getProjectNew()
             //console.log(arrProjects)
 
             //запуск отчетов
