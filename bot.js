@@ -1106,6 +1106,7 @@ const start = async () => {
             const d = new Date()
             const arrProjects = await getAllProjects()
 
+            console.log('Запрос всех проектов...');
             setTimeout(() => {
                 const arr2 = arrProjects.map((page)=> {
                     // const blockId = await getBlocks(page.id);
@@ -1129,7 +1130,10 @@ const start = async () => {
                 })
     
                 console.log(arr2)
-            }, 3000)
+
+                //запуск отчетов
+                console.log('Запуск отчетов проектов...');
+            }, 2000)
 
             
             //const arrProjects = await getProjectNew()
