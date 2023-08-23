@@ -20,8 +20,6 @@ module.exports = async function getAllProjects() {
             };
         });
 
-        console.log("All: ", responseResults)
-
         return responseResults;
     } catch (error) {
         console.error(error.message)

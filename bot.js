@@ -1102,19 +1102,19 @@ const start = async () => {
             
             //получить новые проекты
             const arrProjects = await getProjectNew()
-            console.log(arrProjects)
+            //console.log(arrProjects)
 
             //запуск отчетов
             console.log('Запуск отчетов проектов...');
             
-            arrProjects.map(async (project, i) => {
-                console.log("Новый проект: " + project.name + " - " + project.datestart)
+            // arrProjects.map(async (project, i) => {
+            //     console.log("Новый проект: " + project.name + " - " + project.datestart)
                 
-                setTimeout(function(){
-                    //начать получать отчеты
-                    getReportsTest(project.id, project.name, bot)
-                }, 2000 * ++i)     
-            })
+            //     setTimeout(function(){
+            //         //начать получать отчеты
+            //         getReportsTest(project.id, project.name, bot)
+            //     }, 2000 * ++i)     
+            // })
 
         });
 

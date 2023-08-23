@@ -15,18 +15,19 @@ module.exports = async function getProjectNew() {
             const blockId = await getBlocks(page.id);
             if (blockId) { 
                 databaseBlock = await getDatabaseId(blockId);  
-                if (databaseBlock && databaseBlock?.length !== 0) {
-                    let project = databaseBlock.find(item => new Date(item.date) >= d)
-                    return {
-                        id: page.id,
-                        name: page.name,
-                        datestart: project.date,
-                    }
+                console.log(databaseBlock)
+                //if (databaseBlock && databaseBlock?.length !== 0) {
+                    //let project = databaseBlock.find(item => new Date(item.date) >= d)
+                    // return {
+                    //     id: page.id,
+                    //     name: page.name,
+                    //     datestart: project.date,
+                    // }
                     //arr.push(obj)
-                }
+                //}
             }
         })
-        console.log(responseResults)
+        //console.log(responseResults)
         return responseResults;  
     } catch (error) {
         console.error(error.message)
