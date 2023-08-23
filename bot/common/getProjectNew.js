@@ -24,7 +24,7 @@ module.exports = async function getProjectNew() {
                     //     datestart: project.date,
                     // }
                     arr.push("проект")
-                    //console.log("проект")
+                    console.log(arr)
                 }
 
                 // databaseBlock.map(item => {
