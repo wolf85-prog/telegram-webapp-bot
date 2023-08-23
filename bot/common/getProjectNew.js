@@ -6,7 +6,7 @@ const getDatabaseId = require('./getDatabaseId')
 //получить id блока заданной страницы по id
 module.exports = async function getProjectNew() {
     try {
-        let arr = []
+        let arr
         const d = new Date()
         const arrProjects = await getAllProjects()
 
@@ -25,6 +25,7 @@ module.exports = async function getProjectNew() {
                 }
             }
         })
+        console.log(arr)
         return arr;  
     } catch (error) {
         console.error(error.message)
