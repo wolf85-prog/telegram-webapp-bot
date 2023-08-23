@@ -1106,7 +1106,7 @@ const start = async () => {
             const d = new Date()
             const arrProjects = await getAllProjects()
 
-            arrProjects.forEach(async(page)=> {
+            const arr2 = arrProjects.map(async(page)=> {
                 const blockId = await getBlocks(page.id);
                 if (blockId) { 
                     databaseBlock = await getDatabaseId(blockId);  
@@ -1117,13 +1117,17 @@ const start = async () => {
                         //     name: page.name,
                         //     datestart: project.date,
                         // }
-                        arr.push("проект")
+                        //arr.push("проект")
                         //console.log(arr)
                     }               
-                }        
+                }  
+                
+                return {
+                    id: page.id,
+                }
             })
 
-            console.log(arr)
+            console.log(arr2)
             //const arrProjects = await getProjectNew()
             //console.log(arrProjects)
 
