@@ -23,8 +23,8 @@ module.exports = async function getProjectNew() {
                     //     name: page.name,
                     //     datestart: project.date,
                     // }
-                    //arr.push(obj)
-                    console.log("проект")
+                    arr.push("проект")
+                    //console.log("проект")
                 }
 
                 // databaseBlock.map(item => {
@@ -43,7 +43,7 @@ module.exports = async function getProjectNew() {
             
         })
 
-        //console.log(arr)
+        console.log(arr)
  
         return arr
     } catch (error) {
