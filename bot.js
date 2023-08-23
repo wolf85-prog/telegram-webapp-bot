@@ -1130,7 +1130,7 @@ const start = async () => {
                     }
                 })
     
-                console.log(arr2)
+                console.log(arrProjects)
 
                 //запуск отчетов
                 console.log('Запуск отчетов проектов...');
