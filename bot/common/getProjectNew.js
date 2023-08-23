@@ -10,23 +10,23 @@ module.exports = async function getProjectNew() {
         const d = new Date()
         const arrProjects = await getAllProjects()
 
-        arrProjects.map(async(page)=> {
+        const responseResults = arrProjects.map(async(page)=> {
             const blockId = await getBlocks(page.id);
             if (blockId) { 
                 databaseBlock = await getDatabaseId(blockId);  
                 if (databaseBlock && databaseBlock?.length !== 0) {
                     let project = databaseBlock.find(item => new Date(item.date) >= d)
-                    const obj = {
+                    return {
                         id: page.id,
                         name: page.name,
                         datestart: project.date,
                     }
-                    arr.push(obj)
+                    //arr.push(obj)
                 }
             }
         })
-        console.log(arr)
-        return arr;  
+        //console.log(arr)
+        return responseResults;  
     } catch (error) {
         console.error(error.message)
     }
