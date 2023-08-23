@@ -28,7 +28,7 @@ module.exports = async function getProjectNew() {
             }
         })
         //console.log(responseResults)
-        return responseResults;  
+        //return responseResults;  
     } catch (error) {
         console.error(error.message)
     }
