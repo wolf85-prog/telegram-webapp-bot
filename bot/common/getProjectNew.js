@@ -25,6 +25,10 @@ module.exports = async function getProjectNew() {
         //         };
         // });
 
+        let arr = []
+        const d = new Date()
+        const arrProjects = await getAllProjects()
+
         console.log("Запускаю фильтрацию проектов...")
 
         arrProjects.forEach(async(page)=> {
