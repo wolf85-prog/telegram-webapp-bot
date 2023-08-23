@@ -10,7 +10,7 @@ module.exports = async function getProjectNew() {
         const d = new Date()
         const arrProjects = await getAllProjects()
 
-        arrProjects.forEach(async(page)=> {
+        arrProjects.map(async(page)=> {
             const blockId = await getBlocks(page.id);
             if (blockId) { 
                 databaseBlock = await getDatabaseId(blockId);  
@@ -24,9 +24,7 @@ module.exports = async function getProjectNew() {
                     arr.push(obj)
                 }
             }
-            //console.log(arr)
         })
-
         return arr;  
     } catch (error) {
         console.error(error.message)
