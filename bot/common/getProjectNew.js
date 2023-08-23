@@ -2,11 +2,11 @@ require("dotenv").config();
 const getAllProjects = require("./getAllProjects");
 const getBlocks = require('./getBlocks')
 const getDatabaseId = require('./getDatabaseId')
+let arr = []
 
 //получить id блока заданной страницы по id
 module.exports = async function getProjectNew() {
     try {
-        let arr
         const d = new Date()
         const arrProjects = await getAllProjects()
 
