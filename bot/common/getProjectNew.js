@@ -11,25 +11,39 @@ module.exports = async function getProjectNew() {
         const arrProjects = await getAllProjects()
         //console.log("arrProjects: ", arrProjects)
 
-        const responseResults = arrProjects.map(async(page)=> {
+        arrProjects.map(async(page)=> {
             const blockId = await getBlocks(page.id);
             if (blockId) { 
                 databaseBlock = await getDatabaseId(blockId);  
                 //console.log(databaseBlock)
-                if (databaseBlock && databaseBlock?.length !== 0) {
-                    let project = databaseBlock.find(item => new Date(item.date) >= d)
-                    // return {
-                    //     id: page.id,
-                    //     name: page.name,
-                    //     datestart: project.date,
-                    // }
-                    //arr.push(obj)
-                    console.log(project)
-                }
+                // if (databaseBlock && databaseBlock?.length !== 0) {
+                //     let project = databaseBlock.find(item => new Date(item.date) >= d)
+                //     // return {
+                //     //     id: page.id,
+                //     //     name: page.name,
+                //     //     datestart: project.date,
+                //     // }
+                //     //arr.push(obj)
+                //     console.log(project)
+                // }
+
+                databaseBlock.map(item => {
+                    if (new Date(item.date) >= d) {
+                        const obj = {
+                            id: page.id,
+                            name: page.name,
+                            date: item.date,
+                        }
+                        arr.push(obj) 
+                    }
+                })
+                
             }
         })
-        //console.log(responseResults)
-        //return responseResults;  
+
+        console.log(arr)
+ 
+        return arr
     } catch (error) {
         console.error(error.message)
     }
