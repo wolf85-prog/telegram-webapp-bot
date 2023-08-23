@@ -9,6 +9,7 @@ module.exports = async function getProjectNew() {
     try {
         const d = new Date()
         const arrProjects = await getAllProjects()
+        console.log("arrProjects: ", arrProjects)
 
         const responseResults = arrProjects.map(async(page)=> {
             const blockId = await getBlocks(page.id);
