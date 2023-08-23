@@ -1119,7 +1119,7 @@ const start = async () => {
                         const obj = {
                             id: page.id,
                             name: page.name,
-                            date: project.date,
+                            date: project.datestart,
                         }
                         arr.push(obj)
                     }
