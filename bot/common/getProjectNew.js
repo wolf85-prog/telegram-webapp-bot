@@ -39,10 +39,11 @@ module.exports = async function getProjectNew() {
                 })
                 
             }
+            console.log("проект")
             
         })
 
-        console.log(arr)
+        //console.log(arr)
  
         return arr
     } catch (error) {
