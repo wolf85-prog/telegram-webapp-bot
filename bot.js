@@ -1104,7 +1104,7 @@ const start = async () => {
             //получить новые проекты
             //const arrProjects = await getProjectNew()
             let arr = []
-            const d = new Date()
+            const d = new Date().getTime() + 10800000
             const arrProjects = await getAllProjects()
 
             console.log("Запускаю фильтрацию проектов...")
