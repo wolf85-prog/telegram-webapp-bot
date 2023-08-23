@@ -69,7 +69,6 @@ const updateToDo = require("./bot/common/updateToDo");
 const getProject = require("./bot/common/getProject");
 const sendMessageAdmin = require("./bot/common/sendMessageAdmin");
 const getProjectNew = require("./bot/common/getProjectNew");
-const getAllProjects = require("./bot/common/getAllProjects");
 
 const app = express();
 
@@ -1102,57 +1101,19 @@ const start = async () => {
             console.log('HTTPS Server Bot running on port ' + PORT);
             
             //получить новые проекты
-            let arr = []
-            const d = new Date()
-            const arrProjects = await getAllProjects()
-
-            console.log('Запрос всех проектов...');
-            setTimeout(() => {
-                const arr2 = arrProjects.map(async(page)=> {
-                    const blockId = await getBlocks(page.id);
-                    if (blockId) { 
-                        databaseBlock = await getDatabaseId(blockId);  
-                        //if (databaseBlock && databaseBlock?.length !== 0) {
-                            //let project = databaseBlock.find(item => new Date(item.date) >= d)
-                            // return {
-                            //     id: page.id,
-                            //     name: page.name,
-                            //     datestart: project.date,
-                            // }
-                            //arr.push("проект")
-                            //console.log(arr)
-                        //}               
-                    }  
-                    
-                    return {
-                        id: page.id,
-                        name: page.name,
-                    }
-                })
-    
-                setTimeout(() => {
-                    console.log(arr2)
-                }, 4000)
-
-                //запуск отчетов
-                console.log('Запуск отчетов проектов...');
-            }, 3000)
-
-            
-            //const arrProjects = await getProjectNew()
-            //console.log(arrProjects)
+            const arrProjects = await getProjectNew()
 
             //запуск отчетов
-            //console.log('Запуск отчетов проектов...');
+            console.log('Запуск отчетов проектов...');
             
-            // arrProjects.map(async (project, i) => {
-            //     console.log("Новый проект: " + project.name + " - " + project.datestart)
+            arrProjects.map(async (project, i) => {
+                console.log("Новый проект: " + project.name + " - " + project.datestart)
                 
-            //     setTimeout(function(){
-            //         //начать получать отчеты
-            //         getReportsTest(project.id, project.name, bot)
-            //     }, 2000 * ++i)     
-            // })
+                setTimeout(function(){
+                    //начать получать отчеты
+                    getReportsTest(project.id, project.name, bot)
+                }, 2000 * ++i)     
+            })
 
         });
 

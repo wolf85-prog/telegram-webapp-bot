@@ -1,37 +1,28 @@
 require("dotenv").config();
-const getAllProjects = require("./getAllProjects");
-const getBlocks = require('./getBlocks')
-const getDatabaseId = require('./getDatabaseId')
+//notion api
+const { Client } = require("@notionhq/client");
+const notion = new Client({ auth: process.env.NOTION_API_KEY });
+const databaseId = process.env.NOTION_DATABASE_ID
 
 //получить id блока заданной страницы по id
 module.exports = async function getProjectNew() {
-    let arr = []
     try {
-        const d = new Date()
-        const arrProjects = await getAllProjects()
-        //console.log("arrProjects: ", arrProjects)
+        const response = await notion.databases.query({
+            database_id: databaseId
+        });
 
-        arrProjects.forEach(async(page)=> {
-            const blockId = await getBlocks(page.id);
-            if (blockId) { 
-                databaseBlock = await getDatabaseId(blockId);  
-                //console.log(databaseBlock)
-                if (databaseBlock && databaseBlock?.length !== 0) {
-                    //let project = databaseBlock.find(item => new Date(item.date) >= d)
-                    // return {
-                    //     id: page.id,
-                    //     name: page.name,
-                    //     datestart: project.date,
-                    // }
-                    arr.push("проект")
-                    //console.log(arr)
-                }               
-            }        
-        })
+        const d2 = new Date()
 
-        console.log(arr)
- 
-        return arr
+        const responseResults = response.results.filter((page) => new Date(page.properties["Дата"].date.start) > d2).map((page) => {
+                return {
+                    id: page.id,
+                    name: page.properties.Name.title[0]?.plain_text,
+                    datestart: page.properties["Дата"].date.start,
+                    crmID: page.properties.Crm_ID.rich_text[0]?.plain_text               
+                };
+        });
+
+        return responseResults;  
     } catch (error) {
         console.error(error.message)
     }
