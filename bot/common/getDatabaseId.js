@@ -9,7 +9,7 @@ module.exports = async function getDatabaseId(baseId) {
             database_id: baseId
         });
 
-        const responseResults = response.results.filter((page) => page.properties["2. Дата"].date !== null).map((page) => {
+        const responseResults = response.results.filter((page) => page.properties["2. Дата"].date).map((page) => {
             return {
                 date: page.properties["2. Дата"].date?.start,
                 fio: page.properties["4. ФИО"].relation[0]?.id,

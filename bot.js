@@ -1099,6 +1099,7 @@ const start = async () => {
         
         httpsServer.listen(PORT, async () => {
             console.log('HTTPS Server Bot running on port ' + PORT);
+            
             //получить новые проекты
             const arrProjects = await getProjectNew()
 
