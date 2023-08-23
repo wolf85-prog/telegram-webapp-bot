@@ -1130,7 +1130,9 @@ const start = async () => {
                     }
                 })
     
-                console.log(arrProjects)
+                setTimeout(() => {
+                    console.log(arr2)
+                }, 4000)
 
                 //запуск отчетов
                 console.log('Запуск отчетов проектов...');
