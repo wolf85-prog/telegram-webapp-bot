@@ -11,11 +11,11 @@ module.exports = async function getAllProjects() {
             database_id: databaseId
         });
 
-        const d2 = new Date().getTime() - 2592000000
+        const d2 = new Date() //.getTime() - 2592000000
         const date2 = new Date('2023-07-30')
         //console.log(date2)
 
-        const responseResults = response.results.filter((page) => new Date(page.properties["Дата"].date.start) > date2).map((page) => {
+        const responseResults = response.results.filter((page) => new Date(page.properties["Дата"].date.start) > d2).map((page) => {
             return {
                 id: page.id,
                 name: page.properties.Name.title[0]?.plain_text,
