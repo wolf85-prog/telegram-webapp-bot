@@ -101,7 +101,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
 
             if(d >= d2) {
                 //отправка напоминания
-                if (project_status === 'Load' || project_status === 'Ready' || project_status === 'On Air') {
+                if (project_status === 'Load' || project_status === 'Ready' || project_status === 'OnAir') {
 
                     var timeDiff = d.getTime() - 7200000; //120 минут
                     var timeDiff2 = d.getTime() - 3600000;//60 минут
@@ -387,7 +387,7 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
 //---------------------------------------------------------------------------------------------------
                         //создаю оповещения
                         //отправка напоминания
-                        if (project_status === 'Load' || project_status === 'Ready' || project_status === 'On Air') {
+                        if (project_status === 'Load' || project_status === 'Ready' || project_status === 'OnAir') {
 
                             var timeDiff = d.getTime() - 7200000; //120 минут
                             var timeDiff2 = d.getTime() - 3600000;//60 минут
