@@ -12,8 +12,8 @@ module.exports = async function getAllProjects() {
         });
 
         const d2 = new Date().getTime() - 2592000000
-        const date2 = new Date(d2)
-        console.log(date2)
+        const date2 = new Date('2023-07-30')
+        //console.log(date2)
 
         const responseResults = response.results.filter((page) => new Date(page.properties["Дата"].date.start) > date2).map((page) => {
             return {
