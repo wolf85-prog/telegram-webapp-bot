@@ -123,54 +123,65 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                     const milliseconds5 = Math.floor((date6 - dateNow)); //0 минут
 
                     //120-минутная готовность
-                    console.log("!!!!Планирую запуск сообщения 1...!!!!")     
-                    task1 = setTimeout(async() => {
-                        //отправить сообщение в админку
-                        let socket = io(socketUrl);
-                        socket.emit("sendNotif", {
-                            task: 1
-                        }) 
-                    }, milliseconds) 
+                    if (milliseconds > 0) {
+                        console.log("!!!!Планирую запуск сообщения 1...!!!!")     
+                        task1 = setTimeout(async() => {
+                            //отправить сообщение в админку
+                            let socket = io(socketUrl);
+                            socket.emit("sendNotif", {
+                                task: 1
+                            }) 
+                        }, milliseconds)
+                    }
+                     
 
                     //60-минутная готовность
-                    console.log("!!!!Планирую запуск сообщения 2...!!!!")     
-                    task2 = setTimeout(async() => {
-                        //отправить сообщение в админку
-                        let socket = io(socketUrl);
-                        socket.emit("sendNotif", {
-                            task: 2
-                        }) 
-                    }, milliseconds2)
+                    if (milliseconds2 > 0) {
+                        console.log("!!!!Планирую запуск сообщения 2...!!!!")     
+                        task2 = setTimeout(async() => {
+                            //отправить сообщение в админку
+                            let socket = io(socketUrl);
+                            socket.emit("sendNotif", {
+                                task: 2
+                            }) 
+                        }, milliseconds2)
+                    }
 
                     //30-минутная готовность
-                    console.log("!!!!Планирую запуск сообщения 3...!!!!")     
-                    task3 = setTimeout(async() => {
-                        //отправить сообщение в админку
-                        let socket = io(socketUrl);
-                        socket.emit("sendNotif", {
-                            task: 3
-                        }) 
-                    }, milliseconds3)
+                    if (milliseconds3 > 0) {
+                        console.log("!!!!Планирую запуск сообщения 3...!!!!")     
+                        task3 = setTimeout(async() => {
+                            //отправить сообщение в админку
+                            let socket = io(socketUrl);
+                            socket.emit("sendNotif", {
+                                task: 3
+                            }) 
+                        }, milliseconds3)
+                    }
 
                     //15-минутная готовность
-                    console.log("!!!!Планирую запуск сообщения 4...!!!!")     
-                    task4 = setTimeout(async() => {
-                        //отправить сообщение в админку
-                        let socket = io(socketUrl);
-                        socket.emit("sendNotif", {
-                            task: 4
-                        }) 
-                    }, milliseconds4)
+                    if (milliseconds4 > 0) {
+                        console.log("!!!!Планирую запуск сообщения 4...!!!!")     
+                        task4 = setTimeout(async() => {
+                            //отправить сообщение в админку
+                            let socket = io(socketUrl);
+                            socket.emit("sendNotif", {
+                                task: 4
+                            }) 
+                        }, milliseconds4)
+                    }
 
                     //0 готовность
-                    console.log("!!!!Планирую запуск сообщения 5...!!!!")     
-                    task5 = setTimeout(async() => {
-                        //отправить сообщение в админку
-                        let socket = io(socketUrl);
-                        socket.emit("sendNotif", {
-                            task: 5
-                        }) 
-                    }, milliseconds5)
+                    if (milliseconds5 > 0) {
+                        console.log("!!!!Планирую запуск сообщения 5...!!!!")     
+                        task5 = setTimeout(async() => {
+                            //отправить сообщение в админку
+                            let socket = io(socketUrl);
+                            socket.emit("sendNotif", {
+                                task: 5
+                            }) 
+                        }, milliseconds5)
+                    }
                 }
             }
         })
@@ -417,14 +428,16 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                                 clearTimeout(task1);    
                                 console.log("Задача 1 удалена! " + project_name)                       
                             } 
-                            console.log("!!!!Планирую запуск сообщения 1...!!!!")     
-                            task1 = setTimeout(async() => {
-                                //отправить сообщение в админку
-                                let socket = io(socketUrl);
-                                socket.emit("sendNotif", {
-                                    task: 1
-                                }) 
-                            }, milliseconds) 
+                            if (milliseconds > 0) {
+                                console.log("!!!!Планирую запуск сообщения 1...!!!!")     
+                                task1 = setTimeout(async() => {
+                                    //отправить сообщение в админку
+                                    let socket = io(socketUrl);
+                                    socket.emit("sendNotif", {
+                                        task: 1
+                                    }) 
+                                }, milliseconds) 
+                            }
  
 
                             //60-минутная готовность
@@ -432,56 +445,64 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                                 clearTimeout(task2);    
                                 console.log("Задача 2 удалена! " + project_name)                       
                             } 
-                            console.log("!!!!Планирую запуск сообщения 2...!!!!")     
-                            task2 = setTimeout(async() => {
-                                //отправить сообщение в админку
-                                let socket = io(socketUrl);
-                                socket.emit("sendNotif", {
-                                    task: 2
-                                }) 
-                            }, milliseconds2)
+                            if (milliseconds2 > 0) {
+                                console.log("!!!!Планирую запуск сообщения 2...!!!!")     
+                                task2 = setTimeout(async() => {
+                                    //отправить сообщение в админку
+                                    let socket = io(socketUrl);
+                                    socket.emit("sendNotif", {
+                                        task: 2
+                                    }) 
+                                }, milliseconds2)
+                            }
 
                             //30-минутная готовность
                             if (task3) {
                                 clearTimeout(task3);    
                                 console.log("Задача 3 удалена! " + project_name)                       
                             } 
-                            console.log("!!!!Планирую запуск сообщения 3...!!!!")     
-                            task3 = setTimeout(async() => {
-                                //отправить сообщение в админку
-                                let socket = io(socketUrl);
-                                socket.emit("sendNotif", {
-                                    task: 3
-                                }) 
-                            }, milliseconds3)
+                            if (milliseconds3 > 0) {
+                                console.log("!!!!Планирую запуск сообщения 3...!!!!")     
+                                task3 = setTimeout(async() => {
+                                    //отправить сообщение в админку
+                                    let socket = io(socketUrl);
+                                    socket.emit("sendNotif", {
+                                        task: 3
+                                    }) 
+                                }, milliseconds3)
+                            }
 
                             //15-минутная готовность
                             if (task4) {
                                 clearTimeout(task4);    
                                 console.log("Задача 4 удалена! " + project_name)                       
                             } 
-                            console.log("!!!!Планирую запуск сообщения 4...!!!!")     
-                            task4 = setTimeout(async() => {
-                                //отправить сообщение в админку
-                                let socket = io(socketUrl);
-                                socket.emit("sendNotif", {
-                                    task: 4
-                                }) 
-                            }, milliseconds4)
+                            if (milliseconds4 > 0) {
+                                console.log("!!!!Планирую запуск сообщения 4...!!!!")     
+                                task4 = setTimeout(async() => {
+                                    //отправить сообщение в админку
+                                    let socket = io(socketUrl);
+                                    socket.emit("sendNotif", {
+                                        task: 4
+                                    }) 
+                                }, milliseconds4)
+                            }
 
                             //0 готовность
                             if (task5) {
                                 clearTimeout(task5);    
                                 console.log("Задача 5 удалена! " + project_name)                       
                             } 
-                            console.log("!!!!Планирую запуск сообщения 5...!!!!")     
-                            task5 = setTimeout(async() => {
-                                //отправить сообщение в админку
-                                let socket = io(socketUrl);
-                                socket.emit("sendNotif", {
-                                    task: 5
-                                }) 
-                            }, milliseconds5)
+                            if (milliseconds5 > 0) {
+                                console.log("!!!!Планирую запуск сообщения 5...!!!!")     
+                                task5 = setTimeout(async() => {
+                                    //отправить сообщение в админку
+                                    let socket = io(socketUrl);
+                                    socket.emit("sendNotif", {
+                                        task: 5
+                                    }) 
+                                }, milliseconds5)
+                            }
                         }
 //----------------------------------------------------------------------------------------------
                     }
