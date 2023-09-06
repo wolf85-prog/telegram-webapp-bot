@@ -1069,13 +1069,13 @@ bot.on('message', async (msg) => {
         socket.emit("sendMessage", {
             senderId: chatId,
             receiverId: chatTelegramId,
-            text: 'Информация принята',
+            text: 'Финальная смета одобрена!',
             convId: convId,
             messageId: messageId,
         })
 
 
-        return bot.sendMessage(chatId, 'Спасибо!')
+        return bot.sendMessage(chatId, 'Информация принята')
     }
 
     if (data === '/report') {
