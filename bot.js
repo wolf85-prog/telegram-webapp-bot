@@ -1061,7 +1061,7 @@ bot.on('message', async (msg) => {
     if (data === '/report_accept') {
 
         //отправить сообщение о создании проекта в админ-панель
-        const convId = await sendMyMessage('Пользователь нажал кнопку Принимаю', "text", chatId)
+        const convId = await sendMyMessage('Информация принята', "text", chatId)
 
         // Подключаемся к серверу socket
         let socket = io(socketUrl);
@@ -1069,7 +1069,7 @@ bot.on('message', async (msg) => {
         socket.emit("sendMessage", {
             senderId: chatId,
             receiverId: chatTelegramId,
-            text: 'Пользователь нажал кнопку Принимаю',
+            text: 'Информация принята',
             convId: convId,
             messageId: messageId,
         })
