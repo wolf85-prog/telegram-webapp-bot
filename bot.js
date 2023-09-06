@@ -1057,6 +1057,27 @@ bot.on('message', async (msg) => {
         return bot.sendMessage(chatId, 'Предварительная смета одобрена!')
     }
 
+    //кнопка в отчете
+    if (data === '/report_accept') {
+
+        //отправить сообщение о создании проекта в админ-панель
+        const convId = await sendMyMessage('Пользователь нажал кнопку Принимаю', "text", chatId)
+
+        // Подключаемся к серверу socket
+        let socket = io(socketUrl);
+        socket.emit("addUser", chatId)
+        socket.emit("sendMessage", {
+            senderId: chatId,
+            receiverId: chatTelegramId,
+            text: 'Пользователь нажал кнопку Принимаю',
+            convId: convId,
+            messageId: messageId,
+        })
+
+
+        return bot.sendMessage(chatId, 'Спасибо!')
+    }
+
     if (data === '/report') {
 
         //отправить сообщение о создании проекта в админ-панель

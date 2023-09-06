@@ -375,7 +375,15 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
 
                         //отправка сообщений по таймеру
                         setTimeout(async()=> {
-                            const report = await bot.sendMessage(chatId_manager, text)                         
+                            const report = await bot.sendMessage(chatId_manager, text, {
+                                reply_markup: ({
+                                    inline_keyboard:[
+                                        [
+                                            {"text": "Принимаю", callback_data:'/report_accept'},
+                                        ],
+                                    ]
+                                })
+                            })                         
                             console.log('Отчет отправлен заказчику! ', date.date);
 
                             // сохранить отправленное боту сообщение пользователя в БД
