@@ -649,7 +649,7 @@ bot.on('message', async (msg) => {
                     if(msg.document) {
                         ras = msg.document.mime_type.split('/')
                         //path = `${__dirname}/static/${filename}.${ras[1]}`; 
-                        path = `${__dirname}/static/${msg.document.file_name}`; 
+                        path = `${__dirname}/static/${msg.document.file_name}`.replaceAll(/\s/g, '_'); 
                     }
                     const filePath = fs.createWriteStream(path);
                     res.pipe(filePath);
@@ -660,7 +660,7 @@ bot.on('message', async (msg) => {
                         let convId;
                         if(msg.document) {
                             // сохранить отправленное боту сообщение пользователя в БД
-                            convId = await sendMyMessage(`${botApiUrl}/${msg.document.file_name}`, 'file', chatId, messageId)
+                            convId = await sendMyMessage(`${botApiUrl}/${msg.document.file_name}`.replaceAll(/\s/g, '_'), 'file', chatId, messageId)
                         }
 
                         // Подключаемся к серверу socket
@@ -669,7 +669,7 @@ bot.on('message', async (msg) => {
                         socket.emit("sendMessage", {
                             senderId: chatId,
                             receiverId: chatTelegramId,
-                            text: `${botApiUrl}/${msg.document.file_name}`,
+                            text: `${botApiUrl}/${msg.document.file_name}`.replaceAll(/\s/g, '_'),
                             convId: convId,
                         })
                     })

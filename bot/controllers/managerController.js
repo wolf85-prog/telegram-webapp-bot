@@ -163,7 +163,7 @@ async function getCompanys() {
             };
         });
 
-        console.log("companys size: ", results.length)
+        //console.log("companys size: ", results.length)
 
         return responseResults;
     } catch (error) {
