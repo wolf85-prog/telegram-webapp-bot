@@ -70,6 +70,7 @@ const getProject = require("./bot/common/getProject");
 const sendMessageAdmin = require("./bot/common/sendMessageAdmin");
 const getProjectNew = require("./bot/common/getProjectNew");
 const getAllProjects = require("./bot/common/getAllProjects");
+const updateToDoFinal = require("./bot/common/updateToDoFinal");
 
 const app = express();
 
@@ -974,6 +975,7 @@ bot.on('message', async (msg) => {
         })
     }
 
+    //предварительная смета
     if (data.startsWith('/smeta')) {
         const projectId = data.split(' ');
         console.log("projectId: ", projectId[1])
@@ -993,6 +995,47 @@ bot.on('message', async (msg) => {
         await updateToDo(block3.results[0].id);
 
         const poster = `${host}/files/${crmId}/pre/${crmId}_${chatId}_customer_1.pdf`
+        console.log("poster: ", poster)
+
+        // Подключаемся к серверу socket
+        let socket = io(socketUrl);
+        socket.emit("addUser", chatId)
+
+        //отправить сообщение об одобрении сметы проекта в админ-панель
+        const convId = await sendMyMessage('Предварительная смета одобрена!', "text", chatId)
+
+        socket.emit("sendMessage", {
+            senderId: chatId,
+            receiverId: chatTelegramId,
+            text: 'Предварительная смета одобрена!',
+            convId: convId,
+            messageId: messageId,
+            replyId: ''
+        })
+
+        return bot.sendMessage(chatId, 'Предварительная смета одобрена!')
+    }
+
+    //финальная смета
+    if (data.startsWith('/smetafinal')) {
+        const projectId = data.split(' ');
+        console.log("projectId: ", projectId[1])
+        console.log("Начинаю обрабатывать запрос подтверждения финальной сметы...")
+
+        const crmId = await getProject(projectId[1])
+
+        const block1 = await getBlock(projectId[1])
+        console.log("block1: ", block1.results[0].id)
+                        
+        const block2 = await getBlock(block1.results[0].id)
+        console.log("block2: ", block2.results[0].id)
+                        
+        const block3 = await getBlock(block2.results[0].id)
+        console.log("block3: ", block3.results[0].id)
+             
+        await updateToDoFinal(block3.results[0].id);
+
+        const poster = `${host}/files/${crmId}/final/${crmId}_${chatId}_1.pdf`
         console.log("poster: ", poster)
 
         // Подключаемся к серверу socket

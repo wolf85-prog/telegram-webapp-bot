@@ -73,5 +73,6 @@ router.get("/workers", workerController.workers);
 
 //-----------------POSTER---------------------------------
 router.post('/poster/send', posterController.sendPoster)
+router.post('/poster/final/send', posterController.sendPosterFinal)
 
 module.exports = router

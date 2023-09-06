@@ -75,6 +75,70 @@ class PosterController {
             return res.status(500).json(error.message);
         }
     }
+
+    async sendPosterFinal(req, res) {
+        const token = process.env.TELEGRAM_API_TOKEN
+        const host = process.env.HOST
+        const {crmId, chatId, ver} = req.body;
+        try {
+            //const poster = 'https://proj.uley.team/files/1389/pre/1389_1408579113_customer.pdf'
+            const poster = `${host}/files/${crmId}/final/${crmId}_${chatId}_${ver}.pdf`
+            console.log("poster final API: ", poster)
+
+            const response = await notion.databases.query({
+                database_id: databaseId,
+                filter: {
+                    property: "Crm_ID",
+                    rich_text: {
+                        "contains": crmId
+                    }
+                },         
+            });
+
+            //const project = await getProjectCrmId(crmId)
+            const projectId = response.results[0].id
+            console.log(projectId)
+
+
+            //Передаем данные боту
+            const keyboard = JSON.stringify({
+                inline_keyboard:[
+                    [{text: 'Подтвердить', callback_data:'/smetafinal ' + projectId}]
+                ]
+            });
+
+            console.log("Отправляю постер...")
+            const url_send_poster = `https://api.telegram.org/bot${token}/sendDocument?chat_id=${chatId}&document=${poster}&reply_markup=${keyboard}`
+            console.log(url_send_poster)
+
+            // создание базы данных "Основной состав"
+            const response2 = await fetch(url_send_poster);
+        
+            const data = await response2.json();
+
+            //сохранение сметы в базе данных
+            const convId = await sendMessageAdmin(poster, "image", chatId, null, true, 'Подтверждаю')
+
+            // Подключаемся к серверу socket
+            let socket = io(socketUrl);
+            socket.emit("addUser", chatId)
+
+            // //сохранить в контексте (отправка) сметы в админку
+            socket.emit("sendAdmin", { 
+                senderId: chatTelegramId,
+                receiverId: chatId,
+                text: poster,
+                type: 'image',
+                buttons: 'Подтверждаю',
+                convId: convId,
+                //messageId,
+            })
+
+            return res.status(200).json("Poster has been sent successfully");
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
 }
 
 module.exports = new PosterController()
