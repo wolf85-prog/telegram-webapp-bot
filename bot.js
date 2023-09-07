@@ -71,6 +71,9 @@ const sendMessageAdmin = require("./bot/common/sendMessageAdmin");
 const getProjectNew = require("./bot/common/getProjectNew");
 const getAllProjects = require("./bot/common/getAllProjects");
 const updateToDoFinal = require("./bot/common/updateToDoFinal");
+const updateSmetaFinal = require("./bot/common/updateSmetaFinal");
+const getSmeta = require("./bot/common/getSmeta");
+const updateSmeta = require("./bot/common/updateSmeta");
 
 const app = express();
 
@@ -992,10 +995,18 @@ bot.on('message', async (msg) => {
         const block3 = await getBlock(block2.results[0].id)
         console.log("block3: ", block3.results[0].id)
              
+        
+        //поставить галочку в проекте в поле Предварительная смета
         await updateToDo(block3.results[0].id);
 
         const poster = `${host}/files/${crmId}/pre/${crmId}_${chatId}_customer_1.pdf`
         console.log("poster: ", poster)
+
+        //найти смету по свойству Проект
+        const smetaId = await getSmeta(projectId[1])
+
+        //изменить тег в таб. Сметы в поле Финал. смета на Подтверждена
+        await updateSmeta(smetaId)
 
         // Подключаемся к серверу socket
         let socket = io(socketUrl);
@@ -1032,11 +1043,19 @@ bot.on('message', async (msg) => {
                         
         const block3 = await getBlock(block2.results[0].id)
         console.log("block3: ", block3.results[0].id)
-             
+           
+        //поставить галочку в проекте в поле Финальная смета
         await updateToDoFinal(block3.results[0].id);
 
-        const poster = `${host}/files/${crmId}/final/${crmId}_${chatId}_1.pdf`
-        console.log("poster: ", poster)
+        //const poster = `${host}/files/${crmId}/final/${crmId}_${chatId}_1.pdf`
+        //console.log("poster: ", poster)
+
+        //найти смету по свойству Проект
+        const smetaId = await getSmeta(projectId[1])
+
+        //изменить тег в таб. Сметы в поле Финал. смета на Подтверждена
+        await updateSmetaFinal(smetaId)
+
 
         // Подключаемся к серверу socket
         let socket = io(socketUrl);
