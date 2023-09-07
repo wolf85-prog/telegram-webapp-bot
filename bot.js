@@ -1047,8 +1047,8 @@ bot.on('message', async (msg) => {
         //поставить галочку в проекте в поле Финальная смета
         await updateToDoFinal(block3.results[0].id);
 
-        //const poster = `${host}/files/${crmId}/final/${crmId}_${chatId}_1.pdf`
-        //console.log("poster: ", poster)
+        const poster = `${host}/files/${crmId}/final/${crmId}_${chatId}_1.pdf`
+        console.log("poster: ", poster)
 
         //найти смету по свойству Проект
         const smetaId = await getSmeta(projectId[1])
@@ -1062,18 +1062,18 @@ bot.on('message', async (msg) => {
         socket.emit("addUser", chatId)
 
         //отправить сообщение об одобрении сметы проекта в админ-панель
-        const convId = await sendMyMessage('Предварительная смета одобрена!', "text", chatId)
+        const convId = await sendMyMessage('Финальная смета одобрена!', "text", chatId)
 
         socket.emit("sendMessage", {
             senderId: chatId,
             receiverId: chatTelegramId,
-            text: 'Предварительная смета одобрена!',
+            text: 'Финальная смета одобрена!',
             convId: convId,
             messageId: messageId,
             replyId: ''
         })
 
-        return bot.sendMessage(chatId, 'Предварительная смета одобрена!')
+        return bot.sendMessage(chatId, 'Финальная смета одобрена!')
     }
 
     //кнопка в отчете
