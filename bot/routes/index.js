@@ -78,6 +78,6 @@ router.post('/poster/final/send', posterController.sendPosterFinal)
 
 //-----------------СМЕТЫ ВСЕХ ПРОЕКТОВ МИРА-------------------------
 //get SMETS
-router.get('/smeta', smetaController.smets)
+router.get('/smeta', smetaController.smeta)
 
 module.exports = router
