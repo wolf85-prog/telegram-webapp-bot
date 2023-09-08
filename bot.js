@@ -102,7 +102,7 @@ const httpsServer = https.createServer(credentials, app);
 
 //создание страницы (проекта) базы данных проектов
 app.post('/web-data', async (req, res) => {
-    const {queryId, projectname, datestart, geo, teh, managerId, companyId, worklist = [], equipmentlist = []} = req.body;
+    const {queryId, projectname, datestart, geo, teh, managerId, companyId, worklist = [], equipmentlist = [], chatId} = req.body;
     const d = new Date(datestart);
     const year = d.getFullYear();
     const month = String(d.getMonth()+1).padStart(2, "0");
@@ -125,7 +125,7 @@ app.post('/web-data', async (req, res) => {
             Geo = geo   
             console.log("Сохранение данных завершено: ", projectName)
             
-            await bot.answerWebAppQuery(queryId, {
+            const answer = await bot.answerWebAppQuery(queryId, {
                 type: 'article',
                 id: queryId,
                 title: 'Проект успешно создан',
@@ -144,6 +144,21 @@ app.post('/web-data', async (req, res) => {
 ${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}`
               }
         })
+
+        //console.log("Отправляю сообщение в админ-панель...")
+        //отправить сообщение о создании проекта в админ-панель
+        const convId = await sendMyMessage(
+`Проект успешно создан!
+  
+<b>Проект:</b> ${projectname} 
+<b>Дата:</b> ${day}.${month}.${year}
+<b>Время:</b> ${chas}:${minut} 
+<b>Адрес:</b> ${geo} 
+<b>Тех. задание:</b> ${teh}
+          
+<b>Специалисты:</b>  
+${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}`, 
+        "article", chatId, answer.message_id)
 
         
         //отправить сообщение в чат-админку
