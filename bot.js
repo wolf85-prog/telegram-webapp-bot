@@ -147,18 +147,18 @@ ${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join(
 
         //console.log("Отправляю сообщение в админ-панель...")
         //отправить сообщение о создании проекта в админ-панель
-        const convId = await sendMyMessage(
-`Проект успешно создан!
+//         const convId = await sendMyMessage(
+// `Проект успешно создан!
   
-Проект: ${projectname} 
-Дата: ${day}.${month}.${year}
-Время: ${chas}:${minut} 
-Адрес: ${geo} 
-Тех. задание: ${teh}
+// Проект: ${projectname} 
+// Дата: ${day}.${month}.${year}
+// Время: ${chas}:${minut} 
+// Адрес: ${geo} 
+// Тех. задание: ${teh}
           
-Специалисты: 
-${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}`, 
-        "article", chatId, msg.message_id)
+// Специалисты: 
+// ${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}`, 
+//         "article", chatId, messageId)
 
         
         //отправить сообщение в чат-админку (телеграм)
@@ -820,7 +820,7 @@ bot.on('message', async (msg) => {
                 console.log("Отправляю сообщение в админ-панель...")
 
                 //отправить сообщение о создании проекта в админ-панель
-                const convId = await sendMyMessage(text, "text", chatId, response.message_id)
+                const convId = await sendMyMessage(text, "text", chatId, parseInt(response.message_id)-1)
                 
                 // Подключаемся к серверу socket
                 let socket = io(socketUrl);
