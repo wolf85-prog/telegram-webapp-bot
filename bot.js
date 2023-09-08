@@ -145,25 +145,26 @@ ${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join(
               }
         })
 
+        console.log("answer: ", answer)
         //console.log("Отправляю сообщение в админ-панель...")
         //отправить сообщение о создании проекта в админ-панель
         const convId = await sendMyMessage(
 `Проект успешно создан!
   
-<b>Проект:</b> ${projectname} 
-<b>Дата:</b> ${day}.${month}.${year}
-<b>Время:</b> ${chas}:${minut} 
-<b>Адрес:</b> ${geo} 
-<b>Тех. задание:</b> ${teh}
+Проект: ${projectname} 
+Дата: ${day}.${month}.${year}
+Время: ${chas}:${minut} 
+Адрес: ${geo} 
+Тех. задание: ${teh}
           
-<b>Специалисты:</b>  
+Специалисты: 
 ${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}`, 
         "article", chatId, answer.message_id)
 
         
-        //отправить сообщение в чат-админку
+        //отправить сообщение в чат-админку (телеграм)
         await bot.sendMessage(chatGroupId, 
-  `Проект успешно создан! 
+`Проект успешно создан! 
   
 Название проекта:  ${projectname} 
 Дата: ${day}.${month}.${year}
@@ -174,7 +175,6 @@ ${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join(
 Специалисты:  
 ${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}`
           )
-  
 
         } 
         
