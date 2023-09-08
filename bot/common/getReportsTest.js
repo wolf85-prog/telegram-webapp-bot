@@ -173,7 +173,8 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
 
                     //0 готовность
                     if (milliseconds5 > 0) {
-                        console.log("!!!!Планирую запуск сообщения 5...!!!!")     
+                        console.log("!!!!Планирую запуск сообщения 5...!!!!") 
+                        console.log("--------------------------------------")       
                         task5 = setTimeout(async() => {
                             //отправить сообщение в админку
                             let socket = io(socketUrl);

@@ -125,7 +125,7 @@ app.post('/web-data', async (req, res) => {
             Geo = geo   
             console.log("Сохранение данных завершено: ", projectName)
             
-            const answer = await bot.answerWebAppQuery(queryId, {
+            await bot.answerWebAppQuery(queryId, {
                 type: 'article',
                 id: queryId,
                 title: 'Проект успешно создан',
@@ -145,7 +145,6 @@ ${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join(
               }
         })
 
-        console.log("answer: ", answer)
         //console.log("Отправляю сообщение в админ-панель...")
         //отправить сообщение о создании проекта в админ-панель
         const convId = await sendMyMessage(
@@ -159,7 +158,7 @@ ${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join(
           
 Специалисты: 
 ${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}`, 
-        "article", chatId, answer.message_id)
+        "article", chatId, msg.message_id)
 
         
         //отправить сообщение в чат-админку (телеграм)

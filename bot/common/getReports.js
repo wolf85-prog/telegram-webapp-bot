@@ -565,7 +565,8 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                                 console.log("Задача 5 удалена! " + project_name)                       
                             } 
                             if (milliseconds5 > 0) {
-                                console.log("!!!!Планирую запуск сообщения 5...!!!!")     
+                                console.log("!!!!Планирую запуск сообщения 5...!!!!")  
+                                console.log("--------------------------------------")      
                                 task5 = setTimeout(async() => {
                                     //отправить сообщение в админку
                                     let socket = io(socketUrl);
