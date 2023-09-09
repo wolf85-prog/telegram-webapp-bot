@@ -447,7 +447,7 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                                 reply_markup: ({
                                     inline_keyboard:[
                                         [
-                                            {"text": "Принимаю", callback_data:'/report_accept'},
+                                            {"text": "Информация принята", callback_data:'/report_accept'},
                                         ],
                                     ]
                                 })
