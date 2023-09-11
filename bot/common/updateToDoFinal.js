@@ -15,7 +15,6 @@ module.exports = async function updateToDoFinal(blockId) {
                 "checked": true
               }
         })
-        //console.log(response)
         console.log("Финальная смета обновлена!") //+ JSON.stringify(response))
     } catch (error) {
         console.error(error.message)

@@ -19,8 +19,7 @@ module.exports = async function updateSmetaFinal(pageId) {
                 },
             }
         })
-        console.log(response)
-        console.log("Смета обновлена!") //+ JSON.stringify(response))
+        console.log("Финальная смета обновлена!") //+ JSON.stringify(response))
     } catch (error) {
         console.error(error.message)
     }
