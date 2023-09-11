@@ -33,7 +33,7 @@ class PosterController {
 
             //const project = await getProjectCrmId(crmId)
             const projectId = response.results[0].id
-            console.log(projectId)
+            console.log("projectId pred smeta: ", projectId)
 
 
             //Передаем данные боту
@@ -97,7 +97,7 @@ class PosterController {
 
             //const project = await getProjectCrmId(crmId)
             const projectId = response.results[0].id
-            console.log(projectId)
+            console.log("projectId final smeta: ", projectId)
 
 
             //Передаем данные боту

@@ -1027,7 +1027,7 @@ bot.on('message', async (msg) => {
         socket.emit("addUser", chatId)
 
         //отправить сообщение об одобрении сметы проекта в админ-панель
-        const convId = await sendMyMessage('Предварительная смета одобрена!', "text", chatId)
+        const convId = await sendMyMessage('Предварительная смета одобрена!', "text", chatId, messageId)
 
         socket.emit("sendMessage", {
             senderId: chatId,
@@ -1076,7 +1076,7 @@ bot.on('message', async (msg) => {
         socket.emit("addUser", chatId)
 
         //отправить сообщение об одобрении сметы проекта в админ-панель
-        const convId = await sendMyMessage('Финальная смета одобрена!', "text", chatId)
+        const convId = await sendMyMessage('Финальная смета одобрена!', "text", chatId, messageId)
 
         socket.emit("sendMessage", {
             senderId: chatId,
@@ -1094,7 +1094,7 @@ bot.on('message', async (msg) => {
     if (data === '/report_accept') {
 
         //отправить сообщение о создании проекта в админ-панель
-        const convId = await sendMyMessage('Информация подтверждена', "text", chatId)
+        const convId = await sendMyMessage('Информация подтверждена', "text", chatId, messageId)
 
         // Подключаемся к серверу socket
         let socket = io(socketUrl);
