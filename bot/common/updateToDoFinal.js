@@ -16,7 +16,7 @@ module.exports = async function updateToDoFinal(blockId) {
               }
         })
         //console.log(response)
-        console.log("Смета обновлена!") //+ JSON.stringify(response))
+        console.log("Финальная смета обновлена!") //+ JSON.stringify(response))
     } catch (error) {
         console.error(error.message)
     }

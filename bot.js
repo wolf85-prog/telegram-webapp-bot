@@ -1017,10 +1017,10 @@ bot.on('message', async (msg) => {
         console.log("poster: ", poster)
 
         //найти смету по свойству Проект
-        const smetaId = await getSmeta(projectId[1])
+        //const smetaId = await getSmeta(projectId[1])
 
         //изменить тег в таб. Сметы в поле Финал. смета на Подтверждена
-        await updateSmeta(smetaId)
+        //await updateSmeta(smetaId)
 
         // Подключаемся к серверу socket
         let socket = io(socketUrl);
@@ -1049,26 +1049,26 @@ bot.on('message', async (msg) => {
 
         const crmId = await getProject(projectId[1])
 
-        const block1 = await getBlock(projectId[1])
-        console.log("block1: ", block1.results[0].id)
-                        
-        const block2 = await getBlock(block1.results[0].id)
-        console.log("block2: ", block2.results[0].id)
-                        
-        const block3 = await getBlock(block2.results[0].id)
-        console.log("block3: ", block3.results[0].id)
+        const block1 = await getBlocks(projectId)
+        console.log("block1: ", block1.results[0].id) //первый объект (to do)
+            
+        const block2 = await getBlocks(block1.results[0].id)
+        console.log("block2: ", block2.results[1].id) //второй объект (калькулятор и финальная смета)
+            
+        const block3 = await getBlocks(block2.results[1].id)
+        console.log("block3: ", block3.results[1].id) // второй объект (финальная смета)
            
         //поставить галочку в проекте в поле Финальная смета
-        await updateToDoFinal(block3.results[0].id);
+        await updateToDoFinal(block3.results[1].id);
 
         const poster = `${host}/files/${crmId}/final/${crmId}_${chatId}_1.pdf`
         console.log("poster: ", poster)
 
         //найти смету по свойству Проект
-        const smetaId = await getSmeta(projectId[1])
+        //const smetaId = await getSmeta(projectId[1])
 
         //изменить тег в таб. Сметы в поле Финал. смета на Подтверждена
-        await updateSmetaFinal(smetaId)
+        //await updateSmetaFinal(smetaId)
 
 
         // Подключаемся к серверу socket
