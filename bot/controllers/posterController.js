@@ -103,7 +103,7 @@ class PosterController {
             //Передаем данные боту
             const keyboard = JSON.stringify({
                 inline_keyboard:[
-                    [{text: 'Подтвердить', callback_data:'/smetafinal ' + projectId}]
+                    [{text: 'Подтвердить', callback_data:'/finalsmeta ' + projectId}]
                 ]
             });
 

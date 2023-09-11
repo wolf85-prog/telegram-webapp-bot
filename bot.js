@@ -1042,7 +1042,7 @@ bot.on('message', async (msg) => {
     }
 
     //финальная смета
-    if (data.startsWith('/smetafinal')) {
+    if (data.startsWith('/finalsmeta')) {
         const projectId = data.split(' ');
         console.log("projectId: ", projectId[1])
         console.log("Начинаю обрабатывать запрос подтверждения финальной сметы...")
