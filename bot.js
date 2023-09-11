@@ -1022,6 +1022,20 @@ bot.on('message', async (msg) => {
         //изменить тег в таб. Сметы в поле Финал. смета на Подтверждена
         //await updateSmeta(smetaId)
 
+        //начать цикл сканирования отметки Смета
+        // 86400 секунд в дне
+        var minutCount = 0;
+            
+        // повторить с интервалом 2 минуты
+        // let timerId = setInterval(async() => {
+            
+        // }, 120000); //каждые 2 минуты
+
+        // остановить вывод через 30 дней
+        // if (minutCount == 43200) {
+        //     clearInterval(timerId);
+        // }
+
         // Подключаемся к серверу socket
         let socket = io(socketUrl);
         socket.emit("addUser", chatId)
