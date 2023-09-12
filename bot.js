@@ -1009,27 +1009,17 @@ bot.on('message', async (msg) => {
         const block3 = await getBlock(block2.results[0].id)
         console.log("block3: ", block3.results[0].id)  
         
-
-        setTimeout(async() =>{
             
-            if (block3) {
-                //поставить галочку в проекте в поле Предварительная смета
-                await updateToDo(block3.results[0].id); 
-            } else {
-                console.log("Ошибка установки чека")
-            }
-            
-        }, 5000)
-            
+        if (block3) {
+            //поставить галочку в проекте в поле Предварительная смета
+            await updateToDo(block3.results[0].id); 
+        } else {
+            console.log("Ошибка установки чека")
+        }
 
         //const poster = `${host}/files/${crmId}/pre/${crmId}_${chatId}_customer_1.pdf`
         //console.log("poster: ", poster)
         
-        //найти смету по свойству Проект
-        //const smetaId = await getSmeta(projectId[1])
-
-        //изменить тег в таб. Сметы в поле смета на Подтверждена
-        //await updateSmeta(smetaId)
 
         // Подключаемся к серверу socket
         let socket = io(socketUrl);
@@ -1057,28 +1047,54 @@ bot.on('message', async (msg) => {
         console.log("Начинаю обрабатывать запрос подтверждения финальной сметы...")
 
         const crmId = await getProject(projectId[1])
-
-        const block1 = await getBlocks(projectId)
+        
+        const block1 = await getBlocks(projectId[1])
         console.log("block1: ", block1.results[0].id) //первый объект (to do)
+
+        //pre                     
+        const block2_1 = await getBlock(block1.results[0].id)
+        console.log("block2_1: ", block2_1.results[0].id)
+                        
+        const block3_1 = await getBlock(block2_1.results[0].id)
+        console.log("block3_1: ", block3_1.results[0].id) 
+
             
+        //final
         const block2 = await getBlocks(block1.results[0].id)
         console.log("block2: ", block2.results[1].id) //второй объект (калькулятор и финальная смета)
             
         const block3 = await getBlocks(block2.results[1].id)
         console.log("block3: ", block3.results[1].id) // второй объект (финальная смета)
-           
-        //поставить галочку в проекте в поле Финальная смета
-        await updateToDoFinal(block3.results[1].id);
+
+        if (block3) {
+            //поставить галочку в проекте в поле Финальная смета
+            await updateToDoFinal(block3.results[1].id);
+        } else {
+            console.log("Ошибка установки чека")
+        }  
+
+
+        //найти смету по свойству Проект
+        const smetaId = await getSmeta(projectId[1])
+        console.log("checked: ", block3.results[1].to_do.checked)
+        console.log("checked2: ", block3.results[1].to_do.checked)
+
+        const check = block3_1.results[0].to_do.checked // pre
+        const checkFinal = block3.results[1].to_do.checked //final
+
+        if (check) {
+            //изменить тег в таб. Сметы в поле смета на Подтверждена
+            await updateSmeta(smetaId)
+        }
+
+        if (checkFinal) {
+            //изменить тег в таб. Сметы в поле Финал. смета на Подтверждена
+            await updateSmetaFinal(smetaId)
+        }
+        
 
         //const poster = `${host}/files/${crmId}/final/${crmId}_${chatId}_1.pdf`
         //console.log("poster: ", poster)
-
-        //найти смету по свойству Проект
-        //const smetaId = await getSmeta(projectId[1])
-
-        //изменить тег в таб. Сметы в поле Финал. смета на Подтверждена
-        //await updateSmetaFinal(smetaId)
-
 
         // Подключаемся к серверу socket
         let socket = io(socketUrl);
