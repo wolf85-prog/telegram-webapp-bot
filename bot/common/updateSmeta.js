@@ -20,7 +20,11 @@ module.exports = async function updateSmeta(pageId) {
             },
         });
         
-        console.log("Смета обновлена!") //+ JSON.stringify(response))
+        if (response) {
+            console.log("Смета обновлена!") //+ JSON.stringify(response))
+        } else {
+            console.log("Ошибка обновления сметы!") //+ JSON.stringify(response))
+        }
     } catch (error) {
         console.error(error.message)
     }
