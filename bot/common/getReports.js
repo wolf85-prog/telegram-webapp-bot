@@ -503,10 +503,12 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                                 console.log("!!!!Планирую запуск сообщения 1...!!!!")     
                                 task1 = setTimeout(async() => {
                                     //отправить сообщение в админку
-                                    let socket = io(socketUrl);
-                                    socket.emit("sendNotif", {
-                                        task: 1
-                                    }) 
+                                    if (project_status === 'Load' || project_status === 'Ready' || project_status === 'OnAir') {
+                                        let socket = io(socketUrl);
+                                        socket.emit("sendNotif", {
+                                            task: 1
+                                        }) 
+                                    }
                                 }, milliseconds) 
                             }
  
@@ -520,10 +522,12 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                                 console.log("!!!!Планирую запуск сообщения 2...!!!!")     
                                 task2 = setTimeout(async() => {
                                     //отправить сообщение в админку
-                                    let socket = io(socketUrl);
-                                    socket.emit("sendNotif", {
-                                        task: 2
-                                    }) 
+                                    if (project_status === 'Load' || project_status === 'Ready' || project_status === 'OnAir') {
+                                        let socket = io(socketUrl);
+                                        socket.emit("sendNotif", {
+                                            task: 2
+                                        }) 
+                                    }
                                 }, milliseconds2)
                             }
 
@@ -536,10 +540,12 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                                 console.log("!!!!Планирую запуск сообщения 3...!!!!")     
                                 task3 = setTimeout(async() => {
                                     //отправить сообщение в админку
-                                    let socket = io(socketUrl);
-                                    socket.emit("sendNotif", {
-                                        task: 3
-                                    }) 
+                                    if (project_status === 'Load' || project_status === 'Ready' || project_status === 'OnAir') {
+                                        let socket = io(socketUrl);
+                                        socket.emit("sendNotif", {
+                                            task: 3
+                                        }) 
+                                    }
                                 }, milliseconds3)
                             }
 
@@ -552,10 +558,12 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                                 console.log("!!!!Планирую запуск сообщения 4...!!!!")     
                                 task4 = setTimeout(async() => {
                                     //отправить сообщение в админку
-                                    let socket = io(socketUrl);
-                                    socket.emit("sendNotif", {
-                                        task: 4
-                                    }) 
+                                    if (project_status === 'Load' || project_status === 'Ready' || project_status === 'OnAir') {
+                                        let socket = io(socketUrl);
+                                        socket.emit("sendNotif", {
+                                            task: 4
+                                        }) 
+                                    }
                                 }, milliseconds4)
                             }
 
@@ -569,10 +577,12 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                                 console.log("--------------------------------------")      
                                 task5 = setTimeout(async() => {
                                     //отправить сообщение в админку
-                                    let socket = io(socketUrl);
-                                    socket.emit("sendNotif", {
-                                        task: 5
-                                    }) 
+                                    if (project_status === 'Load' || project_status === 'Ready' || project_status === 'OnAir') {
+                                        let socket = io(socketUrl);
+                                        socket.emit("sendNotif", {
+                                            task: 5
+                                        }) 
+                                    }
                                 }, milliseconds5)
                             }
                         }

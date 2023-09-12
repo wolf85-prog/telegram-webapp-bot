@@ -1007,19 +1007,34 @@ bot.on('message', async (msg) => {
         console.log("block2: ", block2.results[0].id)
                         
         const block3 = await getBlock(block2.results[0].id)
-        console.log("block3: ", block3.results[0].id)            
+        console.log("block3: ", block3.results[0].id)  
         
-        //поставить галочку в проекте в поле Предварительная смета
-        await updateToDo(block3.results[0].id);
 
-        const poster = `${host}/files/${crmId}/pre/${crmId}_${chatId}_customer_1.pdf`
-        console.log("poster: ", poster)
+        setTimeout(async() =>{
+            //поставить галочку в проекте в поле Предварительная смета
+            if (block3) {
+               await updateToDo(block3.results[0].id); 
+
+               //найти смету по свойству Проект
+                const smetaId = await getSmeta(projectId[1])
+
+                //изменить тег в таб. Сметы в поле смета на Подтверждена
+                await updateSmeta(smetaId)
+            } else {
+                console.log("Ошибка установки чека")
+            }
+            
+        }, 20000)
+            
+
+        //const poster = `${host}/files/${crmId}/pre/${crmId}_${chatId}_customer_1.pdf`
+        //console.log("poster: ", poster)
         
         //найти смету по свойству Проект
-        const smetaId = await getSmeta(projectId[1])
+        //const smetaId = await getSmeta(projectId[1])
 
         //изменить тег в таб. Сметы в поле смета на Подтверждена
-        await updateSmeta(smetaId)
+        //await updateSmeta(smetaId)
 
         //начать цикл сканирования отметки Смета     
         // повторить с интервалом 2 минуты
