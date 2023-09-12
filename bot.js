@@ -1011,11 +1011,12 @@ bot.on('message', async (msg) => {
         
 
         setTimeout(async() =>{
-            //поставить галочку в проекте в поле Предварительная смета
+            
             if (block3) {
-               await updateToDo(block3.results[0].id); 
+                //поставить галочку в проекте в поле Предварительная смета
+                await updateToDo(block3.results[0].id); 
 
-               //найти смету по свойству Проект
+                //найти смету по свойству Проект
                 const smetaId = await getSmeta(projectId[1])
 
                 //изменить тег в таб. Сметы в поле смета на Подтверждена
