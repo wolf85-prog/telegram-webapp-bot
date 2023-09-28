@@ -890,11 +890,13 @@ bot.on('message', async (msg) => {
                     if (project.geo != '') {
                         projectId = await addAddress(project.geo, project.name, project.datestart, project.teh, project.managerId, project.companyId, Worklist, Equipmentlist);
                     } else {
-                        let i = 0;
                         while (true) {
                             projectId = await addProjectNotGeo(project.name, project.datestart, project.teh, project.managerId, project.companyId, Worklist, Equipmentlist);
                             console.log("1. Проект без адреса успешно добавлен! " + projectId)             
-                            if (projectId) break; // (*)                         
+                            if (projectId) break
+                            else {
+                                console.log("1. Ошибка создания проекта! ")
+                            }                          
                         }
                         //добавление проекта с названием проекта в базу
                         
@@ -907,8 +909,6 @@ bot.on('message', async (msg) => {
                             await newDatabase3(projectId);                              //создание базы данных "Запасной состав"
                             await newDatabase5(projectId);                              //создание базы данных "Претенденты"   
                             await newDatabase4(projectId, Equipmentlist);               //создание базы данных "Оборудование"
-                        } else {
-                            console.log("1. Ошибка создания проекта! ")
                         }
                     }
 
