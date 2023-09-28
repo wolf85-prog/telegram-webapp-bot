@@ -334,7 +334,9 @@ async function addProject(title, time, teh, managerId, companyId, worklist, equi
                 // },
             }
         })
-        //console.log(response)
+
+        console.log("ID проекта: ", response.id)
+
         const res_id = response.id;
         console.log(new Date())
         console.log("1. Проект с адресом успешно добавлен! " + res_id)
@@ -438,20 +440,9 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
                 },
             }
         })
-        //console.log(response)
-        const res_id = response.id;
-        console.log(new Date())
-        console.log("1. Проект без адреса успешно добавлен! " + res_id)        
-
-        await addTable(res_id);                     //создать верхний блок
         
-        //await newDatabase1(res_id);                //создание базы данных "График работы"    
-        await newDatabase2(res_id, worklist, time);//создание базы данных "Основной состав"   
-        await newDatabase3(res_id);                //создание базы данных "Запасной состав"
-        await newDatabase5(res_id);                //создание базы данных "Претенденты"   
-        await newDatabase4(res_id, equipmentlist); //создание базы данных "Оборудование"
-
-        return res_id;
+        
+        return response.id;
 
     } catch (error) {
         console.error(error.message)
@@ -501,6 +492,7 @@ async function addAddress(geo, projectname, datestart, teh, managerId, companyId
 
         //добавление проекта с названием проекта в базу
         const project_id = await addProject(projectname, datestart, teh, managerId, companyId, worklist, equipmentlist, response.id);
+        console.log("ID проекта: ", project_id)
 
         return project_id
 
@@ -898,8 +890,26 @@ bot.on('message', async (msg) => {
                     if (project.geo != '') {
                         projectId = await addAddress(project.geo, project.name, project.datestart, project.teh, project.managerId, project.companyId, Worklist, Equipmentlist);
                     } else {
+                        let i = 0;
+                        while (true) {
+                            projectId = await addProjectNotGeo(project.name, project.datestart, project.teh, project.managerId, project.companyId, Worklist, Equipmentlist);
+                            console.log("1. Проект без адреса успешно добавлен! " + projectId)             
+                            if (projectId) break; // (*)                         
+                        }
                         //добавление проекта с названием проекта в базу
-                        projectId = await addProjectNotGeo(project.name, project.datestart, project.teh, project.managerId, project.companyId, Worklist, Equipmentlist);
+                        
+                        if (projectId) {
+                            console.log(new Date())
+                            
+                            //создать верхний блок 
+                            await addTable(projectId);                  
+                            await newDatabase2(projectId, Worklist, project.datestart);//создание базы данных "Основной состав"   
+                            await newDatabase3(projectId);                              //создание базы данных "Запасной состав"
+                            await newDatabase5(projectId);                              //создание базы данных "Претенденты"   
+                            await newDatabase4(projectId, Equipmentlist);               //создание базы данных "Оборудование"
+                        } else {
+                            console.log("1. Ошибка создания проекта! ")
+                        }
                     }
 
                     //обновить проект 

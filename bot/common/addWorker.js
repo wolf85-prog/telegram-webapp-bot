@@ -11,10 +11,10 @@ module.exports = async function addWorker(blockId, worker, date) {
     try {
         const response = await notion.pages.create({
             parent: { database_id: blockId },
-            icon: {
-                type: "emoji",
-                emoji: "✅"
-            },
+            // icon: {
+            //     type: "emoji",
+            //     emoji: "✅"
+            // },
             properties: {
                 // "1. Чек-ин": {
                 //     title:[
