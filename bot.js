@@ -334,22 +334,8 @@ async function addProject(title, time, teh, managerId, companyId, worklist, equi
                 // },
             }
         })
-
-        console.log("ID проекта: ", response.id)
-
-        const res_id = response.id;
-        console.log(new Date())
-        console.log("1. Проект с адресом успешно добавлен! " + res_id)
-
-        await addTable(res_id)                     //создать верхний блок
-
-        //await newDatabase1(res_id);                //создание базы данных "График работы"    
-        await newDatabase2(res_id, worklist, time);//создание базы данных "Основной состав"   
-        await newDatabase3(res_id);                //создание базы данных "Запасной состав"
-        await newDatabase5(res_id);                //создание базы данных "Претенденты"   
-        await newDatabase4(res_id, equipmentlist); //создание базы данных "Оборудование"
-
-        return res_id;
+        
+        return response.id;
 
     } catch (error) {
         console.error(error.message)
@@ -490,9 +476,27 @@ async function addAddress(geo, projectname, datestart, teh, managerId, companyId
         //console.log(response)
         console.log("0. Адрес успешно добавлен! " + response.id)
 
+        let project_id
         //добавление проекта с названием проекта в базу
-        const project_id = await addProject(projectname, datestart, teh, managerId, companyId, worklist, equipmentlist, response.id);
-        console.log("ID проекта: ", project_id)
+        while (true) {
+            project_id = await addProject(projectname, datestart, teh, managerId, companyId, worklist, equipmentlist, response.id);
+            console.log("1. Проект с адресом успешно добавлен! " + project_id)
+            if (project_id) break
+            else {
+                console.log("1. Ошибка создания проекта! ")
+            } 
+        }
+
+        if (project_id) {
+            console.log(new Date())
+            
+            //создать верхний блок
+            await addTable(project_id)                       
+            await newDatabase2(project_id, worklist, datestart);//создание базы данных "Основной состав"   
+            await newDatabase3(project_id);                //создание базы данных "Запасной состав"
+            await newDatabase5(project_id);                //создание базы данных "Претенденты"   
+            await newDatabase4(project_id, equipmentlist); //создание базы данных "Оборудование"
+        }
 
         return project_id
 
