@@ -566,8 +566,9 @@ bot.on('message', async (msg) => {
 
         // команда Добавить таблицу Претенденты
         if (text === '/addpretendents') {
-            const project_id = 'e9fcd9a3-726f-4ae7-bc01-a9d2c84a3e0e'; 
-            await newDatabase5(project_id);
+            const project = text.split(' ');
+            //const project_id = 'e9fcd9a3-726f-4ae7-bc01-a9d2c84a3e0e'; 
+            await newDatabase5(project[1]);
         }
 
         if(text.startsWith('/startreports')) {
