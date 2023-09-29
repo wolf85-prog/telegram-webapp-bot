@@ -93,6 +93,8 @@ module.exports = async function newDatabase5(parent_page_id) {
 
         await addPretendent(data.id);
 
+        return data.id
+
     } catch (error) {
         console.error(error.message)
     }

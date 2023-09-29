@@ -571,7 +571,7 @@ bot.on('message', async (msg) => {
         // команда Добавить таблицу Претенденты
         if (text === '/addpretendents') {
             const project = text.split(' ');
-            //const project_id = 'e9fcd9a3-726f-4ae7-bc01-a9d2c84a3e0e'; 
+            console.log(project[1])
             await newDatabase5(project[1]);
         }
 
@@ -912,7 +912,14 @@ bot.on('message', async (msg) => {
                             await addTable(projectId);                  
                             await newDatabase2(projectId, Worklist, project.datestart);//создание базы данных "Основной состав"   
                             await newDatabase3(projectId);                              //создание базы данных "Запасной состав"
-                            await newDatabase5(projectId);                              //создание базы данных "Претенденты"   
+                            while (true) {
+                                const pretendentId = await newDatabase5(projectId);   //создание базы данных "Претенденты"           
+                                if (pretendentId) break
+                                else {
+                                    console.log("4. Ошибка создания таблицы Претенденты!")
+                                }                          
+                            }
+                                                           
                             await newDatabase4(projectId, Equipmentlist);               //создание базы данных "Оборудование"
                         }
                     }
