@@ -607,6 +607,61 @@ bot.on('message', async (msg) => {
             }); 
         }
 
+
+        //финальная смета
+        if (text.startsWith('/finalsmeta')) {
+            const projectId = text.split(' ');
+            console.log("projectId: ", projectId[1])
+            console.log("Начинаю обрабатывать запрос подтверждения финальной сметы...")
+
+            const crmId = await getProject(projectId[1])
+            
+            const block1 = await getBlock(projectId[1])
+            console.log("block1: ", block1.results[0].id) //первый объект (to do)
+
+            //pre                     
+            const block2_1 = await getBlock(block1.results[0].id)
+            console.log("block2_1: ", block2_1.results[0].id)
+                            
+            const block3_1 = await getBlock(block2_1.results[0].id)
+            console.log("block3_1: ", block3_1.results[0].id) 
+
+                
+            //final
+            const block2 = await getBlock(block1.results[0].id)
+            console.log("block2: ", block2.results[1].id) //второй объект (калькулятор и финальная смета)
+                
+            const block3 = await getBlock(block2.results[1].id)
+            console.log("block3: ", block3.results[1].id) // второй объект (финальная смета)
+
+            if (block3) {
+                //поставить галочку в проекте в поле Финальная смета
+                await updateToDoFinal(block3.results[1].id);
+            } else {
+                console.log("Ошибка установки чека")
+            }  
+
+
+            //найти смету по свойству Проект
+            const smetaId = await getSmeta(projectId[1])
+            console.log("checked: ", block3.results[0].to_do.checked)
+            console.log("checked2: ", block3.results[1].to_do.checked)
+
+            const check = block3_1.results[0].to_do.checked // pre
+            const checkFinal = block3.results[1].to_do.checked //final
+
+            if (check) {
+                //изменить тег в таб. Сметы в поле смета на Подтверждена
+                await updateSmeta(smetaId)
+            }
+
+            if (checkFinal) {
+                //изменить тег в таб. Сметы в поле Финал. смета на Подтверждена
+                await updateSmetaFinal(smetaId)
+            }
+            
+        }
+
 //------------------------------------------------------------------------------------------------
 
         //обработка контактов
@@ -1098,7 +1153,7 @@ bot.on('message', async (msg) => {
 
         //найти смету по свойству Проект
         const smetaId = await getSmeta(projectId[1])
-        console.log("checked: ", block3.results[1].to_do.checked)
+        console.log("checked: ", block3.results[0].to_do.checked)
         console.log("checked2: ", block3.results[1].to_do.checked)
 
         const check = block3_1.results[0].to_do.checked // pre
