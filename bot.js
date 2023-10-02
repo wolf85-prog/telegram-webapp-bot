@@ -621,10 +621,10 @@ bot.on('message', async (msg) => {
 
             //pre                     
             const block2_1 = await getBlock(block1.results[0].id)
-            console.log("block2_1: ", block2_1.results[0].id)
+            console.log("block2_1: ", block2_1.results[0].id) // 1-й объект (предварительная смета и постер)
                             
             const block3_1 = await getBlock(block2_1.results[0].id)
-            console.log("block3_1: ", block3_1.results[0].id) 
+            console.log("block3_1: ", block3_1.results[0].id) // 1-й объект (предварительная смета)
 
                 
             //final
@@ -644,7 +644,7 @@ bot.on('message', async (msg) => {
 
             //найти смету по свойству Проект
             const smetaId = await getSmeta(projectId[1])
-            console.log("checked: ", block3.results[0].to_do.checked)
+            console.log("checked: ", block3_1.results[0].to_do.checked)
             console.log("checked2: ", block3.results[1].to_do.checked)
 
             const check = block3_1.results[0].to_do.checked // pre
@@ -1130,10 +1130,10 @@ bot.on('message', async (msg) => {
 
         //pre                     
         const block2_1 = await getBlock(block1.results[0].id)
-        console.log("block2_1: ", block2_1.results[0].id)
+        console.log("block2_1: ", block2_1.results[0].id) // 1-й объект (предварительная смета и постер)
                         
         const block3_1 = await getBlock(block2_1.results[0].id)
-        console.log("block3_1: ", block3_1.results[0].id) 
+        console.log("block3_1: ", block3_1.results[0].id) // 1-й объект (предварительная смета)
 
             
         //final
@@ -1153,7 +1153,7 @@ bot.on('message', async (msg) => {
 
         //найти смету по свойству Проект
         const smetaId = await getSmeta(projectId[1])
-        console.log("checked: ", block3.results[0].to_do.checked)
+        console.log("checked: ", block3_1.results[0].to_do.checked)
         console.log("checked2: ", block3.results[1].to_do.checked)
 
         const check = block3_1.results[0].to_do.checked // pre
