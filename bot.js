@@ -494,7 +494,14 @@ async function addAddress(geo, projectname, datestart, teh, managerId, companyId
             await addTable(project_id)                       
             await newDatabase2(project_id, worklist, datestart);//создание базы данных "Основной состав"   
             await newDatabase3(project_id);                //создание базы данных "Запасной состав"
-            await newDatabase5(project_id);                //создание базы данных "Претенденты"   
+            while (true) {
+                const pretendentId = await newDatabase5(project_id);   //создание базы данных "Претенденты"           
+                if (pretendentId) break
+                else {
+                    console.log("4. Ошибка создания таблицы Претенденты!")
+                }                          
+            }
+            //await newDatabase5(project_id);                //создание базы данных "Претенденты"   
             await newDatabase4(project_id, equipmentlist); //создание базы данных "Оборудование"
         }
 
