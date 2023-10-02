@@ -609,7 +609,7 @@ bot.on('message', async (msg) => {
 
 
         //финальная смета
-        if (text.startsWith('/finalsmeta')) {
+        if (text.startsWith('/proverkasmet')) {
             const projectId = text.split(' ');
             console.log("projectId: ", projectId[1])
             console.log("Начинаю обрабатывать запрос подтверждения финальной сметы...")
