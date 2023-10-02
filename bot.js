@@ -653,6 +653,9 @@ bot.on('message', async (msg) => {
             const smetaId = await getSmeta(projectId[1])
             
             setTimeout(async()=> {
+                //получить обновленный чек Финальная смена
+                const block3 = await getBlock(block2.results[1].id)
+
                 console.log("checked: ", block3_1.results[0].to_do.checked)
                 console.log("checked2: ", block3.results[1].to_do.checked)
 
