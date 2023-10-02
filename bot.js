@@ -649,23 +649,28 @@ bot.on('message', async (msg) => {
             }  
 
 
-            //найти смету по свойству Проект
+            //найти смету по свойству Проект для смены тега на Подтверждено
             const smetaId = await getSmeta(projectId[1])
-            console.log("checked: ", block3_1.results[0].to_do.checked)
-            console.log("checked2: ", block3.results[1].to_do.checked)
+            
+            setTimeout(async()=> {
+                console.log("checked: ", block3_1.results[0].to_do.checked)
+                console.log("checked2: ", block3.results[1].to_do.checked)
 
-            const check = block3_1.results[0].to_do.checked // pre
-            const checkFinal = block3.results[1].to_do.checked //final
+                const check = block3_1.results[0].to_do.checked // pre
+                const checkFinal = block3.results[1].to_do.checked //final
 
-            if (check) {
-                //изменить тег в таб. Сметы в поле смета на Подтверждена
-                await updateSmeta(smetaId)
-            }
+                if (check) {
+                    //изменить тег в таб. Сметы в поле смета на Подтверждена
+                    await updateSmeta(smetaId)
+                }
 
-            if (checkFinal) {
-                //изменить тег в таб. Сметы в поле Финал. смета на Подтверждена
-                await updateSmetaFinal(smetaId)
-            }
+                if (checkFinal) {
+                    //изменить тег в таб. Сметы в поле Финал. смета на Подтверждена
+                    await updateSmetaFinal(smetaId)
+                }
+            }, 3000)
+            
+            
             
         }
 
