@@ -492,7 +492,8 @@ async function addAddress(geo, projectname, datestart, teh, managerId, companyId
             
             //создать верхний блок
             await addTable(project_id)                       
-            await newDatabase2(project_id, worklist, datestart);//создание базы данных "Основной состав"   
+            await newDatabase2(project_id, worklist, datestart);//создание базы данных "Основной состав"  
+            await newDatabase3(project_id);                     //создание базы данных "Запасной состав" 
             while (true) {
                 const pretendentId = await newDatabase5(project_id);   //создание базы данных "Претенденты"           
                 if (pretendentId) break
@@ -916,6 +917,7 @@ bot.on('message', async (msg) => {
                             //создать верхний блок 
                             await addTable(projectId);                  
                             await newDatabase2(projectId, Worklist, project.datestart);//создание базы данных "Основной состав"   
+                            await newDatabase3(projectId);                //создание базы данных "Запасной состав"
                             while (true) {
                                 const pretendentId = await newDatabase5(projectId);   //создание базы данных "Претенденты"           
                                 if (pretendentId) break
