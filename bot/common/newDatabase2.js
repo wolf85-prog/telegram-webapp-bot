@@ -93,6 +93,10 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                                 "name": "Отмена",
                                 "color": "pink"
                             },
+                            {
+                                "name": "Запасной состав",
+                                "color": "orange"
+                            },
                         ]
                     }
                 },

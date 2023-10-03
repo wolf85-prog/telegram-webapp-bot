@@ -499,8 +499,7 @@ async function addAddress(geo, projectname, datestart, teh, managerId, companyId
                 else {
                     console.log("4. Ошибка создания таблицы Претенденты!")
                 }                          
-            }
-            //await newDatabase5(project_id);                //создание базы данных "Претенденты"   
+            } 
             await newDatabase4(project_id, equipmentlist); //создание базы данных "Оборудование"
         }
 
