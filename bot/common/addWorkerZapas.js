@@ -5,7 +5,9 @@ const notion = new Client({ auth: process.env.NOTION_API_KEY });
 
 // текущая дата
 const dateNow = new Date();
-const date = dateNow.getFullYear() + "-0" + ((dateNow.getMonth())+1) + "-01T00:00:00.000"
+//const date = dateNow.getFullYear() + "-0" + ((dateNow.getMonth())+1) + "-01T00:00:00.000"
+const month = String(dateNow.getMonth()+1).padStart(2, "0");
+const date = dateNow.getFullYear() + "-" + month + "-01 10:00:00"
 
 //Добавление строк в таблицу "Запасной состав"
 module.exports = async function addWorkerZapas(blockId) {
