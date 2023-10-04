@@ -913,20 +913,43 @@ bot.on('message', async (msg) => {
                         
                         if (projectId) {
                             console.log(new Date())
+                            let topId, mainId, zapasId, pretendentId, equipId 
                             
                             //создать верхний блок 
-                            await addTable(projectId);                  
-                            await newDatabase2(projectId, Worklist, project.datestart);//создание базы данных "Основной состав"   
-                            await newDatabase3(projectId);                //создание базы данных "Запасной состав"
-                            while (true) {
-                                const pretendentId = await newDatabase5(projectId);   //создание базы данных "Претенденты"           
-                                if (pretendentId) break
-                                else {
-                                    console.log("4. Ошибка создания таблицы Претенденты!")
-                                }                          
+                            while (!topId) {                                
+                                setTimeout(async()=>{
+                                    topId = await addTable(projectId); 
+                                }, 2000)                                                         
                             }
-                                                           
-                            await newDatabase4(projectId, Equipmentlist);               //создание базы данных "Оборудование"
+                               
+                            //создание базы данных "Основной состав"
+                            while (!mainId) {                                
+                                setTimeout(async()=>{
+                                    mainId = await newDatabase2(projectId, Worklist, project.datestart);
+                                }, 2000)                                                         
+                            }
+
+                            //создание базы данных "Запасной состав"
+                            while (!zapasId) {                                
+                                setTimeout(async()=>{
+                                    zapasId = await newDatabase3(projectId);  
+                                }, 2000)                                                         
+                            }
+                            
+                            //создание базы данных "Претенденты"
+                            while (!pretendentId) {                                
+                                setTimeout(async()=>{
+                                    pretendentId = await newDatabase5(projectId);   
+                                }, 2000)                                                         
+                            }
+
+                            //создание базы данных "Оборудование"
+                            while (!equipId) {                                
+                                setTimeout(async()=>{
+                                    equipId = await newDatabase4(projectId, Equipmentlist); 
+                                }, 2000)                                                         
+                            }                             
+                            
                         }
                     }
 
