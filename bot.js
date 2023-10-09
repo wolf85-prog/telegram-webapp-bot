@@ -916,41 +916,31 @@ bot.on('message', async (msg) => {
                             let topId, mainId, zapasId, pretendentId, equipId 
                             
                             //создать верхний блок 
-                            // while (!topId) {                                
-                            //     setTimeout(async()=>{
-                            //         topId = await addTable(projectId); 
-                            //     }, 2000)                                                         
-                            // }
-                            await addTable(projectId) 
-                               
+                            while (!topId) {                                
+                                topId = await addTable(projectId).catch(() => null); 
+                                await delay(2000);                                                        
+                            }
+                            
+
                             //создание базы данных "Основной состав"
-                            // while (!mainId) {                                
-                            //     setTimeout(async()=>{
-                            //         mainId = await newDatabase2(projectId, Worklist, project.datestart);
-                            //     }, 2000)                                                         
-                            // }
-                            await newDatabase2(projectId, Worklist, project.datestart);
+                            while (!mainId) {                                
+                                mainId = await newDatabase2(projectId, Worklist, project.datestart);                                                      
+                            }
 
                             //создание базы данных "Запасной состав"
-                            // while (!zapasId) {                                
-                            //     setTimeout(async()=>{
-                            //         zapasId = await newDatabase3(projectId);  
-                            //     }, 2000)                                                         
-                            // }
-                            await newDatabase3(projectId);  
+                            while (!zapasId) {                                
+                                zapasId = await newDatabase3(projectId);                                                         
+                            }
                             
                             //создание базы данных "Претенденты"
                             while (!pretendentId) {                                
-                                //setTimeout(async()=>{
-                                    pretendentId = await newDatabase5(projectId);   
-                               // }, 2000)                                                         
+                                pretendentId = await newDatabase5(projectId);  
+                                await delay(2000);                                                          
                             }
 
                             //создание базы данных "Оборудование"
                             while (!equipId) {                                
-                                //setTimeout(async()=>{
-                                    equipId = await newDatabase4(projectId, Equipmentlist); 
-                                //}, 2000)                                                         
+                                equipId = await newDatabase4(projectId, Equipmentlist);                                                         
                             }                             
                             
                         }
@@ -1270,6 +1260,14 @@ bot.on('message', async (msg) => {
 
 // Обработка ошибок, последний middleware
 app.use(errorHandler)
+
+
+//функция задержки
+const delay = async(ms) => {
+    return new Promise((resolve, reject) => {
+      setTimeout(resolve, ms);
+    });
+}
 
 //-------------------------------------------------------------------------------------------------------------------------------
 const PORT = process.env.PORT || 8000;
