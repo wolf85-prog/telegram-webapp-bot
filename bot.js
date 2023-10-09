@@ -916,38 +916,41 @@ bot.on('message', async (msg) => {
                             let topId, mainId, zapasId, pretendentId, equipId 
                             
                             //создать верхний блок 
-                            while (!topId) {                                
-                                setTimeout(async()=>{
-                                    topId = await addTable(projectId); 
-                                }, 2000)                                                         
-                            }
+                            // while (!topId) {                                
+                            //     setTimeout(async()=>{
+                            //         topId = await addTable(projectId); 
+                            //     }, 2000)                                                         
+                            // }
+                            await addTable(projectId) 
                                
                             //создание базы данных "Основной состав"
-                            while (!mainId) {                                
-                                setTimeout(async()=>{
-                                    mainId = await newDatabase2(projectId, Worklist, project.datestart);
-                                }, 2000)                                                         
-                            }
+                            // while (!mainId) {                                
+                            //     setTimeout(async()=>{
+                            //         mainId = await newDatabase2(projectId, Worklist, project.datestart);
+                            //     }, 2000)                                                         
+                            // }
+                            await newDatabase2(projectId, Worklist, project.datestart);
 
                             //создание базы данных "Запасной состав"
-                            while (!zapasId) {                                
-                                setTimeout(async()=>{
-                                    zapasId = await newDatabase3(projectId);  
-                                }, 2000)                                                         
-                            }
+                            // while (!zapasId) {                                
+                            //     setTimeout(async()=>{
+                            //         zapasId = await newDatabase3(projectId);  
+                            //     }, 2000)                                                         
+                            // }
+                            await newDatabase3(projectId);  
                             
                             //создание базы данных "Претенденты"
                             while (!pretendentId) {                                
-                                setTimeout(async()=>{
+                                //setTimeout(async()=>{
                                     pretendentId = await newDatabase5(projectId);   
-                                }, 2000)                                                         
+                               // }, 2000)                                                         
                             }
 
                             //создание базы данных "Оборудование"
                             while (!equipId) {                                
-                                setTimeout(async()=>{
+                                //setTimeout(async()=>{
                                     equipId = await newDatabase4(projectId, Equipmentlist); 
-                                }, 2000)                                                         
+                                //}, 2000)                                                         
                             }                             
                             
                         }
