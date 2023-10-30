@@ -96,7 +96,7 @@ module.exports = async function addTable(blockId) {
                 {
                     "type": "table",
                     "table": {
-                        "table_width": 5,
+                        "table_width": 4,
                         "has_column_header": false,
                         "has_row_header": true,
                         "children": [
