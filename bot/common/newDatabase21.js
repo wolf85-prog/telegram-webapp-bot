@@ -30,7 +30,7 @@ module.exports = async function newDatabase2(parent_page_id) {
                 "2. Дата": {
                     "date": {}
                 },
-                "3. Статус": {
+                "3. Вид работ": {
                     "multi_select": {
                         "options": [
                             {
@@ -80,6 +80,14 @@ module.exports = async function newDatabase2(parent_page_id) {
                             {
                                 "name": "Отмена",
                                 "color": "red"
+                            },
+                            {
+                                "name": "Постер",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Репетиция",
+                                "color": "green"
                             },
                         ]
                     }

@@ -381,17 +381,17 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
                         }
                         ],
                 },
-                "Постер": {
-                    type: 'rich_text',
-                    rich_text: [
-                        {
-                            type: 'text',
-                            text: {
-                                content: 'Данные | Данные | Данные * 10 — 12 часов * 0 000.00 — 0 000.00 руб/час ',
-                            },
-                        }
-                        ],
-                },
+                // "Постер": {
+                //     type: 'rich_text',
+                //     rich_text: [
+                //         {
+                //             type: 'text',
+                //             text: {
+                //                 content: 'Данные | Данные | Данные * 10 — 12 часов * 0 000.00 — 0 000.00 руб/час ',
+                //             },
+                //         }
+                //         ],
+                // },
                 "Статус проекта": {
                     type: 'select',
                     select: {
