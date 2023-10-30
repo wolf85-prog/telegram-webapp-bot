@@ -128,7 +128,7 @@ module.exports = async function addTable(blockId) {
                                             {
                                                 "type": "text",
                                                 "text": {
-                                                    "content": "Данные",
+                                                    "content": "Данные | Данные | Данные",
                                                     "link": null
                                                 },
                                                 "annotations": {
@@ -139,75 +139,10 @@ module.exports = async function addTable(blockId) {
                                                     "code": false,
                                                     "color": "purple"
                                                 },
-                                                "plain_text": "Данные",
+                                                "plain_text": "Данные | Данные | Данные",
                                                 "href": null
                                             }
                                         ],
-                                        [
-                                            {
-                                                "type": "text",
-                                                "text": {
-                                                    "content": "Данные",
-                                                    "link": null
-                                                },
-                                                "annotations": {
-                                                    "bold": false,
-                                                    "italic": false,
-                                                    "strikethrough": false,
-                                                    "underline": false,
-                                                    "code": false,
-                                                    "color": "purple"
-                                                },
-                                                "plain_text": "Данные",
-                                                "href": null
-                                            }
-                                        ],
-                                        [
-                                            {
-                                                "type": "text",
-                                                "text": {
-                                                    "content": "Данные",
-                                                    "link": null
-                                                },
-                                                "annotations": {
-                                                    "bold": false,
-                                                    "italic": false,
-                                                    "strikethrough": false,
-                                                    "underline": false,
-                                                    "code": false,
-                                                    "color": "purple"
-                                                },
-                                                "plain_text": "Данные",
-                                                "href": null
-                                            }
-                                        ],
-                                        [
-                                            {
-                                                "type": "text",
-                                                "text": {
-                                                    "content": "Модели пультов | приборов | устройств",
-                                                    "link": null
-                                                },
-                                                "annotations": {
-                                                    "bold": false,
-                                                    "italic": false,
-                                                    "strikethrough": false,
-                                                    "underline": false,
-                                                    "code": false,
-                                                    "color": "blue"
-                                                },
-                                                "plain_text": "Модели пультов | приборов | устройств",
-                                                "href": null
-                                            }
-                                        ]
-                                    ]
-                                }
-                            },
-                            {
-                                //...other keys excluded
-                                "type": "table_row",
-                                "table_row": {
-                                    "cells": [
                                         [
                                             {
                                                 "type": "text",
@@ -216,7 +151,7 @@ module.exports = async function addTable(blockId) {
                                                     "link": null
                                                 },
                                                 "annotations": {
-                                                    "bold": true,
+                                                    "bold": false,
                                                     "italic": false,
                                                     "strikethrough": false,
                                                     "underline": false,
@@ -231,7 +166,7 @@ module.exports = async function addTable(blockId) {
                                             {
                                                 "type": "text",
                                                 "text": {
-                                                    "content": "4",
+                                                    "content": "10",
                                                     "link": null
                                                 },
                                                 "annotations": {
@@ -242,81 +177,7 @@ module.exports = async function addTable(blockId) {
                                                     "code": false,
                                                     "color": "purple"
                                                 },
-                                                "plain_text": "4",
-                                                "href": null
-                                            }
-                                        ],
-                                        [
-                                            {
-                                                "type": "text",
-                                                "text": {
-                                                    "content": "6",
-                                                    "link": null
-                                                },
-                                                "annotations": {
-                                                    "bold": false,
-                                                    "italic": false,
-                                                    "strikethrough": false,
-                                                    "underline": false,
-                                                    "code": false,
-                                                    "color": "purple"
-                                                },
-                                                "plain_text": "6",
-                                                "href": null
-                                            }
-                                        ],
-                                        [
-                                            {
-                                                "type": "text",
-                                                "text": {
-                                                    "content": "часов ",
-                                                    "link": null
-                                                },
-                                                "annotations": {
-                                                    "bold": false,
-                                                    "italic": false,
-                                                    "strikethrough": false,
-                                                    "underline": false,
-                                                    "code": false,
-                                                    "color": "purple"
-                                                },
-                                                "plain_text": "часов ",
-                                                "href": null
-                                            },
-                                            {
-                                                "type": "text",
-                                                "text": {
-                                                    "content": "| смен",
-                                                    "link": null
-                                                },
-                                                "annotations": {
-                                                    "bold": false,
-                                                    "italic": false,
-                                                    "strikethrough": false,
-                                                    "underline": false,
-                                                    "code": false,
-                                                    "color": "pink"
-                                                },
-                                                "plain_text": "| смен",
-                                                "href": null
-                                            }
-                                        ],
-                                        [
-                                            {
-                                                "type": "text",
-                                                "text": {
-                                                    "content": "Хелперы: 4 - 6 - 8 | Специалисты: 10 - 12",
-                                                    "link": null
-                                                },
-                                                "annotations": {
-                                                    "bold": false,
-                                                    "italic": false,
-                                                    "strikethrough": false,
-                                                    "underline": false,
-                                                    "code": false,
-                                                    "color": "blue"
-                                                },
-                                                "plain_text": "Хелперы: 4 - 6 - 8 | Специалисты: 10 - 12",
+                                                "plain_text": "10",
                                                 "href": null
                                             }
                                         ]
@@ -351,7 +212,7 @@ module.exports = async function addTable(blockId) {
                                             {
                                                 "type": "text",
                                                 "text": {
-                                                    "content": "300",
+                                                    "content": "1 400.00 | 5 000.00",
                                                     "link": null
                                                 },
                                                 "annotations": {
@@ -362,7 +223,7 @@ module.exports = async function addTable(blockId) {
                                                     "code": false,
                                                     "color": "purple"
                                                 },
-                                                "plain_text": "300",
+                                                "plain_text": "1 400.00 | 5 000.00",
                                                 "href": null
                                             }
                                         ],
@@ -370,7 +231,26 @@ module.exports = async function addTable(blockId) {
                                             {
                                                 "type": "text",
                                                 "text": {
-                                                    "content": "350",
+                                                    "content": "Переработка",
+                                                    "link": null
+                                                },
+                                                "annotations": {
+                                                    "bold": false,
+                                                    "italic": false,
+                                                    "strikethrough": false,
+                                                    "underline": false,
+                                                    "code": false,
+                                                    "color": "green"
+                                                },
+                                                "plain_text": "Переработка",
+                                                "href": null
+                                            }
+                                        ],
+                                        [
+                                            {
+                                                "type": "text",
+                                                "text": {
+                                                    "content": "350.00 | 500.00",
                                                     "link": null
                                                 },
                                                 "annotations": {
@@ -381,82 +261,10 @@ module.exports = async function addTable(blockId) {
                                                     "code": false,
                                                     "color": "purple"
                                                 },
-                                                "plain_text": "350",
+                                                "plain_text": "350.00 | 500.00",
                                                 "href": null
                                             }
                                         ],
-                                        [
-                                            {
-                                                "type": "text",
-                                                "text": {
-                                                    "content": "руб./час",
-                                                    "link": null
-                                                },
-                                                "annotations": {
-                                                    "bold": false,
-                                                    "italic": false,
-                                                    "strikethrough": false,
-                                                    "underline": false,
-                                                    "code": false,
-                                                    "color": "purple"
-                                                },
-                                                "plain_text": "руб./час",
-                                                "href": null
-                                            },
-                                            {
-                                                "type": "text",
-                                                "text": {
-                                                    "content": " ",
-                                                    "link": null
-                                                },
-                                                "annotations": {
-                                                    "bold": false,
-                                                    "italic": false,
-                                                    "strikethrough": false,
-                                                    "underline": false,
-                                                    "code": false,
-                                                    "color": "default"
-                                                },
-                                                "plain_text": " ",
-                                                "href": null
-                                            },
-                                            {
-                                                "type": "text",
-                                                "text": {
-                                                    "content": "| рублей",
-                                                    "link": null
-                                                },
-                                                "annotations": {
-                                                    "bold": false,
-                                                    "italic": false,
-                                                    "strikethrough": false,
-                                                    "underline": false,
-                                                    "code": false,
-                                                    "color": "pink"
-                                                },
-                                                "plain_text": "| рублей",
-                                                "href": null
-                                            }
-                                        ],
-                                        [
-                                            {
-                                                "type": "text",
-                                                "text": {
-                                                    "content": "300.00 | 350.00 | 5 000.00 | 8 000.00 | 10 000.00",
-                                                    "link": null
-                                                },
-                                                "annotations": {
-                                                    "bold": false,
-                                                    "italic": false,
-                                                    "strikethrough": false,
-                                                    "underline": false,
-                                                    "code": false,
-                                                    "color": "blue"
-                                                },
-                                                "plain_text": "300.00 | 350.00 | 5 000.00 | 8 000.00 | 10 000.00",
-                                                "href": null
-                                            }
-                                        ]
                                     ]
                                 }
                             }
