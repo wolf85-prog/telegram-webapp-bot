@@ -488,20 +488,63 @@ async function addAddress(geo, projectname, datestart, teh, managerId, companyId
         }
 
         if (project_id) {
-            console.log(new Date())
-            
+          
             //создать верхний блок
-            await addTable(project_id)                       
-            await newDatabase2(project_id, worklist, datestart);//создание базы данных "Основной состав"  
-            await newDatabase3(project_id);                     //создание базы данных "Запасной состав" 
-            while (true) {
-                const pretendentId = await newDatabase5(project_id);   //создание базы данных "Претенденты"           
-                if (pretendentId) break
-                else {
-                    console.log("4. Ошибка создания таблицы Претенденты!")
-                }                          
-            } 
-            await newDatabase4(project_id, equipmentlist); //создание базы данных "Оборудование"
+            // await addTable(project_id)                       
+            // await newDatabase2(project_id, worklist, datestart);//создание базы данных "Основной состав"  
+            // await newDatabase3(project_id);                     //создание базы данных "Запасной состав" 
+            
+            // while (true) {
+            //     const pretendentId = await newDatabase5(project_id);   //создание базы данных "Претенденты"           
+            //     if (pretendentId) break
+            //     else {
+            //         console.log("4. Ошибка создания таблицы Претенденты!")
+            //     }                          
+            // } 
+            // await newDatabase4(project_id, equipmentlist); //создание базы данных "Оборудование"
+
+            console.log("Текущая дата и время: ", new Date())
+            let topId, mainId, zapasId, pretendentId, equipId 
+                            
+            //создать верхний блок 
+            while (!topId) {                                
+                topId = await addTable(project_id).catch(() => null); 
+                await delay(2000);                                                        
+            }
+                            
+
+            //создание базы данных "Основной состав"
+            while (!mainId) {  
+                mainId = await newDatabase2(project_id, worklist, datestart);  
+                console.log("mainId: ", mainId)  
+                if (mainId) break; // (*)                           
+                await delay(2000);                                                  
+            }
+
+            //создание базы данных "Запасной состав"
+            while (!zapasId) {                                
+                zapasId = await newDatabase3(project_id);  
+                console.log("zapasId: ", zapasId) 
+                if (zapasId) break; // (*)   
+                await delay(2000);                                                        
+            }
+                            
+            //создание базы данных "Претенденты"
+            while (!pretendentId) {                                
+                pretendentId = await newDatabase5(project_id);  
+                console.log("pretendentId: ", pretendentId) 
+                if (pretendentId) break; // (*)   
+                await delay(2000);                                                          
+            }
+
+            //создание базы данных "Оборудование"
+            while (!equipId) {                                
+                equipId = await newDatabase4(project_id, equipmentlist);    
+                console.log("equipId: ", equipId) 
+                if (equipId) break; // (*)   
+                await delay(2000);                                                      
+            }  
+
         }
 
         return project_id
@@ -912,7 +955,7 @@ bot.on('message', async (msg) => {
                         //добавление проекта с названием проекта в базу
                         
                         if (projectId) {
-                            console.log(new Date())
+                            console.log("Текущая дата и время: ", new Date())
                             let topId, mainId, zapasId, pretendentId, equipId 
                             
                             //создать верхний блок 
@@ -935,19 +978,24 @@ bot.on('message', async (msg) => {
                             while (!zapasId) {                                
                                 zapasId = await newDatabase3(projectId);  
                                 console.log("zapasId: ", zapasId) 
-                                if (zapasId) break; // (*)                                                         
+                                if (zapasId) break; // (*)   
+                                await delay(2000);                                                        
                             }
                             
                             //создание базы данных "Претенденты"
                             while (!pretendentId) {                                
                                 pretendentId = await newDatabase5(projectId);  
                                 console.log("pretendentId: ", pretendentId) 
+                                if (pretendentId) break; // (*)   
                                 await delay(2000);                                                          
                             }
 
                             //создание базы данных "Оборудование"
                             while (!equipId) {                                
-                                equipId = await newDatabase4(projectId, Equipmentlist);                                                         
+                                equipId = await newDatabase4(projectId, Equipmentlist);    
+                                console.log("equipId: ", equipId) 
+                                if (equipId) break; // (*)   
+                                await delay(2000);                                                      
                             }                             
                             
                         }
