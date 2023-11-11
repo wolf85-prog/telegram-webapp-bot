@@ -923,18 +923,25 @@ bot.on('message', async (msg) => {
                             
 
                             //создание базы данных "Основной состав"
-                            while (!mainId) {                                
-                                mainId = await newDatabase2(projectId, Worklist, project.datestart);                                                      
+                            let i = 0;
+                            while (!mainId) {  
+                                mainId = await newDatabase2(projectId, Worklist, project.datestart);  
+                                console.log("mainId: ", mainId)  
+                                if (mainId) break; // (*)                           
+                                await delay(2000);                                                  
                             }
 
                             //создание базы данных "Запасной состав"
                             while (!zapasId) {                                
-                                zapasId = await newDatabase3(projectId);                                                         
+                                zapasId = await newDatabase3(projectId);  
+                                console.log("zapasId: ", zapasId) 
+                                if (zapasId) break; // (*)                                                         
                             }
                             
                             //создание базы данных "Претенденты"
                             while (!pretendentId) {                                
                                 pretendentId = await newDatabase5(projectId);  
+                                console.log("pretendentId: ", pretendentId) 
                                 await delay(2000);                                                          
                             }
 

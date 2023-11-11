@@ -159,6 +159,8 @@ module.exports = async function newDatabase4(parent_page_id, equipmentlist) {
                 addEquipmentEmpty(data.id)
             }          
         });
+
+        return data.id
         
     } catch (error) {
         console.error(error.message)

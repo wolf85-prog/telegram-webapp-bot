@@ -280,7 +280,9 @@ module.exports = async function addTable(blockId) {
         //console.log(response)
         console.log("Верхний блок добавлен! Data: "  + response.results[0].id)//+ JSON.stringify(response))
         console.log("Верхний блок2 добавлен! Data: "  + response.results[1].id)//+ JSON.stringify(response))
-        return response;
+
+        return response.results[0].id;
+
     } catch (error) {
         console.error(error.message)
     }

@@ -542,6 +542,8 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
             }    
             
         });
+
+        return data.id
         
     } catch (error) {
         console.error(error.message)
