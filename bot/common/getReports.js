@@ -205,9 +205,23 @@ module.exports = async function getReports(project, bot) {
         allDate = []
         arr_all = []
 
+        //получить статус проекта
+        // await fetch(`${botApiUrl}/project/${project.projectId}`)
+        // .then((response) => response.json())
+        // .then((data) => {
+        //     if (data) {
+        //         project_status = data?.properties["Статус проекта"].select.name
+        //         console.log("STATUS: ", project_status)
+        //     }  else {
+        //         project_status ='';
+        //         console.log("STATUS: ", project_status)
+        //     }                             
+        // });
+
         //1)получить блок и бд
         if (project.projectId) {
-            console.log("i: " + i + " " +  new Date() + " Проект: " + project.name) 
+            console.log("i: " + i + " " +  new Date() + " Проект: " + project.name + " Статус: " + project.status) 
+
             
             const blockId = await getBlocks(project.projectId);            
             if (blockId) {
@@ -397,10 +411,12 @@ ${arr_count0.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + it
                     project_name = data?.properties.Name.title[0]?.plain_text;
                     project_manager = data?.properties["Менеджер"].relation[0]?.id;
                     project_status = data?.properties["Статус проекта"].select.name
+                    console.log("STATUS: ", project_status)
                 }  else {
                     project_name = project.name
                     project_manager = '';
                     project_status ='';
+                    console.log("STATUS: ", project_status)
                 }                             
             });
 
@@ -441,8 +457,9 @@ ${day}.${month} | ${chas}:${min} | ${project_name} | U.L.E.Y
 
 ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title).join('\n')}`                           
 
-                        //отправка сообщений по таймеру
-                        setTimeout(async()=> {
+                    //отправка сообщений по таймеру
+                    if (project_status !== 'Wasted' || project_status !== 'OnHold') {
+                        setTimeout(async()=> {                       
                             const report = await bot.sendMessage(chatId_manager, text, {
                                 reply_markup: ({
                                     inline_keyboard:[
@@ -470,7 +487,8 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                                         convId: convId,
                                         messageId: report.message_id,
                             }) 
-                        }, 2500 * ++i)   
+                        }, 2500 * ++i) 
+                    }  
 //---------------------------------------------------------------------------------------------------
                         //создаю оповещения
                         //отправка напоминания
@@ -595,7 +613,7 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
         } // end if i
     
         i++ // счетчик интервалов
-    }, 120000); //каждые 2 минуты
+    }, 600000); //каждые 10 минут
 
     // остановить вывод через 30 дней
     if (minutCount == 43200) {
