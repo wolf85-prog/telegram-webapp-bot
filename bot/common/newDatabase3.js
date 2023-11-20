@@ -358,6 +358,8 @@ module.exports = async function newDatabase3(parent_page_id) {
         await addWorkerZapas(data.id);
         await addWorkerZapas(data.id);
 
+        return data.id
+
     } catch (error) {
         console.error(error.message)
     }
