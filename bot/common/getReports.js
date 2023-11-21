@@ -433,185 +433,188 @@ ${arr_count0.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + it
                 }                             
             });
 
+            if (project_status !== 'Wasted' || project_status !== 'OnHold') {
 
-            //отправить сообщение по каждой дате
-            datesObj.forEach((date, i)=> {
-                const d = new Date(date.date.split('+')[0]);
-                const d2 = new Date().getTime() + 10800000 //Текущая дата: ", d2)
+                //отправить сообщение по каждой дате
+                datesObj.forEach((date, i)=> {
+                    const d = new Date(date.date.split('+')[0]);
+                    const d2 = new Date().getTime() + 10800000 //Текущая дата: ", d2)
 
-                if(d >= d2) {
-                    //если есть изменения в таблице Основной состав
-                    if (!date.consilience) { 
-                        datesObj[i].consilience = true
-                        const arr_copy = arr_all[i]
+                    if(d >= d2) {
+                        //если есть изменения в таблице Основной состав
+                        if (!date.consilience) { 
+                            datesObj[i].consilience = true
+                            const arr_copy = arr_all[i]
 
-                        const d = new Date(date.date.split('+')[0]);
-                        const month = String(d.getMonth()+1).padStart(2, "0");
-                        const day = String(d.getDate()).padStart(2, "0");
-                        const chas = d.getHours();
-                        const min = String(d.getMinutes()).padStart(2, "0");
+                            const d = new Date(date.date.split('+')[0]);
+                            const month = String(d.getMonth()+1).padStart(2, "0");
+                            const day = String(d.getDate()).padStart(2, "0");
+                            const chas = d.getHours();
+                            const min = String(d.getMinutes()).padStart(2, "0");
 
-                        const text = `Запрос на специалистов: 
-                                
+                            const text = `Запрос на специалистов: 
+                                    
 ${day}.${month} | ${chas}:${min} | ${project_name} | U.L.E.Y
 
 ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title).join('\n')}`                           
 
-                    //отправка сообщений по таймеру
-                    console.log("timer: ", project_status)
-                    if (project_status !== 'Wasted' || project_status !== 'OnHold') {
-                        setTimeout(async()=> {                       
-                            const report = await bot.sendMessage(chatId_manager, text, {
-                                reply_markup: ({
-                                    inline_keyboard:[
-                                        [
-                                            {"text": "Информация принята", callback_data:'/report_accept'},
-                                        ],
-                                    ]
-                                })
-                            })                         
-                            console.log('Отчет отправлен заказчику! ', date.date);
+                        //отправка сообщений по таймеру
+                        console.log("timer: ", project_status)
+                        
+                        setTimeout(async()=> {   
+                                const report = await bot.sendMessage(chatId_manager, text, {
+                                    reply_markup: ({
+                                        inline_keyboard:[
+                                            [
+                                                {"text": "Информация принята", callback_data:'/report_accept'},
+                                            ],
+                                        ]
+                                    })
+                                })                         
+                                console.log('Отчет отправлен заказчику! ', date.date);
 
-                            // сохранить отправленное боту сообщение пользователя в БД
-                            const convId = await sendMyMessage(text, 'text', chatId_manager, report.message_id)
+                                // сохранить отправленное боту сообщение пользователя в БД
+                                const convId = await sendMyMessage(text, 'text', chatId_manager, report.message_id)
 
-                            //Подключаемся к серверу socket
-                            let socket = io(socketUrl);
-                            socket.emit("addUser", chatId_manager)
+                                //Подключаемся к серверу socket
+                                let socket = io(socketUrl);
+                                socket.emit("addUser", chatId_manager)
 
-                            //отправить сообщение в админку
-                            socket.emit("sendMessage", {
-                                        senderId: chatId_manager,
-                                        receiverId: chatTelegramId,
-                                        text: text,
-                                        type: 'text',
-                                        convId: convId,
-                                        messageId: report.message_id,
-                            }) 
-                        }, 2500 * ++i) 
-                    }  
-//---------------------------------------------------------------------------------------------------
-                        //создаю оповещения
-                        //отправка напоминания
-                        if (project_status === 'Load' || project_status === 'Ready' || project_status === 'OnAir') {
-                            var timeDiff = d.getTime() - 7200000; //120 минут
-                            var timeDiff2 = d.getTime() - 3600000;//60 минут
-                            var timeDiff3 = d.getTime() - 1800000;//30 минут
-                            var timeDiff4 = d.getTime() - 900000; //15 минут
-                            var timeDiff5 = d.getTime();          //0 минут
+                                //отправить сообщение в админку
+                                socket.emit("sendMessage", {
+                                            senderId: chatId_manager,
+                                            receiverId: chatTelegramId,
+                                            text: text,
+                                            type: 'text',
+                                            convId: convId,
+                                            messageId: report.message_id,
+                                }) 
+                        }, 2500 * ++i)   
+    //---------------------------------------------------------------------------------------------------
+                            //создаю оповещения
+                            //отправка напоминания
+                            if (project_status === 'Load' || project_status === 'Ready' || project_status === 'OnAir') {
+                                var timeDiff = d.getTime() - 7200000; //120 минут
+                                var timeDiff2 = d.getTime() - 3600000;//60 минут
+                                var timeDiff3 = d.getTime() - 1800000;//30 минут
+                                var timeDiff4 = d.getTime() - 900000; //15 минут
+                                var timeDiff5 = d.getTime();          //0 минут
 
-                            const date2 = new Date(timeDiff)
-                            const date3 = new Date(timeDiff2)
-                            const date4 = new Date(timeDiff3)
-                            const date5 = new Date(timeDiff4)
-                            const date6 = new Date(timeDiff5)
-                            const dateNow = new Date(d2)
+                                const date2 = new Date(timeDiff)
+                                const date3 = new Date(timeDiff2)
+                                const date4 = new Date(timeDiff3)
+                                const date5 = new Date(timeDiff4)
+                                const date6 = new Date(timeDiff5)
+                                const dateNow = new Date(d2)
 
-                            const milliseconds = Math.floor((date2 - dateNow)); //120 минут
-                            const milliseconds2 = Math.floor((date3 - dateNow)); //60 минут
-                            const milliseconds3 = Math.floor((date4 - dateNow)); //30 минут
-                            const milliseconds4 = Math.floor((date5 - dateNow)); //15 минут
-                            const milliseconds5 = Math.floor((date6 - dateNow)); //0 минут
+                                const milliseconds = Math.floor((date2 - dateNow)); //120 минут
+                                const milliseconds2 = Math.floor((date3 - dateNow)); //60 минут
+                                const milliseconds3 = Math.floor((date4 - dateNow)); //30 минут
+                                const milliseconds4 = Math.floor((date5 - dateNow)); //15 минут
+                                const milliseconds5 = Math.floor((date6 - dateNow)); //0 минут
 
-                            //120-минутная готовность
-                            if (task1) {
-                                clearTimeout(task1);    
-                                console.log("Задача 1 удалена! " + project_name)                       
-                            } 
-                            if (milliseconds > 0) {
-                                console.log("!!!!Планирую запуск сообщения 1...!!!!")     
-                                task1 = setTimeout(async() => {
-                                    //отправить сообщение в админку
-                                    if (project_status === 'Load' || project_status === 'Ready' || project_status === 'OnAir') {
-                                        let socket = io(socketUrl);
-                                        socket.emit("sendNotif", {
-                                            task: 1
-                                        }) 
-                                    }
-                                }, milliseconds) 
+                                //120-минутная готовность
+                                if (task1) {
+                                    clearTimeout(task1);    
+                                    console.log("Задача 1 удалена! " + project_name)                       
+                                } 
+                                if (milliseconds > 0) {
+                                    console.log("!!!!Планирую запуск сообщения 1...!!!!")     
+                                    task1 = setTimeout(async() => {
+                                        //отправить сообщение в админку
+                                        if (project_status === 'Load' || project_status === 'Ready' || project_status === 'OnAir') {
+                                            let socket = io(socketUrl);
+                                            socket.emit("sendNotif", {
+                                                task: 1
+                                            }) 
+                                        }
+                                    }, milliseconds) 
+                                }
+    
+
+                                //60-минутная готовность
+                                if (task2) {
+                                    clearTimeout(task2);    
+                                    console.log("Задача 2 удалена! " + project_name)                       
+                                } 
+                                if (milliseconds2 > 0) {
+                                    console.log("!!!!Планирую запуск сообщения 2...!!!!")     
+                                    task2 = setTimeout(async() => {
+                                        //отправить сообщение в админку
+                                        if (project_status === 'Load' || project_status === 'Ready' || project_status === 'OnAir') {
+                                            let socket = io(socketUrl);
+                                            socket.emit("sendNotif", {
+                                                task: 2
+                                            }) 
+                                        }
+                                    }, milliseconds2)
+                                }
+
+                                //30-минутная готовность
+                                if (task3) {
+                                    clearTimeout(task3);    
+                                    console.log("Задача 3 удалена! " + project_name)                       
+                                } 
+                                if (milliseconds3 > 0) {
+                                    console.log("!!!!Планирую запуск сообщения 3...!!!!")     
+                                    task3 = setTimeout(async() => {
+                                        //отправить сообщение в админку
+                                        if (project_status === 'Load' || project_status === 'Ready' || project_status === 'OnAir') {
+                                            let socket = io(socketUrl);
+                                            socket.emit("sendNotif", {
+                                                task: 3
+                                            }) 
+                                        }
+                                    }, milliseconds3)
+                                }
+
+                                //15-минутная готовность
+                                if (task4) {
+                                    clearTimeout(task4);    
+                                    console.log("Задача 4 удалена! " + project_name)                       
+                                } 
+                                if (milliseconds4 > 0) {
+                                    console.log("!!!!Планирую запуск сообщения 4...!!!!")     
+                                    task4 = setTimeout(async() => {
+                                        //отправить сообщение в админку
+                                        if (project_status === 'Load' || project_status === 'Ready' || project_status === 'OnAir') {
+                                            let socket = io(socketUrl);
+                                            socket.emit("sendNotif", {
+                                                task: 4
+                                            }) 
+                                        }
+                                    }, milliseconds4)
+                                }
+
+                                //0 готовность
+                                if (task5) {
+                                    clearTimeout(task5);    
+                                    console.log("Задача 5 удалена! " + project_name)                       
+                                } 
+                                if (milliseconds5 > 0) {
+                                    console.log("!!!!Планирую запуск сообщения 5...!!!!")  
+                                    console.log("--------------------------------------")      
+                                    task5 = setTimeout(async() => {
+                                        //отправить сообщение в админку
+                                        if (project_status === 'Load' || project_status === 'Ready' || project_status === 'OnAir') {
+                                            let socket = io(socketUrl);
+                                            socket.emit("sendNotif", {
+                                                task: 5
+                                            }) 
+                                        }
+                                    }, milliseconds5)
+                                }
                             }
- 
-
-                            //60-минутная готовность
-                            if (task2) {
-                                clearTimeout(task2);    
-                                console.log("Задача 2 удалена! " + project_name)                       
-                            } 
-                            if (milliseconds2 > 0) {
-                                console.log("!!!!Планирую запуск сообщения 2...!!!!")     
-                                task2 = setTimeout(async() => {
-                                    //отправить сообщение в админку
-                                    if (project_status === 'Load' || project_status === 'Ready' || project_status === 'OnAir') {
-                                        let socket = io(socketUrl);
-                                        socket.emit("sendNotif", {
-                                            task: 2
-                                        }) 
-                                    }
-                                }, milliseconds2)
-                            }
-
-                            //30-минутная готовность
-                            if (task3) {
-                                clearTimeout(task3);    
-                                console.log("Задача 3 удалена! " + project_name)                       
-                            } 
-                            if (milliseconds3 > 0) {
-                                console.log("!!!!Планирую запуск сообщения 3...!!!!")     
-                                task3 = setTimeout(async() => {
-                                    //отправить сообщение в админку
-                                    if (project_status === 'Load' || project_status === 'Ready' || project_status === 'OnAir') {
-                                        let socket = io(socketUrl);
-                                        socket.emit("sendNotif", {
-                                            task: 3
-                                        }) 
-                                    }
-                                }, milliseconds3)
-                            }
-
-                            //15-минутная готовность
-                            if (task4) {
-                                clearTimeout(task4);    
-                                console.log("Задача 4 удалена! " + project_name)                       
-                            } 
-                            if (milliseconds4 > 0) {
-                                console.log("!!!!Планирую запуск сообщения 4...!!!!")     
-                                task4 = setTimeout(async() => {
-                                    //отправить сообщение в админку
-                                    if (project_status === 'Load' || project_status === 'Ready' || project_status === 'OnAir') {
-                                        let socket = io(socketUrl);
-                                        socket.emit("sendNotif", {
-                                            task: 4
-                                        }) 
-                                    }
-                                }, milliseconds4)
-                            }
-
-                            //0 готовность
-                            if (task5) {
-                                clearTimeout(task5);    
-                                console.log("Задача 5 удалена! " + project_name)                       
-                            } 
-                            if (milliseconds5 > 0) {
-                                console.log("!!!!Планирую запуск сообщения 5...!!!!")  
-                                console.log("--------------------------------------")      
-                                task5 = setTimeout(async() => {
-                                    //отправить сообщение в админку
-                                    if (project_status === 'Load' || project_status === 'Ready' || project_status === 'OnAir') {
-                                        let socket = io(socketUrl);
-                                        socket.emit("sendNotif", {
-                                            task: 5
-                                        }) 
-                                    }
-                                }, milliseconds5)
-                            }
+    //-----------------------------------------------------------------------------------------------
                         }
-//-----------------------------------------------------------------------------------------------
+                    } else {
+                        console.log('Отчет не отправлен! Основная дата меньше текущей');
                     }
-                } else {
-                    console.log('Отчет не отправлен! Основная дата меньше текущей');
-                }
-            })
-        } // end if i
+                })
+            } else { // if status
+                console.log('Статус проекта onHold или Wasted'); 
+            }
+        } // end if else i
     
         i++ // счетчик интервалов
     }, 600000); //каждые 10 минут
