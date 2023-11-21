@@ -458,6 +458,7 @@ ${day}.${month} | ${chas}:${min} | ${project_name} | U.L.E.Y
 ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title).join('\n')}`                           
 
                     //отправка сообщений по таймеру
+                    console.log("timer: ", project_status)
                     if (project_status !== 'Wasted' || project_status !== 'OnHold') {
                         setTimeout(async()=> {                       
                             const report = await bot.sendMessage(chatId_manager, text, {
