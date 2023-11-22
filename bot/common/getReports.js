@@ -217,13 +217,13 @@ module.exports = async function getReports(project, bot) {
                 project_name = data?.properties.Name.title[0]?.plain_text;
                 project_manager = data?.properties["Менеджер"].relation[0]?.id;
                 statusProjectNew = data?.properties["Статус проекта"].select.name
-                console.log("STATUS: ", statusProjectNew)
+                console.log("STATUS NEW: ", statusProjectNew)
 
             }  else {
                 project_name = project.name
                 project_manager = '';
                 statusProjectNew ='';
-                console.log("STATUS: ", statusProjectNew)
+                console.log("STATUS NEW: ", statusProjectNew)
             }                             
         });
 
@@ -242,8 +242,15 @@ module.exports = async function getReports(project, bot) {
 
 
         //1)получить блок и бд
+        const d = new Date()
+        const year = d.getFullYear()
+        const month = String(d.getMonth()+1).padStart(2, "0");
+        const day = String(d.getDate()).padStart(2, "0");
+        const chas = d.getHours();
+        const minut = String(d.getMinutes()).padStart(2, "0");
+
         if (project.projectId) {
-            console.log("i: " + i + " " +  new Date() + " Проект: " + project_name + " Статус: " + statusProjectNew) 
+            console.log(`i: ${i} ${day}.${month}.${year} ${chas}:${minut} Проект: ${project_name} Статус: ${statusProjectNew}`) 
 
             
             const blockId = await getBlocks(project.projectId);            
@@ -421,7 +428,6 @@ ${arr_count0.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + it
   
         } else {
             // 2-й отчет
-
             if (statusProjectNew !== 'Wasted' || statusProjectNew !== 'OnHold') {
 
                 //отправить сообщение по каждой дате
