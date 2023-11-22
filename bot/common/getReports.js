@@ -205,22 +205,45 @@ module.exports = async function getReports(project, bot) {
         allDate = []
         arr_all = []
 
-        //получить статус проекта
-        // await fetch(`${botApiUrl}/project/${project.projectId}`)
-        // .then((response) => response.json())
-        // .then((data) => {
-        //     if (data) {
-        //         project_status = data?.properties["Статус проекта"].select.name
-        //         console.log("STATUS: ", project_status)
-        //     }  else {
-        //         project_status ='';
-        //         console.log("STATUS: ", project_status)
-        //     }                             
-        // });
+        let statusProjectNew = ''; 
+        let project_name;  
+        let project_manager; 
+        
+        //получить название проекта из ноушена
+        await fetch(`${botApiUrl}/project/${project.projectId}`)
+        .then((response) => response.json())
+        .then((data) => {
+            if (data) {
+                project_name = data?.properties.Name.title[0]?.plain_text;
+                project_manager = data?.properties["Менеджер"].relation[0]?.id;
+                statusProjectNew = data?.properties["Статус проекта"].select.name
+                console.log("STATUS: ", statusProjectNew)
+
+            }  else {
+                project_name = project.name
+                project_manager = '';
+                statusProjectNew ='';
+                console.log("STATUS: ", statusProjectNew)
+            }                             
+        });
+
+
+        //получить TelegramID менеджера проекта из ноушена
+        let chatId_manager;
+        const chat = await fetch(`${botApiUrl}/managers/${project_manager}`)
+        .then((response) => response.json())
+        .then((data) => {
+            if (data) {
+                chatId_manager = data
+            } else {
+                console.log("Manager TelegramId не найден!")
+            }                             
+        });
+
 
         //1)получить блок и бд
         if (project.projectId) {
-            console.log("i: " + i + " " +  new Date() + " Проект: " + project.name + " Статус: " + project.status) 
+            console.log("i: " + i + " " +  new Date() + " Проект: " + project_name + " Статус: " + statusProjectNew) 
 
             
             const blockId = await getBlocks(project.projectId);            
@@ -228,11 +251,11 @@ module.exports = async function getReports(project, bot) {
                 j = 0    
                 databaseBlock = await getDatabaseId(blockId);   
             } else {
-                console.log("База данных не найдена! Проект ID: " + project.name)
+                console.log("База данных не найдена! Проект ID: " + project_name)
                 j++ //счетчик ошибок доступа к БД ноушена
                 console.log("Ошибка № " + j)
                 if (j > 5) {
-                    console.log("Цикл проекта " + project.name + " завершен!")
+                    console.log("Цикл проекта " + project_name + " завершен!")
                     clearTimeout(timerId);
                 }
             }
@@ -399,41 +422,7 @@ ${arr_count0.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + it
         } else {
             // 2-й отчет
 
-            //получить название проекта из ноушена
-            let project_name;  
-            let project_manager; 
-            let project_status; 
-
-            await fetch(`${botApiUrl}/project/${project.projectId}`)
-            .then((response) => response.json())
-            .then((data) => {
-                if (data) {
-                    project_name = data?.properties.Name.title[0]?.plain_text;
-                    project_manager = data?.properties["Менеджер"].relation[0]?.id;
-                    project_status = data?.properties["Статус проекта"].select.name
-                    console.log("STATUS: ", project_status)
-                }  else {
-                    project_name = project.name
-                    project_manager = '';
-                    project_status ='';
-                    console.log("STATUS: ", project_status)
-                }                             
-            });
-
-
-            //получить TelegramID менеджера проекта из ноушена
-            let chatId_manager;
-            const chat = await fetch(`${botApiUrl}/managers/${project_manager}`)
-            .then((response) => response.json())
-            .then((data) => {
-                if (data) {
-                    chatId_manager = data
-                } else {
-                    console.log("Manager TelegramId не найден!")
-                }                             
-            });
-
-            if (project_status !== 'Wasted' || project_status !== 'OnHold') {
+            if (statusProjectNew !== 'Wasted' || statusProjectNew !== 'OnHold') {
 
                 //отправить сообщение по каждой дате
                 datesObj.forEach((date, i)=> {
@@ -459,7 +448,7 @@ ${day}.${month} | ${chas}:${min} | ${project_name} | U.L.E.Y
 ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title).join('\n')}`                           
 
                         //отправка сообщений по таймеру
-                        console.log("timer: ", project_status)
+                        console.log("timer: ", statusProjectNew)
                         
                         setTimeout(async()=> {   
                                 const report = await bot.sendMessage(chatId_manager, text, {
@@ -493,7 +482,7 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
     //---------------------------------------------------------------------------------------------------
                             //создаю оповещения
                             //отправка напоминания
-                            if (project_status === 'Load' || project_status === 'Ready' || project_status === 'OnAir') {
+                            if (statusProjectNew === 'Load' || statusProjectNew === 'Ready' || statusProjectNew === 'OnAir') {
                                 var timeDiff = d.getTime() - 7200000; //120 минут
                                 var timeDiff2 = d.getTime() - 3600000;//60 минут
                                 var timeDiff3 = d.getTime() - 1800000;//30 минут
@@ -522,7 +511,7 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                                     console.log("!!!!Планирую запуск сообщения 1...!!!!")     
                                     task1 = setTimeout(async() => {
                                         //отправить сообщение в админку
-                                        if (project_status === 'Load' || project_status === 'Ready' || project_status === 'OnAir') {
+                                        if (statusProjectNew === 'Load' || statusProjectNew === 'Ready' || statusProjectNew === 'OnAir') {
                                             let socket = io(socketUrl);
                                             socket.emit("sendNotif", {
                                                 task: 1
@@ -541,7 +530,7 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                                     console.log("!!!!Планирую запуск сообщения 2...!!!!")     
                                     task2 = setTimeout(async() => {
                                         //отправить сообщение в админку
-                                        if (project_status === 'Load' || project_status === 'Ready' || project_status === 'OnAir') {
+                                        if (statusProjectNew === 'Load' || statusProjectNew === 'Ready' || statusProjectNew === 'OnAir') {
                                             let socket = io(socketUrl);
                                             socket.emit("sendNotif", {
                                                 task: 2
@@ -559,7 +548,7 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                                     console.log("!!!!Планирую запуск сообщения 3...!!!!")     
                                     task3 = setTimeout(async() => {
                                         //отправить сообщение в админку
-                                        if (project_status === 'Load' || project_status === 'Ready' || project_status === 'OnAir') {
+                                        if (statusProjectNew === 'Load' || statusProjectNew === 'Ready' || statusProjectNew === 'OnAir') {
                                             let socket = io(socketUrl);
                                             socket.emit("sendNotif", {
                                                 task: 3
@@ -577,7 +566,7 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                                     console.log("!!!!Планирую запуск сообщения 4...!!!!")     
                                     task4 = setTimeout(async() => {
                                         //отправить сообщение в админку
-                                        if (project_status === 'Load' || project_status === 'Ready' || project_status === 'OnAir') {
+                                        if (statusProjectNew === 'Load' || statusProjectNew === 'Ready' || statusProjectNew === 'OnAir') {
                                             let socket = io(socketUrl);
                                             socket.emit("sendNotif", {
                                                 task: 4
@@ -596,7 +585,7 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                                     console.log("--------------------------------------")      
                                     task5 = setTimeout(async() => {
                                         //отправить сообщение в админку
-                                        if (project_status === 'Load' || project_status === 'Ready' || project_status === 'OnAir') {
+                                        if (statusProjectNew === 'Load' || statusProjectNew === 'Ready' || statusProjectNew === 'OnAir') {
                                             let socket = io(socketUrl);
                                             socket.emit("sendNotif", {
                                                 task: 5
@@ -608,11 +597,11 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
     //-----------------------------------------------------------------------------------------------
                         }
                     } else {
-                        console.log('Отчет не отправлен! Основная дата меньше текущей');
+                        console.log('Отчет не отправлен! Основная дата меньше текущей: ', project_name);
                     }
                 })
             } else { // if status
-                console.log('Статус проекта onHold или Wasted'); 
+                console.log('Статус проекта onHold или Wasted: ', project_name); 
             }
         } // end if else i
     
