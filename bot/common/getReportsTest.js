@@ -217,7 +217,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
         let project_manager; 
 
         //получить название проекта из ноушена
-        await fetch(`${botApiUrl}/project/${project.projectId}`)
+        await fetch(`${botApiUrl}/project/${projectId}`)
         .then((response) => response.json())
         .then((data) => {
             if (data) {
