@@ -549,7 +549,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
     //----------------------------------------------------------------------------------------------
                         }
                     } else {
-                        console.log('Отчет не отправлен! Основная дата меньше текущей');
+                        //console.log('Отчет не отправлен! Основная дата меньше текущей');
                     }
                 })
             } else { // if status
