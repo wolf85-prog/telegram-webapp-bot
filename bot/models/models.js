@@ -70,12 +70,11 @@ const Report = sequelize.define('report', {
 })
 
 const Manager = sequelize.define('manager', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    managerId: {type: DataTypes.STRING},
-    companyId: {type: DataTypes.STRING},
-    chatId: {type: DataTypes.STRING, unique: true},
-    fio: {type: DataTypes.STRING},
-    phone: {type: DataTypes.STRING},
+    id: {type: DataTypes.STRING, primaryKey: true}, // id менеджера
+    companyId: {type: DataTypes.STRING}, // id заказчика
+    chatId: {type: DataTypes.STRING, unique: true}, // telegram id
+    fio: {type: DataTypes.STRING}, //фио менеджера
+    phone: {type: DataTypes.STRING}, //телефон менеджера
 })
 
 const CountMessage = sequelize.define('countmessage', {

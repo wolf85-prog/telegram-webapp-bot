@@ -64,7 +64,7 @@ const path = require('path')
 
 //подключение к БД PostreSQL
 const sequelize = require('./bot/connections/db')
-const {UserBot, Message, Conversation, Project, Report} = require('./bot/models/models');
+const {UserBot, Message, Conversation, Project, Report, Manager} = require('./bot/models/models');
 const updateToDo = require("./bot/common/updateToDo");
 const getProject = require("./bot/common/getProject");
 const sendMessageAdmin = require("./bot/common/sendMessageAdmin");
@@ -74,6 +74,8 @@ const updateToDoFinal = require("./bot/common/updateToDoFinal");
 const updateSmetaFinal = require("./bot/common/updateSmetaFinal");
 const getSmeta = require("./bot/common/getSmeta");
 const updateSmeta = require("./bot/common/updateSmeta");
+const getManagersAll = require("./bot/http/getManagersAll");
+const getCompanyAll = require("./bot/http/getCompanyAll");
 
 const app = express();
 
@@ -1335,8 +1337,8 @@ const start = async () => {
         httpsServer.listen(PORT, async () => {
             console.log('HTTPS Server Bot running on port ' + PORT);
             
-            //получить новые проекты
-            //const arrProjects = await getProjectNew()
+            // 1. получить новые проекты
+
             let arr = []
             const d = new Date().getTime() + 10800000
             const arrProjects = await getAllProjects()
@@ -1362,6 +1364,7 @@ const start = async () => {
                 }
             })
 
+            // 2.
             setTimeout(()=>{
                 //console.log("arr: ", arr)
 
@@ -1377,8 +1380,39 @@ const start = async () => {
                     }, 2000 * ++i)     
                 })
             }, 6000) 
-    
 
+
+            //3. синхронизация менеджеров из ноушена с БД
+             let i = 0;
+ 
+             // повторить с интервалом 5 минут
+             let timerId = setInterval(async() => {
+ 
+                 console.log("START GET MANAGERS ALL...")
+                 const managers = await getManagersAll()
+                 //console.log(managers)
+
+                 //console.log("START GET COMPANY ALL...")
+                 ///const companies = await getCompanyAll()
+                 //console.log(companies)
+ 
+                 await Manager.truncate();
+ 
+                 managers.map(async(manager)=> {
+                     await Manager.create({ 
+                         id: manager.id, 
+                         companyId: '', 
+                         chatId: manager.tgID, 
+                         fio: manager.fio, 
+                         phone: manager.phone,  
+                     })
+                 })
+                 
+                 //-----------------------------------------------------
+  
+                 i++ // счетчик интервалов
+             }, 300000); //каждые 5 минут 
+ 
         });
 
     } catch (error) {
