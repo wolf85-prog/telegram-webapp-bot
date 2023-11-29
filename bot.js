@@ -1388,7 +1388,7 @@ const start = async () => {
              // повторить с интервалом 5 минут
              let timerId = setInterval(async() => {
  
-                 console.log("START GET MANAGERS ALL...")
+                 console.log("START GET MANAGERS...")
                  const managers = await getManagersAll()
                  //console.log(managers)
 
@@ -1399,6 +1399,10 @@ const start = async () => {
                  await Manager.truncate();
  
                  managers.map(async(manager)=> {
+
+                
+                        
+                        
                      await Manager.create({ 
                          id: manager.id, 
                          companyId: '', 
