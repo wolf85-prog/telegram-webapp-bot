@@ -69,6 +69,23 @@ const Report = sequelize.define('report', {
     delivered: {type: DataTypes.BOOLEAN}, //доставлено
 })
 
+const Manager = sequelize.define('manager', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    managerId: {type: DataTypes.STRING},
+    companyId: {type: DataTypes.STRING},
+    chatId: {type: DataTypes.STRING, unique: true},
+    fio: {type: DataTypes.STRING},
+    phone: {type: DataTypes.STRING},
+})
+
+const CountMessage = sequelize.define('countmessage', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    managers: {type: DataTypes.INTEGER},
+    projects: {type: DataTypes.INTEGER},
+    workers: {type: DataTypes.INTEGER},
+    pretendents: {type: DataTypes.INTEGER},
+})
+
 
 module.exports = {
     User, 
@@ -77,5 +94,7 @@ module.exports = {
     Conversation, 
     Project, 
     Distribution,
-    Report
+    Report,
+    Manager,
+    CountMessage
 }
