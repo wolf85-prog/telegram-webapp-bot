@@ -72,6 +72,7 @@ const Report = sequelize.define('report', {
 const Manager = sequelize.define('manager', {
     id: {type: DataTypes.STRING, primaryKey: true}, // id менеджера
     companyId: {type: DataTypes.STRING}, // id заказчика
+    companyName: {type: DataTypes.STRING}, // название компании (заказчика)
     chatId: {type: DataTypes.STRING, unique: true}, // telegram id
     fio: {type: DataTypes.STRING}, //фио менеджера
     phone: {type: DataTypes.STRING}, //телефон менеджера

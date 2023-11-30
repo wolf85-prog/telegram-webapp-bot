@@ -23,12 +23,12 @@ router.get("/project/:id", projectController.projectId);
 router.get("/project/crm/:id", projectController.projectCrmId);
 
 //get MANAGERS
-router.get("/managers", managerController.managers);
-router.get("/managers2", managerController.managers2);
-router.get("/managers/:id", managerController.managersId);
-router.get("/managers/chat/:id", managerController.managersChatId);
-router.get("/manager/:id", managerController.companyId);
-router.get("/manager/name/:id", managerController.managerName);
+router.get("/managers", managerController.managers);                // все менеджеры с краткой информацией
+router.get("/managers2", managerController.managers2);              // все менеджеры с полной информацией
+router.get("/managers/:id", managerController.managersId);          // tgID менеджера по его UUID
+router.get("/managers/chat/:id", managerController.managersChatId); // UUID менеджера по его tgID
+router.get("/manager/:id", managerController.companyId);            // UUID компании по tgID менеджера
+router.get("/manager/name/:id", managerController.managerName);     // полная информация о менеджере по его UUID
 
 //post MANAGER
 router.post("/manager", managerController.create);

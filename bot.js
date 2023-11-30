@@ -658,6 +658,33 @@ bot.on('message', async (msg) => {
             }); 
         }
 
+        if (text.startsWith('/startgetmanagers')) {
+                console.log("START GET MANAGERS ALL...")
+                const managers = await getManagersAll()
+                //console.log(managers)
+
+                console.log("START GET COMPANY ALL...")
+                const companies = await getCompanyAll()
+                //console.log(companies)                
+ 
+                await Manager.truncate();
+ 
+                managers.map(async(manager)=> {
+
+                    const companyObj = companies.find((item)=> item.managers.find((item2)=>item2.id === manager.id))
+                    console.log(companyObj)
+
+                    await Manager.create({ 
+                         id: manager.id, 
+                         companyId: companyObj.id, 
+                         companyName: companyObj.title, 
+                         chatId: manager.tgID ? manager.tgID : "", 
+                         fio: manager.fio, 
+                         phone: manager.phone,  
+                    })
+                })
+        }
+
 //------------------------------------------------------------------------------------------------
 
         //обработка контактов
@@ -1386,32 +1413,36 @@ const start = async () => {
              let i = 0;
  
              // повторить с интервалом 5 минут
-             let timerId = setInterval(async() => {
+            //  let timerId = setInterval(async() => {
  
-                 console.log("START GET MANAGERS ALL...")
-                 const managers = await getManagersAll()
-                 //console.log(managers)
+            //      console.log("START GET MANAGERS ALL...")
+            //      const managers = await getManagersAll()
+            //      //console.log(managers)
 
-                 //console.log("START GET COMPANY ALL...")
-                 ///const companies = await getCompanyAll()
-                 //console.log(companies)
+            //      console.log("START GET COMPANY ALL...")
+            //      const companies = await getCompanyAll()
+            //      //console.log(companies)                
  
-                 await Manager.truncate();
+            //      await Manager.truncate();
  
-                 managers.map(async(manager)=> {
-                     await Manager.create({ 
-                         id: manager.id, 
-                         companyId: '', 
-                         chatId: manager.tgID, 
-                         fio: manager.fio, 
-                         phone: manager.phone,  
-                     })
-                 })
+            //      managers.map(async(manager)=> {
+
+            //         const companyObj = companies.find((item)=> item.managers.find((item2)=>item2.id === manager.id))
+
+            //          await Manager.create({ 
+            //              id: manager.id, 
+            //              companyId: companyObj.id, 
+            //              companyName: companyObj.title, 
+            //              chatId: manager.tgID ? manager.tgID : "", 
+            //              fio: manager.fio, 
+            //              phone: manager.phone,  
+            //          })
+            //      })
                  
-                 //-----------------------------------------------------
+            //      //-----------------------------------------------------
   
-                 i++ // счетчик интервалов
-             }, 300000); //каждые 5 минут 
+            //      i++ // счетчик интервалов
+            //  }, 600000); //каждые 10 минут 
  
         });
 
