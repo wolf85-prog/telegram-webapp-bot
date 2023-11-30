@@ -674,14 +674,24 @@ bot.on('message', async (msg) => {
                     const companyObj = companies.find((item)=> item.managers.find((item2)=>item2.id === manager.id))
                     console.log(companyObj)
 
-                    await Manager.create({ 
-                         id: manager.id, 
-                         companyId: companyObj.id, 
-                         companyName: companyObj.title, 
-                         chatId: manager.tgID ? manager.tgID : "", 
-                         fio: manager.fio, 
-                         phone: manager.phone,  
+                    //найти chatId в БД
+                    //если нашел то ничего не делать иначе создать запись в таблице
+                    const findChatId = Manager.findAll({
+                        where: {
+                            chatId: manager.tgID
+                        }
                     })
+
+                    if (!findChatId) {
+                        await Manager.create({ 
+                            id: manager.id, 
+                            companyId: companyObj.id, 
+                            companyName: companyObj.title, 
+                            chatId: manager.tgID ? manager.tgID : "", 
+                            fio: manager.fio, 
+                            phone: manager.phone,  
+                        })
+                    }     
                 })
         }
 
