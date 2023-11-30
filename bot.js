@@ -1415,31 +1415,6 @@ const start = async () => {
              // повторить с интервалом 5 минут
             //  let timerId = setInterval(async() => {
  
-            //      console.log("START GET MANAGERS ALL...")
-            //      const managers = await getManagersAll()
-            //      //console.log(managers)
-
-            //      console.log("START GET COMPANY ALL...")
-            //      const companies = await getCompanyAll()
-            //      //console.log(companies)                
- 
-            //      await Manager.truncate();
- 
-            //      managers.map(async(manager)=> {
-
-            //         const companyObj = companies.find((item)=> item.managers.find((item2)=>item2.id === manager.id))
-
-            //          await Manager.create({ 
-            //              id: manager.id, 
-            //              companyId: companyObj.id, 
-            //              companyName: companyObj.title, 
-            //              chatId: manager.tgID ? manager.tgID : "", 
-            //              fio: manager.fio, 
-            //              phone: manager.phone,  
-            //          })
-            //      })
-                 
-            //      //-----------------------------------------------------
   
             //      i++ // счетчик интервалов
             //  }, 600000); //каждые 10 минут 
