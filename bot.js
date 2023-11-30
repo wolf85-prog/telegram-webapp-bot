@@ -658,7 +658,7 @@ bot.on('message', async (msg) => {
             }); 
         }
 
-        if (text.startsWith('/startgetmanagers')) {
+        if (text === '/startgetmanagers') {
                 console.log("START GET MANAGERS ALL...")
                 const managers = await getManagersAll()
                 //console.log(managers)

@@ -224,13 +224,13 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                 project_name = data?.properties.Name.title[0]?.plain_text;
                 project_manager = data?.properties["Менеджер"].relation[0]?.id;
                 statusProjectNew = data?.properties["Статус проекта"].select.name
-                console.log("STATUS NEW: ", statusProjectNew)
+                //console.log("STATUS NEW: ", statusProjectNew)
 
             }  else {
                 project_name = project.name
                 project_manager = '';
                 statusProjectNew ='';
-                console.log("STATUS NEW: ", statusProjectNew)
+                //console.log("STATUS NEW: ", statusProjectNew)
             }                             
         });
 
