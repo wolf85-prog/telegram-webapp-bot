@@ -64,7 +64,7 @@ const path = require('path')
 
 //подключение к БД PostreSQL
 const sequelize = require('./bot/connections/db')
-const {UserBot, Message, Conversation, Project, Report, Manager} = require('./bot/models/models');
+const {UserBot, Message, Conversation, Project, Report, Manager, Projectcash} = require('./bot/models/models');
 const updateToDo = require("./bot/common/updateToDo");
 const getProject = require("./bot/common/getProject");
 const sendMessageAdmin = require("./bot/common/sendMessageAdmin");
@@ -76,6 +76,7 @@ const getSmeta = require("./bot/common/getSmeta");
 const updateSmeta = require("./bot/common/updateSmeta");
 const getManagersAll = require("./bot/http/getManagersAll");
 const getCompanyAll = require("./bot/http/getCompanyAll");
+const getProjectsAll = require("./bot/http/getProjectsAll");
 
 const app = express();
 
@@ -693,6 +694,30 @@ bot.on('message', async (msg) => {
                         })
                     }     
                 })
+        }
+
+        if (text === '/startgetprojects') {
+            console.log("START GET PROJECTS ALL...")
+            
+            
+            
+            const projects = await getProjectsAll()
+            //console.log(projects)
+
+            await Projectcash.truncate();
+
+            projects.map(async(project)=> {
+                await Projectcash.create({ 
+                    id: project.id, 
+                    title: project.title, 
+                    dateStart: project.date_start, 
+                    dateEnd: project.date_end, 
+                    status: JSON.stringify(project.status), 
+                    chatURL: project.chatURL,
+                    specs: JSON.stringify(project.specs)  
+                })
+            })
+
         }
 
 //------------------------------------------------------------------------------------------------

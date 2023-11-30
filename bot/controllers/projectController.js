@@ -2,6 +2,7 @@ require("dotenv").config();
 const { Client } = require("@notionhq/client");
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
 const databaseId = process.env.NOTION_DATABASE_ID
+const {Projectcash} = require('../models/models')
 
 async function getProjects() {
     try {
@@ -159,6 +160,20 @@ async function getProjectCrmId(crmId) {
     }
 }
 
+//получить проекты из БД (кэш)
+async function getProjectsCash() {
+    try {
+        const projects = await Projectcash.findAll({
+            order: [
+                ['id', 'DESC'],
+            ],
+        })
+        return projects;
+    } catch (error) {
+        console.error(error.message);
+    }
+}
+
 
 class ProjectController {
     
@@ -209,6 +224,69 @@ class ProjectController {
             res.json({});
         }
     }
+
+    async projectAll(req, res) {
+        let databaseBlock;
+        let arrayProject = []
+    
+        const projects = await getProjects();
+        if (projects && projects.length > 0){
+            projects.map(async(project, index)=> {
+                let arraySpec = []
+                const blockId = await getBlocks(project.id);
+                
+                if (blockId) {  
+                    databaseBlock = await getDatabaseId(blockId); 
+                    //если бд ноушена доступна
+                    if (databaseBlock) {
+                        databaseBlock.map((db) => {
+                            if (db.fio_id) {
+                                const newSpec = {
+                                    rowId: db?.id,
+                                    id: db?.fio,
+                                    vid: db?.vid,
+                                    spec: db?.spec,
+                                    date: db?.date,
+                                }
+                                arraySpec.push(newSpec)
+                            }
+                        })
+    
+                        const newProject = {
+                            id: project.id,
+                            title: project.title,
+                            date_start: project.date_start,
+                            date_end: project.date_end,
+                            status: project.status,
+                            specs: arraySpec,
+                        }
+                        arrayProject.push(newProject)                           
+                    }                   
+                } else {
+                    console.log("База данных не найдена! Проект ID: " + project.title)
+                }
+                
+            })
+
+            setTimeout(()=> {
+                res.json(arrayProject);
+            }, 10000) 
+        }
+        else{
+            res.json([]);
+        }
+    }
+
+    async projectsCash(req, res) {
+        const projects = await getProjectsCash();
+        if(projects){
+            res.json(projects);
+        }
+        else{
+            res.json({});
+        }
+    }
+    
 }
 
 module.exports = new ProjectController()

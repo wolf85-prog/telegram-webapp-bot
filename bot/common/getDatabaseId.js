@@ -10,11 +10,12 @@ module.exports = async function getDatabaseId(baseId) {
         });
 
         const responseResults = response.results.filter((page) => page.properties["2. Дата"].date).map((page) => {
-            return {
+            return {   
+                id: page.id,        
                 date: page.properties["2. Дата"].date?.start,
                 fio: page.properties["4. ФИО"].relation[0]?.id,
-                //title: page.properties["3. Специализация"].multi_select[0]?.name,
-                spec: page.properties["5. Специализация"].multi_select[0]?.name                
+                vid: page.properties["3. Вид работ"] ? page.properties["3. Вид работ"].multi_select[0]?.name : page.properties["3. Статус"].multi_select[0]?.name,
+                spec: page.properties["5. Специализация"].multi_select[0]?.name 
             };
         });
 

@@ -21,6 +21,8 @@ router.get("/projects3", projectController.projects3);
 router.get("/projects/:id", projectController.projectsId);
 router.get("/project/:id", projectController.projectId);
 router.get("/project/crm/:id", projectController.projectCrmId);
+router.get("/projectall", projectController.projectAll);
+router.get("/projectscash", projectController.projectsCash)
 
 //get MANAGERS
 router.get("/managers", managerController.managers);                // все менеджеры с краткой информацией

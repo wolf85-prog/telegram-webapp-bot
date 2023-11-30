@@ -86,6 +86,16 @@ const CountMessage = sequelize.define('countmessage', {
     pretendents: {type: DataTypes.INTEGER},
 })
 
+const Projectcash = sequelize.define('projectcash', {
+    id: {type: DataTypes.STRING, primaryKey: true}, // id проекта
+    title: {type: DataTypes.STRING},  //название проекта
+    dateStart: {type: DataTypes.STRING}, //начало
+    dateEnd: {type: DataTypes.STRING}, //конец
+    status: {type: DataTypes.TEXT}, //статус проекта
+    chatURL: {type: DataTypes.STRING}, //ссылка на чат проекта
+    specs: {type: DataTypes.TEXT}, // специалисты
+})
+
 
 module.exports = {
     User, 
@@ -96,5 +106,6 @@ module.exports = {
     Distribution,
     Report,
     Manager,
+    Projectcash,
     CountMessage
 }
