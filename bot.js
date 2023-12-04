@@ -328,13 +328,17 @@ async function addProject(title, time, teh, managerId, companyId, worklist, equi
                     ],
                     "has_more": false
                 },
-                // "Специфика": {
-                //     "multi_select": {
-                //         "options": [
-                            
-                //         ]
-                //     }
-                // },
+                "Специфика": {
+                    "multi_select": {
+                        "options": [
+                            {
+                                "id": "6a7d3807-9581-45f8-afb7-f8bd33867daf",
+                                "name": "Стандарт",
+                                "color": "green"
+                            }
+                        ]
+                    }
+                },
             }
         })
         
@@ -426,6 +430,17 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
                             "id": companyId
                         }
                     ]
+                },
+                "Специфика": {
+                    "multi_select": {
+                        "options": [
+                            {
+                                "id": "6a7d3807-9581-45f8-afb7-f8bd33867daf",
+                                "name": "Стандарт",
+                                "color": "green"
+                            }
+                        ]
+                    }
                 },
             }
         })
