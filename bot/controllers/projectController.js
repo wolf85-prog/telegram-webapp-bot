@@ -258,6 +258,7 @@ class ProjectController {
                             date_start: project.date_start,
                             date_end: project.date_end,
                             status: project.status,
+                            managerId: project.manager,
                             specs: arraySpec,
                         }
                         arrayProject.push(newProject)                           

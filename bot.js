@@ -711,7 +711,6 @@ bot.on('message', async (msg) => {
             console.log("START GET PROJECTS ALL...")
             
             
-            
             const projects = await getProjectsAll()
             //console.log(projects)
 
@@ -725,6 +724,7 @@ bot.on('message', async (msg) => {
                     dateEnd: project.date_end, 
                     status: JSON.stringify(project.status), 
                     chatURL: project.chatURL,
+                    manager: project.managerId,
                     specs: JSON.stringify(project.specs)  
                 })
             })
