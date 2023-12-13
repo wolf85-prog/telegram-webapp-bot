@@ -212,7 +212,7 @@ module.exports = async function addTable(blockId) {
                                             {
                                                 "type": "text",
                                                 "text": {
-                                                    "content": "1 400.00 | 5 000.00",
+                                                    "content": "1 600.00 | 6 000.00",
                                                     "link": null
                                                 },
                                                 "annotations": {
@@ -223,7 +223,7 @@ module.exports = async function addTable(blockId) {
                                                     "code": false,
                                                     "color": "purple"
                                                 },
-                                                "plain_text": "1 400.00 | 5 000.00",
+                                                "plain_text": "1 600.00 | 6 000.00",
                                                 "href": null
                                             }
                                         ],
@@ -250,7 +250,7 @@ module.exports = async function addTable(blockId) {
                                             {
                                                 "type": "text",
                                                 "text": {
-                                                    "content": "350.00 | 500.00",
+                                                    "content": "400.00 | 600.00",
                                                     "link": null
                                                 },
                                                 "annotations": {
@@ -261,7 +261,7 @@ module.exports = async function addTable(blockId) {
                                                     "code": false,
                                                     "color": "purple"
                                                 },
-                                                "plain_text": "350.00 | 500.00",
+                                                "plain_text": "400.00 | 600.00",
                                                 "href": null
                                             }
                                         ],
