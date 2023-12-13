@@ -69,8 +69,8 @@ async function getCompanyId(id) {
                 }
             }
         });
-        console.log("CompanyId: ", response.results[0].properties.Заказчики.relation[0].id)
-        return response.results[0].properties.Заказчики.relation[0].id;
+        console.log("CompanyId: ", response.results[0]?.properties.Заказчики.relation[0].id)
+        return response.results[0]?.properties.Заказчики.relation[0].id;
     } catch (error) {
         console.error(error.message)
     }
