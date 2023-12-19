@@ -267,7 +267,13 @@ async function getManagerCash(id) {
     try {
         const manager = await Manager.findOne({
             where: { chatId: id },
-          });
+        });
+
+        console.log("-------------------------------------------------------")
+        console.log("--------------------Новая заявка-----------------------")
+        console.log("-------------------------------------------------------")
+        console.log("TelegramID: ", id)
+        console.log("Manager: ", manager.companyName, manager.fio)
 
         return manager;
     } catch (error) {
