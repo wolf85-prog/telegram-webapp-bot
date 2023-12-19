@@ -4,6 +4,8 @@ const notion = new Client({ auth: process.env.NOTION_API_KEY });
 const databaseManagerId = process.env.NOTION_DATABASE_MANAGER_ID
 const databaseCompanyId = process.env.NOTION_DATABASE_COMPANY_ID
 
+const { Manager } = require('../models/models')
+
 //получить TelegramID менеджера по его id
 async function getManagerId(id) {
     try {
@@ -260,6 +262,19 @@ async function createManager(id, firstname, lastname) {
     }
 }
 
+//получить данные менеджера по его tgID
+async function getManagerCash(id) {
+    try {
+        const manager = await Manager.findOne({
+            where: { chatId: id },
+          });
+
+        return manager;
+    } catch (error) {
+        console.error(error.message)
+    }
+}
+
 
 class ManagerController {
 
@@ -357,6 +372,19 @@ class ManagerController {
         } catch (error) {
             console.error(error.message)
             res.status(500).json(error);
+        }
+    }
+
+// cash managers
+    async managerCash(req, res) {
+        const id = req.params.id; // получаем id
+        //console.log(id)
+        const manager = await getManagerCash(id);
+        if(manager){
+            res.json(manager);
+        }
+        else{
+            res.json({});
         }
     }
 }

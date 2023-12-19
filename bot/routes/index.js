@@ -32,6 +32,8 @@ router.get("/managers/chat/:id", managerController.managersChatId); // UUID ме
 router.get("/manager/:id", managerController.companyId);            // UUID компании по tgID менеджера
 router.get("/manager/name/:id", managerController.managerName);     // полная информация о менеджере по его UUID
 
+router.get("/managers/cash/:id", managerController.managerCash);     // получить данные менеджера из БД
+
 //post MANAGER
 router.post("/manager", managerController.create);
 
