@@ -601,15 +601,25 @@ bot.on('message', async (msg) => {
                 console.log('Отмена добавления в БД. Пользователь уже существует')
             }
         
-            await bot.sendMessage(chatId, 'Добро пожаловать в телеграм-бот U.L.E.Y_Projects. Смотрите и создавайте проекты U.L.E.Y в ' +
-                'web-приложении прямо из мессенджера Telegram.', {
+            // await bot.sendMessage(chatId, 'Добро пожаловать в телеграм-бот U.L.E.Y_Projects. Смотрите и создавайте проекты U.L.E.Y в ' +
+            //     'web-приложении прямо из мессенджера Telegram.', {
+            //     reply_markup: ({
+            //         inline_keyboard:[
+            //             [{text: 'Информация', callback_data:'Информация'}, {text: 'Настройки', callback_data:'Настройки'}],
+            //             [{text: 'Открыть проекты U.L.E.Y', web_app: {url: webAppUrl}}],
+            //         ]
+            //     })
+            // })
+
+            await bot.sendPhoto(chatId, 'https://proj.uley.team/upload/2023-12-25T07:25:09.281Z.png', {
                 reply_markup: ({
                     inline_keyboard:[
-                        [{text: 'Информация', callback_data:'Информация'}, {text: 'Настройки', callback_data:'Настройки'}],
-                        [{text: 'Открыть проекты U.L.E.Y', web_app: {url: webAppUrl}}],
+                        [{text: 'Поехали!', web_app: {url: webAppUrl}}],
                     ]
                 })
             })
+
+
         }
       
         // команда Меню
