@@ -683,13 +683,13 @@ bot.on('message', async (msg) => {
         if (text === '/startgetmanagers') {
                 console.log("START GET MANAGERS ALL...")
                 const managers = await getManagersAll()
-                //console.log(managers)
+                console.log(managers)
 
                 console.log("START GET COMPANY ALL...")
                 const companies = await getCompanyAll()
-                //console.log(companies)                
+                console.log(companies)                
  
-                await Manager.truncate();
+                //await Manager.truncate();
  
                 managers.map(async(manager)=> {
 
