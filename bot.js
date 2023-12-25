@@ -698,13 +698,25 @@ bot.on('message', async (msg) => {
 
                     //найти chatId в БД
                     //если нашел то ничего не делать иначе создать запись в таблице
-                    const findChatId = Manager.findAll({
-                        where: {
-                            chatId: manager.tgID
-                        }
-                    })
+                    const count = await Manager.count();
 
-                    if (!findChatId) {
+                    if (count !== 0) {
+                       const findChatId = Manager.findOne({
+                            where: {
+                                chatId: manager.tgID
+                            }
+                        }) 
+                        if (!findChatId) {
+                            await Manager.create({ 
+                                id: manager.id, 
+                                companyId: companyObj.id, 
+                                companyName: companyObj.title, 
+                                chatId: manager.tgID ? manager.tgID : "", 
+                                fio: manager.fio, 
+                                phone: manager.phone,  
+                            })
+                        }  
+                    } else {
                         await Manager.create({ 
                             id: manager.id, 
                             companyId: companyObj.id, 
@@ -713,7 +725,8 @@ bot.on('message', async (msg) => {
                             fio: manager.fio, 
                             phone: manager.phone,  
                         })
-                    }     
+                    }
+                        
                 })
         }
 
