@@ -73,7 +73,7 @@ module.exports = async function getReports(project, bot) {
     let all = [];
     let date_db;
 
-    let task1, task2, task3, task4, task5
+    let task1, task2, task3, task4, task5, task6, task7
 
     //создаю оповещения
     //получить название проекта из ноушена
@@ -113,6 +113,9 @@ module.exports = async function getReports(project, bot) {
                     var timeDiff4 = d.getTime() - 900000; //15 минут
                     var timeDiff5 = d.getTime();          //0 минут
 
+                    var timeDiff6 = d.getTime() - 600000; //10 минут
+                    var timeDiff7 = d.getTime() - 300000; //5 минут
+
                     const date2 = new Date(timeDiff)
                     const date3 = new Date(timeDiff2)
                     const date4 = new Date(timeDiff3)
@@ -120,11 +123,17 @@ module.exports = async function getReports(project, bot) {
                     const date6 = new Date(timeDiff5)
                     const dateNow = new Date(d2)
 
+                    const date7 = new Date(timeDiff6)
+                    const date8 = new Date(timeDiff7)
+
                     const milliseconds = Math.floor((date2 - dateNow)); //120 минут
                     const milliseconds2 = Math.floor((date3 - dateNow)); //60 минут
                     const milliseconds3 = Math.floor((date4 - dateNow)); //30 минут
                     const milliseconds4 = Math.floor((date5 - dateNow)); //15 минут
                     const milliseconds5 = Math.floor((date6 - dateNow)); //0 минут
+
+                    const milliseconds6 = Math.floor((date7 - dateNow)); //10 минут
+                    const milliseconds7 = Math.floor((date8 - dateNow)); //5 минут
 
                     //120-минутная готовность
                     if (milliseconds > 0) {
@@ -164,15 +173,39 @@ module.exports = async function getReports(project, bot) {
                     }
 
                     //15-минутная готовность
-                    if (milliseconds4 > 0) {
-                        console.log("!!!!Планирую запуск сообщения 4...!!!!")     
+                    // if (milliseconds4 > 0) {
+                    //     console.log("!!!!Планирую запуск сообщения 4...!!!!")     
+                    //     task4 = setTimeout(async() => {
+                    //         //отправить сообщение в админку
+                    //         let socket = io(socketUrl);
+                    //         socket.emit("sendNotif", {
+                    //             task: 4
+                    //         }) 
+                    //     }, milliseconds4)
+                    // }
+
+                    //10-минутная готовность
+                    if (milliseconds6 > 0) {
+                        console.log("!!!!Планирую запуск сообщения 6...!!!!")     
                         task4 = setTimeout(async() => {
                             //отправить сообщение в админку
                             let socket = io(socketUrl);
                             socket.emit("sendNotif", {
-                                task: 4
+                                task: 6
                             }) 
-                        }, milliseconds4)
+                        }, milliseconds6)
+                    }
+
+                    //5-минутная готовность
+                    if (milliseconds7 > 0) {
+                        console.log("!!!!Планирую запуск сообщения 7...!!!!")     
+                        task4 = setTimeout(async() => {
+                            //отправить сообщение в админку
+                            let socket = io(socketUrl);
+                            socket.emit("sendNotif", {
+                                task: 7
+                            }) 
+                        }, milliseconds7)
                     }
 
                     //0 готовность
@@ -495,6 +528,9 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                                 var timeDiff4 = d.getTime() - 900000; //15 минут
                                 var timeDiff5 = d.getTime();          //0 минут
 
+                                var timeDiff6 = d.getTime();          //10 минут
+                                var timeDiff7 = d.getTime();          //5 минут
+
                                 const date2 = new Date(timeDiff)
                                 const date3 = new Date(timeDiff2)
                                 const date4 = new Date(timeDiff3)
@@ -502,11 +538,18 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                                 const date6 = new Date(timeDiff5)
                                 const dateNow = new Date(d2)
 
+                                const date7 = new Date(timeDiff6)
+                                const date8 = new Date(timeDiff7)
+
                                 const milliseconds = Math.floor((date2 - dateNow)); //120 минут
                                 const milliseconds2 = Math.floor((date3 - dateNow)); //60 минут
                                 const milliseconds3 = Math.floor((date4 - dateNow)); //30 минут
                                 const milliseconds4 = Math.floor((date5 - dateNow)); //15 минут
                                 const milliseconds5 = Math.floor((date6 - dateNow)); //0 минут
+
+                                const milliseconds6 = Math.floor((date7 - dateNow)); //10 минут
+                                const milliseconds7 = Math.floor((date8 - dateNow)); //5 минут
+
 
                                 //120-минутная готовность
                                 if (task1) {
@@ -564,21 +607,59 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                                 }
 
                                 //15-минутная готовность
-                                if (task4) {
-                                    clearTimeout(task4);    
-                                    console.log("Задача 4 удалена! " + project_name)                       
+                                // if (task4) {
+                                //     clearTimeout(task4);    
+                                //     console.log("Задача 4 удалена! " + project_name)                       
+                                // } 
+                                // if (milliseconds4 > 0) {
+                                //     console.log("!!!!Планирую запуск сообщения 4...!!!!")     
+                                //     task4 = setTimeout(async() => {
+                                //         //отправить сообщение в админку
+                                //         if (statusProjectNew === 'Load' || statusProjectNew === 'Ready' || statusProjectNew === 'OnAir') {
+                                //             let socket = io(socketUrl);
+                                //             socket.emit("sendNotif", {
+                                //                 task: 4
+                                //             }) 
+                                //         }
+                                //     }, milliseconds4)
+                                // }
+
+                                
+
+                                //10-минутная готовность
+                                if (task6) {
+                                    clearTimeout(task6);    
+                                    console.log("Задача 6 удалена! " + project_name)                       
                                 } 
-                                if (milliseconds4 > 0) {
-                                    console.log("!!!!Планирую запуск сообщения 4...!!!!")     
-                                    task4 = setTimeout(async() => {
+                                if (milliseconds6 > 0) {
+                                    console.log("!!!!Планирую запуск сообщения 6...!!!!")     
+                                    task6 = setTimeout(async() => {
                                         //отправить сообщение в админку
                                         if (statusProjectNew === 'Load' || statusProjectNew === 'Ready' || statusProjectNew === 'OnAir') {
                                             let socket = io(socketUrl);
                                             socket.emit("sendNotif", {
-                                                task: 4
+                                                task: 6
                                             }) 
                                         }
-                                    }, milliseconds4)
+                                    }, milliseconds6)
+                                }
+
+                                //5-минутная готовность
+                                if (task7) {
+                                    clearTimeout(task7);    
+                                    console.log("Задача 7 удалена! " + project_name)                       
+                                } 
+                                if (milliseconds7 > 0) {
+                                    console.log("!!!!Планирую запуск сообщения 7...!!!!")     
+                                    task7 = setTimeout(async() => {
+                                        //отправить сообщение в админку
+                                        if (statusProjectNew === 'Load' || statusProjectNew === 'Ready' || statusProjectNew === 'OnAir') {
+                                            let socket = io(socketUrl);
+                                            socket.emit("sendNotif", {
+                                                task: 7
+                                            }) 
+                                        }
+                                    }, milliseconds7)
                                 }
 
                                 //0 готовность
