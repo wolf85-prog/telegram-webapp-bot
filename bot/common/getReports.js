@@ -111,10 +111,10 @@ module.exports = async function getReports(project, bot) {
                     var timeDiff2 = d.getTime() - 3600000;//60 минут
                     var timeDiff3 = d.getTime() - 1800000;//30 минут
                     var timeDiff4 = d.getTime() - 900000; //15 минут
-                    var timeDiff5 = d.getTime();          //0 минут
-
                     var timeDiff6 = d.getTime() - 600000; //10 минут
                     var timeDiff7 = d.getTime() - 300000; //5 минут
+                    var timeDiff5 = d.getTime();          //0 минут
+     
 
                     const date2 = new Date(timeDiff)
                     const date3 = new Date(timeDiff2)
@@ -173,16 +173,16 @@ module.exports = async function getReports(project, bot) {
                     }
 
                     //15-минутная готовность
-                    // if (milliseconds4 > 0) {
-                    //     console.log("!!!!Планирую запуск сообщения 4...!!!!")     
-                    //     task4 = setTimeout(async() => {
-                    //         //отправить сообщение в админку
-                    //         let socket = io(socketUrl);
-                    //         socket.emit("sendNotif", {
-                    //             task: 4
-                    //         }) 
-                    //     }, milliseconds4)
-                    // }
+                    if (milliseconds4 > 0) {
+                        console.log("!!!!Планирую запуск сообщения 4...!!!!")     
+                        task4 = setTimeout(async() => {
+                            //отправить сообщение в админку
+                            let socket = io(socketUrl);
+                            socket.emit("sendNotif", {
+                                task: 4
+                            }) 
+                        }, milliseconds4)
+                    }
 
                     //10-минутная готовность
                     if (milliseconds6 > 0) {
@@ -607,23 +607,22 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                                 }
 
                                 //15-минутная готовность
-                                // if (task4) {
-                                //     clearTimeout(task4);    
-                                //     console.log("Задача 4 удалена! " + project_name)                       
-                                // } 
-                                // if (milliseconds4 > 0) {
-                                //     console.log("!!!!Планирую запуск сообщения 4...!!!!")     
-                                //     task4 = setTimeout(async() => {
-                                //         //отправить сообщение в админку
-                                //         if (statusProjectNew === 'Load' || statusProjectNew === 'Ready' || statusProjectNew === 'OnAir') {
-                                //             let socket = io(socketUrl);
-                                //             socket.emit("sendNotif", {
-                                //                 task: 4
-                                //             }) 
-                                //         }
-                                //     }, milliseconds4)
-                                // }
-
+                                if (task4) {
+                                    clearTimeout(task4);    
+                                    console.log("Задача 4 удалена! " + project_name)                       
+                                } 
+                                if (milliseconds4 > 0) {
+                                    console.log("!!!!Планирую запуск сообщения 4...!!!!")     
+                                    task4 = setTimeout(async() => {
+                                        //отправить сообщение в админку
+                                        if (statusProjectNew === 'Load' || statusProjectNew === 'Ready' || statusProjectNew === 'OnAir') {
+                                            let socket = io(socketUrl);
+                                            socket.emit("sendNotif", {
+                                                task: 4
+                                            }) 
+                                        }
+                                    }, milliseconds4)
+                                }
                                 
 
                                 //10-минутная готовность
