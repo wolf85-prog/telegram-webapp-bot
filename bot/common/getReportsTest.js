@@ -69,7 +69,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
     let all = [];
     let date_db;
 
-    let task1, task2, task3, task4, task5
+    let task1, task2, task3, task4, task5, task6, task7
 
     //создаю оповещения
     //получить название проекта из ноушена
