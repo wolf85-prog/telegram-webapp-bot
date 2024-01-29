@@ -49,7 +49,7 @@ const getDates = async(projectId, projectName) => {
             allDate.push(db?.date)                        
         })
     } else {
-        console.log("Даты не определны! Проект: " + projectName)
+        console.log("Даты не определены! Проект: " + projectName)
     }
 
     //получить уникальные даты из Основного состава по возрастанию
@@ -62,6 +62,11 @@ const getDates = async(projectId, projectName) => {
     return sortedDates
 }
 
+const randomNumberInRange = (min, max) => {
+    return Math.floor(Math.random()
+        * (max - min + 1)) + min;
+};
+
 module.exports = async function getReports(project, bot) {
     let count_fio, count_fio2;
     let count_title;
@@ -72,6 +77,8 @@ module.exports = async function getReports(project, bot) {
     let arr_all = [];
     let all = [];
     let date_db;
+
+    let randomSec = randomNumberInRange(10000, 30000)
 
     let task1, task2, task3, task4, task5, task6, task7
 
@@ -105,7 +112,7 @@ module.exports = async function getReports(project, bot) {
 
             if(d >= d2) {
                 //отправка напоминания
-                if (project_status === 'Load' || project_status === 'Ready' || project_status === 'OnAir') {
+                if (project_status === 'OnAir') {
 
                     var timeDiff = d.getTime() - 7200000; //120 минут
                     var timeDiff2 = d.getTime() - 3600000;//60 минут
@@ -125,13 +132,13 @@ module.exports = async function getReports(project, bot) {
                     const date7 = new Date(timeDiff6)
                     const date8 = new Date(timeDiff7)
 
-                    const milliseconds = Math.floor((date2 - dateNow)); //120 минут
-                    const milliseconds2 = Math.floor((date3 - dateNow)); //60 минут
-                    const milliseconds3 = Math.floor((date4 - dateNow)); //30 минут
-                    const milliseconds4 = Math.floor((date5 - dateNow)); //15 минут
-                    const milliseconds6 = Math.floor((date7 - dateNow)); //10 минут
-                    const milliseconds7 = Math.floor((date8 - dateNow)); //5 минут
-                    const milliseconds5 = Math.floor((date6 - dateNow)); //0 минут
+                    const milliseconds = Math.floor((date2 - dateNow)) + randomSec; //120 минут
+                    const milliseconds2 = Math.floor((date3 - dateNow)) + randomSec; //60 минут
+                    const milliseconds3 = Math.floor((date4 - dateNow)) + randomSec; //30 минут
+                    const milliseconds4 = Math.floor((date5 - dateNow)) + randomSec; //15 минут
+                    const milliseconds6 = Math.floor((date7 - dateNow)) + randomSec; //10 минут
+                    const milliseconds7 = Math.floor((date8 - dateNow)) + randomSec; //5 минут
+                    const milliseconds5 = Math.floor((date6 - dateNow)) + randomSec; //0 минут
 
 
                     //120-минутная готовность
@@ -139,10 +146,12 @@ module.exports = async function getReports(project, bot) {
                         console.log("!!!!Планирую запуск сообщения 1...!!!!")     
                         task1 = setTimeout(async() => {
                             //отправить сообщение в админку
-                            let socket = io(socketUrl);
-                            socket.emit("sendNotif", {
-                                task: 1
-                            }) 
+                            if (project_status === 'OnAir') {
+                                let socket = io(socketUrl);
+                                socket.emit("sendNotif", {
+                                    task: 1
+                                }) 
+                            }
                         }, milliseconds)
                     }
                      
@@ -152,10 +161,12 @@ module.exports = async function getReports(project, bot) {
                         console.log("!!!!Планирую запуск сообщения 2...!!!!")     
                         task2 = setTimeout(async() => {
                             //отправить сообщение в админку
-                            let socket = io(socketUrl);
-                            socket.emit("sendNotif", {
-                                task: 2
-                            }) 
+                            if (project_status === 'OnAir') {
+                                let socket = io(socketUrl);
+                                socket.emit("sendNotif", {
+                                    task: 2
+                                }) 
+                            }
                         }, milliseconds2)
                     }
 
@@ -164,10 +175,12 @@ module.exports = async function getReports(project, bot) {
                         console.log("!!!!Планирую запуск сообщения 3...!!!!")     
                         task3 = setTimeout(async() => {
                             //отправить сообщение в админку
-                            let socket = io(socketUrl);
-                            socket.emit("sendNotif", {
-                                task: 3
-                            }) 
+                            if (project_status === 'OnAir') {
+                                let socket = io(socketUrl);
+                                socket.emit("sendNotif", {
+                                    task: 3
+                                }) 
+                            }
                         }, milliseconds3)
                     }
 
@@ -176,10 +189,12 @@ module.exports = async function getReports(project, bot) {
                         console.log("!!!!Планирую запуск сообщения 4...!!!!")     
                         task4 = setTimeout(async() => {
                             //отправить сообщение в админку
-                            let socket = io(socketUrl);
-                            socket.emit("sendNotif", {
-                                task: 4
-                            }) 
+                            if (project_status === 'OnAir') {
+                                let socket = io(socketUrl);
+                                socket.emit("sendNotif", {
+                                    task: 4
+                                }) 
+                            }
                         }, milliseconds4)
                     }
 
@@ -188,10 +203,12 @@ module.exports = async function getReports(project, bot) {
                         console.log("!!!!Планирую запуск сообщения 6...!!!!")     
                         task4 = setTimeout(async() => {
                             //отправить сообщение в админку
-                            let socket = io(socketUrl);
-                            socket.emit("sendNotif", {
-                                task: 6
-                            }) 
+                            if (project_status === 'OnAir') {
+                                let socket = io(socketUrl);
+                                socket.emit("sendNotif", {
+                                    task: 6
+                                }) 
+                            }
                         }, milliseconds6)
                     }
 
@@ -200,10 +217,12 @@ module.exports = async function getReports(project, bot) {
                         console.log("!!!!Планирую запуск сообщения 7...!!!!")     
                         task4 = setTimeout(async() => {
                             //отправить сообщение в админку
-                            let socket = io(socketUrl);
-                            socket.emit("sendNotif", {
-                                task: 7
-                            }) 
+                            if (project_status === 'OnAir') {
+                                let socket = io(socketUrl);
+                                socket.emit("sendNotif", {
+                                    task: 7
+                                })
+                            } 
                         }, milliseconds7)
                     }
 
@@ -212,10 +231,12 @@ module.exports = async function getReports(project, bot) {
                         console.log("!!!!Планирую запуск сообщения 5...!!!!")     
                         task5 = setTimeout(async() => {
                             //отправить сообщение в админку
-                            let socket = io(socketUrl);
-                            socket.emit("sendNotif", {
-                                task: 5
-                            }) 
+                            if (project_status === 'OnAir') {
+                                let socket = io(socketUrl);
+                                socket.emit("sendNotif", {
+                                    task: 5
+                                }) 
+                            }
                         }, milliseconds5)
                     }
                 }
@@ -520,7 +541,7 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
     //---------------------------------------------------------------------------------------------------
                             //создаю оповещения
                             //отправка напоминания
-                            if (statusProjectNew === 'Load' || statusProjectNew === 'Ready' || statusProjectNew === 'OnAir') {
+                            if (statusProjectNew === 'OnAir') {
                                 var timeDiff = d.getTime() - 7200000; //120 минут
                                 var timeDiff2 = d.getTime() - 3600000;//60 минут
                                 var timeDiff3 = d.getTime() - 1800000;//30 минут
@@ -540,13 +561,13 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                                 const date7 = new Date(timeDiff6)
                                 const date8 = new Date(timeDiff7)
 
-                                const milliseconds = Math.floor((date2 - dateNow)); //120 минут
-                                const milliseconds2 = Math.floor((date3 - dateNow)); //60 минут
-                                const milliseconds3 = Math.floor((date4 - dateNow)); //30 минут
-                                const milliseconds4 = Math.floor((date5 - dateNow)); //15 минут
-                                const milliseconds6 = Math.floor((date7 - dateNow)); //10 минут
-                                const milliseconds7 = Math.floor((date8 - dateNow)); //5 минут
-                                const milliseconds5 = Math.floor((date6 - dateNow)); //0 минут
+                                const milliseconds = Math.floor((date2 - dateNow)) + randomSec; //120 минут
+                                const milliseconds2 = Math.floor((date3 - dateNow)) + randomSec; //60 минут
+                                const milliseconds3 = Math.floor((date4 - dateNow)) + randomSec; //30 минут
+                                const milliseconds4 = Math.floor((date5 - dateNow)) + randomSec; //15 минут
+                                const milliseconds6 = Math.floor((date7 - dateNow)) + randomSec; //10 минут
+                                const milliseconds7 = Math.floor((date8 - dateNow)) + randomSec; //5 минут
+                                const milliseconds5 = Math.floor((date6 - dateNow)) + randomSec; //0 минут
 
                                 
 
@@ -560,7 +581,7 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                                     console.log("!!!!Планирую запуск сообщения 1...!!!!")     
                                     task1 = setTimeout(async() => {
                                         //отправить сообщение в админку
-                                        if (statusProjectNew === 'Load' || statusProjectNew === 'Ready' || statusProjectNew === 'OnAir') {
+                                        if (statusProjectNew === 'OnAir') {
                                             let socket = io(socketUrl);
                                             socket.emit("sendNotif", {
                                                 task: 1
@@ -579,7 +600,7 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                                     console.log("!!!!Планирую запуск сообщения 2...!!!!")     
                                     task2 = setTimeout(async() => {
                                         //отправить сообщение в админку
-                                        if (statusProjectNew === 'Load' || statusProjectNew === 'Ready' || statusProjectNew === 'OnAir') {
+                                        if (statusProjectNew === 'OnAir') {
                                             let socket = io(socketUrl);
                                             socket.emit("sendNotif", {
                                                 task: 2
@@ -597,7 +618,7 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                                     console.log("!!!!Планирую запуск сообщения 3...!!!!")     
                                     task3 = setTimeout(async() => {
                                         //отправить сообщение в админку
-                                        if (statusProjectNew === 'Load' || statusProjectNew === 'Ready' || statusProjectNew === 'OnAir') {
+                                        if (statusProjectNew === 'OnAir') {
                                             let socket = io(socketUrl);
                                             socket.emit("sendNotif", {
                                                 task: 3
@@ -615,7 +636,7 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                                     console.log("!!!!Планирую запуск сообщения 4...!!!!")     
                                     task4 = setTimeout(async() => {
                                         //отправить сообщение в админку
-                                        if (statusProjectNew === 'Load' || statusProjectNew === 'Ready' || statusProjectNew === 'OnAir') {
+                                        if (statusProjectNew === 'OnAir') {
                                             let socket = io(socketUrl);
                                             socket.emit("sendNotif", {
                                                 task: 4
@@ -634,7 +655,7 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                                     console.log("!!!!Планирую запуск сообщения 6...!!!!")     
                                     task6 = setTimeout(async() => {
                                         //отправить сообщение в админку
-                                        if (statusProjectNew === 'Load' || statusProjectNew === 'Ready' || statusProjectNew === 'OnAir') {
+                                        if (statusProjectNew === 'OnAir') {
                                             let socket = io(socketUrl);
                                             socket.emit("sendNotif", {
                                                 task: 6
@@ -652,7 +673,7 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                                     console.log("!!!!Планирую запуск сообщения 7...!!!!")     
                                     task7 = setTimeout(async() => {
                                         //отправить сообщение в админку
-                                        if (statusProjectNew === 'Load' || statusProjectNew === 'Ready' || statusProjectNew === 'OnAir') {
+                                        if (statusProjectNew === 'OnAir') {
                                             let socket = io(socketUrl);
                                             socket.emit("sendNotif", {
                                                 task: 7
@@ -671,7 +692,7 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                                     console.log("--------------------------------------")      
                                     task5 = setTimeout(async() => {
                                         //отправить сообщение в админку
-                                        if (statusProjectNew === 'Load' || statusProjectNew === 'Ready' || statusProjectNew === 'OnAir') {
+                                        if (statusProjectNew === 'OnAir') {
                                             let socket = io(socketUrl);
                                             socket.emit("sendNotif", {
                                                 task: 5

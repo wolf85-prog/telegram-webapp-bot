@@ -57,6 +57,11 @@ const getDates = async(projectId, projectName) => {
     return sortedDates
 }
 
+const randomNumberInRange = (min, max) => {
+    return Math.floor(Math.random()
+        * (max - min + 1)) + min;
+};
+
 module.exports = async function getReportsTest(projectId, projectName, bot) {
 
     let count_fio;
@@ -68,6 +73,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
     let arr_all = [];
     let all = [];
     let date_db;
+    let randomSec = randomNumberInRange(10000, 30000)
 
     let task1, task2, task3, task4, task5, task6, task7
 
@@ -101,7 +107,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
 
             if(d >= d2) {
                 //отправка напоминания
-                if (project_status === 'Load' || project_status === 'Ready' || project_status === 'OnAir') {
+                if (project_status === 'OnAir') {
 
                     var timeDiff = d.getTime() - 7200000; //120 минут
                     var timeDiff2 = d.getTime() - 3600000;//60 минут
@@ -120,20 +126,20 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                     const date7 = new Date(timeDiff6)
                     const date8 = new Date(timeDiff7)
 
-                    const milliseconds = Math.floor((date2 - dateNow)); //120 минут
-                    const milliseconds2 = Math.floor((date3 - dateNow)); //60 минут
-                    const milliseconds3 = Math.floor((date4 - dateNow)); //30 минут
-                    const milliseconds4 = Math.floor((date5 - dateNow)); //15 минут
-                    const milliseconds6 = Math.floor((date7 - dateNow)); //10 минут
-                    const milliseconds7 = Math.floor((date8 - dateNow)); //5 минут
-                    const milliseconds5 = Math.floor((date6 - dateNow)); //0 минут
+                    const milliseconds = Math.floor((date2 - dateNow)) + randomSec; //120 минут
+                    const milliseconds2 = Math.floor((date3 - dateNow)) + randomSec; //60 минут
+                    const milliseconds3 = Math.floor((date4 - dateNow)) + randomSec; //30 минут
+                    const milliseconds4 = Math.floor((date5 - dateNow)) + randomSec; //15 минут
+                    const milliseconds6 = Math.floor((date7 - dateNow)) + randomSec; //10 минут
+                    const milliseconds7 = Math.floor((date8 - dateNow)) + randomSec; //5 минут
+                    const milliseconds5 = Math.floor((date6 - dateNow)) + randomSec; //0 минут
 
                     //120-минутная готовность
                     if (milliseconds > 0) {
                         console.log("!!!!Планирую запуск сообщения 1...!!!!")     
                         task1 = setTimeout(async() => {
                             //отправить сообщение в админку
-                            if (project_status === 'Load' || project_status === 'Ready' || project_status === 'OnAir') {
+                            if (project_status === 'OnAir') {
                                 let socket = io(socketUrl);
                                 socket.emit("sendNotif", {
                                     task: 1
@@ -148,7 +154,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                         console.log("!!!!Планирую запуск сообщения 2...!!!!")     
                         task2 = setTimeout(async() => {
                             //отправить сообщение в админку
-                            if (project_status === 'Load' || project_status === 'Ready' || project_status === 'OnAir') {
+                            if (project_status === 'OnAir') {
                                 let socket = io(socketUrl);
                                 socket.emit("sendNotif", {
                                     task: 2
@@ -162,7 +168,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                         console.log("!!!!Планирую запуск сообщения 3...!!!!")     
                         task3 = setTimeout(async() => {
                             //отправить сообщение в админку
-                            if (project_status === 'Load' || project_status === 'Ready' || project_status === 'OnAir') {
+                            if (project_status === 'OnAir') {
                                 let socket = io(socketUrl);
                                 socket.emit("sendNotif", {
                                     task: 3
@@ -176,7 +182,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                         console.log("!!!!Планирую запуск сообщения 4...!!!!")     
                         task4 = setTimeout(async() => {
                             //отправить сообщение в админку
-                            if (project_status === 'Load' || project_status === 'Ready' || project_status === 'OnAir') {
+                            if (project_status === 'OnAir') {
                                 let socket = io(socketUrl);
                                 socket.emit("sendNotif", {
                                     task: 4
@@ -190,10 +196,12 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                         console.log("!!!!Планирую запуск сообщения 6...!!!!")     
                         task4 = setTimeout(async() => {
                             //отправить сообщение в админку
-                            let socket = io(socketUrl);
-                            socket.emit("sendNotif", {
-                                task: 6
-                            }) 
+                            if (project_status === 'OnAir') {
+                                let socket = io(socketUrl);
+                                socket.emit("sendNotif", {
+                                    task: 6
+                                })
+                            } 
                         }, milliseconds6)
                     }
 
@@ -202,10 +210,12 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                         console.log("!!!!Планирую запуск сообщения 7...!!!!")     
                         task4 = setTimeout(async() => {
                             //отправить сообщение в админку
-                            let socket = io(socketUrl);
-                            socket.emit("sendNotif", {
-                                task: 7
-                            }) 
+                            if (project_status === 'OnAir') {
+                                let socket = io(socketUrl);
+                                socket.emit("sendNotif", {
+                                    task: 7
+                                })
+                            } 
                         }, milliseconds7)
                     }
 
@@ -215,7 +225,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                         console.log("--------------------------------------")       
                         task5 = setTimeout(async() => {
                             //отправить сообщение в админку
-                            if (project_status === 'Load' || project_status === 'Ready' || project_status === 'OnAir') {
+                            if (project_status === 'OnAir') {
                                 let socket = io(socketUrl);
                                 socket.emit("sendNotif", {
                                     task: 5
@@ -245,6 +255,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
         let statusProjectNew = ''; 
         let project_name;  
         let project_manager; 
+        let project_managers = []; 
 
         //получить название проекта из ноушена
         await fetch(`${botApiUrl}/project/${projectId}`)
@@ -253,12 +264,14 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
             if (data) {
                 project_name = data?.properties.Name.title[0]?.plain_text;
                 project_manager = data?.properties["Менеджер"].relation[0]?.id;
+                project_managers = data?.properties["Менеджер"].relation;
                 statusProjectNew = data?.properties["Статус проекта"].select.name
                 //console.log("STATUS NEW: ", statusProjectNew)
 
             }  else {
                 project_name = project.name
                 project_manager = '';
+                project_managers = [];
                 statusProjectNew ='';
                 //console.log("STATUS NEW: ", statusProjectNew)
             }                             
@@ -266,6 +279,8 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
 
          //получить TelegramID менеджера проекта из ноушена
          let chatId_manager;
+         let chatId_managers = []
+
          const chat = await fetch(`${botApiUrl}/managers/${project_manager}`)
          .then((response) => response.json())
          .then((data) => {
@@ -275,6 +290,19 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                  console.log("Manager TelegramId не найден!")
              }                             
          });
+
+         project_managers.maps(async(manager)=> {
+            await fetch(`${botApiUrl}/managers/${manager.id}`)
+            .then((response) => response.json())
+            .then((data) => {
+                if (data) {
+                    chatId_managers.push(data)
+
+                    console.log("chatId_managers: ", chatId_managers)
+                }                            
+            });
+         })
+
 
 
         // 1) получить блок и бд
@@ -459,7 +487,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
     //---------------------------------------------------------------------------------------------------
                             //создаю оповещения
                             //отправка напоминания
-                            if (statusProjectNew === 'Load' || statusProjectNew === 'Ready' || statusProjectNew === 'OnAir') {
+                            if (statusProjectNew === 'OnAir') {
 
                                 var timeDiff = d.getTime() - 7200000; //120 минут
                                 var timeDiff2 = d.getTime() - 3600000;//60 минут
@@ -478,13 +506,13 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                 const date7 = new Date(timeDiff6)
                                 const date8 = new Date(timeDiff7)
 
-                                const milliseconds = Math.floor((date2 - dateNow)); //120 минут
-                                const milliseconds2 = Math.floor((date3 - dateNow)); //60 минут
-                                const milliseconds3 = Math.floor((date4 - dateNow)); //30 минут
-                                const milliseconds4 = Math.floor((date5 - dateNow)); //15 минут
-                                const milliseconds6 = Math.floor((date7 - dateNow)); //10 минут
-                                const milliseconds7 = Math.floor((date8 - dateNow)); //5 минут
-                                const milliseconds5 = Math.floor((date6 - dateNow)); //0 минут
+                                const milliseconds = Math.floor((date2 - dateNow)) + randomSec; //120 минут
+                                const milliseconds2 = Math.floor((date3 - dateNow)) + randomSec; //60 минут
+                                const milliseconds3 = Math.floor((date4 - dateNow)) + randomSec; //30 минут
+                                const milliseconds4 = Math.floor((date5 - dateNow)) + randomSec; //15 минут
+                                const milliseconds6 = Math.floor((date7 - dateNow)) + randomSec; //10 минут
+                                const milliseconds7 = Math.floor((date8 - dateNow)) + randomSec; //5 минут
+                                const milliseconds5 = Math.floor((date6 - dateNow)) + randomSec; //0 минут
 
                                 // const data = 'СТАРТ - Задача 1 в ' + d + ' запущена! Проект: ' + project_name + '\n';
                                 // const fileName = _dirname  + '/tasks.txt';
@@ -499,7 +527,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                     console.log("!!!!Планирую запуск сообщения 1...!!!!")     
                                     task1 = setTimeout(async() => {
                                         //отправить сообщение в админку
-                                        if (statusProjectNew === 'Load' || statusProjectNew === 'Ready' || statusProjectNew === 'OnAir') {
+                                        if (statusProjectNew === 'OnAir') {
                                             let socket = io(socketUrl);
                                             socket.emit("sendNotif", {
                                                 task: 1
@@ -518,7 +546,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                     console.log("!!!!Планирую запуск сообщения 2...!!!!")     
                                     task2 = setTimeout(async() => {
                                         //отправить сообщение в админку
-                                        if (statusProjectNew === 'Load' || statusProjectNew === 'Ready' || statusProjectNew === 'OnAir') {
+                                        if (statusProjectNew === 'OnAir') {
                                             let socket = io(socketUrl);
                                             socket.emit("sendNotif", {
                                                 task: 2
@@ -536,7 +564,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                     console.log("!!!!Планирую запуск сообщения 3...!!!!")     
                                     task3 = setTimeout(async() => {
                                         //отправить сообщение в админку
-                                        if (statusProjectNew === 'Load' || statusProjectNew === 'Ready' || statusProjectNew === 'OnAir') {
+                                        if (statusProjectNew === 'OnAir') {
                                             let socket = io(socketUrl);
                                             socket.emit("sendNotif", {
                                                 task: 3
@@ -554,7 +582,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                     console.log("!!!!Планирую запуск сообщения 4...!!!!")     
                                     task4 = setTimeout(async() => {
                                         //отправить сообщение в админку
-                                        if (statusProjectNew === 'Load' || statusProjectNew === 'Ready' || statusProjectNew === 'OnAir') {
+                                        if (statusProjectNew === 'OnAir') {
                                             let socket = io(socketUrl);
                                             socket.emit("sendNotif", {
                                                 task: 4
@@ -572,7 +600,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                     console.log("!!!!Планирую запуск сообщения 6...!!!!")     
                                     task6 = setTimeout(async() => {
                                         //отправить сообщение в админку
-                                        if (statusProjectNew === 'Load' || statusProjectNew === 'Ready' || statusProjectNew === 'OnAir') {
+                                        if (statusProjectNew === 'OnAir') {
                                             let socket = io(socketUrl);
                                             socket.emit("sendNotif", {
                                                 task: 6
@@ -590,7 +618,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                     console.log("!!!!Планирую запуск сообщения 7...!!!!")     
                                     task7 = setTimeout(async() => {
                                         //отправить сообщение в админку
-                                        if (statusProjectNew === 'Load' || statusProjectNew === 'Ready' || statusProjectNew === 'OnAir') {
+                                        if (statusProjectNew === 'OnAir') {
                                             let socket = io(socketUrl);
                                             socket.emit("sendNotif", {
                                                 task: 7
@@ -609,7 +637,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                     console.log("--------------------------------------")    
                                     task5 = setTimeout(async() => {
                                         //отправить сообщение в админку
-                                        if (statusProjectNew === 'Load' || statusProjectNew === 'Ready' || statusProjectNew === 'OnAir') {
+                                        if (statusProjectNew === 'OnAir') {
                                             let socket = io(socketUrl);
                                             socket.emit("sendNotif", {
                                                 task: 5
