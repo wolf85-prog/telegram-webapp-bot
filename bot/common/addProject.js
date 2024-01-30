@@ -50,8 +50,8 @@ module.exports = async function addProject(title, time, teh, managerId, companyI
                     type: 'select',
                     select: {
                         "id": "4e370773-fb5d-4ef7-bd2a-eaa91e5919e0",
-                        "name": "Test",
-                        "color": "brown"
+                        "name": "Выбери название города",
+                        "color": "red"
                     }
                 },
                 Manager: {
