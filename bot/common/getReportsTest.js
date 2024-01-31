@@ -291,19 +291,19 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
              }                             
          });
 
-        if (project_managers && project_managers.length > 0) {
-            project_managers.maps(async(manager)=> {
-                await fetch(`${botApiUrl}/managers/${manager.id}`)
-                .then((response) => response.json())
-                .then((data) => {
-                    if (data) {
-                        chatId_managers.push(data)
+        // if (project_managers && project_managers.length > 0) {
+        //     project_managers.maps(async(manager)=> {
+        //         await fetch(`${botApiUrl}/managers/${manager.id}`)
+        //         .then((response) => response.json())
+        //         .then((data) => {
+        //             if (data) {
+        //                 chatId_managers.push(data)
 
-                        console.log("chatId_managers: ", chatId_managers)
-                    }                            
-                });
-            })
-        }
+        //                 console.log("chatId_managers: ", chatId_managers)
+        //             }                            
+        //         });
+        //     })
+        // }
 
 
         // 1) получить блок и бд
