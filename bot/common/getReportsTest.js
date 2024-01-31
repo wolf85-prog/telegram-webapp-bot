@@ -266,7 +266,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                 project_manager = data?.properties["Менеджер"].relation[0]?.id;
                 project_managers = data?.properties["Менеджер"].relation;
                 statusProjectNew = data?.properties["Статус проекта"].select.name
-                //console.log("STATUS NEW: ", statusProjectNew)
+                console.log("project_managers: ", project_managers)
 
             }  else {
                 project_name = project.name
@@ -291,7 +291,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
              }                             
          });
 
-        if (project_managers.length > 0) {
+        if (project_managers && project_managers.length > 0) {
             project_managers.maps(async(manager)=> {
                 await fetch(`${botApiUrl}/managers/${manager.id}`)
                 .then((response) => response.json())
