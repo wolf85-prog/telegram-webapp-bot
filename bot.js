@@ -276,17 +276,6 @@ async function addProject(title, time, teh, managerId, companyId, worklist, equi
                         }
                         ],
                 },
-                // "Постер": {
-                //     type: 'rich_text',
-                //     rich_text: [
-                //         {
-                //             type: 'text',
-                //             text: {
-                //                 content: 'Данные | Данные | Данные * 10 — 12 часов * 0 000.00 — 0 000.00 руб/час ',
-                //             },
-                //         }
-                //         ],
-                // },
                 "Статус проекта": {
                     type: 'select',
                     select: {
@@ -299,8 +288,8 @@ async function addProject(title, time, teh, managerId, companyId, worklist, equi
                     type: 'select',
                     select: {
                         "id": "4e370773-fb5d-4ef7-bd2a-eaa91e5919e0",
-                        "name": "Test",
-                        "color": "brown"
+                        "name": "Выбери название города",
+                        "color": "red"
                     }
                 },
                 "Менеджер": {
@@ -386,17 +375,6 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
                         }
                         ],
                 },
-                // "Постер": {
-                //     type: 'rich_text',
-                //     rich_text: [
-                //         {
-                //             type: 'text',
-                //             text: {
-                //                 content: 'Данные | Данные | Данные * 10 — 12 часов * 0 000.00 — 0 000.00 руб/час ',
-                //             },
-                //         }
-                //         ],
-                // },
                 "Статус проекта": {
                     type: 'select',
                     select: {
@@ -409,8 +387,8 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
                     type: 'select',
                     select: {
                         "id": "4e370773-fb5d-4ef7-bd2a-eaa91e5919e0",
-                        "name": "Test",
-                        "color": "brown"
+                        "name": "Выбери название города",
+                        "color": "red"
                     }
                 },
                 "Менеджер": {
@@ -536,12 +514,12 @@ async function addAddress(geo, projectname, datestart, teh, managerId, companyId
             }
 
             //создание базы данных "Запасной состав"
-            while (!zapasId) {                                
-                zapasId = await newDatabase3(project_id);  
-                console.log("zapasId: ", zapasId) 
-                if (zapasId) break; // (*)   
-                await delay(2000);                                                        
-            }
+            // while (!zapasId) {                                
+            //     zapasId = await newDatabase3(project_id);  
+            //     console.log("zapasId: ", zapasId) 
+            //     if (zapasId) break; // (*)   
+            //     await delay(2000);                                                        
+            // }
                             
             //создание базы данных "Претенденты"
             while (!pretendentId) {                                
@@ -1073,12 +1051,12 @@ bot.on('message', async (msg) => {
                             }
 
                             //создание базы данных "Запасной состав"
-                            while (!zapasId) {                                
-                                zapasId = await newDatabase3(projectId);  
-                                console.log("zapasId: ", zapasId) 
-                                if (zapasId) break; // (*)   
-                                await delay(2000);                                                        
-                            }
+                            // while (!zapasId) {                                
+                            //     zapasId = await newDatabase3(projectId);  
+                            //     console.log("zapasId: ", zapasId) 
+                            //     if (zapasId) break; // (*)   
+                            //     await delay(2000);                                                        
+                            // }
                             
                             //создание базы данных "Претенденты"
                             while (!pretendentId) {                                
