@@ -266,7 +266,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                 project_manager = data?.properties["Менеджер"].relation[0]?.id;
                 project_managers = data?.properties["Менеджер"].relation;
                 statusProjectNew = data?.properties["Статус проекта"].select.name
-                //console.log("STATUS NEW: ", statusProjectNew)
+                console.log("project_managers: ", project_managers)
 
             }  else {
                 project_name = project.name
@@ -291,18 +291,19 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
              }                             
          });
 
-         project_managers.maps(async(manager)=> {
-            await fetch(`${botApiUrl}/managers/${manager.id}`)
-            .then((response) => response.json())
-            .then((data) => {
-                if (data) {
-                    chatId_managers.push(data)
+        // if (project_managers && project_managers.length > 0) {
+        //     project_managers.maps(async(manager)=> {
+        //         await fetch(`${botApiUrl}/managers/${manager.id}`)
+        //         .then((response) => response.json())
+        //         .then((data) => {
+        //             if (data) {
+        //                 chatId_managers.push(data)
 
-                    console.log("chatId_managers: ", chatId_managers)
-                }                            
-            });
-         })
-
+        //                 console.log("chatId_managers: ", chatId_managers)
+        //             }                            
+        //         });
+        //     })
+        // }
 
 
         // 1) получить блок и бд
@@ -456,6 +457,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
 
                             //отправка сообщений по таймеру
                             setTimeout(async()=> {
+                                
                                 const report = await bot.sendMessage(chatId_manager, text, {
                                     reply_markup: ({
                                         inline_keyboard:[
