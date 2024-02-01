@@ -34,6 +34,21 @@ module.exports = async function addTable(blockId) {
                                       "color": "green",
                                     }
                                 },
+                                {
+                                    "object": "block",
+                                    "type": "to_do",
+                                    "to_do": {
+                                      "rich_text": [{
+                                        "type": "text",
+                                        "text": {
+                                          "content": "Финальная смета",
+                                          "link": null
+                                        }
+                                      }],
+                                      "checked": false,
+                                      "color": "blue",
+                                    }
+                                },
                             ]
                           }
                         },
@@ -49,7 +64,22 @@ module.exports = async function addTable(blockId) {
                                       "rich_text": [{
                                         "type": "text",
                                         "text": {
-                                          "content": "Финальная смета",
+                                          "content": "Постер",
+                                          "link": null
+                                        }
+                                      }],
+                                      "checked": false,
+                                      "color": "purple",
+                                    }
+                                },
+                                {
+                                    "object": "block",
+                                    "type": "to_do",
+                                    "to_do": {
+                                      "rich_text": [{
+                                        "type": "text",
+                                        "text": {
+                                          "content": "Без звуковых оповещений",
                                           "link": null
                                         }
                                       }],
@@ -60,29 +90,6 @@ module.exports = async function addTable(blockId) {
                             ]
                           }
                         },
-                        {
-                            "object": "block",
-                            "type": "column",
-                            "column": {
-                              "children": [
-                                  {
-                                      "object": "block",
-                                      "type": "to_do",
-                                      "to_do": {
-                                        "rich_text": [{
-                                          "type": "text",
-                                          "text": {
-                                            "content": "Постер",
-                                            "link": null
-                                          }
-                                        }],
-                                        "checked": false,
-                                        "color": "purple",
-                                      }
-                                  },
-                              ]
-                            }
-                          },
                     ]
                     }
                 },

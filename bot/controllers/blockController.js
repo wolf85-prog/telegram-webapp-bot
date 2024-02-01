@@ -105,32 +105,78 @@ async function createBlock(blockId) {
                             "children": [
                                 {
                                     "object": "block",
-                                    "type": "to_do",
-                                    "to_do": {
-                                      "rich_text": [{
-                                        "type": "text",
-                                        "text": {
-                                          "content": "Предварительная смета",
-                                          "link": null
-                                        }
-                                      }],
-                                      "checked": false,
-                                      "color": "green",
+                                    "type": "column",
+                                    "column": {
+                                      "children": [
+                                          {
+                                              "object": "block",
+                                              "type": "to_do",
+                                              "to_do": {
+                                                "rich_text": [{
+                                                  "type": "text",
+                                                  "text": {
+                                                    "content": "Предварительная смета",
+                                                    "link": null
+                                                  }
+                                                }],
+                                                "checked": false,
+                                                "color": "green",
+                                              }
+                                          },
+                                          {
+                                              "object": "block",
+                                              "type": "to_do",
+                                              "to_do": {
+                                                "rich_text": [{
+                                                  "type": "text",
+                                                  "text": {
+                                                    "content": "Финальная смета",
+                                                    "link": null
+                                                  }
+                                                }],
+                                                "checked": false,
+                                                "color": "blue",
+                                              }
+                                          },
+                                      ]
                                     }
                                 },
                                 {
                                     "object": "block",
-                                    "type": "to_do",
-                                    "to_do": {
-                                      "rich_text": [{
-                                        "type": "text",
-                                        "text": {
-                                          "content": "Постер",
-                                          "link": null
-                                        }
-                                      }],
-                                      "checked": false,
-                                      "color": "purple",
+                                    "type": "column",
+                                    "column": {
+                                      "children": [
+                                          {
+                                              "object": "block",
+                                              "type": "to_do",
+                                              "to_do": {
+                                                "rich_text": [{
+                                                  "type": "text",
+                                                  "text": {
+                                                    "content": "Постер",
+                                                    "link": null
+                                                  }
+                                                }],
+                                                "checked": false,
+                                                "color": "purple",
+                                              }
+                                          },
+                                          {
+                                              "object": "block",
+                                              "type": "to_do",
+                                              "to_do": {
+                                                "rich_text": [{
+                                                  "type": "text",
+                                                  "text": {
+                                                    "content": "Без звуковых оповещений",
+                                                    "link": null
+                                                  }
+                                                }],
+                                                "checked": false,
+                                                "color": "pink",
+                                              }
+                                          },
+                                      ]
                                     }
                                 },
                             ]
