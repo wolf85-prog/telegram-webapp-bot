@@ -98,6 +98,15 @@ const Projectcash = sequelize.define('projectcash', {
 })
 
 
+const SoundNotif = sequelize.define('soundnotif', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}, 
+    name: {type: DataTypes.STRING},  //название проекта
+    text: {type: DataTypes.STRING}, //текст сообщения;
+    date: {type: DataTypes.STRING},  //дата отправки напоминания
+    delivered: {type: DataTypes.BOOLEAN}, //доставлено
+})
+
+
 module.exports = {
     User, 
     UserBot, 
@@ -108,5 +117,6 @@ module.exports = {
     Report,
     Manager,
     Projectcash,
-    CountMessage
+    CountMessage,
+    SoundNotif
 }
