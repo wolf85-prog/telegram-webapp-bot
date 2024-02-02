@@ -1,6 +1,6 @@
 require("dotenv").config();
 const sequelize = require('../connections/db')
-const {Project} = require('../models/models')
+const {Project, SoundNotif} = require('../models/models')
 const getBlocks = require('./getBlocks')
 const getDatabaseId = require('./getDatabaseId')
 const sendMyMessage = require('./sendMyMessage')
@@ -144,6 +144,13 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                 socket.emit("sendNotif", {
                                     task: 1
                                 }) 
+
+                                const res = SoundNotif.create({
+                                    name: project_name,
+                                    text: 'Звуковое оповещение - 120 минут',
+                                    date: new Date(milliseconds),
+                                    delivered: false
+                                })
                             }
                         }, milliseconds)
                     }
@@ -159,6 +166,13 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                 socket.emit("sendNotif", {
                                     task: 2
                                 }) 
+
+                                const res = SoundNotif.create({
+                                    name: project_name,
+                                    text: 'Звуковое оповещение - 60 минут',
+                                    date: new Date(milliseconds2),
+                                    delivered: false
+                                })
                             }
                         }, milliseconds2)
                     }
@@ -173,6 +187,13 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                 socket.emit("sendNotif", {
                                     task: 3
                                 }) 
+
+                                const res = SoundNotif.create({
+                                    name: project_name,
+                                    text: 'Звуковое оповещение - 30 минут',
+                                    date: new Date(milliseconds3),
+                                    delivered: false
+                                })
                             }
                         }, milliseconds3)
                     }
@@ -187,6 +208,13 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                 socket.emit("sendNotif", {
                                     task: 4
                                 }) 
+
+                                const res = SoundNotif.create({
+                                    name: project_name,
+                                    text: 'Звуковое оповещение - 15 минут',
+                                    date: new Date(milliseconds4),
+                                    delivered: false
+                                })
                             }
                         }, milliseconds4)
                     }
@@ -201,6 +229,12 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                 socket.emit("sendNotif", {
                                     task: 6
                                 })
+                                const res = SoundNotif.create({
+                                    name: project_name,
+                                    text: 'Звуковое оповещение - 10 минут',
+                                    date: new Date(milliseconds6),
+                                    delivered: false
+                                })
                             } 
                         }, milliseconds6)
                     }
@@ -214,6 +248,12 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                 let socket = io(socketUrl);
                                 socket.emit("sendNotif", {
                                     task: 7
+                                })
+                                const res = SoundNotif.create({
+                                    name: project_name,
+                                    text: 'Звуковое оповещение - 5 минут',
+                                    date: new Date(milliseconds7),
+                                    delivered: false
                                 })
                             } 
                         }, milliseconds7)
@@ -534,6 +574,13 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                             socket.emit("sendNotif", {
                                                 task: 1
                                             }) 
+                                            const res = SoundNotif.create({
+                                                name: project_name,
+                                                text: 'Звуковое оповещение - 120 минут',
+                                                date: new Date(milliseconds),
+                                                delivered: false
+                                            })
+                                            
                                         }
                                     }, milliseconds) 
                                 }
@@ -553,6 +600,12 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                             socket.emit("sendNotif", {
                                                 task: 2
                                             }) 
+                                            const res = SoundNotif.create({
+                                                name: project_name,
+                                                text: 'Звуковое оповещение - 60 минут',
+                                                date: new Date(milliseconds2),
+                                                delivered: false
+                                            })
                                         }
                                     }, milliseconds2)
                                 }
@@ -571,6 +624,12 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                             socket.emit("sendNotif", {
                                                 task: 3
                                             }) 
+                                            const res = SoundNotif.create({
+                                                name: project_name,
+                                                text: 'Звуковое оповещение - 30 минут',
+                                                date: new Date(milliseconds3),
+                                                delivered: false
+                                            })
                                         }
                                     }, milliseconds3)
                                 }
@@ -589,6 +648,12 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                             socket.emit("sendNotif", {
                                                 task: 4
                                             }) 
+                                            const res = SoundNotif.create({
+                                                name: project_name,
+                                                text: 'Звуковое оповещение - 15 минут',
+                                                date: new Date(milliseconds4),
+                                                delivered: false
+                                            })
                                         }
                                     }, milliseconds4)
                                 }
@@ -607,6 +672,12 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                             socket.emit("sendNotif", {
                                                 task: 6
                                             }) 
+                                            const res = SoundNotif.create({
+                                                name: project_name,
+                                                text: 'Звуковое оповещение - 10 минут',
+                                                date: new Date(milliseconds6),
+                                                delivered: false
+                                            })
                                         }
                                     }, milliseconds6)
                                 }
@@ -625,6 +696,12 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                             socket.emit("sendNotif", {
                                                 task: 7
                                             }) 
+                                            const res = SoundNotif.create({
+                                                name: project_name,
+                                                text: 'Звуковое оповещение - 5 минут',
+                                                date: new Date(milliseconds7),
+                                                delivered: false
+                                            })
                                         }
                                     }, milliseconds7)
                                 }
