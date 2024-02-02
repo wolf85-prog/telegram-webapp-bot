@@ -148,7 +148,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                 const res = SoundNotif.create({
                                     name: project_name,
                                     text: 'Звуковое оповещение - 120 минут',
-                                    date: new Date(milliseconds),
+                                    date: new Date(milliseconds).toISOString(),
                                     delivered: false
                                 })
                             }
@@ -170,7 +170,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                 const res = SoundNotif.create({
                                     name: project_name,
                                     text: 'Звуковое оповещение - 60 минут',
-                                    date: new Date(milliseconds2),
+                                    date: new Date(milliseconds2).toISOString(),
                                     delivered: false
                                 })
                             }
@@ -191,7 +191,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                 const res = SoundNotif.create({
                                     name: project_name,
                                     text: 'Звуковое оповещение - 30 минут',
-                                    date: new Date(milliseconds3),
+                                    date: new Date(milliseconds3).toISOString(),
                                     delivered: false
                                 })
                             }
@@ -212,7 +212,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                 const res = SoundNotif.create({
                                     name: project_name,
                                     text: 'Звуковое оповещение - 15 минут',
-                                    date: new Date(milliseconds4),
+                                    date: new Date(milliseconds4).toISOString(),
                                     delivered: false
                                 })
                             }
@@ -232,7 +232,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                 const res = SoundNotif.create({
                                     name: project_name,
                                     text: 'Звуковое оповещение - 10 минут',
-                                    date: new Date(milliseconds6),
+                                    date: new Date(milliseconds6).toISOString(),
                                     delivered: false
                                 })
                             } 
@@ -252,7 +252,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                 const res = SoundNotif.create({
                                     name: project_name,
                                     text: 'Звуковое оповещение - 5 минут',
-                                    date: new Date(milliseconds7),
+                                    date: new Date(milliseconds7).toISOString(),
                                     delivered: false
                                 })
                             } 
@@ -577,7 +577,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                             const res = SoundNotif.create({
                                                 name: project_name,
                                                 text: 'Звуковое оповещение - 120 минут',
-                                                date: new Date(milliseconds),
+                                                date: new Date(milliseconds).toISOString(),
                                                 delivered: false
                                             })
                                             
@@ -603,7 +603,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                             const res = SoundNotif.create({
                                                 name: project_name,
                                                 text: 'Звуковое оповещение - 60 минут',
-                                                date: new Date(milliseconds2),
+                                                date: new Date(milliseconds2).toISOString(),
                                                 delivered: false
                                             })
                                         }
@@ -627,7 +627,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                             const res = SoundNotif.create({
                                                 name: project_name,
                                                 text: 'Звуковое оповещение - 30 минут',
-                                                date: new Date(milliseconds3),
+                                                date: new Date(milliseconds3).toISOString(),
                                                 delivered: false
                                             })
                                         }
@@ -651,7 +651,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                             const res = SoundNotif.create({
                                                 name: project_name,
                                                 text: 'Звуковое оповещение - 15 минут',
-                                                date: new Date(milliseconds4),
+                                                date: new Date(milliseconds4).toISOString(),
                                                 delivered: false
                                             })
                                         }
@@ -675,7 +675,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                             const res = SoundNotif.create({
                                                 name: project_name,
                                                 text: 'Звуковое оповещение - 10 минут',
-                                                date: new Date(milliseconds6),
+                                                date: new Date(milliseconds6).toISOString(),
                                                 delivered: false
                                             })
                                         }
@@ -699,7 +699,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                             const res = SoundNotif.create({
                                                 name: project_name,
                                                 text: 'Звуковое оповещение - 5 минут',
-                                                date: new Date(milliseconds7),
+                                                date: new Date(milliseconds7).toISOString(),
                                                 delivered: false
                                             })
                                         }
