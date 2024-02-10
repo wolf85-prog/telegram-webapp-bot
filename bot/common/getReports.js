@@ -490,49 +490,13 @@ ${arr_count0.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + it
                 datesObj.forEach((date, i)=> {
                     const arr_copy = []
                     arr_copy.push(arr_all[i])
+                    if (!date.consilience) { 
+                        datesObj[i].consilience = true
+                    }
                 })
 
                 if(d >= d2) {                    
-
-                    const day = String(d.getDate()).padStart(2, "0");
-                    const month = String(d.getMonth()+1).padStart(2, "0");
-
-                    const day2 = String(d1.getDate()).padStart(2, "0");
-                    const month2 = String(d1.getMonth()+1).padStart(2, "0");
-
-                    const text = `Отчет по проекту "${project_name}": 
-                                
-${day}.${month} | ${day2}.${month2} | ${project_name} | U.L.E.Y
-
-${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title).join('\n')}`                           
-                            
-                    const report = await bot.sendMessage(chatId_manager, text, {
-                        reply_markup: ({
-                            inline_keyboard:[
-                                [
-                                    {"text": "Информация принята", callback_data:'/report_accept'},
-                                ],
-                            ]
-                        })
-                    })                         
-                    console.log('Отчет отправлен заказчику! ', date.date);
-
-                    // сохранить отправленное боту сообщение пользователя в БД
-                    const convId = await sendMyMessage(text, 'text', chatId_manager, report.message_id)
-
-                    //Подключаемся к серверу socket
-                    let socket = io(socketUrl);
-                    socket.emit("addUser", chatId_manager)
-
-                    //отправить сообщение в админку
-                    socket.emit("sendMessage", {
-                        senderId: chatId_manager,
-                        receiverId: chatTelegramId,
-                        text: text,
-                        type: 'text',
-                        convId: convId,
-                        messageId: report.message_id,
-                    }) 
+                   
                 }
 
                 //отправить сообщение по каждой дате
@@ -561,35 +525,35 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                         //отправка сообщений по таймеру
                         console.log("timer: ", statusProjectNew)
                         
-                        // setTimeout(async()=> {   
-                        //         const report = await bot.sendMessage(chatId_manager, text, {
-                        //             reply_markup: ({
-                        //                 inline_keyboard:[
-                        //                     [
-                        //                         {"text": "Информация принята", callback_data:'/report_accept'},
-                        //                     ],
-                        //                 ]
-                        //             })
-                        //         })                         
-                        //         console.log('Отчет отправлен заказчику! ', date.date);
+                        setTimeout(async()=> {   
+                                const report = await bot.sendMessage(chatId_manager, text, {
+                                    reply_markup: ({
+                                        inline_keyboard:[
+                                            [
+                                                {"text": "Информация принята", callback_data:'/report_accept'},
+                                            ],
+                                        ]
+                                    })
+                                })                         
+                                console.log('Отчет отправлен заказчику! ', date.date);
 
-                        //         // сохранить отправленное боту сообщение пользователя в БД
-                        //         const convId = await sendMyMessage(text, 'text', chatId_manager, report.message_id)
+                                // сохранить отправленное боту сообщение пользователя в БД
+                                const convId = await sendMyMessage(text, 'text', chatId_manager, report.message_id)
 
-                        //         //Подключаемся к серверу socket
-                        //         let socket = io(socketUrl);
-                        //         socket.emit("addUser", chatId_manager)
+                                //Подключаемся к серверу socket
+                                let socket = io(socketUrl);
+                                socket.emit("addUser", chatId_manager)
 
-                        //         //отправить сообщение в админку
-                        //         socket.emit("sendMessage", {
-                        //                     senderId: chatId_manager,
-                        //                     receiverId: chatTelegramId,
-                        //                     text: text,
-                        //                     type: 'text',
-                        //                     convId: convId,
-                        //                     messageId: report.message_id,
-                        //         }) 
-                        // }, 2500 * ++i)   
+                                //отправить сообщение в админку
+                                socket.emit("sendMessage", {
+                                            senderId: chatId_manager,
+                                            receiverId: chatTelegramId,
+                                            text: text,
+                                            type: 'text',
+                                            convId: convId,
+                                            messageId: report.message_id,
+                                }) 
+                        }, 2500 * ++i)   
     //---------------------------------------------------------------------------------------------------
                             //создаю оповещения
                             //отправка напоминания
