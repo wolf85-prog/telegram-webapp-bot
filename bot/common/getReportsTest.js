@@ -471,32 +471,35 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
             //...
         } else {
             // 2-й отчет
-            if (statusProjectNew !== 'Wasted' || statusProjectNew !== 'OnHold') {
-            
-                //отправить сообщение по каждой дате
-                datesObj.forEach((date, i)=> {
-                    const d = new Date(date.date.split('+')[0]);
+            if (statusProjectNew !== 'Wasted' || statusProjectNew !== 'OnHold') {   
+                
+                //отправить одно сообщение за период
+                //datesObj.forEach((date, i)=> {
+                    const d = new Date(datesObj[0].date.split('+')[0]); //1-я дата
+                    const d1 = new Date(datesObj[datesObj.length-1].date.split('+')[0]); //последняя дата
                     const d2 = new Date().getTime() + 10800000
-
+                
                     if(d >= d2) {
-                        if (!date.consilience) { 
-                            datesObj[i].consilience = true
-                            const arr_copy = arr_all[i]
+                        //if (!date.consilience) { 
+                            //datesObj[i].consilience = true
+                            //const arr_copy = arr_all[i]
+                            const arr_copy = []
+                            arr_copy.push(arr_all[i])
 
-                            const d = new Date(date.date.split('+')[0]);
-                            const month = String(d.getMonth()+1).padStart(2, "0");
                             const day = String(d.getDate()).padStart(2, "0");
-                            const chas = d.getHours();
-                            const min = String(d.getMinutes()).padStart(2, "0");
+                            const month = String(d.getMonth()+1).padStart(2, "0");
 
-                            const text = `Запрос на специалистов: 
+                            const day2 = String(d1.getDate()).padStart(2, "0");
+                            const month2 = String(d1.getMonth()+1).padStart(2, "0");
+
+                            const text = `Отчет по проекту "${project_name}": 
                                     
-    ${day}.${month} | ${chas}:${min} | ${project_name} | U.L.E.Y
+${day}.${month} | ${day2}.${month2} | ${project_name} | U.L.E.Y
 
-    ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title).join('\n')}`                           
+${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title).join('\n')}`                           
 
                             //отправка сообщений по таймеру
-                            setTimeout(async()=> {
+                        // setTimeout(async()=> {
                                 
                                 const report = await bot.sendMessage(chatId_manager, text, {
                                     reply_markup: ({
@@ -525,7 +528,64 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                             convId: convId,
                                             messageId: report.message_id,
                                 }) 
-                            }, 2500 * ++i)  
+                            //}, 2500 * ++i) 
+                        //}
+                    }
+                //})
+
+                //отправить сообщение по каждой дате
+                datesObj.forEach((date, i)=> {
+                    const d = new Date(date.date.split('+')[0]);
+                    const d2 = new Date().getTime() + 10800000
+
+                    if(d >= d2) {
+                        if (!date.consilience) { 
+                            datesObj[i].consilience = true
+                            const arr_copy = arr_all[i]
+
+                            const d = new Date(date.date.split('+')[0]);
+                            const month = String(d.getMonth()+1).padStart(2, "0");
+                            const day = String(d.getDate()).padStart(2, "0");
+                            const chas = d.getHours();
+                            const min = String(d.getMinutes()).padStart(2, "0");
+
+                            const text = `Отчет по проекту "${project_name}": 
+                                    
+    ${day}.${month} | ${chas}:${min} | ${project_name} | U.L.E.Y
+
+    ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title).join('\n')}`                           
+
+                            //отправка сообщений по таймеру
+                            // setTimeout(async()=> {
+                                
+                            //     const report = await bot.sendMessage(chatId_manager, text, {
+                            //         reply_markup: ({
+                            //             inline_keyboard:[
+                            //                 [
+                            //                     {"text": "Информация принята", callback_data:'/report_accept'},
+                            //                 ],
+                            //             ]
+                            //         })
+                            //     })                         
+                            //     console.log('Отчет отправлен заказчику! ', date.date);
+
+                            //     // сохранить отправленное боту сообщение пользователя в БД
+                            //     const convId = await sendMyMessage(text, 'text', chatId_manager, report.message_id)
+
+                            //     //Подключаемся к серверу socket
+                            //     let socket = io(socketUrl);
+                            //     socket.emit("addUser", chatId_manager)
+
+                            //     //отправить сообщение в админку
+                            //     socket.emit("sendMessage", {
+                            //                 senderId: chatId_manager,
+                            //                 receiverId: chatTelegramId,
+                            //                 text: text,
+                            //                 type: 'text',
+                            //                 convId: convId,
+                            //                 messageId: report.message_id,
+                            //     }) 
+                            // }, 2500 * ++i)  
     //---------------------------------------------------------------------------------------------------
                             //создаю оповещения
                             //отправка напоминания
