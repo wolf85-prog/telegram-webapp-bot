@@ -399,6 +399,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
             const obj = {
                 date: item,
                 consilience: false,
+                send: false,
             }
             datesObj.push(obj)  
         })
@@ -486,7 +487,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                         //если есть изменения в таблице Основной состав
                         if (!date.consilience) { 
                             datesObj[i].consilience = true
-                            sendReport = false
+                            datesObj[i].send = true
                             const arr_copy = arr_all[i]
 
                             const d = new Date(date.date.split('+')[0]);
@@ -497,7 +498,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
 
                             text = text + `${day}.${month} | ${chas}:${min} | ${project_name} | U.L.E.Y
 
-${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title).join('\n')} \n\n`                           
+    ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title).join('\n')} \n\n`                           
 
                             
     //---------------------------------------------------------------------------------------------------
@@ -707,10 +708,13 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                 })
                 //отправка  одного сообщения
                             //if (i % 10 === 0 && i !== 0) {
-                            if (!sendReport) {
+                            if (datesObj.find(item=>item.send === true)) {
                                 //отправка сообщений по таймеру
-                                setTimeout(async()=> {   
-                                    sendReport = true                             
+                                setTimeout(async()=> { 
+                                    //сбросить флаг отправки  
+                                    datesObj.map(item=> {
+                                        item.send = false
+                                    })                            
                                     const report = await bot.sendMessage(chatId_manager, text, {
                                         reply_markup: ({
                                             inline_keyboard:[
