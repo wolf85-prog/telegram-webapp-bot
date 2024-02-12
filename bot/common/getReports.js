@@ -79,6 +79,7 @@ module.exports = async function getReports(project, bot) {
     let date_db;
 
     let randomSec = randomNumberInRange(10000, 30000)
+    let sendReport = false
 
     let task1, task2, task3, task4, task5, task6, task7
 
@@ -494,6 +495,7 @@ ${arr_count0.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + it
                         //если есть изменения в таблице Основной состав
                         if (!date.consilience) { 
                             datesObj[i].consilience = true
+                            sendReport = false
                             const arr_copy = arr_all[i]
 
                             const d = new Date(date.date.split('+')[0]);
@@ -679,6 +681,7 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
 
                 //отправка каждого 10-го сообщения
                             //if (i % 10 === 0 && i !== 0) { 
+                            if (!sendReport) {
                                 //отправка сообщений по таймеру                       
                                 setTimeout(async()=> {   
                                     const report = await bot.sendMessage(chatId_manager, text, {
@@ -709,7 +712,7 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                                         messageId: report.message_id,
                                     }) 
                                 }, 2500)   
-                            //}
+                            }
             } else { // if status
                 console.log('Статус проекта onHold или Wasted: ', project_name); 
             }
