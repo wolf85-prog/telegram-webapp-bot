@@ -710,7 +710,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                             //if (i % 10 === 0 && i !== 0) {
                             if (datesObj.find(item=>item.send === true)) {
                                 //отправка сообщений по таймеру
-                                setTimeout(async()=> { 
+                                //setTimeout(async()=> { 
                                     //сбросить флаг отправки  
                                     datesObj.map(item=> {
                                         item.send = false
@@ -724,7 +724,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                             ]
                                         })
                                     })                         
-                                    console.log('Отчет отправлен заказчику! ', date.date);
+                                    //console.log('Отчет отправлен заказчику! ', report);
 
                                     // сохранить отправленное боту сообщение пользователя в БД
                                     const convId = await sendMyMessage(text, 'text', chatId_manager, report.message_id)
@@ -742,7 +742,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                         convId: convId,
                                         messageId: report.message_id,
                                     }) 
-                                }, 2500)  
+                                //}, 2500)  
                             }
             } else { // if status
                 console.log('Статус проекта onHold или Wasted: ', project_name); 

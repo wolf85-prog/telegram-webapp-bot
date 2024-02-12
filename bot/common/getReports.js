@@ -541,8 +541,6 @@ ${arr_count0.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + it
                                 const milliseconds7 = Math.floor((date8 - dateNow)) + randomSec; //5 минут
                                 const milliseconds5 = Math.floor((date6 - dateNow)) + randomSec; //0 минут
 
-                                
-
 
                                 //120-минутная готовность
                                 if (task1) {
@@ -698,7 +696,7 @@ ${arr_count0.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + it
                                             ]
                                         })
                                     })                         
-                                    console.log('Отчет отправлен заказчику! ', date.date);
+                                    //console.log('Отчет отправлен заказчику! ', report);
 
                                     // сохранить отправленное боту сообщение пользователя в БД
                                     const convId = await sendMyMessage(text, 'text', chatId_manager, report.message_id)
