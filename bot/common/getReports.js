@@ -506,39 +506,7 @@ ${arr_count0.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + it
 
 ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title).join('\n')} \n\n`                               
 
-                            //отправка каждого 10-го сообщения
-                            //if (i % 10 === 0 && i !== 0) { 
-                                //отправка сообщений по таймеру                       
-                                setTimeout(async()=> {   
-                                    const report = await bot.sendMessage(chatId_manager, text, {
-                                        reply_markup: ({
-                                            inline_keyboard:[
-                                                [
-                                                    {"text": "Информация принята", callback_data:'/report_accept'},
-                                                ],
-                                            ]
-                                        })
-                                    })                         
-                                    console.log('Отчет отправлен заказчику! ', date.date);
-
-                                    // сохранить отправленное боту сообщение пользователя в БД
-                                    const convId = await sendMyMessage(text, 'text', chatId_manager, report.message_id)
-
-                                    //Подключаемся к серверу socket
-                                    let socket = io(socketUrl);
-                                    socket.emit("addUser", chatId_manager)
-
-                                    //отправить сообщение в админку
-                                    socket.emit("sendMessage", {
-                                        senderId: chatId_manager,
-                                        receiverId: chatTelegramId,
-                                        text: text,
-                                        type: 'text',
-                                        convId: convId,
-                                        messageId: report.message_id,
-                                    }) 
-                                }, 2500 * ++i)   
-                            //}
+                            
     //---------------------------------------------------------------------------------------------------
                             //создаю оповещения
                             //отправка напоминания
@@ -708,6 +676,40 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                         //console.log('Отчет не отправлен! Основная дата меньше текущей: ', project_name);
                     }
                 })
+
+                //отправка каждого 10-го сообщения
+                            //if (i % 10 === 0 && i !== 0) { 
+                                //отправка сообщений по таймеру                       
+                                setTimeout(async()=> {   
+                                    const report = await bot.sendMessage(chatId_manager, text, {
+                                        reply_markup: ({
+                                            inline_keyboard:[
+                                                [
+                                                    {"text": "Информация принята", callback_data:'/report_accept'},
+                                                ],
+                                            ]
+                                        })
+                                    })                         
+                                    console.log('Отчет отправлен заказчику! ', date.date);
+
+                                    // сохранить отправленное боту сообщение пользователя в БД
+                                    const convId = await sendMyMessage(text, 'text', chatId_manager, report.message_id)
+
+                                    //Подключаемся к серверу socket
+                                    let socket = io(socketUrl);
+                                    socket.emit("addUser", chatId_manager)
+
+                                    //отправить сообщение в админку
+                                    socket.emit("sendMessage", {
+                                        senderId: chatId_manager,
+                                        receiverId: chatTelegramId,
+                                        text: text,
+                                        type: 'text',
+                                        convId: convId,
+                                        messageId: report.message_id,
+                                    }) 
+                                }, 2500)   
+                            //}
             } else { // if status
                 console.log('Статус проекта onHold или Wasted: ', project_name); 
             }
