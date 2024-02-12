@@ -494,10 +494,10 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
 
                             text = text + `${day}.${month} | ${chas}:${min} | ${project_name} | U.L.E.Y
 
-${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title).join('\n')} \n`                           
+${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title).join('\n')} \n\n`                           
 
                             //отправка каждого 10-го сообщения
-                            if (i % 10 === 0 && i !== 0) {
+                            //if (i % 10 === 0 && i !== 0) {
                                 //отправка сообщений по таймеру
                                 setTimeout(async()=> {                                
                                     const report = await bot.sendMessage(chatId_manager, text, {
@@ -528,7 +528,7 @@ ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item
                                         messageId: report.message_id,
                                     }) 
                                 }, 2500 * ++i)  
-                            }
+                            //}
                             
     //---------------------------------------------------------------------------------------------------
                             //создаю оповещения
