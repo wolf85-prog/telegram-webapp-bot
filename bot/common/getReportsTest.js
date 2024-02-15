@@ -476,7 +476,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
             // 2-й отчет
             if (statusProjectNew !== 'Wasted' || statusProjectNew !== 'OnHold') {           
                 //отправить одно сообщение за период
-                let text = `Отчет по проекту "${project_name}": \n\n` 
+                let text = `Отчет по проекту «${project_name}»: \n\n` 
 
                 //отправить сообщение по каждой дате
                 datesObj.forEach((date, i)=> {
@@ -496,7 +496,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                             const chas = d.getHours();
                             const min = String(d.getMinutes()).padStart(2, "0");
 
-                            text = text + `${day}.${month} | ${chas}:${min} | ${project_name} | U.L.E.Y
+                            text = text + `${day}.${month} | ${chas}:${min} | ${project_name}
 
     ${arr_copy.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title).join('\n')} \n\n`                           
 
