@@ -88,7 +88,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
     .then((data) => {
         if (data) {
             project_name = data?.properties.Name.title[0]?.plain_text;
-            project_status = data?.properties["Статус проекта"].select.name
+            project_status = data?.properties["Статус проекта"].select?.name
         }  else {
             project_name = projectName
             project_status ='';
