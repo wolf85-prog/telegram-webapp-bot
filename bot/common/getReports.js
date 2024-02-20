@@ -1,6 +1,6 @@
 require("dotenv").config();
 const sequelize = require('./../connections/db')
-const {Project} = require('./../models/models')
+const {Project, SoundNotif} = require('./../models/models')
 const getBlocks = require('./getBlocks')
 const getDatabaseId = require('./getDatabaseId')
 const sendMyMessage = require('./sendMyMessage')
