@@ -39,13 +39,13 @@ module.exports = async function getSoundNotif(project, bot) {
         minutCount++  // a day has passed
 
         const notifs = await getNotif()
-        console.log("notifs: ", notifs)
+        //console.log("notifs: ", notifs)
 
         const currentDate = new Date().getTime()
-        const notif = notifs.find(item => (item.date - currentDate) > 0 && (item.date - currentDate) < 100000)
+        const notif = notifs.find(item => (item.dataValues.date - currentDate) > 0 && (item.dataValues.date - currentDate) < 100000)
         console.log("notif: ", notif)
     
-        i++ // счетчик интервалов
+        //i++ // счетчик интервалов
     }, 60000); //каждые 1 минут
 
     // остановить вывод через 30 дней
