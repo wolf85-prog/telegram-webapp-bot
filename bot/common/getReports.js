@@ -156,7 +156,8 @@ module.exports = async function getReports(project, bot) {
                                     name: project_name,
                                     text: 'Звуковое оповещение - 120 минут',
                                     date: new Date().getTime() + milliseconds,
-                                    delivered: false
+                                    delivered: false,
+                                    task: 1
                                 })
                             }
                         //}, milliseconds)
@@ -177,7 +178,8 @@ module.exports = async function getReports(project, bot) {
                                     name: project_name,
                                     text: 'Звуковое оповещение - 60 минут',
                                     date: new Date().getTime() + milliseconds2,
-                                    delivered: false
+                                    delivered: false,
+                                    task: 2
                                 })
                             }
                         //}, milliseconds2)
@@ -197,7 +199,8 @@ module.exports = async function getReports(project, bot) {
                                     name: project_name,
                                     text: 'Звуковое оповещение - 30 минут',
                                     date: new Date().getTime() + milliseconds3,
-                                    delivered: false
+                                    delivered: false,
+                                    task: 3
                                 })
                             }
                        // }, milliseconds3)
@@ -217,7 +220,8 @@ module.exports = async function getReports(project, bot) {
                                     name: project_name,
                                     text: 'Звуковое оповещение - 15 минут',
                                     date: new Date().getTime() + milliseconds4,
-                                    delivered: false
+                                    delivered: false,
+                                    task: 4
                                 }) 
                             }
                         //}, milliseconds4)
@@ -237,7 +241,8 @@ module.exports = async function getReports(project, bot) {
                                     name: project_name,
                                     text: 'Звуковое оповещение - 10 минут',
                                     date: new Date().getTime() + milliseconds6,
-                                    delivered: false
+                                    delivered: false,
+                                    task: 6
                                 })
                             }
                         //}, milliseconds6)
@@ -257,7 +262,8 @@ module.exports = async function getReports(project, bot) {
                                     name: project_name,
                                     text: 'Звуковое оповещение - 5 минут',
                                     date: new Date().getTime() + milliseconds7,
-                                    delivered: false
+                                    delivered: false,
+                                    task: 7
                                 })
                             } 
                         //}, milliseconds7)
@@ -277,7 +283,8 @@ module.exports = async function getReports(project, bot) {
                                     name: project_name,
                                     text: 'Звуковое оповещение - 0 минут',
                                     date: new Date().getTime() + milliseconds5,
-                                    delivered: false
+                                    delivered: false,
+                                    task: 5
                                 })
                             }
                         //}, milliseconds5)
@@ -602,7 +609,8 @@ ${arr_count0.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + it
                                                 name: project_name,
                                                 text: 'Звуковое оповещение - 120 минут',
                                                 date: new Date().getTime() + milliseconds,
-                                                delivered: false
+                                                delivered: false,
+                                                task: 1
                                             })
                                         }
                                     //}, milliseconds) 
@@ -627,7 +635,8 @@ ${arr_count0.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + it
                                                 name: project_name,
                                                 text: 'Звуковое оповещение - 60 минут',
                                                 date: new Date().getTime() + milliseconds2,
-                                                delivered: false
+                                                delivered: false,
+                                                task: 2
                                             })
                                         }
                                     //}, milliseconds2)
@@ -651,7 +660,8 @@ ${arr_count0.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + it
                                                 name: project_name,
                                                 text: 'Звуковое оповещение - 30 минут',
                                                 date: new Date().getTime() + milliseconds3,
-                                                delivered: false
+                                                delivered: false,
+                                                task: 3
                                             })
                                         }
                                     //}, milliseconds3)
@@ -675,7 +685,8 @@ ${arr_count0.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + it
                                                 name: project_name,
                                                 text: 'Звуковое оповещение - 15 минут',
                                                 date: new Date().getTime() + milliseconds4,
-                                                delivered: false
+                                                delivered: false,
+                                                task: 4
                                             })
                                         }
                                     //}, milliseconds4)
@@ -700,7 +711,8 @@ ${arr_count0.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + it
                                                 name: project_name,
                                                 text: 'Звуковое оповещение - 10 минут',
                                                 date: new Date().getTime() + milliseconds6,
-                                                delivered: false
+                                                delivered: false,
+                                                task: 6
                                             })
                                         }
                                     //}, milliseconds6)
@@ -724,7 +736,8 @@ ${arr_count0.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + it
                                                 name: project_name,
                                                 text: 'Звуковое оповещение - 5 минут',
                                                 date: new Date().getTime() + milliseconds7,
-                                                delivered: false
+                                                delivered: false,
+                                                task: 7
                                             })
                                         }
                                     //}, milliseconds7)
@@ -749,7 +762,8 @@ ${arr_count0.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + it
                                                 name: project_name,
                                                 text: 'Звуковое оповещение - 0 минут',
                                                 date: new Date().getTime() + milliseconds5,
-                                                delivered: false
+                                                delivered: false,
+                                                task: 5
                                             })
                                         }
                                     //}, milliseconds5)
