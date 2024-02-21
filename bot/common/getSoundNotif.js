@@ -24,16 +24,6 @@ const getNotif = require("./getNotif");
 
 
 module.exports = async function getSoundNotif(project, bot) {
-    let count_fio, count_fio2;
-    let count_title;
-    let i = 0;
-    let j = 0;
-    let databaseBlock;
-    let arr_count0, arr_count, arr_count2, allDate;
-    let arr_all = [];
-    let all = [];
-    let date_db;
-
 
     let task1, task2, task3, task4, task5, task6, task7
 

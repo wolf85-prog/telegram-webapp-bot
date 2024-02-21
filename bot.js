@@ -77,6 +77,7 @@ const updateSmeta = require("./bot/common/updateSmeta");
 const getManagersAll = require("./bot/http/getManagersAll");
 const getCompanyAll = require("./bot/http/getCompanyAll");
 const getProjectsAll = require("./bot/http/getProjectsAll");
+const getSoundNotif = require("./bot/common/getSoundNotif");
 
 const app = express();
 
@@ -1455,8 +1456,16 @@ const start = async () => {
                 })
             }, 6000) 
 
+            // 3.
+            setTimeout(()=>{
+                //запуск уведомлений
+                console.log('Запускаю звуковые уведомления...');
+                
+                getSoundNotif()
+            }, 12000) 
 
-            //3. синхронизация менеджеров из ноушена с БД
+
+            //4. синхронизация менеджеров из ноушена с БД
              let i = 0;
  
              // повторить с интервалом 5 минут
