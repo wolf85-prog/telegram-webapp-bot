@@ -104,6 +104,7 @@ const SoundNotif = sequelize.define('soundnotifs', {
     text: {type: DataTypes.STRING}, //текст сообщения;
     date: {type: DataTypes.STRING},  //дата отправки напоминания
     delivered: {type: DataTypes.BOOLEAN}, //доставлено
+    task: {type: DataTypes.INTEGER}, //номер задачи
 })
 
 

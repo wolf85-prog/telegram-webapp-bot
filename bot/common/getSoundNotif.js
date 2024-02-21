@@ -33,7 +33,7 @@ module.exports = async function getSoundNotif(project, bot) {
     // 86400 секунд в дне
     var minutCount = 0;
         
-    // повторить с интервалом 2 минуты
+    // повторить с интервалом 1 минута
     let timerId = setInterval(async() => {
         //console.log("Начало цикла отчетов. TimerId: ", timerId)
         minutCount++  // a day has passed
@@ -43,10 +43,21 @@ module.exports = async function getSoundNotif(project, bot) {
 
         const currentDate = new Date().getTime()
         const notif = notifs.find(item => (item.dataValues.date - currentDate) > 0 && (item.dataValues.date - currentDate) < 100000)
-        console.log("notif: ", notif)
+        console.log("currentDate: ", currentDate)
+        if (notif) {
+            console.log("notif: ", notif)
+
+            //let socket = io(socketUrl);
+            // socket.emit("sendNotif", {
+            //     task: 5
+            // }) 
+        } else {
+            console.log("notif отсутствует!") 
+        }
+        
     
         //i++ // счетчик интервалов
-    }, 60000); //каждые 1 минут
+    }, 60000); //каждую 1 минуту
 
     // остановить вывод через 30 дней
     if (minutCount == 43200) {
