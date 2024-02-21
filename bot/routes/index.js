@@ -11,6 +11,7 @@ const addressController = require('../controllers/addressController')
 const workerController = require('../controllers/workerController')
 const posterController = require('../controllers/posterController')
 const smetaController = require('../controllers/smetaController')
+const notifController = require('../controllers/notifController')
 
 router.get('/secret', secretController.secretInfo)
 
@@ -84,5 +85,8 @@ router.post('/poster/final/send', posterController.sendPosterFinal)
 //get SMETS
 router.get('/smeta', smetaController.smeta)
 router.get('/smeta/:id', smetaController.smetaId)
+
+//-----------------ЗВУКОВЫЕ УВЕДОМЛЕНИЯ-----------------------------
+router.get('/soundnotifAll', notifController.soundnotifAll)
 
 module.exports = router
