@@ -724,7 +724,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                             // }) 
                                             const res = SoundNotif.create({
                                                 name: project_name,
-                                                text: 'Звуковое оповещение - 5 минут',
+                                                text: 'Звуковое оповещение - 0 минут',
                                                 date: new Date().getTime() + milliseconds5,
                                                 delivered: false,
                                                 task: 5
