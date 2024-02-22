@@ -102,7 +102,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
 
     if (datesObj) {
         //отправить сообщение по каждой дате
-        datesObj.forEach((date, i)=> {
+        datesObj.forEach(async(date, i)=> {
             const d = new Date(date.split('+')[0]);
             const d2 = new Date().getTime() + 10800000 // + 3 часа (московское время)
 
@@ -116,7 +116,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                     var timeDiff4 = d.getTime() - 900000; //15 минут
                     var timeDiff6 = d.getTime() - 600000; //10 минут
                     var timeDiff7 = d.getTime() - 300000; //5 минут
-                    var timeDiff5 = d.getTime();          //0 минут        //0 минут
+                    var timeDiff5 = d.getTime();          //0 минут    
 
                     const date2 = new Date(timeDiff)
                     const date3 = new Date(timeDiff2)
@@ -213,7 +213,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                 //     task: 4
                                 // }) 
 
-                                task4 = SoundNotif.create({
+                                task4 = await SoundNotif.create({
                                     name: project_name,
                                     text: 'Звуковое оповещение - 15 минут',
                                     date: new Date().getTime() + milliseconds4,

@@ -64,7 +64,7 @@ const path = require('path')
 
 //подключение к БД PostreSQL
 const sequelize = require('./bot/connections/db')
-const {UserBot, Message, Conversation, Project, Report, Manager, Projectcash} = require('./bot/models/models');
+const {UserBot, Message, Conversation, Project, Report, Manager, Projectcash, SoundNotif} = require('./bot/models/models');
 const updateToDo = require("./bot/common/updateToDo");
 const getProject = require("./bot/common/getProject");
 const sendMessageAdmin = require("./bot/common/sendMessageAdmin");
@@ -730,7 +730,17 @@ bot.on('message', async (msg) => {
                     specs: JSON.stringify(project.specs)  
                 })
             })
+        }
 
+        if (text === '/addnotif') {
+            const task4 = await SoundNotif.create({
+                name: 'Test',
+                text: 'Звуковое оповещение - 15 минут',
+                date: new Date().getTime(),
+                delivered: false,
+                task: 4
+            })
+            console.log("task4: ", task4)
         }
 
 //------------------------------------------------------------------------------------------------
