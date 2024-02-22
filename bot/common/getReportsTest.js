@@ -147,7 +147,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                 //     task: 1
                                 // }) 
 
-                                const res = SoundNotif.create({
+                                task1 = SoundNotif.create({
                                     name: project_name,
                                     text: 'Звуковое оповещение - 120 минут',
                                     date: new Date().getTime() + milliseconds,
@@ -169,7 +169,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                 //     task: 2
                                 // }) 
 
-                                const res = SoundNotif.create({
+                                task2 = SoundNotif.create({
                                     name: project_name,
                                     text: 'Звуковое оповещение - 60 минут',
                                     date: new Date().getTime() + milliseconds2,
@@ -191,7 +191,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                 //     task: 3
                                 // }) 
 
-                                const res = SoundNotif.create({
+                                task3 = SoundNotif.create({
                                     name: project_name,
                                     text: 'Звуковое оповещение - 30 минут',
                                     date: new Date().getTime() + milliseconds3,
@@ -220,7 +220,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                     delivered: false,
                                     task: 4
                                 })
-                                console.log("task4: ", task4)
+                                //console.log("task4: ", task4)
                             }
                         //}, milliseconds4)
                     }
@@ -235,7 +235,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                 // socket.emit("sendNotif", {
                                 //     task: 6
                                 // })
-                                const res = SoundNotif.create({
+                                task6 = SoundNotif.create({
                                     name: project_name,
                                     text: 'Звуковое оповещение - 10 минут',
                                     date: new Date().getTime() + milliseconds6,
@@ -256,7 +256,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                 // socket.emit("sendNotif", {
                                 //     task: 7
                                 // })
-                                const res = SoundNotif.create({
+                                task7 = SoundNotif.create({
                                     name: project_name,
                                     text: 'Звуковое оповещение - 5 минут',
                                     date: new Date().getTime() + milliseconds7,
@@ -278,7 +278,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                 // socket.emit("sendNotif", {
                                 //     task: 5
                                 // }) 
-                                const res = SoundNotif.create({
+                                task5 = SoundNotif.create({
                                     name: project_name,
                                     text: 'Звуковое оповещение - 0 минут',
                                     date: new Date().getTime() + milliseconds5,
@@ -493,7 +493,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                 let text = `Отчет по проекту «${project_name}»: \n\n` 
 
                 //отправить сообщение по каждой дате
-                datesObj.forEach((date, i)=> {
+                datesObj.forEach(async(date, i)=> {
                     const d = new Date(date.date.split('+')[0]);
                     const d2 = new Date().getTime() + 10800000
 
@@ -551,9 +551,13 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
 
                                 //120-минутная готовность
                                 if (task1) {
-                                    //clearTimeout(task1);    
                                     //console.log("Задача 1 удалена! " + project_name)
-
+                                    await SoundNotif.destroy({
+                                        where: {
+                                            id: task1.dataValues.id,
+                                            delivered: false
+                                        },
+                                    }) 
                                 } 
                                 if (milliseconds > 0) {
                                     console.log("!!!!Планирую запуск сообщения 1...!!!!")     
@@ -564,7 +568,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                             // socket.emit("sendNotif", {
                                             //     task: 1
                                             // }) 
-                                            const res = SoundNotif.create({
+                                            task1 = await SoundNotif.create({
                                                 name: project_name,
                                                 text: 'Звуковое оповещение - 120 минут',
                                                 date: new Date().getTime() + milliseconds,
@@ -578,9 +582,14 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
     
 
                                 //60-минутная готовность
-                                if (task2) {
-                                //     clearTimeout(task2);    
-                                //     console.log("Задача 2 удалена! " + project_name)                       
+                                if (task2) {  
+                                //     console.log("Задача 2 удалена! " + project_name)   
+                                    await SoundNotif.destroy({
+                                        where: {
+                                            id: task2.dataValues.id,
+                                            delivered: false
+                                        },
+                                    })                     
                                 } 
                                 if (milliseconds2 > 0) {
                                     console.log("!!!!Планирую запуск сообщения 2...!!!!")     
@@ -591,7 +600,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                             // socket.emit("sendNotif", {
                                             //     task: 2
                                             // }) 
-                                            const res = SoundNotif.create({
+                                            task2 = await SoundNotif.create({
                                                 name: project_name,
                                                 text: 'Звуковое оповещение - 60 минут',
                                                 date: new Date().getTime() + milliseconds2,
@@ -603,9 +612,14 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                 }
 
                                 //30-минутная готовность
-                                if (task3) {
-                                //     clearTimeout(task3);    
-                                //     console.log("Задача 3 удалена! " + project_name)                       
+                                if (task3) { 
+                                //     console.log("Задача 3 удалена! " + project_name)   
+                                    await SoundNotif.destroy({
+                                        where: {
+                                            id: task3.dataValues.id,
+                                            delivered: false
+                                        },
+                                    })                     
                                 } 
                                 if (milliseconds3 > 0) {
                                     console.log("!!!!Планирую запуск сообщения 3...!!!!")     
@@ -616,7 +630,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                             // socket.emit("sendNotif", {
                                             //     task: 3
                                             // }) 
-                                            const res = SoundNotif.create({
+                                            task3 = await SoundNotif.create({
                                                 name: project_name,
                                                 text: 'Звуковое оповещение - 30 минут',
                                                 date: new Date().getTime() + milliseconds3,
@@ -629,13 +643,13 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
 
                                 //15-минутная готовность
                                 if (task4) {
-                                //     clearTimeout(task4);    
-                                //     console.log("Задача 4 удалена! " + project_name)  
-                                    // SoundNotif.destroy({
-                                    //     where: {
-                                    //         id: task4.id,
-                                    //     },
-                                    // })                     
+                                // console.log("Задача 4 удалена! " + project_name)  
+                                    await SoundNotif.destroy({
+                                        where: {
+                                            id: task4.dataValues.id,
+                                            delivered: false
+                                        },
+                                    })                     
                                 } 
                                 if (milliseconds4 > 0) {
                                     console.log("!!!!Планирую запуск сообщения 4...!!!!")     
@@ -646,7 +660,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                             // socket.emit("sendNotif", {
                                             //     task: 4
                                             // }) 
-                                            const res = SoundNotif.create({
+                                            task4 = await SoundNotif.create({
                                                 name: project_name,
                                                 text: 'Звуковое оповещение - 15 минут',
                                                 date: new Date().getTime() + milliseconds4,
@@ -658,10 +672,15 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                 }
 
                                 //10-минутная готовность
-                                // if (task6) {
-                                //     clearTimeout(task6);    
-                                //     console.log("Задача 6 удалена! " + project_name)                       
-                                // } 
+                                if (task6) {  
+                                //     console.log("Задача 6 удалена! " + project_name) 
+                                    await SoundNotif.destroy({
+                                        where: {
+                                            id: task6.dataValues.id,
+                                            delivered: false
+                                        },
+                                    })                      
+                                } 
                                 if (milliseconds6 > 0) {
                                     console.log("!!!!Планирую запуск сообщения 6...!!!!")     
                                     //task6 = setTimeout(async() => {
@@ -671,7 +690,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                             // socket.emit("sendNotif", {
                                             //     task: 6
                                             // }) 
-                                            const res = SoundNotif.create({
+                                            task6 = SoundNotif.create({
                                                 name: project_name,
                                                 text: 'Звуковое оповещение - 10 минут',
                                                 date: new Date().getTime() + milliseconds6,
@@ -683,10 +702,15 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                 }
 
                                 //5-минутная готовность
-                                // if (task7) {
-                                //     clearTimeout(task7);    
-                                //     console.log("Задача 7 удалена! " + project_name)                       
-                                // } 
+                                if (task7) {  
+                                //     console.log("Задача 7 удалена! " + project_name)  
+                                    await SoundNotif.destroy({
+                                        where: {
+                                            id: task7.dataValues.id,
+                                            delivered: false
+                                        },
+                                    })                     
+                                } 
                                 if (milliseconds7 > 0) {
                                     console.log("!!!!Планирую запуск сообщения 7...!!!!")     
                                     //task7 = setTimeout(async() => {
@@ -696,7 +720,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                             // socket.emit("sendNotif", {
                                             //     task: 7
                                             // }) 
-                                            const res = SoundNotif.create({
+                                            task7 = SoundNotif.create({
                                                 name: project_name,
                                                 text: 'Звуковое оповещение - 5 минут',
                                                 date: new Date().getTime() + milliseconds7,
@@ -708,10 +732,15 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                 }
 
                                 //0 готовность
-                                // if (task5) {
-                                //     clearTimeout(task5);    
-                                //     console.log("Задача 5 удалена! " + project_name)                       
-                                // } 
+                                if (task5) {  
+                                    //     console.log("Задача 5 удалена! " + project_name)   
+                                    await SoundNotif.destroy({
+                                        where: {
+                                            id: task5.dataValues.id,
+                                            delivered: false
+                                        },
+                                    })                    
+                                } 
                                 if (milliseconds5 > 0) {
                                     console.log("!!!!Планирую запуск сообщения 5...!!!!")   
                                     console.log("--------------------------------------")    
@@ -722,7 +751,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                                             // socket.emit("sendNotif", {
                                             //     task: 5
                                             // }) 
-                                            const res = SoundNotif.create({
+                                            task5 = SoundNotif.create({
                                                 name: project_name,
                                                 text: 'Звуковое оповещение - 0 минут',
                                                 date: new Date().getTime() + milliseconds5,
