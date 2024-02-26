@@ -1423,7 +1423,11 @@ const start = async () => {
             console.log('HTTPS Server Bot running on port ' + PORT);
 
             //очистить таблицу уведомлений
-            await SoundNotif.truncate();
+            await SoundNotif.destroy({
+                where: {
+                    delivered: false
+                },
+            });
             console.log('Таблица уведомлений очищена...');
             
             // 1. получить новые проекты
