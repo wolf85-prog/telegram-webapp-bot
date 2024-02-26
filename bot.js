@@ -1467,10 +1467,11 @@ const start = async () => {
             }, 6000) 
 
             // 3.
-            setTimeout(()=>{
+            setTimeout(async()=>{
                 //запуск уведомлений
                 console.log('Запускаю звуковые уведомления...');
-                
+                await SoundNotif.truncate();
+                console.log('Таблица уведомлений очищена...');
                 getSoundNotif()
             }, 15000) 
 
