@@ -622,6 +622,8 @@ bot.on('message', async (msg) => {
         // получить список уведомлений
         if (text === '/sounds') {
             await bot.sendMessage(chatId, `Анонс 10 ближайших проектов`);
+            const notifs = await getNotif()
+            console.log("notifs: ", notifs)
         }
 
 
