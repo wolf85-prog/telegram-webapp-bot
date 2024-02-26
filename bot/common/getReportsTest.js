@@ -551,7 +551,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
 
                                 //120-минутная готовность
                                 if (task1) {
-                                    //console.log("Задача 1 удалена! " + project_name)
+                                    console.log("Задача 1 удалена! " + project_name)
                                     await SoundNotif.destroy({
                                         where: {
                                             id: task1.dataValues.id,
@@ -583,7 +583,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
 
                                 //60-минутная готовность
                                 if (task2) {  
-                                //     console.log("Задача 2 удалена! " + project_name)   
+                                    console.log("Задача 2 удалена! " + project_name)   
                                     await SoundNotif.destroy({
                                         where: {
                                             id: task2.dataValues.id,
@@ -613,7 +613,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
 
                                 //30-минутная готовность
                                 if (task3) { 
-                                //     console.log("Задача 3 удалена! " + project_name)   
+                                    console.log("Задача 3 удалена! " + project_name)   
                                     await SoundNotif.destroy({
                                         where: {
                                             id: task3.dataValues.id,
@@ -643,7 +643,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
 
                                 //15-минутная готовность
                                 if (task4) {
-                                // console.log("Задача 4 удалена! " + project_name)  
+                                    console.log("Задача 4 удалена! " + project_name)  
                                     await SoundNotif.destroy({
                                         where: {
                                             id: task4.dataValues.id,
@@ -673,7 +673,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
 
                                 //10-минутная готовность
                                 if (task6) {  
-                                //     console.log("Задача 6 удалена! " + project_name) 
+                                    console.log("Задача 6 удалена! " + project_name) 
                                     await SoundNotif.destroy({
                                         where: {
                                             id: task6.dataValues.id,
@@ -703,7 +703,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
 
                                 //5-минутная готовность
                                 if (task7) {  
-                                //     console.log("Задача 7 удалена! " + project_name)  
+                                    console.log("Задача 7 удалена! " + project_name)  
                                     await SoundNotif.destroy({
                                         where: {
                                             id: task7.dataValues.id,
@@ -733,7 +733,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
 
                                 //0 готовность
                                 if (task5) {  
-                                    //     console.log("Задача 5 удалена! " + project_name)   
+                                    console.log("Задача 5 удалена! " + project_name)   
                                     await SoundNotif.destroy({
                                         where: {
                                             id: task5.dataValues.id,
