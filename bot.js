@@ -53,6 +53,7 @@ const getDatabaseId = require('./bot/common/getDatabaseId')
 const addPretendent = require('./bot/common/addPretendent')
 const getBlocksP = require('./bot/common/getBlocksP')
 const getBlock = require('./bot/common/getBlock')
+const getNotif = require("./bot/common/getNotif");
 
 const fs = require('fs');
 const express = require('express');
