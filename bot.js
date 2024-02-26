@@ -619,6 +619,11 @@ bot.on('message', async (msg) => {
             await bot.sendMessage(chatId, `Приветствуем тебя, ${firstname} ${lastname}! Чат-бот предназначен для создания проектов в U.L.E.Y и общения заказчика с администратором проектов.`);
         }
 
+        // получить список уведомлений
+        if (text === '/sounds') {
+            await bot.sendMessage(chatId, `Анонс 10 ближайших проектов`);
+        }
+
 
         // команда Добавить таблицу Претенденты
         if (text === '/addpretendents') {
