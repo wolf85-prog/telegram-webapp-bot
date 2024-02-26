@@ -1421,9 +1421,12 @@ const start = async () => {
         
         httpsServer.listen(PORT, async () => {
             console.log('HTTPS Server Bot running on port ' + PORT);
+
+            //очистить таблицу уведомлений
+            await SoundNotif.truncate();
+            console.log('Таблица уведомлений очищена...');
             
             // 1. получить новые проекты
-
             let arr = []
             const d = new Date().getTime() + 10800000
             const arrProjects = await getAllProjects()
@@ -1470,8 +1473,6 @@ const start = async () => {
             setTimeout(async()=>{
                 //запуск уведомлений
                 console.log('Запускаю звуковые уведомления...');
-                await SoundNotif.truncate();
-                console.log('Таблица уведомлений очищена...');
                 getSoundNotif()
             }, 15000) 
 
