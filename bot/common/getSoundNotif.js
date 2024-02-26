@@ -47,10 +47,10 @@ module.exports = async function getSoundNotif(project, bot) {
         if (notif) {
             console.log("notif: ", notif)
 
-            //let socket = io(socketUrl);
-            // socket.emit("sendNotif", {
-            //     task: 5
-            // }) 
+            let socket = io(socketUrl);
+            socket.emit("sendNotif", {
+                task: notif.task
+            }) 
 
             await SoundNotif.update({delivered: true},{where: {date: notif.date}})
             console.log("Задача выполнена (обновлена)!")
