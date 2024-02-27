@@ -53,6 +53,7 @@ const getDatabaseId = require('./bot/common/getDatabaseId')
 const addPretendent = require('./bot/common/addPretendent')
 const getBlocksP = require('./bot/common/getBlocksP')
 const getBlock = require('./bot/common/getBlock')
+const getNotif = require("./bot/common/getNotif");
 
 const fs = require('fs');
 const express = require('express');
@@ -1423,7 +1424,11 @@ const start = async () => {
             console.log('HTTPS Server Bot running on port ' + PORT);
 
             //очистить таблицу уведомлений
-            await SoundNotif.truncate();
+            await SoundNotif.destroy({
+                where: {
+                    delivered: false
+                },
+            });
             console.log('Таблица уведомлений очищена...');
             
             // 1. получить новые проекты
