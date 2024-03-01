@@ -5,13 +5,19 @@ const databaseId = process.env.NOTION_DATABASE_ID
 const chatTelegramId = process.env.CHAT_ID
 //fetch api
 const fetch = require('node-fetch');
+const axios = require("axios");
 const sendMessageAdmin = require("./../common/sendMessageAdmin");
 //socket.io
 const {io} = require("socket.io-client")
 const socketUrl = process.env.SOCKET_APP_URL
 
+const $host = axios.create({
+    baseURL: process.env.REACT_APP_API_URL
+})
+
 class PosterController {
 
+    //отправка предварительной сметы
     async sendPoster(req, res) {
         const token = process.env.TELEGRAM_API_TOKEN
         const host = process.env.HOST
@@ -48,12 +54,14 @@ class PosterController {
             console.log(url_send_poster)
 
             // создание базы данных "Основной состав"
-            const response2 = await fetch(url_send_poster);
+            const response2 = await $host.get(url_send_poster);
+
+            console.log("messageId: ", response2)
         
             const data = await response2.json();
 
             //сохранение сметы в базе данных
-            const convId = await sendMessageAdmin(poster, "image", chatId, null, true, 'Подтверждаю')
+            const convId = await sendMessageAdmin(poster, "image", chatId, response2.data?.result?.message_id, true, 'Подтверждаю')
 
             // Подключаемся к серверу socket
             let socket = io(socketUrl);
@@ -67,7 +75,7 @@ class PosterController {
                 type: 'image',
                 buttons: 'Подтверждаю',
                 convId: convId,
-                //messageId,
+                messageId: response2.data?.result?.message_id,
             })
 
             return res.status(200).json("Poster has been sent successfully");
@@ -76,6 +84,7 @@ class PosterController {
         }
     }
 
+    //отправка финальной сметы
     async sendPosterFinal(req, res) {
         const token = process.env.TELEGRAM_API_TOKEN
         const host = process.env.HOST
@@ -112,12 +121,14 @@ class PosterController {
             console.log(url_send_poster)
 
             // создание базы данных "Основной состав"
-            const response2 = await fetch(url_send_poster);
+            const response2 = await $host.get(url_send_poster);
         
             const data = await response2.json();
 
+            console.log("messageId: ", response2)
+
             //сохранение сметы в базе данных
-            const convId = await sendMessageAdmin(poster, "image", chatId, null, true, 'Подтверждаю')
+            const convId = await sendMessageAdmin(poster, "image", chatId, response2.data?.result?.message_id, true, 'Подтверждаю')
 
             // Подключаемся к серверу socket
             let socket = io(socketUrl);
@@ -131,7 +142,7 @@ class PosterController {
                 type: 'image',
                 buttons: 'Подтверждаю',
                 convId: convId,
-                //messageId,
+                messageId: response2.data?.result?.message_id,
             })
 
             return res.status(200).json("Poster has been sent successfully");
