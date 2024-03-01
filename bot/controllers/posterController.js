@@ -56,12 +56,12 @@ class PosterController {
             // создание базы данных "Основной состав"
             const response2 = await $host.get(url_send_poster);
 
-            console.log("messageId: ", response2.data?.result?.message_id)
+            //console.log("messageId: ", response2.data?.result?.message_id)
 
 
             //сохранение сметы в базе данных
             const convId = await sendMessageAdmin(poster, "image", chatId, response2.data?.result?.message_id, true, 'Подтверждаю')
-            console.log("convId: ", convId)
+            //console.log("convId: ", convId)
 
             // Подключаемся к серверу socket
             let socket = io(socketUrl);
@@ -83,7 +83,7 @@ class PosterController {
             return res.status(500).json(error.message);
         }
     }
-
+//-------------------------------------------------------------------------------------------
     //отправка финальной сметы
     async sendPosterFinal(req, res) {
         const token = process.env.TELEGRAM_API_TOKEN
@@ -122,10 +122,8 @@ class PosterController {
 
             // создание базы данных "Основной состав"
             const response2 = await $host.get(url_send_poster);
-        
-            const data = await response2.json();
 
-            console.log("messageId: ", response2)
+            //console.log("messageId: ", response2)
 
             //сохранение сметы в базе данных
             const convId = await sendMessageAdmin(poster, "image", chatId, response2.data?.result?.message_id, true, 'Подтверждаю')
