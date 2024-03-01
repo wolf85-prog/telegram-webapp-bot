@@ -57,8 +57,6 @@ class PosterController {
             const response2 = await $host.get(url_send_poster);
 
             console.log("messageId: ", response2.data?.result?.message_id)
-        
-            const data = await response2.json();
 
 
             //сохранение сметы в базе данных
