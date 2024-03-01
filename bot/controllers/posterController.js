@@ -56,12 +56,14 @@ class PosterController {
             // создание базы данных "Основной состав"
             const response2 = await $host.get(url_send_poster);
 
-            console.log("messageId: ", response2)
+            console.log("messageId: ", response2.data?.result?.message_id)
         
             const data = await response2.json();
 
+
             //сохранение сметы в базе данных
             const convId = await sendMessageAdmin(poster, "image", chatId, response2.data?.result?.message_id, true, 'Подтверждаю')
+            console.log("convId: ", convId)
 
             // Подключаемся к серверу socket
             let socket = io(socketUrl);
