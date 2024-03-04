@@ -683,7 +683,7 @@ bot.on('message', async (msg) => {
                     if (count !== 0) {
                        const findChatId = Manager.findOne({
                             where: {
-                                chatId: manager.tgID
+                                chatId: manager.tgID ? manager.tgID : '',
                             }
                         }) 
                         if (!findChatId) {

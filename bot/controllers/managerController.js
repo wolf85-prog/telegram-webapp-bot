@@ -286,7 +286,7 @@ async function getManagerCashAll() {
     try {
         const managers = await Manager.findAll();
 
-        console.log("Managers: ", managers)
+        //console.log("Managers: ", managers)
 
         return managers;
     } catch (error) {
