@@ -34,7 +34,7 @@ router.get("/manager/:id", managerController.companyId);            // UUID ко
 router.get("/manager/name/:id", managerController.managerName);     // полная информация о менеджере по его UUID
 
 router.get("/managers/cash/:id", managerController.managerCash);     // получить данные менеджера из БД
-router.get("/managers/cash", managerController.managerCashAll);     // получить всех менеджеров из БД
+router.get("/managers/cashall", managerController.managerCashAll);     // получить всех менеджеров из БД
 
 //post MANAGER
 router.post("/manager", managerController.create);
