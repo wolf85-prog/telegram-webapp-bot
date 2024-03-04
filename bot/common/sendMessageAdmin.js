@@ -19,7 +19,7 @@ module.exports = async function sendMessageAdmin(text, typeText, chatId, message
             },
         })   
         
-        //console.log("conversation: ", conversation)
+        //console.log("conversation send message: ", conversation, text, typeText, chatId, messageId, is_bot, buttons)
 
         //если нет беседы, то создать 
         if (!conversation) {

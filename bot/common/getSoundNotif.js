@@ -42,7 +42,7 @@ module.exports = async function getSoundNotif(project, bot) {
         //console.log("notifs: ", notifs)
 
         const currentDate = new Date().getTime()
-        const notif = notifs.find(item => (item.dataValues.date - currentDate) > -100000 && (item.dataValues.date - currentDate) < 100000)
+        const notif = notifs.find(item => (item.dataValues.date - currentDate) > -60000 && (item.dataValues.date - currentDate) < 60000)
         console.log("currentDate Notif: ", new Date(currentDate).toLocaleString())      
         if (notif) {
             console.log("notif: ", notif)
