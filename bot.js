@@ -672,7 +672,6 @@ bot.on('message', async (msg) => {
                 //await Manager.truncate();
  
                 managers.map(async(manager)=> {
-
                     const companyObj = companies.find((item)=> item.managers.find((item2)=>item2.id === manager.id))
                     console.log(companyObj)
 
@@ -685,17 +684,19 @@ bot.on('message', async (msg) => {
                             where: {
                                 chatId: manager.tgID ? manager.tgID : '',
                             }
-                        }) 
-                        if (!findChatId) {
-                            await Manager.create({ 
-                                id: manager.id, 
-                                companyId: companyObj.id, 
-                                companyName: companyObj.title, 
-                                chatId: manager.tgID ? manager.tgID : "", 
-                                fio: manager.fio, 
-                                phone: manager.phone,  
-                            })
-                        }  
+                        })
+                        console.log(findChatId) 
+                        // if (!findChatId) {
+                        //     await Manager.create({ 
+                        //         id: manager.id, 
+                        //         companyId: companyObj.id, 
+                        //         companyName: companyObj.title, 
+                        //         chatId: manager.tgID ? manager.tgID : "", 
+                        //         fio: manager.fio, 
+                        //         phone: manager.phone,  
+                        //     })
+                        // } 
+
                     } else {
                         await Manager.create({ 
                             id: manager.id, 
@@ -705,8 +706,7 @@ bot.on('message', async (msg) => {
                             fio: manager.fio, 
                             phone: manager.phone,  
                         })
-                    }
-                        
+                    }              
                 })
         }
 
