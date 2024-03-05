@@ -387,9 +387,14 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                                 "color": "orange"
                             },
                              //-------- Blacklist ------------------------------
-                             {
+                            {
                                 "name": "Blacklist",
                                 "color": "gray"
+                            },
+                            //--------- Менеджер --------------------------------
+                            {
+                                "name": "Менеджер «U.L.E.Y»",
+                                "color": "purple"
                             },
                         ]
                     }

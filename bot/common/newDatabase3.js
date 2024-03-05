@@ -313,6 +313,11 @@ module.exports = async function newDatabase3(parent_page_id) {
                                 "name": "Blacklist",
                                 "color": "gray"
                             },
+                            //--------- Менеджер --------------------------------
+                            {
+                                "name": "Менеджер «U.L.E.Y»",
+                                "color": "purple"
+                            },
                         ]
                     }
                 },
