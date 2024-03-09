@@ -281,6 +281,19 @@ async function getManagerCash(id) {
     }
 }
 
+//получить всех менеджеров из БД
+async function getManagerCashAll() {
+    try {
+        const managers = await Manager.findAll();
+
+        //console.log("Managers: ", managers)
+
+        return managers;
+    } catch (error) {
+        console.error(error.message)
+    }
+}
+
 
 class ManagerController {
 
@@ -393,6 +406,20 @@ class ManagerController {
             res.json({});
         }
     }
+
+    // cash managers
+    async managerCashAll(req, res) {
+        //const id = req.params.id; // получаем id
+        //console.log(id)
+        const managers = await getManagerCashAll();
+        if(managers){
+            res.json(managers);
+        }
+        else{
+            res.json({});
+        }
+    }
 }
+
 
 module.exports = new ManagerController()
