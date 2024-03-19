@@ -306,24 +306,16 @@ class ProjectController {
                         //databaseBlock.map((db) => {
                             let projDB = databaseBlock.find(db => new Date(db.date) >= new Date())
                             console.log("projDB: ", projDB)
-                            const obj = {
-                                id: project.id,
-                                name: project.title,
-                                date: projDB.date,
-                                status: project.status,
+                            if (projDB) {
+                                const obj = {
+                                    id: project.id,
+                                    name: project.title,
+                                    date: projDB?.date,
+                                    status: project.status,
+                                }
+                                arrayProject.push(obj)  
                             }
-                            arrayProject.push(obj)
-                            // if (new Date(db["Дата"].date.start) > new Date()) {
-                            //     const newProject = {
-                            //         id: project.id,
-                            //         title: project.title,
-                            //         date_main: db["Дата"].date.start,
-                            //         status: project.status,
-                            //         managerId: project.manager,
-                            //     }
-                            //     arrayProject.push(newProject)  
-                            // }
-                        //})                             
+                                                       
                     }                   
                 } else {
                     console.log("База данных не найдена! Проект ID: " + project.title)
