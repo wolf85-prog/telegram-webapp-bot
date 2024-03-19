@@ -305,6 +305,7 @@ class ProjectController {
                     if (databaseBlock && databaseBlock?.length !== 0) {
                         //databaseBlock.map((db) => {
                             let projDB = databaseBlock.find(db => new Date(db.date) >= new Date())
+                            console.log("projDB: ", projDB)
                             const obj = {
                                 id: project.id,
                                 name: project.title,
