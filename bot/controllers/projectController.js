@@ -293,34 +293,57 @@ class ProjectController {
     async projectNewDate(req, res) {
         let databaseBlock;
         let arrayProject = []
+
+        arrProjects.forEach(async(page)=> {
+            const blockId = await getBlocks(page.id);
+            if (blockId) { 
+                databaseBlock = await getDatabaseId(blockId);  
+                if (databaseBlock && databaseBlock?.length !== 0) {
+                    //console.log(databaseBlock)
+                    let project = databaseBlock.find(item => new Date(item.date) >= d)
+                    const obj = {
+                        id: page.id,
+                        name: page.name,
+                        date: project?.date,
+                    }
+                    arr.push(obj)
+                }
+            }
+        })
     
         const projects = await getProjects();
         if (projects && projects.length > 0){
             projects.map(async(project, index)=> {
                 let arraySpec = []
-                const blockId = await getBlocks(project.id);
-                
+                const blockId = await getBlocks(project.id);             
                 if (blockId) {  
                     databaseBlock = await getDatabaseId(blockId); 
                     //если бд ноушена доступна
-                    if (databaseBlock) {
-                        databaseBlock.map((db) => {
-                            if (new Date(db["Дата"].date.start) > new Date()) {
-                                const newProject = {
-                                    id: project.id,
-                                    title: project.title,
-                                    date_main: db["Дата"].date.start,
-                                    status: project.status,
-                                    managerId: project.manager,
-                                }
-                                arrayProject.push(newProject)  
+                    if (databaseBlock && databaseBlock?.length !== 0) {
+                        //databaseBlock.map((db) => {
+                            let project = databaseBlock.find(db => new Date(db.date) >= new Date())
+                            const obj = {
+                                id: project.id,
+                                name: project.title,
+                                date: project?.date,
+                                status: project.status,
                             }
-                        })                             
+                            arrayProject.push(obj)
+                            // if (new Date(db["Дата"].date.start) > new Date()) {
+                            //     const newProject = {
+                            //         id: project.id,
+                            //         title: project.title,
+                            //         date_main: db["Дата"].date.start,
+                            //         status: project.status,
+                            //         managerId: project.manager,
+                            //     }
+                            //     arrayProject.push(newProject)  
+                            // }
+                        //})                             
                     }                   
                 } else {
                     console.log("База данных не найдена! Проект ID: " + project.title)
-                }
-                
+                }       
             })
 
             setTimeout(()=> {
