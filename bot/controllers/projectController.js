@@ -321,11 +321,11 @@ class ProjectController {
                     //если бд ноушена доступна
                     if (databaseBlock && databaseBlock?.length !== 0) {
                         //databaseBlock.map((db) => {
-                            let project = databaseBlock.find(db => new Date(db.date) >= new Date())
+                            let projDB = databaseBlock.find(db => new Date(db.date) >= new Date())
                             const obj = {
                                 id: project.id,
                                 name: project.title,
-                                date: project?.date,
+                                date: projDB.date,
                                 status: project.status,
                             }
                             arrayProject.push(obj)
