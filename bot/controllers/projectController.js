@@ -293,23 +293,6 @@ class ProjectController {
     async projectNewDate(req, res) {
         let databaseBlock;
         let arrayProject = []
-
-        arrProjects.forEach(async(page)=> {
-            const blockId = await getBlocks(page.id);
-            if (blockId) { 
-                databaseBlock = await getDatabaseId(blockId);  
-                if (databaseBlock && databaseBlock?.length !== 0) {
-                    //console.log(databaseBlock)
-                    let project = databaseBlock.find(item => new Date(item.date) >= d)
-                    const obj = {
-                        id: page.id,
-                        name: page.name,
-                        date: project?.date,
-                    }
-                    arr.push(obj)
-                }
-            }
-        })
     
         const projects = await getProjects();
         if (projects && projects.length > 0){
