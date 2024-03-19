@@ -25,6 +25,7 @@ async function getProjects() {
                manager: page.properties["Менеджер"].relation[0]?.id,
                company: page.properties["Компания"].relation[0]?.id,
                worklist:'',
+               crmID: page.properties.Crm_ID.rich_text[0]?.plain_text,
             };
         });
 
