@@ -1497,7 +1497,7 @@ const start = async () => {
                 projects.map(async(project)=> {
                     await ProjectNew.create({ 
                         id: project.id, 
-                        name: project.name, 
+                        title: project.name, 
                         dateStart: project.datestart, 
                         crmID: project.crmID, 
                     })
@@ -1505,7 +1505,7 @@ const start = async () => {
 
 
                 i++ // счетчик интервалов
-            }, 1200000); //каждые 20 минут
+            }, 300000); //каждые 20 минут
  
         });
 
