@@ -59,16 +59,12 @@ module.exports = async function getProjectNew() {
                     console.log("База данных не найдена! Проект ID: " + project.title)
                 }       
             })
-
-            setTimeout(()=> {
-                console.log("projects: ", arrayProject)
-                return arrayProject;
-            }, 10000) 
-        }
-        else{
-            return [];
         }
 
+        setTimeout(()=> {
+            console.log("projects: ", arrayProject)
+            return arrayProject;
+        }, 10000) 
 
         //return responseResults;
     } catch (error) {
