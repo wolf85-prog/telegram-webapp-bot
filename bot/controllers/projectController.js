@@ -306,7 +306,7 @@ class ProjectController {
                     //если бд ноушена доступна
                     if (databaseBlock && databaseBlock?.length !== 0) {
                         let projDB = databaseBlock.find(db => new Date(db.date) >= new Date())
-                        console.log("projDB: ", projDB)
+                        //console.log("projDB: ", projDB)
                         if (projDB) {
                             const obj = {
                                 id: project?.id,
