@@ -34,6 +34,8 @@ module.exports = async function getProjectNew() {
             };
         });
 
+        console.log(projects)
+
         if (projects && projects.length > 0){
             projects.map(async(project, index)=> {
                 let arraySpec = []
@@ -51,6 +53,7 @@ module.exports = async function getProjectNew() {
                                 datestart: projDB?.date,
                                 crmID: project?.crmID,
                             }
+                            console.log(obj)
                             arrayProject.push(obj)  
                         }                                     
                     }                   
