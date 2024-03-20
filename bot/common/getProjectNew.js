@@ -14,6 +14,9 @@ module.exports = async function getProjectNew() {
             database_id: databaseId
         });
 
+        let databaseBlock;
+        let arrayProject = []
+
         const projects = response.results.map((page) => {
             return {
                id: page.id,
