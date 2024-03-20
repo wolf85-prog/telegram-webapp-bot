@@ -65,7 +65,7 @@ const path = require('path')
 
 //подключение к БД PostreSQL
 const sequelize = require('./bot/connections/db')
-const {UserBot, Message, Conversation, Project, Report, Manager, Projectcash, SoundNotif} = require('./bot/models/models');
+const {UserBot, Message, Conversation, Project, Report, Manager, Projectcash, SoundNotif, ProjectNew} = require('./bot/models/models');
 const updateToDo = require("./bot/common/updateToDo");
 const getProject = require("./bot/common/getProject");
 const sendMessageAdmin = require("./bot/common/sendMessageAdmin");
@@ -1485,12 +1485,27 @@ const start = async () => {
             //4. синхронизация менеджеров из ноушена с БД
              let i = 0;
  
-             // повторить с интервалом 5 минут
-            //  let timerId = setInterval(async() => {
- 
-  
-            //      i++ // счетчик интервалов
-            //  }, 600000); //каждые 10 минут 
+
+
+            //5. получить новые проекты, повторить с интервалом 20 минут
+            let timerId = setInterval(async() => {
+                console.log("START GET PROJECT NEW...")
+                const projects = await getProjectNew()
+
+                await ProjectNew.truncate();
+
+                projects.map(async(project)=> {
+                    await ProjectNew.create({ 
+                        id: project.id, 
+                        name: project.name, 
+                        dateStart: project.datestart, 
+                        crmID: project.crmID, 
+                    })
+                })
+
+
+                i++ // счетчик интервалов
+            }, 1200000); //каждые 20 минут
  
         });
 

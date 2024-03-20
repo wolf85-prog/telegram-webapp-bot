@@ -107,6 +107,13 @@ const SoundNotif = sequelize.define('soundnotifs', {
     task: {type: DataTypes.INTEGER}, //номер задачи
 })
 
+const ProjectNew = sequelize.define('projectnew', {
+    id: {type: DataTypes.STRING, primaryKey: true}, // id проекта
+    title: {type: DataTypes.STRING},  //название проекта
+    dateStart: {type: DataTypes.STRING}, //начало
+    crmID: {type: DataTypes.STRING},
+})
+
 
 module.exports = {
     User, 
@@ -119,5 +126,6 @@ module.exports = {
     Manager,
     Projectcash,
     CountMessage,
-    SoundNotif
+    SoundNotif,
+    ProjectNew
 }
