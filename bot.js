@@ -710,6 +710,16 @@ bot.on('message', async (msg) => {
                 })
         }
 
+        if (text === '/getprojectnewdate') {
+            console.log("START GET PROJECT NEW...")
+            const projects = await getProjectNew()
+            console.log(projects)
+
+            setTimeout(()=> {
+                console.log(projects)
+            }, 10000) 
+        }
+
         if (text === '/startgetprojects') {
             console.log("START GET PROJECTS ALL...")
             
@@ -1491,19 +1501,20 @@ const start = async () => {
             let timerId = setInterval(async() => {
                 console.log("START GET PROJECT NEW...")
                 const projects = await getProjectNew()
-
+                console.log(projects)
                 await ProjectNew.truncate();
 
-                projects.map(async(project)=> {
-                    await ProjectNew.create({ 
-                        id: project.id, 
-                        title: project.name, 
-                        dateStart: project.datestart, 
-                        crmID: project.crmID, 
+                setTimeout(()=> {
+                    projects.map(async(project)=> {
+                        await ProjectNew.create({ 
+                            id: project.id, 
+                            title: project.name, 
+                            dateStart: project.datestart, 
+                            crmID: project.crmID, 
+                        })
                     })
-                })
-
-
+                }, 10000) 
+                
                 i++ // счетчик интервалов
             }, 300000); //каждые 20 минут
  
