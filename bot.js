@@ -714,9 +714,16 @@ bot.on('message', async (msg) => {
             console.log("START GET PROJECT NEW...")
             const projects = await getProjectNew()
             
-            //setTimeout(()=> {
-                console.log("projects2: ", projects)
-            //}, 20000) 
+            await ProjectNew.truncate();
+
+            projects.map(async(project)=> {
+                await ProjectNew.create({ 
+                    id: project.id, 
+                    name: project.name, 
+                    datestart: project.datestart, 
+                    crmID: project.crmID, 
+                })
+            })
         }
 
         if (text === '/startgetprojects') {
