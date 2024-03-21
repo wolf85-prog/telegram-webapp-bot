@@ -2,7 +2,7 @@ require("dotenv").config();
 const { Client } = require("@notionhq/client");
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
 const databaseId = process.env.NOTION_DATABASE_ID
-const {Projectcash} = require('../models/models')
+const {Projectcash, ProjectNew} = require('../models/models')
 const getDatabaseId = require("./../common/getDatabaseId");
 const getBlocks = require("./../common/getBlocks");
 
@@ -178,6 +178,20 @@ async function getProjectsCash() {
     }
 }
 
+//получить проекты новые из БД (кэш)
+async function getProjectsNewCash() {
+    try {
+        const projects = await ProjectNew.findAll({
+            order: [
+                ['id', 'DESC'],
+            ],
+        })
+        return projects;
+    } catch (error) {
+        console.error(error.message);
+    }
+}
+
 
 class ProjectController {
     
@@ -331,6 +345,15 @@ class ProjectController {
         }
     }
     
+    async projectsNewCash(req, res) {
+        const projects = await getProjectsNewCash();
+        if(projects){
+            res.json(projects);
+        }
+        else{
+            res.json({});
+        }
+    }
 }
 
 module.exports = new ProjectController()
