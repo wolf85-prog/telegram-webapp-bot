@@ -713,11 +713,10 @@ bot.on('message', async (msg) => {
         if (text === '/getprojectnewdate') {
             console.log("START GET PROJECT NEW...")
             const projects = await getProjectNew()
-            //console.log(projects)
-
-            setTimeout(()=> {
+            
+            //setTimeout(()=> {
                 console.log("projects2: ", projects)
-            }, 20000) 
+            //}, 20000) 
         }
 
         if (text === '/startgetprojects') {
