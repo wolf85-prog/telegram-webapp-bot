@@ -109,8 +109,8 @@ const SoundNotif = sequelize.define('soundnotifs', {
 
 const ProjectNew = sequelize.define('projectnew', {
     id: {type: DataTypes.STRING, primaryKey: true}, // id проекта
-    title: {type: DataTypes.STRING},  //название проекта
-    dateStart: {type: DataTypes.STRING}, //начало
+    name: {type: DataTypes.STRING},  //название проекта
+    datestart: {type: DataTypes.STRING}, //начало
     crmID: {type: DataTypes.STRING},
 })
 

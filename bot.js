@@ -1506,8 +1506,8 @@ const start = async () => {
                 projects.map(async(project)=> {
                     await ProjectNew.create({ 
                         id: project.id, 
-                        title: project.name, 
-                        dateStart: project.datestart, 
+                        name: project.name, 
+                        datestart: project.datestart, 
                         crmID: project.crmID, 
                     })
                 })
