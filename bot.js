@@ -1254,24 +1254,27 @@ bot.on('message', async (msg) => {
         const block1 = await getBlock(projectId[1])
         console.log("block1: ", block1.results[0].id) //первый объект (to do)
 
-        //pre                     
+        //pre final                     
         const block2_1 = await getBlock(block1.results[0].id)
-        console.log("block2_1: ", block2_1.results[0].id) // 1-й объект (предварительная смета и постер)
+        console.log("block2_1: ", block2_1.results[0].id) // 1-й объект (предварительная смета и финальная смета)
                         
         const block3_1 = await getBlock(block2_1.results[0].id)
         console.log("block3_1: ", block3_1.results[0].id) // 1-й объект (предварительная смета)
 
+        const block3_2 = await getBlock(block2_1.results[0].id)
+        console.log("block3_2: ", block3_2.results[1].id) // 2-й объект (финальная смета)
+
             
         //final
-        const block2 = await getBlock(block1.results[0].id)
-        console.log("block2: ", block2.results[1].id) //второй объект (финальная смета и Без звуковых оповещений)/ (калькулятор и финальная смета)
+        // const block2 = await getBlock(block1.results[0].id)
+        // console.log("block2: ", block2.results[1].id) //второй объект (финальная смета и Без звуковых оповещений)/ (калькулятор и финальная смета)
             
-        const block3 = await getBlock(block2.results[1].id)
-        console.log("block3: ", block3.results[0].id) //первый объект / второй объект (финальная смета)
+        // const block3 = await getBlock(block2.results[1].id)
+        // console.log("block3: ", block3.results[0].id) //первый объект / второй объект (финальная смета)
 
-        if (block3) {
+        if (block3_2) {
             //поставить галочку в проекте в поле Финальная смета
-            await updateToDoFinal(block3.results[0].id);
+            await updateToDoFinal(block3_2.results[1].id); //22.03.2024
         } else {
             console.log("Ошибка установки чека")
         }  
