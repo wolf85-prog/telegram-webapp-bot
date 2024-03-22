@@ -1249,64 +1249,6 @@ bot.on('message', async (msg) => {
         console.log("projectId: ", projectId[1])
         console.log("Начинаю обрабатывать запрос подтверждения финальной сметы...")
 
-        //const crmId = await getProject(projectId[1])
-        
-        const block1 = await getBlock(projectId[1])
-        console.log("block1: ", block1.results[0].id) //первый объект (to do)
-
-        //pre final                     
-        const block2_1 = await getBlock(block1.results[0].id)
-        console.log("block2_1: ", block2_1.results[0].id) // 1-й объект (предварительная смета и финальная смета)
-                        
-        const block3_1 = await getBlock(block2_1.results[0].id)
-        console.log("block3_1: ", block3_1.results[0].id) // 1-й объект (предварительная смета)
-
-        const block3_2 = await getBlock(block2_1.results[0].id)
-        console.log("block3_2: ", block3_2.results[1].id) // 2-й объект (финальная смета)
-
-            
-        //final
-        // const block2 = await getBlock(block1.results[0].id)
-        // console.log("block2: ", block2.results[1].id) //второй объект (финальная смета и Без звуковых оповещений)/ (калькулятор и финальная смета)
-            
-        // const block3 = await getBlock(block2.results[1].id)
-        // console.log("block3: ", block3.results[0].id) //первый объект / второй объект (финальная смета)
-
-        if (block3_2) {
-            //поставить галочку в проекте в поле Финальная смета
-            await updateToDoFinal(block3_2.results[1].id); //22.03.2024
-        } else {
-            console.log("Ошибка установки чека")
-        }  
-
-        //найти смету по свойству Проект
-        const smetaId = await getSmeta(projectId[1])
-
-        setTimeout(async()=> {
-            //получить обновленный чек Финальная смета
-            const block3 = await getBlock(block2.results[1].id)
-
-            console.log("checked: ", block3_1.results[0].to_do.checked)
-            console.log("checked2: ", block3.results[1].to_do.checked)
-
-            const check = block3_1.results[0].to_do.checked // pre
-            const checkFinal = block3.results[1].to_do.checked //final
-
-            if (check) {
-                //изменить тег в таб. Сметы в поле смета на Подтверждена
-                await updateSmeta(smetaId)
-            }
-
-            if (checkFinal) {
-                //изменить тег в таб. Сметы в поле Финал. смета на Подтверждена
-                await updateSmetaFinal(smetaId)
-            }
-        }, 3000)
-        
-
-        //const poster = `${host}/files/${crmId}/final/${crmId}_${chatId}_1.pdf`
-        //console.log("poster: ", poster)
-
         // Подключаемся к серверу socket
         let socket = io(socketUrl);
         socket.emit("addUser", chatId)
@@ -1322,6 +1264,52 @@ bot.on('message', async (msg) => {
             messageId: messageId,
             replyId: ''
         })
+        
+        const block1 = await getBlock(projectId[1])
+        console.log("block1: ", block1.results[0].id) //первый объект (to do)
+
+        //pre final                     
+        const block2_1 = await getBlock(block1.results[0].id)
+        console.log("block2_1: ", block2_1.results[0].id) // 1-й объект (предварительная смета и финальная смета)
+                        
+        const block3_1 = await getBlock(block2_1.results[0].id)
+        console.log("block3_1: ", block3_1.results[0].id) // 1-й объект (предварительная смета)
+
+        const block3_2 = await getBlock(block2_1.results[0].id)
+        console.log("block3_2: ", block3_2.results[1].id) // 2-й объект (финальная смета)
+
+
+        if (block3_2) {
+            //поставить галочку в проекте в поле Финальная смета
+            await updateToDoFinal(block3_2.results[1].id); //22.03.2024
+        } else {
+            console.log("Ошибка установки чека")
+        }  
+
+        //найти смету по свойству Проект
+        const smetaId = await getSmeta(projectId[1])
+
+        setTimeout(async()=> {
+            //получить обновленный чек Финальная смета
+            const block3_2 = await getBlock(block2_1.results[0].id)
+
+            console.log("checked: ", block3_1.results[0].to_do.checked)
+            console.log("checked2: ", block3_2.results[1].to_do.checked)
+
+            const check = block3_1.results[0].to_do.checked // pre
+            const checkFinal = block3_2.results[1].to_do.checked //final
+
+            if (check) {
+                //изменить тег в таб. Сметы в поле смета на Подтверждена
+                await updateSmeta(smetaId)
+            }
+
+            if (checkFinal) {
+                //изменить тег в таб. Сметы в поле Финал. смета на Подтверждена
+                await updateSmetaFinal(smetaId)
+            }
+        }, 3000)
+        
 
         return bot.sendMessage(chatId, 'Финальная смета одобрена!')
     }
