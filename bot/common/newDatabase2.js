@@ -186,6 +186,14 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                                 "color": "green"
                             },
                             {
+                                "name": "Оператор-постановщик",
+                                "color": "green"
+                            },
+                            {
+                                "name": "Режиссер эфиров",
+                                "color": "green"
+                            },
+                            {
                                 "name": "Техник монтажа",
                                 "color": "green"
                             },
@@ -193,13 +201,91 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                                 "name": "IT-специалист",
                                 "color": "green"
                             },
+
+                             //-------- Photo ------------------------------
+                             {
+                                "name": "Photo",
+                                "color": "orange"
+                            },
                             {
-                                "name": "Оператор-постановщик",
+                                "name": "Свадебная съемка",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "Репортажная съемка",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "Портретная съемка",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "Предметная съемка",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "Документальная съемка",
+                                "color": "orange"
+                            },
+                            //---------Promo---------------------------------
+                            {
+                                "name": "Promo",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Модель",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Актер",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Промоутер",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Гример",
+                                "color": "blue"
+                            },
+                            //-------- Catering ------------------------------
+                            {
+                                "name": "Catering",
+                                "color": "yellow"
+                            },
+                            {
+                                "name": "Официант",
+                                "color": "yellow"
+                            },
+                            {
+                                "name": "Бармен",
+                                "color": "yellow"
+                            },
+                            {
+                                "name": "Повар",
+                                "color": "yellow"
+                            },
+                            {
+                                "name": "Хостес",
+                                "color": "blyellowue"
+                            },
+                            {
+                                "name": "Банкетный менеджер",
+                                "color": "yellow"
+                            },
+                            //-------- Stagehands ------------------------------
+                            {
+                                "name": "Stagehands",
                                 "color": "green"
                             },
+                            {
+                                "name": "Помощник \/ Грузчик",
+                                "color": "green"
+                            },
+                            
                             //-------- Riggers ------------------------------
                             {
-                                "name": "Riggers",
+                                "name": "Riggers \/ Ground",
                                 "color": "orange"
                             },
                             {
@@ -210,57 +296,119 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                                 "name": "Нижний Риггер",
                                 "color": "orange"
                             },
-                            //-------- Stagehands ------------------------------
-                            {
-                                "name": "Stagehands",
-                                "color": "blue"
-                            },
-                            {
-                                "name": "Помощник \/ Грузчик",
-                                "color": "blue"
-                            },
-                            {
-                                "name": "Промоутер",
-                                "color": "blue"
-                            },
-                            //-------- Stage Ground ------------------------------
-                            {
-                                "name": "Stage Ground",
-                                "color": "green"
-                            },
-                            {
-                                "name": "Риггер [Ground]",
-                                "color": "green"
-                            },
                             {
                                 "name": "Монтажник [Ground]",
-                                "color": "green"
+                                "color": "orange"
                             },
                             {
                                 "name": "Декоратор",
-                                "color": "green"
+                                "color": "orange"
                             },
+                            
+                            //-------- Stage Ground ------------------------------
+                            // {
+                            //     "name": "Stage Ground",
+                            //     "color": "green"
+                            // },
+                            // {
+                            //     "name": "Риггер [Ground]",
+                            //     "color": "green"
+                            // },
+                            // {
+                            //     "name": "Монтажник [Ground]",
+                            //     "color": "green"
+                            // },
+                            // {
+                            //     "name": "Декоратор",
+                            //     "color": "green"
+                            // },
+
                             //-------- Trucks ------------------------------
                             {
                                 "name": "Trucks",
-                                "color": "yellow"
+                                "color": "blue"
                             },
                             {
                                 "name": "C личным ТС [B\/C]",
-                                "color": "yellow"
+                                "color": "blue"
                             },
                             {
                                 "name": "Без личного ТС [B\/C]",
-                                "color": "yellow"
+                                "color": "blue"
                             },
                             {
                                 "name": "С гидролифтом",
-                                "color": "yellow"
+                                "color": "blue"
                             },
                             {
                                 "name": "Без гидролифта",
+                                "color": "blue"
+                            },
+
+                            //-------- Party ------------------------------
+                            {
+                                "name": "Party",
                                 "color": "yellow"
                             },
+                            {
+                                "name": "Кавер-бенд",
+                                "color": "yellow"
+                            },
+                            {
+                                "name": "Танцевальный коллектив",
+                                "color": "yellow"
+                            },
+                            {
+                                "name": "Диджей",
+                                "color": "yellow"
+                            },
+                            {
+                                "name": "Ведущий",
+                                "color": "yellow"
+                            },
+                            {
+                                "name": "Певец \/ певица",
+                                "color": "yellow"
+                            },
+                            {
+                                "name": "Артист оригинального жанра",
+                                "color": "yellow"
+                            },
+                            {
+                                "name": "Go-Go",
+                                "color": "yellow"
+                            },
+
+                            //-------- Games ------------------------------
+                            {
+                                "name": "Games",
+                                "color": "green"
+                            },
+                            {
+                                "name": "Квесты",
+                                "color": "green"
+                            },
+                            {
+                                "name": "Квизы",
+                                "color": "green"
+                            },
+                            {
+                                "name": "Аниматоры",
+                                "color": "green"
+                            },
+                            {
+                                "name": "Настольные игры \/ игровые автоматы",
+                                "color": "green"
+                            },
+                            {
+                                "name": "Пневмокостюмы \/ ростовые куклы",
+                                "color": "green"
+                            },
+                            {
+                                "name": "Активности \/ аттракционы",
+                                "color": "green"
+                            },
+
                             //-------- Production ------------------------------
                             {
                                 "name": "Production",
@@ -274,128 +422,18 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                                 "name": "Отдельные технические задачи",
                                 "color": "orange"
                             },
-                            //-------- Catering ------------------------------
-                            {
-                                "name": "Catering",
-                                "color": "blue"
-                            },
-                            {
-                                "name": "Официант",
-                                "color": "blue"
-                            },
-                            {
-                                "name": "Бармен",
-                                "color": "blue"
-                            },
-                            {
-                                "name": "Повар",
-                                "color": "blue"
-                            },
-                            {
-                                "name": "Хостес",
-                                "color": "blue"
-                            },
-                            {
-                                "name": "Банкетный менеджер",
-                                "color": "blue"
-                            },
-                             //-------- Photo ------------------------------
-                             {
-                                "name": "Photo",
-                                "color": "yellow"
-                            },
-                            {
-                                "name": "Свадебная съемка",
-                                "color": "yellow"
-                            },
-                            {
-                                "name": "Репортажная съемка",
-                                "color": "yellow"
-                            },
-                            {
-                                "name": "Портретная съемка",
-                                "color": "yellow"
-                            },
-                            {
-                                "name": "Предметная съемка",
-                                "color": "yellow"
-                            },
-                            {
-                                "name": "Документальная съемка",
-                                "color": "yellow"
-                            },
-                             //-------- Party ------------------------------
-                             {
-                                "name": "Party",
-                                "color": "green"
-                            },
-                            {
-                                "name": "Кавер-бенд",
-                                "color": "green"
-                            },
-                            {
-                                "name": "Танцевальный коллектив",
-                                "color": "green"
-                            },
-                            {
-                                "name": "Диджей",
-                                "color": "green"
-                            },
-                            {
-                                "name": "Ведущий",
-                                "color": "green"
-                            },
-                            {
-                                "name": "Певец \/ певица",
-                                "color": "green"
-                            },
-                            {
-                                "name": "Артист оригинального жанра",
-                                "color": "green"
-                            },
-                            {
-                                "name": "Go-Go",
-                                "color": "green"
-                            },
-                             //-------- Games ------------------------------
-                             {
-                                "name": "Games",
-                                "color": "orange"
-                            },
-                            {
-                                "name": "Квесты",
-                                "color": "orange"
-                            },
-                            {
-                                "name": "Квизы",
-                                "color": "orange"
-                            },
-                            {
-                                "name": "Аниматоры",
-                                "color": "orange"
-                            },
-                            {
-                                "name": "Настольные игры \/ игровые автоматы",
-                                "color": "orange"
-                            },
-                            {
-                                "name": "Пневмокостюмы \/ ростовые куклы",
-                                "color": "orange"
-                            },
-                            {
-                                "name": "Активности \/ аттракционы",
-                                "color": "orange"
-                            },
-                             //-------- Blacklist ------------------------------
-                            {
-                                "name": "Blacklist",
-                                "color": "gray"
-                            },
                             //--------- Менеджер --------------------------------
                             {
                                 "name": "Менеджер «U.L.E.Y»",
                                 "color": "purple"
                             },
+                             
+                             //-------- Blacklist ------------------------------
+                            {
+                                "name": "Blacklist",
+                                "color": "gray"
+                            },
+                            
                         ]
                     }
                 },
@@ -500,6 +538,10 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                             {
                                 "name": "№2",
                                 "color": "orange"
+                            },
+                            {
+                                "name": "№3",
+                                "color": "green"
                             }
                           ]
                     }

@@ -96,7 +96,7 @@ module.exports = async function addTable(blockId) {
                 {
                     "type": "table",
                     "table": {
-                        "table_width": 4,
+                        "table_width": 9,
                         "has_column_header": false,
                         "has_row_header": true,
                         "children": [
@@ -128,7 +128,7 @@ module.exports = async function addTable(blockId) {
                                             {
                                                 "type": "text",
                                                 "text": {
-                                                    "content": "Данные | Данные | Данные",
+                                                    "content": "Данные",
                                                     "link": null
                                                 },
                                                 "annotations": {
@@ -139,7 +139,7 @@ module.exports = async function addTable(blockId) {
                                                     "code": false,
                                                     "color": "purple"
                                                 },
-                                                "plain_text": "Данные | Данные | Данные",
+                                                "plain_text": "Данные",
                                                 "href": null
                                             }
                                         ],
@@ -147,26 +147,7 @@ module.exports = async function addTable(blockId) {
                                             {
                                                 "type": "text",
                                                 "text": {
-                                                    "content": "Смена",
-                                                    "link": null
-                                                },
-                                                "annotations": {
-                                                    "bold": false,
-                                                    "italic": false,
-                                                    "strikethrough": false,
-                                                    "underline": false,
-                                                    "code": false,
-                                                    "color": "green"
-                                                },
-                                                "plain_text": "Смена",
-                                                "href": null
-                                            }
-                                        ],
-                                        [
-                                            {
-                                                "type": "text",
-                                                "text": {
-                                                    "content": "10",
+                                                    "content": "Данные",
                                                     "link": null
                                                 },
                                                 "annotations": {
@@ -177,97 +158,211 @@ module.exports = async function addTable(blockId) {
                                                     "code": false,
                                                     "color": "purple"
                                                 },
-                                                "plain_text": "10",
+                                                "plain_text": "Данные",
+                                                "href": null
+                                            }
+                                        ],
+                                        [
+                                            {
+                                                "type": "text",
+                                                "text": {
+                                                    "content": "Данные",
+                                                    "link": null
+                                                },
+                                                "annotations": {
+                                                    "bold": false,
+                                                    "italic": false,
+                                                    "strikethrough": false,
+                                                    "underline": false,
+                                                    "code": false,
+                                                    "color": "purple"
+                                                },
+                                                "plain_text": "Данные",
+                                                "href": null
+                                            }
+                                        ],
+                                        [
+                                            {
+                                                "type": "text",
+                                                "text": {
+                                                    "content": "Данные",
+                                                    "link": null
+                                                },
+                                                "annotations": {
+                                                    "bold": false,
+                                                    "italic": false,
+                                                    "strikethrough": false,
+                                                    "underline": false,
+                                                    "code": false,
+                                                    "color": "purple"
+                                                },
+                                                "plain_text": "Данные",
+                                                "href": null
+                                            }
+                                        ],
+                                        [
+                                            {
+                                                "type": "text",
+                                                "text": {
+                                                    "content": "Данные",
+                                                    "link": null
+                                                },
+                                                "annotations": {
+                                                    "bold": false,
+                                                    "italic": false,
+                                                    "strikethrough": false,
+                                                    "underline": false,
+                                                    "code": false,
+                                                    "color": "purple"
+                                                },
+                                                "plain_text": "Данные",
+                                                "href": null
+                                            }
+                                        ],
+                                        [
+                                            {
+                                                "type": "text",
+                                                "text": {
+                                                    "content": "Данные",
+                                                    "link": null
+                                                },
+                                                "annotations": {
+                                                    "bold": false,
+                                                    "italic": false,
+                                                    "strikethrough": false,
+                                                    "underline": false,
+                                                    "code": false,
+                                                    "color": "purple"
+                                                },
+                                                "plain_text": "Данные",
+                                                "href": null
+                                            }
+                                        ],
+                                        [
+                                            {
+                                                "type": "text",
+                                                "text": {
+                                                    "content": "Данные",
+                                                    "link": null
+                                                },
+                                                "annotations": {
+                                                    "bold": false,
+                                                    "italic": false,
+                                                    "strikethrough": false,
+                                                    "underline": false,
+                                                    "code": false,
+                                                    "color": "purple"
+                                                },
+                                                "plain_text": "Данные",
+                                                "href": null
+                                            }
+                                        ],
+                                        [
+                                            {
+                                                "type": "text",
+                                                "text": {
+                                                    "content": "Данные",
+                                                    "link": null
+                                                },
+                                                "annotations": {
+                                                    "bold": false,
+                                                    "italic": false,
+                                                    "strikethrough": false,
+                                                    "underline": false,
+                                                    "code": false,
+                                                    "color": "purple"
+                                                },
+                                                "plain_text": "Данные",
                                                 "href": null
                                             }
                                         ]
                                     ]
                                 }
                             },
-                            {
-                                //...other keys excluded
-                                "type": "table_row",
-                                "table_row": {
-                                    "cells": [
-                                        [
-                                            {
-                                                "type": "text",
-                                                "text": {
-                                                    "content": "Ставка",
-                                                    "link": null
-                                                },
-                                                "annotations": {
-                                                    "bold": true,
-                                                    "italic": false,
-                                                    "strikethrough": false,
-                                                    "underline": false,
-                                                    "code": false,
-                                                    "color": "green"
-                                                },
-                                                "plain_text": "Ставка",
-                                                "href": null
-                                            }
-                                        ],
-                                        [
-                                            {
-                                                "type": "text",
-                                                "text": {
-                                                    "content": "1 600.00 | 6 000.00",
-                                                    "link": null
-                                                },
-                                                "annotations": {
-                                                    "bold": false,
-                                                    "italic": false,
-                                                    "strikethrough": false,
-                                                    "underline": false,
-                                                    "code": false,
-                                                    "color": "purple"
-                                                },
-                                                "plain_text": "1 600.00 | 6 000.00",
-                                                "href": null
-                                            }
-                                        ],
-                                        [
-                                            {
-                                                "type": "text",
-                                                "text": {
-                                                    "content": "Переработка",
-                                                    "link": null
-                                                },
-                                                "annotations": {
-                                                    "bold": false,
-                                                    "italic": false,
-                                                    "strikethrough": false,
-                                                    "underline": false,
-                                                    "code": false,
-                                                    "color": "green"
-                                                },
-                                                "plain_text": "Переработка",
-                                                "href": null
-                                            }
-                                        ],
-                                        [
-                                            {
-                                                "type": "text",
-                                                "text": {
-                                                    "content": "400.00 | 600.00",
-                                                    "link": null
-                                                },
-                                                "annotations": {
-                                                    "bold": false,
-                                                    "italic": false,
-                                                    "strikethrough": false,
-                                                    "underline": false,
-                                                    "code": false,
-                                                    "color": "purple"
-                                                },
-                                                "plain_text": "400.00 | 600.00",
-                                                "href": null
-                                            }
-                                        ],
-                                    ]
-                                }
-                            }
+                            // {
+                            //     //...other keys excluded
+                            //     "type": "table_row",
+                            //     "table_row": {
+                            //         "cells": [
+                            //             [
+                            //                 {
+                            //                     "type": "text",
+                            //                     "text": {
+                            //                         "content": "Ставка",
+                            //                         "link": null
+                            //                     },
+                            //                     "annotations": {
+                            //                         "bold": true,
+                            //                         "italic": false,
+                            //                         "strikethrough": false,
+                            //                         "underline": false,
+                            //                         "code": false,
+                            //                         "color": "green"
+                            //                     },
+                            //                     "plain_text": "Ставка",
+                            //                     "href": null
+                            //                 }
+                            //             ],
+                            //             [
+                            //                 {
+                            //                     "type": "text",
+                            //                     "text": {
+                            //                         "content": "1 600.00 | 6 000.00",
+                            //                         "link": null
+                            //                     },
+                            //                     "annotations": {
+                            //                         "bold": false,
+                            //                         "italic": false,
+                            //                         "strikethrough": false,
+                            //                         "underline": false,
+                            //                         "code": false,
+                            //                         "color": "purple"
+                            //                     },
+                            //                     "plain_text": "1 600.00 | 6 000.00",
+                            //                     "href": null
+                            //                 }
+                            //             ],
+                            //             [
+                            //                 {
+                            //                     "type": "text",
+                            //                     "text": {
+                            //                         "content": "Переработка",
+                            //                         "link": null
+                            //                     },
+                            //                     "annotations": {
+                            //                         "bold": false,
+                            //                         "italic": false,
+                            //                         "strikethrough": false,
+                            //                         "underline": false,
+                            //                         "code": false,
+                            //                         "color": "green"
+                            //                     },
+                            //                     "plain_text": "Переработка",
+                            //                     "href": null
+                            //                 }
+                            //             ],
+                            //             [
+                            //                 {
+                            //                     "type": "text",
+                            //                     "text": {
+                            //                         "content": "400.00 | 600.00",
+                            //                         "link": null
+                            //                     },
+                            //                     "annotations": {
+                            //                         "bold": false,
+                            //                         "italic": false,
+                            //                         "strikethrough": false,
+                            //                         "underline": false,
+                            //                         "code": false,
+                            //                         "color": "purple"
+                            //                     },
+                            //                     "plain_text": "400.00 | 600.00",
+                            //                     "href": null
+                            //                 }
+                            //             ],
+                            //         ]
+                            //     }
+                            // }
                         ]
                     }
                 }

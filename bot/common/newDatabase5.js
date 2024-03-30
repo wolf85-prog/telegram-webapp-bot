@@ -25,16 +25,67 @@ module.exports = async function newDatabase5(parent_page_id) {
             ],
             "is_inline": true,
             "properties": {                
-                "1. Ставка": {
+                "01. Чек-ин": {
                     "title": {}
                 },             
-                "2. Тех. Задание": {
-                    "rich_text": {}
-                },
-                "3. Дата": {
+                // "2. Тех. Задание": {
+                //     "rich_text": {}
+                // },
+                "02. Дата": {
                     "date": {}
                 },
-                "4. ФИО": {    
+                "03. Статус": {
+                    "name": "Статус",
+                    "type": "status",
+                    "status": {
+                      "options": [
+                        {
+                          "id": "134ece9a-384d-4d1f-97f7-7f685b29ae9b",
+                          "name": "Не выбрано",
+                          "color": "blue"
+                        },
+                        {
+                          "id": "234ece9a-384d-4d1f-97f7-7f685b29ae9b",
+                          "name": "В чат",
+                          "color": "green"
+                        },
+                        {
+                          "id": "334ece9a-384d-4d1f-97f7-7f685b29ae9b",
+                          "name": "Отказ",
+                          "color": "orange"
+                        }
+                      ],
+                      "groups": [
+                        {
+                          "id": "b9d42483-e576-4858-a26f-ed940a5f678f",
+                          "name": "To-do",
+                          "color": "gray",
+                          "option_ids": [
+                            "134ece9a-384d-4d1f-97f7-7f685b29ae9b",
+                            "234ece9a-384d-4d1f-97f7-7f685b29ae9b",
+                            "334ece9a-384d-4d1f-97f7-7f685b29ae9b",
+                          ]
+                        },
+                        // {
+                        //   "id": "cf4952eb-1265-46ec-86ab-4bded4fa2e3b",
+                        //   "name": "In progress",
+                        //   "color": "blue",
+                        //   "option_ids": [
+                        //     "330aeafb-598c-4e1c-bc13-1148aa5963d3"
+                        //   ]
+                        // },
+                        // {
+                        //   "id": "4fa7348e-ae74-46d9-9585-e773caca6f40",
+                        //   "name": "Complete",
+                        //   "color": "green",
+                        //   "option_ids": [
+                        //     "497e64fb-01e2-41ef-ae2d-8a87a3bb51da"
+                        //   ]
+                        // }
+                      ]
+                    }
+                },
+                "04. ФИО": {    
                     "name": "ФИО",               
                     "type": "relation",
                     "relation": {
@@ -42,7 +93,7 @@ module.exports = async function newDatabase5(parent_page_id) {
                         "single_property": {}
                     }
                 },
-                "5. Специализация": {
+                "05. Специализация": {
                     "type": "rollup",
                     "rollup": {
                         "rollup_property_name": "Specialization",
@@ -50,7 +101,7 @@ module.exports = async function newDatabase5(parent_page_id) {
                         "function": "show_original"
                     }
                 },
-                "6. Ранг": {
+                "06. Ранг": {
                     "type": "rollup",
                     "rollup": {
                         "rollup_property_name": "Ранг",
@@ -58,7 +109,7 @@ module.exports = async function newDatabase5(parent_page_id) {
                         "function": "show_original"
                     }
                 },
-                "7. Комментарий": {
+                "07. Комментарий": {
                     "type": "rollup",
                     "rollup": {
                         "rollup_property_name": "Комментарии",
@@ -66,7 +117,7 @@ module.exports = async function newDatabase5(parent_page_id) {
                         "function": "show_original"
                     }
                 },
-                "8. Телефон": {
+                "08. Телефон": {
                     "type": "rollup",
                     "rollup": {
                         "rollup_property_name": "Phone",
