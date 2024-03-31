@@ -760,6 +760,11 @@ bot.on('message', async (msg) => {
             console.log("task4: ", task4)
         }
 
+        if (text === '/addpretendent') {
+            pretendentId = await newDatabase5('26870bac-c1d7-403e-ba1f-b0c7e4e57177');  
+            console.log("pretendentId: ", pretendentId) 
+        }
+
 //------------------------------------------------------------------------------------------------
 
         //обработка контактов
