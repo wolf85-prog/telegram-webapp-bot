@@ -568,27 +568,29 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
         });
         
         const data = await response.json();
-        //console.log(response)
+        console.log(response)
         console.log("2. Таблица Основной состав добавлена! Database_id: " + data.id)// + " data: " + JSON.stringify(data))
 
         //добавить список работников        
-        // worklist.forEach((worker) => {           
-        //     for (let i = 0; i < worker.count; i++) {
-        //         let arrWorks = []
-        //         const newCategory = {
-        //             name: worker.icon,
-        //         }
-        //         const newSpec = {
-        //             name: worker.spec,
-        //         }
+        worklist.forEach((worker) => {           
+            for (let i = 0; i < worker.count; i++) {
+                let arrWorks = []
+                const newCategory = {
+                    name: worker.icon,
+                }
+                const newSpec = {
+                    name: worker.spec,
+                }
     
-        //         //arrWorks.push(newCategory)
-        //         arrWorks.push(newSpec)         
+                //arrWorks.push(newCategory)
+                arrWorks.push(newSpec)         
                 
-        //         addWorker(data.id, arrWorks, time)
-        //     }    
+                if (data.id) {
+                   addWorker(data.id, arrWorks, time) 
+                }     
+            }    
             
-        // });
+        });
 
         return data.id
         
