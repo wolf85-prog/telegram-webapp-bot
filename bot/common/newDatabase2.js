@@ -30,7 +30,7 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                 "2. Дата": {
                     "date": {}
                 },
-                "3. Вид работ": {
+                "3. Статус": {
                     "multi_select": {
                         "options": [
                             {
