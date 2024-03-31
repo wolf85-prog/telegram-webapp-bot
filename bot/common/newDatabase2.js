@@ -30,92 +30,92 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                 "2. Дата": {
                     "date": {}
                 },
-                // "3. Статус": {
-                //     "multi_select": {
-                //         "options": [
-                //             {
-                //                 "name": "Погрузка",
-                //                 "color": "orange"
-                //             },
-                //             {
-                //                 "name": "Монтаж",
-                //                 "color": "blue"
-                //             },
-                //             {
-                //                 "name": "Дежурство",
-                //                 "color": "green"
-                //             },
-                //             {
-                //                 "name": "Мероприятие",
-                //                 "color": "purple"
-                //             },
-                //             {
-                //                 "name": "Сопровождение",
-                //                 "color": "pink"
-                //             },
-                //             {
-                //                 "name": "Полный цикл",
-                //                 "color": "orange"
-                //             },
-                //             {
-                //                 "name": "Демонтаж",
-                //                 "color": "blue"
-                //             },
-                //             {
-                //                 "name": "Эфир",
-                //                 "color": "green"
-                //             },
-                //             {
-                //                 "name": "Тесты \/ Чеки",
-                //                 "color": "purple"
-                //             },
-                //             {
-                //                 "name": "Сборы",
-                //                 "color": "pink"
-                //             },
-                //             {
-                //                 "name": "Работы на складе",
-                //                 "color": "orange"
-                //             },
-                //             {
-                //                 "name": "Выезд \/ Перелет",
-                //                 "color": "blue"
-                //             },
-                //             {
-                //                 "name": "Водитель ТС",
-                //                 "color": "green"
-                //             },
-                //             {
-                //                 "name": "Доставка",
-                //                 "color": "purple"
-                //             },
-                //             {
-                //                 "name": "Отмена",
-                //                 "color": "pink"
-                //             },
-                //             {
-                //                 "name": "Запасной состав",
-                //                 "color": "orange"
-                //             },
-                //             {
-                //                 "name": "Постер",
-                //                 "color": "blue"
-                //             },
-                //             {
-                //                 "name": "Репетиция",
-                //                 "color": "green"
-                //             },
-                //         ]
-                //     }
-                // },
-                // "4. ФИО": {    
-                //     "name": "ФИО",               
-                //     "type": "relation",
-                //     "relation": {
-                //         "database_id": databaseWorkersId,
-                //         "single_property": {}
-                //     }
-                // },
+                "3. Статус": {
+                    "multi_select": {
+                        "options": [
+                            {
+                                "name": "Погрузка",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "Монтаж",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Дежурство",
+                                "color": "green"
+                            },
+                            {
+                                "name": "Мероприятие",
+                                "color": "purple"
+                            },
+                            {
+                                "name": "Сопровождение",
+                                "color": "pink"
+                            },
+                            {
+                                "name": "Полный цикл",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "Демонтаж",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Эфир",
+                                "color": "green"
+                            },
+                            {
+                                "name": "Тесты \/ Чеки",
+                                "color": "purple"
+                            },
+                            {
+                                "name": "Сборы",
+                                "color": "pink"
+                            },
+                            {
+                                "name": "Работы на складе",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "Выезд \/ Перелет",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Водитель ТС",
+                                "color": "green"
+                            },
+                            {
+                                "name": "Доставка",
+                                "color": "purple"
+                            },
+                            {
+                                "name": "Отмена",
+                                "color": "pink"
+                            },
+                            {
+                                "name": "Запасной состав",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "Постер",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Репетиция",
+                                "color": "green"
+                            },
+                        ]
+                    }
+                },
+                "4. ФИО": {    
+                    "name": "ФИО",               
+                    "type": "relation",
+                    "relation": {
+                        "database_id": databaseWorkersId,
+                        "single_property": {}
+                    }
+                },
                 // "5. Специализация": {
                 //     "multi_select": {
                 //         "options": [
@@ -437,96 +437,96 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                 //         ]
                 //     }
                 // },
-                // "6. Мерч": {
-                //     "name": "Мерч",
-                //     "type": "checkbox",
-                //     "checkbox": {}
-                // },
-                // "7. КомТег": {
-                //     "multi_select": {
-                //         "options": [
-                //             {
-                //                 "name": "Опоздание",
-                //                 "color": "blue"
-                //             },
-                //             {
-                //                 "name": "Невыход",
-                //                 "color": "orange"
-                //             },
-                //             {
-                //                 "name": "Без мерча",
-                //                 "color": "purple"
-                //             },
-                //             {
-                //                 "name": "Не компетентен",
-                //                 "color": "green"
-                //             },
-                //             {
-                //                 "name": "Нарушение субординации",
-                //                 "color": "pink"
-                //             },
-                //             {
-                //                 "name": "Нетрезвый вид",
-                //                 "color": "blue"
-                //             },
-                //             {
-                //                 "name": "Повышенная ставка",
-                //                 "color": "orange"
-                //             },
-                //             {
-                //                 "name": "Такси [корпоративное]",
-                //                 "color": "green"
-                //             },
-                //             {
-                //                 "name": "Такси [личные расходы]",
-                //                 "color": "purple"
-                //             },
-                //             {
-                //                 "name": "Общ. транспорт",
-                //                 "color": "pink"
-                //             },
-                //             {
-                //                 "name": "Каршеринг",
-                //                 "color": "blue"
-                //             },
-                //             {
-                //                 "name": "ГСМ",
-                //                 "color": "orange"
-                //             },
-                //             {
-                //                 "name": "Компенсация",
-                //                 "color": "purple"
-                //             },
-                //             {
-                //                 "name": "Доп. расходы",
-                //                 "color": "green"
-                //             },
-                //             {
-                //                 "name": "Суточные",
-                //                 "color": "pink"
-                //             },
-                //             {
-                //                 "name": "Старший",
-                //                 "color": "blue"
-                //             },
-                //             {
-                //                 "name": "Премия",
-                //                 "color": "orange"
-                //             },
-                //             {
-                //                 "name": "Герой дня",
-                //                 "color": "purple"
-                //             },
-                //             {
-                //                 "name": "Высотные работы",
-                //                 "color": "brown"
-                //             },
-                //         ]
-                //     }
-                // },
-                // "8. Комментарий": {
-                //     "rich_text": {}
-                // },
+                "6. Мерч": {
+                    "name": "Мерч",
+                    "type": "checkbox",
+                    "checkbox": {}
+                },
+                "7. КомТег": {
+                    "multi_select": {
+                        "options": [
+                            {
+                                "name": "Опоздание",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Невыход",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "Без мерча",
+                                "color": "purple"
+                            },
+                            {
+                                "name": "Не компетентен",
+                                "color": "green"
+                            },
+                            {
+                                "name": "Нарушение субординации",
+                                "color": "pink"
+                            },
+                            {
+                                "name": "Нетрезвый вид",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Повышенная ставка",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "Такси [корпоративное]",
+                                "color": "green"
+                            },
+                            {
+                                "name": "Такси [личные расходы]",
+                                "color": "purple"
+                            },
+                            {
+                                "name": "Общ. транспорт",
+                                "color": "pink"
+                            },
+                            {
+                                "name": "Каршеринг",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "ГСМ",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "Компенсация",
+                                "color": "purple"
+                            },
+                            {
+                                "name": "Доп. расходы",
+                                "color": "green"
+                            },
+                            {
+                                "name": "Суточные",
+                                "color": "pink"
+                            },
+                            {
+                                "name": "Старший",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Премия",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "Герой дня",
+                                "color": "purple"
+                            },
+                            {
+                                "name": "Высотные работы",
+                                "color": "brown"
+                            },
+                        ]
+                    }
+                },
+                "8. Комментарий": {
+                    "rich_text": {}
+                },
                 // "9. Ставка": {
                 //     "type": "select",
                 //     "select": {
