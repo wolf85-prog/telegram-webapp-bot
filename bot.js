@@ -765,6 +765,22 @@ bot.on('message', async (msg) => {
             console.log("pretendentId: ", pretendentId) 
         }
 
+        if (text === '/getprojectnew') {
+                console.log("START GET PROJECT NEW...")
+                const projects = await getProjectNew()
+
+                await ProjectNew.truncate();
+
+                projects.map(async(project)=> {
+                    await ProjectNew.create({ 
+                        id: project.id, 
+                        name: project.name, 
+                        datestart: project.datestart, 
+                        crmID: project.crmID, 
+                    })
+                })     
+        }
+
 //------------------------------------------------------------------------------------------------
 
         //обработка контактов
