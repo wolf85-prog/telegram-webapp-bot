@@ -65,47 +65,47 @@ module.exports = async function newDatabase5(parent_page_id) {
                     //   ]
                     //"status": {
                         "options": [
-                          {
-                            "id": "034ece9a-384d-4d1f-97f7-7f685b29ae9b",
-                            "name": "Not started",
-                            "color": "default"
-                          },
-                          {
-                            "id": "330aeafb-598c-4e1c-bc13-1148aa5963d3",
-                            "name": "In progress",
-                            "color": "blue"
-                          },
-                          {
-                            "id": "497e64fb-01e2-41ef-ae2d-8a87a3bb51da",
-                            "name": "Done",
-                            "color": "green"
-                          }
+                        //   {
+                        //     "id": "034ece9a-384d-4d1f-97f7-7f685b29ae9b",
+                        //     "name": "Not started",
+                        //     "color": "default"
+                        //   },
+                        //   {
+                        //     "id": "330aeafb-598c-4e1c-bc13-1148aa5963d3",
+                        //     "name": "In progress",
+                        //     "color": "blue"
+                        //   },
+                        //   {
+                        //     "id": "497e64fb-01e2-41ef-ae2d-8a87a3bb51da",
+                        //     "name": "Done",
+                        //     "color": "green"
+                        //   }
                         ],
                         "groups": [
-                          {
-                            "id": "b9d42483-e576-4858-a26f-ed940a5f678f",
-                            "name": "To-do",
-                            "color": "gray",
-                            "option_ids": [
-                              "034ece9a-384d-4d1f-97f7-7f685b29ae9b"
-                            ]
-                          },
-                          {
-                            "id": "cf4952eb-1265-46ec-86ab-4bded4fa2e3b",
-                            "name": "In progress",
-                            "color": "blue",
-                            "option_ids": [
-                              "330aeafb-598c-4e1c-bc13-1148aa5963d3"
-                            ]
-                          },
-                          {
-                            "id": "4fa7348e-ae74-46d9-9585-e773caca6f40",
-                            "name": "Complete",
-                            "color": "green",
-                            "option_ids": [
-                              "497e64fb-01e2-41ef-ae2d-8a87a3bb51da"
-                            ]
-                          }
+                        //   {
+                        //     "id": "b9d42483-e576-4858-a26f-ed940a5f678f",
+                        //     "name": "To-do",
+                        //     "color": "gray",
+                        //     "option_ids": [
+                        //       "034ece9a-384d-4d1f-97f7-7f685b29ae9b"
+                        //     ]
+                        //   },
+                        //   {
+                        //     "id": "cf4952eb-1265-46ec-86ab-4bded4fa2e3b",
+                        //     "name": "In progress",
+                        //     "color": "blue",
+                        //     "option_ids": [
+                        //       "330aeafb-598c-4e1c-bc13-1148aa5963d3"
+                        //     ]
+                        //   },
+                        //   {
+                        //     "id": "4fa7348e-ae74-46d9-9585-e773caca6f40",
+                        //     "name": "Complete",
+                        //     "color": "green",
+                        //     "option_ids": [
+                        //       "497e64fb-01e2-41ef-ae2d-8a87a3bb51da"
+                        //     ]
+                        //   }
                         ]
                     }
                 },
