@@ -40,17 +40,17 @@ module.exports = async function newDatabase5(parent_page_id) {
                     "status": {
                       "options": [
                         {
-                          "id": "134ece9a-384d-4d1f-97f7-7f685b29ae9b",
+                          "id": "7a2f146b-560d-4e3d-9eda-09f254d11b32",
                           "name": "Не выбрано",
                           "color": "blue"
                         },
                         {
-                          "id": "234ece9a-384d-4d1f-97f7-7f685b29ae9b",
+                          "id": "X<B^",
                           "name": "В чат",
                           "color": "green"
                         },
                         {
-                          "id": "334ece9a-384d-4d1f-97f7-7f685b29ae9b",
+                          "id": "A]py",
                           "name": "Отказ",
                           "color": "orange"
                         }
@@ -61,9 +61,9 @@ module.exports = async function newDatabase5(parent_page_id) {
                           "name": "To-do",
                           "color": "gray",
                           "option_ids": [
-                            "134ece9a-384d-4d1f-97f7-7f685b29ae9b",
-                            "234ece9a-384d-4d1f-97f7-7f685b29ae9b",
-                            "334ece9a-384d-4d1f-97f7-7f685b29ae9b",
+                            "7a2f146b-560d-4e3d-9eda-09f254d11b32",
+                            "X<B^",
+                            "A]py",
                           ]
                         },
                         // {
