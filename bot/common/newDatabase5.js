@@ -32,8 +32,8 @@ module.exports = async function newDatabase5(parent_page_id) {
                     "date": {}
                 },
                 "3. Статус": {
-                    "type": "status",
-                    "status": {
+                    "type": "select",
+                    "select": {
                      "options": [
                         {
                           //"id": "7a2f146b-560d-4e3d-9eda-09f254d11b32",
