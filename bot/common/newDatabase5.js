@@ -25,10 +25,10 @@ module.exports = async function newDatabase5(parent_page_id) {
             ],
             "is_inline": true,
             "properties": {                
-                "1. Чек-ин": {
+                "01. Чек-ин": {
                     "title": {}
                 },             
-                "2. Дата": {
+                "02. Дата": {
                     "date": {}
                 },
                 // "3. Статус": {
@@ -65,7 +65,7 @@ module.exports = async function newDatabase5(parent_page_id) {
                 //     //   ]
                 //     }
                 // },
-                "4. ФИО": {    
+                "04. ФИО": {    
                     "name": "ФИО",               
                     "type": "relation",
                     "relation": {
@@ -73,7 +73,7 @@ module.exports = async function newDatabase5(parent_page_id) {
                         "single_property": {}
                     }
                 },
-                "5. Специализация": {
+                "05. Специализация": {
                     "type": "rollup",
                     "rollup": {
                         "rollup_property_name": "Specialization",
@@ -81,7 +81,7 @@ module.exports = async function newDatabase5(parent_page_id) {
                         "function": "show_original"
                     }
                 },
-                "6. Ранг": {
+                "06. Ранг": {
                     "type": "rollup",
                     "rollup": {
                         "rollup_property_name": "Ранг",
@@ -89,7 +89,7 @@ module.exports = async function newDatabase5(parent_page_id) {
                         "function": "show_original"
                     }
                 },
-                "7. Комментарий": {
+                "07. Комментарий": {
                     "type": "rollup",
                     "rollup": {
                         "rollup_property_name": "Комментарии",
@@ -97,7 +97,7 @@ module.exports = async function newDatabase5(parent_page_id) {
                         "function": "show_original"
                     }
                 },
-                "8. Телефон": {
+                "08. Телефон": {
                     "type": "rollup",
                     "rollup": {
                         "rollup_property_name": "Phone",
