@@ -31,27 +31,25 @@ module.exports = async function newDatabase5(parent_page_id) {
                 "2. Дата": {
                     "date": {}
                 },
-                // "3. Статус": {
-                //     "type": "status",
-                //      "status": {
-                //      "options": [
-                //             {
-                //             "id": "7a2f146b-560d-4e3d-9eda-09f254d11b32",
-                //             "name": "Не выбрано",
-                //             "color": "default"
-                //             },
-                //         ],
-                //         "groups": [
-                //             {
-                //             "name": "To-do",
-                //             "color": "gray",
-                //             "option_ids": [
-                //                 "7a2f146b-560d-4e3d-9eda-09f254d11b32",
-                //             ]
-                //             },
-                //         ]
-                //    }
-                //},
+                "3. Статус": {
+                    "name": "Статус",
+                    "type": "select",
+                    "select": {
+                      "options": [
+                        {
+                          "name": "Не выбрано",
+                          "color": "blue"
+                        },
+                        {
+                            "name": "В чат",
+                            "color": "green"
+                        },
+                        {
+                            "name": "Отказ",
+                            "color": "orange"
+                        },
+                    ]
+                }},
                 "4. ФИО": {    
                     "name": "ФИО",               
                     "type": "relation",
@@ -60,7 +58,7 @@ module.exports = async function newDatabase5(parent_page_id) {
                         "single_property": {}
                     }
                 },
-                "5. Специализация": {
+                "5. Специальность": {
                     "type": "rollup",
                     "rollup": {
                         "rollup_property_name": "Specialization",
