@@ -34,12 +34,12 @@ module.exports = async function newDatabase5(parent_page_id) {
                 "3. Статус": {
                     "type": "status",
                     "status": {
-                     // "options": [
-                        // {
-                        //   "id": "7a2f146b-560d-4e3d-9eda-09f254d11b32",
-                        //   "name": "Не выбрано",
-                        //   "color": "blue"
-                        // },
+                     "options": [
+                        {
+                          //"id": "7a2f146b-560d-4e3d-9eda-09f254d11b32",
+                          "name": "Не выбрано",
+                          "color": "blue"
+                        },
                         // {
                         //   //"id": "X<B^",
                         //   "name": "В чат",
@@ -50,7 +50,7 @@ module.exports = async function newDatabase5(parent_page_id) {
                         //   "name": "Отказ",
                         //   "color": "orange"
                         // }
-                     // ],
+                     ],
                     //   "groups": [
                     //     {
                     //       //"id": "b9d42483-e576-4858-a26f-ed940a5f678f",
@@ -64,7 +64,7 @@ module.exports = async function newDatabase5(parent_page_id) {
                     //     },
                     //   ]
                     //"status": {
-                        "options": [
+                       // "options": [
                         //   {
                         //     "id": "034ece9a-384d-4d1f-97f7-7f685b29ae9b",
                         //     "name": "Not started",
@@ -80,8 +80,8 @@ module.exports = async function newDatabase5(parent_page_id) {
                         //     "name": "Done",
                         //     "color": "green"
                         //   }
-                        ],
-                        "groups": [
+                        //],
+                       // "groups": [
                         //   {
                         //     "id": "b9d42483-e576-4858-a26f-ed940a5f678f",
                         //     "name": "To-do",
@@ -106,7 +106,7 @@ module.exports = async function newDatabase5(parent_page_id) {
                         //       "497e64fb-01e2-41ef-ae2d-8a87a3bb51da"
                         //     ]
                         //   }
-                        ]
+                        //]
                     }
                 },
                 "4. ФИО": {    
