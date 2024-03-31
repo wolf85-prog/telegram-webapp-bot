@@ -40,33 +40,33 @@ module.exports = async function newDatabase5(parent_page_id) {
                     "status": {
                       "options": [
                         {
-                          "id": "7a2f146b-560d-4e3d-9eda-09f254d11b32",
+                          //"id": "7a2f146b-560d-4e3d-9eda-09f254d11b32",
                           "name": "Не выбрано",
                           "color": "blue"
                         },
-                        // {
-                        //   //"id": "X<B^",
-                        //   "name": "В чат",
-                        //   "color": "green"
-                        // },
-                        // {
-                        //   //"id": "A]py",
-                        //   "name": "Отказ",
-                        //   "color": "orange"
-                        // }
-                      ],
-                      "groups": [
                         {
-                          //"id": "b9d42483-e576-4858-a26f-ed940a5f678f",
-                          "name": "To-do",
-                          "color": "gray",
-                          "option_ids": [
-                            "7a2f146b-560d-4e3d-9eda-09f254d11b32",
-                            // "X<B^",
-                            // "A]py",
-                          ]
+                          //"id": "X<B^",
+                          "name": "В чат",
+                          "color": "green"
                         },
-                      ]
+                        {
+                          //"id": "A]py",
+                          "name": "Отказ",
+                          "color": "orange"
+                        }
+                      ],
+                    //   "groups": [
+                    //     {
+                    //       //"id": "b9d42483-e576-4858-a26f-ed940a5f678f",
+                    //       "name": "To-do",
+                    //       "color": "gray",
+                    //       "option_ids": [
+                    //         "7a2f146b-560d-4e3d-9eda-09f254d11b32",
+                    //         // "X<B^",
+                    //         // "A]py",
+                    //       ]
+                    //     },
+                    //   ]
                     }
                 },
                 "04. ФИО": {    
