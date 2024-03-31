@@ -34,41 +34,40 @@ module.exports = async function newDatabase5(parent_page_id) {
                 "02. Дата": {
                     "date": {}
                 },
-                "03. Статус": {
-                    "name": "Статус",
-                    "type": "status",
-                    "status": {
-                      "options": [
-                        {
-                          //"id": "7a2f146b-560d-4e3d-9eda-09f254d11b32",
-                          "name": "Не выбрано",
-                          "color": "blue"
-                        },
-                        {
-                          //"id": "X<B^",
-                          "name": "В чат",
-                          "color": "green"
-                        },
-                        {
-                          //"id": "A]py",
-                          "name": "Отказ",
-                          "color": "orange"
-                        }
-                      ],
-                    //   "groups": [
-                    //     {
-                    //       //"id": "b9d42483-e576-4858-a26f-ed940a5f678f",
-                    //       "name": "To-do",
-                    //       "color": "gray",
-                    //       "option_ids": [
-                    //         "7a2f146b-560d-4e3d-9eda-09f254d11b32",
-                    //         // "X<B^",
-                    //         // "A]py",
-                    //       ]
-                    //     },
-                    //   ]
-                    }
-                },
+                // "03. Статус": {
+                //     "type": "status",
+                //     "status": {
+                //       "options": [
+                //         {
+                //           //"id": "7a2f146b-560d-4e3d-9eda-09f254d11b32",
+                //           "name": "Не выбрано",
+                //           "color": "blue"
+                //         },
+                //         {
+                //           //"id": "X<B^",
+                //           "name": "В чат",
+                //           "color": "green"
+                //         },
+                //         {
+                //           //"id": "A]py",
+                //           "name": "Отказ",
+                //           "color": "orange"
+                //         }
+                //       ],
+                //     //   "groups": [
+                //     //     {
+                //     //       //"id": "b9d42483-e576-4858-a26f-ed940a5f678f",
+                //     //       "name": "To-do",
+                //     //       "color": "gray",
+                //     //       "option_ids": [
+                //     //         "7a2f146b-560d-4e3d-9eda-09f254d11b32",
+                //     //         // "X<B^",
+                //     //         // "A]py",
+                //     //       ]
+                //     //     },
+                //     //   ]
+                //     }
+                // },
                 "04. ФИО": {    
                     "name": "ФИО",               
                     "type": "relation",
@@ -124,8 +123,13 @@ module.exports = async function newDatabase5(parent_page_id) {
             }
         });
         const data = await response.json();
-        console.log("4. Таблица Претенденты добавлена! Database_id: " + data.id) //" data: " + JSON.stringify(data))
 
+        if (data.id) {
+            console.log("4. Таблица Претенденты добавлена! Database_id: " + data.id) 
+        } else {
+            console.log("4. Таблица Претенденты не добавлена! ") 
+        }
+        
         if (data.id) {
            await addPretendent(data.id); 
         }
