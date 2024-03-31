@@ -527,30 +527,30 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                 "8. Комментарий": {
                     "rich_text": {}
                 },
-                // "9. Ставка": {
-                //     "type": "select",
-                //     "select": {
-                //         "options": [
-                //             {
-                //                 "name": "№1",
-                //                 "color": "blue"
-                //             },
-                //             {
-                //                 "name": "№2",
-                //                 "color": "orange"
-                //             },
-                //             {
-                //                 "name": "№3",
-                //                 "color": "green"
-                //             },
-                //           ]
-                //     }
-                // },
-                // "0. Такси": {
-                //     "name": "Такси",
-                //     "type": "checkbox",
-                //     "checkbox": {}
-                // },
+                "9. Ставка": {
+                    "type": "select",
+                    "select": {
+                        "options": [
+                            {
+                                "name": "№1",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "№2",
+                                "color": "orange"
+                            },
+                            {
+                                "name": "№3",
+                                "color": "green"
+                            },
+                          ]
+                    }
+                },
+                "90. Такси": {
+                    "name": "Такси",
+                    "type": "checkbox",
+                    "checkbox": {}
+                },
             }
         }
 
