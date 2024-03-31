@@ -26,6 +26,7 @@ module.exports = async function newDatabase5(parent_page_id) {
             "is_inline": true,
             "properties": {                
                 "1. Чек-ин": {
+                    "name": "01. Чек-ин",
                     "title": {}
                 },             
                 "2. Дата": {
