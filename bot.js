@@ -509,7 +509,6 @@ async function addAddress(geo, projectname, datestart, teh, managerId, companyId
 
             //создание базы данных "Основной состав"
             while (!mainId) {  
-                console.log("data: ", project_id, worklist, datestart)
                 mainId = await newDatabase2(project_id, worklist, datestart);  
                 console.log("mainId: ", mainId)  
                 if (mainId) break; // (*)                           
@@ -1073,6 +1072,7 @@ bot.on('message', async (msg) => {
                             //создание базы данных "Основной состав"
                             let i = 0;
                             while (!mainId) {  
+                                console.log("data: ", projectId, Worklist, project.datestart)
                                 mainId = await newDatabase2(projectId, Worklist, project.datestart);  
                                 console.log("mainId: ", mainId)  
                                 if (mainId) break; // (*)                           
