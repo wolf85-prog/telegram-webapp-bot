@@ -33,81 +33,24 @@ module.exports = async function newDatabase5(parent_page_id) {
                 },
                 "3. Статус": {
                     "type": "status",
-                    "status": {
-                     "options": [
-                        {
-                          "id": "7a2f146b-560d-4e3d-9eda-09f254d11b32",
-                          "name": "Не выбрано",
-                          "color": "default"
-                        },
-                        // {
-                        //   //"id": "X<B^",
-                        //   "name": "В чат",
-                        //   "color": "green"
-                        // },
-                        // {
-                        //   //"id": "A]py",
-                        //   "name": "Отказ",
-                        //   "color": "orange"
-                        // }
-                     ],
-                    "groups": [
-                        {
-                           //"id": "b9d42483-e576-4858-a26f-ed940a5f678f",
-                          "name": "To-do",
-                          "color": "gray",
-                          "option_ids": [
-                            "7a2f146b-560d-4e3d-9eda-09f254d11b32",
-                            // "X<B^",
-                            // "A]py",
-                          ]
-                        },
-                    ]
-                    //"status": {
-                       // "options": [
-                        //   {
-                        //     "id": "034ece9a-384d-4d1f-97f7-7f685b29ae9b",
-                        //     "name": "Not started",
-                        //     "color": "default"
-                        //   },
-                        //   {
-                        //     "id": "330aeafb-598c-4e1c-bc13-1148aa5963d3",
-                        //     "name": "In progress",
-                        //     "color": "blue"
-                        //   },
-                        //   {
-                        //     "id": "497e64fb-01e2-41ef-ae2d-8a87a3bb51da",
-                        //     "name": "Done",
-                        //     "color": "green"
-                        //   }
-                        //],
-                       // "groups": [
-                        //   {
-                        //     "id": "b9d42483-e576-4858-a26f-ed940a5f678f",
-                        //     "name": "To-do",
-                        //     "color": "gray",
-                        //     "option_ids": [
-                        //       "034ece9a-384d-4d1f-97f7-7f685b29ae9b"
-                        //     ]
-                        //   },
-                        //   {
-                        //     "id": "cf4952eb-1265-46ec-86ab-4bded4fa2e3b",
-                        //     "name": "In progress",
-                        //     "color": "blue",
-                        //     "option_ids": [
-                        //       "330aeafb-598c-4e1c-bc13-1148aa5963d3"
-                        //     ]
-                        //   },
-                        //   {
-                        //     "id": "4fa7348e-ae74-46d9-9585-e773caca6f40",
-                        //     "name": "Complete",
-                        //     "color": "green",
-                        //     "option_ids": [
-                        //       "497e64fb-01e2-41ef-ae2d-8a87a3bb51da"
-                        //     ]
-                        //   }
-                        //]
-                    }
+                //     "status": {
+                //      "options": [
+                //             {
+                //             "id": "7a2f146b-560d-4e3d-9eda-09f254d11b32",
+                //             "name": "Не выбрано",
+                //             "color": "default"
+                //             },
+                //         ],
+                //         "groups": [
+                //             {
+                //             "name": "To-do",
+                //             "color": "gray",
+                //             "option_ids": [
+                //                 "7a2f146b-560d-4e3d-9eda-09f254d11b32",
+                //             ]
+                //             },
+                //         ]
+                //     }
                 },
                 "4. ФИО": {    
                     "name": "ФИО",               
