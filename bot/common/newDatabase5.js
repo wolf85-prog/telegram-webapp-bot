@@ -33,7 +33,7 @@ module.exports = async function newDatabase5(parent_page_id) {
                 },
                 "3. Статус": {
                     "type": "status",
-                //     "status": {
+                     "status": {
                 //      "options": [
                 //             {
                 //             "id": "7a2f146b-560d-4e3d-9eda-09f254d11b32",
@@ -50,7 +50,7 @@ module.exports = async function newDatabase5(parent_page_id) {
                 //             ]
                 //             },
                 //         ]
-                //     }
+                    }
                 },
                 "4. ФИО": {    
                     "name": "ФИО",               
