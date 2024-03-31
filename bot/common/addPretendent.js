@@ -13,13 +13,13 @@ module.exports = async function addPretendent(blockId) {
                 emoji: "➡️"
             },
             properties: {
-                "1. Ставка": {
+                "1. Чек-ин": {
                     type: "title",
                     title: [
                         {
                             type: 'text',
                             text: {
-                                content: "0 000.00 — 0 000.00 руб/час * 0 — 0 часов",
+                                content: "",
                             },
                             "annotations": {
                                 "bold": false,
@@ -29,22 +29,22 @@ module.exports = async function addPretendent(blockId) {
                                 "code": false,
                                 "color": "default"
                             },
-                            "plain_text": "0 000.00 — 0 000.00 руб/час * 0 — 0 часов",
+                            "plain_text": "",
                             "href": null
                         }
                     ],
                 },
-                "2. Тех. Задание": {
-                    type: 'rich_text',   
-                    rich_text: [
-                        {
-                            "type": "text",
-                            "text": {
-                                "content": "Техническое Задание текстом подробно",
-                            },                           
-                        }
-                    ]
-                },
+                // "2. Тех. Задание": {
+                //     type: 'rich_text',   
+                //     rich_text: [
+                //         {
+                //             "type": "text",
+                //             "text": {
+                //                 "content": "Техническое Задание текстом подробно",
+                //             },                           
+                //         }
+                //     ]
+                // },
             }
         })
         //console.log(response)
