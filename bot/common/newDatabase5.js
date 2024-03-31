@@ -142,8 +142,10 @@ module.exports = async function newDatabase5(parent_page_id) {
         const data = await response.json();
         console.log("4. Таблица Претенденты добавлена! Database_id: " + data.id) //" data: " + JSON.stringify(data))
 
-        await addPretendent(data.id);
-
+        if (data.id) {
+           await addPretendent(data.id); 
+        }
+        
         return data.id
 
     } catch (error) {
