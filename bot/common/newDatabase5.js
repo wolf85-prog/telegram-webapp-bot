@@ -31,14 +31,6 @@ module.exports = async function newDatabase5(parent_page_id) {
                 "2. Дата": {
                     "date": {}
                 },
-                "Status": {
-                    "type": "status",
-                    "status": {
-                        "id": "4d44b2da-bcd1-4893-a051-bd90c6e97ba7",
-                        "name": "Not started",
-                        "color": "default"
-                    }
-                },
                 // "3. Статус": {
                 //     "type": "status",
                 //      "status": {
