@@ -761,7 +761,7 @@ bot.on('message', async (msg) => {
         }
 
         if (text === '/addpretendent') {
-            pretendentId = await newDatabase5('26870bac-c1d7-403e-ba1f-b0c7e4e57177');  
+            pretendentId = await newDatabase5('f84744b7-29d7-4576-81f4-3fe8a0ee86a2');  
             console.log("pretendentId: ", pretendentId) 
         }
 
