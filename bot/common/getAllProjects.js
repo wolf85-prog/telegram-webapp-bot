@@ -15,7 +15,7 @@ module.exports = async function getAllProjects() {
         const date2 = new Date(d2)
         console.log(date2)
 
-        const responseResults = response.results.filter((page) => new Date(page.properties["Дата"].date?.start) > date2).map((page) => {
+        const responseResults = response.results.map((page) => {
             return {
                 id: page.id,
                 name: page.properties.Name.title[0]?.plain_text,
