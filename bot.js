@@ -1497,7 +1497,7 @@ const start = async () => {
                 console.log('Запускаю отчеты проектов...');
                 
                 arr.map(async (project, i) => {
-                    console.log(project.name + " - " + project.date)
+                    console.log(project?.name + " - " + project?.date)
                     
                     setTimeout(function(){
                         //начать получать отчеты
