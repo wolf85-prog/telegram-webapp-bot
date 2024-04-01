@@ -781,6 +781,11 @@ bot.on('message', async (msg) => {
                 })     
         }
 
+        if (text === '/getallprojects') {
+            const arrProjects = await getAllProjects()
+            console.log("Новые проекты: ", arrProjects)
+        }
+
 //------------------------------------------------------------------------------------------------
 
         //обработка контактов
