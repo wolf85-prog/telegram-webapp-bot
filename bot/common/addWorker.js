@@ -25,7 +25,7 @@ module.exports = async function addWorker(blockId, worker, date) {
                 //         }
                 //     ]
                 // },
-                "2. Дата": {
+                "02. Дата": {
                     type: 'date',                   
                     date: {
                         "start": date,
@@ -34,11 +34,11 @@ module.exports = async function addWorker(blockId, worker, date) {
                     }
 
                 },
-                "5. Специализация": {
+                "05. Специализация": {
                     type: "multi_select",
                     multi_select: worker
                 },
-                "9. Ставка": {
+                "09. Ставка": {
                     "type": "select",
                     "select": {
                         "name": "№1",

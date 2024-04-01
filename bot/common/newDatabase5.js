@@ -60,7 +60,7 @@ module.exports = async function newDatabase5(parent_page_id) {
                     "type": "rollup",
                     "rollup": {
                         "rollup_property_name": "Specialization",
-                        "relation_property_name": "4. ФИО",
+                        "relation_property_name": "04. ФИО",
                         "function": "show_original"
                     }
                 },
@@ -68,7 +68,7 @@ module.exports = async function newDatabase5(parent_page_id) {
                     "type": "rollup",
                     "rollup": {
                         "rollup_property_name": "Ранг",
-                        "relation_property_name": "4. ФИО",
+                        "relation_property_name": "04. ФИО",
                         "function": "show_original"
                     }
                 },
@@ -76,7 +76,7 @@ module.exports = async function newDatabase5(parent_page_id) {
                     "type": "rollup",
                     "rollup": {
                         "rollup_property_name": "Комментарии",
-                        "relation_property_name": "4. ФИО",
+                        "relation_property_name": "04. ФИО",
                         "function": "show_original"
                     }
                 },
@@ -84,7 +84,7 @@ module.exports = async function newDatabase5(parent_page_id) {
                     "type": "rollup",
                     "rollup": {
                         "rollup_property_name": "Phone",
-                        "relation_property_name": "4. ФИО",
+                        "relation_property_name": "04. ФИО",
                         "function": "show_original"
                     }
                 },

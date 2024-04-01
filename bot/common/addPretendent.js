@@ -13,7 +13,7 @@ module.exports = async function addPretendent(blockId) {
             //     emoji: "➡️"
             // },
             properties: {
-                "1. Чек-ин": {
+                "01. Чек-ин": {
                     type: "title",
                     title: [
                         {
@@ -33,6 +33,13 @@ module.exports = async function addPretendent(blockId) {
                             "href": null
                         }
                     ],
+                },
+                "03. Статус": {
+                    "type": "select",
+                    "select": {
+                        "name": "Не выбрано",
+                        "color": "blue"
+                    }
                 },
                 // "2. Тех. Задание": {
                 //     type: 'rich_text',   
