@@ -103,193 +103,196 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
     if (datesObj) {
         //отправить сообщение по каждой дате
         datesObj.forEach(async(date, i)=> {
-            const d = new Date(date.split('+')[0]);
-            const d2 = new Date().getTime() + 10800000 // + 3 часа (московское время)
+            if (date) {
+                const d = new Date(date?.split('+')[0]);
+                const d2 = new Date().getTime() + 10800000 // + 3 часа (московское время)
 
-            if(d >= d2) {
-                //отправка напоминания
-                if (project_status === 'OnAir') {
+                if(d >= d2) {
+                    //отправка напоминания
+                    if (project_status === 'OnAir') {
 
-                    var timeDiff = d.getTime() - 7200000; //120 минут
-                    var timeDiff2 = d.getTime() - 3600000;//60 минут
-                    var timeDiff3 = d.getTime() - 1800000;//30 минут
-                    var timeDiff4 = d.getTime() - 900000; //15 минут
-                    var timeDiff6 = d.getTime() - 600000; //10 минут
-                    var timeDiff7 = d.getTime() - 300000; //5 минут
-                    var timeDiff5 = d.getTime();          //0 минут    
+                        var timeDiff = d.getTime() - 7200000; //120 минут
+                        var timeDiff2 = d.getTime() - 3600000;//60 минут
+                        var timeDiff3 = d.getTime() - 1800000;//30 минут
+                        var timeDiff4 = d.getTime() - 900000; //15 минут
+                        var timeDiff6 = d.getTime() - 600000; //10 минут
+                        var timeDiff7 = d.getTime() - 300000; //5 минут
+                        var timeDiff5 = d.getTime();          //0 минут    
 
-                    const date2 = new Date(timeDiff)
-                    const date3 = new Date(timeDiff2)
-                    const date4 = new Date(timeDiff3)
-                    const date5 = new Date(timeDiff4)
-                    const date6 = new Date(timeDiff5)
-                    const dateNow = new Date(d2)
-                    const date7 = new Date(timeDiff6)
-                    const date8 = new Date(timeDiff7)
+                        const date2 = new Date(timeDiff)
+                        const date3 = new Date(timeDiff2)
+                        const date4 = new Date(timeDiff3)
+                        const date5 = new Date(timeDiff4)
+                        const date6 = new Date(timeDiff5)
+                        const dateNow = new Date(d2)
+                        const date7 = new Date(timeDiff6)
+                        const date8 = new Date(timeDiff7)
 
-                    const milliseconds = Math.floor((date2 - dateNow)); //120 минут
-                    const milliseconds2 = Math.floor((date3 - dateNow)); //60 минут
-                    const milliseconds3 = Math.floor((date4 - dateNow)); //30 минут
-                    const milliseconds4 = Math.floor((date5 - dateNow)); //15 минут
-                    const milliseconds6 = Math.floor((date7 - dateNow)); //10 минут
-                    const milliseconds7 = Math.floor((date8 - dateNow)); //5 минут
-                    const milliseconds5 = Math.floor((date6 - dateNow)); //0 минут
+                        const milliseconds = Math.floor((date2 - dateNow)); //120 минут
+                        const milliseconds2 = Math.floor((date3 - dateNow)); //60 минут
+                        const milliseconds3 = Math.floor((date4 - dateNow)); //30 минут
+                        const milliseconds4 = Math.floor((date5 - dateNow)); //15 минут
+                        const milliseconds6 = Math.floor((date7 - dateNow)); //10 минут
+                        const milliseconds7 = Math.floor((date8 - dateNow)); //5 минут
+                        const milliseconds5 = Math.floor((date6 - dateNow)); //0 минут
 
-                    //120-минутная готовность
-                    if (milliseconds > 0) {
-                        console.log("!!!!Планирую запуск сообщения 1...!!!!")     
-                        //task1 = setTimeout(async() => {
-                            
-                            //отправить сообщение в админку
-                            if (project_status === 'OnAir') {
-                                // let socket = io(socketUrl);
-                                // socket.emit("sendNotif", {
-                                //     task: 1
-                                // }) 
+                        //120-минутная готовность
+                        if (milliseconds > 0) {
+                            console.log("!!!!Планирую запуск сообщения 1...!!!!")     
+                            //task1 = setTimeout(async() => {
+                                
+                                //отправить сообщение в админку
+                                if (project_status === 'OnAir') {
+                                    // let socket = io(socketUrl);
+                                    // socket.emit("sendNotif", {
+                                    //     task: 1
+                                    // }) 
 
-                                task1 = SoundNotif.create({
-                                    name: project_name,
-                                    text: 'Звуковое оповещение - 120 минут',
-                                    date: new Date().getTime() + milliseconds,
-                                    delivered: false,
-                                    task: 1
-                                })
-                            }
-                        //}, milliseconds)
-                    }                
+                                    task1 = SoundNotif.create({
+                                        name: project_name,
+                                        text: 'Звуковое оповещение - 120 минут',
+                                        date: new Date().getTime() + milliseconds,
+                                        delivered: false,
+                                        task: 1
+                                    })
+                                }
+                            //}, milliseconds)
+                        }                
 
-                    //60-минутная готовность
-                    if (milliseconds2 > 0) {
-                        console.log("!!!!Планирую запуск сообщения 2...!!!!")     
-                        //task2 = setTimeout(async() => {
-                            //отправить сообщение в админку
-                            if (project_status === 'OnAir') {
-                                // let socket = io(socketUrl);
-                                // socket.emit("sendNotif", {
-                                //     task: 2
-                                // }) 
+                        //60-минутная готовность
+                        if (milliseconds2 > 0) {
+                            console.log("!!!!Планирую запуск сообщения 2...!!!!")     
+                            //task2 = setTimeout(async() => {
+                                //отправить сообщение в админку
+                                if (project_status === 'OnAir') {
+                                    // let socket = io(socketUrl);
+                                    // socket.emit("sendNotif", {
+                                    //     task: 2
+                                    // }) 
 
-                                task2 = SoundNotif.create({
-                                    name: project_name,
-                                    text: 'Звуковое оповещение - 60 минут',
-                                    date: new Date().getTime() + milliseconds2,
-                                    delivered: false,
-                                    task: 2
-                                })
-                            }
-                        //}, milliseconds2)
-                    }
+                                    task2 = SoundNotif.create({
+                                        name: project_name,
+                                        text: 'Звуковое оповещение - 60 минут',
+                                        date: new Date().getTime() + milliseconds2,
+                                        delivered: false,
+                                        task: 2
+                                    })
+                                }
+                            //}, milliseconds2)
+                        }
 
-                    //30-минутная готовность
-                    if (milliseconds3 > 0) {
-                        console.log("!!!!Планирую запуск сообщения 3...!!!!")     
-                        //task3 = setTimeout(async() => {
-                            //отправить сообщение в админку
-                            if (project_status === 'OnAir') {
-                                // let socket = io(socketUrl);
-                                // socket.emit("sendNotif", {
-                                //     task: 3
-                                // }) 
+                        //30-минутная готовность
+                        if (milliseconds3 > 0) {
+                            console.log("!!!!Планирую запуск сообщения 3...!!!!")     
+                            //task3 = setTimeout(async() => {
+                                //отправить сообщение в админку
+                                if (project_status === 'OnAir') {
+                                    // let socket = io(socketUrl);
+                                    // socket.emit("sendNotif", {
+                                    //     task: 3
+                                    // }) 
 
-                                task3 = SoundNotif.create({
-                                    name: project_name,
-                                    text: 'Звуковое оповещение - 30 минут',
-                                    date: new Date().getTime() + milliseconds3,
-                                    delivered: false,
-                                    task: 3
-                                })
-                            }
-                        //}, milliseconds3)
-                    }
+                                    task3 = SoundNotif.create({
+                                        name: project_name,
+                                        text: 'Звуковое оповещение - 30 минут',
+                                        date: new Date().getTime() + milliseconds3,
+                                        delivered: false,
+                                        task: 3
+                                    })
+                                }
+                            //}, milliseconds3)
+                        }
 
-                    //15-минутная готовность
-                    if (milliseconds4 > 0) {
-                        console.log("!!!!Планирую запуск сообщения 4...!!!!")     
-                        //task4 = setTimeout(async() => {
-                            //отправить сообщение в админку
-                            if (project_status === 'OnAir') {
-                                // let socket = io(socketUrl);
-                                // socket.emit("sendNotif", {
-                                //     task: 4
-                                // }) 
+                        //15-минутная готовность
+                        if (milliseconds4 > 0) {
+                            console.log("!!!!Планирую запуск сообщения 4...!!!!")     
+                            //task4 = setTimeout(async() => {
+                                //отправить сообщение в админку
+                                if (project_status === 'OnAir') {
+                                    // let socket = io(socketUrl);
+                                    // socket.emit("sendNotif", {
+                                    //     task: 4
+                                    // }) 
 
-                                task4 = await SoundNotif.create({
-                                    name: project_name,
-                                    text: 'Звуковое оповещение - 15 минут',
-                                    date: new Date().getTime() + milliseconds4,
-                                    delivered: false,
-                                    task: 4
-                                })
-                                //console.log("task4: ", task4)
-                            }
-                        //}, milliseconds4)
-                    }
+                                    task4 = await SoundNotif.create({
+                                        name: project_name,
+                                        text: 'Звуковое оповещение - 15 минут',
+                                        date: new Date().getTime() + milliseconds4,
+                                        delivered: false,
+                                        task: 4
+                                    })
+                                    //console.log("task4: ", task4)
+                                }
+                            //}, milliseconds4)
+                        }
 
-                    //10-минутная готовность
-                    if (milliseconds6 > 0) {
-                        console.log("!!!!Планирую запуск сообщения 6...!!!!")     
-                        //task4 = setTimeout(async() => {
-                            //отправить сообщение в админку
-                            if (project_status === 'OnAir') {
-                                // let socket = io(socketUrl);
-                                // socket.emit("sendNotif", {
-                                //     task: 6
-                                // })
-                                task6 = SoundNotif.create({
-                                    name: project_name,
-                                    text: 'Звуковое оповещение - 10 минут',
-                                    date: new Date().getTime() + milliseconds6,
-                                    delivered: false,
-                                    task: 6
-                                })
-                            } 
-                        //}, milliseconds6)
-                    }
+                        //10-минутная готовность
+                        if (milliseconds6 > 0) {
+                            console.log("!!!!Планирую запуск сообщения 6...!!!!")     
+                            //task4 = setTimeout(async() => {
+                                //отправить сообщение в админку
+                                if (project_status === 'OnAir') {
+                                    // let socket = io(socketUrl);
+                                    // socket.emit("sendNotif", {
+                                    //     task: 6
+                                    // })
+                                    task6 = SoundNotif.create({
+                                        name: project_name,
+                                        text: 'Звуковое оповещение - 10 минут',
+                                        date: new Date().getTime() + milliseconds6,
+                                        delivered: false,
+                                        task: 6
+                                    })
+                                } 
+                            //}, milliseconds6)
+                        }
 
-                    //5-минутная готовность
-                    if (milliseconds7 > 0) {
-                        console.log("!!!!Планирую запуск сообщения 7...!!!!")     
-                        //task4 = setTimeout(async() => {
-                            //отправить сообщение в админку
-                            if (project_status === 'OnAir') {
-                                // let socket = io(socketUrl);
-                                // socket.emit("sendNotif", {
-                                //     task: 7
-                                // })
-                                task7 = SoundNotif.create({
-                                    name: project_name,
-                                    text: 'Звуковое оповещение - 5 минут',
-                                    date: new Date().getTime() + milliseconds7,
-                                    delivered: false,
-                                    task: 7
-                                })
-                            } 
-                        //}, milliseconds7)
-                    }
+                        //5-минутная готовность
+                        if (milliseconds7 > 0) {
+                            console.log("!!!!Планирую запуск сообщения 7...!!!!")     
+                            //task4 = setTimeout(async() => {
+                                //отправить сообщение в админку
+                                if (project_status === 'OnAir') {
+                                    // let socket = io(socketUrl);
+                                    // socket.emit("sendNotif", {
+                                    //     task: 7
+                                    // })
+                                    task7 = SoundNotif.create({
+                                        name: project_name,
+                                        text: 'Звуковое оповещение - 5 минут',
+                                        date: new Date().getTime() + milliseconds7,
+                                        delivered: false,
+                                        task: 7
+                                    })
+                                } 
+                            //}, milliseconds7)
+                        }
 
-                    //0 готовность
-                    if (milliseconds5 > 0) {
-                        console.log("!!!!Планирую запуск сообщения 5...!!!!") 
-                        console.log("--------------------------------------")       
-                        //task5 = setTimeout(async() => {
-                            //отправить сообщение в админку
-                            if (project_status === 'OnAir') {
-                                // let socket = io(socketUrl);
-                                // socket.emit("sendNotif", {
-                                //     task: 5
-                                // }) 
-                                task5 = SoundNotif.create({
-                                    name: project_name,
-                                    text: 'Звуковое оповещение - 0 минут',
-                                    date: new Date().getTime() + milliseconds5,
-                                    delivered: false,
-                                    task: 5
-                                })
-                            }
-                        //}, milliseconds5)
+                        //0 готовность
+                        if (milliseconds5 > 0) {
+                            console.log("!!!!Планирую запуск сообщения 5...!!!!") 
+                            console.log("--------------------------------------")       
+                            //task5 = setTimeout(async() => {
+                                //отправить сообщение в админку
+                                if (project_status === 'OnAir') {
+                                    // let socket = io(socketUrl);
+                                    // socket.emit("sendNotif", {
+                                    //     task: 5
+                                    // }) 
+                                    task5 = SoundNotif.create({
+                                        name: project_name,
+                                        text: 'Звуковое оповещение - 0 минут',
+                                        date: new Date().getTime() + milliseconds5,
+                                        delivered: false,
+                                        task: 5
+                                    })
+                                }
+                            //}, milliseconds5)
+                        }
                     }
                 }
             }
+            
         })
     }
 
