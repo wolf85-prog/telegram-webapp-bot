@@ -25,14 +25,13 @@ module.exports = async function newDatabase5(parent_page_id) {
             ],
             "is_inline": true,
             "properties": {                
-                "1. Чек-ин": {
+                "01. Чек-ин": {
                     "title": {}
                 },             
-                "2. Дата": {
+                "02. Дата": {
                     "date": {}
                 },
-                "3. Статус": {
-                    "name": "Статус",
+                "03. Статус": {
                     "type": "select",
                     "select": {
                       "options": [
@@ -50,15 +49,14 @@ module.exports = async function newDatabase5(parent_page_id) {
                         },
                     ]
                 }},
-                "4. ФИО": {    
-                    "name": "ФИО",               
+                "04. ФИО": {                  
                     "type": "relation",
                     "relation": {
                         "database_id": databaseWorkersId,
                         "single_property": {}
                     }
                 },
-                "5. Специальность": {
+                "05. Специальность": {
                     "type": "rollup",
                     "rollup": {
                         "rollup_property_name": "Specialization",
@@ -66,7 +64,7 @@ module.exports = async function newDatabase5(parent_page_id) {
                         "function": "show_original"
                     }
                 },
-                "6. Ранг": {
+                "06. Ранг": {
                     "type": "rollup",
                     "rollup": {
                         "rollup_property_name": "Ранг",
@@ -74,7 +72,7 @@ module.exports = async function newDatabase5(parent_page_id) {
                         "function": "show_original"
                     }
                 },
-                "7. Комментарий": {
+                "07. Комментарий": {
                     "type": "rollup",
                     "rollup": {
                         "rollup_property_name": "Комментарии",
@@ -82,7 +80,7 @@ module.exports = async function newDatabase5(parent_page_id) {
                         "function": "show_original"
                     }
                 },
-                "8. Телефон": {
+                "08. Телефон": {
                     "type": "rollup",
                     "rollup": {
                         "rollup_property_name": "Phone",

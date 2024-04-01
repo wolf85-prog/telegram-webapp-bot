@@ -24,13 +24,13 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
             ],
             "is_inline": true,
             "properties": { 
-                "1. Чек-ин": {
+                "01. Чек-ин": {
                     "title": {}
                 },
-                "2. Дата": {
+                "02. Дата": {
                     "date": {}
                 },
-                "3. Статус": {
+                "03. Вид работ": {
                     "multi_select": {
                         "options": [
                             {
@@ -108,15 +108,14 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                         ]
                     }
                 },
-                "4. ФИО": {    
-                    "name": "ФИО",               
+                "04. ФИО": {                  
                     "type": "relation",
                     "relation": {
                         "database_id": databaseWorkersId,
                         "single_property": {}
                     }
                 },
-                "5. Специализация": {
+                "05. Специализация": {
                     "multi_select": {
                         "options": [
                             {
@@ -419,12 +418,11 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                         ]
                     }
                 },
-                "6. Мерч": {
-                    "name": "Мерч",
+                "06. Мерч": {
                     "type": "checkbox",
                     "checkbox": {}
                 },
-                "7. КомТег": {
+                "07. КомТег": {
                     "multi_select": {
                         "options": [
                             {
@@ -506,10 +504,10 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                         ]
                     }
                 },
-                "8. Комментарий": {
+                "08. Комментарий": {
                     "rich_text": {}
                 },
-                "9. Ставка": {
+                "09. Ставка": {
                     "type": "select",
                     "select": {
                         "options": [
@@ -528,8 +526,7 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                           ]
                     }
                 },
-                "90. Такси": {
-                    "name": "Такси",
+                "10. Такси": {
                     "type": "checkbox",
                     "checkbox": {}
                 },
