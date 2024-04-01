@@ -29,12 +29,12 @@ async function getDatabaseId(baseId) {
             database_id: baseId
         });
 
-        const responseResults = response.results.filter((page) => page.properties["2. Дата"].date !== null).map((page) => {
+        const responseResults = response.results.filter((page) => page.properties["02. Дата"].date !== null).map((page) => {
             return {
-                date: page.properties["2. Дата"].date?.start,
-                fio: page.properties["4. ФИО"].relation[0]?.id,
+                date: page.properties["02. Дата"].date?.start,
+                fio: page.properties["04. ФИО"].relation[0]?.id,
                 //title: page.properties["3. Специализация"].multi_select[0]?.name,
-                spec: page.properties["5. Специализация"].multi_select[0]?.name                
+                spec: page.properties["05. Специализация"].multi_select[0]?.name                
             };
         });
 
