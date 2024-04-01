@@ -319,7 +319,7 @@ class ProjectController {
                     databaseBlock = await getDatabaseId(blockId); 
                     //если бд ноушена доступна
                     if (databaseBlock && databaseBlock?.length !== 0) {
-                        let projDB = databaseBlock.find(db => new Date(db.date) >= new Date())
+                        let projDB = databaseBlock.find(db => new Date(db?.date) >= new Date())
                         //console.log("projDB: ", projDB)
                         if (projDB) {
                             const obj = {
