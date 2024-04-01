@@ -1476,7 +1476,7 @@ const start = async () => {
                         databaseBlock = await getDatabaseId(blockId);  
                         
                         if (databaseBlock && databaseBlock?.length !== 0) {
-                            console.log("main table: ", databaseBlock)
+                            //console.log("main table: ", databaseBlock)
                             let project = databaseBlock.find(item => new Date(item?.date) >= d)
                             const obj = {
                                 id: page.id,
