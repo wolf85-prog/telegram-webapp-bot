@@ -36,15 +36,11 @@ module.exports = async function newDatabase5(parent_page_id) {
                     "select": {
                       "options": [
                         {
-                          "name": "Не выбрано",
-                          "color": "blue"
-                        },
-                        {
-                            "name": "В чат",
+                            "name": "В проект",
                             "color": "green"
                         },
                         {
-                            "name": "Отказ",
+                            "name": "Отказано",
                             "color": "orange"
                         },
                     ]

@@ -19,7 +19,7 @@ module.exports = async function addPretendent(blockId) {
                         {
                             type: 'text',
                             text: {
-                                content: "",
+                                content: " ",
                             },
                             "annotations": {
                                 "bold": false,
@@ -29,18 +29,18 @@ module.exports = async function addPretendent(blockId) {
                                 "code": false,
                                 "color": "default"
                             },
-                            "plain_text": "",
+                            "plain_text": " ",
                             "href": null
                         }
                     ],
                 },
-                "03. Статус": {
-                    "type": "select",
-                    "select": {
-                        "name": "Не выбрано",
-                        "color": "blue"
-                    }
-                },
+                // "03. Статус": {
+                //     "type": "select",
+                //     "select": {
+                //         "name": "Не выбрано",
+                //         "color": "blue"
+                //     }
+                // },
                 // "2. Тех. Задание": {
                 //     type: 'rich_text',   
                 //     rich_text: [
