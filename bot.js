@@ -725,29 +725,7 @@ bot.on('message', async (msg) => {
                 })
             })
         }
-
-        if (text === '/startgetprojects') {
-            console.log("START GET PROJECTS ALL...")
-            
-            
-            const projects = await getProjectsAll()
-            //console.log(projects)
-
-            await Projectcash.truncate();
-
-            projects.map(async(project)=> {
-                await Projectcash.create({ 
-                    id: project.id, 
-                    title: project.title, 
-                    dateStart: project.date_start, 
-                    dateEnd: project.date_end, 
-                    status: JSON.stringify(project.status), 
-                    chatURL: project.chatURL,
-                    manager: project.managerId,
-                    specs: JSON.stringify(project.specs)  
-                })
-            })
-        }
+  
 
         if (text === '/addnotif') {
             const task4 = await SoundNotif.create({
