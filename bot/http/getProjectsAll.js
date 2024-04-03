@@ -8,7 +8,7 @@ const $host = axios.create({
 
 module.exports = async function getProjectsAll() {
     try {
-       let response = await $host.get(`projectscash`);
+       let response = await $host.get(`projectall`);
        //console.log(response);
        return response.data;
     } catch (error) {
