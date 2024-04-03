@@ -1503,7 +1503,7 @@ const start = async () => {
  
 
 
-            //5. получить новые проекты, повторить с интервалом 20 минут
+            //5. получить новые проекты, повторить с интервалом 2 минуты
             let timerId = setInterval(async() => {
                 console.log("START GET PROJECT NEW...")
                 const projects = await getProjectNew()
@@ -1520,7 +1520,7 @@ const start = async () => {
                 })
                 
                 i++ // счетчик интервалов
-            }, 1800000); //каждые 30 минут
+            }, 120000); //каждые 2 минуты
  
         });
 
