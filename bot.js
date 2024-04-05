@@ -321,11 +321,11 @@ async function addProject(title, time, teh, managerId, companyId, worklist, equi
                 },
                 "Специфика": {
                     "multi_select": [
-                        {
-                            "id": "6a7d3807-9581-45f8-afb7-f8bd33867daf",
-                            "name": "Стандарт",
-                            "color": "green"
-                        }
+                        // {
+                        //     "id": "6a7d3807-9581-45f8-afb7-f8bd33867daf",
+                        //     "name": "Стандарт",
+                        //     "color": "green"
+                        // }
                     ]
                 },
             }
@@ -411,11 +411,11 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
                 },
                 "Специфика": {
                     "multi_select": [
-                        {
-                            "id": "6a7d3807-9581-45f8-afb7-f8bd33867daf",
-                            "name": "Стандарт",
-                            "color": "green"
-                        }
+                        // {
+                        //     "id": "6a7d3807-9581-45f8-afb7-f8bd33867daf",
+                        //     "name": "Стандарт",
+                        //     "color": "green"
+                        // }
                     ]
                 },
             }

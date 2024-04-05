@@ -505,6 +505,10 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                                 "name": "Высотные работы",
                                 "color": "brown"
                             },
+                            {
+                                "name": "Постер",
+                                "color": "blue"
+                            },
                         ]
                     }
                 },
