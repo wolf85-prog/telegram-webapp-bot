@@ -85,7 +85,7 @@ module.exports = {
        {
            id: 8,
            name: 'RIGGERS',
-           icon: 'Stage Ground',
+           icon: 'Riggers \/ Ground',
            models: [
                {id: 1, name: 'Верхний Риггер',},
                {id: 2, name: 'Нижний Риггер',},
