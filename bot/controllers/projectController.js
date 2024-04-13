@@ -273,7 +273,7 @@ class ProjectController {
                         const newProject = {
                             id: project.id,
                             title: project.title,
-                            date_start: project.date_start,
+                            date_start: project.start_start,
                             date_end: project.date_end,
                             status: project.status,
                             managerId: project.manager,
