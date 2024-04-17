@@ -568,7 +568,7 @@ bot.on('message', async (msg) => {
     //console.log("msg: ", msg)
     //console.log("text: ", text)
 
-    if (fromId !== '-1002143834257') {
+    if (fromId !== -1002143834257) {
     
     try {
         // обработка команд
@@ -576,7 +576,7 @@ bot.on('message', async (msg) => {
         if (text === '/start') {
             //добавить пользователя в бд
             const user = await UserBot.findOne({where:{chatId: chatId.toString()}})
-            if (!user) {
+            if (!user && chatId !== '-1002143834257') {
                 await UserBot.create({ firstname: firstname, lastname: lastname, chatId: chatId })
                 console.log('Пользователь добавлен в БД')
             } else {
