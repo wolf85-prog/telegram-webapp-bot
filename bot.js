@@ -568,187 +568,153 @@ bot.on('message', async (msg) => {
     //console.log("msg: ", msg)
     //console.log("text: ", text)
 
-    if (fromId !== -1002143834257) {
-    
-    try {
-        // обработка команд
-        // команда Старт
-        if (text === '/start') {
-            //добавить пользователя в бд
-            const user = await UserBot.findOne({where:{chatId: chatId.toString()}})
-            if (!user && chatId !== '-1002143834257') {
-                await UserBot.create({ firstname: firstname, lastname: lastname, chatId: chatId })
-                console.log('Пользователь добавлен в БД')
-            } else {
-                console.log('Отмена добавления в БД. Пользователь уже существует')
+    if (fromId !== -1002143834257) {   
+        try {
+            // обработка команд
+            // команда Старт
+            if (text === '/start') {
+                //добавить пользователя в бд
+                const user = await UserBot.findOne({where:{chatId: chatId.toString()}})
+                if (!user && chatId !== '-1002143834257') {
+                    await UserBot.create({ firstname: firstname, lastname: lastname, chatId: chatId })
+                    console.log('Пользователь добавлен в БД')
+                } else {
+                    console.log('Отмена добавления в БД. Пользователь уже существует')
+                }
+            
+                // await bot.sendMessage(chatId, 'Добро пожаловать в телеграм-бот U.L.E.Y_Projects. Смотрите и создавайте проекты U.L.E.Y в ' +
+                //     'web-приложении прямо из мессенджера Telegram.', {
+                //     reply_markup: ({
+                //         inline_keyboard:[
+                //             [{text: 'Информация', callback_data:'Информация'}, {text: 'Настройки', callback_data:'Настройки'}],
+                //             [{text: 'Открыть проекты U.L.E.Y', web_app: {url: webAppUrl}}],
+                //         ]
+                //     })
+                // })
+
+                await bot.sendPhoto(chatId, 'https://proj.uley.team/upload/2023-12-26T12:00:12.460Z.png', {
+                    reply_markup: ({
+                        inline_keyboard:[
+                            [{text: 'Поехали!', web_app: {url: webAppUrl}}],
+                        ]
+                    })
+                })
+
+
             }
         
-            // await bot.sendMessage(chatId, 'Добро пожаловать в телеграм-бот U.L.E.Y_Projects. Смотрите и создавайте проекты U.L.E.Y в ' +
-            //     'web-приложении прямо из мессенджера Telegram.', {
-            //     reply_markup: ({
-            //         inline_keyboard:[
-            //             [{text: 'Информация', callback_data:'Информация'}, {text: 'Настройки', callback_data:'Настройки'}],
-            //             [{text: 'Открыть проекты U.L.E.Y', web_app: {url: webAppUrl}}],
-            //         ]
-            //     })
-            // })
-
-            await bot.sendPhoto(chatId, 'https://proj.uley.team/upload/2023-12-26T12:00:12.460Z.png', {
-                reply_markup: ({
-                    inline_keyboard:[
-                        [{text: 'Поехали!', web_app: {url: webAppUrl}}],
-                    ]
+            // команда Меню
+            if (text === '/menu') {
+                await bot.sendMessage(chatId, 'Смотрите и создавайте проекты U.L.E.Y в web-приложении прямо из мессенджера Telegram.', {
+                    reply_markup: ({
+                        inline_keyboard:[
+                            [{text: 'Информация', callback_data:'Информация'}, {text: 'Настройки', callback_data:'Настройки'}],
+                            [{text: 'Открыть проекты U.L.E.Y', web_app: {url: webAppUrl}}],
+                        ]
+                    })
                 })
-            })
+            }     
+        
+            // команда Информация
+            if (text === '/information') {
+                const user = await UserBot.findOne({where:{chatId: chatId.toString()}})
+                await bot.sendMessage(chatId, `Приветствуем тебя, ${firstname} ${lastname}! Чат-бот предназначен для создания проектов в U.L.E.Y и общения заказчика с администратором проектов.`);
+            }
 
 
-        }
-      
-        // команда Меню
-        if (text === '/menu') {
-            await bot.sendMessage(chatId, 'Смотрите и создавайте проекты U.L.E.Y в web-приложении прямо из мессенджера Telegram.', {
-                reply_markup: ({
-                    inline_keyboard:[
-                        [{text: 'Информация', callback_data:'Информация'}, {text: 'Настройки', callback_data:'Настройки'}],
-                        [{text: 'Открыть проекты U.L.E.Y', web_app: {url: webAppUrl}}],
-                    ]
-                })
-            })
-        }     
-      
-        // команда Информация
-        if (text === '/information') {
-            const user = await UserBot.findOne({where:{chatId: chatId.toString()}})
-            await bot.sendMessage(chatId, `Приветствуем тебя, ${firstname} ${lastname}! Чат-бот предназначен для создания проектов в U.L.E.Y и общения заказчика с администратором проектов.`);
-        }
+            // команда Добавить таблицу Претенденты
+            if (text === '/addpretendents') {
+                const project = text.split(' ');
+                console.log(project[1])
+                await newDatabase5(project[1]);
+            }
 
+            if(text.startsWith('/startreports')) {
+                const project = text.split(' ');
 
-        // команда Добавить таблицу Претенденты
-        if (text === '/addpretendents') {
-            const project = text.split(' ');
-            console.log(project[1])
-            await newDatabase5(project[1]);
-        }
+                const project2 = await Project.findOne({ where:{ id: project[1] } })
 
-        if(text.startsWith('/startreports')) {
-            const project = text.split(' ');
-
-            const project2 = await Project.findOne({ where:{ id: project[1] } })
-
-            //начать получать отчеты
-            getReportsTest(project2, bot)
-        }
-
-
-        if(text.startsWith('/startnotif')) {
-            //task1.stop();
-            //console.log("Задача 1 остановлена!");
-            let socket = io(socketUrl);
-            socket.emit("sendNotif", {
-                task: 2
-            }) 
-        }
-
-
-        if(text.startsWith('/startnotionreports')) {
-            const project = text.split(' ');
-
-            const res = await fetch(`${botApiUrl}/project/${project[1]}`)
-            .then((response) => response.json())
-            .then((data) => {
-                console.log("проект найден!") 
                 //начать получать отчеты
-                getReportsNotion(data, bot)                           
-            }); 
-        }
+                getReportsTest(project2, bot)
+            }
 
-        if (text === '/startgetmanagers') {
-                console.log("START GET MANAGERS ALL...")
-                const managers = await getManagersAll()
-                console.log(managers)
 
-                console.log("START GET COMPANY ALL...")
-                const companies = await getCompanyAll()
-                console.log(companies)                
- 
-                //await Manager.truncate();
- 
-                managers.map(async(manager)=> {
-                    const companyObj = companies.find((item)=> item.managers.find((item2)=>item2.id === manager.id))
-                    console.log(companyObj)
+            if(text.startsWith('/startnotif')) {
+                //task1.stop();
+                //console.log("Задача 1 остановлена!");
+                let socket = io(socketUrl);
+                socket.emit("sendNotif", {
+                    task: 2
+                }) 
+            }
 
-                    //найти chatId в БД
-                    //если нашел то ничего не делать иначе создать запись в таблице
-                    const count = await Manager.count();
 
-                    if (count !== 0) {
-                       const findChatId = Manager.findOne({
-                            where: {
-                                chatId: manager.tgID ? manager.tgID : '',
-                            }
-                        })
-                        console.log(findChatId) 
-                        // if (!findChatId) {
-                        //     await Manager.create({ 
-                        //         id: manager.id, 
-                        //         companyId: companyObj.id, 
-                        //         companyName: companyObj.title, 
-                        //         chatId: manager.tgID ? manager.tgID : "", 
-                        //         fio: manager.fio, 
-                        //         phone: manager.phone,  
-                        //     })
-                        // } 
+            if(text.startsWith('/startnotionreports')) {
+                const project = text.split(' ');
 
-                    } else {
-                        await Manager.create({ 
-                            id: manager.id, 
-                            companyId: companyObj.id, 
-                            companyName: companyObj.title, 
-                            chatId: manager.tgID ? manager.tgID : "", 
-                            fio: manager.fio, 
-                            phone: manager.phone,  
-                        })
-                    }              
-                })
-        }
+                const res = await fetch(`${botApiUrl}/project/${project[1]}`)
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log("проект найден!") 
+                    //начать получать отчеты
+                    getReportsNotion(data, bot)                           
+                }); 
+            }
 
-        if (text === '/getprojectnewdate') {
-            console.log("START GET PROJECT NEW...")
-            const projects = await getProjectNew()
-            
-            await ProjectNew.truncate();
+            if (text === '/startgetmanagers') {
+                    console.log("START GET MANAGERS ALL...")
+                    const managers = await getManagersAll()
+                    console.log(managers)
 
-            projects.map(async(project)=> {
-                await ProjectNew.create({ 
-                    id: project.id, 
-                    name: project.name, 
-                    datestart: project.datestart, 
-                    crmID: project.crmID, 
-                })
-            })
-        }
-  
+                    console.log("START GET COMPANY ALL...")
+                    const companies = await getCompanyAll()
+                    console.log(companies)                
+    
+                    //await Manager.truncate();
+    
+                    managers.map(async(manager)=> {
+                        const companyObj = companies.find((item)=> item.managers.find((item2)=>item2.id === manager.id))
+                        console.log(companyObj)
 
-        if (text === '/addnotif') {
-            const task4 = await SoundNotif.create({
-                name: 'Test',
-                text: 'Звуковое оповещение - 15 минут',
-                date: new Date().getTime(),
-                delivered: false,
-                task: 4
-            })
-            console.log("task4: ", task4)
-        }
+                        //найти chatId в БД
+                        //если нашел то ничего не делать иначе создать запись в таблице
+                        const count = await Manager.count();
 
-        if (text === '/addpretendent') {
-            pretendentId = await newDatabase5('f84744b7-29d7-4576-81f4-3fe8a0ee86a2');  
-            console.log("pretendentId: ", pretendentId) 
-        }
+                        if (count !== 0) {
+                        const findChatId = Manager.findOne({
+                                where: {
+                                    chatId: manager.tgID ? manager.tgID : '',
+                                }
+                            })
+                            console.log(findChatId) 
+                            // if (!findChatId) {
+                            //     await Manager.create({ 
+                            //         id: manager.id, 
+                            //         companyId: companyObj.id, 
+                            //         companyName: companyObj.title, 
+                            //         chatId: manager.tgID ? manager.tgID : "", 
+                            //         fio: manager.fio, 
+                            //         phone: manager.phone,  
+                            //     })
+                            // } 
 
-        if (text === '/getprojectnew') {
+                        } else {
+                            await Manager.create({ 
+                                id: manager.id, 
+                                companyId: companyObj.id, 
+                                companyName: companyObj.title, 
+                                chatId: manager.tgID ? manager.tgID : "", 
+                                fio: manager.fio, 
+                                phone: manager.phone,  
+                            })
+                        }              
+                    })
+            }
+
+            if (text === '/getprojectnewdate') {
                 console.log("START GET PROJECT NEW...")
                 const projects = await getProjectNew()
-
+                
                 await ProjectNew.truncate();
 
                 projects.map(async(project)=> {
@@ -758,428 +724,461 @@ bot.on('message', async (msg) => {
                         datestart: project.datestart, 
                         crmID: project.crmID, 
                     })
-                })     
-        }
-
-        if (text === '/getallprojects') {
-            const arrProjects = await getAllProjects()
-            console.log("Новые проекты: ", arrProjects)
-        }
-
-//------------------------------------------------------------------------------------------------
-
-        //обработка контактов
-        if (msg.contact) {
-            await bot.sendMessage(chatId, `Ваш контакт получен!`)
-            const phone = msg.contact.phone_number
-            const firstname = msg.contact.first_name
-            const lastname = msg.contact.last_name ? msg.contact.last_name : ''
-            
-            //const response = await bot.sendContact(chatTelegramId, phone, firstname, lastname, vcard)  
-            //const response2 = await bot.sendContact(chatGiaId, phone, firstname, lastname, vcard)   
-            const text_contact = `${phone} ${firstname} ${lastname}`
-
-            console.log("Отправляю контакт в админ-панель...")
-
-            //отправить сообщение о контакте в админ-панель
-            const convId = await sendMyMessage(text_contact, "text", chatId, messageId)
-                
-                // Подключаемся к серверу socket
-                let socket = io(socketUrl);
-                socket.emit("addUser", chatId)
-                 
-                //отправить сообщение в админку
-                socket.emit("sendMessage", {
-                     senderId: chatId,
-                     receiverId: chatTelegramId,
-                     text: text_contact,
-                     type: 'text',
-                     convId: convId,
-                     messageId: messageId,
-                 })
-        }
-//--------------------------------------------------------------------------------------------------
-        //обработка документов
-        if (msg.document) {
-            console.log(msg.document)
-            const docum = await bot.getFile(msg.document.file_id);
-            try {
-                const res = await fetch(
-                    `https://api.telegram.org/bot${token}/getFile?file_id=${docum.file_id}`
-                );
-
-                // extract the file path
-                const res2 = await res.json();
-                const filePath = res2.result.file_path;
-
-                // now that we've "file path" we can generate the download link
-                const downloadURL = `https://api.telegram.org/file/bot${token}/${filePath}`;
-
-                https.get(downloadURL,(res) => {
-                    const filename = Date.now()
-                    // Image will be stored at this path
-                    let path;
-                    let ras;
-                    if(msg.document) {
-                        ras = msg.document.mime_type.split('/')
-                        //path = `${__dirname}/static/${filename}.${ras[1]}`; 
-                        path = `${__dirname}/static/${msg.document.file_name}`.replaceAll(/\s/g, '_'); 
-                    }
-                    const filePath = fs.createWriteStream(path);
-                    res.pipe(filePath);
-                    filePath.on('finish', async () => {
-                        filePath.close();
-                        console.log('Download Completed: ', path); 
-                        
-                        let convId;
-                        if(msg.document) {
-                            // сохранить отправленное боту сообщение пользователя в БД
-                            convId = await sendMyMessage(`${botApiUrl}/${msg.document.file_name}`.replaceAll(/\s/g, '_'), 'file', chatId, messageId)
-                        }
-
-                        // Подключаемся к серверу socket
-                        let socket = io(socketUrl);
-                        socket.emit("addUser", chatId)
-                        socket.emit("sendMessage", {
-                            senderId: chatId,
-                            receiverId: chatTelegramId,
-                            text: `${botApiUrl}/${msg.document.file_name}`.replaceAll(/\s/g, '_'),
-                            convId: convId,
-                        })
-                    })
                 })
-            } catch (error) {
-                console.log(error.message)
             }
-        }
-//----------------------------------------------------------------------------------------------------------------          
-        //обработка изображений
-        if (msg.photo) {
-            console.log(msg.photo)
-            //console.log(msg.photo.length)
-            const image = await bot.getFile(msg.photo[msg.photo.length-1].file_id);
+    
 
-            try {
-                const res = await fetch(
-                    `https://api.telegram.org/bot${token}/getFile?file_id=${image.file_id}`
-                );
-
-                // extract the file path
-                const res2 = await res.json();
-                const filePath = res2.result.file_path;
-
-                // now that we've "file path" we can generate the download link
-                const downloadURL = `https://api.telegram.org/file/bot${token}/${filePath}`;
-
-                https.get(downloadURL,(res) => {
-                    const filename = Date.now()
-                    // Image will be stored at this path
-                    const path = `${__dirname}/static/${filename}.jpg`; 
-                    const filePath = fs.createWriteStream(path);
-                    res.pipe(filePath);
-                    filePath.on('finish', async () => {
-                        filePath.close();
-                        console.log('Download Completed: ', path); 
-                        
-                        // сохранить отправленное боту сообщение пользователя в БД
-                        const convId = await sendMyMessage(`${botApiUrl}/${filename}.jpg`, 'image', chatId, messageId)
-
-                        // Подключаемся к серверу socket
-                        let socket = io(socketUrl);
-
-                        socket.emit("addUser", chatId)
-                        //socket.on("getUsers", users => {
-                            //console.log("users from bot: ", users);
-                        //})
-
-                        socket.emit("sendMessage", {
-                            senderId: chatId,
-                            receiverId: chatTelegramId,
-                            text: `${botApiUrl}/${filename}.jpg`,
-                            type: 'image',
-                            convId: convId,
-                        })
-                    })
-                })            
-            } catch (error) {
-                console.log(error.message)
-            }
-        }
-//---------------------------------------------------------------------------------------------------------------
-
- //обработка аудио сообщений
- if (msg.voice) {
-    await bot.sendMessage(chatId, `Ваше аудио-сообщение получено!`)
-    const voice = await bot.getFile(msg.voice.file_id);
-
-    try {
-        const res = await fetch(
-            `https://api.telegram.org/bot${token}/getFile?file_id=${voice.file_id}`
-        );
-
-        // extract the file path
-        const res2 = await res.json();
-        const filePath = res2.result.file_path;
-
-        // now that we've "file path" we can generate the download link
-        const downloadURL = `https://api.telegram.org/file/bot${token}/${filePath}`;
-
-        https.get(downloadURL,(res) => {
-            const filename = Date.now()
-            // Image will be stored at this path
-            let path;
-            let ras;
-            if(msg.voice) {
-                ras = msg.voice.mime_type.split('/')
-                //path = `${__dirname}/static/${filename}.${ras[1]}`; 
-                path = `${__dirname}/static/${msg.voice.file_unique_id}.${ras[1]}`; 
-            }
-            const filePath = fs.createWriteStream(path);
-            res.pipe(filePath);
-            filePath.on('finish', async () => {
-                filePath.close();
-                console.log('Download Completed: ', path); 
-                
-                let convId;
-                if(msg.voice) {
-                    // сохранить отправленное боту сообщение пользователя в БД
-                    convId = await sendMyMessage(`${botApiUrl}/${msg.voice.file_unique_id}.${ras[1]}`, 'file', chatId, messageId)
-                }
-
-                //Подключаемся к серверу socket
-                let socket = io(socketUrl);
-                socket.emit("addUser", chatId)
-                socket.emit("sendMessage", {
-                    senderId: chatId,
-                    receiverId: chatTelegramId,
-                    text: `${botApiUrl}/${msg.voice.file_unique_id}.${ras[1]}`,
-                    convId: convId,
+            if (text === '/addnotif') {
+                const task4 = await SoundNotif.create({
+                    name: 'Test',
+                    text: 'Звуковое оповещение - 15 минут',
+                    date: new Date().getTime(),
+                    delivered: false,
+                    task: 4
                 })
-            })
-        })            
-    } catch (error) {
-        console.log(error.message)
-    }
-}
+                console.log("task4: ", task4)
+            }
 
-//----------------------------------------------------------------------------------------------------------------      
-        
-        //обработка сообщений    
-        if ((text || '')[0] !== '/' && text) {       
-            if (text.startsWith("Reply")) {           
-                await bot.sendMessage(text.substring(6, text.indexOf('.')), text.slice(text.indexOf('.') + 2)) 
+            if (text === '/addpretendent') {
+                pretendentId = await newDatabase5('f84744b7-29d7-4576-81f4-3fe8a0ee86a2');  
+                console.log("pretendentId: ", pretendentId) 
+            }
 
-            // Проект успешно создан
-            } else if (text.startsWith('Проект успешно создан')) {           
-                const response = await bot.sendMessage(chatTelegramId, `${text} \n \n от ${firstname} ${lastname} ${chatId}`)
+            if (text === '/getprojectnew') {
+                    console.log("START GET PROJECT NEW...")
+                    const projects = await getProjectNew()
 
-                console.log("Отправляю сообщение в админ-панель...")
+                    await ProjectNew.truncate();
 
-                //отправить сообщение о создании проекта в админ-панель
-                const convId = await sendMyMessage(text, "text", chatId, parseInt(response.message_id)-1)
+                    projects.map(async(project)=> {
+                        await ProjectNew.create({ 
+                            id: project.id, 
+                            name: project.name, 
+                            datestart: project.datestart, 
+                            crmID: project.crmID, 
+                        })
+                    })     
+            }
+
+            if (text === '/getallprojects') {
+                const arrProjects = await getAllProjects()
+                console.log("Новые проекты: ", arrProjects)
+            }
+
+    //------------------------------------------------------------------------------------------------
+
+            //обработка контактов
+            if (msg.contact) {
+                await bot.sendMessage(chatId, `Ваш контакт получен!`)
+                const phone = msg.contact.phone_number
+                const firstname = msg.contact.first_name
+                const lastname = msg.contact.last_name ? msg.contact.last_name : ''
                 
-                // Подключаемся к серверу socket
-                let socket = io(socketUrl);
-                socket.emit("addUser", chatId)
-                 
-                //отправить сообщение в админку
-                socket.emit("sendMessage", {
-                     senderId: chatId,
-                     receiverId: chatTelegramId,
-                     text: text,
-                     type: 'text',
-                     convId: convId,
-                     messageId: response.message_id,
-                 })
+                //const response = await bot.sendContact(chatTelegramId, phone, firstname, lastname, vcard)  
+                //const response2 = await bot.sendContact(chatGiaId, phone, firstname, lastname, vcard)   
+                const text_contact = `${phone} ${firstname} ${lastname}`
 
+                console.log("Отправляю контакт в админ-панель...")
 
-                //массив специалистов
-                let specArr = []
-                console.log("Сохраняю Worklist в БД: ", Worklist)
-                if (Worklist !== '') {
-                    specArr = Worklist.map(item => ({
-                        spec: item.spec,
-                        cat: item.cat,
-                        count: item.count,
-                    }));
-                }
-
-                //массив оборудования
-                let equipArr = []
-                console.log("Сохраняю Equipmentlist в БД: ", Equipmentlist)
-                if (Equipmentlist !== '') {
-                    equipArr = Equipmentlist.map(item => ({
-                        name: item.spec,
-                        subname: item.subname,
-                        cat: item.cat,
-                        count: item.count,
-                    }));
-                } 
-
+                //отправить сообщение о контакте в админ-панель
+                const convId = await sendMyMessage(text_contact, "text", chatId, messageId)
+                    
+                    // Подключаемся к серверу socket
+                    let socket = io(socketUrl);
+                    socket.emit("addUser", chatId)
+                    
+                    //отправить сообщение в админку
+                    socket.emit("sendMessage", {
+                        senderId: chatId,
+                        receiverId: chatTelegramId,
+                        text: text_contact,
+                        type: 'text',
+                        convId: convId,
+                        messageId: messageId,
+                    })
+            }
+    //--------------------------------------------------------------------------------------------------
+            //обработка документов
+            if (msg.document) {
+                console.log(msg.document)
+                const docum = await bot.getFile(msg.document.file_id);
                 try {
-                    //создание проекта в БД
-                    const res = await Project.create({ 
-                        name: projectName, 
-                        datestart: dateStart, 
-                        spec: JSON.stringify(specArr),
-                        equipment: JSON.stringify(equipArr),
-                        teh: Teh, 
-                        geo: Geo, 
-                        managerId: manager_id, 
-                        companyId: company_id, 
-                        chatId: chatId
+                    const res = await fetch(
+                        `https://api.telegram.org/bot${token}/getFile?file_id=${docum.file_id}`
+                    );
+
+                    // extract the file path
+                    const res2 = await res.json();
+                    const filePath = res2.result.file_path;
+
+                    // now that we've "file path" we can generate the download link
+                    const downloadURL = `https://api.telegram.org/file/bot${token}/${filePath}`;
+
+                    https.get(downloadURL,(res) => {
+                        const filename = Date.now()
+                        // Image will be stored at this path
+                        let path;
+                        let ras;
+                        if(msg.document) {
+                            ras = msg.document.mime_type.split('/')
+                            //path = `${__dirname}/static/${filename}.${ras[1]}`; 
+                            path = `${__dirname}/static/${msg.document.file_name}`.replaceAll(/\s/g, '_'); 
+                        }
+                        const filePath = fs.createWriteStream(path);
+                        res.pipe(filePath);
+                        filePath.on('finish', async () => {
+                            filePath.close();
+                            console.log('Download Completed: ', path); 
+                            
+                            let convId;
+                            if(msg.document) {
+                                // сохранить отправленное боту сообщение пользователя в БД
+                                convId = await sendMyMessage(`${botApiUrl}/${msg.document.file_name}`.replaceAll(/\s/g, '_'), 'file', chatId, messageId)
+                            }
+
+                            // Подключаемся к серверу socket
+                            let socket = io(socketUrl);
+                            socket.emit("addUser", chatId)
+                            socket.emit("sendMessage", {
+                                senderId: chatId,
+                                receiverId: chatTelegramId,
+                                text: `${botApiUrl}/${msg.document.file_name}`.replaceAll(/\s/g, '_'),
+                                convId: convId,
+                            })
+                        })
                     })
-
-                    //очистить переменные
-                    console.log("Очищаю переменные...")
-                    projectName = '';
-                    projectDate = '';
-                    projectTime = '';
-                    dateStart = '';
-                    Teh = '';
-                    //Worklist = [];
-                    //Equipmentlist = [];
-                    manager_id = '';
-                    company_id = '';
-                    Geo = '';
-
-                    console.log('Проект успешно добавлен в БД! Project: ' + res.name)  
-                    
-                    const project = await Project.findOne({where:{id: res.id}})
-                
-//-------------------------------------------------------------------------------------------------------------------------------
-//--------------------------- Создание проекта ----------------------------------------------------------------------------------
-//-------------------------------------------------------------------------------------------------------------------------------
-                    //добавление геопозиции в БД Площадки (Адрес) и добавление проекта
-                    if (project.geo != '') {
-                        projectId = await addAddress(project.geo, project.name, project.datestart, project.teh, project.managerId, project.companyId, Worklist, Equipmentlist);
-                    } else {
-                        while (true) {
-                            projectId = await addProjectNotGeo(project.name, project.datestart, project.teh, project.managerId, project.companyId, Worklist, Equipmentlist);
-                            console.log("1. Проект без адреса успешно добавлен! " + projectId)             
-                            if (projectId) break
-                            else {
-                                console.log("1. Ошибка создания проекта! ")
-                            }                          
-                        }
-                        //добавление проекта с названием проекта в базу
-                        
-                        if (projectId) {
-                            console.log("Текущая дата и время: ", new Date())
-                            let topId, mainId, zapasId, pretendentId, equipId 
-                            
-                            //создать верхний блок 
-                            while (!topId) {                                
-                                topId = await addTable(projectId).catch(() => null); 
-                                await delay(2000);                                                        
-                            }
-                            
-
-                            //создание базы данных "Основной состав"
-                            let i = 0;
-                            while (!mainId) {  
-                                //console.log("data: ", projectId, Worklist, project.datestart)
-                                mainId = await newDatabase2(projectId, Worklist, project.datestart);  
-                                console.log("mainId: ", mainId)  
-                                if (mainId) break; // (*)                           
-                                await delay(2000);                                                  
-                            }
-
-                            //создание базы данных "Запасной состав"
-                            // while (!zapasId) {                                
-                            //     zapasId = await newDatabase3(projectId);  
-                            //     console.log("zapasId: ", zapasId) 
-                            //     if (zapasId) break; // (*)   
-                            //     await delay(2000);                                                        
-                            // }
-                            
-                            //создание базы данных "Претенденты"
-                            while (!pretendentId) {                                
-                                pretendentId = await newDatabase5(projectId);  
-                                console.log("pretendentId: ", pretendentId) 
-                                if (pretendentId) break; // (*)   
-                                await delay(2000);                                                          
-                            }
-
-                            //создание базы данных "Оборудование"
-                            while (!equipId) {                                
-                                equipId = await newDatabase4(projectId, Equipmentlist);    
-                                console.log("equipId: ", equipId) 
-                                if (equipId) break; // (*)   
-                                await delay(2000);                                                      
-                            }                             
-                            
-                        }
-                    }
-
-                    //обновить проект 
-                    await Project.update({projectId: projectId},{where: {id: res.id}})
-
-                    // отправить сообщение пользователю через 30 секунд
-                    setTimeout(() => {bot.sendMessage(project.chatId, 'Ваша заявка принята!')}, 25000) // 30 секунд                   
-                    
-                    const project2 = await Project.findOne({where:{id: res.id}})  
-                    
-                    //начать получать отчеты
-                    getReports(project2, bot)
-                    
-                                    
                 } catch (error) {
                     console.log(error.message)
                 }
-
-            } else {
-//----------------------------------------------------------------------------------------------------------------
-                //обработка исходящего сообщения
-
-                //добавление пользователя в БД
-                const user = await UserBot.findOne({where:{chatId: chatId.toString()}})
-                if (!user) {
-                    await UserBot.create({ firstname: firstname, lastname: lastname, chatId: chatId })
-                    console.log('Пользователь добавлен в БД')
-                } else {
-                    console.log('Отмена операции! Пользователь уже существует')
-                }
-
-                //обработка пересылаемых сообщений
-                let str_text;
-                let reply_id;
-                if (msg.reply_to_message) {
-                    const message = await Message.findOne({where:{messageId: msg.reply_to_message.message_id.toString()}}) 
-                   str_text = `${message.dataValues.text}_reply_${text}`  
-                   reply_id = msg.reply_to_message.message_id              
-                } else {
-                    str_text = text
-                }
-
-                // сохранить отправленное боту сообщение пользователя в БД
-                const convId = await sendMyMessage(str_text, 'text', chatId, messageId, reply_id)
-
-                // Подключаемся к серверу socket
-                let socket = io(socketUrl);
-
-                socket.emit("addUser", chatId)
-
-                socket.emit("sendMessage", {
-                    senderId: chatId,
-                    receiverId: chatTelegramId,
-                    text: str_text,
-                    type: 'text',
-                    convId: convId,
-                    messageId: messageId,
-                    replyId: reply_id,
-                })
-
-
-                // ответ бота
-                //await bot.sendMessage(chatId, `Ваше сообщение "${text}" отправлено!`)
-                await bot.sendMessage(chatTelegramId, `${str_text} \n \n от ${firstname} ${lastname} ${chatId}`)           
             }
-        }
+    //----------------------------------------------------------------------------------------------------------------          
+            //обработка изображений
+            if (msg.photo) {
+                console.log(msg.photo)
+                //console.log(msg.photo.length)
+                const image = await bot.getFile(msg.photo[msg.photo.length-1].file_id);
 
-    } catch (error) {
-        console.log('Произошла непредвиденная ошибка! ', error.message)
-    }
+                try {
+                    const res = await fetch(
+                        `https://api.telegram.org/bot${token}/getFile?file_id=${image.file_id}`
+                    );
+
+                    // extract the file path
+                    const res2 = await res.json();
+                    const filePath = res2.result.file_path;
+
+                    // now that we've "file path" we can generate the download link
+                    const downloadURL = `https://api.telegram.org/file/bot${token}/${filePath}`;
+
+                    https.get(downloadURL,(res) => {
+                        const filename = Date.now()
+                        // Image will be stored at this path
+                        const path = `${__dirname}/static/${filename}.jpg`; 
+                        const filePath = fs.createWriteStream(path);
+                        res.pipe(filePath);
+                        filePath.on('finish', async () => {
+                            filePath.close();
+                            console.log('Download Completed: ', path); 
+                            
+                            // сохранить отправленное боту сообщение пользователя в БД
+                            const convId = await sendMyMessage(`${botApiUrl}/${filename}.jpg`, 'image', chatId, messageId)
+
+                            // Подключаемся к серверу socket
+                            let socket = io(socketUrl);
+
+                            socket.emit("addUser", chatId)
+                            //socket.on("getUsers", users => {
+                                //console.log("users from bot: ", users);
+                            //})
+
+                            socket.emit("sendMessage", {
+                                senderId: chatId,
+                                receiverId: chatTelegramId,
+                                text: `${botApiUrl}/${filename}.jpg`,
+                                type: 'image',
+                                convId: convId,
+                            })
+                        })
+                    })            
+                } catch (error) {
+                    console.log(error.message)
+                }
+            }
+    //---------------------------------------------------------------------------------------------------------------
+
+            //обработка аудио сообщений
+            if (msg.voice) {
+                await bot.sendMessage(chatId, `Ваше аудио-сообщение получено!`)
+                const voice = await bot.getFile(msg.voice.file_id);
+
+                try {
+                    const res = await fetch(
+                        `https://api.telegram.org/bot${token}/getFile?file_id=${voice.file_id}`
+                    );
+
+                    // extract the file path
+                    const res2 = await res.json();
+                    const filePath = res2.result.file_path;
+
+                    // now that we've "file path" we can generate the download link
+                    const downloadURL = `https://api.telegram.org/file/bot${token}/${filePath}`;
+
+                    https.get(downloadURL,(res) => {
+                        const filename = Date.now()
+                        // Image will be stored at this path
+                        let path;
+                        let ras;
+                        if(msg.voice) {
+                            ras = msg.voice.mime_type.split('/')
+                            //path = `${__dirname}/static/${filename}.${ras[1]}`; 
+                            path = `${__dirname}/static/${msg.voice.file_unique_id}.${ras[1]}`; 
+                        }
+                        const filePath = fs.createWriteStream(path);
+                        res.pipe(filePath);
+                        filePath.on('finish', async () => {
+                            filePath.close();
+                            console.log('Download Completed: ', path); 
+                            
+                            let convId;
+                            if(msg.voice) {
+                                // сохранить отправленное боту сообщение пользователя в БД
+                                convId = await sendMyMessage(`${botApiUrl}/${msg.voice.file_unique_id}.${ras[1]}`, 'file', chatId, messageId)
+                            }
+
+                            //Подключаемся к серверу socket
+                            let socket = io(socketUrl);
+                            socket.emit("addUser", chatId)
+                            socket.emit("sendMessage", {
+                                senderId: chatId,
+                                receiverId: chatTelegramId,
+                                text: `${botApiUrl}/${msg.voice.file_unique_id}.${ras[1]}`,
+                                convId: convId,
+                            })
+                        })
+                    })            
+                } catch (error) {
+                    console.log(error.message)
+                }
+            }
+
+    //----------------------------------------------------------------------------------------------------------------      
+            
+            //обработка сообщений    
+            if ((text || '')[0] !== '/' && text) {       
+                if (text.startsWith("Reply")) {           
+                    await bot.sendMessage(text.substring(6, text.indexOf('.')), text.slice(text.indexOf('.') + 2)) 
+
+                // Проект успешно создан
+                } else if (text.startsWith('Проект успешно создан')) {           
+                    const response = await bot.sendMessage(chatTelegramId, `${text} \n \n от ${firstname} ${lastname} ${chatId}`)
+
+                    console.log("Отправляю сообщение в админ-панель...")
+
+                    //отправить сообщение о создании проекта в админ-панель
+                    const convId = await sendMyMessage(text, "text", chatId, parseInt(response.message_id)-1)
+                    
+                    // Подключаемся к серверу socket
+                    let socket = io(socketUrl);
+                    socket.emit("addUser", chatId)
+                    
+                    //отправить сообщение в админку
+                    socket.emit("sendMessage", {
+                        senderId: chatId,
+                        receiverId: chatTelegramId,
+                        text: text,
+                        type: 'text',
+                        convId: convId,
+                        messageId: response.message_id,
+                    })
+
+
+                    //массив специалистов
+                    let specArr = []
+                    console.log("Сохраняю Worklist в БД: ", Worklist)
+                    if (Worklist !== '') {
+                        specArr = Worklist.map(item => ({
+                            spec: item.spec,
+                            cat: item.cat,
+                            count: item.count,
+                        }));
+                    }
+
+                    //массив оборудования
+                    let equipArr = []
+                    console.log("Сохраняю Equipmentlist в БД: ", Equipmentlist)
+                    if (Equipmentlist !== '') {
+                        equipArr = Equipmentlist.map(item => ({
+                            name: item.spec,
+                            subname: item.subname,
+                            cat: item.cat,
+                            count: item.count,
+                        }));
+                    } 
+
+                    try {
+                        //создание проекта в БД
+                        const res = await Project.create({ 
+                            name: projectName, 
+                            datestart: dateStart, 
+                            spec: JSON.stringify(specArr),
+                            equipment: JSON.stringify(equipArr),
+                            teh: Teh, 
+                            geo: Geo, 
+                            managerId: manager_id, 
+                            companyId: company_id, 
+                            chatId: chatId
+                        })
+
+                        //очистить переменные
+                        console.log("Очищаю переменные...")
+                        projectName = '';
+                        projectDate = '';
+                        projectTime = '';
+                        dateStart = '';
+                        Teh = '';
+                        //Worklist = [];
+                        //Equipmentlist = [];
+                        manager_id = '';
+                        company_id = '';
+                        Geo = '';
+
+                        console.log('Проект успешно добавлен в БД! Project: ' + res.name)  
+                        
+                        const project = await Project.findOne({where:{id: res.id}})
+                    
+    //-------------------------------------------------------------------------------------------------------------------------------
+    //--------------------------- Создание проекта ----------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------------------------------------------------------
+                        //добавление геопозиции в БД Площадки (Адрес) и добавление проекта
+                        if (project.geo != '') {
+                            projectId = await addAddress(project.geo, project.name, project.datestart, project.teh, project.managerId, project.companyId, Worklist, Equipmentlist);
+                        } else {
+                            while (true) {
+                                projectId = await addProjectNotGeo(project.name, project.datestart, project.teh, project.managerId, project.companyId, Worklist, Equipmentlist);
+                                console.log("1. Проект без адреса успешно добавлен! " + projectId)             
+                                if (projectId) break
+                                else {
+                                    console.log("1. Ошибка создания проекта! ")
+                                }                          
+                            }
+                            //добавление проекта с названием проекта в базу
+                            
+                            if (projectId) {
+                                console.log("Текущая дата и время: ", new Date())
+                                let topId, mainId, zapasId, pretendentId, equipId 
+                                
+                                //создать верхний блок 
+                                while (!topId) {                                
+                                    topId = await addTable(projectId).catch(() => null); 
+                                    await delay(2000);                                                        
+                                }
+                                
+
+                                //создание базы данных "Основной состав"
+                                let i = 0;
+                                while (!mainId) {  
+                                    //console.log("data: ", projectId, Worklist, project.datestart)
+                                    mainId = await newDatabase2(projectId, Worklist, project.datestart);  
+                                    console.log("mainId: ", mainId)  
+                                    if (mainId) break; // (*)                           
+                                    await delay(2000);                                                  
+                                }
+
+                                //создание базы данных "Запасной состав"
+                                // while (!zapasId) {                                
+                                //     zapasId = await newDatabase3(projectId);  
+                                //     console.log("zapasId: ", zapasId) 
+                                //     if (zapasId) break; // (*)   
+                                //     await delay(2000);                                                        
+                                // }
+                                
+                                //создание базы данных "Претенденты"
+                                while (!pretendentId) {                                
+                                    pretendentId = await newDatabase5(projectId);  
+                                    console.log("pretendentId: ", pretendentId) 
+                                    if (pretendentId) break; // (*)   
+                                    await delay(2000);                                                          
+                                }
+
+                                //создание базы данных "Оборудование"
+                                while (!equipId) {                                
+                                    equipId = await newDatabase4(projectId, Equipmentlist);    
+                                    console.log("equipId: ", equipId) 
+                                    if (equipId) break; // (*)   
+                                    await delay(2000);                                                      
+                                }                             
+                                
+                            }
+                        }
+
+                        //обновить проект 
+                        await Project.update({projectId: projectId},{where: {id: res.id}})
+
+                        // отправить сообщение пользователю через 30 секунд
+                        setTimeout(() => {bot.sendMessage(project.chatId, 'Ваша заявка принята!')}, 25000) // 30 секунд                   
+                        
+                        const project2 = await Project.findOne({where:{id: res.id}})  
+                        
+                        //начать получать отчеты
+                        getReports(project2, bot)
+                        
+                                        
+                    } catch (error) {
+                        console.log(error.message)
+                    }
+
+                } else {
+    //----------------------------------------------------------------------------------------------------------------
+                    //обработка исходящего сообщения
+
+                    //добавление пользователя в БД
+                    const user = await UserBot.findOne({where:{chatId: chatId.toString()}})
+                    if (!user) {
+                        await UserBot.create({ firstname: firstname, lastname: lastname, chatId: chatId })
+                        console.log('Пользователь добавлен в БД')
+                    } else {
+                        console.log('Отмена операции! Пользователь уже существует')
+                    }
+
+                    //обработка пересылаемых сообщений
+                    let str_text;
+                    let reply_id;
+                    if (msg.reply_to_message) {
+                        const message = await Message.findOne({where:{messageId: msg.reply_to_message.message_id.toString()}}) 
+                    str_text = `${message.dataValues.text}_reply_${text}`  
+                    reply_id = msg.reply_to_message.message_id              
+                    } else {
+                        str_text = text
+                    }
+
+                    // сохранить отправленное боту сообщение пользователя в БД
+                    const convId = await sendMyMessage(str_text, 'text', chatId, messageId, reply_id)
+
+                    // Подключаемся к серверу socket
+                    let socket = io(socketUrl);
+
+                    socket.emit("addUser", chatId)
+
+                    socket.emit("sendMessage", {
+                        senderId: chatId,
+                        receiverId: chatTelegramId,
+                        text: str_text,
+                        type: 'text',
+                        convId: convId,
+                        messageId: messageId,
+                        replyId: reply_id,
+                    })
+
+
+                    // ответ бота
+                    //await bot.sendMessage(chatId, `Ваше сообщение "${text}" отправлено!`)
+                    await bot.sendMessage(chatTelegramId, `${str_text} \n \n от ${firstname} ${lastname} ${chatId}`)           
+                }
+            }
+
+        } catch (error) {
+            console.log('Произошла непредвиденная ошибка! ', error.message)
+        }
     }
     
   });
