@@ -564,10 +564,12 @@ bot.on('message', async (msg) => {
     const lastname = msg.from.last_name
     const text = msg.text ? msg.text : '';
     const messageId = msg.message_id;
-
+    const fromId = msg.from.id;
     //console.log("msg: ", msg)
     //console.log("text: ", text)
 
+    if (fromId !== '-1002143834257') {
+    
     try {
         // обработка команд
         // команда Старт
@@ -1177,6 +1179,7 @@ bot.on('message', async (msg) => {
 
     } catch (error) {
         console.log('Произошла непредвиденная ошибка! ', error.message)
+    }
     }
     
   });
