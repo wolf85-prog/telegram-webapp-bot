@@ -565,7 +565,7 @@ bot.on('message', async (msg) => {
     const text = msg.text ? msg.text : '';
     const messageId = msg.message_id;
     const fromId = msg.from.id;
-    //console.log("msg: ", msg)
+    console.log("msg: ", msg)
     //console.log("text: ", text)
 
     if (fromId !== -1002143834257) {   
