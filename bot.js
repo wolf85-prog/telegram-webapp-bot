@@ -569,7 +569,9 @@ bot.on('message', async (msg) => {
     console.log("msg: ", msg)
     //console.log("text: ", text)
 
-    if (chatId !== '-1002143834257') {   
+    if (chatId === '-1002143834257') { 
+        console.log('Заблокирован id -1002143834257')
+    } else { 
         try {
             // обработка команд
             // команда Старт
