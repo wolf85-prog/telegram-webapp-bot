@@ -595,7 +595,7 @@ bot.on('message', async (msg) => {
                 //     })
                 // })
 
-                await bot.sendPhoto(chatId, 'https://proj.uley.team/upload/2023-12-26T12:00:12.460Z.png', {
+                await bot.sendPhoto(chatId, 'https://proj.uley.team/upload/2024-05-18T09:08:53.561Z.jpg', {
                     reply_markup: ({
                         inline_keyboard:[
                             [{text: 'Поехали!', web_app: {url: webAppUrl}}],
