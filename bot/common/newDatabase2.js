@@ -54,7 +54,7 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                                 "color": "pink"
                             },
                             {
-                                "name": "Полный цикл",
+                                "name": "Репетиция",
                                 "color": "orange"
                             },
                             {
@@ -62,48 +62,52 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                                 "color": "blue"
                             },
                             {
-                                "name": "Эфир",
+                                "name": "Полный цикл",
                                 "color": "green"
                             },
                             {
-                                "name": "Тесты \/ Чеки",
+                                "name": "Тесты \/ чеки",
                                 "color": "purple"
                             },
                             {
-                                "name": "Сборы",
+                                "name": "Съемки",
                                 "color": "pink"
                             },
                             {
-                                "name": "Работы на складе",
+                                "name": "Эфир",
                                 "color": "orange"
                             },
                             {
-                                "name": "Выезд \/ Перелет",
+                                "name": "Работы на складе",
                                 "color": "blue"
                             },
                             {
-                                "name": "Водитель ТС",
+                                "name": "Запасной состав",
                                 "color": "green"
                             },
                             {
-                                "name": "Доставка",
+                                "name": "Выезд \/ Перелет",
                                 "color": "purple"
+                            },
+                            {
+                                "name": "Водитель ТС",
+                                "color": "pink"
+                            },
+                            {
+                                "name": "Доставка",
+                                "color": "orange"
+                            },                          
+                            {
+                                "name": "Сборый",
+                                "color": "blue"
                             },
                             {
                                 "name": "Отмена",
                                 "color": "pink"
                             },
                             {
-                                "name": "Запасной состав",
-                                "color": "orange"
-                            },
-                            {
                                 "name": "Постер",
-                                "color": "blue"
-                            },
-                            {
-                                "name": "Репетиция",
-                                "color": "green"
+                                "color": "gray"
                             },
                         ]
                     }
@@ -534,7 +538,23 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                           ]
                     }
                 },
-                "10. Такси": {
+                "10. Самозанятость": {
+                    "type": "rollup",
+                    "rollup": {
+                        "rollup_property_name": "Specialization",
+                        "relation_property_name": "04. ФИО",
+                        "function": "show_original"
+                    }
+                },
+                "11. Договор": {
+                    "type": "rollup",
+                    "rollup": {
+                        "rollup_property_name": "Specialization",
+                        "relation_property_name": "04. ФИО",
+                        "function": "show_original"
+                    }
+                },
+                "12. Такси": {
                     "type": "checkbox",
                     "checkbox": {}
                 },
