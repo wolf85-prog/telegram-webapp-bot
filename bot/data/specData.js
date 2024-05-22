@@ -4,6 +4,7 @@ module.exports = {
            id: 1,
            name: 'SOUND',
            icon: 'Sound',
+           notion: '⇩ Sound ⇩',
            models: [
                {id: 1, name: 'Звукорежиссер',},
                {id: 2, name: 'Системный инженер',},

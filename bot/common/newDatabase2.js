@@ -66,7 +66,7 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                                 "color": "green"
                             },
                             {
-                                "name": "Тесты \/ чеки",
+                                "name": "Тесты \/ Чеки",
                                 "color": "purple"
                             },
                             {
@@ -98,7 +98,7 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                                 "color": "orange"
                             },                          
                             {
-                                "name": "Сборый",
+                                "name": "Сборы",
                                 "color": "blue"
                             },
                             {
@@ -123,7 +123,7 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                     "multi_select": {
                         "options": [
                             {
-                                "name": "Sound",
+                                "name": "⇩ Sound ⇩",
                                 "color": "blue"
                             },
                             {
@@ -152,7 +152,7 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                             },
                             //-------- Light ------------------------------
                             {
-                                "name": "Light",
+                                "name": "⇩ Light ⇩",
                                 "color": "yellow"
                             },
                             {
@@ -173,7 +173,7 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                             },
                             //-------- Video ------------------------------
                             {
-                                "name": "Video",
+                                "name": "⇩ Video ⇩",
                                 "color": "green"
                             },
                             {
@@ -211,7 +211,7 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
 
                             //-------- Photo ------------------------------
                             {
-                                "name": "Photo",
+                                "name": "⇩ Photo ⇩",
                                 "color": "orange"
                             },
                             {
@@ -236,7 +236,7 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                             },
                             //---------Promo---------------------------------
                             {
-                                "name": "Promo",
+                                "name": "⇩ Promo ⇩",
                                 "color": "blue"
                             },
                             {
@@ -257,7 +257,7 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                             },
                             //-------- Catering ------------------------------
                             {
-                                "name": "Catering",
+                                "name": "⇩ Catering ⇩",
                                 "color": "yellow"
                             },
                             {
@@ -282,7 +282,7 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                             },
                             //-------- Stagehands ------------------------------
                             {
-                                "name": "Stagehands",
+                                "name": "⇩ Stagehands ⇩",
                                 "color": "green"
                             },
                             {
@@ -292,7 +292,7 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                             
                             //-------- Riggers ------------------------------
                             {
-                                "name": "Riggers \/ Ground",
+                                "name": "⇩ Riggers \/ Ground ⇩",
                                 "color": "orange"
                             },
                             {
@@ -314,7 +314,11 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                             
                             //-------- Trucks ------------------------------
                             {
-                                "name": "Trucks",
+                                "name": "⇩ Trucks ⇩",
+                                "color": "blue"
+                            },
+                            {
+                                "name": "Мотокурьер",
                                 "color": "blue"
                             },
                             {
@@ -336,7 +340,7 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
 
                             //-------- Party ------------------------------
                             {
-                                "name": "Party",
+                                "name": "⇩ Party ⇩",
                                 "color": "yellow"
                             },
                             {
@@ -370,7 +374,7 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
 
                             //-------- Games ------------------------------
                             {
-                                "name": "Games",
+                                "name": "⇩ Games ⇩",
                                 "color": "green"
                             },
                             {
@@ -400,7 +404,7 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
 
                             //-------- Production ------------------------------
                             {
-                                "name": "Production",
+                                "name": "⇩ Production ⇩",
                                 "color": "orange"
                             },
                             {
@@ -418,10 +422,10 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                             },
                              
                              //-------- Blacklist ------------------------------
-                            {
-                                "name": "Blacklist",
-                                "color": "gray"
-                            },
+                            // {
+                            //     "name": "Blacklist",
+                            //     "color": "gray"
+                            // },
                             
                         ]
                     }
