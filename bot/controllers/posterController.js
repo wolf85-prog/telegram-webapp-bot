@@ -48,7 +48,7 @@ class PosterController {
             //Передаем данные боту
             const keyboard = JSON.stringify({
                 inline_keyboard:[
-                    [{text: 'Подтвердить смету', callback_data:'/smeta ' + projectId}]
+                    [{text: 'Подтвердить смету', callback_data:'/smeta ' + projectId}],
                     [{text: 'Предложить свою цену', web_app: {url: webAppUrl+'/add-stavka/' + projectId}}],
                 ]
             });
