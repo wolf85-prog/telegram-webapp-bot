@@ -768,6 +768,24 @@ bot.on('message', async (msg) => {
                 console.log("Новые проекты: ", arrProjects)
             }
 
+            if (text === '/sendbutton') {
+                //Передаем данные боту
+                const keyboard = JSON.stringify({
+                    inline_keyboard:[
+                        [{text: 'Подтвердить смету', callback_data:'/smeta ' + projectId}]
+                    ]
+                });
+
+                await bot.sendMessage(chatId, 'Смотрите и создавайте проекты U.L.E.Y в web-приложении прямо из мессенджера Telegram.', {
+                    reply_markup: ({
+                        inline_keyboard:[
+                            [{text: 'Подтвердить смету', callback_data:'Информация'}],
+                            [{text: 'Предложить свою цену', web_app: {url: webAppUrl}}],
+                        ]
+                    })
+                })
+            }
+
     //------------------------------------------------------------------------------------------------
 
             //обработка контактов
