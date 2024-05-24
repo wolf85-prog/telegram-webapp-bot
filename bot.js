@@ -79,6 +79,7 @@ const getManagersAll = require("./bot/http/getManagersAll");
 const getCompanyAll = require("./bot/http/getCompanyAll");
 const getProjectsAll = require("./bot/http/getProjectsAll");
 const getSoundNotif = require("./bot/common/getSoundNotif");
+const getProjectTeh = require("./bot/common/getProjectTeh");
 
 const app = express();
 
@@ -245,14 +246,18 @@ app.post('/web-stavka', async (req, res) => {
             await bot.answerWebAppQuery(queryId, {
                 type: 'article',
                 id: queryId,
-                title: 'Твоя ставка отправлена',
+                title: 'Твоя цена отправлена',
                 input_message_content: {
                     parse_mode: 'HTML',
                     message_text: 
-`Твоя ставка отправлена!`}})
+`Твоя цена отправлена!`}})
 
             console.log("Начинаю сохранять данные в ноушене...", id)
             console.log("chatId: ", userId)
+
+            const project= await getProjectTeh(id)
+
+            console.log("Teh: ", project)
         
             
         return res.status(200).json({});
