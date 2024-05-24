@@ -237,6 +237,30 @@ ${equipmentlist.map(item =>' - ' + item.subname + ' = ' + item.count + ' шт.')
     }
 })
 
+//альтернативна ставка
+app.post('/web-stavka', async (req, res) => {
+    const {queryId, summaStavki, id, userId} = req.body;
+
+    try {
+            await bot.answerWebAppQuery(queryId, {
+                type: 'article',
+                id: queryId,
+                title: 'Твоя ставка отправлена',
+                input_message_content: {
+                    parse_mode: 'HTML',
+                    message_text: 
+`Твоя ставка отправлена!`}})
+
+            console.log("Начинаю сохранять данные в ноушене...", id)
+            console.log("chatId: ", userId)
+        
+            
+        return res.status(200).json({});
+    } catch (e) {
+        return res.status(500).json({})
+    }
+})
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -780,7 +804,7 @@ bot.on('message', async (msg) => {
                     reply_markup: ({
                         inline_keyboard:[
                             [{text: 'Подтвердить смету', callback_data:'Информация'}],
-                            [{text: 'Предложить свою цену', web_app: {url: webAppUrl}}],
+                            [{text: 'Предложить свою цену', web_app: {url: webAppUrl+'/add-stavka/1'}}],
                         ]
                     })
                 })
