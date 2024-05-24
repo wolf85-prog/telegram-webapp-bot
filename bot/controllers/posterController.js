@@ -15,6 +15,9 @@ const $host = axios.create({
     baseURL: process.env.REACT_APP_API_URL
 })
 
+// web-приложение
+const webAppUrl = process.env.WEB_APP_URL;
+
 class PosterController {
 
     //отправка предварительной сметы
@@ -46,6 +49,7 @@ class PosterController {
             const keyboard = JSON.stringify({
                 inline_keyboard:[
                     [{text: 'Подтвердить смету', callback_data:'/smeta ' + projectId}]
+                    [{text: 'Предложить свою цену', web_app: {url: webAppUrl+'/add-stavka/' + projectId}}],
                 ]
             });
 
