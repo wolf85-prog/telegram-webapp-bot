@@ -80,6 +80,7 @@ const getCompanyAll = require("./bot/http/getCompanyAll");
 const getProjectsAll = require("./bot/http/getProjectsAll");
 const getSoundNotif = require("./bot/common/getSoundNotif");
 const getProjectTeh = require("./bot/common/getProjectTeh");
+const updateProject = require("./bot/common/updateProject");
 
 const app = express();
 
@@ -252,12 +253,14 @@ app.post('/web-stavka', async (req, res) => {
                     message_text: 
 `Твоя цена отправлена!`}})
 
-            console.log("Начинаю сохранять данные в ноушене...", id)
+            console.log("Начинаю сохранять данные в ноушене...", id, summaStavki)
             console.log("chatId: ", userId)
 
-            const project= await getProjectTeh(id)
+            const projectTeh= await getProjectTeh(id)
 
-            console.log("Teh: ", project)
+            console.log("Teh: ", projectTeh)
+
+            const res = await updateProject(id, projectTeh, summaStavki)
         
             
         return res.status(200).json({});
