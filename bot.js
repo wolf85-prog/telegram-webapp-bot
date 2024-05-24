@@ -566,7 +566,7 @@ bot.on('message', async (msg) => {
     const messageId = msg.message_id;
     const fromId = msg.from.id;
     const isBot = msg.from.is_bot;
-    console.log("msg: ", msg)
+    //console.log("msg: ", msg)
     //console.log("text: ", text)
 
     if (chatId === '6510181163') { 
