@@ -1528,7 +1528,7 @@ const start = async () => {
             }
             
 
-            // 2.
+            // 2. Отчеты проектов
             setTimeout(()=>{
                 //console.log("arr: ", arr)
 
