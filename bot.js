@@ -1501,49 +1501,49 @@ const start = async () => {
             // 1. получить новые проекты
             let arr = []
             const d = new Date().getTime() + 10800000
-            // const arrProjects = await getAllProjects()
+            const arrProjects = await getAllProjects()
 
-            // console.log("Новые проекты: ", arrProjects)
+            console.log("Новые проекты: ", arrProjects)
 
-            // console.log("Запускаю фильтрацию проектов...")
+            console.log("Запускаю фильтрацию проектов...")
 
-            // if (arrProjects && arrProjects.length > 0) {
-            //     arrProjects.forEach(async(page)=> {
-            //         const blockId = await getBlocks(page.id);
-            //         if (blockId) { 
-            //             databaseBlock = await getDatabaseId(blockId);  
+            if (arrProjects && arrProjects.length > 0) {
+                arrProjects.forEach(async(page)=> {
+                    const blockId = await getBlocks(page.id);
+                    if (blockId) { 
+                        databaseBlock = await getDatabaseId(blockId);  
                         
-            //             if (databaseBlock && databaseBlock?.length !== 0) {
-            //                 //console.log("main table: ", databaseBlock)
-            //                 let project = databaseBlock.find(item => new Date(item?.date) >= d)
-            //                 const obj = {
-            //                     id: page.id,
-            //                     name: page.name,
-            //                     date: project?.date,
-            //                 }
-            //                 arr.push(obj)
-            //             }
-            //         }
-            //     }) 
-            // }
+                        if (databaseBlock && databaseBlock?.length !== 0) {
+                            //console.log("main table: ", databaseBlock)
+                            let project = databaseBlock.find(item => new Date(item?.date) >= d)
+                            const obj = {
+                                id: page.id,
+                                name: page.name,
+                                date: project?.date,
+                            }
+                            arr.push(obj)
+                        }
+                    }
+                }) 
+            }
             
 
             // 2. Отчеты проектов
-            // setTimeout(()=>{
-            //     //console.log("arr: ", arr)
+            setTimeout(()=>{
+                //console.log("arr: ", arr)
 
-            //     //запуск отчетов
-            //     console.log('Запускаю отчеты проектов...');
+                //запуск отчетов
+                console.log('Запускаю отчеты проектов...');
                 
-            //     arr.map(async (project, i) => {
-            //         console.log(project?.name + " - " + project?.date)
+                arr.map(async (project, i) => {
+                    console.log(project?.name + " - " + project?.date)
                     
-            //         setTimeout(function(){
-            //             //начать получать отчеты
-            //             getReportsTest(project.id, project.name, bot)
-            //         }, 2000 * ++i)     
-            //     })
-            // }, 6000) 
+                    setTimeout(function(){
+                        //начать получать отчеты
+                        getReportsTest(project.id, project.name, bot)
+                    }, 2000 * ++i)     
+                })
+            }, 6000) 
 
             // 3.
             // setTimeout(async()=>{
@@ -1559,23 +1559,23 @@ const start = async () => {
 
 
             //5. получить новые проекты, повторить с интервалом 2 минуты
-            // let timerId = setInterval(async() => {
-            //     console.log("START GET PROJECT NEW...")
-            //     const projects = await getProjectNew()
+            let timerId = setInterval(async() => {
+                console.log("START GET PROJECT NEW...")
+                const projects = await getProjectNew()
 
-            //     await ProjectNew.truncate();
+                await ProjectNew.truncate();
 
-            //     projects.map(async(project)=> {
-            //         await ProjectNew.create({ 
-            //             id: project.id, 
-            //             name: project.name, 
-            //             datestart: project.datestart, 
-            //             crmID: project.crmID, 
-            //         })
-            //     })
+                projects.map(async(project)=> {
+                    await ProjectNew.create({ 
+                        id: project.id, 
+                        name: project.name, 
+                        datestart: project.datestart, 
+                        crmID: project.crmID, 
+                    })
+                })
                 
-            //     i++ // счетчик интервалов
-            // }, 240000); //каждые 4 минуты
+                i++ // счетчик интервалов
+            }, 240000); //каждые 4 минуты
  
         });
 
