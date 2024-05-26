@@ -1559,23 +1559,23 @@ const start = async () => {
 
 
             //5. получить новые проекты, повторить с интервалом 2 минуты
-            let timerId = setInterval(async() => {
-                console.log("START GET PROJECT NEW...")
-                const projects = await getProjectNew()
+            // let timerId = setInterval(async() => {
+            //     console.log("START GET PROJECT NEW...")
+            //     const projects = await getProjectNew()
 
-                await ProjectNew.truncate();
+            //     await ProjectNew.truncate();
 
-                projects.map(async(project)=> {
-                    await ProjectNew.create({ 
-                        id: project.id, 
-                        name: project.name, 
-                        datestart: project.datestart, 
-                        crmID: project.crmID, 
-                    })
-                })
+            //     projects.map(async(project)=> {
+            //         await ProjectNew.create({ 
+            //             id: project.id, 
+            //             name: project.name, 
+            //             datestart: project.datestart, 
+            //             crmID: project.crmID, 
+            //         })
+            //     })
                 
-                i++ // счетчик интервалов
-            }, 240000); //каждые 4 минуты
+            //     i++ // счетчик интервалов
+            // }, 680000); //каждые 8 минуты
  
         });
 
