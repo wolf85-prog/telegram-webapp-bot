@@ -822,20 +822,20 @@ bot.on('message', async (msg) => {
             if(text.startsWith('/sendsmeta')) {
                 const id = text.split(' ');
 
-                // await bot.sendDocument(id[1], 'https://proj.uley.team/files/2335/pre/2335_5096408255_customer_1.pdf',
-                // {
-                //     reply_markup: ({
-                //         inline_keyboard:[
-                //             [{text: 'Подтвердить смету', callback_data:'Информация'}],
-                //             [{text: 'Предложить свою цену', web_app: {url: webAppUrl+'/add-stavka/1'}}],
-                //         ]
-                //     })
-                // });
+                const poster = 'https://proj.uley.team/files/2335/final/2335_5096408255_16.pdf'
 
-                const poster = 'https://proj.uley.team/files/2335/pre/2335_5096408255_customer_1.pdf'
+                const response = await bot.sendDocument(id[1], poster,
+                {
+                    reply_markup: ({
+                        inline_keyboard:[
+                            [{text: 'Подтвердить смету', callback_data:'Информация'}],
+                            [{text: 'Предложить свою цену', web_app: {url: webAppUrl+'/add-stavka/1'}}],
+                        ]
+                    })
+                }); 
 
                 //сохранение сметы в базе данных
-                const convId = await sendMessageAdmin(poster, "image", id[1], "", true, 'Подтверждаю')
+                const convId = await sendMessageAdmin(poster, "image", id[1], response.data?.result?.message_id, true, 'Подтверждаю')
                 //console.log("convId: ", convId)
 
                 // Подключаемся к серверу socket
@@ -850,8 +850,13 @@ bot.on('message', async (msg) => {
                     type: 'image',
                     buttons: 'Подтверждаю',
                     convId: convId,
-                    messageId: "",
+                    messageId: response.data?.result?.message_id,
                 })
+            }
+
+            if (text.startsWith('/delmessage')) {
+                const id = text.split(' ');
+                await deleteMessage(id[1], id[2])
             }
 
     //------------------------------------------------------------------------------------------------
