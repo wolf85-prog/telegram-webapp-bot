@@ -822,15 +822,34 @@ bot.on('message', async (msg) => {
             if(text.startsWith('/sendsmeta')) {
                 const id = text.split(' ');
 
-                await bot.sendDocument(id[1], 'https://proj.uley.team/files/2335/pre/2335_5096408255_customer_1.pdf',
-                {
-                    reply_markup: ({
-                        inline_keyboard:[
-                            [{text: 'Подтвердить смету', callback_data:'Информация'}],
-                            [{text: 'Предложить свою цену', web_app: {url: webAppUrl+'/add-stavka/1'}}],
-                        ]
-                    })
-                });
+                // await bot.sendDocument(id[1], 'https://proj.uley.team/files/2335/pre/2335_5096408255_customer_1.pdf',
+                // {
+                //     reply_markup: ({
+                //         inline_keyboard:[
+                //             [{text: 'Подтвердить смету', callback_data:'Информация'}],
+                //             [{text: 'Предложить свою цену', web_app: {url: webAppUrl+'/add-stavka/1'}}],
+                //         ]
+                //     })
+                // });
+
+                //сохранение сметы в базе данных
+                const convId = await sendMessageAdmin('https://proj.uley.team/files/2335/pre/2335_5096408255_customer_1.pdf', "image", id[1], "", true, 'Подтверждаю')
+                //console.log("convId: ", convId)
+
+                // Подключаемся к серверу socket
+                let socket = io(socketUrl);
+                socket.emit("addUser", id[1])
+
+                // //сохранить в контексте (отправка) сметы в админку
+                socket.emit("sendAdmin", { 
+                    senderId: chatTelegramId,
+                    receiverId: id[1],
+                    text: poster,
+                    type: 'image',
+                    buttons: 'Подтверждаю',
+                    convId: convId,
+                    messageId: "",
+                })
             }
 
     //------------------------------------------------------------------------------------------------
