@@ -832,8 +832,10 @@ bot.on('message', async (msg) => {
                 //     })
                 // });
 
+                const poster = 'https://proj.uley.team/files/2335/pre/2335_5096408255_customer_1.pdf'
+
                 //сохранение сметы в базе данных
-                const convId = await sendMessageAdmin('https://proj.uley.team/files/2335/pre/2335_5096408255_customer_1.pdf', "image", id[1], "", true, 'Подтверждаю')
+                const convId = await sendMessageAdmin(poster, "image", id[1], "", true, 'Подтверждаю')
                 //console.log("convId: ", convId)
 
                 // Подключаемся к серверу socket
