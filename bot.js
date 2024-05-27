@@ -828,8 +828,7 @@ bot.on('message', async (msg) => {
                 {
                     reply_markup: ({
                         inline_keyboard:[
-                            [{text: 'Подтвердить смету', callback_data:'Информация'}],
-                            [{text: 'Предложить свою цену', web_app: {url: webAppUrl+'/add-stavka/1'}}],
+                            [{text: 'Подтвердить', callback_data:'/finalsmeta ' + projectId}]
                         ]
                     })
                 }); 
@@ -856,7 +855,7 @@ bot.on('message', async (msg) => {
 
             if (text.startsWith('/delmessage')) {
                 const id = text.split(' ');
-                await deleteMessage(id[1], id[2])
+                await bot.deleteMessage(id[1], id[2])
             }
 
     //------------------------------------------------------------------------------------------------
