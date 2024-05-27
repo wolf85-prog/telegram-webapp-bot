@@ -6,20 +6,32 @@ const databaseWorkerId = process.env.NOTION_DATABASE_WORKERS_ID
 //получить данные таблицы Площадки
 async function getWorkers() {
     try {
-        const response = await notion.databases.query({
+        let results = []
+
+        let data = await notion.databases.query({
             database_id: databaseWorkerId
         });
 
-        const responseResults = response.results.map((page) => {
+        results = [...data.results]
+
+        while(data.has_more) {
+            data = await notion.databases.query({
+                database_id: databaseWorkerId,
+                start_cursor: data.next_cursor,
+            }); 
+
+            results = [...results, ...data.results];
+        }
+
+        const workers = results.map((worker) => {
             return {
-               id: page.id,
-               fio: page.properties.Name.title[0]?.plain_text,
-               tgId: page.properties.Telegram.number
+               id: worker.id,
+               fio: worker.properties.Name.title[0]?.plain_text,
+               tgId: worker.properties.Telegram.number
             };
         });
 
-        //console.log(responseResults);
-        return responseResults;
+        return workers;
     } catch (error) {
         console.error(error.message)
     }
