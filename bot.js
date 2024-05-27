@@ -818,6 +818,21 @@ bot.on('message', async (msg) => {
                 })
             }
 
+            //if (text === '/sendsmeta') { //805436270, 5096408255
+            if(text.startsWith('/sendsmeta')) {
+                const id = text.split(' ');
+
+                await bot.sendDocument(id[1], 'https://proj.uley.team/files/2335/pre/2335_5096408255_customer_1.pdf',
+                {
+                    reply_markup: ({
+                        inline_keyboard:[
+                            [{text: 'Подтвердить смету', callback_data:'Информация'}],
+                            [{text: 'Предложить свою цену', web_app: {url: webAppUrl+'/add-stavka/1'}}],
+                        ]
+                    })
+                });
+            }
+
     //------------------------------------------------------------------------------------------------
 
             //обработка контактов
