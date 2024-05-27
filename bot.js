@@ -1213,7 +1213,7 @@ bot.on('message', async (msg) => {
                         const project2 = await Project.findOne({where:{id: res.id}})  
                         
                         //начать получать отчеты
-                        getReports(project2, bot)
+                        //getReports(project2, bot)
                         
                                         
                     } catch (error) {
