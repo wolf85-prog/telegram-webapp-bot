@@ -858,21 +858,24 @@ bot.on('message', async (msg) => {
                 await bot.deleteMessage(id[1], id[2])
             }
 
+            //получить новые проекты
             if (text === '/getnewprojects') {
                 // 1. получить новые проекты
                 console.log("START GET PROJECT NEW...")
                 const projects = await getProjectNew()
 
-                // await ProjectNew.truncate();
+                if (projects && projects.length > 0) {
+                    await ProjectNew.truncate();
 
-                projects.map(async(project)=> {
-                    await ProjectNew.create({ 
-                        id: project.id, 
-                        name: project.name, 
-                        datestart: project.datestart, 
-                        crmID: project.crmID, 
+                    projects.map(async(project)=> {
+                        await ProjectNew.create({ 
+                            id: project.id, 
+                            name: project.name, 
+                            datestart: project.datestart, 
+                            crmID: project.crmID, 
+                        })
                     })
-                })
+                }     
             }
 
     //------------------------------------------------------------------------------------------------
