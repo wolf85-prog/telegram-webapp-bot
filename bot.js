@@ -858,7 +858,7 @@ bot.on('message', async (msg) => {
                 await bot.deleteMessage(id[1], id[2])
             }
 
-            if (text === 'getnewprojects') {
+            if (text === '/getnewprojects') {
                 // 1. получить новые проекты
                 console.log("START GET PROJECT NEW...")
                 const projects = await getProjectNew()
