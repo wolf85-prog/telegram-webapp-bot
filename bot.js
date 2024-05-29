@@ -1219,7 +1219,7 @@ bot.on('message', async (msg) => {
                         const project2 = await Project.findOne({where:{id: res.id}})  
                         
                         //начать получать отчеты
-                        //getReports(project2, bot)
+                        getReports(project2, bot)
                         
                                         
                     } catch (error) {
@@ -1545,58 +1545,58 @@ const start = async () => {
             console.log('Таблица уведомлений очищена...');
             
             // 1. получить новые проекты
-            // let arr = []
-            // const d = new Date().getTime() + 10800000
-            // const arrProjects = await getAllProjects()
+            let arr = []
+            const d = new Date().getTime() + 10800000
+            const arrProjects = await getAllProjects()
 
-            // console.log("Новые проекты: ", arrProjects)
+            console.log("Новые проекты: ", arrProjects)
 
-            // console.log("Запускаю фильтрацию проектов...")
+            console.log("Запускаю фильтрацию проектов...")
 
-            // if (arrProjects && arrProjects.length > 0) {
-            //     arrProjects.forEach(async(page)=> {
-            //         const blockId = await getBlocks(page.id);
-            //         if (blockId) { 
-            //             databaseBlock = await getDatabaseId(blockId);  
+            if (arrProjects && arrProjects.length > 0) {
+                arrProjects.forEach(async(page)=> {
+                    const blockId = await getBlocks(page.id);
+                    if (blockId) { 
+                        databaseBlock = await getDatabaseId(blockId);  
                         
-            //             if (databaseBlock && databaseBlock?.length !== 0) {
-            //                 //console.log("main table: ", databaseBlock)
-            //                 let project = databaseBlock.find(item => new Date(item?.date) >= d)
-            //                 const obj = {
-            //                     id: page.id,
-            //                     name: page.name,
-            //                     date: project?.date,
-            //                 }
-            //                 arr.push(obj)
-            //             }
-            //         }
-            //     }) 
-            // }
+                        if (databaseBlock && databaseBlock?.length !== 0) {
+                            //console.log("main table: ", databaseBlock)
+                            let project = databaseBlock.find(item => new Date(item?.date) >= d)
+                            const obj = {
+                                id: page.id,
+                                name: page.name,
+                                date: project?.date,
+                            }
+                            arr.push(obj)
+                        }
+                    }
+                }) 
+            }
             
 
             // 2. Отчеты проектов
-            // setTimeout(()=>{
-            //     //console.log("arr: ", arr)
+            setTimeout(()=>{
+                //console.log("arr: ", arr)
 
-            //     //запуск отчетов
-            //     console.log('Запускаю отчеты проектов...');
+                //запуск отчетов
+                console.log('Запускаю отчеты проектов...');
                 
-            //     arr.map(async (project, i) => {
-            //         console.log(project?.name + " - " + project?.date)
+                arr.map(async (project, i) => {
+                    console.log(project?.name + " - " + project?.date)
                     
-            //         setTimeout(function(){
-            //             //начать получать отчеты
-            //             getReportsTest(project.id, project.name, bot)
-            //         }, 2000 * ++i)     
-            //     })
-            // }, 6000) 
+                    setTimeout(function(){
+                        //начать получать отчеты
+                        getReportsTest(project.id, project.name, bot)
+                    }, 2000 * ++i)     
+                })
+            }, 6000) 
 
             // 3.
-            // setTimeout(async()=>{
-            //     //запуск уведомлений
-            //     console.log('Запускаю звуковые уведомления...');
-            //     getSoundNotif()
-            // }, 15000) 
+            setTimeout(async()=>{
+                //запуск уведомлений
+                console.log('Запускаю звуковые уведомления...');
+                getSoundNotif()
+            }, 15000) 
 
 
             //4. синхронизация менеджеров из ноушена с БД
@@ -1604,24 +1604,24 @@ const start = async () => {
  
 
 
-            //5. получить новые проекты, повторить с интервалом 2 минуты
-            // let timerId = setInterval(async() => {
-            //     console.log("START GET PROJECT NEW...")
-            //     const projects = await getProjectNew()
+            //5. получить новые проекты, повторить с интервалом 8 минут
+            let timerId = setInterval(async() => {
+                console.log("START GET PROJECT NEW...")
+                const projects = await getProjectNew()
 
-            //     await ProjectNew.truncate();
+                await ProjectNew.truncate();
 
-            //     projects.map(async(project)=> {
-            //         await ProjectNew.create({ 
-            //             id: project.id, 
-            //             name: project.name, 
-            //             datestart: project.datestart, 
-            //             crmID: project.crmID, 
-            //         })
-            //     })
+                projects.map(async(project)=> {
+                    await ProjectNew.create({ 
+                        id: project.id, 
+                        name: project.name, 
+                        datestart: project.datestart, 
+                        crmID: project.crmID, 
+                    })
+                })
                 
-            //     i++ // счетчик интервалов
-            // }, 680000); //каждые 8 минуты
+                i++ // счетчик интервалов
+            }, 680000); //каждые 8 минуты
  
         });
 
