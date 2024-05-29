@@ -139,7 +139,7 @@ app.post('/web-data', async (req, res) => {
                 input_message_content: {
                     parse_mode: 'HTML',
                     message_text: 
-  `Проект успешно создан!
+  `Проект успешно создан! ${ companyId === 'Локальный заказчик' ? 'Offline' : ''} 
   
 <b>Проект:</b> ${projectname} 
 <b>Дата:</b> ${day}.${month}.${year}
@@ -151,26 +151,10 @@ app.post('/web-data', async (req, res) => {
 ${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}`
               }
         })
-
-        //console.log("Отправляю сообщение в админ-панель...")
-        //отправить сообщение о создании проекта в админ-панель
-//         const convId = await sendMyMessage(
-// `Проект успешно создан!
-  
-// Проект: ${projectname} 
-// Дата: ${day}.${month}.${year}
-// Время: ${chas}:${minut} 
-// Адрес: ${geo} 
-// Тех. задание: ${teh}
-          
-// Специалисты: 
-// ${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}`, 
-//         "article", chatId, messageId)
-
         
         //отправить сообщение в чат-админку (телеграм)
         await bot.sendMessage(chatGroupId, 
-`Проект успешно создан! 
+`Проект успешно создан! ${ companyId === 'Локальный заказчик' ? 'Offline' : ''} 
   
 Название проекта:  ${projectname} 
 Дата: ${day}.${month}.${year}
@@ -183,6 +167,8 @@ ${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join
           )
 
         } 
+//-------------------------------------------------------------------------------------
+// Оборудование
         
         if (equipmentlist.length > 0) {
             await bot.answerWebAppQuery(queryId, {
