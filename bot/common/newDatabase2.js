@@ -549,7 +549,7 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                 "10. Самозанятость": {
                     "type": "rollup",
                     "rollup": {
-                        "rollup_property_name": "Specialization",
+                        "rollup_property_name": "Самозанятость",
                         "relation_property_name": "04. ФИО",
                         "function": "show_original"
                     }
@@ -557,7 +557,7 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                 "11. Договор": {
                     "type": "rollup",
                     "rollup": {
-                        "rollup_property_name": "Specialization",
+                        "rollup_property_name": "Договор",
                         "relation_property_name": "04. ФИО",
                         "function": "show_original"
                     }
