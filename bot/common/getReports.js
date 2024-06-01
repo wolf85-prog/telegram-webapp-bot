@@ -506,7 +506,7 @@ module.exports = async function getReports(project, bot) {
 
                 const text = `Запрос на специалистов: 
                             
-${day}.${month} | ${chas}:${minut} | ${project.name} | U.L.E.Y
+${day}.${month} | ${chas}:${minut} | ${project.name}
 
 ${arr_count0.map((item, index) =>'0' + (index+1) + '. '+ item.title + ' = ' + item.count_fio + '\/' + item.count_title).join('\n')}`    
 
