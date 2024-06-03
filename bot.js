@@ -1604,7 +1604,7 @@ const start = async () => {
  
 
 
-            //5. получить новые проекты, повторить с интервалом 1 минуты
+            //5. получить новые проекты, повторить с интервалом 2 минуты
             let timerId = setInterval(async() => {
                 console.log("START GET PROJECT NEW...")
                 const projects = await getProjectNew()
@@ -1621,7 +1621,7 @@ const start = async () => {
                 })
                 
                 i++ // счетчик интервалов
-            }, 85000); //каждые 1 минуты
+            }, 120000); //каждые 2 минуты
  
         });
 
