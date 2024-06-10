@@ -1634,10 +1634,10 @@ const start = async () => {
                     })
 
                     //удаление старых проектов
-                    projectsNew.map((project)=> {
+                    projectsNew.map(async(project)=> {
                         const projectOld = projects.find(item => item.id === project.id)
                         if (!projectOld) {
-                            ProjectNew.destroy({
+                            await ProjectNew.destroy({
                                 where: {
                                     id: project.id,
                                 }
