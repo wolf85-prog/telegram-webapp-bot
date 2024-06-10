@@ -1611,16 +1611,30 @@ const start = async () => {
                 //notion
                 const projects = await getProjectNew()
 
-                await ProjectNew.truncate();
+                //await ProjectNew.truncate();
 
-                projects.map(async(project)=> {
-                    await ProjectNew.create({ 
-                        id: project.id, 
-                        name: project.name, 
-                        datestart: project.datestart, 
-                        crmID: project.crmID, 
+                try {    
+                    const projectsNew = await ProjectNew.findAll()
+                    console.log("projectsNew: ", projectsNew)
+
+                    projects.map(async(project)=> {
+                        const id = project.id
+                        let exist = await ProjectNew.findOne( {where: {id}} )
+                        
+                        if(!exist){
+                            await ProjectNew.create({ 
+                                id: project.id, 
+                                name: project.name, 
+                                datestart: project.datestart, 
+                                crmID: project.crmID, 
+                            })
+                            return;
+                        }   
                     })
-                })
+
+                } catch (error) {
+                    return res.status(500).json(error.message);
+                }    
                 
                 i++ // счетчик интервалов
             }, 120000); //каждые 2 минуты
