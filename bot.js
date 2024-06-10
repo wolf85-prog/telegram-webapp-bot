@@ -1617,6 +1617,7 @@ const start = async () => {
                     const projectsNew = await ProjectNew.findAll()
                     console.log("projectsNew: ", projectsNew)
 
+                    //добавление новых проектов
                     projects.map(async(project)=> {
                         const id = project.id
                         let exist = await ProjectNew.findOne( {where: {id}} )
@@ -1628,8 +1629,20 @@ const start = async () => {
                                 datestart: project.datestart, 
                                 crmID: project.crmID, 
                             })
-                            return;
+                            //return;
                         }   
+                    })
+
+                    //удаление старых проектов
+                    projectsNew.map((project)=> {
+                        const projectOld = projects.find(item => item.id === project.id)
+                        if (!projectOld) {
+                            ProjectNew.destroy({
+                                where: {
+                                    id: project.id,
+                                }
+                            })
+                        }
                     })
 
                 } catch (error) {
