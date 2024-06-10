@@ -1547,6 +1547,7 @@ const start = async () => {
             // 1. получить новые проекты
             let arr = []
             const d = new Date().getTime() + 10800000
+            //notion
             const arrProjects = await getAllProjects()
 
             console.log("Новые проекты: ", arrProjects)
@@ -1604,9 +1605,10 @@ const start = async () => {
  
 
 
-            //5. получить новые проекты, повторить с интервалом 2 минуты
+            //5. получить новые проекты для рассылки, повторить с интервалом 2 минуты
             let timerId = setInterval(async() => {
                 console.log("START GET PROJECT NEW...")
+                //notion
                 const projects = await getProjectNew()
 
                 await ProjectNew.truncate();
