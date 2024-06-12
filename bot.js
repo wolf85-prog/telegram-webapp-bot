@@ -1637,13 +1637,13 @@ const start = async () => {
                     projectsNew.map(async(project)=> {
                         const projectOld = projects.find(item => item.id === project.id)
                         console.log("projectOld: ", projectOld)
-                        // if (!projectOld) {
-                        //     await ProjectNew.destroy({
-                        //         where: {
-                        //             id: project.id,
-                        //         }
-                        //     })
-                        // }
+                        if (projectOld === 'undefined') {
+                            await ProjectNew.destroy({
+                                where: {
+                                    id: project.id,
+                                }
+                            })
+                        }
                     })
 
                 } catch (error) {
