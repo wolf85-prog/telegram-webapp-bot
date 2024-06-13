@@ -1629,7 +1629,9 @@ const start = async () => {
                                 datestart: project.datestart, 
                                 crmID: project.crmID, 
                             })
-                            //return;
+                        } else {
+                            await ProjectNew.update({name: project.name},{where: {id: project.id}})    
+                            console.log("Проект в кеше обновлен!")   
                         }   
                     })
 
@@ -1637,7 +1639,7 @@ const start = async () => {
                     projectsNew.map(async(project)=> {
                         const projectOld = projects.find(item => item.id === project.id)
                         //console.log("projectOld: ", projectOld)
-                        if (projectOld === 'undefined') {
+                        if (projectOld === undefined) {
                             await ProjectNew.destroy({
                                 where: {
                                     id: project.id,
