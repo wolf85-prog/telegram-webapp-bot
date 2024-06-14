@@ -24,32 +24,18 @@ class PosterController {
     async sendPoster(req, res) {
         const token = process.env.TELEGRAM_API_TOKEN
         const host = process.env.HOST
-        const {crmId, chatId, ver} = req.body;
+        const {crmId, chatId, ver, project_id} = req.body;
         try {
             //const poster = 'https://proj.uley.team/files/1389/pre/1389_1408579113_customer.pdf'
             const poster = `${host}/files/${crmId}/pre/${crmId}_${chatId}_customer_${ver}.pdf`
-            console.log("poster API: ", poster)
-
-            const response = await notion.databases.query({
-                database_id: databaseId,
-                filter: {
-                    property: "Crm_ID",
-                    rich_text: {
-                        "contains": crmId
-                    }
-                },         
-            });
-
-            //const project = await getProjectCrmId(crmId)
-            const projectId = response.results[0].id
-            console.log("projectId pred smeta: ", projectId)
-
+            console.log("poster API: ", poster)         
+            console.log("projectId pred smeta: ", project_id)
 
             //Передаем данные боту
             const keyboard = JSON.stringify({
                 inline_keyboard:[
-                    [{text: 'Подтвердить смету', callback_data:'/smeta ' + projectId}],
-                    [{text: 'Предложить свою цену', web_app: {url: webAppUrl+'/add-stavka/' + projectId}}],
+                    [{text: 'Подтвердить смету', callback_data:'/smeta ' + project_id}],
+                    [{text: 'Предложить свою цену', web_app: {url: webAppUrl+'/add-stavka/' + project_id}}],
                 ]
             });
 
@@ -92,24 +78,23 @@ class PosterController {
     async sendPosterFinal(req, res) {
         const token = process.env.TELEGRAM_API_TOKEN
         const host = process.env.HOST
-        const {crmId, chatId, ver} = req.body;
+        const {crmId, chatId, ver, project_id} = req.body;
         try {
             //const poster = 'https://proj.uley.team/files/1389/pre/1389_1408579113_customer.pdf'
             const poster = `${host}/files/${crmId}/final/${crmId}_${chatId}_${ver}.pdf`
             console.log("poster final API: ", poster)
 
-            const response = await notion.databases.query({
-                database_id: databaseId,
-                filter: {
-                    property: "Crm_ID",
-                    rich_text: {
-                        "contains": crmId
-                    }
-                },         
-            });
+            // const response = await notion.databases.query({
+            //     database_id: databaseId,
+            //     filter: {
+            //         property: "Crm_ID",
+            //         rich_text: {
+            //             "contains": crmId
+            //         }
+            //     },         
+            // });
 
-            //const project = await getProjectCrmId(crmId)
-            const projectId = response.results[0].id
+            const projectId = project_id
             console.log("projectId final smeta: ", projectId)
 
 
