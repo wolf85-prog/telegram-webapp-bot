@@ -1151,6 +1151,14 @@ bot.on('message', async (msg) => {
                         //добавление геопозиции в БД Площадки (Адрес) и добавление проекта
                         if (project.geo != '') {
                             projectId = await addAddress(project.geo, project.name, project.datestart, project.teh, project.managerId, project.companyId, Worklist, Equipmentlist);
+                            while (true) {
+                                projectId = await addAddress(project.geo, project.name, project.datestart, project.teh, project.managerId, project.companyId, Worklist, Equipmentlist);
+                                console.log("1. Проект успешно добавлен! " + projectId)             
+                                if (projectId) break
+                                else {
+                                    console.log("1. Ошибка создания проекта! ")
+                                }                          
+                            }
                         } else {
                             while (true) {
                                 projectId = await addProjectNotGeo(project.name, project.datestart, project.teh, project.managerId, project.companyId, Worklist, Equipmentlist);
@@ -1207,6 +1215,8 @@ bot.on('message', async (msg) => {
                                     await delay(2000);                                                      
                                 }                             
                                 
+                            } else {
+                                console.log('Ошибка добавления проекта в Ноушен... ')  
                             }
                         }
 
