@@ -242,11 +242,21 @@ app.post('/web-stavka', async (req, res) => {
             console.log("Начинаю сохранять данные в ноушене...", id, summaStavki)
             console.log("chatId: ", userId)
 
-            const projectTeh= await getProjectTeh(id)
+            while (true) {
+                const projectTeh= await getProjectTeh(id)
+                console.log("Teh: ", projectTeh)
 
-            console.log("Teh: ", projectTeh)
+                const res = await updateProject(id, projectTeh, summaStavki)
 
-            const res = await updateProject(id, projectTeh, summaStavki)
+                if (projectTeh) break
+                else {
+                    console.log("1. Ошибка обновления ставки! ")
+                }   
+                
+                await delay(20000);  
+            }
+
+            
         
             
         return res.status(200).json({});
