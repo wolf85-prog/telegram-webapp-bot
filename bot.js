@@ -54,6 +54,7 @@ const addPretendent = require('./bot/common/addPretendent')
 const getBlocksP = require('./bot/common/getBlocksP')
 const getBlock = require('./bot/common/getBlock')
 const getNotif = require("./bot/common/getNotif");
+const addAddress = require("./bot/common/addAddress")
 
 const fs = require('fs');
 const express = require('express');
@@ -462,46 +463,27 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
 //send data to notion
 async function addProjectAddress(geo, projectname, datestart, teh, managerId, companyId, worklist, equipmentlist) {
     try {
-        const response = await notion.pages.create({
-            parent: { database_id: databaseAddressId },
-            properties: {
-                "Название площадки": {
-                    type: "title",
-                    title: [
-                        {
-                            type: "text",
-                            text: {
-                                content: geo,
-                                "link": null
-                            },
-                            plain_text: geo,
-                            "href": null
-                        }
-                    ]
-                },
-                "Адрес": {
-                    type: "rich_text",
-                    rich_text: [
-                        {
-                            type: "text",
-                            text: {
-                                content: geo,
-                                "link": null
-                            },
-                            plain_text: geo,
-                            "href": null
-                        }
-                    ]
-                },
-            },
-        })
-        //console.log(response)
-        console.log("0. Адрес успешно добавлен! " + response.id)
+        while (true) {
+            const addressId = await addAddress(geo)
+            await delay(2000);  
+            console.log("0. Адрес успешно добавлен! " + addressId)
+            if (addressId) break
+            else {
+                console.log("0. Ошибка создания адреса! ")
+            } 
+        }
 
         let project_id
         //добавление проекта с названием проекта в базу
-        project_id = await addProject(projectname, datestart, teh, managerId, companyId, worklist, equipmentlist, response.id);
-        console.log("1. Проект с адресом успешно добавлен! " + project_id)
+        while (true) {
+            project_id = await addProject(projectname, datestart, teh, managerId, companyId, worklist, equipmentlist, response.id);
+            await delay(2000);  
+            console.log("1. Проект с адресом успешно добавлен! " + project_id)
+            if (project_id) break
+            else {
+                console.log("1. Ошибка создания проекта! ")
+            } 
+        }
 
         if (project_id) {
           
@@ -1155,15 +1137,6 @@ bot.on('message', async (msg) => {
                         //добавление геопозиции в БД Площадки (Адрес) и добавление проекта
                         if (project.geo != '') {
                             projectId = await addProjectAddress(project.geo, project.name, project.datestart, project.teh, project.managerId, project.companyId, Worklist, Equipmentlist);
-                            while (true) {
-                                projectId = await addProjectAddress(project.geo, project.name, project.datestart, project.teh, project.managerId, project.companyId, Worklist, Equipmentlist);
-                                await delay(3000); 
-                                console.log("ProjectId " + projectId)             
-                                if (projectId) break
-                                else {
-                                    console.log("1. Ошибка создания проекта! ")
-                                }                          
-                            }
                         } else {
                             while (true) {
                                 projectId = await addProjectNotGeo(project.name, project.datestart, project.teh, project.managerId, project.companyId, Worklist, Equipmentlist);

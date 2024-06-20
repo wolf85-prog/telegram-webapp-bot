@@ -6,7 +6,7 @@ module.exports = async function addAddress(geo, projectname, datestart, teh, man
         const response = await notion.pages.create({
             parent: { database_id: databaseAddressId },
             properties: {
-                "Название": {
+                "Название площадки": {
                     type: "title",
                     title: [
                         {
@@ -37,12 +37,12 @@ module.exports = async function addAddress(geo, projectname, datestart, teh, man
             },
         })
         //console.log(response)
-        console.log("Адрес добавлен! " + response.id)
+        console.log("0. Адрес успешно добавлен! " + response.id)
 
         //добавление проекта с названием проекта в базу
-        const project_id = await addProject(projectname, datestart, teh, managerId, companyId, worklist, response.id);
+        // const project_id = await addProject(projectname, datestart, teh, managerId, companyId, worklist, response.id);
 
-        return project_id
+        // return project_id
 
     } catch (error) {
         console.error(error.message)
