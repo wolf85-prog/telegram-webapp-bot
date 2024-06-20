@@ -1,5 +1,6 @@
 require("dotenv").config();
 const databaseAddressId = process.env.NOTION_DATABASE_ADDRESS_ID
+const { Client } = require("@notionhq/client");
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
 
 module.exports = async function addAddress(geo, projectname, datestart, teh, managerId, companyId, worklist) {
