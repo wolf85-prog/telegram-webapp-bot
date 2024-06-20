@@ -477,14 +477,17 @@ async function addProjectAddress(geo, projectname, datestart, teh, managerId, co
 
         let project_id
         //добавление проекта с названием проекта в базу
-        while (true) {
+        while (!project_id) {
             project_id = await addProject(projectname, datestart, teh, managerId, companyId, worklist, equipmentlist, addressId);
-            await delay(2000);  
-            console.log("1. Проект с адресом успешно добавлен! " + project_id)
-            if (project_id) break
+            //
+            
+            if (project_id) {
+                console.log("1. Проект с адресом успешно добавлен! " + project_id)
+            }
             else {
                 console.log("1. Ошибка создания проекта! ")
             } 
+            await delay(2000);  
         }
 
         if (project_id) {
