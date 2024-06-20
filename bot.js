@@ -465,13 +465,13 @@ async function addProjectAddress(geo, projectname, datestart, teh, managerId, co
     try {
         //while (true) {
             const addressId = await addAddress(geo)
-            await delay(2000);  
+            //await delay(2000);  
             if (addressId) {
                 //break
                 console.log("0. Адрес успешно добавлен! " + addressId)
             }
             else {
-                console.log("0. Ошибка создания адреса! ")
+                console.log("0. Ошибка создания адреса! " + addressId)
             } 
         //}
 
