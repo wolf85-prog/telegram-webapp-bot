@@ -460,7 +460,7 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
 //----------------------------------------------------------------------------------------------------------------
 
 //send data to notion
-async function addAddress(geo, projectname, datestart, teh, managerId, companyId, worklist, equipmentlist) {
+async function addProjectAddress(geo, projectname, datestart, teh, managerId, companyId, worklist, equipmentlist) {
     try {
         const response = await notion.pages.create({
             parent: { database_id: databaseAddressId },
@@ -500,14 +500,8 @@ async function addAddress(geo, projectname, datestart, teh, managerId, companyId
 
         let project_id
         //добавление проекта с названием проекта в базу
-        while (true) {
-            project_id = await addProject(projectname, datestart, teh, managerId, companyId, worklist, equipmentlist, response.id);
-            console.log("1. Проект с адресом успешно добавлен! " + project_id)
-            if (project_id) break
-            else {
-                console.log("1. Ошибка создания проекта! ")
-            } 
-        }
+        project_id = await addProject(projectname, datestart, teh, managerId, companyId, worklist, equipmentlist, response.id);
+        console.log("1. Проект с адресом успешно добавлен! " + project_id)
 
         if (project_id) {
           
@@ -1160,10 +1154,11 @@ bot.on('message', async (msg) => {
     //-------------------------------------------------------------------------------------------------------------------------------
                         //добавление геопозиции в БД Площадки (Адрес) и добавление проекта
                         if (project.geo != '') {
-                            projectId = await addAddress(project.geo, project.name, project.datestart, project.teh, project.managerId, project.companyId, Worklist, Equipmentlist);
+                            projectId = await addProjectAddress(project.geo, project.name, project.datestart, project.teh, project.managerId, project.companyId, Worklist, Equipmentlist);
                             while (true) {
-                                projectId = await addAddress(project.geo, project.name, project.datestart, project.teh, project.managerId, project.companyId, Worklist, Equipmentlist);
-                                console.log("1. Проект успешно добавлен! " + projectId)             
+                                projectId = await addProjectAddress(project.geo, project.name, project.datestart, project.teh, project.managerId, project.companyId, Worklist, Equipmentlist);
+                                await delay(3000); 
+                                console.log("ProjectId " + projectId)             
                                 if (projectId) break
                                 else {
                                     console.log("1. Ошибка создания проекта! ")
