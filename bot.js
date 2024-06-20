@@ -463,15 +463,17 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
 //send data to notion
 async function addProjectAddress(geo, projectname, datestart, teh, managerId, companyId, worklist, equipmentlist) {
     try {
-        while (true) {
+        //while (true) {
             const addressId = await addAddress(geo)
             await delay(2000);  
-            console.log("0. Адрес успешно добавлен! " + addressId)
-            if (addressId) break
+            if (addressId) {
+                //break
+                console.log("0. Адрес успешно добавлен! " + addressId)
+            }
             else {
                 console.log("0. Ошибка создания адреса! ")
             } 
-        }
+        //}
 
         let project_id
         //добавление проекта с названием проекта в базу
