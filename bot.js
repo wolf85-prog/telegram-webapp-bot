@@ -1614,36 +1614,38 @@ const start = async () => {
                     //console.log("projectsNew: ", projectsNew)
 
                     //добавление новых проектов
-                    projects.map(async(project)=> {
-                        const id = project.id
-                        let exist = await ProjectNew.findOne( {where: {id}} )
-                        
-                        if(!exist){
-                            await ProjectNew.create({ 
-                                id: project.id, 
-                                name: project.name, 
-                                datestart: project.datestart, 
-                                crmID: project.crmID, 
-                            })
-                        } else {
-                            await ProjectNew.update({name: project.name},{where: {id: project.id}})    
-                            console.log("Проект в кеше обновлен!")   
-                        }   
-                    })
+                    if (projects && projects.length > 0) {
+                        projects.map(async(project)=> {
+                            const id = project.id
+                            let exist = await ProjectNew.findOne( {where: {id}} )
+                            
+                            if(!exist){
+                                await ProjectNew.create({ 
+                                    id: project.id, 
+                                    name: project.name, 
+                                    datestart: project.datestart, 
+                                    crmID: project.crmID, 
+                                })
+                            } else {
+                                await ProjectNew.update({name: project.name},{where: {id: project.id}})    
+                                console.log("Проект в кеше обновлен!")   
+                            }   
+                        })
 
-                    //удаление старых проектов
-                    projectsNew.map(async(project)=> {
-                        const projectOld = projects.find(item => item.id === project.id)
-                        //console.log("projectOld: ", projectOld)
-                        if (projectOld === undefined) {
-                            await ProjectNew.destroy({
-                                where: {
-                                    id: project.id,
-                                }
-                            })
-                            console.log("Проект удален!")
-                        }
-                    })
+                        //удаление старых проектов
+                        projectsNew.map(async(project, index)=> {
+                            const projectOld = projects.find(item => item.id === project.id)
+                            //console.log("projectOld: ", projectOld)
+                            if (projectOld === undefined) {
+                                await ProjectNew.destroy({
+                                    where: {
+                                        id: project.id,
+                                    }
+                                })
+                                console.log("Удаленный проект: ", index)
+                            }
+                        })
+                    }  
 
                 } catch (error) {
                     return res.status(500).json(error.message);
