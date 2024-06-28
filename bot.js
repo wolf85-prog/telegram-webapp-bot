@@ -1601,57 +1601,55 @@ const start = async () => {
 
 
             //5. получить новые проекты для рассылки, повторить с интервалом 2 минуты
-            let timerId = setInterval(async() => {
-                console.log("START GET PROJECT NEW...")
-                //notion
-                const projects = await getProjectNew()
+            // let timerId = setInterval(async() => {
+            //     console.log("START GET PROJECT NEW...")
+            //     //notion
+            //     const projects = await getProjectNew()
 
-                //await ProjectNew.truncate();
+            //     try {    
+            //         const projectsNew = await ProjectNew.findAll()
+            //         //console.log("projectsNew: ", projectsNew)
 
-                try {    
-                    const projectsNew = await ProjectNew.findAll()
-                    //console.log("projectsNew: ", projectsNew)
-
-                    //добавление новых проектов
-                    if (projects && projects.length > 0) {
-                        projects.map(async(project)=> {
-                            const id = project.id
-                            let exist = await ProjectNew.findOne( {where: {id}} )
+            //         //добавление новых проектов
+            //         if (projects && projects.length > 0) {
+            //             projects.map(async(project)=> {
+            //                 const id = project.id
+            //                 let exist = await ProjectNew.findOne( {where: {id}} )
                             
-                            if(!exist){
-                                await ProjectNew.create({ 
-                                    id: project.id, 
-                                    name: project.name, 
-                                    datestart: project.datestart, 
-                                    crmID: project.crmID, 
-                                })
-                            } else {
-                                await ProjectNew.update({name: project.name},{where: {id: project.id}})    
-                                console.log("Проект в кеше обновлен!")   
-                            }   
-                        })
+            //                 if(!exist){
+            //                     await ProjectNew.create({ 
+            //                         id: project.id, 
+            //                         name: project.name, 
+            //                         datestart: project.datestart, 
+            //                         crmID: project.crmID, 
+            //                     })
+            //                 } else {
+            //                     await ProjectNew.update({name: project.name},{where: {id: project.id}})    
+            //                     console.log("Проект в кеше обновлен!")   
+            //                 }   
+            //             })
 
-                        //удаление старых проектов
-                        projectsNew.map(async(project, index)=> {
-                            const projectOld = projects.find(item => item.id === project.id)
-                            //console.log("projectOld: ", projectOld)
-                            if (projectOld === undefined) {
-                                await ProjectNew.destroy({
-                                    where: {
-                                        id: project.id,
-                                    }
-                                })
-                                console.log("Удаленный проект: ", index)
-                            }
-                        })
-                    }  
+            //             //удаление старых проектов
+            //             projectsNew.map(async(project, index)=> {
+            //                 const projectOld = projects.find(item => item.id === project.id)
+            //                 //console.log("projectOld: ", projectOld)
+            //                 if (projectOld === undefined) {
+            //                     await ProjectNew.destroy({
+            //                         where: {
+            //                             id: project.id,
+            //                         }
+            //                     })
+            //                     console.log("Удаленный проект: ", index)
+            //                 }
+            //             })
+            //         }  
 
-                } catch (error) {
-                    return res.status(500).json(error.message);
-                }    
+            //     } catch (error) {
+            //         return res.status(500).json(error.message);
+            //     }    
                 
-                i++ // счетчик интервалов
-            }, 120000); //каждые 2 минуты
+            //     i++ // счетчик интервалов
+            // }, 120000); //каждые 2 минуты
  
         });
 
