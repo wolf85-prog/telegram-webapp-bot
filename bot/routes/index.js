@@ -26,6 +26,7 @@ router.get("/projectall", projectController.projectAll);
 router.get("/projectscash", projectController.projectsCash)
 router.get("/projectnewdate", projectController.projectNewDate);
 router.get("/projectsnewcash", projectController.projectsNewCash)
+router.get("/projectsallnotion", projectController.projectsAllNotion);
 
 //get MANAGERS
 router.get("/managers", managerController.managers);                // все менеджеры с краткой информацией
@@ -91,5 +92,6 @@ router.get('/smeta/:id', smetaController.smetaId)
 
 //-----------------ЗВУКОВЫЕ УВЕДОМЛЕНИЯ-----------------------------
 router.get('/soundnotifAll', notifController.soundnotifAll)
+router.get('/startsoundnotif', notifController.startSoundNotif)
 
 module.exports = router

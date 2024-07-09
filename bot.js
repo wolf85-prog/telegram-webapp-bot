@@ -1587,7 +1587,7 @@ const start = async () => {
                 arrProjects.forEach(async(page)=> {
                     const blockId = await getBlocks(page.id);
                     if (blockId) { 
-                        databaseBlock = await getDatabaseId(blockId);  
+                        const databaseBlock = await getDatabaseId(blockId);  
                         
                         if (databaseBlock && databaseBlock?.length !== 0) {
                             //console.log("main table: ", databaseBlock)
