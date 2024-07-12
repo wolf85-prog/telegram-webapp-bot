@@ -895,7 +895,13 @@ bot.on('message', async (msg) => {
                 socket.emit("sendNotif", {
                     task: 1
                 })
+            }
 
+            if (text === '/testsound2') {
+                let socket = io(socketUrl);
+                socket.emit("sendNotif", {
+                    task: 2
+                })
             }
 
 
