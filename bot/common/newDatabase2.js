@@ -537,7 +537,7 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                             },
                             {
                                 "name": "№2",
-                                "color": "orange"
+                                "color": "yellow"
                             },
                             {
                                 "name": "№3",
@@ -545,11 +545,11 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                             },
                             {
                                 "name": "№4",
-                                "color": "purple"
+                                "color": "orange"
                             },
                             {
                                 "name": "№5",
-                                "color": "pink"
+                                "color": "blue"
                             },
                             {
                                 "name": "№6",
@@ -557,11 +557,11 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                             },
                             {
                                 "name": "№7",
-                                "color": "red"
+                                "color": "green"
                             },
                             {
                                 "name": "№8",
-                                "color": "brown"
+                                "color": "orange"
                             },
                           ]
                     }
