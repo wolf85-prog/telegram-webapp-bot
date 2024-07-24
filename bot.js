@@ -21,6 +21,9 @@ const fetch = require('node-fetch');
 //планировщик
 var cron = require('node-cron');
 
+//мониторинг
+const statusMonitor = require('express-status-monitor');
+
 //notion api
 const { Client } = require("@notionhq/client");
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
@@ -84,6 +87,11 @@ const getProjectTeh = require("./bot/common/getProjectTeh");
 const updateProject = require("./bot/common/updateProject");
 
 const app = express();
+
+app.use(statusMonitor({
+    title: 'Бот заказчиков',
+    theme: '../../../../../custom.css',
+})); // Enable Express Status Monitor middleware
 
 app.use(express.json());
 app.use(cors());
