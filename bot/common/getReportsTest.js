@@ -73,16 +73,15 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
     let arr_all = [];
     let all = [];
     let date_db;
-    let randomSec = randomNumberInRange(10000, 30000)
-    let sendReport = false
-
-    let task1, task2, task3, task4, task5, task6, task7
+    //let randomSec = randomNumberInRange(10000, 30000)
+    //let sendReport = false
 
     //создаю оповещения
     //получить название проекта из ноушена
     let project_name;  
     let project_status;
 
+    //запрос к ноушен (получить имя проекта и статус)
     await fetch(`${botApiUrl}/project/${projectId}`)
     .then((response) => response.json())
     .then((data) => {
@@ -97,204 +96,9 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
 
     console.log('START GET REPORTS 2: ' + project_name + " - " + project_status)
 
-    const datesObj = await getDates(projectId, project_name)
-    console.log(datesObj)
+    //запрос к ноушен дат проекта
+    //const datesObj = await getDates(projectId, project_name)
 
-    if (datesObj) {
-        //отправить сообщение по каждой дате
-        datesObj.forEach(async(date, i)=> {
-            if (date) {
-                const d = new Date(date?.split('+')[0]);
-                const d2 = new Date().getTime() + 10800000 // + 3 часа (московское время)
-
-                if(d >= d2) {
-                    //отправка напоминания
-                    if (project_status === 'OnAir') {
-
-                        var timeDiff = d.getTime() - 7200000; //120 минут
-                        var timeDiff2 = d.getTime() - 3600000;//60 минут
-                        var timeDiff3 = d.getTime() - 1800000;//30 минут
-                        var timeDiff4 = d.getTime() - 900000; //15 минут
-                        var timeDiff6 = d.getTime() - 600000; //10 минут
-                        var timeDiff7 = d.getTime() - 300000; //5 минут
-                        var timeDiff5 = d.getTime();          //0 минут    
-
-                        const date2 = new Date(timeDiff)
-                        const date3 = new Date(timeDiff2)
-                        const date4 = new Date(timeDiff3)
-                        const date5 = new Date(timeDiff4)
-                        const date6 = new Date(timeDiff5)
-                        const dateNow = new Date(d2)
-                        const date7 = new Date(timeDiff6)
-                        const date8 = new Date(timeDiff7)
-
-                        const milliseconds = Math.floor((date2 - dateNow)); //120 минут
-                        const milliseconds2 = Math.floor((date3 - dateNow)); //60 минут
-                        const milliseconds3 = Math.floor((date4 - dateNow)); //30 минут
-                        const milliseconds4 = Math.floor((date5 - dateNow)); //15 минут
-                        const milliseconds6 = Math.floor((date7 - dateNow)); //10 минут
-                        const milliseconds7 = Math.floor((date8 - dateNow)); //5 минут
-                        const milliseconds5 = Math.floor((date6 - dateNow)); //0 минут
-
-                        //120-минутная готовность
-                        // if (milliseconds > 0) {
-                        //     console.log("!!!!Планирую запуск сообщения 1...!!!!")     
-                        //     //task1 = setTimeout(async() => {
-                                
-                        //         //отправить сообщение в админку
-                        //         if (project_status === 'OnAir') {
-                        //             // let socket = io(socketUrl);
-                        //             // socket.emit("sendNotif", {
-                        //             //     task: 1
-                        //             // }) 
-
-                        //             task1 = SoundNotif.create({
-                        //                 name: project_name,
-                        //                 text: 'Звуковое оповещение - 120 минут',
-                        //                 date: new Date().getTime() + milliseconds,
-                        //                 delivered: false,
-                        //                 task: 1
-                        //             })
-                        //         }
-                        //     //}, milliseconds)
-                        // }                
-
-                        //60-минутная готовность
-                        // if (milliseconds2 > 0) {
-                        //     console.log("!!!!Планирую запуск сообщения 2...!!!!")     
-                        //     //task2 = setTimeout(async() => {
-                        //         //отправить сообщение в админку
-                        //         if (project_status === 'OnAir') {
-                        //             // let socket = io(socketUrl);
-                        //             // socket.emit("sendNotif", {
-                        //             //     task: 2
-                        //             // }) 
-
-                        //             task2 = SoundNotif.create({
-                        //                 name: project_name,
-                        //                 text: 'Звуковое оповещение - 60 минут',
-                        //                 date: new Date().getTime() + milliseconds2,
-                        //                 delivered: false,
-                        //                 task: 2
-                        //             })
-                        //         }
-                        //     //}, milliseconds2)
-                        // }
-
-                        //30-минутная готовность
-                        // if (milliseconds3 > 0) {
-                        //     console.log("!!!!Планирую запуск сообщения 3...!!!!")     
-                        //     //task3 = setTimeout(async() => {
-                        //         //отправить сообщение в админку
-                        //         if (project_status === 'OnAir') {
-                        //             // let socket = io(socketUrl);
-                        //             // socket.emit("sendNotif", {
-                        //             //     task: 3
-                        //             // }) 
-
-                        //             task3 = SoundNotif.create({
-                        //                 name: project_name,
-                        //                 text: 'Звуковое оповещение - 30 минут',
-                        //                 date: new Date().getTime() + milliseconds3,
-                        //                 delivered: false,
-                        //                 task: 3
-                        //             })
-                        //         }
-                        //     //}, milliseconds3)
-                        // }
-
-                        //15-минутная готовность
-                        // if (milliseconds4 > 0) {
-                        //     console.log("!!!!Планирую запуск сообщения 4...!!!!")     
-                        //     //task4 = setTimeout(async() => {
-                        //         //отправить сообщение в админку
-                        //         if (project_status === 'OnAir') {
-                        //             // let socket = io(socketUrl);
-                        //             // socket.emit("sendNotif", {
-                        //             //     task: 4
-                        //             // }) 
-
-                        //             task4 = await SoundNotif.create({
-                        //                 name: project_name,
-                        //                 text: 'Звуковое оповещение - 15 минут',
-                        //                 date: new Date().getTime() + milliseconds4,
-                        //                 delivered: false,
-                        //                 task: 4
-                        //             })
-                        //             //console.log("task4: ", task4)
-                        //         }
-                        //     //}, milliseconds4)
-                        // }
-
-                        //10-минутная готовность
-                        // if (milliseconds6 > 0) {
-                        //     console.log("!!!!Планирую запуск сообщения 6...!!!!")     
-                        //     //task4 = setTimeout(async() => {
-                        //         //отправить сообщение в админку
-                        //         if (project_status === 'OnAir') {
-                        //             // let socket = io(socketUrl);
-                        //             // socket.emit("sendNotif", {
-                        //             //     task: 6
-                        //             // })
-                        //             task6 = SoundNotif.create({
-                        //                 name: project_name,
-                        //                 text: 'Звуковое оповещение - 10 минут',
-                        //                 date: new Date().getTime() + milliseconds6,
-                        //                 delivered: false,
-                        //                 task: 6
-                        //             })
-                        //         } 
-                        //     //}, milliseconds6)
-                        // }
-
-                        //5-минутная готовность
-                        // if (milliseconds7 > 0) {
-                        //     console.log("!!!!Планирую запуск сообщения 7...!!!!")     
-                        //     //task4 = setTimeout(async() => {
-                        //         //отправить сообщение в админку
-                        //         if (project_status === 'OnAir') {
-                        //             // let socket = io(socketUrl);
-                        //             // socket.emit("sendNotif", {
-                        //             //     task: 7
-                        //             // })
-                        //             task7 = SoundNotif.create({
-                        //                 name: project_name,
-                        //                 text: 'Звуковое оповещение - 5 минут',
-                        //                 date: new Date().getTime() + milliseconds7,
-                        //                 delivered: false,
-                        //                 task: 7
-                        //             })
-                        //         } 
-                        //     //}, milliseconds7)
-                        // }
-
-                        //0 готовность
-                        // if (milliseconds5 > 0) {
-                        //     console.log("!!!!Планирую запуск сообщения 5...!!!!") 
-                        //     console.log("--------------------------------------")       
-                        //     //task5 = setTimeout(async() => {
-                        //         //отправить сообщение в админку
-                        //         if (project_status === 'OnAir') {
-                        //             // let socket = io(socketUrl);
-                        //             // socket.emit("sendNotif", {
-                        //             //     task: 5
-                        //             // }) 
-                        //             task5 = SoundNotif.create({
-                        //                 name: project_name,
-                        //                 text: 'Звуковое оповещение - 0 минут',
-                        //                 date: new Date().getTime() + milliseconds5,
-                        //                 delivered: false,
-                        //                 task: 5
-                        //             })
-                        //         }
-                        //     //}, milliseconds5)
-                        // }
-                    }
-                }
-            }
-            
-        })
-    }
 
     // начало цикла Специалисты ----------------------------------------------------------------------
     // 86400 секунд в дне
@@ -350,20 +154,6 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
              }                             
          });
 
-        // if (project_managers && project_managers.length > 0) {
-        //     project_managers.maps(async(manager)=> {
-        //         await fetch(`${botApiUrl}/managers/${manager.id}`)
-        //         .then((response) => response.json())
-        //         .then((data) => {
-        //             if (data) {
-        //                 chatId_managers.push(data)
-
-        //                 console.log("chatId_managers: ", chatId_managers)
-        //             }                            
-        //         });
-        //     })
-        // }
-
 
         // 1) получить блок и бд
         const d = new Date()
@@ -373,6 +163,7 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
         const chas = d.getHours();
         const minut = String(d.getMinutes()).padStart(2, "0");
 
+        //запрос к ноушен дат проекта
         if (projectId) {
             console.log(`i: ${i} ${day}.${month}.${year} ${chas}:${minut} Проект: ${project_name} Статус: ${statusProjectNew}`) 
             
@@ -391,16 +182,14 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
             }
         }
 
-
-        //2) проверить массив специалистов (1-й отчет)                           
-        //......
-
         //--------------------------------------------------------------------------------
         //получить массив дат
         if (databaseBlock) {   
             databaseBlock.map((db) => {
                 allDate.push(db?.date)                        
             })
+        } else {
+            console.log("Даты не определны! Проект: " + projectName)
         }
 
         //получить уникальные даты из Основного состава по возрастанию
@@ -523,30 +312,30 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
                             //отправка напоминания
                             if (statusProjectNew === 'OnAir') {
 
-                                var timeDiff = d.getTime() - 7200000; //120 минут
-                                var timeDiff2 = d.getTime() - 3600000;//60 минут
-                                var timeDiff3 = d.getTime() - 1800000;//30 минут
-                                var timeDiff4 = d.getTime() - 900000; //15 минут
-                                var timeDiff6 = d.getTime();          //10 минут
-                                var timeDiff7 = d.getTime();          //5 минут
-                                var timeDiff5 = d.getTime();          //0 минут
+                                // var timeDiff = d.getTime() - 7200000; //120 минут
+                                // var timeDiff2 = d.getTime() - 3600000;//60 минут
+                                // var timeDiff3 = d.getTime() - 1800000;//30 минут
+                                // var timeDiff4 = d.getTime() - 900000; //15 минут
+                                // var timeDiff6 = d.getTime();          //10 минут
+                                // var timeDiff7 = d.getTime();          //5 минут
+                                // var timeDiff5 = d.getTime();          //0 минут
                                 
-                                const date2 = new Date(timeDiff)
-                                const date3 = new Date(timeDiff2)
-                                const date4 = new Date(timeDiff3)
-                                const date5 = new Date(timeDiff4)
-                                const date6 = new Date(timeDiff5)
-                                const dateNow = new Date(d2)
-                                const date7 = new Date(timeDiff6)
-                                const date8 = new Date(timeDiff7)
+                                // const date2 = new Date(timeDiff)
+                                // const date3 = new Date(timeDiff2)
+                                // const date4 = new Date(timeDiff3)
+                                // const date5 = new Date(timeDiff4)
+                                // const date6 = new Date(timeDiff5)
+                                // const dateNow = new Date(d2)
+                                // const date7 = new Date(timeDiff6)
+                                // const date8 = new Date(timeDiff7)
 
-                                const milliseconds = Math.floor((date2 - dateNow)); //120 минут
-                                const milliseconds2 = Math.floor((date3 - dateNow)); //60 минут
-                                const milliseconds3 = Math.floor((date4 - dateNow)); //30 минут
-                                const milliseconds4 = Math.floor((date5 - dateNow)); //15 минут
-                                const milliseconds6 = Math.floor((date7 - dateNow)); //10 минут
-                                const milliseconds7 = Math.floor((date8 - dateNow)); //5 минут
-                                const milliseconds5 = Math.floor((date6 - dateNow)); //0 минут
+                                // const milliseconds = Math.floor((date2 - dateNow)); //120 минут
+                                // const milliseconds2 = Math.floor((date3 - dateNow)); //60 минут
+                                // const milliseconds3 = Math.floor((date4 - dateNow)); //30 минут
+                                // const milliseconds4 = Math.floor((date5 - dateNow)); //15 минут
+                                // const milliseconds6 = Math.floor((date7 - dateNow)); //10 минут
+                                // const milliseconds7 = Math.floor((date8 - dateNow)); //5 минут
+                                // const milliseconds5 = Math.floor((date6 - dateNow)); //0 минут
 
                                 // const data = 'СТАРТ - Задача 1 в ' + d + ' запущена! Проект: ' + project_name + '\n';
                                 // const fileName = _dirname  + '/tasks.txt';
