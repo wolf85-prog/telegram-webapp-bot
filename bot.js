@@ -326,14 +326,14 @@ async function addProject(title, time, teh, managerId, companyId, worklist, equi
                         "color": "blue"
                     }
                 },
-                // "Город": {
-                //     type: 'select',
-                //     select: {
-                //         "id": "4e370773-fb5d-4ef7-bd2a-eaa91e5919e0",
-                //         "name": "Выбери название города",
-                //         "color": "red"
-                //     }
-                // },
+                "Город": {
+                    type: 'select',
+                    select: {
+                        "id": "fd53fb72-3800-451b-92e8-14c5f2f542e4",
+                        "name": "Выбор города...",
+                        "color": "blue"
+                    }
+                },
                 "Менеджер": {
                     type: "relation",
                     relation: [
@@ -425,14 +425,14 @@ async function addProjectNotGeo(title, time, teh, managerId, companyId, worklist
                         "color": "blue"
                     }
                 },
-                // "Город": {
-                //     type: 'select',
-                //     select: {
-                //         "id": "4e370773-fb5d-4ef7-bd2a-eaa91e5919e0",
-                //         "name": "Выбери название города",
-                //         "color": "red"
-                //     }
-                // },
+                "Город": {
+                    type: 'select',
+                    select: {
+                        "id": "fd53fb72-3800-451b-92e8-14c5f2f542e4",
+                        "name": "Выбор города...",
+                        "color": "blue"
+                    }
+                },
                 "Менеджер": {
                     type: "relation",
                     relation: [
