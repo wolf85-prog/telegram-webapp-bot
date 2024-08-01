@@ -12,6 +12,7 @@ const workerController = require('../controllers/workerController')
 const posterController = require('../controllers/posterController')
 const smetaController = require('../controllers/smetaController')
 const notifController = require('../controllers/notifController')
+const processController = require('../controllers/processController')
 
 router.get('/secret', secretController.secretInfo)
 
@@ -93,5 +94,9 @@ router.get('/smeta/:id', smetaController.smetaId)
 //-----------------ЗВУКОВЫЕ УВЕДОМЛЕНИЯ-----------------------------
 router.get('/soundnotifAll', notifController.soundnotifAll)
 router.get('/startsoundnotif', notifController.startSoundNotif)
+
+
+//-----------------УПРАВЛЕНИЕ ПРОЦЕССАМИ---------------------------------
+router.get('/process/update', processController.startProcess)
 
 module.exports = router
