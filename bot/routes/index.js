@@ -97,6 +97,6 @@ router.get('/startsoundnotif', notifController.startSoundNotif)
 
 
 //-----------------УПРАВЛЕНИЕ ПРОЦЕССАМИ---------------------------------
-router.get('/process/update', processController.startProcess)
+router.get('/process/update/:count/:on', processController.startProcess)
 
 module.exports = router

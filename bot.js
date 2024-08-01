@@ -40,6 +40,8 @@ const hostAdmin = process.env.HOST_ADMIN
 
 let projectId, projectName, projectDate, projectTime, dateStart, manager_id, company_id, Geo, Teh, Worklist, Equipmentlist;
 
+let socket = io(socketUrl);
+
 //functions
 const addTable = require('./bot/common/addTable')
 const newDatabase1 = require('./bot/common/newDatabase1')
@@ -1572,6 +1574,20 @@ const delay = async(ms) => {
     });
 }
 
+const fetchProcess = async (dataAll) => {
+
+    let d = new Date()
+    d.setHours(d.getHours() + 3);
+
+	console.log("Получен процесс: ", dataAll, d)
+	const { process, data } = dataAll;
+
+	if (process === 1) {
+        currentProcess = 1
+        dataProcess = data
+    }
+}
+
 //-------------------------------------------------------------------------------------------------------------------------------
 const PORT = process.env.PORT || 8000;
 
@@ -1582,6 +1598,10 @@ const start = async () => {
         
         httpsServer.listen(PORT, async () => {
             console.log('HTTPS Server Bot running on port ' + PORT);
+
+            // Подключаемся к серверу socket
+            //let socket = io(socketUrl);
+            socket.on("getProcess", fetchProcess);
             
             // 1. получить новые проекты
             let arr = []

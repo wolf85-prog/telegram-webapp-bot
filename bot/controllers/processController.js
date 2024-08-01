@@ -10,7 +10,7 @@ async function fetchProcess(dataAll) {
     let d = new Date()
     d.setHours(d.getHours() + 3);
 
-	console.log("Получен процесс: ", dataAll, d)
+	console.log("Отправлен процесс: ", dataAll, d)
 	const { process, data } = dataAll;
 
 	if (process === 1) {
@@ -20,10 +20,19 @@ async function fetchProcess(dataAll) {
 
 class ProcessController {
 
-    async startProcess() {          
+    async startProcess(req, res) {   
+        const count = req.params.count; // получаем id     
+        const on = req.params.count; // получаем id     
         // Подключаемся к серверу socket
         let socket = io(socketUrl);
-        socket.on("getProcess", fetchProcess);
+        socket.emit("sendProcess", {
+            process: count,
+            data: [
+                {
+                    start: on,
+                },
+            ],
+        }) 
     }
 }
 
