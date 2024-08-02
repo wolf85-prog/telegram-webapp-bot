@@ -42,7 +42,8 @@ let projectId, projectName, projectDate, projectTime, dateStart, manager_id, com
 
 let socket = io(socketUrl);
 
-let currentProcess, dataProcess;
+let currentProcess = 0 
+let dataProcess = true
 
 //functions
 const addTable = require('./bot/common/addTable')
