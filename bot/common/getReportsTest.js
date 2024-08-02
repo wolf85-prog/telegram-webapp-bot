@@ -85,23 +85,23 @@ module.exports = async function getReportsTest(projectId, projectName, bot, numb
 
     if (on) {
         console.log("Работает")
-        //запрос к ноушен (получить имя проекта и статус)
-        await fetch(`${botApiUrl}/project/${projectId}`)
-        .then((response) => response.json())
-        .then((data) => {
-            if (data) {
-                project_name = data?.properties.Name.title[0]?.plain_text;
-                project_status = data?.properties["Статус проекта"].select?.name
-            }  else {
-                project_name = projectName
-                project_status ='';
-            }                             
-        });
+        
     } else {
         console.log("Выкл.")
     }
 
-    
+    //запрос к ноушен (получить имя проекта и статус)
+    await fetch(`${botApiUrl}/project/${projectId}`)
+    .then((response) => response.json())
+    .then((data) => {
+        if (data) {
+            project_name = data?.properties.Name.title[0]?.plain_text;
+            project_status = data?.properties["Статус проекта"].select?.name
+        }  else {
+            project_name = projectName
+            project_status ='';
+        }                             
+    });
 
     console.log('START GET REPORTS 2: ' + project_name + " - " + project_status)
 
