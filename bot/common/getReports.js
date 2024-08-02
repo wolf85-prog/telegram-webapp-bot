@@ -62,7 +62,7 @@ const getDates = async(projectId, projectName) => {
     return sortedDates
 }
 
-module.exports = async function getReports(project, bot) {
+module.exports = async function getReports(project, bot, number, on) {
     let count_fio, count_fio2;
     let count_title;
     let i = 0;
@@ -73,11 +73,24 @@ module.exports = async function getReports(project, bot) {
     let all = [];
     let date_db;
 
+    // Подключаемся к серверу socket
+    let socket = io(socketUrl);  
+    socket.emit("sendProcess", {
+        process: number,
+        data: on,
+    })
 
     //создаю оповещения
     //получить название проекта из ноушена
     let project_name;  
     let project_status;
+
+    if (on) {
+        console.log("Работает")
+        
+    } else {
+        console.log("Выкл.")
+    }
 
     await fetch(`${botApiUrl}/project/${project.projectId}`)
     .then((response) => response.json())

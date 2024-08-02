@@ -653,15 +653,6 @@ bot.on('message', async (msg) => {
             await newDatabase5(project[1]);
         }
 
-        if(text.startsWith('/startreports')) {
-            const project = text.split(' ');
-
-            const project2 = await Project.findOne({ where:{ id: project[1] } })
-
-            //начать получать отчеты
-            getReportsTest(project2, bot)
-        }
-
 
         if(text.startsWith('/startnotif')) {
             //task1.stop();
@@ -1272,7 +1263,7 @@ bot.on('message', async (msg) => {
                     const project2 = await Project.findOne({where:{id: res.id}})  
                     
                     //начать получать отчеты
-                    getReports(project2, bot)
+                    getReports(project2, bot, currentProcess, dataProcess)
                     
                                     
                 } catch (error) {
