@@ -57,7 +57,9 @@ const getDates = async(projectId, projectName) => {
     return sortedDates
 }
 
-module.exports = async function getReportsTest(projectId, projectName, bot) {
+module.exports = async function getReportsTest(projectId, projectName, bot, number, on) {
+
+    console.log("process: ", number, on)
 
     let count_fio;
     let count_title;
@@ -69,23 +71,37 @@ module.exports = async function getReportsTest(projectId, projectName, bot) {
     let all = [];
     let date_db;
 
+    // Подключаемся к серверу socket
+    let socket = io(socketUrl);  
+    socket.emit("sendProcess", {
+        process: number,
+        data: on,
+    })
+
     //создаю оповещения
     //получить название проекта из ноушена
     let project_name;  
     let project_status;
 
-    //запрос к ноушен (получить имя проекта и статус)
-    await fetch(`${botApiUrl}/project/${projectId}`)
-    .then((response) => response.json())
-    .then((data) => {
-        if (data) {
-            project_name = data?.properties.Name.title[0]?.plain_text;
-            project_status = data?.properties["Статус проекта"].select?.name
-        }  else {
-            project_name = projectName
-            project_status ='';
-        }                             
-    });
+    if (on) {
+        console.log("Работает")
+        //запрос к ноушен (получить имя проекта и статус)
+        await fetch(`${botApiUrl}/project/${projectId}`)
+        .then((response) => response.json())
+        .then((data) => {
+            if (data) {
+                project_name = data?.properties.Name.title[0]?.plain_text;
+                project_status = data?.properties["Статус проекта"].select?.name
+            }  else {
+                project_name = projectName
+                project_status ='';
+            }                             
+        });
+    } else {
+        console.log("Выкл.")
+    }
+
+    
 
     console.log('START GET REPORTS 2: ' + project_name + " - " + project_status)
 

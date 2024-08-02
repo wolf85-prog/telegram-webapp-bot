@@ -42,6 +42,8 @@ let projectId, projectName, projectDate, projectTime, dateStart, manager_id, com
 
 let socket = io(socketUrl);
 
+let currentProcess, dataProcess;
+
 //functions
 const addTable = require('./bot/common/addTable')
 const newDatabase1 = require('./bot/common/newDatabase1')
@@ -1644,7 +1646,7 @@ const start = async () => {
                     
                     setTimeout(function(){
                         //начать получать отчеты
-                        getReportsTest(project.id, project.name, bot)
+                        getReportsTest(project.id, project.name, bot, currentProcess, dataProcess)
                     }, 2000 * ++i)     
                 })
             }, 6000) 
