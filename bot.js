@@ -1632,6 +1632,7 @@ const start = async () => {
             setTimeout(()=>{
                 //запуск отчетов
                 console.log('Запускаю отчеты проектов...');
+                console.log('Текущий процесс: ', currentProcess, dataProcess)
                 
                 arr.map(async (project, i) => {
                     console.log(project?.name + " - " + project?.date)
