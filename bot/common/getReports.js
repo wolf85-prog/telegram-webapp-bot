@@ -75,6 +75,7 @@ module.exports = async function getReports(project, bot, number, on) {
 
     // Подключаемся к серверу socket
     let socket = io(socketUrl);  
+    console.log("send process: ", 1)
     socket.emit("sendProcess", {
         process: '1',
         data: on,
