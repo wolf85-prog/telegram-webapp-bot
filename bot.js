@@ -577,12 +577,12 @@ async function addProjectAddress(geo, projectname, datestart, teh, managerId, co
 
 //-------------------------------------------------------------------------------------------------------
 
-bot.setMyCommands([
+//bot.setMyCommands([
     // {command: '/start', description: 'Начальное приветствие'},
     // {command: '/menu', description: 'Главное меню'},
     // {command: '/info', description: 'Получить информацию о боте'},
     // {command: '/settings', description: 'Настройки'},
-])
+//])
 
 bot.on('message', async (msg) => {
     const chatId = msg.chat.id;
