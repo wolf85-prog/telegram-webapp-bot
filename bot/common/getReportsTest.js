@@ -57,9 +57,9 @@ const getDates = async(projectId, projectName) => {
     return sortedDates
 }
 
-module.exports = async function getReportsTest(projectId, projectName, bot, number, on) {
+module.exports = async function getReportsTest(projectId, projectName, bot, number, on, interval, time) {
 
-    console.log("process: ", number, on)
+    console.log("process: ", number, on, interval, time)
 
     let count_fio;
     let count_title;
@@ -77,6 +77,8 @@ module.exports = async function getReportsTest(projectId, projectName, bot, numb
     socket.emit("sendProcess", {
         process: '2',
         data: on,
+        interval: '10',
+        time: 'M',
     })
 
     //создаю оповещения

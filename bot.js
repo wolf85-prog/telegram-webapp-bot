@@ -44,6 +44,8 @@ let socket = io(socketUrl);
 
 let currentProcess = 0 
 let dataProcess = true
+let dataInterval = '0'
+let dataTime = 'S'
 
 //functions
 const addTable = require('./bot/common/addTable')
@@ -1263,7 +1265,7 @@ bot.on('message', async (msg) => {
                     const project2 = await Project.findOne({where:{id: res.id}})  
                     
                     //начать получать отчеты
-                    getReports(project2, bot, currentProcess, dataProcess)
+                    getReports(project2, bot, currentProcess, dataProcess, dataInterval, dataTime)
                     
                                     
                 } catch (error) {
@@ -1574,11 +1576,13 @@ const fetchProcess = async (dataAll) => {
     d.setHours(d.getHours() + 3);
 
 	console.log("Получен процесс: ", dataAll, d)
-	const { process, data } = dataAll;
+	const { process, data, interval, time } = dataAll;
 
 	if (process === 1) {
         currentProcess = 1
         dataProcess = data
+        dataInterval = interval
+        dataTime = time
     }
 }
 
@@ -1639,7 +1643,7 @@ const start = async () => {
                     
                     setTimeout(function(){
                         //начать получать отчеты
-                        getReportsTest(project.id, project.name, bot, currentProcess, dataProcess)
+                        getReportsTest(project.id, project.name, bot, currentProcess, dataProcess, dataInterval, dataTime)
                     }, 2000 * ++i)     
                 })
             }, 6000) 
