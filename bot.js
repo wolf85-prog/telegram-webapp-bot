@@ -761,6 +761,7 @@ bot.on('message', async (msg) => {
             console.log("pretendentId: ", pretendentId) 
         }
 
+        //обновление списка проектов в планировщике
         if (text === '/getprojectnew') {
                 console.log("START GET PROJECT NEW...")
                 const projects = await getProjectNew()
