@@ -252,6 +252,10 @@ module.exports = async function newDatabase2(parent_page_id, worklist, time) {
                                 "color": "blue"
                             },
                             {
+                                "name": "Визажист",
+                                "color": "blue"
+                            },
+                            {
                                 "name": "Гример",
                                 "color": "blue"
                             },
