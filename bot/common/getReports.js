@@ -81,7 +81,7 @@ module.exports = async function getReports(project, bot, number, on, interval, t
     console.log("send process: ", 1)
     socket.emit("sendProcess", {
         process: '1',
-        data: on,
+        data: true,
         interval: '10',
         time: 'M',
     })
@@ -90,13 +90,6 @@ module.exports = async function getReports(project, bot, number, on, interval, t
     //получить название проекта из ноушена
     let project_name;  
     let project_status;
-
-    if (on && number === '1') {
-        console.log("Работает")
-        
-    } else {
-        console.log("Выкл.")
-    }
 
     await fetch(`${botApiUrl}/project/${project.projectId}`)
     .then((response) => response.json())
