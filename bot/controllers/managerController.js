@@ -71,8 +71,8 @@ async function getCompanyId(id) {
                 }
             }
         });
-        console.log("CompanyId: ", response.results[0]?.properties["Related to Заказчики (1) (Менеджеры)"].relation[0].id)
-        return response.results[0]?.properties["Related to Заказчики (1) (Менеджеры)"].relation[0].id;
+        console.log("CompanyId: ", response.results[0]?.properties["Компания"].relation[0].id)
+        return response.results[0]?.properties["Компания"].relation[0].id;
     } catch (error) {
         console.error(error.message)
     }
@@ -102,7 +102,7 @@ async function getManagers() {
                id: manager.id,
                fio: manager.properties["ФИО"].title[0]?.plain_text,
                tgID: manager.properties.ID.rich_text[0]?.plain_text,
-               phone: manager.properties["Основной"].phone_number,
+               phone: manager.properties["Телефон"].phone_number,
                comment: manager.properties["Комментарий"].rich_text[0]?.plain_text,
             };
         });
@@ -243,7 +243,7 @@ async function createManager(id, firstname, lastname) {
                         }
                     ]
                 },
-                "Related to Заказчики (1) (Менеджеры)": {
+                "Компания": {
                     "type": "relation",
                     "relation": [
                         {
