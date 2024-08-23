@@ -13,7 +13,7 @@ async function getManagerId(id) {
             page_id: id,
         });
 
-        return manager.properties.TelegramID.rich_text[0]?.plain_text; 
+        return manager.properties.ID.rich_text[0]?.plain_text; 
         
     } catch (error) {
         console.error(error.message)
@@ -26,7 +26,7 @@ async function getManagerChatId(id) {
         const response = await notion.databases.query({
             database_id: databaseManagerId, 
             "filter": {
-                "property": "TelegramID",
+                "property": "ID",
                 "rich_text": {
                     "contains": id
                 }
@@ -65,7 +65,7 @@ async function getCompanyId(id) {
         const response = await notion.databases.query({
             database_id: databaseManagerId, 
             "filter": {
-                "property": "TelegramID",
+                "property": "ID",
                 "rich_text": {
                     "contains": id
                 }
@@ -101,7 +101,7 @@ async function getManagers() {
             return {
                id: manager.id,
                fio: manager.properties["ФИО"].title[0]?.plain_text,
-               tgID: manager.properties.TelegramID.rich_text[0]?.plain_text,
+               tgID: manager.properties.ID.rich_text[0]?.plain_text,
                phone: manager.properties["Основной"].phone_number,
                comment: manager.properties["Комментарий"].rich_text[0]?.plain_text,
             };
@@ -230,7 +230,7 @@ async function createManager(id, firstname, lastname) {
                         }
                     ]
                 },
-                TelegramID: {
+                ID: {
                     "type": "rich_text",
                     "rich_text": [
                         {
