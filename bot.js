@@ -908,6 +908,51 @@ bot.on('message', async (msg) => {
             })
         }
 
+        if (text === '/testsound3') {
+            let socket = io(socketUrl);
+            socket.emit("sendNotif", {
+                task: 3
+            })
+        }
+
+        if (text === '/testsound4') {
+            let socket = io(socketUrl);
+            socket.emit("sendNotif", {
+                task: 4
+            })
+        }
+
+        if (text === '/testsound5') {
+            let socket = io(socketUrl);
+            socket.emit("sendNotif", {
+                task: 5
+            })
+        }
+
+        if (text === '/testsound6') {
+            let socket = io(socketUrl);
+            socket.emit("sendNotif", {
+                task: 6
+            })
+        }
+
+        if (text === '/testsound7') {
+            let socket = io(socketUrl);
+            socket.emit("sendNotif", {
+                task: 7
+            })
+        }
+
+        if (text === '/testsoundall') {
+            let socket = io(socketUrl);
+            socket.emit("sendNotif", {
+                task: 1
+            })
+            socket.emit("sendNotif", {
+                task: 1
+            })
+        }
+
 
 //------------------------------------------------------------------------------------------------
 
