@@ -132,25 +132,30 @@ module.exports = async function getReportsTest(projectId, projectName, bot, numb
         let project_manager; 
         let project_managers = []; 
 
-        //получить название проекта из ноушена
-        await fetch(`${botApiUrl}/project/${projectId}`)
-        .then((response) => response.json())
-        .then((data) => {
-            if (data) {
-                project_name = data?.properties.Name.title[0]?.plain_text;
-                project_manager = data?.properties["Менеджер"].relation[0]?.id;
-                project_managers = data?.properties["Менеджер"].relation;
-                statusProjectNew = data?.properties["Статус проекта"].select.name
-                //console.log("project_managers: ", project_managers)
+        try {
+            //получить название проекта из ноушена
+            await fetch(`${botApiUrl}/project/${projectId}`)
+            .then((response) => response.json())
+            .then((data) => {
+                if (data) {
+                    project_name = data?.properties.Name.title[0]?.plain_text;
+                    project_manager = data?.properties["Менеджер"].relation[0]?.id;
+                    project_managers = data?.properties["Менеджер"].relation;
+                    statusProjectNew = data?.properties["Статус проекта"].select.name
+                    //console.log("project_managers: ", project_managers)
 
-            }  else {
-                project_name = project.name
-                project_manager = '';
-                project_managers = [];
-                statusProjectNew ='';
-                //console.log("STATUS NEW: ", statusProjectNew)
-            }                             
-        });
+                }  else {
+                    project_name = project.name
+                    project_manager = '';
+                    project_managers = [];
+                    statusProjectNew ='';
+                    //console.log("STATUS NEW: ", statusProjectNew)
+                }                             
+            });
+        } catch (error) {
+            console.log("Ошибка доступа к ноушен: ", error.message, new Date().toLocaleString())
+        }
+        
 
          //получить TelegramID менеджера проекта из ноушена
          let chatId_manager;

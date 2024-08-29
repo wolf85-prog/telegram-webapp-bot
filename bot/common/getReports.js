@@ -127,23 +127,28 @@ module.exports = async function getReports(project, bot, number, on, interval, t
         let project_name;  
         let project_manager; 
         
-        //получить название проекта из ноушена
-        await fetch(`${botApiUrl}/project/${project.projectId}`)
-        .then((response) => response.json())
-        .then((data) => {
-            if (data) {
-                project_name = data?.properties.Name.title[0]?.plain_text;
-                project_manager = data?.properties["Менеджер"].relation[0]?.id;
-                statusProjectNew = data?.properties["Статус проекта"].select.name
-                //console.log("STATUS NEW: ", statusProjectNew)
+        try {
+            //получить название проекта из ноушена
+            await fetch(`${botApiUrl}/project/${project.projectId}`)
+            .then((response) => response.json())
+            .then((data) => {
+                if (data) {
+                    project_name = data?.properties.Name.title[0]?.plain_text;
+                    project_manager = data?.properties["Менеджер"].relation[0]?.id;
+                    statusProjectNew = data?.properties["Статус проекта"].select.name
+                    //console.log("STATUS NEW: ", statusProjectNew)
 
-            }  else {
-                project_name = project.name
-                project_manager = '';
-                statusProjectNew ='';
-                //console.log("STATUS NEW: ", statusProjectNew)
-            }                             
-        });
+                }  else {
+                    project_name = project.name
+                    project_manager = '';
+                    statusProjectNew ='';
+                    //console.log("STATUS NEW: ", statusProjectNew)
+                }                             
+            });
+        } catch (error) {
+            console.log("Ошибка доступа к ноушен: ", error.message, new Date().toLocaleString())
+        }
+        
 
 
         //получить TelegramID менеджера проекта из ноушена
