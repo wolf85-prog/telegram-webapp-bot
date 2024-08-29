@@ -36,6 +36,7 @@ async function getManagerChatId(id) {
         console.log("-------------------------------------------------------")
         console.log("----------------Открытие приложения--------------------")
         console.log("-------------------------------------------------------")
+        console.log("Дата и время: ", new Date().toISOString())
         console.log("TelegramID: ", id)
         console.log("ManagerId: ", response.results[0]?.id)
 
@@ -272,6 +273,7 @@ async function getManagerCash(id) {
         console.log("-------------------------------------------------------")
         console.log("--------------------Новая заявка-----------------------")
         console.log("-------------------------------------------------------")
+        console.log("Дата и время: ", new Date().toISOString())
         console.log("TelegramID: ", id)
         console.log("Manager: ", manager.companyName, manager.fio)
 
