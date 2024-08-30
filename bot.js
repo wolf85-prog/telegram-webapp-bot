@@ -5,6 +5,13 @@ const TelegramBot = require('node-telegram-bot-api');
 const {menuOptions, backOptions} = require('./options')
 const token = process.env.TELEGRAM_API_TOKEN
 const bot = new TelegramBot(token, {polling: true});
+
+// const bot = new TelegramBot(token, {
+//     polling: {
+//         autoStart: false,
+//     }
+// });
+
 const { Op } = require('sequelize')
 
 // web-приложение
@@ -73,6 +80,7 @@ const https = require('https');
 const router = require('./bot/routes/index')
 const errorHandler = require('./bot/middleware/ErrorHandling')
 const path = require('path')
+const pm2 = require('pm2');
 
 //подключение к БД PostreSQL
 const sequelize = require('./bot/connections/db')
@@ -118,6 +126,34 @@ const credentials = {
 };
 
 const httpsServer = https.createServer(credentials, app);
+
+//перезагрузка бота
+// bot.getUpdates().then((updates) => {
+//     if (updates[0] !== undefined) {
+//       if (updates[0].message.text.includes('/restart')) {
+//         bot.getUpdates({
+//           timeout: 1,
+//           limit: 0,
+//           offset: updates[0].update_id + 1
+//         });
+//         bot.sendMessage(updates[0].message.chat.id, 'Бот перезагружен');
+//       }
+//     }
+// });
+// bot.stopPolling();
+// bot.startPolling();
+
+
+// function errorTelegram(error) {
+//     bot.stopPolling();
+//     bot.getUpdates({
+//       timeout: 1,
+//       limit: 0,
+//       offset: bot._polling.options.params.offset
+//     });
+//     console.error(error);
+//     pm2.disconnect();
+// }
 
 //--------------------------------------------------------------------------------------------------------
 //              REQUEST
@@ -953,6 +989,20 @@ bot.on('message', async (msg) => {
             })
         }
 
+
+        if (text === '/restart') {
+            let proc = 'bot';
+            pm2.restart(proc, function(err, pr) {
+                if (err) {
+                    errorTelegram(err);
+                }
+
+                bot.sendMessage(chatId, `Process <i>${proc.name}</i> has been restarted`, {
+                    parse_mode: 'html'
+                });
+
+            });
+        }
 
 //------------------------------------------------------------------------------------------------
 
