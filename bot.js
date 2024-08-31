@@ -90,6 +90,7 @@ const getProject = require("./bot/common/getProject");
 const sendMessageAdmin = require("./bot/common/sendMessageAdmin");
 const getProjectNew = require("./bot/common/getProjectNew");
 const getAllProjects = require("./bot/common/getAllProjects");
+const getProjectsOn = require("./bot/common/getProjectsOn");
 const updateToDoFinal = require("./bot/common/updateToDoFinal");
 const updateSmetaFinal = require("./bot/common/updateSmetaFinal");
 const getSmeta = require("./bot/common/getSmeta");
@@ -1701,7 +1702,8 @@ const start = async () => {
             let arr = []
             const d = new Date().getTime() + 10800000
             //notion
-            const arrProjects = await getAllProjects()
+            //const arrProjects = await getAllProjects()
+            const arrProjects = await getProjectsOn()
 
             console.log("Новые проекты: ", arrProjects)
 
@@ -1709,7 +1711,7 @@ const start = async () => {
 
             if (arrProjects && arrProjects.length > 0) {
                 arrProjects.forEach(async(page)=> {
-                    const blockId = await getBlocks(page.id);
+                    //const blockId = await getBlocks(page.id);
                     if (blockId) { 
                         const databaseBlock = await getDatabaseId(blockId);  
                         
