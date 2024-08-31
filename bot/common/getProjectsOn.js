@@ -19,9 +19,9 @@ module.exports = async function getProjectsOn() {
                 datestart: page.properties["Дата"].date?.start,
                 crmID: page.properties.Crm_ID.rich_text[0]?.plain_text               
             };
-    });
+        });
 
-    return responseResults;
+        return responseResults;
     } catch (error) {
         console.error(error.message)
     }
