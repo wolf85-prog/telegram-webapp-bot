@@ -15,7 +15,7 @@ module.exports = async function getProjectsOn() {
         const responseResults = response.results.filter((page) => page.properties["Статус проекта"].select.name === 'Load' || page.properties["Статус проекта"].select.name === 'Ready' || page.properties["Статус проекта"].select.name === 'OnAir').map((page) => {
             return {
                 id: page.id,
-                name: page.properties.Name.title[0]?.plain_text,
+                name: page.properties.Name?.title[0]?.plain_text,
                 datestart: page.properties["Дата"].date?.start,
                 crmID: page.properties.Crm_ID.rich_text[0]?.plain_text               
             };
