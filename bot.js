@@ -4,13 +4,13 @@ require("dotenv").config();
 const TelegramBot = require('node-telegram-bot-api');
 const {menuOptions, backOptions} = require('./options')
 const token = process.env.TELEGRAM_API_TOKEN
-const bot = new TelegramBot(token, {polling: true});
+//const bot = new TelegramBot(token, {polling: true});
 
-// const bot = new TelegramBot(token, {
-//     polling: {
-//         autoStart: false,
-//     }
-// });
+const bot = new TelegramBot(token, {
+    polling: {
+        autoStart: false,
+    }
+});
 
 const { Op } = require('sequelize')
 
@@ -129,32 +129,32 @@ const credentials = {
 const httpsServer = https.createServer(credentials, app);
 
 //перезагрузка бота
-// bot.getUpdates().then((updates) => {
-//     if (updates[0] !== undefined) {
-//       if (updates[0].message.text.includes('/restart')) {
-//         bot.getUpdates({
-//           timeout: 1,
-//           limit: 0,
-//           offset: updates[0].update_id + 1
-//         });
-//         bot.sendMessage(updates[0].message.chat.id, 'Бот перезагружен');
-//       }
-//     }
-// });
-// bot.stopPolling();
-// bot.startPolling();
+bot.getUpdates().then((updates) => {
+    if (updates[0] !== undefined) {
+      if (updates[0].message.text.includes('/restart')) {
+        bot.getUpdates({
+          timeout: 1,
+          limit: 0,
+          offset: updates[0].update_id + 1
+        });
+        bot.sendMessage(updates[0].message.chat.id, 'Бот перезагружен');
+      }
+    }
+});
+bot.stopPolling();
+bot.startPolling();
 
 
-// function errorTelegram(error) {
-//     bot.stopPolling();
-//     bot.getUpdates({
-//       timeout: 1,
-//       limit: 0,
-//       offset: bot._polling.options.params.offset
-//     });
-//     console.error(error);
-//     pm2.disconnect();
-// }
+function errorTelegram(error) {
+    bot.stopPolling();
+    bot.getUpdates({
+      timeout: 1,
+      limit: 0,
+      offset: bot._polling.options.params.offset
+    });
+    console.error(error);
+    pm2.disconnect();
+}
 
 //--------------------------------------------------------------------------------------------------------
 //              REQUEST
@@ -1005,27 +1005,6 @@ bot.on('message', async (msg) => {
             });
         }
 
-        if (text === '/testprojects') {
-            try {
-                const response = await notion.databases.query({
-                    database_id: databaseId
-                });
-        
-        
-                const responseResults = response.results.filter((page) => page.properties["Статус проекта"].select.name === 'Load' || page.properties["Статус проекта"].select.name === 'Ready' || page.properties["Статус проекта"].select.name === 'OnAir').map((page) => {
-                    return {
-                        id: page.id,
-                        name: page.properties.Name.title[0]?.plain_text,
-                        datestart: page.properties["Дата"].date?.start,
-                        crmID: page.properties.Crm_ID.rich_text[0]?.plain_text               
-                    };
-                });
-        
-                return responseResults;
-            } catch (error) {
-                console.error(error.message)
-            }
-        }
 
 //------------------------------------------------------------------------------------------------
 
