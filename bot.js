@@ -1694,7 +1694,7 @@ const fetchProcess = async (dataAll) => {
     let d = new Date()
     d.setHours(d.getHours() + 3);
 
-	console.log("Получен процесс: ", dataAll, d)
+	//console.log("Получен процесс: ", dataAll, d)
 	const { process, data, interval, time } = dataAll;
 
 	if (process === 1) {
