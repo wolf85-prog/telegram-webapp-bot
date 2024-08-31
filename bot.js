@@ -1733,7 +1733,7 @@ const start = async () => {
 
             if (arrProjects && arrProjects.length > 0) {
                 arrProjects.forEach(async(page)=> {
-                    //const blockId = await getBlocks(page.id);
+                    const blockId = await getBlocks(page.id);
                     if (blockId) { 
                         const databaseBlock = await getDatabaseId(blockId);  
                         
