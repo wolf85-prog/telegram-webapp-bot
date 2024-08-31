@@ -1724,8 +1724,8 @@ const start = async () => {
             let arr = []
             const d = new Date().getTime() + 10800000
             //notion
-            const arrProjects = await getAllProjects()
-            //const arrProjects = await getProjectsOn()
+            //const arrProjects = await getAllProjects()
+            const arrProjects = await getProjectsOn()
 
             console.log("Новые проекты: ", arrProjects)
 
