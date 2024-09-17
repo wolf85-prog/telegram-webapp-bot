@@ -115,7 +115,7 @@ module.exports = async function getReports(project, bot, number, on, interval, t
         
     // повторить с интервалом 2 минуты
     //let timerId = setInterval(async() => {
-    seTimeout(async() => {
+    setTimeout(async() => {
         //console.log("Начало цикла отчетов. TimerId: ", timerId)
         minutCount++  // a day has passed
         arr_count0 = []
