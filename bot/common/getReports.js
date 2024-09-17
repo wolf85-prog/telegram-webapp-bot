@@ -173,7 +173,7 @@ module.exports = async function getReports(project, bot, number, on, interval, t
         const chas = d.getHours();
         const minut = String(d.getMinutes()).padStart(2, "0");
 
-        if (project.projectId) {
+        //if (project.projectId) {
             console.log(`i: ${i} ${day}.${month}.${year} ${chas}:${minut} Проект: ${project_name} Статус: ${statusProjectNew}`) 
 
             
@@ -190,7 +190,7 @@ module.exports = async function getReports(project, bot, number, on, interval, t
             //         clearTimeout(timerId);
             //     }
             // }
-        }
+        //}
 
 
         //2) проверить массив специалистов (1-й отчет)
