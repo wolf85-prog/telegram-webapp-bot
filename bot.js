@@ -1291,71 +1291,71 @@ bot.on('message', async (msg) => {
 //--------------------------- Создание проекта ----------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------------------------------------
                     //добавление геопозиции в БД Площадки (Адрес) и добавление проекта
-                    if (project.geo != '') {
-                        projectId = await addProjectAddress(project.geo, project.name, project.datestart, project.teh, project.managerId, project.companyId, Worklist, Equipmentlist);
-                    } else {
-                        while (true) {
-                            projectId = await addProjectNotGeo(project.name, project.datestart, project.teh, project.managerId, project.companyId, Worklist, Equipmentlist);
-                            console.log("1. Проект без адреса успешно добавлен! " + projectId)             
-                            if (projectId) break
-                            else {
-                                console.log("1. Ошибка создания проекта! ")
-                            }                          
-                        }
-                        //добавление проекта с названием проекта в базу
+                    // if (project.geo != '') {
+                    //     projectId = await addProjectAddress(project.geo, project.name, project.datestart, project.teh, project.managerId, project.companyId, Worklist, Equipmentlist);
+                    // } else {
+                    //     while (true) {
+                    //         projectId = await addProjectNotGeo(project.name, project.datestart, project.teh, project.managerId, project.companyId, Worklist, Equipmentlist);
+                    //         console.log("1. Проект без адреса успешно добавлен! " + projectId)             
+                    //         if (projectId) break
+                    //         else {
+                    //             console.log("1. Ошибка создания проекта! ")
+                    //         }                          
+                    //     }
+                    //     //добавление проекта с названием проекта в базу
                         
-                        if (projectId) {
-                            console.log("Текущая дата и время: ", new Date())
-                            let topId, mainId, zapasId, pretendentId, equipId 
+                    //     if (projectId) {
+                    //         console.log("Текущая дата и время: ", new Date())
+                    //         let topId, mainId, zapasId, pretendentId, equipId 
                             
-                            //создать верхний блок 
-                            while (!topId) {                                
-                                topId = await addTable(projectId).catch(() => null); 
-                                await delay(2000);                                                        
-                            }
+                    //         //создать верхний блок 
+                    //         while (!topId) {                                
+                    //             topId = await addTable(projectId).catch(() => null); 
+                    //             await delay(2000);                                                        
+                    //         }
                             
 
-                            //создание базы данных "Основной состав"
-                            let i = 0;
-                            while (!mainId) {  
-                                //console.log("data: ", projectId, Worklist, project.datestart)
-                                mainId = await newDatabase2(projectId, Worklist, project.datestart);  
-                                console.log("mainId: ", mainId)  
-                                if (mainId) break; // (*)                           
-                                await delay(2000);                                                  
-                            }
+                    //         //создание базы данных "Основной состав"
+                    //         let i = 0;
+                    //         while (!mainId) {  
+                    //             //console.log("data: ", projectId, Worklist, project.datestart)
+                    //             mainId = await newDatabase2(projectId, Worklist, project.datestart);  
+                    //             console.log("mainId: ", mainId)  
+                    //             if (mainId) break; // (*)                           
+                    //             await delay(2000);                                                  
+                    //         }
 
-                            //создание базы данных "Запасной состав"
-                            // while (!zapasId) {                                
-                            //     zapasId = await newDatabase3(projectId);  
-                            //     console.log("zapasId: ", zapasId) 
-                            //     if (zapasId) break; // (*)   
-                            //     await delay(2000);                                                        
-                            // }
+                    //         //создание базы данных "Запасной состав"
+                    //         // while (!zapasId) {                                
+                    //         //     zapasId = await newDatabase3(projectId);  
+                    //         //     console.log("zapasId: ", zapasId) 
+                    //         //     if (zapasId) break; // (*)   
+                    //         //     await delay(2000);                                                        
+                    //         // }
                             
-                            //создание базы данных "Претенденты"
-                            while (!pretendentId) {                                
-                                pretendentId = await newDatabase5(projectId);  
-                                console.log("pretendentId: ", pretendentId) 
-                                if (pretendentId) break; // (*)   
-                                await delay(2000);                                                          
-                            }
+                    //         //создание базы данных "Претенденты"
+                    //         while (!pretendentId) {                                
+                    //             pretendentId = await newDatabase5(projectId);  
+                    //             console.log("pretendentId: ", pretendentId) 
+                    //             if (pretendentId) break; // (*)   
+                    //             await delay(2000);                                                          
+                    //         }
 
-                            //создание базы данных "Оборудование"
-                            while (!equipId) {                                
-                                equipId = await newDatabase4(projectId, Equipmentlist);    
-                                console.log("equipId: ", equipId) 
-                                if (equipId) break; // (*)   
-                                await delay(2000);                                                      
-                            }                             
+                    //         //создание базы данных "Оборудование"
+                    //         while (!equipId) {                                
+                    //             equipId = await newDatabase4(projectId, Equipmentlist);    
+                    //             console.log("equipId: ", equipId) 
+                    //             if (equipId) break; // (*)   
+                    //             await delay(2000);                                                      
+                    //         }                             
                             
-                        } else {
-                            console.log('Ошибка добавления проекта в Ноушен... ')  
-                        }
-                    }
+                    //     } else {
+                    //         console.log('Ошибка добавления проекта в Ноушен... ')  
+                    //     }
+                    // }
 
                     //обновить проект 
-                    await Project.update({projectId: projectId},{where: {id: res.id}})
+                    //await Project.update({projectId: projectId},{where: {id: res.id}})
 
                     // отправить сообщение пользователю через 30 секунд
                     setTimeout(() => {bot.sendMessage(project.chatId, 'Ваша заявка принята!')}, 25000) // 30 секунд                   
