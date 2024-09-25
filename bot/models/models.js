@@ -72,10 +72,22 @@ const Report = sequelize.define('report', {
 const Manager = sequelize.define('manager', {
     id: {type: DataTypes.STRING, primaryKey: true}, // id менеджера
     companyId: {type: DataTypes.STRING}, // id заказчика
-    companyName: {type: DataTypes.STRING}, // название компании (заказчика)
     chatId: {type: DataTypes.STRING, unique: true}, // telegram id
     fio: {type: DataTypes.STRING}, //фио менеджера
     phone: {type: DataTypes.STRING}, //телефон менеджера
+    phone2: {type: DataTypes.STRING}, //телефон менеджера
+    city: {type: DataTypes.STRING},
+    dolgnost: {type: DataTypes.STRING},
+    sfera: {type: DataTypes.TEXT},  
+    email: {type: DataTypes.STRING}, //почта менеджера
+    inn: {type: DataTypes.STRING}, //инн менеджера
+    comteg: {type: DataTypes.TEXT},
+    comment: {type: DataTypes.TEXT}, 
+    profile: {type: DataTypes.TEXT},
+    dogovor: {type: DataTypes.BOOLEAN}, 
+    block: {type: DataTypes.BOOLEAN},
+    deleted: {type: DataTypes.BOOLEAN},
+    great: {type: DataTypes.BOOLEAN}, //hello
 })
 
 const CountMessage = sequelize.define('countmessage', {
