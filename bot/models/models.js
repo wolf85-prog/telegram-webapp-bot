@@ -23,7 +23,7 @@ const Message = sequelize.define('message', {
     conversationId: {type: DataTypes.STRING},
     senderId: {type: DataTypes.STRING},
     receiverId: {type: DataTypes.STRING},    
-    text: {type: DataTypes.STRING}, //текст сообщения;
+    text: {type: DataTypes.TEXT}, //текст сообщения;
     type: {type: DataTypes.STRING},      //тип сообщения;
     is_bot: {type: DataTypes.BOOLEAN},
     messageId: {type: DataTypes.STRING},
