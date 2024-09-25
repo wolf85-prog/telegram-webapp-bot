@@ -1011,68 +1011,7 @@ bot.on('message', async (msg) => {
         if (text === '/savemanagerdb') {
 
             const workers = managerNotion.reverse().map((page) => {
-                let specArr = []
-                page.properties.Specialization.multi_select.map(item=> {                   
-                    //arr.push({spec: item.name})
-                    specData.map((category)=> {
-                        category.models.map((work)=> {
-                            if (work.name === item.name){
-                                const obj = {
-                                    spec: item.name,
-                                    cat: category.icon,
-                                }
-                                specArr.push(obj)
-                            }
-                        })
-                        if (category.icon === item.name) {
-                            const obj = {
-                                spec: item.name,
-                                cat: category.icon,
-                            }
-                            specArr.push(obj) 
-                        }
-                    })  
-                    
-                    if (item.name === 'Blacklist') {
-                        const obj = {
-                            spec: item.name,
-                            cat: 'Blacklist',
-                        }
-                        specArr.push(obj) 
-                    }
 
-                    if (item.name === '+18') {
-                        const obj = {
-                            spec: item.name,
-                            cat: '+18',
-                        }
-                        specArr.push(obj) 
-                    }
-
-                    if (item.name === 'Менеджер «U.L.E.Y»') {
-                        const obj = {
-                            spec: item.name,
-                            cat: 'Менеджер',
-                        }
-                        specArr.push(obj) 
-                    }
-                })
-
-                let skillArr = []
-                page.properties.Skill.multi_select.length > 0 && page.properties.Skill.multi_select.map(item2=> { 
-                    const obj = {
-                        name: item2.name,
-                    }
-                    skillArr.push(obj) 
-                }) 
-
-                let merchArr = []
-                page.properties.Merch.multi_select.length > 0 && page.properties.Merch.multi_select.map(item2=> { 
-                    const obj = {
-                        name: item2.name,
-                    }
-                    merchArr.push(obj) 
-                })
 
                 let companyArr = []
                 page.properties.Company.multi_select.length > 0 && page.properties.Company.multi_select.map(item2=> { 
@@ -1090,13 +1029,6 @@ bot.on('message', async (msg) => {
                     comtegArr.push(obj) 
                 })
 
-                let comtegArr2 = []
-                page.properties["КомТег 2"].multi_select.length > 0 && page.properties["КомТег 2"].multi_select.map(item2=> { 
-                    const obj = {
-                        name: item2.name,
-                    }
-                    comtegArr2.push(obj) 
-                })
 
                 let comment = []
                 page.properties["Комментарии"].rich_text.length > 0 && page.properties["Комментарии"].rich_text.map(item2=> { 
@@ -1106,38 +1038,20 @@ bot.on('message', async (msg) => {
                     comment.push(obj) 
                 })
 
-                let comment2 = []
-                page.properties["Комментарии 2"].rich_text.length > 0 && page.properties["Комментарии 2"].rich_text.map(item2=> { 
-                    const obj = {
-                        content: item2.plain_text,
-                    }
-                    comment2.push(obj) 
-                })
+                
 
                 return {
-                    fio: page.properties.Name.title[0]?.plain_text,
-                    chatId: page.properties.Telegram.number,
-                    phone: page.properties.Phone.phone_number,
-                    phone2: page.properties["Phone 2"].phone_number,
-                    specialization: JSON.stringify(specArr),  
+                    fio: page.properties["ФИО"].title[0]?.plain_text,
+                    chatId: page.properties.ID.rich_text[0]?.plain_text,
+                    phone: page.properties["Телефон"].phone_number,
+                    phone2: page.properties["Телефон №2"].phone_number,
                     city: page.properties["Город"].multi_select[0]?.name,
-                    skill: JSON.stringify(skillArr), 
-                    promoId: page.properties["Промокод ID"].number, 
-                    rank: page.properties["Ранг"].number, 
-                    merch: JSON.stringify(merchArr), 
-                    company: JSON.stringify(companyArr), 
+                    dolgnost: page.properties["Должность"].select?.name, 
                     comteg: JSON.stringify(comtegArr), 
-                    comteg2: JSON.stringify(comtegArr2), 
-                    comment: JSON.stringify(comment),
-                    comment2: JSON.stringify(comment2),
-                    age: page.properties.Age.date?.start,
-                    reyting: page.properties["Рейтинг"].rich_text[0]?.plain_text,
+                    comment: JSON.stringify(companyArr),
                     inn: page.properties["ИНН"].rich_text[0]?.plain_text, 
                     passport: page.properties.Passport.rich_text[0]?.plain_text,
                     profile: page.properties["Профиль"].files.length > 0 ? (page.properties["Профиль"]?.files[0].file ? page.properties["Профиль"]?.files[0].file.url : page.properties["Профиль"]?.files[0].external.url) : null,
-                    dogovor: page.properties["Договор"].select?.name ? true : false,
-                    samozanjatost: page.properties["Самозанятость"].select?.name ? true : false,
-                    passportScan: page.properties["Паспорт скан"]?.files.length > 0 ? (page.properties["Паспорт скан"]?.files[0].file ? page.properties["Паспорт скан"]?.files[0].file.url : page.properties["Паспорт скан"]?.files[0].external.url) : null,
                     email: page.properties.Email.email, 
                 };
             });
@@ -1150,7 +1064,7 @@ bot.on('message', async (msg) => {
                     console.log(index + " Пользовател: " + user.chatId + " сохранен!")
 
                     //сохранение сообщения в базе данных wmessage
-                    await Specialist.create(user)
+                    await Manager.create(user)
 
                 }, 500 * ++index) 
 
