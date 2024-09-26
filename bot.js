@@ -1038,7 +1038,13 @@ bot.on('message', async (msg) => {
                     comment.push(obj) 
                 })
 
-                
+                let companyArr = []
+                page.properties["Компания"].relation.length > 0 && page.properties["Компания"].relation.map(item2=> { 
+                    const obj = {
+                        content: item2.id,
+                    }
+                    companyArr.push(obj) 
+                })
 
                 return {
                     fio: page.properties["ФИО"].title[0]?.plain_text,
@@ -1049,12 +1055,10 @@ bot.on('message', async (msg) => {
                     sfera: JSON.stringify(sferaArr),
                     dolgnost: page.properties["Должность"].select?.name, 
                     comteg: JSON.stringify(comtegArr), 
-                    comment: JSON.stringify(companyArr),
-                    inn: page.properties["ИНН"].rich_text[0]?.plain_text, 
-                    passport: page.properties.Passport.rich_text[0]?.plain_text,
-                    profile: page.properties["Профиль"].files.length > 0 ? (page.properties["Профиль"]?.files[0].file ? page.properties["Профиль"]?.files[0].file.url : page.properties["Профиль"]?.files[0].external.url) : null,
+                    comment: JSON.stringify(comment),
                     email: page.properties.Email.email, 
                     projects: page.properties["Проекты"].number,
+                    company: JSON.stringify(companyArr),
                 };
             });
 
