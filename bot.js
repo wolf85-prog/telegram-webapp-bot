@@ -1049,15 +1049,15 @@ bot.on('message', async (msg) => {
                 return {
                     fio: page.properties["ФИО"].title[0]?.plain_text,
                     chatId: page.properties.ID.rich_text[0]?.plain_text,
-                    // phone: page.properties["Телефон"].phone_number,
-                    // phone2: page.properties["Телефон №2"].phone_number,
-                    // city: page.properties["Город"].multi_select[0]?.name,
+                    phone: page.properties["Телефон"].phone_number,
+                    phone2: page.properties["Телефон №2"].phone_number,
+                    city: page.properties["Город"].multi_select[0]?.name,
                     // sfera: JSON.stringify(sferaArr),
-                    // dolgnost: page.properties["Должность"].select?.name, 
+                    dolgnost: page.properties["Должность"].select?.name, 
                     // comteg: JSON.stringify(comtegArr), 
                     // comment: JSON.stringify(comment),
-                    // email: page.properties.Email.email, 
-                    // projects: page.properties["Проекты"].number,
+                    email: page.properties.Email.email, 
+                    projects: page.properties["Проекты"].number,
                     // company: JSON.stringify(companyArr),
                 };
             });

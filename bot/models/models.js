@@ -71,7 +71,6 @@ const Report = sequelize.define('report', {
 
 const Manager = sequelize.define('manager', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}, 
-    companyId: {type: DataTypes.STRING}, // id заказчика
     chatId: {type: DataTypes.STRING, unique: true}, // telegram id
     fio: {type: DataTypes.STRING}, //фио менеджера
     phone: {type: DataTypes.STRING}, //телефон менеджера
@@ -89,6 +88,7 @@ const Manager = sequelize.define('manager', {
     block: {type: DataTypes.BOOLEAN},
     deleted: {type: DataTypes.BOOLEAN},
     great: {type: DataTypes.BOOLEAN}, //hello
+    companyId: {type: DataTypes.STRING}, // id заказчика
 })
 
 const CountMessage = sequelize.define('countmessage', {
