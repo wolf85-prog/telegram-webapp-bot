@@ -1013,14 +1013,7 @@ bot.on('message', async (msg) => {
             const workers = managerNotion.reverse().map((page) => {
 
 
-                let companyArr = []
-                page.properties.Company.multi_select.length > 0 && page.properties.Company.multi_select.map(item2=> { 
-                    const obj = {
-                        name: item2.name,
-                    }
-                    companyArr.push(obj) 
-                })
-
+                
                 let comtegArr = []
                 page.properties["КомТег"].multi_select.length > 0 && page.properties["КомТег"].multi_select.map(item2=> { 
                     const obj = {
