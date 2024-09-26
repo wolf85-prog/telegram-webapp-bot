@@ -1013,52 +1013,52 @@ bot.on('message', async (msg) => {
             const workers = managerNotion.reverse().map((page) => {
 
 
-                let sferaArr = []
-                page.properties["Сфера деятельности"].multi_select.length > 0 && page.properties["КомТег"].multi_select.map(item2=> { 
-                    const obj = {
-                        name: item2.name,
-                    }
-                    sferaArr.push(obj) 
-                })
+                // let sferaArr = []
+                // page.properties["Сфера деятельности"].multi_select.length > 0 && page.properties["КомТег"].multi_select.map(item2=> { 
+                //     const obj = {
+                //         name: item2.name,
+                //     }
+                //     sferaArr.push(obj) 
+                // })
                 
-                let comtegArr = []
-                page.properties["КомТег"].multi_select.length > 0 && page.properties["КомТег"].multi_select.map(item2=> { 
-                    const obj = {
-                        name: item2.name,
-                    }
-                    comtegArr.push(obj) 
-                })
+                // let comtegArr = []
+                // page.properties["КомТег"].multi_select.length > 0 && page.properties["КомТег"].multi_select.map(item2=> { 
+                //     const obj = {
+                //         name: item2.name,
+                //     }
+                //     comtegArr.push(obj) 
+                // })
 
 
-                let comment = []
-                page.properties["Комментарии"].rich_text.length > 0 && page.properties["Комментарии"].rich_text.map(item2=> { 
-                    const obj = {
-                        content: item2.plain_text,
-                    }
-                    comment.push(obj) 
-                })
+                // let comment = []
+                // page.properties["Комментарии"].rich_text.length > 0 && page.properties["Комментарии"].rich_text.map(item2=> { 
+                //     const obj = {
+                //         content: item2.plain_text,
+                //     }
+                //     comment.push(obj) 
+                // })
 
-                let companyArr = []
-                page.properties["Компания"].relation.length > 0 && page.properties["Компания"].relation.map(item2=> { 
-                    const obj = {
-                        content: item2.id,
-                    }
-                    companyArr.push(obj) 
-                })
+                // let companyArr = []
+                // page.properties["Компания"].relation.length > 0 && page.properties["Компания"].relation.map(item2=> { 
+                //     const obj = {
+                //         content: item2.id,
+                //     }
+                //     companyArr.push(obj) 
+                // })
 
                 return {
                     fio: page.properties["ФИО"].title[0]?.plain_text,
-                    chatId: page.properties.ID.rich_text[0]?.plain_text,
-                    phone: page.properties["Телефон"].phone_number,
-                    phone2: page.properties["Телефон №2"].phone_number,
-                    city: page.properties["Город"].multi_select[0]?.name,
-                    sfera: JSON.stringify(sferaArr),
-                    dolgnost: page.properties["Должность"].select?.name, 
-                    comteg: JSON.stringify(comtegArr), 
-                    comment: JSON.stringify(comment),
-                    email: page.properties.Email.email, 
-                    projects: page.properties["Проекты"].number,
-                    company: JSON.stringify(companyArr),
+                    // chatId: page.properties.ID.rich_text[0]?.plain_text,
+                    // phone: page.properties["Телефон"].phone_number,
+                    // phone2: page.properties["Телефон №2"].phone_number,
+                    // city: page.properties["Город"].multi_select[0]?.name,
+                    // sfera: JSON.stringify(sferaArr),
+                    // dolgnost: page.properties["Должность"].select?.name, 
+                    // comteg: JSON.stringify(comtegArr), 
+                    // comment: JSON.stringify(comment),
+                    // email: page.properties.Email.email, 
+                    // projects: page.properties["Проекты"].number,
+                    // company: JSON.stringify(companyArr),
                 };
             });
 
@@ -1067,7 +1067,7 @@ bot.on('message', async (msg) => {
 
             workers.map(async (user, index) => {      
                 setTimeout(async()=> { 
-                    console.log(index + " Пользовател: " + user.chatId + " сохранен!")
+                    console.log(index + " Пользовател: " + user.fio + " сохранен!")
 
                     //сохранение сообщения в базе данных wmessage
                     await Manager.create(user)
