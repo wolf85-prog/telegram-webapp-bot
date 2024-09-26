@@ -1013,6 +1013,13 @@ bot.on('message', async (msg) => {
             const workers = managerNotion.reverse().map((page) => {
 
 
+                let sferaArr = []
+                page.properties["Сфера деятельности"].multi_select.length > 0 && page.properties["КомТег"].multi_select.map(item2=> { 
+                    const obj = {
+                        name: item2.name,
+                    }
+                    sferaArr.push(obj) 
+                })
                 
                 let comtegArr = []
                 page.properties["КомТег"].multi_select.length > 0 && page.properties["КомТег"].multi_select.map(item2=> { 
@@ -1039,6 +1046,7 @@ bot.on('message', async (msg) => {
                     phone: page.properties["Телефон"].phone_number,
                     phone2: page.properties["Телефон №2"].phone_number,
                     city: page.properties["Город"].multi_select[0]?.name,
+                    sfera: JSON.stringify(sferaArr),
                     dolgnost: page.properties["Должность"].select?.name, 
                     comteg: JSON.stringify(comtegArr), 
                     comment: JSON.stringify(companyArr),
@@ -1046,6 +1054,7 @@ bot.on('message', async (msg) => {
                     passport: page.properties.Passport.rich_text[0]?.plain_text,
                     profile: page.properties["Профиль"].files.length > 0 ? (page.properties["Профиль"]?.files[0].file ? page.properties["Профиль"]?.files[0].file.url : page.properties["Профиль"]?.files[0].external.url) : null,
                     email: page.properties.Email.email, 
+                    projects: page.properties["Проекты"].number,
                 };
             });
 

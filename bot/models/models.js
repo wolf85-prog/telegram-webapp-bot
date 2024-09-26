@@ -78,7 +78,8 @@ const Manager = sequelize.define('manager', {
     phone2: {type: DataTypes.STRING}, //телефон менеджера
     city: {type: DataTypes.STRING},
     dolgnost: {type: DataTypes.STRING},
-    sfera: {type: DataTypes.TEXT},  
+    sfera: {type: DataTypes.TEXT}, 
+    projects: {type: DataTypes.STRING}, 
     email: {type: DataTypes.STRING}, //почта менеджера
     inn: {type: DataTypes.STRING}, //инн менеджера
     comteg: {type: DataTypes.TEXT},
