@@ -103,6 +103,7 @@ const getProjectTeh = require("./bot/common/getProjectTeh");
 const updateProject = require("./bot/common/updateProject");
 
 const {managerNotion} = require('./bot/data/managerNotion');
+const {companyNotion} = require('./bot/data/companyNotion');
 
 const app = express();
 
@@ -1081,7 +1082,7 @@ bot.on('message', async (msg) => {
 
         if (text === '/savecompanydb') {
 
-            const workers = managerNotion.reverse().map((page) => {
+            const workers = companyNotion.reverse().map((page) => {
                 
                 let managerArr = []
                 page.properties["Менеджеры"].relation.length > 0 && page.properties["Менеджеры"].relation.map(item2=> { 
