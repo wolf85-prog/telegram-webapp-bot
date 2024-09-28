@@ -1153,10 +1153,10 @@ bot.on('message', async (msg) => {
 
             workers.map(async (user, index) => {      
                 setTimeout(async()=> { 
-                    console.log(index + " Компания: " + user.title + " сохранен!")
+                    console.log(index + " Компания: " + user.properties["Название компании"].title[0]?.plain_text + " сохранен!")
 
                     //сохранение сообщения в базе данных wmessage
-                    await Company.update({GUID: user.GUID},{where: {title: user.title}})
+                    await Company.update({GUID: user.id},{where: {title: user.properties["Название компании"].title[0]?.plain_text}})
 
                 }, 500 * ++index) 
 
