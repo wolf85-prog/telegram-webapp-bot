@@ -1145,7 +1145,7 @@ bot.on('message', async (msg) => {
             const workers = companyNotion.reverse().map((page) => {            
 
                 return {
-                    GUID: page.id,
+                    id: page.id,
                     title: page.properties["Название компании"].title[0]?.plain_text
                 };
             });
