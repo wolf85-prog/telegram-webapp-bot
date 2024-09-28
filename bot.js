@@ -84,7 +84,7 @@ const pm2 = require('pm2');
 
 //подключение к БД PostreSQL
 const sequelize = require('./bot/connections/db')
-const {UserBot, Message, Conversation, Project, Report, Manager, Projectcash, SoundNotif, ProjectNew} = require('./bot/models/models');
+const {UserBot, Message, Company, Project, Report, Manager, Projectcash, SoundNotif, ProjectNew} = require('./bot/models/models');
 const updateToDo = require("./bot/common/updateToDo");
 const getProject = require("./bot/common/getProject");
 const sendMessageAdmin = require("./bot/common/sendMessageAdmin");
@@ -1071,6 +1071,66 @@ bot.on('message', async (msg) => {
 
                     //сохранение сообщения в базе данных wmessage
                     await Manager.create(user)
+
+                }, 500 * ++index) 
+
+            })
+                
+
+        }
+
+        if (text === '/savecompanydb') {
+
+            const workers = managerNotion.reverse().map((page) => {
+                
+                let managerArr = []
+                page.properties["Менеджеры"].relation.length > 0 && page.properties["Менеджеры"].relation.map(item2=> { 
+                    const obj = {
+                        name: item2.id,
+                    }
+                    managerArr.push(obj) 
+                })
+
+                let projectsArr = []
+                page.properties["🧰 Проекты"].relation.length > 0 && page.properties["🧰 Проекты"].relation.map(item2=> { 
+                    const obj = {
+                        name: item2.id,
+                    }
+                    projectsArr.push(obj) 
+                })
+
+
+                let comment = []
+                page.properties["Комментарий"].rich_text.length > 0 && page.properties["Комментарий"].rich_text.map(item2=> { 
+                    const obj = {
+                        content: item2.plain_text,
+                    }
+                    comment.push(obj) 
+                })
+
+
+                return {
+                    title: page.properties["Название компании"].title[0]?.plain_text,
+                    city: page.properties["Город"].rich_text[0]?.plain_text,
+                    office: page.properties["Адрес офиса"].rich_text[0]?.plain_text,
+                    sklad: page.properties["Адрес склада"].rich_text[0]?.plain_text,
+                    comment: JSON.stringify(comment),
+                    projects: JSON.stringify(projectsArr), 
+                    managers: JSON.stringify(managerArr),          
+                    dogovorDate: page.properties["Договор до"].date,
+                    dogovorNumber: page.properties["№ Договора"].number, 
+                };
+            });
+
+            console.log("arr_worker: ", workers.length)
+
+
+            workers.map(async (user, index) => {      
+                setTimeout(async()=> { 
+                    console.log(index + " Компания: " + user.title + " сохранен!")
+
+                    //сохранение сообщения в базе данных wmessage
+                    await Company.create(user)
 
                 }, 500 * ++index) 
 
