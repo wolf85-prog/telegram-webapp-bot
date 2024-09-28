@@ -1140,6 +1140,31 @@ bot.on('message', async (msg) => {
 
         }
 
+        if (text === '/updatecompanydb') {
+
+            const workers = companyNotion.reverse().map((page) => {            
+
+                return {
+                    GUID: page.id,
+                };
+            });
+
+            console.log("arr_worker: ", workers.length)
+
+            workers.map(async (user, index) => {      
+                setTimeout(async()=> { 
+                    console.log(index + " Компания: " + user.title + " сохранен!")
+
+                    //сохранение сообщения в базе данных wmessage
+                    await Company.update({GUID: user.GUID},{where: {title: user.title}})
+
+                }, 500 * ++index) 
+
+            })
+                
+
+        }
+
 
 //------------------------------------------------------------------------------------------------
 

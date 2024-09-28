@@ -141,6 +141,7 @@ const Company = sequelize.define('company', {
     bugalterFio: {type: DataTypes.STRING}, 
     bugalterEmail: {type: DataTypes.STRING},
     bugalterPhone: {type: DataTypes.STRING},  
+    GUID: {type: DataTypes.STRING}, 
 })
 
 
