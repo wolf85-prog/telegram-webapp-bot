@@ -1140,6 +1140,32 @@ bot.on('message', async (msg) => {
 
         }
 
+        if (text === '/updatemanagerdb') {
+
+            const workers = managerNotion.reverse().map((page) => {            
+
+                return {
+                    id: page.id,
+                    fio: page.properties["ФИО"].title[0]?.plain_text
+                };
+            });
+
+            console.log("arr_worker: ", workers.length)
+
+            workers.map(async (user, index) => {      
+                setTimeout(async()=> { 
+                    console.log(index + " Менеджер: " + user.title + " сохранен!")
+
+                    //сохранение сообщения в базе данных wmessage
+                    await Manager.update({GUID: user.id},{where: {fio: user.fio}})
+
+                }, 500 * ++index) 
+
+            })
+                
+
+        }
+
         if (text === '/updatecompanydb') {
 
             const workers = companyNotion.reverse().map((page) => {            
