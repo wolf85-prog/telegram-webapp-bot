@@ -89,6 +89,7 @@ const Manager = sequelize.define('manager', {
     deleted: {type: DataTypes.BOOLEAN},
     great: {type: DataTypes.BOOLEAN}, //hello
     companyId: {type: DataTypes.STRING}, // id заказчика
+    GUID: {type: DataTypes.STRING}, 
 })
 
 const CountMessage = sequelize.define('countmessage', {
