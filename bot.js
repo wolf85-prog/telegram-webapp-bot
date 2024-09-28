@@ -1118,7 +1118,7 @@ bot.on('message', async (msg) => {
                     comment: JSON.stringify(comment),
                     projects: JSON.stringify(projectsArr), 
                     managers: JSON.stringify(managerArr),          
-                    dogovorDate: page.properties["Договор до"].date,
+                    dogovorDate: page.properties["Договор до"].date?.start,
                     dogovorNumber: page.properties["№ Договора"].number, 
                 };
             });
