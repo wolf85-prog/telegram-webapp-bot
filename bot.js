@@ -1146,7 +1146,8 @@ bot.on('message', async (msg) => {
 
                 return {
                     id: page.id,
-                    fio: page.properties["ФИО"].title[0]?.plain_text
+                    fio: page.properties["ФИО"].title[0]?.plain_text,
+                    companyId: page.properties["Компания"].relation[0].id
                 };
             });
 
@@ -1157,7 +1158,7 @@ bot.on('message', async (msg) => {
                     console.log(index + " Менеджер: " + user.fio + " сохранен!")
 
                     //сохранение сообщения в базе данных wmessage
-                    await Manager.update({GUID: user.id},{where: {fio: user.fio}})
+                    await Manager.update({companyId: user.companyId},{where: {fio: user.fio}})
 
                 }, 500 * ++index) 
 
