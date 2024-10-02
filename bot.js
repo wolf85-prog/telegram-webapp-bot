@@ -1147,7 +1147,7 @@ bot.on('message', async (msg) => {
                 return {
                     id: page.id,
                     fio: page.properties["ФИО"].title[0]?.plain_text,
-                    companyId: page.properties["Компания"].relation[0].id
+                    companyId: page.properties["Компания"].relation[0]?.id
                 };
             });
 
