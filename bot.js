@@ -1201,7 +1201,6 @@ bot.on('message', async (msg) => {
                     address: page.properties["Адрес"].rich_text[0]?.plain_text,
                     track: page.properties["Как добраться"].rich_text[0]?.plain_text,
                     url: page.properties["Ссылка на карту"].url,
-                    karta: page.properties["Карта"].files[0]?.file.url,
                 };
             });
 
