@@ -145,6 +145,16 @@ const Company = sequelize.define('company', {
     GUID: {type: DataTypes.STRING}, 
 })
 
+const Platform = sequelize.define('platform', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}, 
+    title: {type: DataTypes.STRING}, //
+    city: {type: DataTypes.STRING}, //
+    address: {type: DataTypes.STRING}, //
+    track: {type: DataTypes.STRING}, //
+    url: {type: DataTypes.STRING}, //
+    karta: {type: DataTypes.STRING}, //
+})
+
 
 module.exports = {
     User, 
@@ -159,5 +169,6 @@ module.exports = {
     CountMessage,
     SoundNotif,
     ProjectNew,
-    Company
+    Company,
+    Platform
 }

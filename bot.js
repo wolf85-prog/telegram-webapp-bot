@@ -84,7 +84,7 @@ const pm2 = require('pm2');
 
 //подключение к БД PostreSQL
 const sequelize = require('./bot/connections/db')
-const {UserBot, Message, Company, Project, Report, Manager, Projectcash, SoundNotif, ProjectNew} = require('./bot/models/models');
+const {UserBot, Message, Company, Project, Manager, SoundNotif, ProjectNew, Platform} = require('./bot/models/models');
 const updateToDo = require("./bot/common/updateToDo");
 const getProject = require("./bot/common/getProject");
 const sendMessageAdmin = require("./bot/common/sendMessageAdmin");
@@ -104,6 +104,7 @@ const updateProject = require("./bot/common/updateProject");
 
 const {managerNotion} = require('./bot/data/managerNotion');
 const {companyNotion} = require('./bot/data/companyNotion');
+const {platformsNotion} = require('./bot/data/platformsNotion');
 
 const app = express();
 
@@ -1191,6 +1192,32 @@ bot.on('message', async (msg) => {
             })
                 
 
+        }
+
+        if (text === '/saveplatformdb') {
+            const mesta = platformsNotion.reverse().map((page) => {
+                return {
+                    title: page.properties["Название площадки"].title[0]?.plain_text,
+                    address: page.properties["Адрес"].rich_text[0]?.plain_text,
+                    track: page.properties["Как добраться"].rich_text[0]?.plain_text,
+                    url: page.properties["Ссылка на карту"].url,
+                    karta: page.properties["Карта"].files[0]?.file.url,
+                };
+            });
+
+            console.log("arr_mesta: ", mesta.length)
+
+
+            mesta.map(async (mesto, index) => {      
+                setTimeout(async()=> { 
+                    console.log(index + " Площадка: " + mesto.title + " сохранена!")
+
+                    //сохранение сообщения в базе данных wmessage
+                    await Platform.create(mesto)
+
+                }, 500 * ++index) 
+
+            })
         }
 
 
