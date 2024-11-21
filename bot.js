@@ -1520,9 +1520,9 @@ bot.on('message', async (msg) => {
                         managerId: project?.managerId,
                         companyId: project?.companyId,
                         chatId: chatId,
-                        spec: Worklist,  
+                        spec: JSON.stringify(specArr),  
                         comment: '',
-                        equipment: '',
+                        equipment: JSON.stringify(equipArr),
                         number: '',
                     }
 
