@@ -1513,7 +1513,7 @@ bot.on('message', async (msg) => {
                         status: 'Новый',
                         //specifika: '',
                         //city: '',
-                        dateStart: project?.datestart, 
+                        dateStart: project?.datestart + ':00.000Z', 
                         dateEnd: project?.dateend, 
                         teh: project?.teh,
                         geo: project?.geo,
