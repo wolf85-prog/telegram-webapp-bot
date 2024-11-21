@@ -12,8 +12,6 @@ const bot = new TelegramBot(token, {
     }
 });
 
-const { Op } = require('sequelize')
-
 // web-приложение
 const webAppUrl = process.env.WEB_APP_URL;
 const botApiUrl = process.env.REACT_APP_API_URL
@@ -84,6 +82,7 @@ const pm2 = require('pm2');
 
 //подключение к БД PostreSQL
 const sequelize = require('./bot/connections/db')
+const { Op } = require('sequelize')
 const {UserBot, Message, Company, Project, Manager, SoundNotif, ProjectNew, Platform} = require('./bot/models/models');
 const updateToDo = require("./bot/common/updateToDo");
 const getProject = require("./bot/common/getProject");
@@ -1504,6 +1503,31 @@ bot.on('message', async (msg) => {
 //-------------------------------------------------------------------------------------------------------------------------------
 //--------------------------- Создание проекта ----------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------------------------------------
+                    const crm = await sequelize.query("SELECT nextval('crm_id')");
+
+                    const resid = crm[0][0].nextval
+
+                    const obj = {                
+                        crmID: resid.toString(),
+                        name: project.name,
+                        status: 'Новый',
+                        //specifika: '',
+                        //city: '',
+                        dateStart: project?.datestart, 
+                        dateEnd: project?.dateend, 
+                        teh: project?.teh,
+                        geo: project?.geo,
+                        managerId: project?.managerId,
+                        companyId: project?.companyId,
+                        chatId: chatId,
+                        spec: Worklist,  
+                        comment: '',
+                        equipment: '',
+                        number: '',
+                    }
+
+                    const resAdd2 = await ProjectNew.create(obj)
+
                     //добавление геопозиции в БД Площадки (Адрес) и добавление проекта
                     // if (project.geo != '') {
                     //     projectId = await addProjectAddress(project.geo, project.name, project.datestart, project.teh, project.managerId, project.companyId, Worklist, Equipmentlist);
