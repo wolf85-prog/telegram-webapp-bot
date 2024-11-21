@@ -1523,10 +1523,11 @@ bot.on('message', async (msg) => {
                         spec: JSON.stringify(specArr),  
                         comment: '',
                         equipment: JSON.stringify(equipArr),
-                        number: '',
                     }
+                    console.log("obj :", obj)
 
                     const resAdd2 = await ProjectNew.create(obj)
+                    console.log("resAdd2: ", resAdd2)
 
                     //добавление геопозиции в БД Площадки (Адрес) и добавление проекта
                     // if (project.geo != '') {
