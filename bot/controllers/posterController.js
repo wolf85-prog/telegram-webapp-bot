@@ -40,7 +40,8 @@ class PosterController {
             });
 
             console.log("Отправляю постер...")
-            const url_send_poster = `https://api.telegram.org/bot${token}/sendDocument?chat_id=${chatId}&document=${poster}&reply_markup=${keyboard}`
+            //const url_send_poster = `https://api.telegram.org/bot${token}/sendDocument?chat_id=${chatId}&document=${poster}&reply_markup=${keyboard}`
+            const url_send_poster = `https://api.telegram.org/bot${token}/sendDocument?chat_id=${chatId}&document=${poster}`
             console.log(url_send_poster)
 
             // создание базы данных "Основной состав"
@@ -106,7 +107,8 @@ class PosterController {
             });
 
             console.log("Отправляю постер...")
-            const url_send_poster = `https://api.telegram.org/bot${token}/sendDocument?chat_id=${chatId}&document=${poster}&reply_markup=${keyboard}`
+            //const url_send_poster = `https://api.telegram.org/bot${token}/sendDocument?chat_id=${chatId}&document=${poster}&reply_markup=${keyboard}`
+            const url_send_poster = `https://api.telegram.org/bot${token}/sendDocument?chat_id=${chatId}&document=${poster}`
             console.log(url_send_poster)
 
             // создание базы данных "Основной состав"
