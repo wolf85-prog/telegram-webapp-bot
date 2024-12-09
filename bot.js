@@ -1531,7 +1531,7 @@ bot.on('message', async (msg) => {
                     console.log("resAdd2: ", resAdd2)
 
                     if (resAdd2) {
-                        const startD = new Date(project.datestart?.split('T')[0]).toLocaleString().split(',')[0]
+                        const startD = `${project.datestart?.split('-')[2].project.datestart?.split('-')[1].project.datestart?.split('-')[0]}`
                         const startT = project.datestart?.split('T')[1]?.slice(0, 5)
                         //добавление специалистов в основной состав
                         const dateStart = startD + 'T' + startT
