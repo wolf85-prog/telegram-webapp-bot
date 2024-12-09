@@ -1531,8 +1531,8 @@ bot.on('message', async (msg) => {
                     console.log("resAdd2: ", resAdd2)
 
                     if (resAdd2) {
-                        const startD = `${project.datestart?.split('-')[2].project.datestart?.split('-')[1].project.datestart?.split('-')[0]}`
-                        const startT = project.datestart?.split('T')[1]?.slice(0, 5)
+                        const startD = `${resAdd2.dateStart?.split('-')[2]}.${resAdd2resAdd2.dateStart?.split('-')[1]}.${resAdd2resAdd2.dateStart?.split('-')[0]}`
+                        const startT = resAdd2.dateStart?.split('T')[1]?.slice(0, 5)
                         //добавление специалистов в основной состав
                         const dateStart = startD + 'T' + startT
 
