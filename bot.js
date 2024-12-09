@@ -54,6 +54,7 @@ let dataTime = 'S'
 
 //functions
 const addTable = require('./bot/common/addTable')
+const addMainSpec = require('./bot/common/addMainSpec')
 const newDatabase1 = require('./bot/common/newDatabase1')
 const newDatabase2 = require('./bot/common/newDatabase2')
 const newDatabase3 = require('./bot/common/newDatabase3')
@@ -1528,6 +1529,25 @@ bot.on('message', async (msg) => {
 
                     const resAdd2 = await ProjectNew.create(obj)
                     console.log("resAdd2: ", resAdd2)
+
+                    if (resAdd2) {
+                        const startD = new Date(project.datestart?.split('T')[0]).toLocaleString().split(',')[0]
+                        const startT = project.datestart?.split('T')[1]?.slice(0, 5)
+                        //добавление специалистов в основной состав
+                        const dateStart = startD + 'T' + startT
+
+
+                        //добавить список работников        
+                        Worklist.forEach((worker, index) => {           
+                            for (let i = 0; i < worker.count; i++) {
+                                setTimeout(async()=> {
+                                    const res = await addMainSpec(resAdd2?.id, dateStart, worker.spec, '№1');
+                                    console.log("res add spec main: ", res, index+1) 
+                                }, 300 * i) 
+                            }    
+                        });                   
+                    }
+                    
 
                     //добавление геопозиции в БД Площадки (Адрес) и добавление проекта
                     // if (project.geo != '') {

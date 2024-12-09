@@ -178,6 +178,23 @@ const Platform = sequelize.define('platform', {
     karta: {type: DataTypes.STRING}, //
 })
 
+const MainSpec = sequelize.define('mainspec', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},  
+    date: {type: DataTypes.STRING},
+    specId: {type: DataTypes.STRING},
+    vidWork: {type: DataTypes.STRING},
+    specialization: {type: DataTypes.TEXT},  
+    comteg: {type: DataTypes.TEXT},
+    comment: {type: DataTypes.TEXT},
+    stavka: {type: DataTypes.STRING},
+    merch: {type: DataTypes.STRING},
+    taxi: {type: DataTypes.STRING},
+    projectId: {type: DataTypes.STRING},
+    hr: {type: DataTypes.BOOLEAN},
+    number: {type: DataTypes.INTEGER},
+    count: {type: DataTypes.INTEGER},
+})
+
 
 module.exports = {
     User, 
@@ -193,5 +210,6 @@ module.exports = {
     SoundNotif,
     ProjectNew,
     Company,
-    Platform
+    Platform,
+    MainSpec,
 }
