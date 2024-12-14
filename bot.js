@@ -1661,7 +1661,7 @@ bot.on('message', async (msg) => {
 
                 socket.emit("addUser", chatId)
 
-                socket.emit("sendMessage", {
+                socket.emit("sendMessageRent", {
                     senderId: chatId,
                     receiverId: chatTelegramId,
                     text: str_text,
@@ -1669,6 +1669,7 @@ bot.on('message', async (msg) => {
                     convId: convId,
                     messageId: messageId,
                     replyId: reply_id,
+                    is_bot: false,
                 })
 
 
