@@ -176,7 +176,7 @@ app.post('/web-data', async (req, res) => {
     try {
         if (worklist.length > 0) {
 
-            console.log("Начинаю сохранять данные по заявке...")
+            console.log("Начинаю сохранять данные по заявке...", managerId, companyId)
             projectName = projectname
             projectDate = `${day}.${month}`
             projectTime = `${chas}:${minut}`
@@ -187,7 +187,7 @@ app.post('/web-data', async (req, res) => {
             manager_id = managerId
             company_id = companyId
             Geo = geo   
-            console.log("Сохранение данных завершено: ", projectName)
+            console.log("Сохранение данных завершено: ", projectName, manager_id, company_id)
             
             await bot.answerWebAppQuery(queryId, {
                 type: 'article',
