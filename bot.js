@@ -187,41 +187,41 @@ app.post('/web-data', async (req, res) => {
             manager_id = managerId
             company_id = companyId
             Geo = geo   
-            console.log("Сохранение данных завершено: ", chatId, projectName, datestart, geo, manager_id, company_id, queryId, worklist)
+            console.log("Сохранение данных завершено: ", projectName, datestart, manager_id, company_id, queryId, worklist)
             
-//             await bot.answerWebAppQuery(queryId, {
-//                 type: 'article',
-//                 id: queryId,
-//                 title: 'Проект успешно создан',
-//                 input_message_content: {
-//                     parse_mode: 'HTML',
-//                     message_text: 
-//   `Проект успешно создан! ${ companyId === 'Локальный заказчик' ? 'Offline' : ''} 
+            await bot.answerWebAppQuery(queryId, {
+                type: 'article',
+                id: queryId,
+                title: 'Проект успешно создан',
+                input_message_content: {
+                    parse_mode: 'HTML',
+                    message_text: 
+  `Проект успешно создан!
   
-// <b>Проект:</b> ${projectname} 
-// <b>Дата:</b> ${day}.${month}.${year}
-// <b>Время:</b> ${chas}:${minut} 
-// <b>Адрес:</b> ${geo} 
-// <b>Тех. задание:</b> ${teh}
+<b>Проект:</b> ${projectname} 
+<b>Дата:</b> ${day}.${month}.${year}
+<b>Время:</b> ${chas}:${minut} 
+<b>Адрес:</b> ${geo} 
+<b>Тех. задание:</b> ${teh}
   
-// <b>Специалисты:</b>  
-// ${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}`
-//               }
-//         })
+<b>Специалисты:</b>  
+${worklist.map(item =>' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}`
+              }
+        })
         
         //отправить сообщение в чат-админку (телеграм)
-        await bot.sendMessage(chatGroupId, 
-`Проект успешно создан! ${ companyId === 'Локальный заказчик' ? 'Offline' : ''} 
+//         await bot.sendMessage(chatGroupId, 
+// `Проект успешно создан! ${ companyId === 'Локальный заказчик' ? 'Offline' : ''} 
   
-Название проекта:  ${projectname} 
-Дата: ${day}.${month}.${year}
-Время: ${chas}:${minut} 
-Адрес: ${geo} 
-Тех. задание: ${teh} 
+// Название проекта:  ${projectname} 
+// Дата: ${day}.${month}.${year}
+// Время: ${chas}:${minut} 
+// Адрес: ${geo} 
+// Тех. задание: ${teh} 
   
-Специалисты:  
-${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}`
-          )
+// Специалисты:  
+// ${worklist.map(item => ' - ' + item.spec + ' = ' + item.count + ' чел.').join('\n')}`
+//           )
 
         } 
 //-------------------------------------------------------------------------------------
