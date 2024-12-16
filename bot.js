@@ -176,7 +176,7 @@ app.post('/web-data', async (req, res) => {
     try {
         if (worklist.length > 0) {
 
-            console.log("Начинаю сохранять данные по заявке...", managerId, companyId)
+            console.log("Начинаю сохранять данные по заявке...", queryId, managerId, companyId)
             projectName = projectname
             projectDate = `${day}.${month}`
             projectTime = `${chas}:${minut}`
@@ -278,6 +278,7 @@ ${equipmentlist.map(item =>' - ' + item.subname + ' = ' + item.count + ' шт.')
   
         return res.status(200).json({});
     } catch (e) {
+        console.log("Ошибка: ", e.message)
         return res.status(500).json({})
     }
 })
