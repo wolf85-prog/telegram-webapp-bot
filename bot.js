@@ -3,7 +3,7 @@ require("dotenv").config();
 //telegram api
 const TelegramBot = require('node-telegram-bot-api');
 const {menuOptions, backOptions} = require('./options')
-const token = process.env.TELEGRAM_API_TOKEN
+const token = process.env.TELEGRAM_API_TOKEN_RENTHUB
 //const bot = new TelegramBot(token, {polling: true});
 
 const bot = new TelegramBot(token, {
